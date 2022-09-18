@@ -30,3 +30,8 @@ https://qiita.com/yugui/items/87d00d77dee159e74886
 protobufのプラグインをC#で実装する方法？ではなかった。
 https://developers.google.com/protocol-buffers/docs/csharptutorial
 
+
+これいいんちゃうん？、C#のプラグイン
+https://github.com/cactuaroid/protoc-gen-myplugincsharp
+
+
