@@ -19,3 +19,14 @@ protobuf-csharp-3.21.6.zip
 プロトコルバッファランタイムのソースコード
 
 protoc-21.6-win64.zip
+プロトコルバッファコンパイラのバイナリ
+
+
+
+protobufのプラグインを実装する方法但しGo
+https://qiita.com/yugui/items/87d00d77dee159e74886
+
+
+protobufのプラグインをC#で実装する方法？ではなかった。
+https://developers.google.com/protocol-buffers/docs/csharptutorial
+
