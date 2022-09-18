@@ -11,5 +11,5 @@ https://github.com/protocolbuffers/protobuf/releases
 
 
 
-.NetSDK 6.0をインストールする 
+.NetSDK 6.0をインストールする  
 https://dotnet.microsoft.com/en-us/download/dotnet
