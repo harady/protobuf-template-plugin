@@ -5,7 +5,7 @@ items:
   - name: "generate_model_table_cs"
     message: "== Unity Model(TableData)のC#ファイルを生成中."
     src_path_pattern: "./table/**/*.proto"
-    &base_path "output/test"
+    &base_path "output/test/aaaa"
     items:
       # Unity XxxxData.cs 生成
       - message: "==== Unity XxxxData.cs 生成中"
