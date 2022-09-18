@@ -5,13 +5,13 @@ items:
   - name: "generate_model_table_cs"
     message: "== Unity Model(TableData)のC#ファイルを生成中."
     src_path_pattern: "./table/**/*.proto"
-    &base_path "output/test"
+    base_path : "output/test"
     items:
       # Unity XxxxData.cs 生成
       - message: "==== Unity XxxxData.cs 生成中"
         template_path: "template/csharp_unity_data-partial.gotemplate"
         file_suffix: "Data.cs"
-        out_dir_path: *base_path
+        out_dir_path: "{{ base_path }}/unity/Data"
         is_editable: true
       # Unity XxxxData_GeneratedGameDB.cs 生成
       - message: "==== Unity XxxxData_GeneratedGameDB.cs 生成中"
