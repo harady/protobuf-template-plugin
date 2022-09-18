@@ -1,6 +1,6 @@
 items:
    -src_base_path : "./"
-   -out_base_path : "output/unity/"
+   -out_base_path : "output2/unity/"
   #============================================================
   # Unity Model(TableData)のC#ファイルを生成.
   #============================================================
@@ -59,7 +59,7 @@ items:
   #============================================================
   - name: "generate_service_cs"
     message: "== Unity ServiceのC#ファイルを生成中."
-    src_path_pattern: "./service/**/*.proto"
+    src_path_pattern: "service/**/*.proto"
     items:
       # Unity XxxxService.cs 生成
       - message: "==== Unity XxxxService.cs 生成中"
@@ -82,7 +82,7 @@ items:
   #============================================================
   - name: "generate_enum_cs"
     message: "== Unity EnumのC#ファイルを生成中."
-    src_path_pattern: "./{data,table,enum}/**/*.proto"
+    src_path_pattern: "{data,table,enum}/**/*.proto"
     items:
       # Unity data/table/enum XxxxEnum.cs 生成
       - message: "==== Unity data/table/enum XxxxEnum.cs 生成中"
