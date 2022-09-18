@@ -5,3 +5,11 @@ proto形式のファイルとテンプレートファイルからコードを生
 
 ### プロトコルバッファのgithub
 https://github.com/protocolbuffers
+
+### プロトコルバッファリリース
+https://github.com/protocolbuffers/protobuf/releases
+
+
+
+.NetSDK 6.0をインストールする
+https://dotnet.microsoft.com/en-us/download/dotnet
