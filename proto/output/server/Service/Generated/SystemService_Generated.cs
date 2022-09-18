@@ -1,0 +1,10 @@
+service System
+   .monstershot.SystemPingResponse Ping(.monstershot.SystemPingRequest)
+   .monstershot.SystemSignupResponse Signup(.monstershot.SystemSignupRequest)
+   .monstershot.SystemLoginResponse Login(.monstershot.SystemLoginRequest)
+message SystemPingRequest
+message SystemPingResponse
+message SystemSignupRequest
+message SystemSignupResponse
+message SystemLoginRequest
+message SystemLoginResponse

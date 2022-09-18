@@ -1,5 +1,0 @@
-service Exchange
-   .monstershot.ExchangeExchangeResponse Exchange(.monstershot.ExchangeExchangeRequest)
-message ExchangeExchangeRequest
-message ExchangeExchangeResponse
-template=template/csharp_server_service.gotemplate,fileSuffix=Service_Generated.cs

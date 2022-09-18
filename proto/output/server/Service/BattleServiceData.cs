@@ -1,0 +1,34 @@
+service Battle
+   .monstershot.BattleHelperListResponse HelperList(.monstershot.BattleHelperListRequest)
+   .monstershot.BattleStartResponse Start(.monstershot.BattleStartRequest)
+   .monstershot.BattleContinueResponse Continue(.monstershot.BattleContinueRequest)
+   .monstershot.BattleGiveupResponse Giveup(.monstershot.BattleGiveupRequest)
+   .monstershot.BattleClearResponse Clear(.monstershot.BattleClearRequest)
+message UserUnitData
+message OtherUserData
+message BattleUserData
+message BattleInitDeckData
+message RoundData
+message ResourceData
+message BattleInitEnemyData
+message EnemyData
+message EnemyActionData
+message BattleClientData
+message BattleResultTurnLogData
+message BattleResultReplayLogData
+message BattleResultData
+message BattleRewardResourceData
+message BattleRewardsSpecialRewardsData
+message BattleRewardsQuestRewardsData
+message BattleRewardsUsersData
+message BattleRewardsData
+message BattleHelperListRequest
+message BattleHelperListResponse
+message BattleStartRequest
+message BattleStartResponse
+message BattleContinueRequest
+message BattleContinueResponse
+message BattleGiveupRequest
+message BattleGiveupResponse
+message BattleClearRequest
+message BattleClearResponse

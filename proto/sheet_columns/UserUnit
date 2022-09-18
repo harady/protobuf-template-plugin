@@ -1,2 +1,0 @@
-message UserUnitData
-template=template/sheet_columns.gotemplate,fileSuffix=.txt

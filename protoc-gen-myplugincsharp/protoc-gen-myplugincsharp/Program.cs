@@ -2,6 +2,7 @@
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Collections.Generic;
 using Google.Protobuf;
 using Google.Protobuf.Compiler;
 
@@ -24,6 +25,7 @@ namespace protoc_gen_myplugincsharp
 			}
 
 			var response = new CodeGeneratorResponse();
+			var paramDict = ParseParameter(request.Parameter);
 
 			foreach (var file in request.FileToGenerate) {
 				var output = new StringBuilder();
@@ -53,7 +55,7 @@ namespace protoc_gen_myplugincsharp
 				}
 
 				var filename = Path.GetFileNameWithoutExtension(file).ToPascalCase();
-				output.AppendLine(request.Parameter);
+				filename += paramDict["fileSuffix"];
 
 				// set as response
 				response.File.Add(
@@ -69,6 +71,21 @@ namespace protoc_gen_myplugincsharp
 				response.WriteTo(stdout);
 			}
 		}
+
+		static Dictionary<string, object> ParseParameter(string parameter)
+		{
+			var result = new Dictionary<string, object>();
+
+			var parameters = parameter.Split(',');
+			foreach (var param in parameters) {
+				var keyVal = param.Split('=');
+				if (keyVal.Length != 2) { continue; }
+				result[keyVal[0]] = keyVal[1];
+			}
+
+			return result;
+		}
+
 
 		static T Deserialize<T>(Stream stream) where T : IMessage<T>, new()
 			=> new MessageParser<T>(() => new T()).ParseFrom(stream);

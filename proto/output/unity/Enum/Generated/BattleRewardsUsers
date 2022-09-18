@@ -1,4 +1,0 @@
-message UserUnitData
-message OtherUserData
-message BattleRewardsUsersData
-template=template/csharp_enum.gotemplate,fileSuffix=Enum.cs

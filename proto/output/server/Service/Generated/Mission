@@ -1,8 +1,0 @@
-service Mission
-   .monstershot.MissionAchieveResponse Achieve(.monstershot.MissionAchieveRequest)
-   .monstershot.MissionReceiveResponse Receive(.monstershot.MissionReceiveRequest)
-message MissionAchieveRequest
-message MissionAchieveResponse
-message MissionReceiveRequest
-message MissionReceiveResponse
-template=template/csharp_server_service.gotemplate,fileSuffix=Service_Generated.cs

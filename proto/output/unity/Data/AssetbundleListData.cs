@@ -1,0 +1,2 @@
+message AssetbundleData
+message AssetbundleListData

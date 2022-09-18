@@ -1,9 +1,0 @@
-message ResourceData
-message BattleRewardResourceData
-message BattleRewardsSpecialRewardsData
-message BattleRewardsQuestRewardsData
-message UserUnitData
-message OtherUserData
-message BattleRewardsUsersData
-message BattleRewardsData
-template=template/csharp_server_model-partial.gotemplate,fileSuffix=Data.cs

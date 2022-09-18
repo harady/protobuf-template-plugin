@@ -1,0 +1,2 @@
+message UnitData
+message GachaPoolData

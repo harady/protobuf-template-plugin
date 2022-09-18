@@ -1,0 +1,12 @@
+message UserUnitData
+message OtherUserData
+message BattleUserData
+message BattleInitDeckData
+message RoundData
+message ResourceData
+message BattleInitEnemyData
+message EnemyData
+message EnemyActionData
+message BattleClientData
+message BattleServerData
+message UserBattleData

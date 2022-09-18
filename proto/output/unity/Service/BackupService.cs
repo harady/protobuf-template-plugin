@@ -1,0 +1,11 @@
+service Backup
+   .monstershot.BackupSaveTokenResponse SaveToken(.monstershot.BackupSaveTokenRequest)
+   .monstershot.BackupRemoveTokenResponse RemoveToken(.monstershot.BackupRemoveTokenRequest)
+   .monstershot.BackupTransferResponse Transfer(.monstershot.BackupTransferRequest)
+message UserBackupData
+message BackupSaveTokenRequest
+message BackupSaveTokenResponse
+message BackupRemoveTokenRequest
+message BackupRemoveTokenResponse
+message BackupTransferRequest
+message BackupTransferResponse

@@ -1,4 +1,0 @@
-message ResourceData
-message BattleRewardResourceData
-message BattleRewardsQuestRewardsData
-template=template/csharp_unity_data-partial.gotemplate,fileSuffix=Data.cs

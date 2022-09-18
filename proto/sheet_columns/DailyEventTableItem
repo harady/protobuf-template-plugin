@@ -1,2 +1,0 @@
-message DailyEventTableItemData
-template=template/sheet_columns.gotemplate,fileSuffix=.txt

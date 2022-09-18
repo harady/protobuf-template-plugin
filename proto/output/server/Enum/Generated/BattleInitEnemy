@@ -1,3 +1,0 @@
-message ResourceData
-message BattleInitEnemyData
-template=template/csharp_enum.gotemplate,fileSuffix=Enum.cs

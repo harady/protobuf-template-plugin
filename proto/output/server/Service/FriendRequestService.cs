@@ -1,0 +1,12 @@
+service FriendRequest
+   .monstershot.FriendRequestListResponse List(.monstershot.FriendRequestListRequest)
+   .monstershot.FriendRequestAcceptResponse Accept(.monstershot.FriendRequestAcceptRequest)
+   .monstershot.FriendRequestRejectResponse Reject(.monstershot.FriendRequestRejectRequest)
+message UserUnitData
+message OtherUserData
+message FriendRequestListRequest
+message FriendRequestListResponse
+message FriendRequestAcceptRequest
+message FriendRequestAcceptResponse
+message FriendRequestRejectRequest
+message FriendRequestRejectResponse

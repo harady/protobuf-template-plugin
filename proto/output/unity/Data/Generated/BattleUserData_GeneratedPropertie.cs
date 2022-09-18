@@ -1,0 +1,3 @@
+message UserUnitData
+message OtherUserData
+message BattleUserData

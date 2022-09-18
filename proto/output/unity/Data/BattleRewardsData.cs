@@ -1,0 +1,8 @@
+message ResourceData
+message BattleRewardResourceData
+message BattleRewardsSpecialRewardsData
+message BattleRewardsQuestRewardsData
+message UserUnitData
+message OtherUserData
+message BattleRewardsUsersData
+message BattleRewardsData

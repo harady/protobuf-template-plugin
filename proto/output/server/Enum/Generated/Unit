@@ -1,2 +1,0 @@
-message UnitData
-template=template/csharp_enum.gotemplate,fileSuffix=Enum.cs

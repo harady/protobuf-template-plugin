@@ -1,4 +1,0 @@
-message UserUnitData
-message OtherUserData
-message BattleUserData
-template=template/csharp_server_model-partial.gotemplate,fileSuffix=Data.cs

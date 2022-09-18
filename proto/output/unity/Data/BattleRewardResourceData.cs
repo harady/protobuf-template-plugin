@@ -1,0 +1,2 @@
+message ResourceData
+message BattleRewardResourceData

@@ -1,0 +1,4 @@
+service Exchange
+   .monstershot.ExchangeExchangeResponse Exchange(.monstershot.ExchangeExchangeRequest)
+message ExchangeExchangeRequest
+message ExchangeExchangeResponse

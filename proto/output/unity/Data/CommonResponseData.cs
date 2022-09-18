@@ -1,0 +1,15 @@
+message UserData
+message UserBackupData
+message UserDeckData
+message UserExchangeItemData
+message UserGachaButtonData
+message UserItemData
+message UserMessageData
+message UserMissionData
+message UserPaidCrystalData
+message UserShopItemData
+message UserStageData
+message UserUnitData
+message UserUnitCollectionData
+message UserUpdateData
+message CommonResponse

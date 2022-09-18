@@ -1,3 +1,0 @@
-message UserUnitData
-message BattleInitDeckData
-template=template/csharp_enum.gotemplate,fileSuffix=Enum.cs

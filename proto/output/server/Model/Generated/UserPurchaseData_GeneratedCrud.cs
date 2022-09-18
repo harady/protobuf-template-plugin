@@ -1,0 +1,11 @@
+service Shop
+   .monstershot.ShopPurchaseGooglePlayResponse PurchaseGooglePlay(.monstershot.ShopPurchaseGooglePlayRequest)
+   .monstershot.ShopPurchaseAppStoreResponse PurchaseAppStore(.monstershot.ShopPurchaseAppStoreRequest)
+   .monstershot.ShopPurchaseDebugResponse PurchaseDebug(.monstershot.ShopPurchaseDebugRequest)
+message ShopPurchaseGooglePlayRequest
+message ShopPurchaseGooglePlayResponse
+message ShopPurchaseAppStoreRequest
+message ShopPurchaseAppStoreResponse
+message ShopPurchaseDebugRequest
+message ShopPurchaseDebugResponse
+message UserPurchaseData

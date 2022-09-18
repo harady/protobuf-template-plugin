@@ -1,2 +1,0 @@
-message UserDeckData
-template=template/sheet_columns.gotemplate,fileSuffix=.txt

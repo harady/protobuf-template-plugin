@@ -1,2 +1,0 @@
-message ExchangeScheduleData
-template=template/sheet_columns.gotemplate,fileSuffix=.txt

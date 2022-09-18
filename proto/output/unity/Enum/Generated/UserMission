@@ -1,2 +1,0 @@
-message UserMissionData
-template=template/csharp_enum.gotemplate,fileSuffix=Enum.cs

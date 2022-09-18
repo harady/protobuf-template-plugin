@@ -1,2 +1,0 @@
-message MessageData
-template=template/sheet_columns.gotemplate,fileSuffix=.txt
