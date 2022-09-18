@@ -9,6 +9,7 @@ class CodeGenerator
   attr_accessor :message
   attr_accessor :src_base_path
   attr_accessor :src_path_pattern
+  attr_accessor :template_base_path
   attr_accessor :template_path
   attr_accessor :file_suffix
   attr_accessor :out_base_path
@@ -20,6 +21,7 @@ class CodeGenerator
     @message = ""
     @src_base_path = ""
     @src_path_pattern = ""
+    @template_base_path = ""
     @template_path = ""
     @file_suffix = ""
     @out_base_path = ""
@@ -31,6 +33,10 @@ class CodeGenerator
 
   def actual_src_path_pattern
     "#{@src_base_path}#{@src_path_pattern}"
+  end
+
+  def actual_template_path
+    "#{@template_base_path}#{@template_path}"
   end
 
   def actual_out_dir_path
@@ -64,6 +70,7 @@ class CodeGenerator
       message: data.dig("message"),
       src_base_path: data.dig("src_base_path"),
       src_path_pattern: data.dig("src_path_pattern"),
+      template_base_path: data.dig("template_base_path"),
       template_path: data.dig("template_path"),
       file_suffix: data.dig("file_suffix"),
       out_base_path: data.dig("out_base_path"),
@@ -81,6 +88,7 @@ class CodeGenerator
     message: nil,
     src_base_path: nil,
     src_path_pattern: nil,
+    template_base_path: nil,
     template_path: nil,
     file_suffix: nil,
     out_base_path: nil,
@@ -92,6 +100,7 @@ class CodeGenerator
     self.message = message if !message.nil?
     self.src_base_path = src_base_path if !src_base_path.nil?
     self.src_path_pattern = src_path_pattern if !src_path_pattern.nil?
+    self.template_base_path = template_base_path if !template_base_path.nil?
     self.template_path = template_path if !template_path.nil?
     self.file_suffix = file_suffix if !file_suffix.nil?
     self.out_base_path = out_base_path if !out_base_path.nil?
@@ -136,14 +145,14 @@ class CodeGenerator
       # 編集不能なコードはソース、テンプレートの更新あったらスキップしない.
       if !is_editable
         skip &= (File.mtime(src_file_path) < File.mtime(out_file_path))
-        skip &= (File.mtime(template_path) < File.mtime(out_file_path))
+        skip &= (File.mtime(actual_template_path) < File.mtime(out_file_path))
       end
     end
     skip = false if is_force_update
     return if skip
 
     # コード生成コマンド実行.
-    command = "bin/protoc --csharp-template_out=template=#{template_path},"
+    command = "bin/protoc --csharp-template_out=template=#{actual_template_path},"
     command += "fileSuffix=#{file_suffix}:#{actual_out_dir_path} "
     command += "--plugin=plugin/protoc-gen-csharp-template #{src_file_path}"
     `#{command}`
