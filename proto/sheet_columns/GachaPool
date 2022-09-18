@@ -1,0 +1,3 @@
+message UnitData
+message GachaPoolData
+template=template/sheet_columns.gotemplate,fileSuffix=.txt
