@@ -1,5 +1,5 @@
--src_base_path : "./"
--out_base_path : "output2/unity/"
+src_base_path : "./"
+out_base_path : "output2/unity/"
 items:
   #============================================================
   # Unity Model(TableData)のC#ファイルを生成.

@@ -7,26 +7,26 @@ require "fileutils"
 #====================================================================
 class CodeGenerator
   attr_accessor :message
+  attr_accessor :src_base_path
   attr_accessor :src_path_pattern
   attr_accessor :template_path
   attr_accessor :file_suffix
+  attr_accessor :out_base_path
   attr_accessor :out_dir_path
   attr_accessor :is_editable
   attr_accessor :is_force_update
-  attr_accessor :src_base_path
-  attr_accessor :out_base_path
 
   def initialize
     @message = ""
+    @src_base_path = ""
     @src_path_pattern = ""
     @template_path = ""
     @file_suffix = ""
+    @out_base_path = ""
     @out_dir_path = ""
     @is_editable = false
     @is_force_update = false
     @target_content_pattern = nil
-    @src_base_path = ""
-    @out_base_path = ""
   end
 
   def actual_src_path_pattern
@@ -62,15 +62,15 @@ class CodeGenerator
   def setup_by_data(data:)
     setup(
       message: data.dig("message"),
+      src_base_path: data.dig("src_base_path"),
       src_path_pattern: data.dig("src_path_pattern"),
       template_path: data.dig("template_path"),
       file_suffix: data.dig("file_suffix"),
+      out_base_path: data.dig("out_base_path"),
       out_dir_path: data.dig("out_dir_path"),
       is_editable: data.dig("is_editable"),
       is_force_update: data.dig("is_force_update"),
       target_content_pattern: data.dig("target_content_pattern"),
-      src_base_path: data.dig("src_base_path"),
-      out_base_path: data.dig("out_base_path"),
     )
   end
 
@@ -79,26 +79,26 @@ class CodeGenerator
   #============================================================
   def setup(
     message: nil,
+    src_base_path: nil,
     src_path_pattern: nil,
     template_path: nil,
     file_suffix: nil,
+    out_base_path: nil,
     out_dir_path: nil,
     is_editable: nil,
     is_force_update: nil,
-    target_content_pattern: nil,
-    src_base_path: nil,
-    out_base_path: nil
+    target_content_pattern: nil
   )
     self.message = message if !message.nil?
+    self.src_base_path = src_base_path if !src_base_path.nil?
     self.src_path_pattern = src_path_pattern if !src_path_pattern.nil?
     self.template_path = template_path if !template_path.nil?
     self.file_suffix = file_suffix if !file_suffix.nil?
+    self.out_base_path = out_base_path if !out_base_path.nil?
     self.out_dir_path = out_dir_path if !out_dir_path.nil?
     self.is_editable = is_editable if !is_editable.nil?
     self.is_force_update = is_force_update if !is_force_update.nil?
     self.target_content_pattern = target_content_pattern if !target_content_pattern.nil?
-    self.src_base_path = src_base_path if !src_base_path.nil?
-    self.out_base_path = out_base_path if !out_base_path.nil?
     self
   end
 
