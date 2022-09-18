@@ -29,6 +29,10 @@ class CodeGenerator
     @out_base_path = ""
   end
 
+  def actual_src_path_pattern
+    "#{@src_base_path}#{@src_path_pattern}"
+  end
+
   def actual_out_dir_path
     "#{@out_base_path}#{@out_dir_path}"
   end
@@ -104,8 +108,8 @@ class CodeGenerator
   def generate_inner()
     # 出力先フォルダがなければ生成.
     FileUtils.mkdir_p(actual_out_dir_path)
-    src_file_paths = Dir.glob(src_path_pattern)
-
+    src_file_paths = Dir.glob(actual_src_path_pattern)
+    p actual_src_path_pattern
     src_file_paths.each do |src_file_path|
       generate_code(src_file_path: src_file_path)
     end
