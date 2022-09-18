@@ -1,1 +1,3 @@
 message CanpaignData
+    id
+    name

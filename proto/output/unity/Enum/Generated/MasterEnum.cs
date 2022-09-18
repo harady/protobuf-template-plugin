@@ -1,55 +1,8 @@
-message EnemyData
-message EnemyActionData
-message RoundData
-message WeakPointData
-message WeakPointPositionData
-message CanpaignData
-message ConfigData
-message IdentifableItemData
-message ItemData
-message ResourceLotteryData
-message ResourceLotteryItemData
-message ResourceSetData
-message ResourceSetItemData
-message DailyEventTableData
-message DailyEventTableItemData
-message GachaData
-message GachaButtonData
-message GachaScheduleData
-message MessageData
-message MissionData
-message MissionGroupData
-message MissionScheduleData
-message AdviceData
-message LogData
-message LoginBonusData
-message LoginBonusItemData
-message UserRankExpData
-message VersionData
-message EventScheduleData
-message QuestData
-message QuestGroupData
-message StageData
-message StageSpecialRewardData
-message ExchangeData
-message ExchangeItemData
-message ExchangeScheduleData
-message ShopData
-message ShopItemData
-message ShopScheduleData
-message AbilityData
-message ComboData
-message EquipmentData
-message SkillData
-message UnitData
-message UnitCategoryData
-message UnitEvolutionData
-message UnitLevelExpData
-message ClientMasterData
-message EnemyClusterData
-message EnemyMappingData
-message EventQuestCategoryData
-message EventScheduleTermData
-message GachaPoolData
-message GachaPoolItemData
 message MasterData
+   .monstershot.ClientMasterData client_master
+   .monstershot.EnemyClusterData enemy_clusters
+   .monstershot.EnemyMappingData enemy_mappings
+   .monstershot.EventQuestCategoryData event_quest_categorys
+   .monstershot.EventScheduleTermData event_schedule_terms
+   .monstershot.GachaPoolData gacha_pools
+   .monstershot.GachaPoolItemData gacha_pool_items

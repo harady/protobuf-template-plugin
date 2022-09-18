@@ -1,1 +1,3 @@
 message LoginBonusItemData
+    id
+    name

@@ -8,8 +8,14 @@ service Operation
    .monstershot.OperationUpdateMasterVersionResponse UpdateMasterVersion(.monstershot.OperationUpdateMasterVersionRequest)
    .monstershot.OperationUpdateEventScheduleResponse UpdateEventSchedule(.monstershot.OperationUpdateEventScheduleRequest)
 message OperationTestRequest
+    message
 message OperationTestResponse
+    message
 message OperationUpdateMasterVersionRequest
+    message
 message OperationUpdateMasterVersionResponse
+    message
 message OperationUpdateEventScheduleRequest
+    message
 message OperationUpdateEventScheduleResponse
+    message

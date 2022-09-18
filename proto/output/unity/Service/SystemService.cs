@@ -5,6 +5,11 @@ service System
 message SystemPingRequest
 message SystemPingResponse
 message SystemSignupRequest
+    name
 message SystemSignupResponse
+    token
+    session_id
 message SystemLoginRequest
+    token
 message SystemLoginResponse
+    session_id

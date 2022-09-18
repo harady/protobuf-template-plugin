@@ -1,1 +1,3 @@
 message VersionData
+    id
+    name

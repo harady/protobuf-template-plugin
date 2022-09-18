@@ -1,6 +1,6 @@
 service Gacha
    .monstershot.GachaDrawResponse Draw(.monstershot.GachaDrawRequest)
-message ResourceData
-message GachaResultItemData
 message GachaDrawRequest
+    gacha_button_id
 message GachaDrawResponse
+   .monstershot.GachaResultItemData gacha_result_items

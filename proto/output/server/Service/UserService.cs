@@ -4,4 +4,5 @@ service User
 message UserDataListRequest
 message UserDataListResponse
 message UserNameEditRequest
+    name
 message UserNameEditResponse

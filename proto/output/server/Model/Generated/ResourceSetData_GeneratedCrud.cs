@@ -1,1 +1,3 @@
 message ResourceSetData
+    id
+    name

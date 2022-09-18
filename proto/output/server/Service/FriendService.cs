@@ -3,13 +3,16 @@ service Friend
    .monstershot.FriendRemoveResponse Remove(.monstershot.FriendRemoveRequest)
    .monstershot.FriendSearchResponse Search(.monstershot.FriendSearchRequest)
    .monstershot.FriendRequestResponse Request(.monstershot.FriendRequestRequest)
-message UserUnitData
-message OtherUserData
 message FriendListRequest
 message FriendListResponse
+   .monstershot.OtherUserData other_users
 message FriendRemoveRequest
+    user_id
 message FriendRemoveResponse
 message FriendSearchRequest
+    code
 message FriendSearchResponse
+   .monstershot.OtherUserData other_user
 message FriendRequestRequest
+    user_id
 message FriendRequestResponse

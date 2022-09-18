@@ -1,8 +1,5 @@
-message ResourceData
-message BattleRewardResourceData
-message BattleRewardsSpecialRewardsData
-message BattleRewardsQuestRewardsData
-message UserUnitData
-message OtherUserData
-message BattleRewardsUsersData
 message BattleRewardsData
+    stage_id
+   .monstershot.BattleRewardsSpecialRewardsData special_rewards
+   .monstershot.BattleRewardsQuestRewardsData quest_rewards
+   .monstershot.BattleRewardsUsersData users

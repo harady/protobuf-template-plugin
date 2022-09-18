@@ -27,11 +27,16 @@ namespace protoc_gen_myplugincsharp
 			var response = new CodeGeneratorResponse();
 			var paramDict = ParseParameter(request.Parameter);
 
-			foreach (var file in request.FileToGenerate) {
+			var fileToGenerates = request.FileToGenerate.ToHashSet();
+
+			var outputFileDescs = request.ProtoFile
+				.Where(file => fileToGenerates.Contains(file.Name));
+
+			foreach (var fileDesc in outputFileDescs) {
 				var output = new StringBuilder();
 
 				// make service method list
-				foreach (var serviceType in request.ProtoFile.SelectMany((x) => x.Service)) {
+				foreach (var serviceType in fileDesc.Service) {
 					output.AppendLine($"service {serviceType.Name}");
 
 					foreach (var method in serviceType.Method) {
@@ -40,11 +45,11 @@ namespace protoc_gen_myplugincsharp
 				}
 
 				// make message field list
-				foreach (var messageDesc in request.ProtoFile.SelectMany((x) => x.MessageType)) {
+				foreach (var messageDesc in fileDesc.MessageType) {
 					output.AppendLine($"message {messageDesc.Name}");
 
-					foreach (var enumDesc in messageDesc.EnumType) {
-						output.AppendLine($"   {enumDesc.Name}");
+					foreach (var fieldDesc in messageDesc.Field) {
+						output.AppendLine($"   {fieldDesc.TypeName} {fieldDesc.Name}");
 					}
 
 					foreach (var enumDesc in messageDesc.EnumType) {
@@ -52,7 +57,9 @@ namespace protoc_gen_myplugincsharp
 					}
 				}
 
-				var filename = Path.GetFileNameWithoutExtension(file).ToPascalCase();
+				var filename
+					= Path.GetFileNameWithoutExtension(fileDesc.Name)
+						.ToPascalCase();
 				filename += paramDict["fileSuffix"];
 
 				// set as response

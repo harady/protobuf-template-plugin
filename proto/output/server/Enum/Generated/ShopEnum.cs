@@ -1,1 +1,3 @@
 message ShopData
+    id
+    name

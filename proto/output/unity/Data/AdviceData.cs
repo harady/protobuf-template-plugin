@@ -1,1 +1,3 @@
 message AdviceData
+    id
+    message

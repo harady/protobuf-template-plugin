@@ -8,6 +8,10 @@ service Debug
    .monstershot.DebugTestResponse Test5(.monstershot.DebugTestRequest)
    .monstershot.DebugTestResponse Test6(.monstershot.DebugTestRequest)
 message DebugSetServerTimeRequest
+    is_clear
+    to_set_server_time
 message DebugSetServerTimeResponse
 message DebugTestRequest
+    message
 message DebugTestResponse
+    message

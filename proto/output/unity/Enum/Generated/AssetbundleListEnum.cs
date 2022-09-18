@@ -1,2 +1,3 @@
-message AssetbundleData
 message AssetbundleListData
+    version
+   .monstershot.AssetbundleData assetbundles

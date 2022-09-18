@@ -1,1 +1,3 @@
 message DailyEventTableData
+    id
+    name

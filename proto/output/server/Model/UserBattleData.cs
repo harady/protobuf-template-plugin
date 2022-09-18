@@ -1,12 +1,8 @@
-message UserUnitData
-message OtherUserData
-message BattleUserData
-message BattleInitDeckData
-message RoundData
-message ResourceData
-message BattleInitEnemyData
-message EnemyData
-message EnemyActionData
-message BattleClientData
-message BattleServerData
 message UserBattleData
+    id
+    user_id
+    stage_id
+    continue_count
+   .monstershot.BattleClientData battle_client_data
+   .monstershot.BattleServerData battle_server_data
+    start_at

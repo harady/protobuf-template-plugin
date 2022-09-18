@@ -1,1 +1,3 @@
 message MessageData
+    id
+    name
