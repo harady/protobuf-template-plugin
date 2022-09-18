@@ -10,6 +10,8 @@ https://github.com/protocolbuffers
 https://github.com/protocolbuffers/protobuf/releases
 
 
+VisualStudioをインストールする  
+https://visualstudio.microsoft.com/ja/vs/community/
 
 .NetSDK 6.0をインストールする  
 https://dotnet.microsoft.com/en-us/download/dotnet
