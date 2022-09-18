@@ -40,17 +40,15 @@ namespace protoc_gen_myplugincsharp
 				}
 
 				// make message field list
-				foreach (var fileDesc in request.ProtoFile) {
-					foreach (var messageDesc in fileDesc.MessageType) {
-						output.AppendLine($"message {messageDesc.Name}");
+				foreach (var messageDesc in request.ProtoFile.SelectMany((x) => x.MessageType)) {
+					output.AppendLine($"message {messageDesc.Name}");
 
-						foreach (var enumDesc in messageDesc.EnumType) {
-							output.AppendLine($"   {enumDesc.Name}");
-						}
+					foreach (var enumDesc in messageDesc.EnumType) {
+						output.AppendLine($"   {enumDesc.Name}");
+					}
 
-						foreach (var enumDesc in messageDesc.EnumType) {
-							output.AppendLine($"   {enumDesc.Name}");
-						}
+					foreach (var enumDesc in messageDesc.EnumType) {
+						output.AppendLine($"   {enumDesc.Name}");
 					}
 				}
 
