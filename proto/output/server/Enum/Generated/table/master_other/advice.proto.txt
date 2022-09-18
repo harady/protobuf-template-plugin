@@ -1,3 +1,0 @@
-message AdviceData
-    id
-    message

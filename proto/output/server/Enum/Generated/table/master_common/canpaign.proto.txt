@@ -1,3 +1,0 @@
-message CanpaignData
-    id
-    name

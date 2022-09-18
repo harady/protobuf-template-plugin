@@ -1,0 +1,16 @@
+service Operation
+   .monstershot.OperationTestResponse Test(.monstershot.OperationTestRequest)
+   .monstershot.OperationTestResponse Test1(.monstershot.OperationTestRequest)
+   .monstershot.OperationTestResponse Test2(.monstershot.OperationTestRequest)
+   .monstershot.OperationTestResponse Test3(.monstershot.OperationTestRequest)
+   .monstershot.OperationTestResponse Test4(.monstershot.OperationTestRequest)
+   .monstershot.OperationTestResponse Test5(.monstershot.OperationTestRequest)
+   .monstershot.OperationUpdateMasterVersionResponse UpdateMasterVersion(.monstershot.OperationUpdateMasterVersionRequest)
+   .monstershot.OperationUpdateEventScheduleResponse UpdateEventSchedule(.monstershot.OperationUpdateEventScheduleRequest)
+message OperationTestRequest
+message OperationTestResponse
+message OperationUpdateMasterVersionRequest
+message OperationUpdateMasterVersionResponse
+message OperationUpdateEventScheduleRequest
+message OperationUpdateEventScheduleResponse
+template=template/csharp_unity_data-partial.gotemplate,fileSuffix=ServiceData.cs

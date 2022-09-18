@@ -1,3 +1,0 @@
-message WeakPointData
-    id
-    name

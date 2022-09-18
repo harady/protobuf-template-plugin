@@ -1,3 +1,0 @@
-message LoginBonusItemData
-    id
-    name

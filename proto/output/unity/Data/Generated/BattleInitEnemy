@@ -1,0 +1,3 @@
+message ResourceData
+message BattleInitEnemyData
+template=template/csharp_unity_data-propertie.gotemplate,fileSuffix=Data_GeneratedPropertie.cs

@@ -1,3 +1,0 @@
-message DailyEventTableData
-    id
-    name

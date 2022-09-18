@@ -1,0 +1,4 @@
+message ResourceData
+message BattleRewardResourceData
+message BattleRewardsSpecialRewardsData
+template=template/csharp_unity_data-propertie.gotemplate,fileSuffix=Data_GeneratedPropertie.cs

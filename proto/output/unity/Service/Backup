@@ -1,0 +1,12 @@
+service Backup
+   .monstershot.BackupSaveTokenResponse SaveToken(.monstershot.BackupSaveTokenRequest)
+   .monstershot.BackupRemoveTokenResponse RemoveToken(.monstershot.BackupRemoveTokenRequest)
+   .monstershot.BackupTransferResponse Transfer(.monstershot.BackupTransferRequest)
+message UserBackupData
+message BackupSaveTokenRequest
+message BackupSaveTokenResponse
+message BackupRemoveTokenRequest
+message BackupRemoveTokenResponse
+message BackupTransferRequest
+message BackupTransferResponse
+template=template/csharp_unity_data-partial.gotemplate,fileSuffix=ServiceData.cs

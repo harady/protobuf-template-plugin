@@ -1,0 +1,4 @@
+message BattleResultTurnLogData
+message BattleResultReplayLogData
+message BattleResultData
+template=template/csharp_unity_data-partial.gotemplate,fileSuffix=Data.cs

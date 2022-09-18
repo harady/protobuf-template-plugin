@@ -1,0 +1,4 @@
+message ResourceData
+message BattleRewardResourceData
+message BattleRewardsQuestRewardsData
+template=template/csharp_enum.gotemplate,fileSuffix=Enum.cs

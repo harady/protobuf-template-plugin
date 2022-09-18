@@ -1,0 +1,3 @@
+message UnitData
+message GachaPoolData
+template=template/csharp_enum.gotemplate,fileSuffix=Enum.cs

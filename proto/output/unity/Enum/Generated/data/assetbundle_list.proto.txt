@@ -1,7 +1,0 @@
-message AssetbundleData
-    name
-    hash
-    size
-message AssetbundleListData
-    version
-   .monstershot.AssetbundleData assetbundles

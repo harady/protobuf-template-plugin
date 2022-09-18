@@ -1,0 +1,7 @@
+service Gacha
+   .monstershot.GachaDrawResponse Draw(.monstershot.GachaDrawRequest)
+message ResourceData
+message GachaResultItemData
+message GachaDrawRequest
+message GachaDrawResponse
+template=template/csharp_unity_service.gotemplate,fileSuffix=Service_Generated.cs

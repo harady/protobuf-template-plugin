@@ -1,0 +1,4 @@
+message UserUnitData
+message OtherUserData
+message BattleRewardsUsersData
+template=template/csharp_unity_data-partial.gotemplate,fileSuffix=Data.cs
