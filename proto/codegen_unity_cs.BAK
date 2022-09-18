@@ -11,7 +11,7 @@ items:
       - message: "==== Unity XxxxData.cs 生成中"
         template_path: "template/csharp_unity_data-partial.gotemplate"
         file_suffix: "Data.cs"
-        out_dir_path: *out_base_path
+        out_dir_path: *base_path
         is_editable: true
       # Unity XxxxData_GeneratedGameDB.cs 生成
       - message: "==== Unity XxxxData_GeneratedGameDB.cs 生成中"
