@@ -1,0 +1,20 @@
+■Messages
+Message.Name:ResourceSetData
+  Message.PrimaryKey:id
+  Field.Name:id
+    Field.BaseType:long
+    Field.FullType:long
+    Field.IsRepeated:false
+  Field.Name:name
+    Field.BaseType:string
+    Field.FullType:string
+    Field.IsRepeated:false
+
+■Services
+■EnumTypes
+Message.Name:ResourceSetType
+  Value.Name:ResourceSetTypeNone
+  Value.Number:0
+  Value.Name:ResourceSetTypeEvolutionMaterial
+  Value.Number:1
+

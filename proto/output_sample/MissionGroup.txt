@@ -1,0 +1,24 @@
+■Messages
+Message.Name:MissionGroupData
+  Message.PrimaryKey:id
+  Field.Name:id
+    Field.BaseType:long
+    Field.FullType:long
+    Field.IsRepeated:false
+  Field.Name:type
+    Field.BaseType:MissionGroupType
+    Field.FullType:MonsterShot.MissionGroupType
+    Field.IsRepeated:false
+
+■Services
+■EnumTypes
+Message.Name:MissionGroupType
+  Value.Name:MissionGroupTypeNone
+  Value.Number:0
+  Value.Name:MissionGroupTypeNormal
+  Value.Number:1
+  Value.Name:MissionGroupTypeWeakly
+  Value.Number:2
+  Value.Name:MissionGroupTypeEvent
+  Value.Number:3
+

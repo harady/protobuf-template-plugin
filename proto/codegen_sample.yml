@@ -1,0 +1,14 @@
+items:
+  #============================================================
+  # Model(Table)のサンプル出力ファイルを生成.
+  #============================================================
+  - name: "generate_sample_cs"
+    message: "== Model(Table)のサンプル出力ファイル 生成中."
+    src_path_pattern: "./table/**/*.proto"
+    items:
+      # XxxxData.cs 生成
+      - message: "==== XxxxData.cs 生成中"
+        template_path: "template/sample.gotemplate"
+        file_suffix: ".txt"
+        out_dir_path: "./output_sample"
+        is_editable: true

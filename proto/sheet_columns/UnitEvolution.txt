@@ -1,0 +1,2 @@
+・unit_evolutions
+id	name	type	baseUnitId	resultUnitId	costResourceSetId	

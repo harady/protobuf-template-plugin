@@ -1,0 +1,2 @@
+・user_paid_crystals
+id	userId	purchasePlatformType	amount	

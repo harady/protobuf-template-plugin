@@ -1,0 +1,50 @@
+■Messages
+Message.Name:GachaButtonData
+  Message.PrimaryKey:id
+  Field.Name:id
+    Field.BaseType:long
+    Field.FullType:long
+    Field.IsRepeated:false
+  Field.Name:name
+    Field.BaseType:string
+    Field.FullType:string
+    Field.IsRepeated:false
+  Field.Name:gacha_id
+    Field.BaseType:long
+    Field.FullType:long
+    Field.IsRepeated:false
+  Field.Name:view_order
+    Field.BaseType:long
+    Field.FullType:long
+    Field.IsRepeated:false
+  Field.Name:draw_count
+    Field.BaseType:long
+    Field.FullType:long
+    Field.IsRepeated:false
+  Field.Name:extra_count
+    Field.BaseType:long
+    Field.FullType:long
+    Field.IsRepeated:false
+  Field.Name:guarantee_count
+    Field.BaseType:long
+    Field.FullType:long
+    Field.IsRepeated:false
+  Field.Name:purchase_count
+    Field.BaseType:long
+    Field.FullType:long
+    Field.IsRepeated:false
+  Field.Name:cost_resource_type
+    Field.BaseType:ResourceType
+    Field.FullType:MonsterShot.ResourceType
+    Field.IsRepeated:false
+  Field.Name:cost_resource_id
+    Field.BaseType:long
+    Field.FullType:long
+    Field.IsRepeated:false
+  Field.Name:cost_resource_amount
+    Field.BaseType:long
+    Field.FullType:long
+    Field.IsRepeated:false
+
+■Services
+■EnumTypes

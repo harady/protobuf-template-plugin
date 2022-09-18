@@ -1,0 +1,38 @@
+■Messages
+Message.Name:GachaPoolItemData
+  Message.PrimaryKey:id
+  Field.Name:id
+    Field.BaseType:long
+    Field.FullType:long
+    Field.IsRepeated:false
+  Field.Name:gacha_pool_id
+    Field.BaseType:long
+    Field.FullType:long
+    Field.IsRepeated:false
+  Field.Name:resource_type
+    Field.BaseType:ResourceType
+    Field.FullType:MonsterShot.ResourceType
+    Field.IsRepeated:false
+  Field.Name:resource_id
+    Field.BaseType:long
+    Field.FullType:long
+    Field.IsRepeated:false
+  Field.Name:resource_amount
+    Field.BaseType:long
+    Field.FullType:long
+    Field.IsRepeated:false
+  Field.Name:weight
+    Field.BaseType:long
+    Field.FullType:long
+    Field.IsRepeated:false
+  Field.Name:open_at
+    Field.BaseType:long
+    Field.FullType:long
+    Field.IsRepeated:false
+  Field.Name:close_at
+    Field.BaseType:long
+    Field.FullType:long
+    Field.IsRepeated:false
+
+■Services
+■EnumTypes

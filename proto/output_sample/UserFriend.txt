@@ -1,0 +1,30 @@
+■Messages
+Message.Name:UserFriendData
+  Message.PrimaryKey:id
+  Field.Name:id
+    Field.BaseType:long
+    Field.FullType:long
+    Field.IsRepeated:false
+  Field.Name:user_id
+    Field.BaseType:long
+    Field.FullType:long
+    Field.IsRepeated:false
+  Field.Name:friend_user_id
+    Field.BaseType:long
+    Field.FullType:long
+    Field.IsRepeated:false
+  Field.Name:is_favorite
+    Field.BaseType:bool
+    Field.FullType:bool
+    Field.IsRepeated:false
+  Field.Name:last_used_at
+    Field.BaseType:long
+    Field.FullType:long
+    Field.IsRepeated:false
+  Field.Name:used_count
+    Field.BaseType:long
+    Field.FullType:long
+    Field.IsRepeated:false
+
+■Services
+■EnumTypes

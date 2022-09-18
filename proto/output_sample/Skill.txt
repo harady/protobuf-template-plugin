@@ -1,0 +1,70 @@
+■Messages
+Message.Name:SkillData
+  Message.PrimaryKey:id
+  Field.Name:id
+    Field.BaseType:long
+    Field.FullType:long
+    Field.IsRepeated:false
+  Field.Name:name
+    Field.BaseType:string
+    Field.FullType:string
+    Field.IsRepeated:false
+  Field.Name:description
+    Field.BaseType:string
+    Field.FullType:string
+    Field.IsRepeated:false
+  Field.Name:turn
+    Field.BaseType:long
+    Field.FullType:long
+    Field.IsRepeated:false
+  Field.Name:attack_rate
+    Field.BaseType:long
+    Field.FullType:long
+    Field.IsRepeated:false
+  Field.Name:speed_rate
+    Field.BaseType:long
+    Field.FullType:long
+    Field.IsRepeated:false
+  Field.Name:brake_rate
+    Field.BaseType:long
+    Field.FullType:long
+    Field.IsRepeated:false
+  Field.Name:effect1_type
+    Field.BaseType:SkillEffectType
+    Field.FullType:MonsterShot.SkillEffectType
+    Field.IsRepeated:false
+  Field.Name:effect1_rank
+    Field.BaseType:long
+    Field.FullType:long
+    Field.IsRepeated:false
+  Field.Name:effect1_param_a
+    Field.BaseType:long
+    Field.FullType:long
+    Field.IsRepeated:false
+  Field.Name:effect1_param_b
+    Field.BaseType:long
+    Field.FullType:long
+    Field.IsRepeated:false
+  Field.Name:effect2_type
+    Field.BaseType:SkillEffectType
+    Field.FullType:MonsterShot.SkillEffectType
+    Field.IsRepeated:false
+  Field.Name:effect2_rank
+    Field.BaseType:long
+    Field.FullType:long
+    Field.IsRepeated:false
+  Field.Name:effect2_param_a
+    Field.BaseType:long
+    Field.FullType:long
+    Field.IsRepeated:false
+  Field.Name:effect2_param_b
+    Field.BaseType:long
+    Field.FullType:long
+    Field.IsRepeated:false
+
+■Services
+■EnumTypes
+Message.Name:SkillEffectType
+  Value.Name:SkillEffectTypeNone
+  Value.Number:0
+

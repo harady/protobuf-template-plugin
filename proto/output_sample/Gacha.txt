@@ -1,0 +1,22 @@
+■Messages
+Message.Name:GachaData
+  Message.PrimaryKey:id
+  Field.Name:id
+    Field.BaseType:long
+    Field.FullType:long
+    Field.IsRepeated:false
+  Field.Name:name
+    Field.BaseType:string
+    Field.FullType:string
+    Field.IsRepeated:false
+  Field.Name:base_gacha_id
+    Field.BaseType:long
+    Field.FullType:long
+    Field.IsRepeated:false
+  Field.Name:is_premium
+    Field.BaseType:bool
+    Field.FullType:bool
+    Field.IsRepeated:false
+
+■Services
+■EnumTypes

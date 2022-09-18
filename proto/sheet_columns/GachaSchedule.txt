@@ -1,0 +1,2 @@
+・gacha_schedules
+id	gachaId	openAt	closeAt	

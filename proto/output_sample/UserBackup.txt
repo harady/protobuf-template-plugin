@@ -1,0 +1,32 @@
+■Messages
+Message.Name:UserBackupData
+  Message.PrimaryKey:id
+  Field.Name:id
+    Field.BaseType:long
+    Field.FullType:long
+    Field.IsRepeated:false
+  Field.Name:user_id
+    Field.BaseType:long
+    Field.FullType:long
+    Field.IsRepeated:false
+  Field.Name:backup_type
+    Field.BaseType:BackupType
+    Field.FullType:MonsterShot.BackupType
+    Field.IsRepeated:false
+  Field.Name:backup_token
+    Field.BaseType:string
+    Field.FullType:string
+    Field.IsRepeated:false
+
+■Services
+■EnumTypes
+Message.Name:BackupType
+  Value.Name:BackupTypeNone
+  Value.Number:0
+  Value.Name:BackupTypeCode
+  Value.Number:1
+  Value.Name:BackupTypeTwitter
+  Value.Number:2
+  Value.Name:BackupTypeLine
+  Value.Number:3
+

@@ -1,0 +1,2 @@
+・shop_items
+id	name	shopId	purchasePlatformType	platformProductId	price	resourceSetId	limitCount	

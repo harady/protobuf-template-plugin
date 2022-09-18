@@ -1,0 +1,32 @@
+■Messages
+Message.Name:IdentifableItemData
+  Message.PrimaryKey:id
+  Field.Name:id
+    Field.BaseType:long
+    Field.FullType:long
+    Field.IsRepeated:false
+  Field.Name:name
+    Field.BaseType:string
+    Field.FullType:string
+    Field.IsRepeated:false
+  Field.Name:description
+    Field.BaseType:string
+    Field.FullType:string
+    Field.IsRepeated:false
+  Field.Name:type
+    Field.BaseType:IdentifableItemType
+    Field.FullType:MonsterShot.IdentifableItemType
+    Field.IsRepeated:false
+  Field.Name:owned_limit
+    Field.BaseType:long
+    Field.FullType:long
+    Field.IsRepeated:false
+
+■Services
+■EnumTypes
+Message.Name:IdentifableItemType
+  Value.Name:IdentifableItemTypeNone
+  Value.Number:0
+  Value.Name:IdentifableItemTypeQuestTicket
+  Value.Number:1
+

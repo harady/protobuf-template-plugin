@@ -1,0 +1,2 @@
+・resource_lotterys
+id	name	hasEmpty	

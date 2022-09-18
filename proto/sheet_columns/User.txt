@@ -1,0 +1,2 @@
+・users
+id	name	token	code	rank	exp	money	stamina	lastStaminaUpdateAt	freeCrystal	paidCrystal	currentDeckId	maxStaminaPlus	deckNumPlus	maxFriendNumPlus	unitBoxNumPlus	friendUserUnitId	

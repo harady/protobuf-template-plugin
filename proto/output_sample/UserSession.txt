@@ -1,0 +1,22 @@
+■Messages
+Message.Name:UserSessionData
+  Message.PrimaryKey:id
+  Field.Name:id
+    Field.BaseType:long
+    Field.FullType:long
+    Field.IsRepeated:false
+  Field.Name:user_id
+    Field.BaseType:long
+    Field.FullType:long
+    Field.IsRepeated:false
+  Field.Name:session_id
+    Field.BaseType:string
+    Field.FullType:string
+    Field.IsRepeated:false
+  Field.Name:expire_at
+    Field.BaseType:long
+    Field.FullType:long
+    Field.IsRepeated:false
+
+■Services
+■EnumTypes

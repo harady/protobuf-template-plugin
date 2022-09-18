@@ -1,0 +1,2 @@
+・resource_sets
+id	name	

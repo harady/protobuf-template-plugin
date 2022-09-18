@@ -1,0 +1,76 @@
+■Messages
+Message.Name:ItemData
+  Message.PrimaryKey:id
+  Field.Name:id
+    Field.BaseType:long
+    Field.FullType:long
+    Field.IsRepeated:false
+  Field.Name:name
+    Field.BaseType:string
+    Field.FullType:string
+    Field.IsRepeated:false
+  Field.Name:attribute
+    Field.BaseType:long
+    Field.FullType:long
+    Field.IsRepeated:false
+  Field.Name:description
+    Field.BaseType:string
+    Field.FullType:string
+    Field.IsRepeated:false
+  Field.Name:category
+    Field.BaseType:ItemCategory
+    Field.FullType:MonsterShot.ItemCategory
+    Field.IsRepeated:false
+  Field.Name:type
+    Field.BaseType:ItemType
+    Field.FullType:MonsterShot.ItemType
+    Field.IsRepeated:false
+  Field.Name:owned_limit
+    Field.BaseType:long
+    Field.FullType:long
+    Field.IsRepeated:false
+  Field.Name:param_a
+    Field.BaseType:long
+    Field.FullType:long
+    Field.IsRepeated:false
+  Field.Name:param_b
+    Field.BaseType:long
+    Field.FullType:long
+    Field.IsRepeated:false
+
+■Services
+■EnumTypes
+Message.Name:ItemCategory
+  Value.Name:ItemCategoryNone
+  Value.Number:0
+  Value.Name:ItemCategoryUnitPowerup
+  Value.Number:1
+  Value.Name:ItemCategoryUnitEvolution
+  Value.Number:2
+  Value.Name:ItemCategoryStaminaRecover
+  Value.Number:3
+  Value.Name:ItemCategoryQuestTicket
+  Value.Number:4
+  Value.Name:ItemCategoryEventPoint
+  Value.Number:5
+
+Message.Name:ItemType
+  Value.Name:ItemTypeNone
+  Value.Number:0
+  Value.Name:ItemTypeUnitExpUp
+  Value.Number:101
+  Value.Name:ItemTypeUnitHpPlusUp
+  Value.Number:102
+  Value.Name:ItemTypeUnitAttackPlusUp
+  Value.Number:103
+  Value.Name:ItemTypeUnitSpeedPlusUp
+  Value.Number:104
+  Value.Name:ItemTypeUnitEvolutionMaterial
+  Value.Number:201
+  Value.Name:ItemTypeStaminaRecover
+  Value.Number:301
+  Value.Name:ItemTypeQuestTicket
+  Value.Number:401
+  Value.Name:ItemTypeEventPoint
+  Value.Number:501
+

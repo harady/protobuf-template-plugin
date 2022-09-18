@@ -1,0 +1,2 @@
+・user_sessions
+id	userId	sessionId	expireAt	

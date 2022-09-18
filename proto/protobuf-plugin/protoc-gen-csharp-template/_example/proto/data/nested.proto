@@ -1,0 +1,32 @@
+syntax = "proto3";
+
+package data;
+option csharp_namespace = "Centurion.Models.Data";
+
+enum SugarType {
+    SUGAR_TYPE_WHITE   = 0;
+    SUGAR_TYPE_BROWN   = 1;
+    SUGAR_TYPE_ZERO_CALORIE   = 2;
+}
+
+message CoffeeData {
+    uint64 id                        = 1;
+    enum CoffeeType {
+        COFFEE_TYPE_LATTE = 0;
+        COFFEE_TYPE_ESPRESSO = 1;
+    }
+    CoffeeType coffee_type = 2;
+    SugarType sugar_type = 3;
+}
+
+message NestedA {
+    message NestedB {
+        message NestedC {
+            uint64 id                        = 1;
+            enum NestedEnumD {
+                NESTED_ENUM_D_NONE      = 0;
+                NESTED_ENUM_D_EXIST     = 1;
+            }
+        }
+    }
+}

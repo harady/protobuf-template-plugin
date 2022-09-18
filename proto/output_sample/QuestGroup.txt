@@ -1,0 +1,38 @@
+■Messages
+Message.Name:QuestGroupData
+  Message.PrimaryKey:id
+  Field.Name:id
+    Field.BaseType:long
+    Field.FullType:long
+    Field.IsRepeated:false
+  Field.Name:name
+    Field.BaseType:string
+    Field.FullType:string
+    Field.IsRepeated:false
+  Field.Name:type
+    Field.BaseType:QuestGroupType
+    Field.FullType:MonsterShot.QuestGroupType
+    Field.IsRepeated:false
+
+■Services
+■EnumTypes
+Message.Name:QuestGroupType
+  Value.Name:QuestGroupTypeNone
+  Value.Number:0
+  Value.Name:QuestGroupTypeNormal
+  Value.Number:1
+  Value.Name:QuestGroupTypeEvent
+  Value.Number:2
+  Value.Name:QuestGroupTypeHasha
+  Value.Number:3
+  Value.Name:QuestGroupTypeShinju
+  Value.Number:4
+  Value.Name:QuestGroupTypeHirameki
+  Value.Number:5
+  Value.Name:QuestGroupTypeShoko
+  Value.Number:6
+  Value.Name:QuestGroupTypeShinden
+  Value.Number:7
+  Value.Name:QuestGroupTypeKinki
+  Value.Number:8
+

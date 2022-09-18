@@ -1,0 +1,18 @@
+syntax = "proto3";
+
+package data;
+
+import "data/master_data.proto";
+
+message PlayerMultiDeckData {
+    repeated PlayerDeckData decks = 10;
+}
+
+message PlayerDeckData {
+    uint64 id = 10;
+    string name = 20;
+    repeated uint64 player_hero_ids = 30;
+}
+message PlayerHeroData {
+    repeated HeroData heros = 10;
+}

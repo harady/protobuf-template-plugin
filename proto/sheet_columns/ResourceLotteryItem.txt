@@ -1,0 +1,2 @@
+・resource_lottery_items
+id	resourceLotteryId	weight	resourceType	resourceId	resourceAmountMin	resourceAmountMax	

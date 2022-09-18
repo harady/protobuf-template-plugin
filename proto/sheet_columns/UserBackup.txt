@@ -1,0 +1,2 @@
+・user_backups
+id	userId	backupType	backupToken	

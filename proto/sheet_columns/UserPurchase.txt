@@ -1,0 +1,2 @@
+・user_purchases
+id	userId	purchasePlatformType	shopItemId	price	googlePlayRequest	appStoreRequest	debugRequest	isReceiptInquired	isResourceGranted	purchaseAt	

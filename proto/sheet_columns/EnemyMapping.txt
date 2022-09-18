@@ -1,0 +1,2 @@
+・enemy_mappings
+id	roundId	enemyId	posX	posY	dropRate	rewardResourceLotteryId	

@@ -1,0 +1,38 @@
+■Messages
+Message.Name:EquipmentData
+  Message.PrimaryKey:id
+  Field.Name:id
+    Field.BaseType:long
+    Field.FullType:long
+    Field.IsRepeated:false
+  Field.Name:name
+    Field.BaseType:string
+    Field.FullType:string
+    Field.IsRepeated:false
+  Field.Name:type
+    Field.BaseType:EquipmentType
+    Field.FullType:MonsterShot.EquipmentType
+    Field.IsRepeated:false
+  Field.Name:description
+    Field.BaseType:string
+    Field.FullType:string
+    Field.IsRepeated:false
+  Field.Name:param_a
+    Field.BaseType:long
+    Field.FullType:long
+    Field.IsRepeated:false
+  Field.Name:param_b
+    Field.BaseType:long
+    Field.FullType:long
+    Field.IsRepeated:false
+  Field.Name:icon_id
+    Field.BaseType:long
+    Field.FullType:long
+    Field.IsRepeated:false
+
+■Services
+■EnumTypes
+Message.Name:EquipmentType
+  Value.Name:EquipmentTypeNone
+  Value.Number:0
+

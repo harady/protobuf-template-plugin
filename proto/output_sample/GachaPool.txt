@@ -1,0 +1,46 @@
+■Messages
+Message.Name:GachaPoolData
+  Message.PrimaryKey:id
+  Field.Name:id
+    Field.BaseType:long
+    Field.FullType:long
+    Field.IsRepeated:false
+  Field.Name:name
+    Field.BaseType:string
+    Field.FullType:string
+    Field.IsRepeated:false
+  Field.Name:gacha_id
+    Field.BaseType:long
+    Field.FullType:long
+    Field.IsRepeated:false
+  Field.Name:base_gacha_pool_id
+    Field.BaseType:long
+    Field.FullType:long
+    Field.IsRepeated:false
+  Field.Name:is_extra
+    Field.BaseType:bool
+    Field.FullType:bool
+    Field.IsRepeated:false
+  Field.Name:is_pickup
+    Field.BaseType:bool
+    Field.FullType:bool
+    Field.IsRepeated:false
+  Field.Name:is_guarantee
+    Field.BaseType:bool
+    Field.FullType:bool
+    Field.IsRepeated:false
+  Field.Name:rarity
+    Field.BaseType:long
+    Field.FullType:long
+    Field.IsRepeated:false
+  Field.Name:attribute
+    Field.BaseType:UnitAttribute
+    Field.FullType:MonsterShot.UnitAttribute
+    Field.IsRepeated:false
+  Field.Name:weight
+    Field.BaseType:long
+    Field.FullType:long
+    Field.IsRepeated:false
+
+■Services
+■EnumTypes

@@ -1,0 +1,2 @@
+・user_exchange_items
+id	userId	exchangeItemId	exchangeScheduleId	exchangedCount	

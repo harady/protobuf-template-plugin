@@ -1,0 +1,2 @@
+・battle_init_enemys
+id	roundId	enemyId	posX	posY	dropRewardResource	

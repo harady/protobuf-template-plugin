@@ -1,0 +1,22 @@
+■Messages
+Message.Name:ConfigData
+  Message.PrimaryKey:id
+  Field.Name:id
+    Field.BaseType:long
+    Field.FullType:long
+    Field.IsRepeated:false
+  Field.Name:key
+    Field.BaseType:string
+    Field.FullType:string
+    Field.IsRepeated:false
+  Field.Name:value
+    Field.BaseType:long
+    Field.FullType:long
+    Field.IsRepeated:false
+  Field.Name:text
+    Field.BaseType:string
+    Field.FullType:string
+    Field.IsRepeated:false
+
+■Services
+■EnumTypes

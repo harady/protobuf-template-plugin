@@ -1,0 +1,14 @@
+{{- if gt (len .Services) 0 -}}
+using Google.Protobuf;
+using System.Collections.Generic;
+
+namespace {{ .CsharpNamespace }}
+{
+    {{ range .Services }}
+    public partial class {{ .Name }}Service : BaseService
+    {
+
+    }
+    {{ end }}
+}
+{{- end -}}

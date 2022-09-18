@@ -1,0 +1,34 @@
+■Messages
+Message.Name:EventQuestCategoryData
+  Message.PrimaryKey:id
+  Field.Name:id
+    Field.BaseType:long
+    Field.FullType:long
+    Field.IsRepeated:false
+  Field.Name:name
+    Field.BaseType:string
+    Field.FullType:string
+    Field.IsRepeated:false
+  Field.Name:min_start_time
+    Field.BaseType:long
+    Field.FullType:long
+    Field.IsRepeated:false
+  Field.Name:max_start_time
+    Field.BaseType:long
+    Field.FullType:long
+    Field.IsRepeated:false
+  Field.Name:open_hours
+    Field.BaseType:long
+    Field.FullType:long
+    Field.IsRepeated:false
+  Field.Name:quest_group_id
+    Field.BaseType:long
+    Field.FullType:long
+    Field.IsRepeated:false
+  Field.Name:questDifficultyType
+    Field.BaseType:QuestDifficultyType
+    Field.FullType:MonsterShot.QuestDifficultyType
+    Field.IsRepeated:false
+
+■Services
+■EnumTypes
