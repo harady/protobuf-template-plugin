@@ -13,6 +13,8 @@ class CodeGenerator
   attr_accessor :out_dir_path
   attr_accessor :is_editable
   attr_accessor :is_force_update
+  attr_accessor :src_base_path
+  attr_accessor :out_base_path
 
   def initialize
     @message = ""
@@ -23,6 +25,12 @@ class CodeGenerator
     @is_editable = false
     @is_force_update = false
     @target_content_pattern = nil
+    @src_base_path = ""
+    @out_base_path = ""
+  end
+
+  def actual_out_dir_path
+    "#{@out_base_path}#{@out_dir_path}"
   end
 
   #============================================================
@@ -57,6 +65,8 @@ class CodeGenerator
       is_editable: data.dig("is_editable"),
       is_force_update: data.dig("is_force_update"),
       target_content_pattern: data.dig("target_content_pattern"),
+      src_base_path: data.dig("src_base_path"),
+      out_base_path: data.dig("out_base_path"),
     )
   end
 
@@ -71,7 +81,9 @@ class CodeGenerator
     out_dir_path: nil,
     is_editable: nil,
     is_force_update: nil,
-    target_content_pattern: nil
+    target_content_pattern: nil,
+    src_base_path: nil,
+    out_base_path: nil
   )
     self.message = message if !message.nil?
     self.src_path_pattern = src_path_pattern if !src_path_pattern.nil?
@@ -81,6 +93,8 @@ class CodeGenerator
     self.is_editable = is_editable if !is_editable.nil?
     self.is_force_update = is_force_update if !is_force_update.nil?
     self.target_content_pattern = target_content_pattern if !target_content_pattern.nil?
+    self.src_base_path = src_base_path if !src_base_path.nil?
+    self.out_base_path = out_base_path if !out_base_path.nil?
     self
   end
 
@@ -89,7 +103,7 @@ class CodeGenerator
   #====================================================================
   def generate_inner()
     # 出力先フォルダがなければ生成.
-    FileUtils.mkdir_p(out_dir_path)
+    FileUtils.mkdir_p(actual_out_dir_path)
     src_file_paths = Dir.glob(src_path_pattern)
 
     src_file_paths.each do |src_file_path|
@@ -109,7 +123,7 @@ class CodeGenerator
     src_file_path:
   )
     file_prefix = File.basename(src_file_path, ".*").camelize
-    out_file_path = "#{out_dir_path}/#{file_prefix}#{file_suffix}"
+    out_file_path = "#{actual_out_dir_path}/#{file_prefix}#{file_suffix}"
 
     # 更新不要ならスキップ.
     skip = false
@@ -126,7 +140,7 @@ class CodeGenerator
 
     # コード生成コマンド実行.
     command = "bin/protoc --csharp-template_out=template=#{template_path},"
-    command += "fileSuffix=#{file_suffix}:#{out_dir_path} "
+    command += "fileSuffix=#{file_suffix}:#{actual_out_dir_path} "
     command += "--plugin=plugin/protoc-gen-csharp-template #{src_file_path}"
     `#{command}`
 
