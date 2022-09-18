@@ -1,0 +1,28 @@
+service Shop
+   .monstershot.ShopPurchaseGooglePlayResponse PurchaseGooglePlay(.monstershot.ShopPurchaseGooglePlayRequest)
+   .monstershot.ShopPurchaseAppStoreResponse PurchaseAppStore(.monstershot.ShopPurchaseAppStoreRequest)
+   .monstershot.ShopPurchaseDebugResponse PurchaseDebug(.monstershot.ShopPurchaseDebugRequest)
+message ShopPurchaseGooglePlayRequest
+    shop_item_id
+    signed_data
+    signature
+message ShopPurchaseGooglePlayResponse
+message ShopPurchaseAppStoreRequest
+    shop_item_id
+    receipt
+message ShopPurchaseAppStoreResponse
+message ShopPurchaseDebugRequest
+    shop_item_id
+message ShopPurchaseDebugResponse
+message UserPurchaseData
+    id
+    user_id
+   .monstershot.PurchasePlatformType purchase_platform_type
+    shop_item_id
+    price
+   .monstershot.ShopPurchaseGooglePlayRequest google_play_request
+   .monstershot.ShopPurchaseAppStoreRequest app_store_request
+   .monstershot.ShopPurchaseDebugRequest debug_request
+    is_receipt_inquired
+    is_resource_granted
+    purchase_at

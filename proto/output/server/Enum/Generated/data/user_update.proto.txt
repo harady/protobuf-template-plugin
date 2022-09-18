@@ -1,0 +1,112 @@
+message UserData
+    id
+    name
+    token
+    code
+    rank
+    exp
+    money
+    stamina
+    last_stamina_update_at
+    free_crystal
+    paid_crystal
+    current_deck_id
+    max_stamina_plus
+    deck_num_plus
+    max_friend_num_plus
+    unit_box_num_plus
+    friend_user_unit_id
+message UserBackupData
+    id
+    user_id
+   .monstershot.BackupType backup_type
+    backup_token
+message UserDeckData
+    id
+    user_id
+    deck_no
+    name
+    user_unit1_id
+    user_unit2_id
+    user_unit3_id
+message UserExchangeItemData
+    id
+    user_id
+    exchange_item_id
+    exchange_schedule_id
+    exchanged_count
+message UserGachaButtonData
+    id
+    user_id
+    gacha_button_id
+    gacha_schedule_id
+    purchase_count
+message UserItemData
+    id
+    user_id
+    item_id
+    amount
+message UserMessageData
+    id
+    user_id
+    name
+message UserMissionData
+    id
+    user_id
+    mission_id
+    progress
+message UserPaidCrystalData
+    id
+    user_id
+   .monstershot.PurchasePlatformType purchase_platform_type
+    amount
+message UserShopItemData
+    id
+    user_id
+    shop_item_id
+    shop_schedule_id
+    purchased_count
+message UserStageData
+    id
+    user_id
+    stage_id
+    clear_count
+    failed_count
+    best_clear_time
+message UserUnitData
+    id
+    user_id
+    unit_id
+    level
+    exp
+    luck
+    plus_hp
+    plus_attack
+    plus_speed
+    equipment1_id
+    equipment2_id
+    equipment3_id
+    hero_mark
+    hero_badge
+    is_locked
+    get_at
+message UserUnitCollectionData
+    id
+    user_id
+    unit_id
+    has_earned
+    used_count
+message UserUpdateData
+   .monstershot.UserData user
+   .monstershot.UserBackupData user_backups
+   .monstershot.UserDeckData user_decks
+   .monstershot.UserExchangeItemData user_exchange_items
+   .monstershot.UserGachaButtonData user_gacha_buttons
+   .monstershot.UserItemData user_items
+   .monstershot.UserMessageData user_messages
+   .monstershot.UserMissionData user_missions
+   .monstershot.UserPaidCrystalData user_paid_crystals
+   .monstershot.UserShopItemData user_shop_items
+   .monstershot.UserStageData user_stages
+   .monstershot.UserUnitData user_units
+   .monstershot.UserUnitCollectionData user_unit_collections

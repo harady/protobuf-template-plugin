@@ -1,2 +1,0 @@
-・skills
-id	name	description	turn	attackRate	speedRate	brakeRate	effect1Type	effect1Rank	effect1ParamA	effect1ParamB	effect2Type	effect2Rank	effect2ParamA	effect2ParamB	

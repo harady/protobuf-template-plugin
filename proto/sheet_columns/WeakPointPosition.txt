@@ -1,2 +1,0 @@
-・weak_point_positions
-id	weakPointId	angle	radiusRate	sizeRate	

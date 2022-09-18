@@ -1,0 +1,49 @@
+message ResourceData
+   .monstershot.ResourceType resource_type
+    resource_id
+    resource_amount
+    resource_extra
+message BattleRewardResourceData
+   .monstershot.ResourceData resource
+   .monstershot.BattleRewardType type
+    param
+    tag
+message BattleRewardsSpecialRewardsData
+   .monstershot.BattleRewardResourceData battle_reward_resources
+message BattleRewardsQuestRewardsData
+    earned_money
+    earned_exp
+   .monstershot.BattleRewardResourceData battle_reward_resources
+message UserUnitData
+    id
+    user_id
+    unit_id
+    level
+    exp
+    luck
+    plus_hp
+    plus_attack
+    plus_speed
+    equipment1_id
+    equipment2_id
+    equipment3_id
+    hero_mark
+    hero_badge
+    is_locked
+    get_at
+message OtherUserData
+    id
+    name
+    code
+    rank
+   .monstershot.UserUnitData user_unit
+    is_friend
+message BattleRewardsUsersData
+   .monstershot.OtherUserData host_users
+   .monstershot.OtherUserData guest_users
+   .monstershot.OtherUserData helper_users
+message BattleRewardsData
+    stage_id
+   .monstershot.BattleRewardsSpecialRewardsData special_rewards
+   .monstershot.BattleRewardsQuestRewardsData quest_rewards
+   .monstershot.BattleRewardsUsersData users

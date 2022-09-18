@@ -1,2 +1,0 @@
-・gacha_buttons
-id	name	gachaId	viewOrder	drawCount	extraCount	guaranteeCount	purchaseCount	costResourceType	costResourceId	costResourceAmount	

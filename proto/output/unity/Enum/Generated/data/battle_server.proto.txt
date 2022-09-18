@@ -1,0 +1,2 @@
+message BattleServerData
+    id

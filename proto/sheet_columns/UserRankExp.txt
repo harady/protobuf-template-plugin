@@ -1,2 +1,0 @@
-・user_rank_exps
-id	rank	totalExp	maxStamina	deckNum	maxFriendNum	unitBoxNum	

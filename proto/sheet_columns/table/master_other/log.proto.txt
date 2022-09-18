@@ -1,0 +1,3 @@
+message LogData
+    id
+    name
