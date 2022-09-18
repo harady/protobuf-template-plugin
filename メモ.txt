@@ -10,3 +10,12 @@
 するプログラム各言語用のものが用意されている
 
 
+## プロトコルバッファリリースバイナリ
+https://github.com/protocolbuffers/protobuf/releases
+
+protobuf-all-21.6.zip
+
+protobuf-csharp-3.21.6.zip
+プロトコルバッファランタイムのソースコード
+
+protoc-21.6-win64.zip
