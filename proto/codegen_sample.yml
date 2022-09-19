@@ -1,3 +1,8 @@
+protoc_path : "bin/protoc"
+protoc_plugin_path : "plugin/protoc-gen-csharp-template"
+src_base_path : "./"
+template_base_path : "template/"
+out_base_path : "./output_sample"
 items:
   #============================================================
   # Model(Table)のサンプル出力ファイルを生成.
@@ -8,7 +13,7 @@ items:
     items:
       # XxxxData.cs 生成
       - message: "==== XxxxData.cs 生成中"
-        template_path: "template/sample.gotemplate"
+        template_path: "sample.gotemplate"
         file_suffix: ".txt"
-        out_dir_path: "./output_sample"
+        out_dir_path: ""
         is_editable: true
