@@ -7,3 +7,4 @@ message BattleClientData
    .monstershot.BattleInitEnemyData battle_init_enemys
    .monstershot.EnemyData enemys
    .monstershot.EnemyActionData enemy_actions
+template=template/csharp_unity_data-propertie.gotemplate,fileSuffix=Data_GeneratedPropertie.cs

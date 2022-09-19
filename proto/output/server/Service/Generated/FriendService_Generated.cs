@@ -16,3 +16,4 @@ message FriendSearchResponse
 message FriendRequestRequest
     user_id
 message FriendRequestResponse
+template=template/csharp_server_service.gotemplate,fileSuffix=Service_Generated.cs

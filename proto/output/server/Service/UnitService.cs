@@ -23,3 +23,4 @@ message UnitLockRequest
     user_unit_id
     is_locked
 message UnitLockResponse
+template=template/csharp_server_service-partial.gotemplate,fileSuffix=Service.cs

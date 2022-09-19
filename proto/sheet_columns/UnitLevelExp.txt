@@ -3,3 +3,4 @@ message UnitLevelExpData
     growth_type
     level
     total_exp
+template=template/sheet_columns.gotemplate,fileSuffix=.txt

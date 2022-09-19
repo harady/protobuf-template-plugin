@@ -5,3 +5,4 @@ message BattleInitEnemyData
     pos_x
     pos_y
    .monstershot.ResourceData drop_reward_resource
+template=template/csharp_server_model-data.gotemplate,fileSuffix=Data_GeneratedData.cs

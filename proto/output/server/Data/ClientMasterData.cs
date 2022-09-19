@@ -46,3 +46,4 @@ message ClientMasterData
    .monstershot.UnitCategoryData unit_categorys
    .monstershot.UnitEvolutionData unit_evolutions
    .monstershot.UnitLevelExpData unit_level_exps
+template=template/csharp_server_model-partial.gotemplate,fileSuffix=Data.cs

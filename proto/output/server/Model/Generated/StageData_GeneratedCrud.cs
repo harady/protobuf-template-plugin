@@ -8,3 +8,4 @@ message StageData
    .monstershot.QuestDifficultyType quest_difficulty_type
     to_unlock_stage_id
     base_stage_id
+template=template/csharp_server_model-crud.gotemplate,fileSuffix=Data_GeneratedCrud.cs

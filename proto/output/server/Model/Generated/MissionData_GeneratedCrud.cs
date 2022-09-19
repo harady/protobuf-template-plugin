@@ -9,3 +9,4 @@ message MissionData
    .monstershot.ResourceType reward_resource_type
     reward_resource_id
     reward_resource_amount
+template=template/csharp_server_model-crud.gotemplate,fileSuffix=Data_GeneratedCrud.cs

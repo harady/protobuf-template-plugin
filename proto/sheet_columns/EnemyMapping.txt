@@ -6,3 +6,4 @@ message EnemyMappingData
     pos_y
     drop_rate
     reward_resource_lottery_id
+template=template/sheet_columns.gotemplate,fileSuffix=.txt

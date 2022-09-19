@@ -14,3 +14,4 @@ message SkillData
     effect2_rank
     effect2_param_a
     effect2_param_b
+template=template/sheet_columns.gotemplate,fileSuffix=.txt

@@ -1,3 +1,4 @@
 message CanpaignData
     id
     name
+template=template/sheet_columns.gotemplate,fileSuffix=.txt

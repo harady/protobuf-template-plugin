@@ -10,3 +10,4 @@ message ExchangeItemData
     resource_amount
     resource_set_id
     limit_count
+template=template/sheet_columns.gotemplate,fileSuffix=.txt

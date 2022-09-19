@@ -12,7 +12,8 @@
           "Google.Protobuf.Tools": "3.21.6",
           "Grpc.Tools": "2.48.1",
           "NUnit": "3.13.3",
-          "Newtonsoft.Json": "13.0.1"
+          "Newtonsoft.Json": "13.0.1",
+          "Scriban": "5.5.0"
         },
         "runtime": {
           "protoc-gen-template.dll": {}
@@ -50,6 +51,14 @@
           "lib/netstandard2.0/nunit.framework.dll": {
             "assemblyVersion": "3.13.3.0",
             "fileVersion": "3.13.3.0"
+          }
+        }
+      },
+      "Scriban/5.5.0": {
+        "runtime": {
+          "lib/net5.0/Scriban.dll": {
+            "assemblyVersion": "5.0.0.0",
+            "fileVersion": "5.5.0.0"
           }
         }
       }
@@ -109,6 +118,13 @@
       "sha512": "sha512-KNPDpls6EfHwC3+nnA67fh5wpxeLb3VLFAfLxrug6JMYDLHH6InaQIWR7Sc3y75d/9IKzMksH/gi08W7XWbmnQ==",
       "path": "nunit/3.13.3",
       "hashPath": "nunit.3.13.3.nupkg.sha512"
+    },
+    "Scriban/5.5.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-e6n2qpSPlOx43+y1PeEukwu5n4i0slIUIMaFSndiIydfNuVqRbqL2QLd4y+BzFWDfN349YT71N/J38CH2IYb+w==",
+      "path": "scriban/5.5.0",
+      "hashPath": "scriban.5.5.0.nupkg.sha512"
     }
   }
 }

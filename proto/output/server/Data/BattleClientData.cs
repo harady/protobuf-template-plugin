@@ -7,3 +7,4 @@ message BattleClientData
    .monstershot.BattleInitEnemyData battle_init_enemys
    .monstershot.EnemyData enemys
    .monstershot.EnemyActionData enemy_actions
+template=template/csharp_server_model-partial.gotemplate,fileSuffix=Data.cs

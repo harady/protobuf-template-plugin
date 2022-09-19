@@ -9,3 +9,4 @@ message GachaPoolData
     rarity
    .monstershot.UnitAttribute attribute
     weight
+template=template/csharp_enum.gotemplate,fileSuffix=Enum.cs

@@ -10,3 +10,4 @@ message UserPurchaseData
     is_receipt_inquired
     is_resource_granted
     purchase_at
+template=template/csharp_unity_data-gamedb.gotemplate,fileSuffix=Data_GeneratedGameDB.cs

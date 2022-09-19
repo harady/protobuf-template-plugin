@@ -1,3 +1,4 @@
 message MissionGroupData
     id
    .monstershot.MissionGroupType type
+template=template/sheet_columns.gotemplate,fileSuffix=.txt

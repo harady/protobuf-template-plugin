@@ -4,3 +4,4 @@ message UserUnitCollectionData
     unit_id
     has_earned
     used_count
+template=template/sheet_columns.gotemplate,fileSuffix=.txt

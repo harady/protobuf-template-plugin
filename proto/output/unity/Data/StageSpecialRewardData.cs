@@ -6,3 +6,4 @@ message StageSpecialRewardData
     param_a
     param_b
     resource_lottery_id
+template=template/csharp_unity_data-partial.gotemplate,fileSuffix=Data.cs

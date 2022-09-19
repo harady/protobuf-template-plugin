@@ -5,3 +5,4 @@ message UserFriendData
     is_favorite
     last_used_at
     used_count
+template=template/csharp_server_model-partial.gotemplate,fileSuffix=Data.cs

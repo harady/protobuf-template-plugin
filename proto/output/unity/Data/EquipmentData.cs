@@ -6,3 +6,4 @@ message EquipmentData
     param_a
     param_b
     icon_id
+template=template/csharp_unity_data-partial.gotemplate,fileSuffix=Data.cs

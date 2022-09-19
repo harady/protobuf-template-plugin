@@ -15,3 +15,4 @@ message UserUnitData
     hero_badge
     is_locked
     get_at
+template=template/sheet_columns.gotemplate,fileSuffix=.txt

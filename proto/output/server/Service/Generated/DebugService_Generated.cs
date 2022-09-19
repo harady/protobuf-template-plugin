@@ -15,3 +15,4 @@ message DebugTestRequest
     message
 message DebugTestResponse
     message
+template=template/csharp_server_service.gotemplate,fileSuffix=Service_Generated.cs

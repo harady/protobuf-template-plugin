@@ -2,3 +2,4 @@ message QuestGroupData
     id
     name
    .monstershot.QuestGroupType type
+template=template/sheet_columns.gotemplate,fileSuffix=.txt

@@ -19,3 +19,4 @@ message OperationUpdateEventScheduleRequest
     message
 message OperationUpdateEventScheduleResponse
     message
+template=template/csharp_unity_data-partial.gotemplate,fileSuffix=ServiceData.cs

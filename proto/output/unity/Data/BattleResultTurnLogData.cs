@@ -11,3 +11,4 @@ message BattleResultTurnLogData
     is_use_skill
     shot_angle
     hash
+template=template/csharp_unity_data-partial.gotemplate,fileSuffix=Data.cs

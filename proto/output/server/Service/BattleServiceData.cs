@@ -27,3 +27,4 @@ message BattleClearRequest
 message BattleClearResponse
     result
    .monstershot.BattleRewardsData battle_rewards
+template=template/csharp_server_model-partial.gotemplate,fileSuffix=ServiceData.cs

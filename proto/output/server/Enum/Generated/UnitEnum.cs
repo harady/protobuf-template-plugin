@@ -31,3 +31,4 @@ message UnitData
     equipment_slot_count
     sale_price
     baseExp
+template=template/csharp_enum.gotemplate,fileSuffix=Enum.cs

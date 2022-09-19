@@ -4,3 +4,4 @@ message ResourceSetItemData
    .monstershot.ResourceType resource_type
     resource_id
     resource_amount
+template=template/csharp_unity_data-gamedb.gotemplate,fileSuffix=Data_GeneratedGameDB.cs

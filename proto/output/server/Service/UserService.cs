@@ -6,3 +6,4 @@ message UserDataListResponse
 message UserNameEditRequest
     name
 message UserNameEditResponse
+template=template/csharp_server_service-partial.gotemplate,fileSuffix=Service.cs

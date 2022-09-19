@@ -6,3 +6,4 @@ message MessageListResponse
 message MessageReceiveRequest
     user_message_id
 message MessageReceiveResponse
+template=template/csharp_server_service.gotemplate,fileSuffix=Service_Generated.cs

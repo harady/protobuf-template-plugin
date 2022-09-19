@@ -4,3 +4,4 @@ message WeakPointPositionData
     angle
     radius_rate
     size_rate
+template=template/csharp_server_model-partial.gotemplate,fileSuffix=Data.cs

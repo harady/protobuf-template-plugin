@@ -8,3 +8,4 @@ message AbilityData
     param_a
     param_b
     param_c
+template=template/csharp_server_model-partial.gotemplate,fileSuffix=Data.cs

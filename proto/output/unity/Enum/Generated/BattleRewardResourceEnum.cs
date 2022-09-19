@@ -3,3 +3,4 @@ message BattleRewardResourceData
    .monstershot.BattleRewardType type
     param
     tag
+template=template/csharp_enum.gotemplate,fileSuffix=Enum.cs

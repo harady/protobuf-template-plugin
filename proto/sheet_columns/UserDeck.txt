@@ -6,3 +6,4 @@ message UserDeckData
     user_unit1_id
     user_unit2_id
     user_unit3_id
+template=template/sheet_columns.gotemplate,fileSuffix=.txt

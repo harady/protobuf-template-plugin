@@ -14,3 +14,4 @@ message ShopPurchaseAppStoreResponse
 message ShopPurchaseDebugRequest
     shop_item_id
 message ShopPurchaseDebugResponse
+template=template/csharp_unity_data-partial.gotemplate,fileSuffix=ServiceData.cs

@@ -9,3 +9,4 @@ message GachaPoolData
     rarity
    .monstershot.UnitAttribute attribute
     weight
+template=template/sheet_columns.gotemplate,fileSuffix=.txt

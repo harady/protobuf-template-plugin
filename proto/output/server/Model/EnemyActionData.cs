@@ -12,3 +12,4 @@ message EnemyActionData
     action_param_b
     action_param_c
     action_param_d
+template=template/csharp_server_model-partial.gotemplate,fileSuffix=Data.cs

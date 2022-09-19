@@ -4,3 +4,4 @@ message WeakPointPositionData
     angle
     radius_rate
     size_rate
+template=template/csharp_enum.gotemplate,fileSuffix=Enum.cs

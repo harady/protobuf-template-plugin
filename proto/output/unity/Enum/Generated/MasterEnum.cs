@@ -6,3 +6,4 @@ message MasterData
    .monstershot.EventScheduleTermData event_schedule_terms
    .monstershot.GachaPoolData gacha_pools
    .monstershot.GachaPoolItemData gacha_pool_items
+template=template/csharp_enum.gotemplate,fileSuffix=Enum.cs

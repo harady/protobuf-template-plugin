@@ -1,3 +1,4 @@
 message LogData
     id
     name
+template=template/sheet_columns.gotemplate,fileSuffix=.txt

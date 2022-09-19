@@ -4,3 +4,4 @@ message IdentifableItemData
     description
    .monstershot.IdentifableItemType type
     owned_limit
+template=template/sheet_columns.gotemplate,fileSuffix=.txt

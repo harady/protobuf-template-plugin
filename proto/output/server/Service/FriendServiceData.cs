@@ -16,3 +16,4 @@ message FriendSearchResponse
 message FriendRequestRequest
     user_id
 message FriendRequestResponse
+template=template/csharp_server_model-partial.gotemplate,fileSuffix=ServiceData.cs

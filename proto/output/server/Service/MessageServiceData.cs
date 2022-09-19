@@ -6,3 +6,4 @@ message MessageListResponse
 message MessageReceiveRequest
     user_message_id
 message MessageReceiveResponse
+template=template/csharp_server_model-partial.gotemplate,fileSuffix=ServiceData.cs

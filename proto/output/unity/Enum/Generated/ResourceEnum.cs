@@ -3,3 +3,4 @@ message ResourceData
     resource_id
     resource_amount
     resource_extra
+template=template/csharp_enum.gotemplate,fileSuffix=Enum.cs

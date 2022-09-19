@@ -11,3 +11,4 @@ message FriendRequestAcceptResponse
 message FriendRequestRejectRequest
     user_id
 message FriendRequestRejectResponse
+template=template/csharp_unity_service.gotemplate,fileSuffix=Service_Generated.cs

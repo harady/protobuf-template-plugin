@@ -10,3 +10,4 @@ message UserPurchaseData
     is_receipt_inquired
     is_resource_granted
     purchase_at
+template=template/csharp_server_model-partial.gotemplate,fileSuffix=Data.cs

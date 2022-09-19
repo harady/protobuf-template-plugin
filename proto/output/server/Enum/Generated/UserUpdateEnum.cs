@@ -12,3 +12,4 @@ message UserUpdateData
    .monstershot.UserStageData user_stages
    .monstershot.UserUnitData user_units
    .monstershot.UserUnitCollectionData user_unit_collections
+template=template/csharp_enum.gotemplate,fileSuffix=Enum.cs

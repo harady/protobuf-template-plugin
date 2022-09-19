@@ -6,3 +6,4 @@ message EnemyMappingData
     pos_y
     drop_rate
     reward_resource_lottery_id
+template=template/csharp_server_model-partial.gotemplate,fileSuffix=Data.cs

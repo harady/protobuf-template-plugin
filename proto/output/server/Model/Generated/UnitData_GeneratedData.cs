@@ -31,3 +31,4 @@ message UnitData
     equipment_slot_count
     sale_price
     baseExp
+template=template/csharp_server_model-data.gotemplate,fileSuffix=Data_GeneratedData.cs

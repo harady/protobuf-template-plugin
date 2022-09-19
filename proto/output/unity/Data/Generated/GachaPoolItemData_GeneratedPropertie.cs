@@ -7,3 +7,4 @@ message GachaPoolItemData
     weight
     open_at
     close_at
+template=template/csharp_unity_data-propertie.gotemplate,fileSuffix=Data_GeneratedPropertie.cs

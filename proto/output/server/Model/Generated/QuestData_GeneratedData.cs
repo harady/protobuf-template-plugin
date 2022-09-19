@@ -8,3 +8,4 @@ message QuestData
     open_at
     close_at
     open_dow
+template=template/csharp_server_model-data.gotemplate,fileSuffix=Data_GeneratedData.cs

@@ -15,3 +15,4 @@ message BackupTransferRequest
 message BackupTransferResponse
     token
     session_id
+template=template/csharp_unity_data-partial.gotemplate,fileSuffix=ServiceData.cs

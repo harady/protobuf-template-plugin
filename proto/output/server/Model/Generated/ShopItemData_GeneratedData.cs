@@ -7,3 +7,4 @@ message ShopItemData
     price
     resource_set_id
     limit_count
+template=template/csharp_server_model-data.gotemplate,fileSuffix=Data_GeneratedData.cs

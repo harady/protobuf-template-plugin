@@ -13,3 +13,4 @@ message SystemLoginRequest
     token
 message SystemLoginResponse
     session_id
+template=template/csharp_unity_data-partial.gotemplate,fileSuffix=ServiceData.cs

@@ -11,3 +11,4 @@ message FriendRequestAcceptResponse
 message FriendRequestRejectRequest
     user_id
 message FriendRequestRejectResponse
+template=template/csharp_unity_data-partial.gotemplate,fileSuffix=ServiceData.cs

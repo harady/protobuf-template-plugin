@@ -16,3 +16,4 @@ message UserData
     max_friend_num_plus
     unit_box_num_plus
     friend_user_unit_id
+template=template/csharp_server_model-partial.gotemplate,fileSuffix=Data.cs

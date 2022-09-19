@@ -7,3 +7,4 @@ message MissionAchieveResponse
 message MissionReceiveRequest
     mission_ids
 message MissionReceiveResponse
+template=template/csharp_server_service.gotemplate,fileSuffix=Service_Generated.cs

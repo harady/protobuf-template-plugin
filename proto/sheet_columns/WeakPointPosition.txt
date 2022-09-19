@@ -4,3 +4,4 @@ message WeakPointPositionData
     angle
     radius_rate
     size_rate
+template=template/sheet_columns.gotemplate,fileSuffix=.txt

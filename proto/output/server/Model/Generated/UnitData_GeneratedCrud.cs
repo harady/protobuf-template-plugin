@@ -31,3 +31,4 @@ message UnitData
     equipment_slot_count
     sale_price
     baseExp
+template=template/csharp_server_model-crud.gotemplate,fileSuffix=Data_GeneratedCrud.cs

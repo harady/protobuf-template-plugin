@@ -8,3 +8,4 @@ message QuestData
     open_at
     close_at
     open_dow
+template=template/sheet_columns.gotemplate,fileSuffix=.txt

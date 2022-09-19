@@ -10,3 +10,4 @@ message ComboData
     param_b
     param_c
     icon_id
+template=template/csharp_server_model-partial.gotemplate,fileSuffix=Data.cs

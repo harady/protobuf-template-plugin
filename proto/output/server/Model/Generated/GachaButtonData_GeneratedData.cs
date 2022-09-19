@@ -10,3 +10,4 @@ message GachaButtonData
    .monstershot.ResourceType cost_resource_type
     cost_resource_id
     cost_resource_amount
+template=template/csharp_server_model-data.gotemplate,fileSuffix=Data_GeneratedData.cs

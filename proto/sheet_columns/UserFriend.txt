@@ -5,3 +5,4 @@ message UserFriendData
     is_favorite
     last_used_at
     used_count
+template=template/sheet_columns.gotemplate,fileSuffix=.txt

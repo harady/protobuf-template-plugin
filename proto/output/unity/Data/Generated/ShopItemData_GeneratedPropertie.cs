@@ -7,3 +7,4 @@ message ShopItemData
     price
     resource_set_id
     limit_count
+template=template/csharp_unity_data-propertie.gotemplate,fileSuffix=Data_GeneratedPropertie.cs

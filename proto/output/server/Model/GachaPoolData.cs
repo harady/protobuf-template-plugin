@@ -9,3 +9,4 @@ message GachaPoolData
     rarity
    .monstershot.UnitAttribute attribute
     weight
+template=template/csharp_server_model-partial.gotemplate,fileSuffix=Data.cs

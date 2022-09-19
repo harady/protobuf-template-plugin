@@ -4,3 +4,4 @@ message UserShopItemData
     shop_item_id
     shop_schedule_id
     purchased_count
+template=template/sheet_columns.gotemplate,fileSuffix=.txt

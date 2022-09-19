@@ -8,3 +8,4 @@ message AbilityData
     param_a
     param_b
     param_c
+template=template/csharp_unity_data-propertie.gotemplate,fileSuffix=Data_GeneratedPropertie.cs

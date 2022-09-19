@@ -1,3 +1,4 @@
 message AdviceData
     id
     message
+template=template/sheet_columns.gotemplate,fileSuffix=.txt

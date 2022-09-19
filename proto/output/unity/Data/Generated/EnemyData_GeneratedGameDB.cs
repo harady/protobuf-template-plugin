@@ -13,3 +13,4 @@ message EnemyData
     base_enemy_id
     drop_rate
     reward_resource_lottery_id
+template=template/csharp_unity_data-gamedb.gotemplate,fileSuffix=Data_GeneratedGameDB.cs
