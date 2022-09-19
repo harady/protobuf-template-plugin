@@ -1,5 +1,4 @@
 ﻿using System;
-
 {{ for message in file.message_type }}
 public partial class {{ message.name }}
 {
@@ -9,7 +8,7 @@ public partial class {{ message.name }}
 	{{- if (field.name == "client_master") }}
 		{{ field.name | to_camel}}.SetToGameDb();
 	{{- else if (field | is_repeated) }}
-		{{ field.name | to_cs_type }}.SetDataList({{ field.name | to_camel }});
+		{{ field | to_cs_type }}.SetDataList({{ field.name | to_camel }});
 	{{- else }}
 		MasterDataManager.instance.{{ field.name | to_camel }}Data = {{ field.name | to_camel }};
 	{{- end }}

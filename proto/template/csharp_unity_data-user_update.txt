@@ -7,11 +7,11 @@ public partial class {{ message.name }}
 {
 	public void SetToGameDb()
 	{
-{{- range .Fields }}
-	{{- if .IsRepeated }}
-		{{.BaseType }}.SetDataList({{.Name | ToCamelCase}});
+{{- for field in message.field }}
+	{{- if (field | is_repeated) }}
+		{{.BaseType }}.SetDataList({{ field.name | to_camel }});
 	{{- else }}
-		UserDataManager.instance.{{.Name | ToCamelCase}}Data = {{.Name | ToCamelCase}};
+		UserDataManager.instance.{{ field.name | to_camel }}Data = {{ field.name | to_camel }};
 	{{- end }}
 {{- end }}
 		RemoveFromGameDb();
@@ -19,11 +19,11 @@ public partial class {{ message.name }}
 	
 	public void AddToGameDb()
 	{
-{{- range .Fields }}
-	{{- if .IsRepeated }}
-		{{.BaseType }}.AddDataList({{.Name | ToCamelCase}});
+{{- for field in message.field }}
+	{{- if (field | is_repeated) }}
+		{{.BaseType }}.AddDataList({{ field.name | to_camel }});
 	{{- else }}
-		UserDataManager.instance.{{.Name | ToCamelCase}}Data = {{.Name | ToCamelCase}};
+		UserDataManager.instance.{{ field.name | to_camel }}Data = {{ field.name | to_camel }};
 	{{- end }}
 {{- end }}
 		RemoveFromGameDb();
@@ -31,16 +31,16 @@ public partial class {{ message.name }}
 
 	public void RemoveFromGameDb()
 	{
-{{- range .Fields }}
-	{{- if .IsRepeated }}
-		{{- $deletedIdsPropertieName := (Replace (Join (Join "deleted" (.Name | SnakeToPascal)) "_Ids") "s_Ids" "Ids") }}
+{{- for field in message.field }}
+	{{- if (field | is_repeated) }}
+		{{- $deletedIdsPropertieName := (Replace (Join (Join "deleted" (field.name | to_pascal)) "_Ids") "s_Ids" "Ids") }}
 		{{.BaseType }}.RemoveDataByIds({{ $deletedIdsPropertieName }});
 	{{- end }}
 {{- end }}
 	}
-{{- range .Fields }}
-	{{- $deletedIdsPropertieName := (Replace (Join (Join "deleted" (.Name | SnakeToPascal)) "_Ids") "s_Ids" "Ids") }}
-	{{- if .IsRepeated  }}
+{{- for field in message.field }}
+	{{- $deletedIdsPropertieName := (Replace (Join (Join "deleted" (field.name | to_pascal)) "_Ids") "s_Ids" "Ids") }}
+	{{- if (field | is_repeated) }}
 
 	[DataMember(Name = "{{ $deletedIdsPropertieName }}")]
 	public List<long> {{ $deletedIdsPropertieName }} { get; set; } = new List<long>();
