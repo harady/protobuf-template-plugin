@@ -66,9 +66,8 @@ namespace protoc_gen_myplugincsharp
 					= Path.GetFileNameWithoutExtension(fileDesc.Name)
 						.ToPascalCase();
 				filename += paramDict["fileSuffix"];
-
+				
 				var output = template.Render(new { File = fileDesc }); // => "Hello World!" 
-
 
 				// set as response
 				response.File.Add(
