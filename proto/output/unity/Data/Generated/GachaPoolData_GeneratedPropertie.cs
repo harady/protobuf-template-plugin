@@ -12,20 +12,20 @@ public partial class GachaPoolData : AbstractData
 	[DataMember(Name = "name")]
 	public String name { get; set; }
 
-	[DataMember(Name = "gacha_id")]
-	public Int64 gacha_id { get; set; }
+	[DataMember(Name = "gachaId")]
+	public Int64 gachaId { get; set; }
 
-	[DataMember(Name = "base_gacha_pool_id")]
-	public Int64 base_gacha_pool_id { get; set; }
+	[DataMember(Name = "baseGachaPoolId")]
+	public Int64 baseGachaPoolId { get; set; }
 
-	[DataMember(Name = "is_extra")]
-	public Bool is_extra { get; set; }
+	[DataMember(Name = "isExtra")]
+	public Bool isExtra { get; set; }
 
-	[DataMember(Name = "is_pickup")]
-	public Bool is_pickup { get; set; }
+	[DataMember(Name = "isPickup")]
+	public Bool isPickup { get; set; }
 
-	[DataMember(Name = "is_guarantee")]
-	public Bool is_guarantee { get; set; }
+	[DataMember(Name = "isGuarantee")]
+	public Bool isGuarantee { get; set; }
 
 	[DataMember(Name = "rarity")]
 	public Int64 rarity { get; set; }
@@ -36,9 +36,8 @@ public partial class GachaPoolData : AbstractData
 	[DataMember(Name = "weight")]
 	public Int64 weight { get; set; }
 
-
 	public AbilityData Clone() {
-		var result = new AbilityData();
+		var result = new GachaPoolData();
 		result.id = id;
 		result.name = name;
 		result.gachaId = gachaId;

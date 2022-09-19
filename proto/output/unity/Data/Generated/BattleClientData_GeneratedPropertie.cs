@@ -6,33 +6,32 @@ using Newtonsoft.Json;
 [DataContract]
 public partial class BattleClientData : AbstractData
 {
-	[DataMember(Name = "stage_id")]
-	public Int64 stage_id { get; set; }
+	[DataMember(Name = "stageId")]
+	public Int64 stageId { get; set; }
 
-	[DataMember(Name = "random_seed")]
-	public Int64 random_seed { get; set; }
+	[DataMember(Name = "randomSeed")]
+	public Int64 randomSeed { get; set; }
 
-	[DataMember(Name = "battle_users")]
-	public Message battle_users { get; set; }
+	[DataMember(Name = "battleUsers")]
+	public Message battleUsers { get; set; }
 
-	[DataMember(Name = "battle_init_deck")]
-	public Message battle_init_deck { get; set; }
+	[DataMember(Name = "battleInitDeck")]
+	public Message battleInitDeck { get; set; }
 
 	[DataMember(Name = "rounds")]
 	public Message rounds { get; set; }
 
-	[DataMember(Name = "battle_init_enemys")]
-	public Message battle_init_enemys { get; set; }
+	[DataMember(Name = "battleInitEnemys")]
+	public Message battleInitEnemys { get; set; }
 
 	[DataMember(Name = "enemys")]
 	public Message enemys { get; set; }
 
-	[DataMember(Name = "enemy_actions")]
-	public Message enemy_actions { get; set; }
-
+	[DataMember(Name = "enemyActions")]
+	public Message enemyActions { get; set; }
 
 	public AbilityData Clone() {
-		var result = new AbilityData();
+		var result = new BattleClientData();
 		result.stageId = stageId;
 		result.randomSeed = randomSeed;
 		result.battleUsers = battleUsers;

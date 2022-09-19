@@ -7,14 +7,13 @@ using Newtonsoft.Json;
 public partial class {{ message.name }} : AbstractData
 {
 {{- for field in message.field }}
-	[DataMember(Name = "{{ field.name }}")]
-	public {{ field.type }} {{ field.name }} { get; set; }
+	[DataMember(Name = "{{ field.name | to_camel }}")]
+	public {{ field.type }} {{ field.name | to_camel }} { get; set; }
 {{ end }}
-
 	public AbilityData Clone() {
-		var result = new AbilityData();
+		var result = new {{ message.name }}();
 {{- for field in message.field }}
-		result.{{ to_camel field.name }} = {{ to_camel field.name }};
+		result.{{ field.name | to_camel }} = {{ field.name | to_camel }};
 {{- end }}
 		return result;
 	}

@@ -9,11 +9,11 @@ public partial class UserUnitData : AbstractData
 	[DataMember(Name = "id")]
 	public Int64 id { get; set; }
 
-	[DataMember(Name = "user_id")]
-	public Int64 user_id { get; set; }
+	[DataMember(Name = "userId")]
+	public Int64 userId { get; set; }
 
-	[DataMember(Name = "unit_id")]
-	public Int64 unit_id { get; set; }
+	[DataMember(Name = "unitId")]
+	public Int64 unitId { get; set; }
 
 	[DataMember(Name = "level")]
 	public Int64 level { get; set; }
@@ -24,39 +24,38 @@ public partial class UserUnitData : AbstractData
 	[DataMember(Name = "luck")]
 	public Int64 luck { get; set; }
 
-	[DataMember(Name = "plus_hp")]
-	public Int64 plus_hp { get; set; }
+	[DataMember(Name = "plusHp")]
+	public Int64 plusHp { get; set; }
 
-	[DataMember(Name = "plus_attack")]
-	public Int64 plus_attack { get; set; }
+	[DataMember(Name = "plusAttack")]
+	public Int64 plusAttack { get; set; }
 
-	[DataMember(Name = "plus_speed")]
-	public Int64 plus_speed { get; set; }
+	[DataMember(Name = "plusSpeed")]
+	public Int64 plusSpeed { get; set; }
 
-	[DataMember(Name = "equipment1_id")]
-	public Int64 equipment1_id { get; set; }
+	[DataMember(Name = "equipment1Id")]
+	public Int64 equipment1Id { get; set; }
 
-	[DataMember(Name = "equipment2_id")]
-	public Int64 equipment2_id { get; set; }
+	[DataMember(Name = "equipment2Id")]
+	public Int64 equipment2Id { get; set; }
 
-	[DataMember(Name = "equipment3_id")]
-	public Int64 equipment3_id { get; set; }
+	[DataMember(Name = "equipment3Id")]
+	public Int64 equipment3Id { get; set; }
 
-	[DataMember(Name = "hero_mark")]
-	public Bool hero_mark { get; set; }
+	[DataMember(Name = "heroMark")]
+	public Bool heroMark { get; set; }
 
-	[DataMember(Name = "hero_badge")]
-	public Bool hero_badge { get; set; }
+	[DataMember(Name = "heroBadge")]
+	public Bool heroBadge { get; set; }
 
-	[DataMember(Name = "is_locked")]
-	public Bool is_locked { get; set; }
+	[DataMember(Name = "isLocked")]
+	public Bool isLocked { get; set; }
 
-	[DataMember(Name = "get_at")]
-	public Int64 get_at { get; set; }
-
+	[DataMember(Name = "getAt")]
+	public Int64 getAt { get; set; }
 
 	public AbilityData Clone() {
-		var result = new AbilityData();
+		var result = new UserUnitData();
 		result.id = id;
 		result.userId = userId;
 		result.unitId = unitId;

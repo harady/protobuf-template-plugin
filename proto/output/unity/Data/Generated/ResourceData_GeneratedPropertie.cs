@@ -6,21 +6,20 @@ using Newtonsoft.Json;
 [DataContract]
 public partial class ResourceData : AbstractData
 {
-	[DataMember(Name = "resource_type")]
-	public Enum resource_type { get; set; }
+	[DataMember(Name = "resourceType")]
+	public Enum resourceType { get; set; }
 
-	[DataMember(Name = "resource_id")]
-	public Int64 resource_id { get; set; }
+	[DataMember(Name = "resourceId")]
+	public Int64 resourceId { get; set; }
 
-	[DataMember(Name = "resource_amount")]
-	public Int64 resource_amount { get; set; }
+	[DataMember(Name = "resourceAmount")]
+	public Int64 resourceAmount { get; set; }
 
-	[DataMember(Name = "resource_extra")]
-	public String resource_extra { get; set; }
-
+	[DataMember(Name = "resourceExtra")]
+	public String resourceExtra { get; set; }
 
 	public AbilityData Clone() {
-		var result = new AbilityData();
+		var result = new ResourceData();
 		result.resourceType = resourceType;
 		result.resourceId = resourceId;
 		result.resourceAmount = resourceAmount;

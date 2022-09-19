@@ -12,15 +12,14 @@ public partial class GachaData : AbstractData
 	[DataMember(Name = "name")]
 	public String name { get; set; }
 
-	[DataMember(Name = "base_gacha_id")]
-	public Int64 base_gacha_id { get; set; }
+	[DataMember(Name = "baseGachaId")]
+	public Int64 baseGachaId { get; set; }
 
-	[DataMember(Name = "is_premium")]
-	public Bool is_premium { get; set; }
-
+	[DataMember(Name = "isPremium")]
+	public Bool isPremium { get; set; }
 
 	public AbilityData Clone() {
-		var result = new AbilityData();
+		var result = new GachaData();
 		result.id = id;
 		result.name = name;
 		result.baseGachaId = baseGachaId;

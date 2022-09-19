@@ -15,9 +15,8 @@ public partial class BattleResultReplayLogData : AbstractData
 	[DataMember(Name = "data")]
 	public String data { get; set; }
 
-
 	public AbilityData Clone() {
-		var result = new AbilityData();
+		var result = new BattleResultReplayLogData();
 		result.time = time;
 		result.type = type;
 		result.data = data;

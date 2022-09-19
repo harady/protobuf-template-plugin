@@ -12,24 +12,23 @@ public partial class UserRankExpData : AbstractData
 	[DataMember(Name = "rank")]
 	public Int64 rank { get; set; }
 
-	[DataMember(Name = "total_exp")]
-	public Int64 total_exp { get; set; }
+	[DataMember(Name = "totalExp")]
+	public Int64 totalExp { get; set; }
 
-	[DataMember(Name = "max_stamina")]
-	public Int64 max_stamina { get; set; }
+	[DataMember(Name = "maxStamina")]
+	public Int64 maxStamina { get; set; }
 
-	[DataMember(Name = "deck_num")]
-	public Int64 deck_num { get; set; }
+	[DataMember(Name = "deckNum")]
+	public Int64 deckNum { get; set; }
 
-	[DataMember(Name = "max_friend_num")]
-	public Int64 max_friend_num { get; set; }
+	[DataMember(Name = "maxFriendNum")]
+	public Int64 maxFriendNum { get; set; }
 
-	[DataMember(Name = "unit_box_num")]
-	public Int64 unit_box_num { get; set; }
-
+	[DataMember(Name = "unitBoxNum")]
+	public Int64 unitBoxNum { get; set; }
 
 	public AbilityData Clone() {
-		var result = new AbilityData();
+		var result = new UserRankExpData();
 		result.id = id;
 		result.rank = rank;
 		result.totalExp = totalExp;

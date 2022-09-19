@@ -9,30 +9,29 @@ public partial class GachaPoolItemData : AbstractData
 	[DataMember(Name = "id")]
 	public Int64 id { get; set; }
 
-	[DataMember(Name = "gacha_pool_id")]
-	public Int64 gacha_pool_id { get; set; }
+	[DataMember(Name = "gachaPoolId")]
+	public Int64 gachaPoolId { get; set; }
 
-	[DataMember(Name = "resource_type")]
-	public Enum resource_type { get; set; }
+	[DataMember(Name = "resourceType")]
+	public Enum resourceType { get; set; }
 
-	[DataMember(Name = "resource_id")]
-	public Int64 resource_id { get; set; }
+	[DataMember(Name = "resourceId")]
+	public Int64 resourceId { get; set; }
 
-	[DataMember(Name = "resource_amount")]
-	public Int64 resource_amount { get; set; }
+	[DataMember(Name = "resourceAmount")]
+	public Int64 resourceAmount { get; set; }
 
 	[DataMember(Name = "weight")]
 	public Int64 weight { get; set; }
 
-	[DataMember(Name = "open_at")]
-	public Int64 open_at { get; set; }
+	[DataMember(Name = "openAt")]
+	public Int64 openAt { get; set; }
 
-	[DataMember(Name = "close_at")]
-	public Int64 close_at { get; set; }
-
+	[DataMember(Name = "closeAt")]
+	public Int64 closeAt { get; set; }
 
 	public AbilityData Clone() {
-		var result = new AbilityData();
+		var result = new GachaPoolItemData();
 		result.id = id;
 		result.gachaPoolId = gachaPoolId;
 		result.resourceType = resourceType;

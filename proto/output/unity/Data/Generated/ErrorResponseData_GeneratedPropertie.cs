@@ -18,9 +18,8 @@ public partial class ErrorResponse : AbstractData
 	[DataMember(Name = "description")]
 	public String description { get; set; }
 
-
 	public AbilityData Clone() {
-		var result = new AbilityData();
+		var result = new ErrorResponse();
 		result.code = code;
 		result.title = title;
 		result.message = message;

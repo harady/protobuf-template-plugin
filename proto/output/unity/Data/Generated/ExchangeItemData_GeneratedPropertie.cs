@@ -12,36 +12,35 @@ public partial class ExchangeItemData : AbstractData
 	[DataMember(Name = "name")]
 	public String name { get; set; }
 
-	[DataMember(Name = "exchange_id")]
-	public Int64 exchange_id { get; set; }
+	[DataMember(Name = "exchangeId")]
+	public Int64 exchangeId { get; set; }
 
-	[DataMember(Name = "cost_resource_type")]
-	public Enum cost_resource_type { get; set; }
+	[DataMember(Name = "costResourceType")]
+	public Enum costResourceType { get; set; }
 
-	[DataMember(Name = "cost_resource_id")]
-	public Int64 cost_resource_id { get; set; }
+	[DataMember(Name = "costResourceId")]
+	public Int64 costResourceId { get; set; }
 
-	[DataMember(Name = "cost_resource_amount")]
-	public Int64 cost_resource_amount { get; set; }
+	[DataMember(Name = "costResourceAmount")]
+	public Int64 costResourceAmount { get; set; }
 
-	[DataMember(Name = "resource_type")]
-	public Enum resource_type { get; set; }
+	[DataMember(Name = "resourceType")]
+	public Enum resourceType { get; set; }
 
-	[DataMember(Name = "resource_id")]
-	public Int64 resource_id { get; set; }
+	[DataMember(Name = "resourceId")]
+	public Int64 resourceId { get; set; }
 
-	[DataMember(Name = "resource_amount")]
-	public Int64 resource_amount { get; set; }
+	[DataMember(Name = "resourceAmount")]
+	public Int64 resourceAmount { get; set; }
 
-	[DataMember(Name = "resource_set_id")]
-	public Int64 resource_set_id { get; set; }
+	[DataMember(Name = "resourceSetId")]
+	public Int64 resourceSetId { get; set; }
 
-	[DataMember(Name = "limit_count")]
-	public Int64 limit_count { get; set; }
-
+	[DataMember(Name = "limitCount")]
+	public Int64 limitCount { get; set; }
 
 	public AbilityData Clone() {
-		var result = new AbilityData();
+		var result = new ExchangeItemData();
 		result.id = id;
 		result.name = name;
 		result.exchangeId = exchangeId;

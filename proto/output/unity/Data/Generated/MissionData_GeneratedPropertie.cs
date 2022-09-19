@@ -12,33 +12,32 @@ public partial class MissionData : AbstractData
 	[DataMember(Name = "name")]
 	public String name { get; set; }
 
-	[DataMember(Name = "mission_group_id")]
-	public Int64 mission_group_id { get; set; }
+	[DataMember(Name = "missionGroupId")]
+	public Int64 missionGroupId { get; set; }
 
 	[DataMember(Name = "type")]
 	public Enum type { get; set; }
 
-	[DataMember(Name = "to_achieve_progress")]
-	public Int64 to_achieve_progress { get; set; }
+	[DataMember(Name = "toAchieveProgress")]
+	public Int64 toAchieveProgress { get; set; }
 
-	[DataMember(Name = "param_a")]
-	public Int64 param_a { get; set; }
+	[DataMember(Name = "paramA")]
+	public Int64 paramA { get; set; }
 
-	[DataMember(Name = "param_b")]
-	public Int64 param_b { get; set; }
+	[DataMember(Name = "paramB")]
+	public Int64 paramB { get; set; }
 
-	[DataMember(Name = "reward_resource_type")]
-	public Enum reward_resource_type { get; set; }
+	[DataMember(Name = "rewardResourceType")]
+	public Enum rewardResourceType { get; set; }
 
-	[DataMember(Name = "reward_resource_id")]
-	public Int64 reward_resource_id { get; set; }
+	[DataMember(Name = "rewardResourceId")]
+	public Int64 rewardResourceId { get; set; }
 
-	[DataMember(Name = "reward_resource_amount")]
-	public Int64 reward_resource_amount { get; set; }
-
+	[DataMember(Name = "rewardResourceAmount")]
+	public Int64 rewardResourceAmount { get; set; }
 
 	public AbilityData Clone() {
-		var result = new AbilityData();
+		var result = new MissionData();
 		result.id = id;
 		result.name = name;
 		result.missionGroupId = missionGroupId;

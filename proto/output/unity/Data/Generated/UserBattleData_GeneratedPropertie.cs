@@ -9,27 +9,26 @@ public partial class UserBattleData : AbstractData
 	[DataMember(Name = "id")]
 	public Int64 id { get; set; }
 
-	[DataMember(Name = "user_id")]
-	public Int64 user_id { get; set; }
+	[DataMember(Name = "userId")]
+	public Int64 userId { get; set; }
 
-	[DataMember(Name = "stage_id")]
-	public Int64 stage_id { get; set; }
+	[DataMember(Name = "stageId")]
+	public Int64 stageId { get; set; }
 
-	[DataMember(Name = "continue_count")]
-	public Int64 continue_count { get; set; }
+	[DataMember(Name = "continueCount")]
+	public Int64 continueCount { get; set; }
 
-	[DataMember(Name = "battle_client_data")]
-	public Message battle_client_data { get; set; }
+	[DataMember(Name = "battleClientData")]
+	public Message battleClientData { get; set; }
 
-	[DataMember(Name = "battle_server_data")]
-	public Message battle_server_data { get; set; }
+	[DataMember(Name = "battleServerData")]
+	public Message battleServerData { get; set; }
 
-	[DataMember(Name = "start_at")]
-	public Int64 start_at { get; set; }
-
+	[DataMember(Name = "startAt")]
+	public Int64 startAt { get; set; }
 
 	public AbilityData Clone() {
-		var result = new AbilityData();
+		var result = new UserBattleData();
 		result.id = id;
 		result.userId = userId;
 		result.stageId = stageId;

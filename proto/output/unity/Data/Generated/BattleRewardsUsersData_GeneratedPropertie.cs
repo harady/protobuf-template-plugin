@@ -6,18 +6,17 @@ using Newtonsoft.Json;
 [DataContract]
 public partial class BattleRewardsUsersData : AbstractData
 {
-	[DataMember(Name = "host_users")]
-	public Message host_users { get; set; }
+	[DataMember(Name = "hostUsers")]
+	public Message hostUsers { get; set; }
 
-	[DataMember(Name = "guest_users")]
-	public Message guest_users { get; set; }
+	[DataMember(Name = "guestUsers")]
+	public Message guestUsers { get; set; }
 
-	[DataMember(Name = "helper_users")]
-	public Message helper_users { get; set; }
-
+	[DataMember(Name = "helperUsers")]
+	public Message helperUsers { get; set; }
 
 	public AbilityData Clone() {
-		var result = new AbilityData();
+		var result = new BattleRewardsUsersData();
 		result.hostUsers = hostUsers;
 		result.guestUsers = guestUsers;
 		result.helperUsers = helperUsers;

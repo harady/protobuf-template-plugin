@@ -9,21 +9,20 @@ public partial class UserIdentifableItemData : AbstractData
 	[DataMember(Name = "id")]
 	public Int64 id { get; set; }
 
-	[DataMember(Name = "user_id")]
-	public Int64 user_id { get; set; }
+	[DataMember(Name = "userId")]
+	public Int64 userId { get; set; }
 
-	[DataMember(Name = "identifable_item_id")]
-	public Int64 identifable_item_id { get; set; }
+	[DataMember(Name = "identifableItemId")]
+	public Int64 identifableItemId { get; set; }
 
-	[DataMember(Name = "param_a")]
-	public Int64 param_a { get; set; }
+	[DataMember(Name = "paramA")]
+	public Int64 paramA { get; set; }
 
-	[DataMember(Name = "param_b")]
-	public Int64 param_b { get; set; }
-
+	[DataMember(Name = "paramB")]
+	public Int64 paramB { get; set; }
 
 	public AbilityData Clone() {
-		var result = new AbilityData();
+		var result = new UserIdentifableItemData();
 		result.id = id;
 		result.userId = userId;
 		result.identifableItemId = identifableItemId;

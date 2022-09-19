@@ -6,18 +6,17 @@ using Newtonsoft.Json;
 [DataContract]
 public partial class BattleRewardsQuestRewardsData : AbstractData
 {
-	[DataMember(Name = "earned_money")]
-	public Int64 earned_money { get; set; }
+	[DataMember(Name = "earnedMoney")]
+	public Int64 earnedMoney { get; set; }
 
-	[DataMember(Name = "earned_exp")]
-	public Int64 earned_exp { get; set; }
+	[DataMember(Name = "earnedExp")]
+	public Int64 earnedExp { get; set; }
 
-	[DataMember(Name = "battle_reward_resources")]
-	public Message battle_reward_resources { get; set; }
-
+	[DataMember(Name = "battleRewardResources")]
+	public Message battleRewardResources { get; set; }
 
 	public AbilityData Clone() {
-		var result = new AbilityData();
+		var result = new BattleRewardsQuestRewardsData();
 		result.earnedMoney = earnedMoney;
 		result.earnedExp = earnedExp;
 		result.battleRewardResources = battleRewardResources;

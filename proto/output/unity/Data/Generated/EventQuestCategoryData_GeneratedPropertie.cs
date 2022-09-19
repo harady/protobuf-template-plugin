@@ -12,24 +12,23 @@ public partial class EventQuestCategoryData : AbstractData
 	[DataMember(Name = "name")]
 	public String name { get; set; }
 
-	[DataMember(Name = "min_start_time")]
-	public Int64 min_start_time { get; set; }
+	[DataMember(Name = "minStartTime")]
+	public Int64 minStartTime { get; set; }
 
-	[DataMember(Name = "max_start_time")]
-	public Int64 max_start_time { get; set; }
+	[DataMember(Name = "maxStartTime")]
+	public Int64 maxStartTime { get; set; }
 
-	[DataMember(Name = "open_hours")]
-	public Int64 open_hours { get; set; }
+	[DataMember(Name = "openHours")]
+	public Int64 openHours { get; set; }
 
-	[DataMember(Name = "quest_group_id")]
-	public Int64 quest_group_id { get; set; }
+	[DataMember(Name = "questGroupId")]
+	public Int64 questGroupId { get; set; }
 
-	[DataMember(Name = "questDifficultyType")]
-	public Enum questDifficultyType { get; set; }
-
+	[DataMember(Name = "questdifficultytype")]
+	public Enum questdifficultytype { get; set; }
 
 	public AbilityData Clone() {
-		var result = new AbilityData();
+		var result = new EventQuestCategoryData();
 		result.id = id;
 		result.name = name;
 		result.minStartTime = minStartTime;

@@ -9,15 +9,14 @@ public partial class UserFriendRequestData : AbstractData
 	[DataMember(Name = "id")]
 	public Int64 id { get; set; }
 
-	[DataMember(Name = "sender_user_id")]
-	public Int64 sender_user_id { get; set; }
+	[DataMember(Name = "senderUserId")]
+	public Int64 senderUserId { get; set; }
 
-	[DataMember(Name = "target_user_id")]
-	public Int64 target_user_id { get; set; }
-
+	[DataMember(Name = "targetUserId")]
+	public Int64 targetUserId { get; set; }
 
 	public AbilityData Clone() {
-		var result = new AbilityData();
+		var result = new UserFriendRequestData();
 		result.id = id;
 		result.senderUserId = senderUserId;
 		result.targetUserId = targetUserId;

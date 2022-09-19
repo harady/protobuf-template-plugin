@@ -9,9 +9,8 @@ public partial class BattleServerData : AbstractData
 	[DataMember(Name = "id")]
 	public Int64 id { get; set; }
 
-
 	public AbilityData Clone() {
-		var result = new AbilityData();
+		var result = new BattleServerData();
 		result.id = id;
 		return result;
 	}

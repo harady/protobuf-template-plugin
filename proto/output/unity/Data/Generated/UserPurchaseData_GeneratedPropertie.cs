@@ -9,39 +9,38 @@ public partial class UserPurchaseData : AbstractData
 	[DataMember(Name = "id")]
 	public Int64 id { get; set; }
 
-	[DataMember(Name = "user_id")]
-	public Int64 user_id { get; set; }
+	[DataMember(Name = "userId")]
+	public Int64 userId { get; set; }
 
-	[DataMember(Name = "purchase_platform_type")]
-	public Enum purchase_platform_type { get; set; }
+	[DataMember(Name = "purchasePlatformType")]
+	public Enum purchasePlatformType { get; set; }
 
-	[DataMember(Name = "shop_item_id")]
-	public Int64 shop_item_id { get; set; }
+	[DataMember(Name = "shopItemId")]
+	public Int64 shopItemId { get; set; }
 
 	[DataMember(Name = "price")]
 	public Int64 price { get; set; }
 
-	[DataMember(Name = "google_play_request")]
-	public Message google_play_request { get; set; }
+	[DataMember(Name = "googlePlayRequest")]
+	public Message googlePlayRequest { get; set; }
 
-	[DataMember(Name = "app_store_request")]
-	public Message app_store_request { get; set; }
+	[DataMember(Name = "appStoreRequest")]
+	public Message appStoreRequest { get; set; }
 
-	[DataMember(Name = "debug_request")]
-	public Message debug_request { get; set; }
+	[DataMember(Name = "debugRequest")]
+	public Message debugRequest { get; set; }
 
-	[DataMember(Name = "is_receipt_inquired")]
-	public Bool is_receipt_inquired { get; set; }
+	[DataMember(Name = "isReceiptInquired")]
+	public Bool isReceiptInquired { get; set; }
 
-	[DataMember(Name = "is_resource_granted")]
-	public Bool is_resource_granted { get; set; }
+	[DataMember(Name = "isResourceGranted")]
+	public Bool isResourceGranted { get; set; }
 
-	[DataMember(Name = "purchase_at")]
-	public Int64 purchase_at { get; set; }
-
+	[DataMember(Name = "purchaseAt")]
+	public Int64 purchaseAt { get; set; }
 
 	public AbilityData Clone() {
-		var result = new AbilityData();
+		var result = new UserPurchaseData();
 		result.id = id;
 		result.userId = userId;
 		result.purchasePlatformType = purchasePlatformType;

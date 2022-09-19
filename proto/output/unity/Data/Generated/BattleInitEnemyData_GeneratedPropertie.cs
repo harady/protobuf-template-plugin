@@ -9,24 +9,23 @@ public partial class BattleInitEnemyData : AbstractData
 	[DataMember(Name = "id")]
 	public Int64 id { get; set; }
 
-	[DataMember(Name = "round_id")]
-	public Int64 round_id { get; set; }
+	[DataMember(Name = "roundId")]
+	public Int64 roundId { get; set; }
 
-	[DataMember(Name = "enemy_id")]
-	public Int64 enemy_id { get; set; }
+	[DataMember(Name = "enemyId")]
+	public Int64 enemyId { get; set; }
 
-	[DataMember(Name = "pos_x")]
-	public Int64 pos_x { get; set; }
+	[DataMember(Name = "posX")]
+	public Int64 posX { get; set; }
 
-	[DataMember(Name = "pos_y")]
-	public Int64 pos_y { get; set; }
+	[DataMember(Name = "posY")]
+	public Int64 posY { get; set; }
 
-	[DataMember(Name = "drop_reward_resource")]
-	public Message drop_reward_resource { get; set; }
-
+	[DataMember(Name = "dropRewardResource")]
+	public Message dropRewardResource { get; set; }
 
 	public AbilityData Clone() {
-		var result = new AbilityData();
+		var result = new BattleInitEnemyData();
 		result.id = id;
 		result.roundId = roundId;
 		result.enemyId = enemyId;

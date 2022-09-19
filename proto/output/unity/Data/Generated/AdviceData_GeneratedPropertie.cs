@@ -12,9 +12,8 @@ public partial class AdviceData : AbstractData
 	[DataMember(Name = "message")]
 	public String message { get; set; }
 
-
 	public AbilityData Clone() {
-		var result = new AbilityData();
+		var result = new AdviceData();
 		result.id = id;
 		result.message = message;
 		return result;

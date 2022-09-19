@@ -6,45 +6,44 @@ using Newtonsoft.Json;
 [DataContract]
 public partial class BattleResultTurnLogData : AbstractData
 {
-	[DataMember(Name = "turn_no")]
-	public Int64 turn_no { get; set; }
+	[DataMember(Name = "turnNo")]
+	public Int64 turnNo { get; set; }
 
-	[DataMember(Name = "round_no")]
-	public Int64 round_no { get; set; }
+	[DataMember(Name = "roundNo")]
+	public Int64 roundNo { get; set; }
 
-	[DataMember(Name = "hit_count")]
-	public Int64 hit_count { get; set; }
+	[DataMember(Name = "hitCount")]
+	public Int64 hitCount { get; set; }
 
-	[DataMember(Name = "total_damage")]
-	public Int64 total_damage { get; set; }
+	[DataMember(Name = "totalDamage")]
+	public Int64 totalDamage { get; set; }
 
-	[DataMember(Name = "killed_enemy_mapping_ids")]
-	public Int64 killed_enemy_mapping_ids { get; set; }
+	[DataMember(Name = "killedEnemyMappingIds")]
+	public Int64 killedEnemyMappingIds { get; set; }
 
-	[DataMember(Name = "total_waiting_time")]
-	public Float total_waiting_time { get; set; }
+	[DataMember(Name = "totalWaitingTime")]
+	public Float totalWaitingTime { get; set; }
 
-	[DataMember(Name = "turn_end_time")]
-	public Float turn_end_time { get; set; }
+	[DataMember(Name = "turnEndTime")]
+	public Float turnEndTime { get; set; }
 
-	[DataMember(Name = "turn_end_realtime")]
-	public Float turn_end_realtime { get; set; }
+	[DataMember(Name = "turnEndRealtime")]
+	public Float turnEndRealtime { get; set; }
 
-	[DataMember(Name = "is_shot")]
-	public Bool is_shot { get; set; }
+	[DataMember(Name = "isShot")]
+	public Bool isShot { get; set; }
 
-	[DataMember(Name = "is_use_skill")]
-	public Bool is_use_skill { get; set; }
+	[DataMember(Name = "isUseSkill")]
+	public Bool isUseSkill { get; set; }
 
-	[DataMember(Name = "shot_angle")]
-	public Float shot_angle { get; set; }
+	[DataMember(Name = "shotAngle")]
+	public Float shotAngle { get; set; }
 
 	[DataMember(Name = "hash")]
 	public String hash { get; set; }
 
-
 	public AbilityData Clone() {
-		var result = new AbilityData();
+		var result = new BattleResultTurnLogData();
 		result.turnNo = turnNo;
 		result.roundNo = roundNo;
 		result.hitCount = hitCount;

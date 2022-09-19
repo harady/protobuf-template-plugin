@@ -12,24 +12,23 @@ public partial class StageSpecialRewardData : AbstractData
 	[DataMember(Name = "name")]
 	public String name { get; set; }
 
-	[DataMember(Name = "stage_id")]
-	public Int64 stage_id { get; set; }
+	[DataMember(Name = "stageId")]
+	public Int64 stageId { get; set; }
 
-	[DataMember(Name = "battle_reward_type")]
-	public Enum battle_reward_type { get; set; }
+	[DataMember(Name = "battleRewardType")]
+	public Enum battleRewardType { get; set; }
 
-	[DataMember(Name = "param_a")]
-	public Int64 param_a { get; set; }
+	[DataMember(Name = "paramA")]
+	public Int64 paramA { get; set; }
 
-	[DataMember(Name = "param_b")]
-	public Int64 param_b { get; set; }
+	[DataMember(Name = "paramB")]
+	public Int64 paramB { get; set; }
 
-	[DataMember(Name = "resource_lottery_id")]
-	public Int64 resource_lottery_id { get; set; }
-
+	[DataMember(Name = "resourceLotteryId")]
+	public Int64 resourceLotteryId { get; set; }
 
 	public AbilityData Clone() {
-		var result = new AbilityData();
+		var result = new StageSpecialRewardData();
 		result.id = id;
 		result.name = name;
 		result.stageId = stageId;

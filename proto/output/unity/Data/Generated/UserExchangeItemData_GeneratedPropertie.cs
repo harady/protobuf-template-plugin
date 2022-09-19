@@ -9,21 +9,20 @@ public partial class UserExchangeItemData : AbstractData
 	[DataMember(Name = "id")]
 	public Int64 id { get; set; }
 
-	[DataMember(Name = "user_id")]
-	public Int64 user_id { get; set; }
+	[DataMember(Name = "userId")]
+	public Int64 userId { get; set; }
 
-	[DataMember(Name = "exchange_item_id")]
-	public Int64 exchange_item_id { get; set; }
+	[DataMember(Name = "exchangeItemId")]
+	public Int64 exchangeItemId { get; set; }
 
-	[DataMember(Name = "exchange_schedule_id")]
-	public Int64 exchange_schedule_id { get; set; }
+	[DataMember(Name = "exchangeScheduleId")]
+	public Int64 exchangeScheduleId { get; set; }
 
-	[DataMember(Name = "exchanged_count")]
-	public Int64 exchanged_count { get; set; }
-
+	[DataMember(Name = "exchangedCount")]
+	public Int64 exchangedCount { get; set; }
 
 	public AbilityData Clone() {
-		var result = new AbilityData();
+		var result = new UserExchangeItemData();
 		result.id = id;
 		result.userId = userId;
 		result.exchangeItemId = exchangeItemId;

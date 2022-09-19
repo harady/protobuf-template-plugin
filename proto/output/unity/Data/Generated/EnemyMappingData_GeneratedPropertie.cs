@@ -9,27 +9,26 @@ public partial class EnemyMappingData : AbstractData
 	[DataMember(Name = "id")]
 	public Int64 id { get; set; }
 
-	[DataMember(Name = "round_id")]
-	public Int64 round_id { get; set; }
+	[DataMember(Name = "roundId")]
+	public Int64 roundId { get; set; }
 
-	[DataMember(Name = "enemy_id")]
-	public Int64 enemy_id { get; set; }
+	[DataMember(Name = "enemyId")]
+	public Int64 enemyId { get; set; }
 
-	[DataMember(Name = "pos_x")]
-	public Int64 pos_x { get; set; }
+	[DataMember(Name = "posX")]
+	public Int64 posX { get; set; }
 
-	[DataMember(Name = "pos_y")]
-	public Int64 pos_y { get; set; }
+	[DataMember(Name = "posY")]
+	public Int64 posY { get; set; }
 
-	[DataMember(Name = "drop_rate")]
-	public Int64 drop_rate { get; set; }
+	[DataMember(Name = "dropRate")]
+	public Int64 dropRate { get; set; }
 
-	[DataMember(Name = "reward_resource_lottery_id")]
-	public Int64 reward_resource_lottery_id { get; set; }
-
+	[DataMember(Name = "rewardResourceLotteryId")]
+	public Int64 rewardResourceLotteryId { get; set; }
 
 	public AbilityData Clone() {
-		var result = new AbilityData();
+		var result = new EnemyMappingData();
 		result.id = id;
 		result.roundId = roundId;
 		result.enemyId = enemyId;

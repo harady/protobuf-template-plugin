@@ -9,18 +9,17 @@ public partial class UnitLevelExpData : AbstractData
 	[DataMember(Name = "id")]
 	public Int64 id { get; set; }
 
-	[DataMember(Name = "growth_type")]
-	public Int64 growth_type { get; set; }
+	[DataMember(Name = "growthType")]
+	public Int64 growthType { get; set; }
 
 	[DataMember(Name = "level")]
 	public Int64 level { get; set; }
 
-	[DataMember(Name = "total_exp")]
-	public Int64 total_exp { get; set; }
-
+	[DataMember(Name = "totalExp")]
+	public Int64 totalExp { get; set; }
 
 	public AbilityData Clone() {
-		var result = new AbilityData();
+		var result = new UnitLevelExpData();
 		result.id = id;
 		result.growthType = growthType;
 		result.level = level;

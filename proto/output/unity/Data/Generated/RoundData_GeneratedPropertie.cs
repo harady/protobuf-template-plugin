@@ -12,15 +12,14 @@ public partial class RoundData : AbstractData
 	[DataMember(Name = "name")]
 	public String name { get; set; }
 
-	[DataMember(Name = "stage_id")]
-	public Int64 stage_id { get; set; }
+	[DataMember(Name = "stageId")]
+	public Int64 stageId { get; set; }
 
-	[DataMember(Name = "round_no")]
-	public Int64 round_no { get; set; }
-
+	[DataMember(Name = "roundNo")]
+	public Int64 roundNo { get; set; }
 
 	public AbilityData Clone() {
-		var result = new AbilityData();
+		var result = new RoundData();
 		result.id = id;
 		result.name = name;
 		result.stageId = stageId;

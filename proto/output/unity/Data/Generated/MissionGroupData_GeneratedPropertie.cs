@@ -12,9 +12,8 @@ public partial class MissionGroupData : AbstractData
 	[DataMember(Name = "type")]
 	public Enum type { get; set; }
 
-
 	public AbilityData Clone() {
-		var result = new AbilityData();
+		var result = new MissionGroupData();
 		result.id = id;
 		result.type = type;
 		return result;

@@ -9,18 +9,17 @@ public partial class UserSessionData : AbstractData
 	[DataMember(Name = "id")]
 	public Int64 id { get; set; }
 
-	[DataMember(Name = "user_id")]
-	public Int64 user_id { get; set; }
+	[DataMember(Name = "userId")]
+	public Int64 userId { get; set; }
 
-	[DataMember(Name = "session_id")]
-	public String session_id { get; set; }
+	[DataMember(Name = "sessionId")]
+	public String sessionId { get; set; }
 
-	[DataMember(Name = "expire_at")]
-	public Int64 expire_at { get; set; }
-
+	[DataMember(Name = "expireAt")]
+	public Int64 expireAt { get; set; }
 
 	public AbilityData Clone() {
-		var result = new AbilityData();
+		var result = new UserSessionData();
 		result.id = id;
 		result.userId = userId;
 		result.sessionId = sessionId;

@@ -15,18 +15,17 @@ public partial class UnitEvolutionData : AbstractData
 	[DataMember(Name = "type")]
 	public Enum type { get; set; }
 
-	[DataMember(Name = "base_unit_id")]
-	public Int64 base_unit_id { get; set; }
+	[DataMember(Name = "baseUnitId")]
+	public Int64 baseUnitId { get; set; }
 
-	[DataMember(Name = "result_unit_id")]
-	public Int64 result_unit_id { get; set; }
+	[DataMember(Name = "resultUnitId")]
+	public Int64 resultUnitId { get; set; }
 
-	[DataMember(Name = "cost_resource_set_id")]
-	public Int64 cost_resource_set_id { get; set; }
-
+	[DataMember(Name = "costResourceSetId")]
+	public Int64 costResourceSetId { get; set; }
 
 	public AbilityData Clone() {
-		var result = new AbilityData();
+		var result = new UnitEvolutionData();
 		result.id = id;
 		result.name = name;
 		result.type = type;

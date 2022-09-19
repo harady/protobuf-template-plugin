@@ -24,15 +24,14 @@ public partial class AbilityData : AbstractData
 	[DataMember(Name = "target")]
 	public Int64 target { get; set; }
 
-	[DataMember(Name = "param_a")]
-	public Int64 param_a { get; set; }
+	[DataMember(Name = "paramA")]
+	public Int64 paramA { get; set; }
 
-	[DataMember(Name = "param_b")]
-	public Int64 param_b { get; set; }
+	[DataMember(Name = "paramB")]
+	public Int64 paramB { get; set; }
 
-	[DataMember(Name = "param_c")]
-	public Int64 param_c { get; set; }
-
+	[DataMember(Name = "paramC")]
+	public Int64 paramC { get; set; }
 
 	public AbilityData Clone() {
 		var result = new AbilityData();

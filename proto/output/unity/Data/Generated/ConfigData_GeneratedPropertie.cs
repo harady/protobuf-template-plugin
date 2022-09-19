@@ -18,9 +18,8 @@ public partial class ConfigData : AbstractData
 	[DataMember(Name = "text")]
 	public String text { get; set; }
 
-
 	public AbilityData Clone() {
-		var result = new AbilityData();
+		var result = new ConfigData();
 		result.id = id;
 		result.key = key;
 		result.value = value;

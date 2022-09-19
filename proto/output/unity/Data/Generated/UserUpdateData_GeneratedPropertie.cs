@@ -9,45 +9,44 @@ public partial class UserUpdateData : AbstractData
 	[DataMember(Name = "user")]
 	public Message user { get; set; }
 
-	[DataMember(Name = "user_backups")]
-	public Message user_backups { get; set; }
+	[DataMember(Name = "userBackups")]
+	public Message userBackups { get; set; }
 
-	[DataMember(Name = "user_decks")]
-	public Message user_decks { get; set; }
+	[DataMember(Name = "userDecks")]
+	public Message userDecks { get; set; }
 
-	[DataMember(Name = "user_exchange_items")]
-	public Message user_exchange_items { get; set; }
+	[DataMember(Name = "userExchangeItems")]
+	public Message userExchangeItems { get; set; }
 
-	[DataMember(Name = "user_gacha_buttons")]
-	public Message user_gacha_buttons { get; set; }
+	[DataMember(Name = "userGachaButtons")]
+	public Message userGachaButtons { get; set; }
 
-	[DataMember(Name = "user_items")]
-	public Message user_items { get; set; }
+	[DataMember(Name = "userItems")]
+	public Message userItems { get; set; }
 
-	[DataMember(Name = "user_messages")]
-	public Message user_messages { get; set; }
+	[DataMember(Name = "userMessages")]
+	public Message userMessages { get; set; }
 
-	[DataMember(Name = "user_missions")]
-	public Message user_missions { get; set; }
+	[DataMember(Name = "userMissions")]
+	public Message userMissions { get; set; }
 
-	[DataMember(Name = "user_paid_crystals")]
-	public Message user_paid_crystals { get; set; }
+	[DataMember(Name = "userPaidCrystals")]
+	public Message userPaidCrystals { get; set; }
 
-	[DataMember(Name = "user_shop_items")]
-	public Message user_shop_items { get; set; }
+	[DataMember(Name = "userShopItems")]
+	public Message userShopItems { get; set; }
 
-	[DataMember(Name = "user_stages")]
-	public Message user_stages { get; set; }
+	[DataMember(Name = "userStages")]
+	public Message userStages { get; set; }
 
-	[DataMember(Name = "user_units")]
-	public Message user_units { get; set; }
+	[DataMember(Name = "userUnits")]
+	public Message userUnits { get; set; }
 
-	[DataMember(Name = "user_unit_collections")]
-	public Message user_unit_collections { get; set; }
-
+	[DataMember(Name = "userUnitCollections")]
+	public Message userUnitCollections { get; set; }
 
 	public AbilityData Clone() {
-		var result = new AbilityData();
+		var result = new UserUpdateData();
 		result.user = user;
 		result.userBackups = userBackups;
 		result.userDecks = userDecks;

@@ -12,8 +12,8 @@ public partial class EnemyData : AbstractData
 	[DataMember(Name = "name")]
 	public String name { get; set; }
 
-	[DataMember(Name = "unit_id")]
-	public Int64 unit_id { get; set; }
+	[DataMember(Name = "unitId")]
+	public Int64 unitId { get; set; }
 
 	[DataMember(Name = "hp")]
 	public Int64 hp { get; set; }
@@ -21,36 +21,35 @@ public partial class EnemyData : AbstractData
 	[DataMember(Name = "size")]
 	public Int64 size { get; set; }
 
-	[DataMember(Name = "weak_point_id")]
-	public Int64 weak_point_id { get; set; }
+	[DataMember(Name = "weakPointId")]
+	public Int64 weakPointId { get; set; }
 
-	[DataMember(Name = "is_boss")]
-	public Bool is_boss { get; set; }
+	[DataMember(Name = "isBoss")]
+	public Bool isBoss { get; set; }
 
-	[DataMember(Name = "is_escape")]
-	public Bool is_escape { get; set; }
+	[DataMember(Name = "isEscape")]
+	public Bool isEscape { get; set; }
 
-	[DataMember(Name = "damage_rate")]
-	public Int64 damage_rate { get; set; }
+	[DataMember(Name = "damageRate")]
+	public Int64 damageRate { get; set; }
 
-	[DataMember(Name = "direct_damage_rate")]
-	public Int64 direct_damage_rate { get; set; }
+	[DataMember(Name = "directDamageRate")]
+	public Int64 directDamageRate { get; set; }
 
-	[DataMember(Name = "indirect_damage_rate")]
-	public Int64 indirect_damage_rate { get; set; }
+	[DataMember(Name = "indirectDamageRate")]
+	public Int64 indirectDamageRate { get; set; }
 
-	[DataMember(Name = "base_enemy_id")]
-	public Int64 base_enemy_id { get; set; }
+	[DataMember(Name = "baseEnemyId")]
+	public Int64 baseEnemyId { get; set; }
 
-	[DataMember(Name = "drop_rate")]
-	public Int64 drop_rate { get; set; }
+	[DataMember(Name = "dropRate")]
+	public Int64 dropRate { get; set; }
 
-	[DataMember(Name = "reward_resource_lottery_id")]
-	public Int64 reward_resource_lottery_id { get; set; }
-
+	[DataMember(Name = "rewardResourceLotteryId")]
+	public Int64 rewardResourceLotteryId { get; set; }
 
 	public AbilityData Clone() {
-		var result = new AbilityData();
+		var result = new EnemyData();
 		result.id = id;
 		result.name = name;
 		result.unitId = unitId;

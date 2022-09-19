@@ -6,33 +6,32 @@ using Newtonsoft.Json;
 [DataContract]
 public partial class CommonResponse : AbstractData
 {
-	[DataMember(Name = "user_update")]
-	public Message user_update { get; set; }
+	[DataMember(Name = "userUpdate")]
+	public Message userUpdate { get; set; }
 
-	[DataMember(Name = "server_time")]
-	public Int64 server_time { get; set; }
+	[DataMember(Name = "serverTime")]
+	public Int64 serverTime { get; set; }
 
-	[DataMember(Name = "app_version")]
-	public String app_version { get; set; }
+	[DataMember(Name = "appVersion")]
+	public String appVersion { get; set; }
 
-	[DataMember(Name = "master_data_version")]
-	public Int64 master_data_version { get; set; }
+	[DataMember(Name = "masterDataVersion")]
+	public Int64 masterDataVersion { get; set; }
 
-	[DataMember(Name = "master_data_url")]
-	public String master_data_url { get; set; }
+	[DataMember(Name = "masterDataUrl")]
+	public String masterDataUrl { get; set; }
 
-	[DataMember(Name = "asset_list_version")]
-	public Int64 asset_list_version { get; set; }
+	[DataMember(Name = "assetListVersion")]
+	public Int64 assetListVersion { get; set; }
 
-	[DataMember(Name = "asset_list_url")]
-	public String asset_list_url { get; set; }
+	[DataMember(Name = "assetListUrl")]
+	public String assetListUrl { get; set; }
 
-	[DataMember(Name = "asset_base_url")]
-	public String asset_base_url { get; set; }
-
+	[DataMember(Name = "assetBaseUrl")]
+	public String assetBaseUrl { get; set; }
 
 	public AbilityData Clone() {
-		var result = new AbilityData();
+		var result = new CommonResponse();
 		result.userUpdate = userUpdate;
 		result.serverTime = serverTime;
 		result.appVersion = appVersion;

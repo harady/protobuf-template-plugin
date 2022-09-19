@@ -30,36 +30,35 @@ public partial class UserData : AbstractData
 	[DataMember(Name = "stamina")]
 	public Int64 stamina { get; set; }
 
-	[DataMember(Name = "last_stamina_update_at")]
-	public Int64 last_stamina_update_at { get; set; }
+	[DataMember(Name = "lastStaminaUpdateAt")]
+	public Int64 lastStaminaUpdateAt { get; set; }
 
-	[DataMember(Name = "free_crystal")]
-	public Int64 free_crystal { get; set; }
+	[DataMember(Name = "freeCrystal")]
+	public Int64 freeCrystal { get; set; }
 
-	[DataMember(Name = "paid_crystal")]
-	public Int64 paid_crystal { get; set; }
+	[DataMember(Name = "paidCrystal")]
+	public Int64 paidCrystal { get; set; }
 
-	[DataMember(Name = "current_deck_id")]
-	public Int64 current_deck_id { get; set; }
+	[DataMember(Name = "currentDeckId")]
+	public Int64 currentDeckId { get; set; }
 
-	[DataMember(Name = "max_stamina_plus")]
-	public Int64 max_stamina_plus { get; set; }
+	[DataMember(Name = "maxStaminaPlus")]
+	public Int64 maxStaminaPlus { get; set; }
 
-	[DataMember(Name = "deck_num_plus")]
-	public Int64 deck_num_plus { get; set; }
+	[DataMember(Name = "deckNumPlus")]
+	public Int64 deckNumPlus { get; set; }
 
-	[DataMember(Name = "max_friend_num_plus")]
-	public Int64 max_friend_num_plus { get; set; }
+	[DataMember(Name = "maxFriendNumPlus")]
+	public Int64 maxFriendNumPlus { get; set; }
 
-	[DataMember(Name = "unit_box_num_plus")]
-	public Int64 unit_box_num_plus { get; set; }
+	[DataMember(Name = "unitBoxNumPlus")]
+	public Int64 unitBoxNumPlus { get; set; }
 
-	[DataMember(Name = "friend_user_unit_id")]
-	public Int64 friend_user_unit_id { get; set; }
-
+	[DataMember(Name = "friendUserUnitId")]
+	public Int64 friendUserUnitId { get; set; }
 
 	public AbilityData Clone() {
-		var result = new AbilityData();
+		var result = new UserData();
 		result.id = id;
 		result.name = name;
 		result.token = token;

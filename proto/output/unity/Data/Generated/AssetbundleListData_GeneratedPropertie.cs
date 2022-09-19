@@ -12,9 +12,8 @@ public partial class AssetbundleListData : AbstractData
 	[DataMember(Name = "assetbundles")]
 	public Message assetbundles { get; set; }
 
-
 	public AbilityData Clone() {
-		var result = new AbilityData();
+		var result = new AssetbundleListData();
 		result.version = version;
 		result.assetbundles = assetbundles;
 		return result;

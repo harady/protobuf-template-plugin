@@ -9,18 +9,17 @@ public partial class ShopScheduleData : AbstractData
 	[DataMember(Name = "id")]
 	public Int64 id { get; set; }
 
-	[DataMember(Name = "shop_id")]
-	public Int64 shop_id { get; set; }
+	[DataMember(Name = "shopId")]
+	public Int64 shopId { get; set; }
 
-	[DataMember(Name = "open_at")]
-	public Int64 open_at { get; set; }
+	[DataMember(Name = "openAt")]
+	public Int64 openAt { get; set; }
 
-	[DataMember(Name = "close_at")]
-	public Int64 close_at { get; set; }
-
+	[DataMember(Name = "closeAt")]
+	public Int64 closeAt { get; set; }
 
 	public AbilityData Clone() {
-		var result = new AbilityData();
+		var result = new ShopScheduleData();
 		result.id = id;
 		result.shopId = shopId;
 		result.openAt = openAt;

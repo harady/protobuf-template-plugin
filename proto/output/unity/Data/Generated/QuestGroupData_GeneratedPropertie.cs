@@ -15,9 +15,8 @@ public partial class QuestGroupData : AbstractData
 	[DataMember(Name = "type")]
 	public Enum type { get; set; }
 
-
 	public AbilityData Clone() {
-		var result = new AbilityData();
+		var result = new QuestGroupData();
 		result.id = id;
 		result.name = name;
 		result.type = type;

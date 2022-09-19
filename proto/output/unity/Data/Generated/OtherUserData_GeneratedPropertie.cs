@@ -18,15 +18,14 @@ public partial class OtherUserData : AbstractData
 	[DataMember(Name = "rank")]
 	public Int64 rank { get; set; }
 
-	[DataMember(Name = "user_unit")]
-	public Message user_unit { get; set; }
+	[DataMember(Name = "userUnit")]
+	public Message userUnit { get; set; }
 
-	[DataMember(Name = "is_friend")]
-	public Bool is_friend { get; set; }
-
+	[DataMember(Name = "isFriend")]
+	public Bool isFriend { get; set; }
 
 	public AbilityData Clone() {
-		var result = new AbilityData();
+		var result = new OtherUserData();
 		result.id = id;
 		result.name = name;
 		result.code = code;

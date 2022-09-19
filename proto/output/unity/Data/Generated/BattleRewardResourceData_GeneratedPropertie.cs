@@ -18,9 +18,8 @@ public partial class BattleRewardResourceData : AbstractData
 	[DataMember(Name = "tag")]
 	public String tag { get; set; }
 
-
 	public AbilityData Clone() {
-		var result = new AbilityData();
+		var result = new BattleRewardResourceData();
 		result.resource = resource;
 		result.type = type;
 		result.param = param;

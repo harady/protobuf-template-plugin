@@ -18,18 +18,17 @@ public partial class EquipmentData : AbstractData
 	[DataMember(Name = "description")]
 	public String description { get; set; }
 
-	[DataMember(Name = "param_a")]
-	public Int64 param_a { get; set; }
+	[DataMember(Name = "paramA")]
+	public Int64 paramA { get; set; }
 
-	[DataMember(Name = "param_b")]
-	public Int64 param_b { get; set; }
+	[DataMember(Name = "paramB")]
+	public Int64 paramB { get; set; }
 
-	[DataMember(Name = "icon_id")]
-	public Int64 icon_id { get; set; }
-
+	[DataMember(Name = "iconId")]
+	public Int64 iconId { get; set; }
 
 	public AbilityData Clone() {
-		var result = new AbilityData();
+		var result = new EquipmentData();
 		result.id = id;
 		result.name = name;
 		result.type = type;

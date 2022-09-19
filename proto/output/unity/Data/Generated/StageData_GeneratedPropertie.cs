@@ -12,30 +12,29 @@ public partial class StageData : AbstractData
 	[DataMember(Name = "name")]
 	public String name { get; set; }
 
-	[DataMember(Name = "quest_id")]
-	public Int64 quest_id { get; set; }
+	[DataMember(Name = "questId")]
+	public Int64 questId { get; set; }
 
 	[DataMember(Name = "stamina")]
 	public Int64 stamina { get; set; }
 
-	[DataMember(Name = "earn_exp")]
-	public Int64 earn_exp { get; set; }
+	[DataMember(Name = "earnExp")]
+	public Int64 earnExp { get; set; }
 
-	[DataMember(Name = "earn_money")]
-	public Int64 earn_money { get; set; }
+	[DataMember(Name = "earnMoney")]
+	public Int64 earnMoney { get; set; }
 
-	[DataMember(Name = "quest_difficulty_type")]
-	public Enum quest_difficulty_type { get; set; }
+	[DataMember(Name = "questDifficultyType")]
+	public Enum questDifficultyType { get; set; }
 
-	[DataMember(Name = "to_unlock_stage_id")]
-	public Int64 to_unlock_stage_id { get; set; }
+	[DataMember(Name = "toUnlockStageId")]
+	public Int64 toUnlockStageId { get; set; }
 
-	[DataMember(Name = "base_stage_id")]
-	public Int64 base_stage_id { get; set; }
-
+	[DataMember(Name = "baseStageId")]
+	public Int64 baseStageId { get; set; }
 
 	public AbilityData Clone() {
-		var result = new AbilityData();
+		var result = new StageData();
 		result.id = id;
 		result.name = name;
 		result.questId = questId;

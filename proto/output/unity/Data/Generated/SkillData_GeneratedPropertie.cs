@@ -18,42 +18,41 @@ public partial class SkillData : AbstractData
 	[DataMember(Name = "turn")]
 	public Int64 turn { get; set; }
 
-	[DataMember(Name = "attack_rate")]
-	public Int64 attack_rate { get; set; }
+	[DataMember(Name = "attackRate")]
+	public Int64 attackRate { get; set; }
 
-	[DataMember(Name = "speed_rate")]
-	public Int64 speed_rate { get; set; }
+	[DataMember(Name = "speedRate")]
+	public Int64 speedRate { get; set; }
 
-	[DataMember(Name = "brake_rate")]
-	public Int64 brake_rate { get; set; }
+	[DataMember(Name = "brakeRate")]
+	public Int64 brakeRate { get; set; }
 
-	[DataMember(Name = "effect1_type")]
-	public Enum effect1_type { get; set; }
+	[DataMember(Name = "effect1Type")]
+	public Enum effect1Type { get; set; }
 
-	[DataMember(Name = "effect1_rank")]
-	public Int64 effect1_rank { get; set; }
+	[DataMember(Name = "effect1Rank")]
+	public Int64 effect1Rank { get; set; }
 
-	[DataMember(Name = "effect1_param_a")]
-	public Int64 effect1_param_a { get; set; }
+	[DataMember(Name = "effect1ParamA")]
+	public Int64 effect1ParamA { get; set; }
 
-	[DataMember(Name = "effect1_param_b")]
-	public Int64 effect1_param_b { get; set; }
+	[DataMember(Name = "effect1ParamB")]
+	public Int64 effect1ParamB { get; set; }
 
-	[DataMember(Name = "effect2_type")]
-	public Enum effect2_type { get; set; }
+	[DataMember(Name = "effect2Type")]
+	public Enum effect2Type { get; set; }
 
-	[DataMember(Name = "effect2_rank")]
-	public Int64 effect2_rank { get; set; }
+	[DataMember(Name = "effect2Rank")]
+	public Int64 effect2Rank { get; set; }
 
-	[DataMember(Name = "effect2_param_a")]
-	public Int64 effect2_param_a { get; set; }
+	[DataMember(Name = "effect2ParamA")]
+	public Int64 effect2ParamA { get; set; }
 
-	[DataMember(Name = "effect2_param_b")]
-	public Int64 effect2_param_b { get; set; }
-
+	[DataMember(Name = "effect2ParamB")]
+	public Int64 effect2ParamB { get; set; }
 
 	public AbilityData Clone() {
-		var result = new AbilityData();
+		var result = new SkillData();
 		result.id = id;
 		result.name = name;
 		result.description = description;

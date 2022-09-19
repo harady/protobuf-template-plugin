@@ -9,18 +9,17 @@ public partial class EventScheduleData : AbstractData
 	[DataMember(Name = "id")]
 	public Int64 id { get; set; }
 
-	[DataMember(Name = "quest_id")]
-	public Int64 quest_id { get; set; }
+	[DataMember(Name = "questId")]
+	public Int64 questId { get; set; }
 
-	[DataMember(Name = "open_at")]
-	public Int64 open_at { get; set; }
+	[DataMember(Name = "openAt")]
+	public Int64 openAt { get; set; }
 
-	[DataMember(Name = "close_at")]
-	public Int64 close_at { get; set; }
-
+	[DataMember(Name = "closeAt")]
+	public Int64 closeAt { get; set; }
 
 	public AbilityData Clone() {
-		var result = new AbilityData();
+		var result = new EventScheduleData();
 		result.id = id;
 		result.questId = questId;
 		result.openAt = openAt;

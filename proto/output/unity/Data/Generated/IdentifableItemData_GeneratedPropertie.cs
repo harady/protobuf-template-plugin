@@ -18,12 +18,11 @@ public partial class IdentifableItemData : AbstractData
 	[DataMember(Name = "type")]
 	public Enum type { get; set; }
 
-	[DataMember(Name = "owned_limit")]
-	public Int64 owned_limit { get; set; }
-
+	[DataMember(Name = "ownedLimit")]
+	public Int64 ownedLimit { get; set; }
 
 	public AbilityData Clone() {
-		var result = new AbilityData();
+		var result = new IdentifableItemData();
 		result.id = id;
 		result.name = name;
 		result.description = description;

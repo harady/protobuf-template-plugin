@@ -12,9 +12,8 @@ public partial class WeakPointData : AbstractData
 	[DataMember(Name = "name")]
 	public String name { get; set; }
 
-
 	public AbilityData Clone() {
-		var result = new AbilityData();
+		var result = new WeakPointData();
 		result.id = id;
 		result.name = name;
 		return result;

@@ -9,21 +9,20 @@ public partial class UserShopItemData : AbstractData
 	[DataMember(Name = "id")]
 	public Int64 id { get; set; }
 
-	[DataMember(Name = "user_id")]
-	public Int64 user_id { get; set; }
+	[DataMember(Name = "userId")]
+	public Int64 userId { get; set; }
 
-	[DataMember(Name = "shop_item_id")]
-	public Int64 shop_item_id { get; set; }
+	[DataMember(Name = "shopItemId")]
+	public Int64 shopItemId { get; set; }
 
-	[DataMember(Name = "shop_schedule_id")]
-	public Int64 shop_schedule_id { get; set; }
+	[DataMember(Name = "shopScheduleId")]
+	public Int64 shopScheduleId { get; set; }
 
-	[DataMember(Name = "purchased_count")]
-	public Int64 purchased_count { get; set; }
-
+	[DataMember(Name = "purchasedCount")]
+	public Int64 purchasedCount { get; set; }
 
 	public AbilityData Clone() {
-		var result = new AbilityData();
+		var result = new UserShopItemData();
 		result.id = id;
 		result.userId = userId;
 		result.shopItemId = shopItemId;

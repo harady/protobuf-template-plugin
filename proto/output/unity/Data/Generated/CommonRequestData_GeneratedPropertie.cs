@@ -6,12 +6,11 @@ using Newtonsoft.Json;
 [DataContract]
 public partial class CommonRequest : AbstractData
 {
-	[DataMember(Name = "session_id")]
-	public String session_id { get; set; }
-
+	[DataMember(Name = "sessionId")]
+	public String sessionId { get; set; }
 
 	public AbilityData Clone() {
-		var result = new AbilityData();
+		var result = new CommonRequest();
 		result.sessionId = sessionId;
 		return result;
 	}

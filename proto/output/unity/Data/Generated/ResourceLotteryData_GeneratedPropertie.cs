@@ -12,12 +12,11 @@ public partial class ResourceLotteryData : AbstractData
 	[DataMember(Name = "name")]
 	public String name { get; set; }
 
-	[DataMember(Name = "has_empty")]
-	public Bool has_empty { get; set; }
-
+	[DataMember(Name = "hasEmpty")]
+	public Bool hasEmpty { get; set; }
 
 	public AbilityData Clone() {
-		var result = new AbilityData();
+		var result = new ResourceLotteryData();
 		result.id = id;
 		result.name = name;
 		result.hasEmpty = hasEmpty;

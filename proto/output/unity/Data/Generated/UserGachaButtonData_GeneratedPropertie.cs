@@ -9,21 +9,20 @@ public partial class UserGachaButtonData : AbstractData
 	[DataMember(Name = "id")]
 	public Int64 id { get; set; }
 
-	[DataMember(Name = "user_id")]
-	public Int64 user_id { get; set; }
+	[DataMember(Name = "userId")]
+	public Int64 userId { get; set; }
 
-	[DataMember(Name = "gacha_button_id")]
-	public Int64 gacha_button_id { get; set; }
+	[DataMember(Name = "gachaButtonId")]
+	public Int64 gachaButtonId { get; set; }
 
-	[DataMember(Name = "gacha_schedule_id")]
-	public Int64 gacha_schedule_id { get; set; }
+	[DataMember(Name = "gachaScheduleId")]
+	public Int64 gachaScheduleId { get; set; }
 
-	[DataMember(Name = "purchase_count")]
-	public Int64 purchase_count { get; set; }
-
+	[DataMember(Name = "purchaseCount")]
+	public Int64 purchaseCount { get; set; }
 
 	public AbilityData Clone() {
-		var result = new AbilityData();
+		var result = new UserGachaButtonData();
 		result.id = id;
 		result.userId = userId;
 		result.gachaButtonId = gachaButtonId;

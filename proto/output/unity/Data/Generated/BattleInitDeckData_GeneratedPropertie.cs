@@ -6,12 +6,11 @@ using Newtonsoft.Json;
 [DataContract]
 public partial class BattleInitDeckData : AbstractData
 {
-	[DataMember(Name = "user_units")]
-	public Message user_units { get; set; }
-
+	[DataMember(Name = "userUnits")]
+	public Message userUnits { get; set; }
 
 	public AbilityData Clone() {
-		var result = new AbilityData();
+		var result = new BattleInitDeckData();
 		result.userUnits = userUnits;
 		return result;
 	}

@@ -9,45 +9,44 @@ public partial class EnemyActionData : AbstractData
 	[DataMember(Name = "id")]
 	public Int64 id { get; set; }
 
-	[DataMember(Name = "enemy_id")]
-	public Int64 enemy_id { get; set; }
+	[DataMember(Name = "enemyId")]
+	public Int64 enemyId { get; set; }
 
-	[DataMember(Name = "action_no")]
-	public Int64 action_no { get; set; }
+	[DataMember(Name = "actionNo")]
+	public Int64 actionNo { get; set; }
 
-	[DataMember(Name = "trigger_type")]
-	public Enum trigger_type { get; set; }
+	[DataMember(Name = "triggerType")]
+	public Enum triggerType { get; set; }
 
-	[DataMember(Name = "trigger_param_a")]
-	public Int64 trigger_param_a { get; set; }
+	[DataMember(Name = "triggerParamA")]
+	public Int64 triggerParamA { get; set; }
 
-	[DataMember(Name = "trigger_param_b")]
-	public Int64 trigger_param_b { get; set; }
+	[DataMember(Name = "triggerParamB")]
+	public Int64 triggerParamB { get; set; }
 
-	[DataMember(Name = "trigger_param_c")]
-	public Int64 trigger_param_c { get; set; }
+	[DataMember(Name = "triggerParamC")]
+	public Int64 triggerParamC { get; set; }
 
-	[DataMember(Name = "trigger_param_d")]
-	public Int64 trigger_param_d { get; set; }
+	[DataMember(Name = "triggerParamD")]
+	public Int64 triggerParamD { get; set; }
 
-	[DataMember(Name = "action_type")]
-	public Enum action_type { get; set; }
+	[DataMember(Name = "actionType")]
+	public Enum actionType { get; set; }
 
-	[DataMember(Name = "action_param_a")]
-	public Int64 action_param_a { get; set; }
+	[DataMember(Name = "actionParamA")]
+	public Int64 actionParamA { get; set; }
 
-	[DataMember(Name = "action_param_b")]
-	public Int64 action_param_b { get; set; }
+	[DataMember(Name = "actionParamB")]
+	public Int64 actionParamB { get; set; }
 
-	[DataMember(Name = "action_param_c")]
-	public Int64 action_param_c { get; set; }
+	[DataMember(Name = "actionParamC")]
+	public Int64 actionParamC { get; set; }
 
-	[DataMember(Name = "action_param_d")]
-	public Int64 action_param_d { get; set; }
-
+	[DataMember(Name = "actionParamD")]
+	public Int64 actionParamD { get; set; }
 
 	public AbilityData Clone() {
-		var result = new AbilityData();
+		var result = new EnemyActionData();
 		result.id = id;
 		result.enemyId = enemyId;
 		result.actionNo = actionNo;

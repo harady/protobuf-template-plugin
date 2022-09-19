@@ -15,9 +15,8 @@ public partial class AssetbundleData : AbstractData
 	[DataMember(Name = "size")]
 	public Int64 size { get; set; }
 
-
 	public AbilityData Clone() {
-		var result = new AbilityData();
+		var result = new AssetbundleData();
 		result.name = name;
 		result.hash = hash;
 		result.size = size;

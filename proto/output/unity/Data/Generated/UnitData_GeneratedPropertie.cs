@@ -15,8 +15,8 @@ public partial class UnitData : AbstractData
 	[DataMember(Name = "number")]
 	public Int64 number { get; set; }
 
-	[DataMember(Name = "base_unit_number")]
-	public Int64 base_unit_number { get; set; }
+	[DataMember(Name = "baseUnitNumber")]
+	public Int64 baseUnitNumber { get; set; }
 
 	[DataMember(Name = "rarity")]
 	public Int64 rarity { get; set; }
@@ -24,87 +24,86 @@ public partial class UnitData : AbstractData
 	[DataMember(Name = "attribute")]
 	public Enum attribute { get; set; }
 
-	[DataMember(Name = "attack_type")]
-	public Enum attack_type { get; set; }
+	[DataMember(Name = "attackType")]
+	public Enum attackType { get; set; }
 
-	[DataMember(Name = "unit_category_id")]
-	public Int64 unit_category_id { get; set; }
+	[DataMember(Name = "unitCategoryId")]
+	public Int64 unitCategoryId { get; set; }
 
-	[DataMember(Name = "growth_type")]
-	public Int64 growth_type { get; set; }
+	[DataMember(Name = "growthType")]
+	public Int64 growthType { get; set; }
 
-	[DataMember(Name = "max_level")]
-	public Int64 max_level { get; set; }
+	[DataMember(Name = "maxLevel")]
+	public Int64 maxLevel { get; set; }
 
-	[DataMember(Name = "max_luck")]
-	public Int64 max_luck { get; set; }
+	[DataMember(Name = "maxLuck")]
+	public Int64 maxLuck { get; set; }
 
-	[DataMember(Name = "obtain_type")]
-	public Enum obtain_type { get; set; }
+	[DataMember(Name = "obtainType")]
+	public Enum obtainType { get; set; }
 
-	[DataMember(Name = "base_hp")]
-	public Int64 base_hp { get; set; }
+	[DataMember(Name = "baseHp")]
+	public Int64 baseHp { get; set; }
 
-	[DataMember(Name = "base_attack")]
-	public Int64 base_attack { get; set; }
+	[DataMember(Name = "baseAttack")]
+	public Int64 baseAttack { get; set; }
 
-	[DataMember(Name = "base_speed")]
-	public Int64 base_speed { get; set; }
+	[DataMember(Name = "baseSpeed")]
+	public Int64 baseSpeed { get; set; }
 
-	[DataMember(Name = "max_hp")]
-	public Int64 max_hp { get; set; }
+	[DataMember(Name = "maxHp")]
+	public Int64 maxHp { get; set; }
 
-	[DataMember(Name = "max_attack")]
-	public Int64 max_attack { get; set; }
+	[DataMember(Name = "maxAttack")]
+	public Int64 maxAttack { get; set; }
 
-	[DataMember(Name = "max_speed")]
-	public Int64 max_speed { get; set; }
+	[DataMember(Name = "maxSpeed")]
+	public Int64 maxSpeed { get; set; }
 
-	[DataMember(Name = "max_plus_hp")]
-	public Int64 max_plus_hp { get; set; }
+	[DataMember(Name = "maxPlusHp")]
+	public Int64 maxPlusHp { get; set; }
 
-	[DataMember(Name = "max_plus_attack")]
-	public Int64 max_plus_attack { get; set; }
+	[DataMember(Name = "maxPlusAttack")]
+	public Int64 maxPlusAttack { get; set; }
 
-	[DataMember(Name = "max_plus_speed")]
-	public Int64 max_plus_speed { get; set; }
+	[DataMember(Name = "maxPlusSpeed")]
+	public Int64 maxPlusSpeed { get; set; }
 
-	[DataMember(Name = "skill_id")]
-	public Int64 skill_id { get; set; }
+	[DataMember(Name = "skillId")]
+	public Int64 skillId { get; set; }
 
-	[DataMember(Name = "combo1_id")]
-	public Int64 combo1_id { get; set; }
+	[DataMember(Name = "combo1Id")]
+	public Int64 combo1Id { get; set; }
 
-	[DataMember(Name = "combo2_id")]
-	public Int64 combo2_id { get; set; }
+	[DataMember(Name = "combo2Id")]
+	public Int64 combo2Id { get; set; }
 
-	[DataMember(Name = "ability1_id")]
-	public Int64 ability1_id { get; set; }
+	[DataMember(Name = "ability1Id")]
+	public Int64 ability1Id { get; set; }
 
-	[DataMember(Name = "ability2_id")]
-	public Int64 ability2_id { get; set; }
+	[DataMember(Name = "ability2Id")]
+	public Int64 ability2Id { get; set; }
 
-	[DataMember(Name = "ability3_id")]
-	public Int64 ability3_id { get; set; }
+	[DataMember(Name = "ability3Id")]
+	public Int64 ability3Id { get; set; }
 
-	[DataMember(Name = "ability4_id")]
-	public Int64 ability4_id { get; set; }
+	[DataMember(Name = "ability4Id")]
+	public Int64 ability4Id { get; set; }
 
-	[DataMember(Name = "ability5_id")]
-	public Int64 ability5_id { get; set; }
+	[DataMember(Name = "ability5Id")]
+	public Int64 ability5Id { get; set; }
 
-	[DataMember(Name = "equipment_slot_count")]
-	public Int64 equipment_slot_count { get; set; }
+	[DataMember(Name = "equipmentSlotCount")]
+	public Int64 equipmentSlotCount { get; set; }
 
-	[DataMember(Name = "sale_price")]
-	public Int64 sale_price { get; set; }
+	[DataMember(Name = "salePrice")]
+	public Int64 salePrice { get; set; }
 
-	[DataMember(Name = "baseExp")]
-	public Int64 baseExp { get; set; }
-
+	[DataMember(Name = "baseexp")]
+	public Int64 baseexp { get; set; }
 
 	public AbilityData Clone() {
-		var result = new AbilityData();
+		var result = new UnitData();
 		result.id = id;
 		result.name = name;
 		result.number = number;

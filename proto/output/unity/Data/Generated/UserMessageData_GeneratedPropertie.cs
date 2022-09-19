@@ -9,15 +9,14 @@ public partial class UserMessageData : AbstractData
 	[DataMember(Name = "id")]
 	public Int64 id { get; set; }
 
-	[DataMember(Name = "user_id")]
-	public Int64 user_id { get; set; }
+	[DataMember(Name = "userId")]
+	public Int64 userId { get; set; }
 
 	[DataMember(Name = "name")]
 	public String name { get; set; }
 
-
 	public AbilityData Clone() {
-		var result = new AbilityData();
+		var result = new UserMessageData();
 		result.id = id;
 		result.userId = userId;
 		result.name = name;

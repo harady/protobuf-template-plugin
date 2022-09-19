@@ -21,27 +21,26 @@ public partial class ComboData : AbstractData
 	[DataMember(Name = "rank")]
 	public Int64 rank { get; set; }
 
-	[DataMember(Name = "base_attack")]
-	public Int64 base_attack { get; set; }
+	[DataMember(Name = "baseAttack")]
+	public Int64 baseAttack { get; set; }
 
-	[DataMember(Name = "max_attack")]
-	public Int64 max_attack { get; set; }
+	[DataMember(Name = "maxAttack")]
+	public Int64 maxAttack { get; set; }
 
-	[DataMember(Name = "param_a")]
-	public Int64 param_a { get; set; }
+	[DataMember(Name = "paramA")]
+	public Int64 paramA { get; set; }
 
-	[DataMember(Name = "param_b")]
-	public Int64 param_b { get; set; }
+	[DataMember(Name = "paramB")]
+	public Int64 paramB { get; set; }
 
-	[DataMember(Name = "param_c")]
-	public Int64 param_c { get; set; }
+	[DataMember(Name = "paramC")]
+	public Int64 paramC { get; set; }
 
-	[DataMember(Name = "icon_id")]
-	public Int64 icon_id { get; set; }
-
+	[DataMember(Name = "iconId")]
+	public Int64 iconId { get; set; }
 
 	public AbilityData Clone() {
-		var result = new AbilityData();
+		var result = new ComboData();
 		result.id = id;
 		result.name = name;
 		result.type = type;

@@ -9,24 +9,23 @@ public partial class UserFriendData : AbstractData
 	[DataMember(Name = "id")]
 	public Int64 id { get; set; }
 
-	[DataMember(Name = "user_id")]
-	public Int64 user_id { get; set; }
+	[DataMember(Name = "userId")]
+	public Int64 userId { get; set; }
 
-	[DataMember(Name = "friend_user_id")]
-	public Int64 friend_user_id { get; set; }
+	[DataMember(Name = "friendUserId")]
+	public Int64 friendUserId { get; set; }
 
-	[DataMember(Name = "is_favorite")]
-	public Bool is_favorite { get; set; }
+	[DataMember(Name = "isFavorite")]
+	public Bool isFavorite { get; set; }
 
-	[DataMember(Name = "last_used_at")]
-	public Int64 last_used_at { get; set; }
+	[DataMember(Name = "lastUsedAt")]
+	public Int64 lastUsedAt { get; set; }
 
-	[DataMember(Name = "used_count")]
-	public Int64 used_count { get; set; }
-
+	[DataMember(Name = "usedCount")]
+	public Int64 usedCount { get; set; }
 
 	public AbilityData Clone() {
-		var result = new AbilityData();
+		var result = new UserFriendData();
 		result.id = id;
 		result.userId = userId;
 		result.friendUserId = friendUserId;

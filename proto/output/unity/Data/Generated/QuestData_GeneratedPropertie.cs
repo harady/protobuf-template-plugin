@@ -12,30 +12,29 @@ public partial class QuestData : AbstractData
 	[DataMember(Name = "name")]
 	public String name { get; set; }
 
-	[DataMember(Name = "quest_group_id")]
-	public Int64 quest_group_id { get; set; }
+	[DataMember(Name = "questGroupId")]
+	public Int64 questGroupId { get; set; }
 
-	[DataMember(Name = "noContinue")]
-	public Bool noContinue { get; set; }
+	[DataMember(Name = "nocontinue")]
+	public Bool nocontinue { get; set; }
 
-	[DataMember(Name = "quest_difficulty_type")]
-	public Enum quest_difficulty_type { get; set; }
+	[DataMember(Name = "questDifficultyType")]
+	public Enum questDifficultyType { get; set; }
 
-	[DataMember(Name = "boss_unit_id")]
-	public Int64 boss_unit_id { get; set; }
+	[DataMember(Name = "bossUnitId")]
+	public Int64 bossUnitId { get; set; }
 
-	[DataMember(Name = "open_at")]
-	public Int64 open_at { get; set; }
+	[DataMember(Name = "openAt")]
+	public Int64 openAt { get; set; }
 
-	[DataMember(Name = "close_at")]
-	public Int64 close_at { get; set; }
+	[DataMember(Name = "closeAt")]
+	public Int64 closeAt { get; set; }
 
-	[DataMember(Name = "open_dow")]
-	public Int64 open_dow { get; set; }
-
+	[DataMember(Name = "openDow")]
+	public Int64 openDow { get; set; }
 
 	public AbilityData Clone() {
-		var result = new AbilityData();
+		var result = new QuestData();
 		result.id = id;
 		result.name = name;
 		result.questGroupId = questGroupId;

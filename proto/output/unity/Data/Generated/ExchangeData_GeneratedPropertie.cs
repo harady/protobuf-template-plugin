@@ -15,9 +15,8 @@ public partial class ExchangeData : AbstractData
 	[DataMember(Name = "type")]
 	public Enum type { get; set; }
 
-
 	public AbilityData Clone() {
-		var result = new AbilityData();
+		var result = new ExchangeData();
 		result.id = id;
 		result.name = name;
 		result.type = type;

@@ -9,27 +9,26 @@ public partial class ResourceLotteryItemData : AbstractData
 	[DataMember(Name = "id")]
 	public Int64 id { get; set; }
 
-	[DataMember(Name = "resource_lottery_id")]
-	public Int64 resource_lottery_id { get; set; }
+	[DataMember(Name = "resourceLotteryId")]
+	public Int64 resourceLotteryId { get; set; }
 
 	[DataMember(Name = "weight")]
 	public Int64 weight { get; set; }
 
-	[DataMember(Name = "resource_type")]
-	public Enum resource_type { get; set; }
+	[DataMember(Name = "resourceType")]
+	public Enum resourceType { get; set; }
 
-	[DataMember(Name = "resource_id")]
-	public Int64 resource_id { get; set; }
+	[DataMember(Name = "resourceId")]
+	public Int64 resourceId { get; set; }
 
-	[DataMember(Name = "resource_amount_min")]
-	public Int64 resource_amount_min { get; set; }
+	[DataMember(Name = "resourceAmountMin")]
+	public Int64 resourceAmountMin { get; set; }
 
-	[DataMember(Name = "resource_amount_max")]
-	public Int64 resource_amount_max { get; set; }
-
+	[DataMember(Name = "resourceAmountMax")]
+	public Int64 resourceAmountMax { get; set; }
 
 	public AbilityData Clone() {
-		var result = new AbilityData();
+		var result = new ResourceLotteryItemData();
 		result.id = id;
 		result.resourceLotteryId = resourceLotteryId;
 		result.weight = weight;

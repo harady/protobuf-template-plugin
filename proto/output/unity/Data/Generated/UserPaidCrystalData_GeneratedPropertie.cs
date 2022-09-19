@@ -9,18 +9,17 @@ public partial class UserPaidCrystalData : AbstractData
 	[DataMember(Name = "id")]
 	public Int64 id { get; set; }
 
-	[DataMember(Name = "user_id")]
-	public Int64 user_id { get; set; }
+	[DataMember(Name = "userId")]
+	public Int64 userId { get; set; }
 
-	[DataMember(Name = "purchase_platform_type")]
-	public Enum purchase_platform_type { get; set; }
+	[DataMember(Name = "purchasePlatformType")]
+	public Enum purchasePlatformType { get; set; }
 
 	[DataMember(Name = "amount")]
 	public Int64 amount { get; set; }
 
-
 	public AbilityData Clone() {
-		var result = new AbilityData();
+		var result = new UserPaidCrystalData();
 		result.id = id;
 		result.userId = userId;
 		result.purchasePlatformType = purchasePlatformType;
