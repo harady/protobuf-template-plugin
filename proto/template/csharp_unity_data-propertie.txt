@@ -14,6 +14,12 @@ public partial class {{ message.name }} : AbstractData
 {{ else }}
 	public List<{{ field | to_cs_type }}> {{ field.name | to_camel }} { get; set; } = new List<{{ field | to_cs_type }}>();
 {{ end -}}
+{{ if (field.name | string.ends_with "_at") }}
+	public DateTime {{ field.name | to_pascal }} {
+		get { return ServerDateTimeUtil.FromEpoch({{ field.name | to_camel }}); }
+		set { {{ field.name | to_camel }} = ServerDateTimeUtil.ToEpoch(value); }
+	}
+{{ end -}}
 {{- end }}
 	public {{ message.name }} Clone() {
 		var result = new {{ message.name }}();

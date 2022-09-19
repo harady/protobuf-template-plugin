@@ -21,6 +21,11 @@ public partial class UserFriendData : AbstractData
 	[DataMember(Name = "lastUsedAt")]
 	public long lastUsedAt { get; set; }
 
+	public DateTime LastUsedAt {
+		get { return ServerDateTimeUtil.FromEpoch(lastUsedAt); }
+		set { lastUsedAt = ServerDateTimeUtil.ToEpoch(value); }
+	}
+
 	[DataMember(Name = "usedCount")]
 	public long usedCount { get; set; }
 

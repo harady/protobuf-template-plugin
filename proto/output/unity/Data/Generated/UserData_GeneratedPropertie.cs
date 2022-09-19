@@ -33,6 +33,11 @@ public partial class UserData : AbstractData
 	[DataMember(Name = "lastStaminaUpdateAt")]
 	public long lastStaminaUpdateAt { get; set; }
 
+	public DateTime LastStaminaUpdateAt {
+		get { return ServerDateTimeUtil.FromEpoch(lastStaminaUpdateAt); }
+		set { lastStaminaUpdateAt = ServerDateTimeUtil.ToEpoch(value); }
+	}
+
 	[DataMember(Name = "freeCrystal")]
 	public long freeCrystal { get; set; }
 
