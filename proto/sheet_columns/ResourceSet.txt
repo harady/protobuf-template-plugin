@@ -1,3 +1,2 @@
-message ResourceSetData
-    id
-    name
+・resource_sets
+id	name	

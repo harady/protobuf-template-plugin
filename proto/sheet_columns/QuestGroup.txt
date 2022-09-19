@@ -1,4 +1,2 @@
-message QuestGroupData
-    id
-    name
-   .monstershot.QuestGroupType type
+・quest_groups
+id	name	type	

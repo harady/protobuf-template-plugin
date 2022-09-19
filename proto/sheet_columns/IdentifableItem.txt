@@ -1,6 +1,2 @@
-message IdentifableItemData
-    id
-    name
-    description
-   .monstershot.IdentifableItemType type
-    owned_limit
+・identifable_items
+id	name	description	type	ownedLimit	

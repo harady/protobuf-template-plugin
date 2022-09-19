@@ -1,18 +1,44 @@
-service Friend
-   .monstershot.FriendListResponse List(.monstershot.FriendListRequest)
-   .monstershot.FriendRemoveResponse Remove(.monstershot.FriendRemoveRequest)
-   .monstershot.FriendSearchResponse Search(.monstershot.FriendSearchRequest)
-   .monstershot.FriendRequestResponse Request(.monstershot.FriendRequestRequest)
-message FriendListRequest
-message FriendListResponse
-   .monstershot.OtherUserData other_users
-message FriendRemoveRequest
-    user_id
-message FriendRemoveResponse
-message FriendSearchRequest
-    code
-message FriendSearchResponse
-   .monstershot.OtherUserData other_user
-message FriendRequestRequest
-    user_id
-message FriendRequestResponse
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using Amazon.Lambda.Core;
+
+namespace AwsDotnetCsharp
+{
+	public partial class FriendService : FriendServiceBase
+	{
+
+		public override async Task<FriendListResponse> ListImpl(
+			FriendListRequest request, ILambdaContext context)
+		{
+			await Task.Run(() => Console.WriteLine("ListImpl is not implemented"));
+			var result = new FriendListResponse();
+			return result;
+		}
+
+		public override async Task<FriendRemoveResponse> RemoveImpl(
+			FriendRemoveRequest request, ILambdaContext context)
+		{
+			await Task.Run(() => Console.WriteLine("RemoveImpl is not implemented"));
+			var result = new FriendRemoveResponse();
+			return result;
+		}
+
+		public override async Task<FriendSearchResponse> SearchImpl(
+			FriendSearchRequest request, ILambdaContext context)
+		{
+			await Task.Run(() => Console.WriteLine("SearchImpl is not implemented"));
+			var result = new FriendSearchResponse();
+			return result;
+		}
+
+		public override async Task<FriendRequestResponse> RequestImpl(
+			FriendRequestRequest request, ILambdaContext context)
+		{
+			await Task.Run(() => Console.WriteLine("RequestImpl is not implemented"));
+			var result = new FriendRequestResponse();
+			return result;
+		}
+
+	}
+}

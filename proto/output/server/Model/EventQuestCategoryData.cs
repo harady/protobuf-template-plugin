@@ -1,8 +1,11 @@
-message EventQuestCategoryData
-    id
-    name
-    min_start_time
-    max_start_time
-    open_hours
-    quest_group_id
-   .monstershot.QuestDifficultyType questDifficultyType
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+
+namespace AwsDotnetCsharp
+{
+	public partial class EventQuestCategoryData
+	{
+
+	}
+}

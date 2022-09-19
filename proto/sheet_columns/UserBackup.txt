@@ -1,5 +1,2 @@
-message UserBackupData
-    id
-    user_id
-   .monstershot.BackupType backup_type
-    backup_token
+・user_backups
+id	userId	backupType	backupToken	

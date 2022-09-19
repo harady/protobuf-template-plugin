@@ -1,7 +1,2 @@
-message UserStageData
-    id
-    user_id
-    stage_id
-    clear_count
-    failed_count
-    best_clear_time
+・user_stages
+id	userId	stageId	clearCount	failedCount	bestClearTime	

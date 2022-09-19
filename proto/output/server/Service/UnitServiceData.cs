@@ -1,25 +1,56 @@
-service Unit
-   .monstershot.UnitDeckEditResponse DeckEdit(.monstershot.UnitDeckEditRequest)
-   .monstershot.UnitPowerupResponse Powerup(.monstershot.UnitPowerupRequest)
-   .monstershot.UnitEvolutionResponse Evolution(.monstershot.UnitEvolutionRequest)
-   .monstershot.UnitSellResponse Sell(.monstershot.UnitSellRequest)
-   .monstershot.UnitLockResponse Lock(.monstershot.UnitLockRequest)
-message UnitDeckEditRequest
-   .monstershot.UserDeckData user_deck
-message UnitDeckEditResponse
-message UnitPowerupRequest
-    user_unit_id
-   .monstershot.ResourceData consume_resources
-message UnitPowerupResponse
-message UnitEvolutionRequest
-    user_unit_id
-    unit_evolution_id
-   .monstershot.ResourceData consume_resources
-message UnitEvolutionResponse
-message UnitSellRequest
-    user_unit_ids
-message UnitSellResponse
-message UnitLockRequest
-    user_unit_id
-    is_locked
-message UnitLockResponse
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+
+namespace AwsDotnetCsharp
+{
+	public partial class UnitDeckEditRequest
+	{
+
+	}
+
+	public partial class UnitDeckEditResponse
+	{
+
+	}
+
+	public partial class UnitEvolutionRequest
+	{
+
+	}
+
+	public partial class UnitEvolutionResponse
+	{
+
+	}
+
+	public partial class UnitLockRequest
+	{
+
+	}
+
+	public partial class UnitLockResponse
+	{
+
+	}
+
+	public partial class UnitPowerupRequest
+	{
+
+	}
+
+	public partial class UnitPowerupResponse
+	{
+
+	}
+
+	public partial class UnitSellRequest
+	{
+
+	}
+
+	public partial class UnitSellResponse
+	{
+
+	}
+}

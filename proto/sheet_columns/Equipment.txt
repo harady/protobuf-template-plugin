@@ -1,8 +1,2 @@
-message EquipmentData
-    id
-    name
-   .monstershot.EquipmentType type
-    description
-    param_a
-    param_b
-    icon_id
+・equipments
+id	name	type	description	paramA	paramB	iconId	

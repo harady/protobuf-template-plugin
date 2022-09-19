@@ -1,5 +1,11 @@
-message ResourceData
-   .monstershot.ResourceType resource_type
-    resource_id
-    resource_amount
-    resource_extra
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+
+namespace AwsDotnetCsharp
+{
+	public partial class ResourceData
+	{
+
+	}
+}

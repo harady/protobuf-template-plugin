@@ -1,5 +1,2 @@
-message ConfigData
-    id
-    key
-    value
-    text
+・configs
+id	key	value	text	

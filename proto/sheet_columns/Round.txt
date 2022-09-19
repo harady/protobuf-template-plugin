@@ -1,5 +1,2 @@
-message RoundData
-    id
-    name
-    stage_id
-    round_no
+・rounds
+id	name	stageId	roundNo	

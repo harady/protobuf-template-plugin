@@ -1,5 +1,11 @@
-message ExchangeScheduleData
-    id
-    exchange_id
-    open_at
-    close_at
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+
+namespace AwsDotnetCsharp
+{
+	public partial class ExchangeScheduleData
+	{
+
+	}
+}

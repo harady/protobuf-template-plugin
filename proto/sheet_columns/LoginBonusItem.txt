@@ -1,3 +1,2 @@
-message LoginBonusItemData
-    id
-    name
+・login_bonus_items
+id	name	

@@ -1,4 +1,11 @@
-message ExchangeData
-    id
-    name
-   .monstershot.ExchangeType type
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+
+namespace AwsDotnetCsharp
+{
+	public partial class ExchangeData
+	{
+
+	}
+}

@@ -1,8 +1,26 @@
-service Message
-   .monstershot.MessageListResponse List(.monstershot.MessageListRequest)
-   .monstershot.MessageReceiveResponse Receive(.monstershot.MessageReceiveRequest)
-message MessageListRequest
-message MessageListResponse
-message MessageReceiveRequest
-    user_message_id
-message MessageReceiveResponse
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+
+namespace AwsDotnetCsharp
+{
+	public partial class MessageListRequest
+	{
+
+	}
+
+	public partial class MessageListResponse
+	{
+
+	}
+
+	public partial class MessageReceiveRequest
+	{
+
+	}
+
+	public partial class MessageReceiveResponse
+	{
+
+	}
+}

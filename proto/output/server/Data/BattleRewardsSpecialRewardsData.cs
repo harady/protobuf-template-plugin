@@ -1,2 +1,11 @@
-message BattleRewardsSpecialRewardsData
-   .monstershot.BattleRewardResourceData battle_reward_resources
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+
+namespace AwsDotnetCsharp
+{
+	public partial class BattleRewardsSpecialRewardsData
+	{
+
+	}
+}

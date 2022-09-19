@@ -1,5 +1,2 @@
-message UnitLevelExpData
-    id
-    growth_type
-    level
-    total_exp
+・unit_level_exps
+id	growthType	level	totalExp	

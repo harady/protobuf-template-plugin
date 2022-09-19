@@ -1,6 +1,2 @@
-message UserUnitCollectionData
-    id
-    user_id
-    unit_id
-    has_earned
-    used_count
+・user_unit_collections
+id	userId	unitId	hasEarned	usedCount	

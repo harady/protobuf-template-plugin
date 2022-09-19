@@ -1,3 +1,11 @@
-message ResourceTypeIdData
-   .monstershot.ResourceType resource_type
-    resource_id
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+
+namespace AwsDotnetCsharp
+{
+	public partial class ResourceTypeIdData
+	{
+
+	}
+}

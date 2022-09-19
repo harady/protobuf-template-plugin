@@ -1,6 +1,2 @@
-message WeakPointPositionData
-    id
-    weak_point_id
-    angle
-    radius_rate
-    size_rate
+・weak_point_positions
+id	weakPointId	angle	radiusRate	sizeRate	

@@ -1,6 +1,11 @@
-message UserShopItemData
-    id
-    user_id
-    shop_item_id
-    shop_schedule_id
-    purchased_count
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+
+namespace AwsDotnetCsharp
+{
+	public partial class UserShopItemData
+	{
+
+	}
+}

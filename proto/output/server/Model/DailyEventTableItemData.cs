@@ -1,5 +1,11 @@
-message DailyEventTableItemData
-    id
-    daily_event_table_id
-    event_quest_category_id
-    count
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+
+namespace AwsDotnetCsharp
+{
+	public partial class DailyEventTableItemData
+	{
+
+	}
+}

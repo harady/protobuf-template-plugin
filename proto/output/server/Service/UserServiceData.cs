@@ -1,8 +1,26 @@
-service User
-   .monstershot.UserDataListResponse DataList(.monstershot.UserDataListRequest)
-   .monstershot.UserNameEditResponse NameEdit(.monstershot.UserNameEditRequest)
-message UserDataListRequest
-message UserDataListResponse
-message UserNameEditRequest
-    name
-message UserNameEditResponse
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+
+namespace AwsDotnetCsharp
+{
+	public partial class UserDataListRequest
+	{
+
+	}
+
+	public partial class UserDataListResponse
+	{
+
+	}
+
+	public partial class UserNameEditRequest
+	{
+
+	}
+
+	public partial class UserNameEditResponse
+	{
+
+	}
+}

@@ -1,4 +1,11 @@
-message QuestGroupData
-    id
-    name
-   .monstershot.QuestGroupType type
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+
+namespace AwsDotnetCsharp
+{
+	public partial class QuestGroupData
+	{
+
+	}
+}

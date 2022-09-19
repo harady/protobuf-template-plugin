@@ -1,5 +1,2 @@
-message UserItemData
-    id
-    user_id
-    item_id
-    amount
+・user_items
+id	userId	itemId	amount	

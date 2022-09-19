@@ -1,2 +1,11 @@
-message BattleInitDeckData
-   .monstershot.UserUnitData user_units
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+
+namespace AwsDotnetCsharp
+{
+	public partial class BattleInitDeckData
+	{
+
+	}
+}

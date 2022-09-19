@@ -1,1 +1,5 @@
-Hello World!
+
+public enum SkillEffectType
+{
+	None = 0,
+}

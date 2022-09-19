@@ -1,8 +1,11 @@
-message EquipmentData
-    id
-    name
-   .monstershot.EquipmentType type
-    description
-    param_a
-    param_b
-    icon_id
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+
+namespace AwsDotnetCsharp
+{
+	public partial class EquipmentData
+	{
+
+	}
+}
