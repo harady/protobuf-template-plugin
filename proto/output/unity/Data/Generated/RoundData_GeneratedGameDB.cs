@@ -1,84 +1,36 @@
-﻿using System.Collections.Generic;
+using System;
+using System.Collections.Generic;
+using System.Runtime.Serialization;
+using Newtonsoft.Json;
 
-public partial class RoundData : IUnique<long>
+[DataContract]
+public partial class RoundData : AbstractData
 {
-	#region NullObject
-	public static RoundData Null => NullObjectContainer.Get<RoundData>();
+	[DataMember(Name = "id")]
+	public long id { get; set; }
 
-	public bool isNull => (this == Null);
-	#endregion
-	#region GameDbWrapper(DataTable)
-	public static DataTable<long, RoundData> dataTable {
-		get {
-			DataTable<long, RoundData> result;
-			if (GameDb.TableExists<long, RoundData>()) {
-				result = GameDb.From<long, RoundData>();
-			} else {
-				result = GameDb.CreateTable<long, RoundData>();
-				SetupRoundDataTableIndexGenerated(result);
-				SetupRoundDataTableIndex(result);
-			}
-			return result;
-		}
+	[DataMember(Name = "name")]
+	public string name { get; set; }
+
+	[DataMember(Name = "stageId")]
+	public long stageId { get; set; }
+
+	[DataMember(Name = "roundNo")]
+	public long roundNo { get; set; }
+
+	public RoundData Clone() {
+		var result = new RoundData();
+		result.id = id;
+		result.name = name;
+		result.stageId = stageId;
+		result.roundNo = roundNo;
+		return result;
 	}
 
-	public static int Count => dataTable.Count;
+	public string idNameText => GetIdNameText(id, name);
 
-	public static List<RoundData> GetDataList()
+	public override string ToString()
 	{
-		return dataTable.dataList;
+		return JsonConvert.SerializeObject(this);
 	}
-
-	public static void SetData(RoundData data)
-	{
-		dataTable.Insert(data);
-	}
-
-	public static void AddDataList(IEnumerable<RoundData> dataList)
-	{
-		dataTable.InsertRange(dataList);
-	}
-
-	public static void SetDataList(IEnumerable<RoundData> dataList)
-	{
-		Clear();
-		dataTable.InsertRange(dataList);
-	}
-
-	public static void Clear()
-	{
-		dataTable.DeleteAll();
-	}
-
-	static partial void SetupRoundDataTableIndex(DataTable<long, RoundData> targetDataTable);
-
-	private static void SetupRoundDataTableIndexGenerated(DataTable<long, RoundData> targetDataTable)
-	{
-		targetDataTable.CreateUniqueIndex("Id", aData => (object)aData.id);
-		targetDataTable.CreateIndex("StageId", aData => (object)aData.stageId);
-	}
-	#endregion
-	#region DataTableUniqueIndex(Id)
-	public static RoundData GetDataById(long id)
-	{
-		return dataTable.GetData("Id", (object)id);
-	}
-
-	public static void RemoveDataByIds(ICollection<long> ids)
-	{
-		ids.ForEach(aId => RemoveDataById(aId));
-	}
-
-	public static void RemoveDataById(long id)
-	{
-		dataTable.DeleteByKey("Id", (object)id);
-	}
-	#endregion
-	#region DataTableIndex (StageId)
-	public static List<RoundData> GetDataListByStageId(long stageId)
-	{
-		return dataTable.GetDataList("StageId", (object)stageId);
-	}
-	#endregion
 }
-

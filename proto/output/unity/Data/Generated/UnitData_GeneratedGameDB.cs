@@ -1,84 +1,148 @@
-﻿using System.Collections.Generic;
+using System;
+using System.Collections.Generic;
+using System.Runtime.Serialization;
+using Newtonsoft.Json;
 
-public partial class UnitData : IUnique<long>
+[DataContract]
+public partial class UnitData : AbstractData
 {
-	#region NullObject
-	public static UnitData Null => NullObjectContainer.Get<UnitData>();
+	[DataMember(Name = "id")]
+	public long id { get; set; }
 
-	public bool isNull => (this == Null);
-	#endregion
-	#region GameDbWrapper(DataTable)
-	public static DataTable<long, UnitData> dataTable {
-		get {
-			DataTable<long, UnitData> result;
-			if (GameDb.TableExists<long, UnitData>()) {
-				result = GameDb.From<long, UnitData>();
-			} else {
-				result = GameDb.CreateTable<long, UnitData>();
-				SetupUnitDataTableIndexGenerated(result);
-				SetupUnitDataTableIndex(result);
-			}
-			return result;
-		}
+	[DataMember(Name = "name")]
+	public string name { get; set; }
+
+	[DataMember(Name = "number")]
+	public long number { get; set; }
+
+	[DataMember(Name = "baseUnitNumber")]
+	public long baseUnitNumber { get; set; }
+
+	[DataMember(Name = "rarity")]
+	public long rarity { get; set; }
+
+	[DataMember(Name = "attribute")]
+	public UnitAttribute attribute { get; set; }
+
+	[DataMember(Name = "attackType")]
+	public UnitAttackType attackType { get; set; }
+
+	[DataMember(Name = "unitCategoryId")]
+	public long unitCategoryId { get; set; }
+
+	[DataMember(Name = "growthType")]
+	public long growthType { get; set; }
+
+	[DataMember(Name = "maxLevel")]
+	public long maxLevel { get; set; }
+
+	[DataMember(Name = "maxLuck")]
+	public long maxLuck { get; set; }
+
+	[DataMember(Name = "obtainType")]
+	public UnitObtainType obtainType { get; set; }
+
+	[DataMember(Name = "baseHp")]
+	public long baseHp { get; set; }
+
+	[DataMember(Name = "baseAttack")]
+	public long baseAttack { get; set; }
+
+	[DataMember(Name = "baseSpeed")]
+	public long baseSpeed { get; set; }
+
+	[DataMember(Name = "maxHp")]
+	public long maxHp { get; set; }
+
+	[DataMember(Name = "maxAttack")]
+	public long maxAttack { get; set; }
+
+	[DataMember(Name = "maxSpeed")]
+	public long maxSpeed { get; set; }
+
+	[DataMember(Name = "maxPlusHp")]
+	public long maxPlusHp { get; set; }
+
+	[DataMember(Name = "maxPlusAttack")]
+	public long maxPlusAttack { get; set; }
+
+	[DataMember(Name = "maxPlusSpeed")]
+	public long maxPlusSpeed { get; set; }
+
+	[DataMember(Name = "skillId")]
+	public long skillId { get; set; }
+
+	[DataMember(Name = "combo1Id")]
+	public long combo1Id { get; set; }
+
+	[DataMember(Name = "combo2Id")]
+	public long combo2Id { get; set; }
+
+	[DataMember(Name = "ability1Id")]
+	public long ability1Id { get; set; }
+
+	[DataMember(Name = "ability2Id")]
+	public long ability2Id { get; set; }
+
+	[DataMember(Name = "ability3Id")]
+	public long ability3Id { get; set; }
+
+	[DataMember(Name = "ability4Id")]
+	public long ability4Id { get; set; }
+
+	[DataMember(Name = "ability5Id")]
+	public long ability5Id { get; set; }
+
+	[DataMember(Name = "equipmentSlotCount")]
+	public long equipmentSlotCount { get; set; }
+
+	[DataMember(Name = "salePrice")]
+	public long salePrice { get; set; }
+
+	[DataMember(Name = "baseexp")]
+	public long baseexp { get; set; }
+
+	public UnitData Clone() {
+		var result = new UnitData();
+		result.id = id;
+		result.name = name;
+		result.number = number;
+		result.baseUnitNumber = baseUnitNumber;
+		result.rarity = rarity;
+		result.attribute = attribute;
+		result.attackType = attackType;
+		result.unitCategoryId = unitCategoryId;
+		result.growthType = growthType;
+		result.maxLevel = maxLevel;
+		result.maxLuck = maxLuck;
+		result.obtainType = obtainType;
+		result.baseHp = baseHp;
+		result.baseAttack = baseAttack;
+		result.baseSpeed = baseSpeed;
+		result.maxHp = maxHp;
+		result.maxAttack = maxAttack;
+		result.maxSpeed = maxSpeed;
+		result.maxPlusHp = maxPlusHp;
+		result.maxPlusAttack = maxPlusAttack;
+		result.maxPlusSpeed = maxPlusSpeed;
+		result.skillId = skillId;
+		result.combo1Id = combo1Id;
+		result.combo2Id = combo2Id;
+		result.ability1Id = ability1Id;
+		result.ability2Id = ability2Id;
+		result.ability3Id = ability3Id;
+		result.ability4Id = ability4Id;
+		result.ability5Id = ability5Id;
+		result.equipmentSlotCount = equipmentSlotCount;
+		result.salePrice = salePrice;
+		result.baseexp = baseexp;
+		return result;
 	}
 
-	public static int Count => dataTable.Count;
+	public string idNameText => GetIdNameText(id, name);
 
-	public static List<UnitData> GetDataList()
+	public override string ToString()
 	{
-		return dataTable.dataList;
+		return JsonConvert.SerializeObject(this);
 	}
-
-	public static void SetData(UnitData data)
-	{
-		dataTable.Insert(data);
-	}
-
-	public static void AddDataList(IEnumerable<UnitData> dataList)
-	{
-		dataTable.InsertRange(dataList);
-	}
-
-	public static void SetDataList(IEnumerable<UnitData> dataList)
-	{
-		Clear();
-		dataTable.InsertRange(dataList);
-	}
-
-	public static void Clear()
-	{
-		dataTable.DeleteAll();
-	}
-
-	static partial void SetupUnitDataTableIndex(DataTable<long, UnitData> targetDataTable);
-
-	private static void SetupUnitDataTableIndexGenerated(DataTable<long, UnitData> targetDataTable)
-	{
-		targetDataTable.CreateUniqueIndex("Id", aData => (object)aData.id);
-		targetDataTable.CreateIndex("BaseUnitNumber", aData => (object)aData.baseUnitNumber);
-	}
-	#endregion
-	#region DataTableUniqueIndex(Id)
-	public static UnitData GetDataById(long id)
-	{
-		return dataTable.GetData("Id", (object)id);
-	}
-
-	public static void RemoveDataByIds(ICollection<long> ids)
-	{
-		ids.ForEach(aId => RemoveDataById(aId));
-	}
-
-	public static void RemoveDataById(long id)
-	{
-		dataTable.DeleteByKey("Id", (object)id);
-	}
-	#endregion
-	#region DataTableIndex (BaseUnitNumber)
-	public static List<UnitData> GetDataListByBaseUnitNumber(long baseUnitNumber)
-	{
-		return dataTable.GetDataList("BaseUnitNumber", (object)baseUnitNumber);
-	}
-	#endregion
 }
-

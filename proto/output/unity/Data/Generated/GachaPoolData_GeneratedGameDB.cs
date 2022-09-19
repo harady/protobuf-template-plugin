@@ -1,84 +1,60 @@
-﻿using System.Collections.Generic;
+using System;
+using System.Collections.Generic;
+using System.Runtime.Serialization;
+using Newtonsoft.Json;
 
-public partial class GachaPoolData : IUnique<long>
+[DataContract]
+public partial class GachaPoolData : AbstractData
 {
-	#region NullObject
-	public static GachaPoolData Null => NullObjectContainer.Get<GachaPoolData>();
+	[DataMember(Name = "id")]
+	public long id { get; set; }
 
-	public bool isNull => (this == Null);
-	#endregion
-	#region GameDbWrapper(DataTable)
-	public static DataTable<long, GachaPoolData> dataTable {
-		get {
-			DataTable<long, GachaPoolData> result;
-			if (GameDb.TableExists<long, GachaPoolData>()) {
-				result = GameDb.From<long, GachaPoolData>();
-			} else {
-				result = GameDb.CreateTable<long, GachaPoolData>();
-				SetupGachaPoolDataTableIndexGenerated(result);
-				SetupGachaPoolDataTableIndex(result);
-			}
-			return result;
-		}
+	[DataMember(Name = "name")]
+	public string name { get; set; }
+
+	[DataMember(Name = "gachaId")]
+	public long gachaId { get; set; }
+
+	[DataMember(Name = "baseGachaPoolId")]
+	public long baseGachaPoolId { get; set; }
+
+	[DataMember(Name = "isExtra")]
+	public bool isExtra { get; set; }
+
+	[DataMember(Name = "isPickup")]
+	public bool isPickup { get; set; }
+
+	[DataMember(Name = "isGuarantee")]
+	public bool isGuarantee { get; set; }
+
+	[DataMember(Name = "rarity")]
+	public long rarity { get; set; }
+
+	[DataMember(Name = "attribute")]
+	public UnitAttribute attribute { get; set; }
+
+	[DataMember(Name = "weight")]
+	public long weight { get; set; }
+
+	public GachaPoolData Clone() {
+		var result = new GachaPoolData();
+		result.id = id;
+		result.name = name;
+		result.gachaId = gachaId;
+		result.baseGachaPoolId = baseGachaPoolId;
+		result.isExtra = isExtra;
+		result.isPickup = isPickup;
+		result.isGuarantee = isGuarantee;
+		result.rarity = rarity;
+		result.attribute = attribute;
+		result.weight = weight;
+		return result;
 	}
 
-	public static int Count => dataTable.Count;
+	public string idNameText => GetIdNameText(id, name);
 
-	public static List<GachaPoolData> GetDataList()
+	public override string ToString()
 	{
-		return dataTable.dataList;
+		return JsonConvert.SerializeObject(this);
 	}
-
-	public static void SetData(GachaPoolData data)
-	{
-		dataTable.Insert(data);
-	}
-
-	public static void AddDataList(IEnumerable<GachaPoolData> dataList)
-	{
-		dataTable.InsertRange(dataList);
-	}
-
-	public static void SetDataList(IEnumerable<GachaPoolData> dataList)
-	{
-		Clear();
-		dataTable.InsertRange(dataList);
-	}
-
-	public static void Clear()
-	{
-		dataTable.DeleteAll();
-	}
-
-	static partial void SetupGachaPoolDataTableIndex(DataTable<long, GachaPoolData> targetDataTable);
-
-	private static void SetupGachaPoolDataTableIndexGenerated(DataTable<long, GachaPoolData> targetDataTable)
-	{
-		targetDataTable.CreateUniqueIndex("Id", aData => (object)aData.id);
-		targetDataTable.CreateIndex("GachaId", aData => (object)aData.gachaId);
-	}
-	#endregion
-	#region DataTableUniqueIndex(Id)
-	public static GachaPoolData GetDataById(long id)
-	{
-		return dataTable.GetData("Id", (object)id);
-	}
-
-	public static void RemoveDataByIds(ICollection<long> ids)
-	{
-		ids.ForEach(aId => RemoveDataById(aId));
-	}
-
-	public static void RemoveDataById(long id)
-	{
-		dataTable.DeleteByKey("Id", (object)id);
-	}
-	#endregion
-	#region DataTableIndex (GachaId)
-	public static List<GachaPoolData> GetDataListByGachaId(long gachaId)
-	{
-		return dataTable.GetDataList("GachaId", (object)gachaId);
-	}
-	#endregion
 }
-

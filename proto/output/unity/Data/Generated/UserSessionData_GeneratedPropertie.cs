@@ -32,7 +32,6 @@ public partial class UserSessionData : AbstractData
 		return result;
 	}
 
-
 	public override string ToString()
 	{
 		return JsonConvert.SerializeObject(this);

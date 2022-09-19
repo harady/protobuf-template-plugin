@@ -1,77 +1,28 @@
-﻿using System.Collections.Generic;
+using System;
+using System.Collections.Generic;
+using System.Runtime.Serialization;
+using Newtonsoft.Json;
 
-public partial class EnemyClusterData : IUnique<long>
+[DataContract]
+public partial class EnemyClusterData : AbstractData
 {
-	#region NullObject
-	public static EnemyClusterData Null => NullObjectContainer.Get<EnemyClusterData>();
+	[DataMember(Name = "id")]
+	public long id { get; set; }
 
-	public bool isNull => (this == Null);
-	#endregion
-	#region GameDbWrapper(DataTable)
-	public static DataTable<long, EnemyClusterData> dataTable {
-		get {
-			DataTable<long, EnemyClusterData> result;
-			if (GameDb.TableExists<long, EnemyClusterData>()) {
-				result = GameDb.From<long, EnemyClusterData>();
-			} else {
-				result = GameDb.CreateTable<long, EnemyClusterData>();
-				SetupEnemyClusterDataTableIndexGenerated(result);
-				SetupEnemyClusterDataTableIndex(result);
-			}
-			return result;
-		}
+	[DataMember(Name = "name")]
+	public string name { get; set; }
+
+	public EnemyClusterData Clone() {
+		var result = new EnemyClusterData();
+		result.id = id;
+		result.name = name;
+		return result;
 	}
 
-	public static int Count => dataTable.Count;
+	public string idNameText => GetIdNameText(id, name);
 
-	public static List<EnemyClusterData> GetDataList()
+	public override string ToString()
 	{
-		return dataTable.dataList;
+		return JsonConvert.SerializeObject(this);
 	}
-
-	public static void SetData(EnemyClusterData data)
-	{
-		dataTable.Insert(data);
-	}
-
-	public static void AddDataList(IEnumerable<EnemyClusterData> dataList)
-	{
-		dataTable.InsertRange(dataList);
-	}
-
-	public static void SetDataList(IEnumerable<EnemyClusterData> dataList)
-	{
-		Clear();
-		dataTable.InsertRange(dataList);
-	}
-
-	public static void Clear()
-	{
-		dataTable.DeleteAll();
-	}
-
-	static partial void SetupEnemyClusterDataTableIndex(DataTable<long, EnemyClusterData> targetDataTable);
-
-	private static void SetupEnemyClusterDataTableIndexGenerated(DataTable<long, EnemyClusterData> targetDataTable)
-	{
-		targetDataTable.CreateUniqueIndex("Id", aData => (object)aData.id);
-	}
-	#endregion
-	#region DataTableUniqueIndex(Id)
-	public static EnemyClusterData GetDataById(long id)
-	{
-		return dataTable.GetData("Id", (object)id);
-	}
-
-	public static void RemoveDataByIds(ICollection<long> ids)
-	{
-		ids.ForEach(aId => RemoveDataById(aId));
-	}
-
-	public static void RemoveDataById(long id)
-	{
-		dataTable.DeleteByKey("Id", (object)id);
-	}
-	#endregion
 }
-

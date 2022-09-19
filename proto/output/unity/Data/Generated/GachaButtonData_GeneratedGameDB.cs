@@ -1,84 +1,64 @@
-﻿using System.Collections.Generic;
+using System;
+using System.Collections.Generic;
+using System.Runtime.Serialization;
+using Newtonsoft.Json;
 
-public partial class GachaButtonData : IUnique<long>
+[DataContract]
+public partial class GachaButtonData : AbstractData
 {
-	#region NullObject
-	public static GachaButtonData Null => NullObjectContainer.Get<GachaButtonData>();
+	[DataMember(Name = "id")]
+	public long id { get; set; }
 
-	public bool isNull => (this == Null);
-	#endregion
-	#region GameDbWrapper(DataTable)
-	public static DataTable<long, GachaButtonData> dataTable {
-		get {
-			DataTable<long, GachaButtonData> result;
-			if (GameDb.TableExists<long, GachaButtonData>()) {
-				result = GameDb.From<long, GachaButtonData>();
-			} else {
-				result = GameDb.CreateTable<long, GachaButtonData>();
-				SetupGachaButtonDataTableIndexGenerated(result);
-				SetupGachaButtonDataTableIndex(result);
-			}
-			return result;
-		}
+	[DataMember(Name = "name")]
+	public string name { get; set; }
+
+	[DataMember(Name = "gachaId")]
+	public long gachaId { get; set; }
+
+	[DataMember(Name = "viewOrder")]
+	public long viewOrder { get; set; }
+
+	[DataMember(Name = "drawCount")]
+	public long drawCount { get; set; }
+
+	[DataMember(Name = "extraCount")]
+	public long extraCount { get; set; }
+
+	[DataMember(Name = "guaranteeCount")]
+	public long guaranteeCount { get; set; }
+
+	[DataMember(Name = "purchaseCount")]
+	public long purchaseCount { get; set; }
+
+	[DataMember(Name = "costResourceType")]
+	public ResourceType costResourceType { get; set; }
+
+	[DataMember(Name = "costResourceId")]
+	public long costResourceId { get; set; }
+
+	[DataMember(Name = "costResourceAmount")]
+	public long costResourceAmount { get; set; }
+
+	public GachaButtonData Clone() {
+		var result = new GachaButtonData();
+		result.id = id;
+		result.name = name;
+		result.gachaId = gachaId;
+		result.viewOrder = viewOrder;
+		result.drawCount = drawCount;
+		result.extraCount = extraCount;
+		result.guaranteeCount = guaranteeCount;
+		result.purchaseCount = purchaseCount;
+		result.costResourceType = costResourceType;
+		result.costResourceId = costResourceId;
+		result.costResourceAmount = costResourceAmount;
+		return result;
 	}
 
-	public static int Count => dataTable.Count;
+	public string idNameText => GetIdNameText(id, name);
 
-	public static List<GachaButtonData> GetDataList()
+	public override string ToString()
 	{
-		return dataTable.dataList;
+		return JsonConvert.SerializeObject(this);
 	}
-
-	public static void SetData(GachaButtonData data)
-	{
-		dataTable.Insert(data);
-	}
-
-	public static void AddDataList(IEnumerable<GachaButtonData> dataList)
-	{
-		dataTable.InsertRange(dataList);
-	}
-
-	public static void SetDataList(IEnumerable<GachaButtonData> dataList)
-	{
-		Clear();
-		dataTable.InsertRange(dataList);
-	}
-
-	public static void Clear()
-	{
-		dataTable.DeleteAll();
-	}
-
-	static partial void SetupGachaButtonDataTableIndex(DataTable<long, GachaButtonData> targetDataTable);
-
-	private static void SetupGachaButtonDataTableIndexGenerated(DataTable<long, GachaButtonData> targetDataTable)
-	{
-		targetDataTable.CreateUniqueIndex("Id", aData => (object)aData.id);
-		targetDataTable.CreateIndex("GachaId", aData => (object)aData.gachaId);
-	}
-	#endregion
-	#region DataTableUniqueIndex(Id)
-	public static GachaButtonData GetDataById(long id)
-	{
-		return dataTable.GetData("Id", (object)id);
-	}
-
-	public static void RemoveDataByIds(ICollection<long> ids)
-	{
-		ids.ForEach(aId => RemoveDataById(aId));
-	}
-
-	public static void RemoveDataById(long id)
-	{
-		dataTable.DeleteByKey("Id", (object)id);
-	}
-	#endregion
-	#region DataTableIndex (GachaId)
-	public static List<GachaButtonData> GetDataListByGachaId(long gachaId)
-	{
-		return dataTable.GetDataList("GachaId", (object)gachaId);
-	}
-	#endregion
 }
-

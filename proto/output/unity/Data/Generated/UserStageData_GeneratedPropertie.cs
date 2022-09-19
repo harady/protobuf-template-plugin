@@ -35,7 +35,6 @@ public partial class UserStageData : AbstractData
 		return result;
 	}
 
-
 	public override string ToString()
 	{
 		return JsonConvert.SerializeObject(this);

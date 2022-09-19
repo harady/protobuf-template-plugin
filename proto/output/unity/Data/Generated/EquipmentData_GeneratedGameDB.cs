@@ -1,77 +1,48 @@
-﻿using System.Collections.Generic;
+using System;
+using System.Collections.Generic;
+using System.Runtime.Serialization;
+using Newtonsoft.Json;
 
-public partial class EquipmentData : IUnique<long>
+[DataContract]
+public partial class EquipmentData : AbstractData
 {
-	#region NullObject
-	public static EquipmentData Null => NullObjectContainer.Get<EquipmentData>();
+	[DataMember(Name = "id")]
+	public long id { get; set; }
 
-	public bool isNull => (this == Null);
-	#endregion
-	#region GameDbWrapper(DataTable)
-	public static DataTable<long, EquipmentData> dataTable {
-		get {
-			DataTable<long, EquipmentData> result;
-			if (GameDb.TableExists<long, EquipmentData>()) {
-				result = GameDb.From<long, EquipmentData>();
-			} else {
-				result = GameDb.CreateTable<long, EquipmentData>();
-				SetupEquipmentDataTableIndexGenerated(result);
-				SetupEquipmentDataTableIndex(result);
-			}
-			return result;
-		}
+	[DataMember(Name = "name")]
+	public string name { get; set; }
+
+	[DataMember(Name = "type")]
+	public EquipmentType type { get; set; }
+
+	[DataMember(Name = "description")]
+	public string description { get; set; }
+
+	[DataMember(Name = "paramA")]
+	public long paramA { get; set; }
+
+	[DataMember(Name = "paramB")]
+	public long paramB { get; set; }
+
+	[DataMember(Name = "iconId")]
+	public long iconId { get; set; }
+
+	public EquipmentData Clone() {
+		var result = new EquipmentData();
+		result.id = id;
+		result.name = name;
+		result.type = type;
+		result.description = description;
+		result.paramA = paramA;
+		result.paramB = paramB;
+		result.iconId = iconId;
+		return result;
 	}
 
-	public static int Count => dataTable.Count;
+	public string idNameText => GetIdNameText(id, name);
 
-	public static List<EquipmentData> GetDataList()
+	public override string ToString()
 	{
-		return dataTable.dataList;
+		return JsonConvert.SerializeObject(this);
 	}
-
-	public static void SetData(EquipmentData data)
-	{
-		dataTable.Insert(data);
-	}
-
-	public static void AddDataList(IEnumerable<EquipmentData> dataList)
-	{
-		dataTable.InsertRange(dataList);
-	}
-
-	public static void SetDataList(IEnumerable<EquipmentData> dataList)
-	{
-		Clear();
-		dataTable.InsertRange(dataList);
-	}
-
-	public static void Clear()
-	{
-		dataTable.DeleteAll();
-	}
-
-	static partial void SetupEquipmentDataTableIndex(DataTable<long, EquipmentData> targetDataTable);
-
-	private static void SetupEquipmentDataTableIndexGenerated(DataTable<long, EquipmentData> targetDataTable)
-	{
-		targetDataTable.CreateUniqueIndex("Id", aData => (object)aData.id);
-	}
-	#endregion
-	#region DataTableUniqueIndex(Id)
-	public static EquipmentData GetDataById(long id)
-	{
-		return dataTable.GetData("Id", (object)id);
-	}
-
-	public static void RemoveDataByIds(ICollection<long> ids)
-	{
-		ids.ForEach(aId => RemoveDataById(aId));
-	}
-
-	public static void RemoveDataById(long id)
-	{
-		dataTable.DeleteByKey("Id", (object)id);
-	}
-	#endregion
 }
-

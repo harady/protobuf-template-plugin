@@ -1,84 +1,70 @@
-﻿using System.Collections.Generic;
+using System;
+using System.Collections.Generic;
+using System.Runtime.Serialization;
+using Newtonsoft.Json;
 
-public partial class EnemyActionData : IUnique<long>
+[DataContract]
+public partial class EnemyActionData : AbstractData
 {
-	#region NullObject
-	public static EnemyActionData Null => NullObjectContainer.Get<EnemyActionData>();
+	[DataMember(Name = "id")]
+	public long id { get; set; }
 
-	public bool isNull => (this == Null);
-	#endregion
-	#region GameDbWrapper(DataTable)
-	public static DataTable<long, EnemyActionData> dataTable {
-		get {
-			DataTable<long, EnemyActionData> result;
-			if (GameDb.TableExists<long, EnemyActionData>()) {
-				result = GameDb.From<long, EnemyActionData>();
-			} else {
-				result = GameDb.CreateTable<long, EnemyActionData>();
-				SetupEnemyActionDataTableIndexGenerated(result);
-				SetupEnemyActionDataTableIndex(result);
-			}
-			return result;
-		}
+	[DataMember(Name = "enemyId")]
+	public long enemyId { get; set; }
+
+	[DataMember(Name = "actionNo")]
+	public long actionNo { get; set; }
+
+	[DataMember(Name = "triggerType")]
+	public TriggerType triggerType { get; set; }
+
+	[DataMember(Name = "triggerParamA")]
+	public long triggerParamA { get; set; }
+
+	[DataMember(Name = "triggerParamB")]
+	public long triggerParamB { get; set; }
+
+	[DataMember(Name = "triggerParamC")]
+	public long triggerParamC { get; set; }
+
+	[DataMember(Name = "triggerParamD")]
+	public long triggerParamD { get; set; }
+
+	[DataMember(Name = "actionType")]
+	public ActionType actionType { get; set; }
+
+	[DataMember(Name = "actionParamA")]
+	public long actionParamA { get; set; }
+
+	[DataMember(Name = "actionParamB")]
+	public long actionParamB { get; set; }
+
+	[DataMember(Name = "actionParamC")]
+	public long actionParamC { get; set; }
+
+	[DataMember(Name = "actionParamD")]
+	public long actionParamD { get; set; }
+
+	public EnemyActionData Clone() {
+		var result = new EnemyActionData();
+		result.id = id;
+		result.enemyId = enemyId;
+		result.actionNo = actionNo;
+		result.triggerType = triggerType;
+		result.triggerParamA = triggerParamA;
+		result.triggerParamB = triggerParamB;
+		result.triggerParamC = triggerParamC;
+		result.triggerParamD = triggerParamD;
+		result.actionType = actionType;
+		result.actionParamA = actionParamA;
+		result.actionParamB = actionParamB;
+		result.actionParamC = actionParamC;
+		result.actionParamD = actionParamD;
+		return result;
 	}
 
-	public static int Count => dataTable.Count;
-
-	public static List<EnemyActionData> GetDataList()
+	public override string ToString()
 	{
-		return dataTable.dataList;
+		return JsonConvert.SerializeObject(this);
 	}
-
-	public static void SetData(EnemyActionData data)
-	{
-		dataTable.Insert(data);
-	}
-
-	public static void AddDataList(IEnumerable<EnemyActionData> dataList)
-	{
-		dataTable.InsertRange(dataList);
-	}
-
-	public static void SetDataList(IEnumerable<EnemyActionData> dataList)
-	{
-		Clear();
-		dataTable.InsertRange(dataList);
-	}
-
-	public static void Clear()
-	{
-		dataTable.DeleteAll();
-	}
-
-	static partial void SetupEnemyActionDataTableIndex(DataTable<long, EnemyActionData> targetDataTable);
-
-	private static void SetupEnemyActionDataTableIndexGenerated(DataTable<long, EnemyActionData> targetDataTable)
-	{
-		targetDataTable.CreateUniqueIndex("Id", aData => (object)aData.id);
-		targetDataTable.CreateIndex("EnemyId", aData => (object)aData.enemyId);
-	}
-	#endregion
-	#region DataTableUniqueIndex(Id)
-	public static EnemyActionData GetDataById(long id)
-	{
-		return dataTable.GetData("Id", (object)id);
-	}
-
-	public static void RemoveDataByIds(ICollection<long> ids)
-	{
-		ids.ForEach(aId => RemoveDataById(aId));
-	}
-
-	public static void RemoveDataById(long id)
-	{
-		dataTable.DeleteByKey("Id", (object)id);
-	}
-	#endregion
-	#region DataTableIndex (EnemyId)
-	public static List<EnemyActionData> GetDataListByEnemyId(long enemyId)
-	{
-		return dataTable.GetDataList("EnemyId", (object)enemyId);
-	}
-	#endregion
 }
-

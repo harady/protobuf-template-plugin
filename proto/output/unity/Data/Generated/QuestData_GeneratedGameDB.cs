@@ -1,84 +1,66 @@
-﻿using System.Collections.Generic;
+using System;
+using System.Collections.Generic;
+using System.Runtime.Serialization;
+using Newtonsoft.Json;
 
-public partial class QuestData : IUnique<long>
+[DataContract]
+public partial class QuestData : AbstractData
 {
-	#region NullObject
-	public static QuestData Null => NullObjectContainer.Get<QuestData>();
+	[DataMember(Name = "id")]
+	public long id { get; set; }
 
-	public bool isNull => (this == Null);
-	#endregion
-	#region GameDbWrapper(DataTable)
-	public static DataTable<long, QuestData> dataTable {
-		get {
-			DataTable<long, QuestData> result;
-			if (GameDb.TableExists<long, QuestData>()) {
-				result = GameDb.From<long, QuestData>();
-			} else {
-				result = GameDb.CreateTable<long, QuestData>();
-				SetupQuestDataTableIndexGenerated(result);
-				SetupQuestDataTableIndex(result);
-			}
-			return result;
-		}
+	[DataMember(Name = "name")]
+	public string name { get; set; }
+
+	[DataMember(Name = "questGroupId")]
+	public long questGroupId { get; set; }
+
+	[DataMember(Name = "nocontinue")]
+	public bool nocontinue { get; set; }
+
+	[DataMember(Name = "questDifficultyType")]
+	public QuestDifficultyType questDifficultyType { get; set; }
+
+	[DataMember(Name = "bossUnitId")]
+	public long bossUnitId { get; set; }
+
+	[DataMember(Name = "openAt")]
+	public long openAt { get; set; }
+
+	public DateTime OpenAt {
+		get { return ServerDateTimeUtil.FromEpoch(openAt); }
+		set { openAt = ServerDateTimeUtil.ToEpoch(value); }
 	}
 
-	public static int Count => dataTable.Count;
+	[DataMember(Name = "closeAt")]
+	public long closeAt { get; set; }
 
-	public static List<QuestData> GetDataList()
+	public DateTime CloseAt {
+		get { return ServerDateTimeUtil.FromEpoch(closeAt); }
+		set { closeAt = ServerDateTimeUtil.ToEpoch(value); }
+	}
+
+	[DataMember(Name = "openDow")]
+	public long openDow { get; set; }
+
+	public QuestData Clone() {
+		var result = new QuestData();
+		result.id = id;
+		result.name = name;
+		result.questGroupId = questGroupId;
+		result.nocontinue = nocontinue;
+		result.questDifficultyType = questDifficultyType;
+		result.bossUnitId = bossUnitId;
+		result.openAt = openAt;
+		result.closeAt = closeAt;
+		result.openDow = openDow;
+		return result;
+	}
+
+	public string idNameText => GetIdNameText(id, name);
+
+	public override string ToString()
 	{
-		return dataTable.dataList;
+		return JsonConvert.SerializeObject(this);
 	}
-
-	public static void SetData(QuestData data)
-	{
-		dataTable.Insert(data);
-	}
-
-	public static void AddDataList(IEnumerable<QuestData> dataList)
-	{
-		dataTable.InsertRange(dataList);
-	}
-
-	public static void SetDataList(IEnumerable<QuestData> dataList)
-	{
-		Clear();
-		dataTable.InsertRange(dataList);
-	}
-
-	public static void Clear()
-	{
-		dataTable.DeleteAll();
-	}
-
-	static partial void SetupQuestDataTableIndex(DataTable<long, QuestData> targetDataTable);
-
-	private static void SetupQuestDataTableIndexGenerated(DataTable<long, QuestData> targetDataTable)
-	{
-		targetDataTable.CreateUniqueIndex("Id", aData => (object)aData.id);
-		targetDataTable.CreateIndex("QuestGroupId", aData => (object)aData.questGroupId);
-	}
-	#endregion
-	#region DataTableUniqueIndex(Id)
-	public static QuestData GetDataById(long id)
-	{
-		return dataTable.GetData("Id", (object)id);
-	}
-
-	public static void RemoveDataByIds(ICollection<long> ids)
-	{
-		ids.ForEach(aId => RemoveDataById(aId));
-	}
-
-	public static void RemoveDataById(long id)
-	{
-		dataTable.DeleteByKey("Id", (object)id);
-	}
-	#endregion
-	#region DataTableIndex (QuestGroupId)
-	public static List<QuestData> GetDataListByQuestGroupId(long questGroupId)
-	{
-		return dataTable.GetDataList("QuestGroupId", (object)questGroupId);
-	}
-	#endregion
 }
-

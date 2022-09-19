@@ -1,77 +1,48 @@
-﻿using System.Collections.Generic;
+using System;
+using System.Collections.Generic;
+using System.Runtime.Serialization;
+using Newtonsoft.Json;
 
-public partial class EventQuestCategoryData : IUnique<long>
+[DataContract]
+public partial class EventQuestCategoryData : AbstractData
 {
-	#region NullObject
-	public static EventQuestCategoryData Null => NullObjectContainer.Get<EventQuestCategoryData>();
+	[DataMember(Name = "id")]
+	public long id { get; set; }
 
-	public bool isNull => (this == Null);
-	#endregion
-	#region GameDbWrapper(DataTable)
-	public static DataTable<long, EventQuestCategoryData> dataTable {
-		get {
-			DataTable<long, EventQuestCategoryData> result;
-			if (GameDb.TableExists<long, EventQuestCategoryData>()) {
-				result = GameDb.From<long, EventQuestCategoryData>();
-			} else {
-				result = GameDb.CreateTable<long, EventQuestCategoryData>();
-				SetupEventQuestCategoryDataTableIndexGenerated(result);
-				SetupEventQuestCategoryDataTableIndex(result);
-			}
-			return result;
-		}
+	[DataMember(Name = "name")]
+	public string name { get; set; }
+
+	[DataMember(Name = "minStartTime")]
+	public long minStartTime { get; set; }
+
+	[DataMember(Name = "maxStartTime")]
+	public long maxStartTime { get; set; }
+
+	[DataMember(Name = "openHours")]
+	public long openHours { get; set; }
+
+	[DataMember(Name = "questGroupId")]
+	public long questGroupId { get; set; }
+
+	[DataMember(Name = "questdifficultytype")]
+	public QuestDifficultyType questdifficultytype { get; set; }
+
+	public EventQuestCategoryData Clone() {
+		var result = new EventQuestCategoryData();
+		result.id = id;
+		result.name = name;
+		result.minStartTime = minStartTime;
+		result.maxStartTime = maxStartTime;
+		result.openHours = openHours;
+		result.questGroupId = questGroupId;
+		result.questdifficultytype = questdifficultytype;
+		return result;
 	}
 
-	public static int Count => dataTable.Count;
+	public string idNameText => GetIdNameText(id, name);
 
-	public static List<EventQuestCategoryData> GetDataList()
+	public override string ToString()
 	{
-		return dataTable.dataList;
+		return JsonConvert.SerializeObject(this);
 	}
-
-	public static void SetData(EventQuestCategoryData data)
-	{
-		dataTable.Insert(data);
-	}
-
-	public static void AddDataList(IEnumerable<EventQuestCategoryData> dataList)
-	{
-		dataTable.InsertRange(dataList);
-	}
-
-	public static void SetDataList(IEnumerable<EventQuestCategoryData> dataList)
-	{
-		Clear();
-		dataTable.InsertRange(dataList);
-	}
-
-	public static void Clear()
-	{
-		dataTable.DeleteAll();
-	}
-
-	static partial void SetupEventQuestCategoryDataTableIndex(DataTable<long, EventQuestCategoryData> targetDataTable);
-
-	private static void SetupEventQuestCategoryDataTableIndexGenerated(DataTable<long, EventQuestCategoryData> targetDataTable)
-	{
-		targetDataTable.CreateUniqueIndex("Id", aData => (object)aData.id);
-	}
-	#endregion
-	#region DataTableUniqueIndex(Id)
-	public static EventQuestCategoryData GetDataById(long id)
-	{
-		return dataTable.GetData("Id", (object)id);
-	}
-
-	public static void RemoveDataByIds(ICollection<long> ids)
-	{
-		ids.ForEach(aId => RemoveDataById(aId));
-	}
-
-	public static void RemoveDataById(long id)
-	{
-		dataTable.DeleteByKey("Id", (object)id);
-	}
-	#endregion
 }
-

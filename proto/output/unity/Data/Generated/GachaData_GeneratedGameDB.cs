@@ -1,77 +1,36 @@
-﻿using System.Collections.Generic;
+using System;
+using System.Collections.Generic;
+using System.Runtime.Serialization;
+using Newtonsoft.Json;
 
-public partial class GachaData : IUnique<long>
+[DataContract]
+public partial class GachaData : AbstractData
 {
-	#region NullObject
-	public static GachaData Null => NullObjectContainer.Get<GachaData>();
+	[DataMember(Name = "id")]
+	public long id { get; set; }
 
-	public bool isNull => (this == Null);
-	#endregion
-	#region GameDbWrapper(DataTable)
-	public static DataTable<long, GachaData> dataTable {
-		get {
-			DataTable<long, GachaData> result;
-			if (GameDb.TableExists<long, GachaData>()) {
-				result = GameDb.From<long, GachaData>();
-			} else {
-				result = GameDb.CreateTable<long, GachaData>();
-				SetupGachaDataTableIndexGenerated(result);
-				SetupGachaDataTableIndex(result);
-			}
-			return result;
-		}
+	[DataMember(Name = "name")]
+	public string name { get; set; }
+
+	[DataMember(Name = "baseGachaId")]
+	public long baseGachaId { get; set; }
+
+	[DataMember(Name = "isPremium")]
+	public bool isPremium { get; set; }
+
+	public GachaData Clone() {
+		var result = new GachaData();
+		result.id = id;
+		result.name = name;
+		result.baseGachaId = baseGachaId;
+		result.isPremium = isPremium;
+		return result;
 	}
 
-	public static int Count => dataTable.Count;
+	public string idNameText => GetIdNameText(id, name);
 
-	public static List<GachaData> GetDataList()
+	public override string ToString()
 	{
-		return dataTable.dataList;
+		return JsonConvert.SerializeObject(this);
 	}
-
-	public static void SetData(GachaData data)
-	{
-		dataTable.Insert(data);
-	}
-
-	public static void AddDataList(IEnumerable<GachaData> dataList)
-	{
-		dataTable.InsertRange(dataList);
-	}
-
-	public static void SetDataList(IEnumerable<GachaData> dataList)
-	{
-		Clear();
-		dataTable.InsertRange(dataList);
-	}
-
-	public static void Clear()
-	{
-		dataTable.DeleteAll();
-	}
-
-	static partial void SetupGachaDataTableIndex(DataTable<long, GachaData> targetDataTable);
-
-	private static void SetupGachaDataTableIndexGenerated(DataTable<long, GachaData> targetDataTable)
-	{
-		targetDataTable.CreateUniqueIndex("Id", aData => (object)aData.id);
-	}
-	#endregion
-	#region DataTableUniqueIndex(Id)
-	public static GachaData GetDataById(long id)
-	{
-		return dataTable.GetData("Id", (object)id);
-	}
-
-	public static void RemoveDataByIds(ICollection<long> ids)
-	{
-		ids.ForEach(aId => RemoveDataById(aId));
-	}
-
-	public static void RemoveDataById(long id)
-	{
-		dataTable.DeleteByKey("Id", (object)id);
-	}
-	#endregion
 }
-

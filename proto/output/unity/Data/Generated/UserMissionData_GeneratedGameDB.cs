@@ -1,84 +1,34 @@
-﻿using System.Collections.Generic;
+using System;
+using System.Collections.Generic;
+using System.Runtime.Serialization;
+using Newtonsoft.Json;
 
-public partial class UserMissionData : IUnique<long>
+[DataContract]
+public partial class UserMissionData : AbstractData
 {
-	#region NullObject
-	public static UserMissionData Null => NullObjectContainer.Get<UserMissionData>();
+	[DataMember(Name = "id")]
+	public long id { get; set; }
 
-	public bool isNull => (this == Null);
-	#endregion
-	#region GameDbWrapper(DataTable)
-	public static DataTable<long, UserMissionData> dataTable {
-		get {
-			DataTable<long, UserMissionData> result;
-			if (GameDb.TableExists<long, UserMissionData>()) {
-				result = GameDb.From<long, UserMissionData>();
-			} else {
-				result = GameDb.CreateTable<long, UserMissionData>();
-				SetupUserMissionDataTableIndexGenerated(result);
-				SetupUserMissionDataTableIndex(result);
-			}
-			return result;
-		}
+	[DataMember(Name = "userId")]
+	public long userId { get; set; }
+
+	[DataMember(Name = "missionId")]
+	public long missionId { get; set; }
+
+	[DataMember(Name = "progress")]
+	public long progress { get; set; }
+
+	public UserMissionData Clone() {
+		var result = new UserMissionData();
+		result.id = id;
+		result.userId = userId;
+		result.missionId = missionId;
+		result.progress = progress;
+		return result;
 	}
 
-	public static int Count => dataTable.Count;
-
-	public static List<UserMissionData> GetDataList()
+	public override string ToString()
 	{
-		return dataTable.dataList;
+		return JsonConvert.SerializeObject(this);
 	}
-
-	public static void SetData(UserMissionData data)
-	{
-		dataTable.Insert(data);
-	}
-
-	public static void AddDataList(IEnumerable<UserMissionData> dataList)
-	{
-		dataTable.InsertRange(dataList);
-	}
-
-	public static void SetDataList(IEnumerable<UserMissionData> dataList)
-	{
-		Clear();
-		dataTable.InsertRange(dataList);
-	}
-
-	public static void Clear()
-	{
-		dataTable.DeleteAll();
-	}
-
-	static partial void SetupUserMissionDataTableIndex(DataTable<long, UserMissionData> targetDataTable);
-
-	private static void SetupUserMissionDataTableIndexGenerated(DataTable<long, UserMissionData> targetDataTable)
-	{
-		targetDataTable.CreateUniqueIndex("Id", aData => (object)aData.id);
-		targetDataTable.CreateIndex("UserId", aData => (object)aData.userId);
-	}
-	#endregion
-	#region DataTableUniqueIndex(Id)
-	public static UserMissionData GetDataById(long id)
-	{
-		return dataTable.GetData("Id", (object)id);
-	}
-
-	public static void RemoveDataByIds(ICollection<long> ids)
-	{
-		ids.ForEach(aId => RemoveDataById(aId));
-	}
-
-	public static void RemoveDataById(long id)
-	{
-		dataTable.DeleteByKey("Id", (object)id);
-	}
-	#endregion
-	#region DataTableIndex (UserId)
-	public static List<UserMissionData> GetDataListByUserId(long userId)
-	{
-		return dataTable.GetDataList("UserId", (object)userId);
-	}
-	#endregion
 }
-

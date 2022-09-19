@@ -39,7 +39,6 @@ public partial class ResourceLotteryItemData : AbstractData
 		return result;
 	}
 
-
 	public override string ToString()
 	{
 		return JsonConvert.SerializeObject(this);

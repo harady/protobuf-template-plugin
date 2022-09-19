@@ -1,84 +1,64 @@
-﻿using System.Collections.Generic;
+using System;
+using System.Collections.Generic;
+using System.Runtime.Serialization;
+using Newtonsoft.Json;
 
-public partial class ExchangeItemData : IUnique<long>
+[DataContract]
+public partial class ExchangeItemData : AbstractData
 {
-	#region NullObject
-	public static ExchangeItemData Null => NullObjectContainer.Get<ExchangeItemData>();
+	[DataMember(Name = "id")]
+	public long id { get; set; }
 
-	public bool isNull => (this == Null);
-	#endregion
-	#region GameDbWrapper(DataTable)
-	public static DataTable<long, ExchangeItemData> dataTable {
-		get {
-			DataTable<long, ExchangeItemData> result;
-			if (GameDb.TableExists<long, ExchangeItemData>()) {
-				result = GameDb.From<long, ExchangeItemData>();
-			} else {
-				result = GameDb.CreateTable<long, ExchangeItemData>();
-				SetupExchangeItemDataTableIndexGenerated(result);
-				SetupExchangeItemDataTableIndex(result);
-			}
-			return result;
-		}
+	[DataMember(Name = "name")]
+	public string name { get; set; }
+
+	[DataMember(Name = "exchangeId")]
+	public long exchangeId { get; set; }
+
+	[DataMember(Name = "costResourceType")]
+	public ResourceType costResourceType { get; set; }
+
+	[DataMember(Name = "costResourceId")]
+	public long costResourceId { get; set; }
+
+	[DataMember(Name = "costResourceAmount")]
+	public long costResourceAmount { get; set; }
+
+	[DataMember(Name = "resourceType")]
+	public ResourceType resourceType { get; set; }
+
+	[DataMember(Name = "resourceId")]
+	public long resourceId { get; set; }
+
+	[DataMember(Name = "resourceAmount")]
+	public long resourceAmount { get; set; }
+
+	[DataMember(Name = "resourceSetId")]
+	public long resourceSetId { get; set; }
+
+	[DataMember(Name = "limitCount")]
+	public long limitCount { get; set; }
+
+	public ExchangeItemData Clone() {
+		var result = new ExchangeItemData();
+		result.id = id;
+		result.name = name;
+		result.exchangeId = exchangeId;
+		result.costResourceType = costResourceType;
+		result.costResourceId = costResourceId;
+		result.costResourceAmount = costResourceAmount;
+		result.resourceType = resourceType;
+		result.resourceId = resourceId;
+		result.resourceAmount = resourceAmount;
+		result.resourceSetId = resourceSetId;
+		result.limitCount = limitCount;
+		return result;
 	}
 
-	public static int Count => dataTable.Count;
+	public string idNameText => GetIdNameText(id, name);
 
-	public static List<ExchangeItemData> GetDataList()
+	public override string ToString()
 	{
-		return dataTable.dataList;
+		return JsonConvert.SerializeObject(this);
 	}
-
-	public static void SetData(ExchangeItemData data)
-	{
-		dataTable.Insert(data);
-	}
-
-	public static void AddDataList(IEnumerable<ExchangeItemData> dataList)
-	{
-		dataTable.InsertRange(dataList);
-	}
-
-	public static void SetDataList(IEnumerable<ExchangeItemData> dataList)
-	{
-		Clear();
-		dataTable.InsertRange(dataList);
-	}
-
-	public static void Clear()
-	{
-		dataTable.DeleteAll();
-	}
-
-	static partial void SetupExchangeItemDataTableIndex(DataTable<long, ExchangeItemData> targetDataTable);
-
-	private static void SetupExchangeItemDataTableIndexGenerated(DataTable<long, ExchangeItemData> targetDataTable)
-	{
-		targetDataTable.CreateUniqueIndex("Id", aData => (object)aData.id);
-		targetDataTable.CreateIndex("ExchangeId", aData => (object)aData.exchangeId);
-	}
-	#endregion
-	#region DataTableUniqueIndex(Id)
-	public static ExchangeItemData GetDataById(long id)
-	{
-		return dataTable.GetData("Id", (object)id);
-	}
-
-	public static void RemoveDataByIds(ICollection<long> ids)
-	{
-		ids.ForEach(aId => RemoveDataById(aId));
-	}
-
-	public static void RemoveDataById(long id)
-	{
-		dataTable.DeleteByKey("Id", (object)id);
-	}
-	#endregion
-	#region DataTableIndex (ExchangeId)
-	public static List<ExchangeItemData> GetDataListByExchangeId(long exchangeId)
-	{
-		return dataTable.GetDataList("ExchangeId", (object)exchangeId);
-	}
-	#endregion
 }
-

@@ -8,13 +8,25 @@ EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
+		Debug|x64 = Debug|x64
+		Native|Any CPU = Native|Any CPU
+		Native|x64 = Native|x64
 		Release|Any CPU = Release|Any CPU
+		Release|x64 = Release|x64
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{CEAE7E46-0FF3-4FDC-91AA-96ABE2B81FBD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{CEAE7E46-0FF3-4FDC-91AA-96ABE2B81FBD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CEAE7E46-0FF3-4FDC-91AA-96ABE2B81FBD}.Debug|x64.ActiveCfg = Debug|x64
+		{CEAE7E46-0FF3-4FDC-91AA-96ABE2B81FBD}.Debug|x64.Build.0 = Debug|x64
+		{CEAE7E46-0FF3-4FDC-91AA-96ABE2B81FBD}.Native|Any CPU.ActiveCfg = Native|Any CPU
+		{CEAE7E46-0FF3-4FDC-91AA-96ABE2B81FBD}.Native|Any CPU.Build.0 = Native|Any CPU
+		{CEAE7E46-0FF3-4FDC-91AA-96ABE2B81FBD}.Native|x64.ActiveCfg = Native|x64
+		{CEAE7E46-0FF3-4FDC-91AA-96ABE2B81FBD}.Native|x64.Build.0 = Native|x64
 		{CEAE7E46-0FF3-4FDC-91AA-96ABE2B81FBD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CEAE7E46-0FF3-4FDC-91AA-96ABE2B81FBD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CEAE7E46-0FF3-4FDC-91AA-96ABE2B81FBD}.Release|x64.ActiveCfg = Release|x64
+		{CEAE7E46-0FF3-4FDC-91AA-96ABE2B81FBD}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

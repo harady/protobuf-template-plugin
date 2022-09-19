@@ -1,91 +1,87 @@
-﻿using System.Collections.Generic;
+using System;
+using System.Collections.Generic;
+using System.Runtime.Serialization;
+using Newtonsoft.Json;
 
-public partial class UserUnitData : IUnique<long>
+[DataContract]
+public partial class UserUnitData : AbstractData
 {
-	#region NullObject
-	public static UserUnitData Null => NullObjectContainer.Get<UserUnitData>();
+	[DataMember(Name = "id")]
+	public long id { get; set; }
 
-	public bool isNull => (this == Null);
-	#endregion
-	#region GameDbWrapper(DataTable)
-	public static DataTable<long, UserUnitData> dataTable {
-		get {
-			DataTable<long, UserUnitData> result;
-			if (GameDb.TableExists<long, UserUnitData>()) {
-				result = GameDb.From<long, UserUnitData>();
-			} else {
-				result = GameDb.CreateTable<long, UserUnitData>();
-				SetupUserUnitDataTableIndexGenerated(result);
-				SetupUserUnitDataTableIndex(result);
-			}
-			return result;
-		}
-	}
+	[DataMember(Name = "userId")]
+	public long userId { get; set; }
 
-	public static int Count => dataTable.Count;
+	[DataMember(Name = "unitId")]
+	public long unitId { get; set; }
 
-	public static List<UserUnitData> GetDataList()
-	{
-		return dataTable.dataList;
-	}
+	[DataMember(Name = "level")]
+	public long level { get; set; }
 
-	public static void SetData(UserUnitData data)
-	{
-		dataTable.Insert(data);
-	}
+	[DataMember(Name = "exp")]
+	public long exp { get; set; }
 
-	public static void AddDataList(IEnumerable<UserUnitData> dataList)
-	{
-		dataTable.InsertRange(dataList);
-	}
+	[DataMember(Name = "luck")]
+	public long luck { get; set; }
 
-	public static void SetDataList(IEnumerable<UserUnitData> dataList)
-	{
-		Clear();
-		dataTable.InsertRange(dataList);
-	}
+	[DataMember(Name = "plusHp")]
+	public long plusHp { get; set; }
 
-	public static void Clear()
-	{
-		dataTable.DeleteAll();
-	}
+	[DataMember(Name = "plusAttack")]
+	public long plusAttack { get; set; }
 
-	static partial void SetupUserUnitDataTableIndex(DataTable<long, UserUnitData> targetDataTable);
+	[DataMember(Name = "plusSpeed")]
+	public long plusSpeed { get; set; }
 
-	private static void SetupUserUnitDataTableIndexGenerated(DataTable<long, UserUnitData> targetDataTable)
-	{
-		targetDataTable.CreateUniqueIndex("Id", aData => (object)aData.id);
-		targetDataTable.CreateIndex("UserId", aData => (object)aData.userId);
-		targetDataTable.CreateIndex("UnitId", aData => (object)aData.unitId);
-	}
-	#endregion
-	#region DataTableUniqueIndex(Id)
-	public static UserUnitData GetDataById(long id)
-	{
-		return dataTable.GetData("Id", (object)id);
+	[DataMember(Name = "equipment1Id")]
+	public long equipment1Id { get; set; }
+
+	[DataMember(Name = "equipment2Id")]
+	public long equipment2Id { get; set; }
+
+	[DataMember(Name = "equipment3Id")]
+	public long equipment3Id { get; set; }
+
+	[DataMember(Name = "heroMark")]
+	public bool heroMark { get; set; }
+
+	[DataMember(Name = "heroBadge")]
+	public bool heroBadge { get; set; }
+
+	[DataMember(Name = "isLocked")]
+	public bool isLocked { get; set; }
+
+	[DataMember(Name = "getAt")]
+	public long getAt { get; set; }
+
+	public DateTime GetAt {
+		get { return ServerDateTimeUtil.FromEpoch(getAt); }
+		set { getAt = ServerDateTimeUtil.ToEpoch(value); }
 	}
 
-	public static void RemoveDataByIds(ICollection<long> ids)
-	{
-		ids.ForEach(aId => RemoveDataById(aId));
+	public UserUnitData Clone() {
+		var result = new UserUnitData();
+		result.id = id;
+		result.userId = userId;
+		result.unitId = unitId;
+		result.level = level;
+		result.exp = exp;
+		result.luck = luck;
+		result.plusHp = plusHp;
+		result.plusAttack = plusAttack;
+		result.plusSpeed = plusSpeed;
+		result.equipment1Id = equipment1Id;
+		result.equipment2Id = equipment2Id;
+		result.equipment3Id = equipment3Id;
+		result.heroMark = heroMark;
+		result.heroBadge = heroBadge;
+		result.isLocked = isLocked;
+		result.getAt = getAt;
+		return result;
 	}
 
-	public static void RemoveDataById(long id)
+	public override string ToString()
 	{
-		dataTable.DeleteByKey("Id", (object)id);
+		return JsonConvert.SerializeObject(this);
 	}
-	#endregion
-	#region DataTableIndex (UserId)
-	public static List<UserUnitData> GetDataListByUserId(long userId)
-	{
-		return dataTable.GetDataList("UserId", (object)userId);
-	}
-	#endregion
-	#region DataTableIndex (UnitId)
-	public static List<UserUnitData> GetDataListByUnitId(long unitId)
-	{
-		return dataTable.GetDataList("UnitId", (object)unitId);
-	}
-	#endregion
 }
-

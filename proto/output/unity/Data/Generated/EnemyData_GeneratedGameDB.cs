@@ -1,77 +1,76 @@
-﻿using System.Collections.Generic;
+using System;
+using System.Collections.Generic;
+using System.Runtime.Serialization;
+using Newtonsoft.Json;
 
-public partial class EnemyData : IUnique<long>
+[DataContract]
+public partial class EnemyData : AbstractData
 {
-	#region NullObject
-	public static EnemyData Null => NullObjectContainer.Get<EnemyData>();
+	[DataMember(Name = "id")]
+	public long id { get; set; }
 
-	public bool isNull => (this == Null);
-	#endregion
-	#region GameDbWrapper(DataTable)
-	public static DataTable<long, EnemyData> dataTable {
-		get {
-			DataTable<long, EnemyData> result;
-			if (GameDb.TableExists<long, EnemyData>()) {
-				result = GameDb.From<long, EnemyData>();
-			} else {
-				result = GameDb.CreateTable<long, EnemyData>();
-				SetupEnemyDataTableIndexGenerated(result);
-				SetupEnemyDataTableIndex(result);
-			}
-			return result;
-		}
+	[DataMember(Name = "name")]
+	public string name { get; set; }
+
+	[DataMember(Name = "unitId")]
+	public long unitId { get; set; }
+
+	[DataMember(Name = "hp")]
+	public long hp { get; set; }
+
+	[DataMember(Name = "size")]
+	public long size { get; set; }
+
+	[DataMember(Name = "weakPointId")]
+	public long weakPointId { get; set; }
+
+	[DataMember(Name = "isBoss")]
+	public bool isBoss { get; set; }
+
+	[DataMember(Name = "isEscape")]
+	public bool isEscape { get; set; }
+
+	[DataMember(Name = "damageRate")]
+	public long damageRate { get; set; }
+
+	[DataMember(Name = "directDamageRate")]
+	public long directDamageRate { get; set; }
+
+	[DataMember(Name = "indirectDamageRate")]
+	public long indirectDamageRate { get; set; }
+
+	[DataMember(Name = "baseEnemyId")]
+	public long baseEnemyId { get; set; }
+
+	[DataMember(Name = "dropRate")]
+	public long dropRate { get; set; }
+
+	[DataMember(Name = "rewardResourceLotteryId")]
+	public long rewardResourceLotteryId { get; set; }
+
+	public EnemyData Clone() {
+		var result = new EnemyData();
+		result.id = id;
+		result.name = name;
+		result.unitId = unitId;
+		result.hp = hp;
+		result.size = size;
+		result.weakPointId = weakPointId;
+		result.isBoss = isBoss;
+		result.isEscape = isEscape;
+		result.damageRate = damageRate;
+		result.directDamageRate = directDamageRate;
+		result.indirectDamageRate = indirectDamageRate;
+		result.baseEnemyId = baseEnemyId;
+		result.dropRate = dropRate;
+		result.rewardResourceLotteryId = rewardResourceLotteryId;
+		return result;
 	}
 
-	public static int Count => dataTable.Count;
+	public string idNameText => GetIdNameText(id, name);
 
-	public static List<EnemyData> GetDataList()
+	public override string ToString()
 	{
-		return dataTable.dataList;
+		return JsonConvert.SerializeObject(this);
 	}
-
-	public static void SetData(EnemyData data)
-	{
-		dataTable.Insert(data);
-	}
-
-	public static void AddDataList(IEnumerable<EnemyData> dataList)
-	{
-		dataTable.InsertRange(dataList);
-	}
-
-	public static void SetDataList(IEnumerable<EnemyData> dataList)
-	{
-		Clear();
-		dataTable.InsertRange(dataList);
-	}
-
-	public static void Clear()
-	{
-		dataTable.DeleteAll();
-	}
-
-	static partial void SetupEnemyDataTableIndex(DataTable<long, EnemyData> targetDataTable);
-
-	private static void SetupEnemyDataTableIndexGenerated(DataTable<long, EnemyData> targetDataTable)
-	{
-		targetDataTable.CreateUniqueIndex("Id", aData => (object)aData.id);
-	}
-	#endregion
-	#region DataTableUniqueIndex(Id)
-	public static EnemyData GetDataById(long id)
-	{
-		return dataTable.GetData("Id", (object)id);
-	}
-
-	public static void RemoveDataByIds(ICollection<long> ids)
-	{
-		ids.ForEach(aId => RemoveDataById(aId));
-	}
-
-	public static void RemoveDataById(long id)
-	{
-		dataTable.DeleteByKey("Id", (object)id);
-	}
-	#endregion
 }
-

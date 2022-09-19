@@ -53,7 +53,6 @@ public partial class GachaPoolItemData : AbstractData
 		return result;
 	}
 
-
 	public override string ToString()
 	{
 		return JsonConvert.SerializeObject(this);

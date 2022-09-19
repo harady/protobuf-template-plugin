@@ -34,8 +34,12 @@ https://developers.google.com/protocol-buffers/docs/csharptutorial
 これいいんちゃうん？、C#のプラグイン
 https://github.com/cactuaroid/protoc-gen-myplugincsharp
 
+
 C#で作ったプラグインの起動速度が遅すぎる
 ngen.exeを使ってみるか。
+→NativeImageCompilerを使用する
+https://learn.microsoft.com/ja-jp/windows/msix/desktop/desktop-to-uwp-r2r
+　→すでに非推奨だった
 
 
 GrのテンプレートエンジンはGo標準のtext/templateを使用している。
@@ -48,6 +52,7 @@ https://zenn.dev/nuits_jp/articles/2022-05-26-text-template-benckmarks
 
 Scriban:Goのtext/templateに近い？
 https://github.com/scriban/scriban
+
 
 Scribanを採用することにした。
 

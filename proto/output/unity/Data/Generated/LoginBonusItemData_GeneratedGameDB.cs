@@ -1,77 +1,28 @@
-﻿using System.Collections.Generic;
+using System;
+using System.Collections.Generic;
+using System.Runtime.Serialization;
+using Newtonsoft.Json;
 
-public partial class LoginBonusItemData : IUnique<long>
+[DataContract]
+public partial class LoginBonusItemData : AbstractData
 {
-	#region NullObject
-	public static LoginBonusItemData Null => NullObjectContainer.Get<LoginBonusItemData>();
+	[DataMember(Name = "id")]
+	public long id { get; set; }
 
-	public bool isNull => (this == Null);
-	#endregion
-	#region GameDbWrapper(DataTable)
-	public static DataTable<long, LoginBonusItemData> dataTable {
-		get {
-			DataTable<long, LoginBonusItemData> result;
-			if (GameDb.TableExists<long, LoginBonusItemData>()) {
-				result = GameDb.From<long, LoginBonusItemData>();
-			} else {
-				result = GameDb.CreateTable<long, LoginBonusItemData>();
-				SetupLoginBonusItemDataTableIndexGenerated(result);
-				SetupLoginBonusItemDataTableIndex(result);
-			}
-			return result;
-		}
+	[DataMember(Name = "name")]
+	public string name { get; set; }
+
+	public LoginBonusItemData Clone() {
+		var result = new LoginBonusItemData();
+		result.id = id;
+		result.name = name;
+		return result;
 	}
 
-	public static int Count => dataTable.Count;
+	public string idNameText => GetIdNameText(id, name);
 
-	public static List<LoginBonusItemData> GetDataList()
+	public override string ToString()
 	{
-		return dataTable.dataList;
+		return JsonConvert.SerializeObject(this);
 	}
-
-	public static void SetData(LoginBonusItemData data)
-	{
-		dataTable.Insert(data);
-	}
-
-	public static void AddDataList(IEnumerable<LoginBonusItemData> dataList)
-	{
-		dataTable.InsertRange(dataList);
-	}
-
-	public static void SetDataList(IEnumerable<LoginBonusItemData> dataList)
-	{
-		Clear();
-		dataTable.InsertRange(dataList);
-	}
-
-	public static void Clear()
-	{
-		dataTable.DeleteAll();
-	}
-
-	static partial void SetupLoginBonusItemDataTableIndex(DataTable<long, LoginBonusItemData> targetDataTable);
-
-	private static void SetupLoginBonusItemDataTableIndexGenerated(DataTable<long, LoginBonusItemData> targetDataTable)
-	{
-		targetDataTable.CreateUniqueIndex("Id", aData => (object)aData.id);
-	}
-	#endregion
-	#region DataTableUniqueIndex(Id)
-	public static LoginBonusItemData GetDataById(long id)
-	{
-		return dataTable.GetData("Id", (object)id);
-	}
-
-	public static void RemoveDataByIds(ICollection<long> ids)
-	{
-		ids.ForEach(aId => RemoveDataById(aId));
-	}
-
-	public static void RemoveDataById(long id)
-	{
-		dataTable.DeleteByKey("Id", (object)id);
-	}
-	#endregion
 }
-

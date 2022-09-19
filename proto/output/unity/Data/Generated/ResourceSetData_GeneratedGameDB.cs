@@ -1,77 +1,28 @@
-﻿using System.Collections.Generic;
+using System;
+using System.Collections.Generic;
+using System.Runtime.Serialization;
+using Newtonsoft.Json;
 
-public partial class ResourceSetData : IUnique<long>
+[DataContract]
+public partial class ResourceSetData : AbstractData
 {
-	#region NullObject
-	public static ResourceSetData Null => NullObjectContainer.Get<ResourceSetData>();
+	[DataMember(Name = "id")]
+	public long id { get; set; }
 
-	public bool isNull => (this == Null);
-	#endregion
-	#region GameDbWrapper(DataTable)
-	public static DataTable<long, ResourceSetData> dataTable {
-		get {
-			DataTable<long, ResourceSetData> result;
-			if (GameDb.TableExists<long, ResourceSetData>()) {
-				result = GameDb.From<long, ResourceSetData>();
-			} else {
-				result = GameDb.CreateTable<long, ResourceSetData>();
-				SetupResourceSetDataTableIndexGenerated(result);
-				SetupResourceSetDataTableIndex(result);
-			}
-			return result;
-		}
+	[DataMember(Name = "name")]
+	public string name { get; set; }
+
+	public ResourceSetData Clone() {
+		var result = new ResourceSetData();
+		result.id = id;
+		result.name = name;
+		return result;
 	}
 
-	public static int Count => dataTable.Count;
+	public string idNameText => GetIdNameText(id, name);
 
-	public static List<ResourceSetData> GetDataList()
+	public override string ToString()
 	{
-		return dataTable.dataList;
+		return JsonConvert.SerializeObject(this);
 	}
-
-	public static void SetData(ResourceSetData data)
-	{
-		dataTable.Insert(data);
-	}
-
-	public static void AddDataList(IEnumerable<ResourceSetData> dataList)
-	{
-		dataTable.InsertRange(dataList);
-	}
-
-	public static void SetDataList(IEnumerable<ResourceSetData> dataList)
-	{
-		Clear();
-		dataTable.InsertRange(dataList);
-	}
-
-	public static void Clear()
-	{
-		dataTable.DeleteAll();
-	}
-
-	static partial void SetupResourceSetDataTableIndex(DataTable<long, ResourceSetData> targetDataTable);
-
-	private static void SetupResourceSetDataTableIndexGenerated(DataTable<long, ResourceSetData> targetDataTable)
-	{
-		targetDataTable.CreateUniqueIndex("Id", aData => (object)aData.id);
-	}
-	#endregion
-	#region DataTableUniqueIndex(Id)
-	public static ResourceSetData GetDataById(long id)
-	{
-		return dataTable.GetData("Id", (object)id);
-	}
-
-	public static void RemoveDataByIds(ICollection<long> ids)
-	{
-		ids.ForEach(aId => RemoveDataById(aId));
-	}
-
-	public static void RemoveDataById(long id)
-	{
-		dataTable.DeleteByKey("Id", (object)id);
-	}
-	#endregion
 }
-

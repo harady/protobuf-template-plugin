@@ -1,77 +1,28 @@
-﻿using System.Collections.Generic;
+using System;
+using System.Collections.Generic;
+using System.Runtime.Serialization;
+using Newtonsoft.Json;
 
-public partial class MissionScheduleData : IUnique<long>
+[DataContract]
+public partial class MissionScheduleData : AbstractData
 {
-	#region NullObject
-	public static MissionScheduleData Null => NullObjectContainer.Get<MissionScheduleData>();
+	[DataMember(Name = "id")]
+	public long id { get; set; }
 
-	public bool isNull => (this == Null);
-	#endregion
-	#region GameDbWrapper(DataTable)
-	public static DataTable<long, MissionScheduleData> dataTable {
-		get {
-			DataTable<long, MissionScheduleData> result;
-			if (GameDb.TableExists<long, MissionScheduleData>()) {
-				result = GameDb.From<long, MissionScheduleData>();
-			} else {
-				result = GameDb.CreateTable<long, MissionScheduleData>();
-				SetupMissionScheduleDataTableIndexGenerated(result);
-				SetupMissionScheduleDataTableIndex(result);
-			}
-			return result;
-		}
+	[DataMember(Name = "name")]
+	public string name { get; set; }
+
+	public MissionScheduleData Clone() {
+		var result = new MissionScheduleData();
+		result.id = id;
+		result.name = name;
+		return result;
 	}
 
-	public static int Count => dataTable.Count;
+	public string idNameText => GetIdNameText(id, name);
 
-	public static List<MissionScheduleData> GetDataList()
+	public override string ToString()
 	{
-		return dataTable.dataList;
+		return JsonConvert.SerializeObject(this);
 	}
-
-	public static void SetData(MissionScheduleData data)
-	{
-		dataTable.Insert(data);
-	}
-
-	public static void AddDataList(IEnumerable<MissionScheduleData> dataList)
-	{
-		dataTable.InsertRange(dataList);
-	}
-
-	public static void SetDataList(IEnumerable<MissionScheduleData> dataList)
-	{
-		Clear();
-		dataTable.InsertRange(dataList);
-	}
-
-	public static void Clear()
-	{
-		dataTable.DeleteAll();
-	}
-
-	static partial void SetupMissionScheduleDataTableIndex(DataTable<long, MissionScheduleData> targetDataTable);
-
-	private static void SetupMissionScheduleDataTableIndexGenerated(DataTable<long, MissionScheduleData> targetDataTable)
-	{
-		targetDataTable.CreateUniqueIndex("Id", aData => (object)aData.id);
-	}
-	#endregion
-	#region DataTableUniqueIndex(Id)
-	public static MissionScheduleData GetDataById(long id)
-	{
-		return dataTable.GetData("Id", (object)id);
-	}
-
-	public static void RemoveDataByIds(ICollection<long> ids)
-	{
-		ids.ForEach(aId => RemoveDataById(aId));
-	}
-
-	public static void RemoveDataById(long id)
-	{
-		dataTable.DeleteByKey("Id", (object)id);
-	}
-	#endregion
 }
-

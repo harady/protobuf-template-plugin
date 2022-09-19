@@ -1,84 +1,67 @@
-﻿using System.Collections.Generic;
+using System;
+using System.Collections.Generic;
+using System.Runtime.Serialization;
+using Newtonsoft.Json;
 
-public partial class UserPurchaseData : IUnique<long>
+[DataContract]
+public partial class UserPurchaseData : AbstractData
 {
-	#region NullObject
-	public static UserPurchaseData Null => NullObjectContainer.Get<UserPurchaseData>();
+	[DataMember(Name = "id")]
+	public long id { get; set; }
 
-	public bool isNull => (this == Null);
-	#endregion
-	#region GameDbWrapper(DataTable)
-	public static DataTable<long, UserPurchaseData> dataTable {
-		get {
-			DataTable<long, UserPurchaseData> result;
-			if (GameDb.TableExists<long, UserPurchaseData>()) {
-				result = GameDb.From<long, UserPurchaseData>();
-			} else {
-				result = GameDb.CreateTable<long, UserPurchaseData>();
-				SetupUserPurchaseDataTableIndexGenerated(result);
-				SetupUserPurchaseDataTableIndex(result);
-			}
-			return result;
-		}
+	[DataMember(Name = "userId")]
+	public long userId { get; set; }
+
+	[DataMember(Name = "purchasePlatformType")]
+	public PurchasePlatformType purchasePlatformType { get; set; }
+
+	[DataMember(Name = "shopItemId")]
+	public long shopItemId { get; set; }
+
+	[DataMember(Name = "price")]
+	public long price { get; set; }
+
+	[DataMember(Name = "googlePlayRequest")]
+	public ShopPurchaseGooglePlayRequest googlePlayRequest { get; set; }
+
+	[DataMember(Name = "appStoreRequest")]
+	public ShopPurchaseAppStoreRequest appStoreRequest { get; set; }
+
+	[DataMember(Name = "debugRequest")]
+	public ShopPurchaseDebugRequest debugRequest { get; set; }
+
+	[DataMember(Name = "isReceiptInquired")]
+	public bool isReceiptInquired { get; set; }
+
+	[DataMember(Name = "isResourceGranted")]
+	public bool isResourceGranted { get; set; }
+
+	[DataMember(Name = "purchaseAt")]
+	public long purchaseAt { get; set; }
+
+	public DateTime PurchaseAt {
+		get { return ServerDateTimeUtil.FromEpoch(purchaseAt); }
+		set { purchaseAt = ServerDateTimeUtil.ToEpoch(value); }
 	}
 
-	public static int Count => dataTable.Count;
+	public UserPurchaseData Clone() {
+		var result = new UserPurchaseData();
+		result.id = id;
+		result.userId = userId;
+		result.purchasePlatformType = purchasePlatformType;
+		result.shopItemId = shopItemId;
+		result.price = price;
+		result.googlePlayRequest = googlePlayRequest;
+		result.appStoreRequest = appStoreRequest;
+		result.debugRequest = debugRequest;
+		result.isReceiptInquired = isReceiptInquired;
+		result.isResourceGranted = isResourceGranted;
+		result.purchaseAt = purchaseAt;
+		return result;
+	}
 
-	public static List<UserPurchaseData> GetDataList()
+	public override string ToString()
 	{
-		return dataTable.dataList;
+		return JsonConvert.SerializeObject(this);
 	}
-
-	public static void SetData(UserPurchaseData data)
-	{
-		dataTable.Insert(data);
-	}
-
-	public static void AddDataList(IEnumerable<UserPurchaseData> dataList)
-	{
-		dataTable.InsertRange(dataList);
-	}
-
-	public static void SetDataList(IEnumerable<UserPurchaseData> dataList)
-	{
-		Clear();
-		dataTable.InsertRange(dataList);
-	}
-
-	public static void Clear()
-	{
-		dataTable.DeleteAll();
-	}
-
-	static partial void SetupUserPurchaseDataTableIndex(DataTable<long, UserPurchaseData> targetDataTable);
-
-	private static void SetupUserPurchaseDataTableIndexGenerated(DataTable<long, UserPurchaseData> targetDataTable)
-	{
-		targetDataTable.CreateUniqueIndex("Id", aData => (object)aData.id);
-		targetDataTable.CreateIndex("UserId", aData => (object)aData.userId);
-	}
-	#endregion
-	#region DataTableUniqueIndex(Id)
-	public static UserPurchaseData GetDataById(long id)
-	{
-		return dataTable.GetData("Id", (object)id);
-	}
-
-	public static void RemoveDataByIds(ICollection<long> ids)
-	{
-		ids.ForEach(aId => RemoveDataById(aId));
-	}
-
-	public static void RemoveDataById(long id)
-	{
-		dataTable.DeleteByKey("Id", (object)id);
-	}
-	#endregion
-	#region DataTableIndex (UserId)
-	public static List<UserPurchaseData> GetDataListByUserId(long userId)
-	{
-		return dataTable.GetDataList("UserId", (object)userId);
-	}
-	#endregion
 }
-

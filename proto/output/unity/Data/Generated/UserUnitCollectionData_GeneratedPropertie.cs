@@ -31,7 +31,6 @@ public partial class UserUnitCollectionData : AbstractData
 		return result;
 	}
 
-
 	public override string ToString()
 	{
 		return JsonConvert.SerializeObject(this);

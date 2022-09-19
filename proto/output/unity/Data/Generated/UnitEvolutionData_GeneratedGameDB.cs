@@ -1,84 +1,44 @@
-﻿using System.Collections.Generic;
+using System;
+using System.Collections.Generic;
+using System.Runtime.Serialization;
+using Newtonsoft.Json;
 
-public partial class UnitEvolutionData : IUnique<long>
+[DataContract]
+public partial class UnitEvolutionData : AbstractData
 {
-	#region NullObject
-	public static UnitEvolutionData Null => NullObjectContainer.Get<UnitEvolutionData>();
+	[DataMember(Name = "id")]
+	public long id { get; set; }
 
-	public bool isNull => (this == Null);
-	#endregion
-	#region GameDbWrapper(DataTable)
-	public static DataTable<long, UnitEvolutionData> dataTable {
-		get {
-			DataTable<long, UnitEvolutionData> result;
-			if (GameDb.TableExists<long, UnitEvolutionData>()) {
-				result = GameDb.From<long, UnitEvolutionData>();
-			} else {
-				result = GameDb.CreateTable<long, UnitEvolutionData>();
-				SetupUnitEvolutionDataTableIndexGenerated(result);
-				SetupUnitEvolutionDataTableIndex(result);
-			}
-			return result;
-		}
+	[DataMember(Name = "name")]
+	public string name { get; set; }
+
+	[DataMember(Name = "type")]
+	public UnitEvolutionType type { get; set; }
+
+	[DataMember(Name = "baseUnitId")]
+	public long baseUnitId { get; set; }
+
+	[DataMember(Name = "resultUnitId")]
+	public long resultUnitId { get; set; }
+
+	[DataMember(Name = "costResourceSetId")]
+	public long costResourceSetId { get; set; }
+
+	public UnitEvolutionData Clone() {
+		var result = new UnitEvolutionData();
+		result.id = id;
+		result.name = name;
+		result.type = type;
+		result.baseUnitId = baseUnitId;
+		result.resultUnitId = resultUnitId;
+		result.costResourceSetId = costResourceSetId;
+		return result;
 	}
 
-	public static int Count => dataTable.Count;
+	public string idNameText => GetIdNameText(id, name);
 
-	public static List<UnitEvolutionData> GetDataList()
+	public override string ToString()
 	{
-		return dataTable.dataList;
+		return JsonConvert.SerializeObject(this);
 	}
-
-	public static void SetData(UnitEvolutionData data)
-	{
-		dataTable.Insert(data);
-	}
-
-	public static void AddDataList(IEnumerable<UnitEvolutionData> dataList)
-	{
-		dataTable.InsertRange(dataList);
-	}
-
-	public static void SetDataList(IEnumerable<UnitEvolutionData> dataList)
-	{
-		Clear();
-		dataTable.InsertRange(dataList);
-	}
-
-	public static void Clear()
-	{
-		dataTable.DeleteAll();
-	}
-
-	static partial void SetupUnitEvolutionDataTableIndex(DataTable<long, UnitEvolutionData> targetDataTable);
-
-	private static void SetupUnitEvolutionDataTableIndexGenerated(DataTable<long, UnitEvolutionData> targetDataTable)
-	{
-		targetDataTable.CreateUniqueIndex("Id", aData => (object)aData.id);
-		targetDataTable.CreateIndex("BaseUnitId", aData => (object)aData.baseUnitId);
-	}
-	#endregion
-	#region DataTableUniqueIndex(Id)
-	public static UnitEvolutionData GetDataById(long id)
-	{
-		return dataTable.GetData("Id", (object)id);
-	}
-
-	public static void RemoveDataByIds(ICollection<long> ids)
-	{
-		ids.ForEach(aId => RemoveDataById(aId));
-	}
-
-	public static void RemoveDataById(long id)
-	{
-		dataTable.DeleteByKey("Id", (object)id);
-	}
-	#endregion
-	#region DataTableIndex (BaseUnitId)
-	public static List<UnitEvolutionData> GetDataListByBaseUnitId(long baseUnitId)
-	{
-		return dataTable.GetDataList("BaseUnitId", (object)baseUnitId);
-	}
-	#endregion
 }
-

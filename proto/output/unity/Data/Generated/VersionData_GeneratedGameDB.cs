@@ -1,77 +1,28 @@
-﻿using System.Collections.Generic;
+using System;
+using System.Collections.Generic;
+using System.Runtime.Serialization;
+using Newtonsoft.Json;
 
-public partial class VersionData : IUnique<long>
+[DataContract]
+public partial class VersionData : AbstractData
 {
-	#region NullObject
-	public static VersionData Null => NullObjectContainer.Get<VersionData>();
+	[DataMember(Name = "id")]
+	public long id { get; set; }
 
-	public bool isNull => (this == Null);
-	#endregion
-	#region GameDbWrapper(DataTable)
-	public static DataTable<long, VersionData> dataTable {
-		get {
-			DataTable<long, VersionData> result;
-			if (GameDb.TableExists<long, VersionData>()) {
-				result = GameDb.From<long, VersionData>();
-			} else {
-				result = GameDb.CreateTable<long, VersionData>();
-				SetupVersionDataTableIndexGenerated(result);
-				SetupVersionDataTableIndex(result);
-			}
-			return result;
-		}
+	[DataMember(Name = "name")]
+	public string name { get; set; }
+
+	public VersionData Clone() {
+		var result = new VersionData();
+		result.id = id;
+		result.name = name;
+		return result;
 	}
 
-	public static int Count => dataTable.Count;
+	public string idNameText => GetIdNameText(id, name);
 
-	public static List<VersionData> GetDataList()
+	public override string ToString()
 	{
-		return dataTable.dataList;
+		return JsonConvert.SerializeObject(this);
 	}
-
-	public static void SetData(VersionData data)
-	{
-		dataTable.Insert(data);
-	}
-
-	public static void AddDataList(IEnumerable<VersionData> dataList)
-	{
-		dataTable.InsertRange(dataList);
-	}
-
-	public static void SetDataList(IEnumerable<VersionData> dataList)
-	{
-		Clear();
-		dataTable.InsertRange(dataList);
-	}
-
-	public static void Clear()
-	{
-		dataTable.DeleteAll();
-	}
-
-	static partial void SetupVersionDataTableIndex(DataTable<long, VersionData> targetDataTable);
-
-	private static void SetupVersionDataTableIndexGenerated(DataTable<long, VersionData> targetDataTable)
-	{
-		targetDataTable.CreateUniqueIndex("Id", aData => (object)aData.id);
-	}
-	#endregion
-	#region DataTableUniqueIndex(Id)
-	public static VersionData GetDataById(long id)
-	{
-		return dataTable.GetData("Id", (object)id);
-	}
-
-	public static void RemoveDataByIds(ICollection<long> ids)
-	{
-		ids.ForEach(aId => RemoveDataById(aId));
-	}
-
-	public static void RemoveDataById(long id)
-	{
-		dataTable.DeleteByKey("Id", (object)id);
-	}
-	#endregion
 }
-

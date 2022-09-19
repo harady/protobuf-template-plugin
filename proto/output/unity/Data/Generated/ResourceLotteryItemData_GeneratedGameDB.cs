@@ -1,84 +1,46 @@
-﻿using System.Collections.Generic;
+using System;
+using System.Collections.Generic;
+using System.Runtime.Serialization;
+using Newtonsoft.Json;
 
-public partial class ResourceLotteryItemData : IUnique<long>
+[DataContract]
+public partial class ResourceLotteryItemData : AbstractData
 {
-	#region NullObject
-	public static ResourceLotteryItemData Null => NullObjectContainer.Get<ResourceLotteryItemData>();
+	[DataMember(Name = "id")]
+	public long id { get; set; }
 
-	public bool isNull => (this == Null);
-	#endregion
-	#region GameDbWrapper(DataTable)
-	public static DataTable<long, ResourceLotteryItemData> dataTable {
-		get {
-			DataTable<long, ResourceLotteryItemData> result;
-			if (GameDb.TableExists<long, ResourceLotteryItemData>()) {
-				result = GameDb.From<long, ResourceLotteryItemData>();
-			} else {
-				result = GameDb.CreateTable<long, ResourceLotteryItemData>();
-				SetupResourceLotteryItemDataTableIndexGenerated(result);
-				SetupResourceLotteryItemDataTableIndex(result);
-			}
-			return result;
-		}
+	[DataMember(Name = "resourceLotteryId")]
+	public long resourceLotteryId { get; set; }
+
+	[DataMember(Name = "weight")]
+	public long weight { get; set; }
+
+	[DataMember(Name = "resourceType")]
+	public ResourceType resourceType { get; set; }
+
+	[DataMember(Name = "resourceId")]
+	public long resourceId { get; set; }
+
+	[DataMember(Name = "resourceAmountMin")]
+	public long resourceAmountMin { get; set; }
+
+	[DataMember(Name = "resourceAmountMax")]
+	public long resourceAmountMax { get; set; }
+
+	public ResourceLotteryItemData Clone() {
+		var result = new ResourceLotteryItemData();
+		result.id = id;
+		result.resourceLotteryId = resourceLotteryId;
+		result.weight = weight;
+		result.resourceType = resourceType;
+		result.resourceId = resourceId;
+		result.resourceAmountMin = resourceAmountMin;
+		result.resourceAmountMax = resourceAmountMax;
+		return result;
 	}
 
-	public static int Count => dataTable.Count;
-
-	public static List<ResourceLotteryItemData> GetDataList()
+	public override string ToString()
 	{
-		return dataTable.dataList;
+		return JsonConvert.SerializeObject(this);
 	}
-
-	public static void SetData(ResourceLotteryItemData data)
-	{
-		dataTable.Insert(data);
-	}
-
-	public static void AddDataList(IEnumerable<ResourceLotteryItemData> dataList)
-	{
-		dataTable.InsertRange(dataList);
-	}
-
-	public static void SetDataList(IEnumerable<ResourceLotteryItemData> dataList)
-	{
-		Clear();
-		dataTable.InsertRange(dataList);
-	}
-
-	public static void Clear()
-	{
-		dataTable.DeleteAll();
-	}
-
-	static partial void SetupResourceLotteryItemDataTableIndex(DataTable<long, ResourceLotteryItemData> targetDataTable);
-
-	private static void SetupResourceLotteryItemDataTableIndexGenerated(DataTable<long, ResourceLotteryItemData> targetDataTable)
-	{
-		targetDataTable.CreateUniqueIndex("Id", aData => (object)aData.id);
-		targetDataTable.CreateIndex("ResourceLotteryId", aData => (object)aData.resourceLotteryId);
-	}
-	#endregion
-	#region DataTableUniqueIndex(Id)
-	public static ResourceLotteryItemData GetDataById(long id)
-	{
-		return dataTable.GetData("Id", (object)id);
-	}
-
-	public static void RemoveDataByIds(ICollection<long> ids)
-	{
-		ids.ForEach(aId => RemoveDataById(aId));
-	}
-
-	public static void RemoveDataById(long id)
-	{
-		dataTable.DeleteByKey("Id", (object)id);
-	}
-	#endregion
-	#region DataTableIndex (ResourceLotteryId)
-	public static List<ResourceLotteryItemData> GetDataListByResourceLotteryId(long resourceLotteryId)
-	{
-		return dataTable.GetDataList("ResourceLotteryId", (object)resourceLotteryId);
-	}
-	#endregion
 }
-

@@ -32,9 +32,9 @@ public partial class {{ message.name }} : AbstractData
 {{- for field in message.field }}
 {{- if (field.name == "name") }}
 	public string idNameText => GetIdNameText(id, name);
-{{- end }}
-{{- end }}
 {{ end }}
+{{- end }}
+{{- end }}
 	public override string ToString()
 	{
 		return JsonConvert.SerializeObject(this);

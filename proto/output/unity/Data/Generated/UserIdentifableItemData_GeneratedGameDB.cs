@@ -1,84 +1,38 @@
-﻿using System.Collections.Generic;
+using System;
+using System.Collections.Generic;
+using System.Runtime.Serialization;
+using Newtonsoft.Json;
 
-public partial class UserIdentifableItemData : IUnique<long>
+[DataContract]
+public partial class UserIdentifableItemData : AbstractData
 {
-	#region NullObject
-	public static UserIdentifableItemData Null => NullObjectContainer.Get<UserIdentifableItemData>();
+	[DataMember(Name = "id")]
+	public long id { get; set; }
 
-	public bool isNull => (this == Null);
-	#endregion
-	#region GameDbWrapper(DataTable)
-	public static DataTable<long, UserIdentifableItemData> dataTable {
-		get {
-			DataTable<long, UserIdentifableItemData> result;
-			if (GameDb.TableExists<long, UserIdentifableItemData>()) {
-				result = GameDb.From<long, UserIdentifableItemData>();
-			} else {
-				result = GameDb.CreateTable<long, UserIdentifableItemData>();
-				SetupUserIdentifableItemDataTableIndexGenerated(result);
-				SetupUserIdentifableItemDataTableIndex(result);
-			}
-			return result;
-		}
+	[DataMember(Name = "userId")]
+	public long userId { get; set; }
+
+	[DataMember(Name = "identifableItemId")]
+	public long identifableItemId { get; set; }
+
+	[DataMember(Name = "paramA")]
+	public long paramA { get; set; }
+
+	[DataMember(Name = "paramB")]
+	public long paramB { get; set; }
+
+	public UserIdentifableItemData Clone() {
+		var result = new UserIdentifableItemData();
+		result.id = id;
+		result.userId = userId;
+		result.identifableItemId = identifableItemId;
+		result.paramA = paramA;
+		result.paramB = paramB;
+		return result;
 	}
 
-	public static int Count => dataTable.Count;
-
-	public static List<UserIdentifableItemData> GetDataList()
+	public override string ToString()
 	{
-		return dataTable.dataList;
+		return JsonConvert.SerializeObject(this);
 	}
-
-	public static void SetData(UserIdentifableItemData data)
-	{
-		dataTable.Insert(data);
-	}
-
-	public static void AddDataList(IEnumerable<UserIdentifableItemData> dataList)
-	{
-		dataTable.InsertRange(dataList);
-	}
-
-	public static void SetDataList(IEnumerable<UserIdentifableItemData> dataList)
-	{
-		Clear();
-		dataTable.InsertRange(dataList);
-	}
-
-	public static void Clear()
-	{
-		dataTable.DeleteAll();
-	}
-
-	static partial void SetupUserIdentifableItemDataTableIndex(DataTable<long, UserIdentifableItemData> targetDataTable);
-
-	private static void SetupUserIdentifableItemDataTableIndexGenerated(DataTable<long, UserIdentifableItemData> targetDataTable)
-	{
-		targetDataTable.CreateUniqueIndex("Id", aData => (object)aData.id);
-		targetDataTable.CreateIndex("UserId", aData => (object)aData.userId);
-	}
-	#endregion
-	#region DataTableUniqueIndex(Id)
-	public static UserIdentifableItemData GetDataById(long id)
-	{
-		return dataTable.GetData("Id", (object)id);
-	}
-
-	public static void RemoveDataByIds(ICollection<long> ids)
-	{
-		ids.ForEach(aId => RemoveDataById(aId));
-	}
-
-	public static void RemoveDataById(long id)
-	{
-		dataTable.DeleteByKey("Id", (object)id);
-	}
-	#endregion
-	#region DataTableIndex (UserId)
-	public static List<UserIdentifableItemData> GetDataListByUserId(long userId)
-	{
-		return dataTable.GetDataList("UserId", (object)userId);
-	}
-	#endregion
 }
-

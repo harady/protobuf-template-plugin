@@ -1,91 +1,34 @@
-﻿using System.Collections.Generic;
+using System;
+using System.Collections.Generic;
+using System.Runtime.Serialization;
+using Newtonsoft.Json;
 
-public partial class UnitLevelExpData : IUnique<long>
+[DataContract]
+public partial class UnitLevelExpData : AbstractData
 {
-	#region NullObject
-	public static UnitLevelExpData Null => NullObjectContainer.Get<UnitLevelExpData>();
+	[DataMember(Name = "id")]
+	public long id { get; set; }
 
-	public bool isNull => (this == Null);
-	#endregion
-	#region GameDbWrapper(DataTable)
-	public static DataTable<long, UnitLevelExpData> dataTable {
-		get {
-			DataTable<long, UnitLevelExpData> result;
-			if (GameDb.TableExists<long, UnitLevelExpData>()) {
-				result = GameDb.From<long, UnitLevelExpData>();
-			} else {
-				result = GameDb.CreateTable<long, UnitLevelExpData>();
-				SetupUnitLevelExpDataTableIndexGenerated(result);
-				SetupUnitLevelExpDataTableIndex(result);
-			}
-			return result;
-		}
-	}
+	[DataMember(Name = "growthType")]
+	public long growthType { get; set; }
 
-	public static int Count => dataTable.Count;
+	[DataMember(Name = "level")]
+	public long level { get; set; }
 
-	public static List<UnitLevelExpData> GetDataList()
-	{
-		return dataTable.dataList;
+	[DataMember(Name = "totalExp")]
+	public long totalExp { get; set; }
+
+	public UnitLevelExpData Clone() {
+		var result = new UnitLevelExpData();
+		result.id = id;
+		result.growthType = growthType;
+		result.level = level;
+		result.totalExp = totalExp;
+		return result;
 	}
 
-	public static void SetData(UnitLevelExpData data)
+	public override string ToString()
 	{
-		dataTable.Insert(data);
+		return JsonConvert.SerializeObject(this);
 	}
-
-	public static void AddDataList(IEnumerable<UnitLevelExpData> dataList)
-	{
-		dataTable.InsertRange(dataList);
-	}
-
-	public static void SetDataList(IEnumerable<UnitLevelExpData> dataList)
-	{
-		Clear();
-		dataTable.InsertRange(dataList);
-	}
-
-	public static void Clear()
-	{
-		dataTable.DeleteAll();
-	}
-
-	static partial void SetupUnitLevelExpDataTableIndex(DataTable<long, UnitLevelExpData> targetDataTable);
-
-	private static void SetupUnitLevelExpDataTableIndexGenerated(DataTable<long, UnitLevelExpData> targetDataTable)
-	{
-		targetDataTable.CreateUniqueIndex("Id", aData => (object)aData.id);
-		targetDataTable.CreateIndex("GrowthType", aData => (object)aData.growthType);
-		targetDataTable.CreateIndex("Level", aData => (object)aData.level);
-	}
-	#endregion
-	#region DataTableUniqueIndex(Id)
-	public static UnitLevelExpData GetDataById(long id)
-	{
-		return dataTable.GetData("Id", (object)id);
-	}
-
-	public static void RemoveDataByIds(ICollection<long> ids)
-	{
-		ids.ForEach(aId => RemoveDataById(aId));
-	}
-
-	public static void RemoveDataById(long id)
-	{
-		dataTable.DeleteByKey("Id", (object)id);
-	}
-	#endregion
-	#region DataTableIndex (GrowthType)
-	public static List<UnitLevelExpData> GetDataListByGrowthType(long growthType)
-	{
-		return dataTable.GetDataList("GrowthType", (object)growthType);
-	}
-	#endregion
-	#region DataTableIndex (Level)
-	public static List<UnitLevelExpData> GetDataListByLevel(long level)
-	{
-		return dataTable.GetDataList("Level", (object)level);
-	}
-	#endregion
 }
-

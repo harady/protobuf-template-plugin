@@ -37,7 +37,6 @@ public partial class ExchangeScheduleData : AbstractData
 		return result;
 	}
 
-
 	public override string ToString()
 	{
 		return JsonConvert.SerializeObject(this);

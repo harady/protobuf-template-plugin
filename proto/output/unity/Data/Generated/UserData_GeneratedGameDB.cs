@@ -1,91 +1,93 @@
-﻿using System.Collections.Generic;
+using System;
+using System.Collections.Generic;
+using System.Runtime.Serialization;
+using Newtonsoft.Json;
 
-public partial class UserData : IUnique<long>
+[DataContract]
+public partial class UserData : AbstractData
 {
-	#region NullObject
-	public static UserData Null => NullObjectContainer.Get<UserData>();
+	[DataMember(Name = "id")]
+	public long id { get; set; }
 
-	public bool isNull => (this == Null);
-	#endregion
-	#region GameDbWrapper(DataTable)
-	public static DataTable<long, UserData> dataTable {
-		get {
-			DataTable<long, UserData> result;
-			if (GameDb.TableExists<long, UserData>()) {
-				result = GameDb.From<long, UserData>();
-			} else {
-				result = GameDb.CreateTable<long, UserData>();
-				SetupUserDataTableIndexGenerated(result);
-				SetupUserDataTableIndex(result);
-			}
-			return result;
-		}
-	}
+	[DataMember(Name = "name")]
+	public string name { get; set; }
 
-	public static int Count => dataTable.Count;
+	[DataMember(Name = "token")]
+	public string token { get; set; }
 
-	public static List<UserData> GetDataList()
-	{
-		return dataTable.dataList;
-	}
+	[DataMember(Name = "code")]
+	public long code { get; set; }
 
-	public static void SetData(UserData data)
-	{
-		dataTable.Insert(data);
-	}
+	[DataMember(Name = "rank")]
+	public long rank { get; set; }
 
-	public static void AddDataList(IEnumerable<UserData> dataList)
-	{
-		dataTable.InsertRange(dataList);
+	[DataMember(Name = "exp")]
+	public long exp { get; set; }
+
+	[DataMember(Name = "money")]
+	public long money { get; set; }
+
+	[DataMember(Name = "stamina")]
+	public long stamina { get; set; }
+
+	[DataMember(Name = "lastStaminaUpdateAt")]
+	public long lastStaminaUpdateAt { get; set; }
+
+	public DateTime LastStaminaUpdateAt {
+		get { return ServerDateTimeUtil.FromEpoch(lastStaminaUpdateAt); }
+		set { lastStaminaUpdateAt = ServerDateTimeUtil.ToEpoch(value); }
 	}
 
-	public static void SetDataList(IEnumerable<UserData> dataList)
-	{
-		Clear();
-		dataTable.InsertRange(dataList);
+	[DataMember(Name = "freeCrystal")]
+	public long freeCrystal { get; set; }
+
+	[DataMember(Name = "paidCrystal")]
+	public long paidCrystal { get; set; }
+
+	[DataMember(Name = "currentDeckId")]
+	public long currentDeckId { get; set; }
+
+	[DataMember(Name = "maxStaminaPlus")]
+	public long maxStaminaPlus { get; set; }
+
+	[DataMember(Name = "deckNumPlus")]
+	public long deckNumPlus { get; set; }
+
+	[DataMember(Name = "maxFriendNumPlus")]
+	public long maxFriendNumPlus { get; set; }
+
+	[DataMember(Name = "unitBoxNumPlus")]
+	public long unitBoxNumPlus { get; set; }
+
+	[DataMember(Name = "friendUserUnitId")]
+	public long friendUserUnitId { get; set; }
+
+	public UserData Clone() {
+		var result = new UserData();
+		result.id = id;
+		result.name = name;
+		result.token = token;
+		result.code = code;
+		result.rank = rank;
+		result.exp = exp;
+		result.money = money;
+		result.stamina = stamina;
+		result.lastStaminaUpdateAt = lastStaminaUpdateAt;
+		result.freeCrystal = freeCrystal;
+		result.paidCrystal = paidCrystal;
+		result.currentDeckId = currentDeckId;
+		result.maxStaminaPlus = maxStaminaPlus;
+		result.deckNumPlus = deckNumPlus;
+		result.maxFriendNumPlus = maxFriendNumPlus;
+		result.unitBoxNumPlus = unitBoxNumPlus;
+		result.friendUserUnitId = friendUserUnitId;
+		return result;
 	}
 
-	public static void Clear()
-	{
-		dataTable.DeleteAll();
-	}
+	public string idNameText => GetIdNameText(id, name);
 
-	static partial void SetupUserDataTableIndex(DataTable<long, UserData> targetDataTable);
-
-	private static void SetupUserDataTableIndexGenerated(DataTable<long, UserData> targetDataTable)
+	public override string ToString()
 	{
-		targetDataTable.CreateUniqueIndex("Id", aData => (object)aData.id);
-		targetDataTable.CreateIndex("Token", aData => (object)aData.token);
-		targetDataTable.CreateIndex("Code", aData => (object)aData.code);
+		return JsonConvert.SerializeObject(this);
 	}
-	#endregion
-	#region DataTableUniqueIndex(Id)
-	public static UserData GetDataById(long id)
-	{
-		return dataTable.GetData("Id", (object)id);
-	}
-
-	public static void RemoveDataByIds(ICollection<long> ids)
-	{
-		ids.ForEach(aId => RemoveDataById(aId));
-	}
-
-	public static void RemoveDataById(long id)
-	{
-		dataTable.DeleteByKey("Id", (object)id);
-	}
-	#endregion
-	#region DataTableIndex (Token)
-	public static List<UserData> GetDataListByToken(string token)
-	{
-		return dataTable.GetDataList("Token", (object)token);
-	}
-	#endregion
-	#region DataTableIndex (Code)
-	public static List<UserData> GetDataListByCode(long code)
-	{
-		return dataTable.GetDataList("Code", (object)code);
-	}
-	#endregion
 }
-

@@ -1,91 +1,30 @@
-﻿using System.Collections.Generic;
+using System;
+using System.Collections.Generic;
+using System.Runtime.Serialization;
+using Newtonsoft.Json;
 
-public partial class UserFriendRequestData : IUnique<long>
+[DataContract]
+public partial class UserFriendRequestData : AbstractData
 {
-	#region NullObject
-	public static UserFriendRequestData Null => NullObjectContainer.Get<UserFriendRequestData>();
+	[DataMember(Name = "id")]
+	public long id { get; set; }
 
-	public bool isNull => (this == Null);
-	#endregion
-	#region GameDbWrapper(DataTable)
-	public static DataTable<long, UserFriendRequestData> dataTable {
-		get {
-			DataTable<long, UserFriendRequestData> result;
-			if (GameDb.TableExists<long, UserFriendRequestData>()) {
-				result = GameDb.From<long, UserFriendRequestData>();
-			} else {
-				result = GameDb.CreateTable<long, UserFriendRequestData>();
-				SetupUserFriendRequestDataTableIndexGenerated(result);
-				SetupUserFriendRequestDataTableIndex(result);
-			}
-			return result;
-		}
+	[DataMember(Name = "senderUserId")]
+	public long senderUserId { get; set; }
+
+	[DataMember(Name = "targetUserId")]
+	public long targetUserId { get; set; }
+
+	public UserFriendRequestData Clone() {
+		var result = new UserFriendRequestData();
+		result.id = id;
+		result.senderUserId = senderUserId;
+		result.targetUserId = targetUserId;
+		return result;
 	}
 
-	public static int Count => dataTable.Count;
-
-	public static List<UserFriendRequestData> GetDataList()
+	public override string ToString()
 	{
-		return dataTable.dataList;
+		return JsonConvert.SerializeObject(this);
 	}
-
-	public static void SetData(UserFriendRequestData data)
-	{
-		dataTable.Insert(data);
-	}
-
-	public static void AddDataList(IEnumerable<UserFriendRequestData> dataList)
-	{
-		dataTable.InsertRange(dataList);
-	}
-
-	public static void SetDataList(IEnumerable<UserFriendRequestData> dataList)
-	{
-		Clear();
-		dataTable.InsertRange(dataList);
-	}
-
-	public static void Clear()
-	{
-		dataTable.DeleteAll();
-	}
-
-	static partial void SetupUserFriendRequestDataTableIndex(DataTable<long, UserFriendRequestData> targetDataTable);
-
-	private static void SetupUserFriendRequestDataTableIndexGenerated(DataTable<long, UserFriendRequestData> targetDataTable)
-	{
-		targetDataTable.CreateUniqueIndex("Id", aData => (object)aData.id);
-		targetDataTable.CreateIndex("SenderUserId", aData => (object)aData.senderUserId);
-		targetDataTable.CreateIndex("TargetUserId", aData => (object)aData.targetUserId);
-	}
-	#endregion
-	#region DataTableUniqueIndex(Id)
-	public static UserFriendRequestData GetDataById(long id)
-	{
-		return dataTable.GetData("Id", (object)id);
-	}
-
-	public static void RemoveDataByIds(ICollection<long> ids)
-	{
-		ids.ForEach(aId => RemoveDataById(aId));
-	}
-
-	public static void RemoveDataById(long id)
-	{
-		dataTable.DeleteByKey("Id", (object)id);
-	}
-	#endregion
-	#region DataTableIndex (SenderUserId)
-	public static List<UserFriendRequestData> GetDataListBySenderUserId(long senderUserId)
-	{
-		return dataTable.GetDataList("SenderUserId", (object)senderUserId);
-	}
-	#endregion
-	#region DataTableIndex (TargetUserId)
-	public static List<UserFriendRequestData> GetDataListByTargetUserId(long targetUserId)
-	{
-		return dataTable.GetDataList("TargetUserId", (object)targetUserId);
-	}
-	#endregion
 }
-

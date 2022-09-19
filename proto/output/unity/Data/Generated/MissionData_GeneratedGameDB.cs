@@ -1,84 +1,60 @@
-﻿using System.Collections.Generic;
+using System;
+using System.Collections.Generic;
+using System.Runtime.Serialization;
+using Newtonsoft.Json;
 
-public partial class MissionData : IUnique<long>
+[DataContract]
+public partial class MissionData : AbstractData
 {
-	#region NullObject
-	public static MissionData Null => NullObjectContainer.Get<MissionData>();
+	[DataMember(Name = "id")]
+	public long id { get; set; }
 
-	public bool isNull => (this == Null);
-	#endregion
-	#region GameDbWrapper(DataTable)
-	public static DataTable<long, MissionData> dataTable {
-		get {
-			DataTable<long, MissionData> result;
-			if (GameDb.TableExists<long, MissionData>()) {
-				result = GameDb.From<long, MissionData>();
-			} else {
-				result = GameDb.CreateTable<long, MissionData>();
-				SetupMissionDataTableIndexGenerated(result);
-				SetupMissionDataTableIndex(result);
-			}
-			return result;
-		}
+	[DataMember(Name = "name")]
+	public string name { get; set; }
+
+	[DataMember(Name = "missionGroupId")]
+	public long missionGroupId { get; set; }
+
+	[DataMember(Name = "type")]
+	public MissionType type { get; set; }
+
+	[DataMember(Name = "toAchieveProgress")]
+	public long toAchieveProgress { get; set; }
+
+	[DataMember(Name = "paramA")]
+	public long paramA { get; set; }
+
+	[DataMember(Name = "paramB")]
+	public long paramB { get; set; }
+
+	[DataMember(Name = "rewardResourceType")]
+	public ResourceType rewardResourceType { get; set; }
+
+	[DataMember(Name = "rewardResourceId")]
+	public long rewardResourceId { get; set; }
+
+	[DataMember(Name = "rewardResourceAmount")]
+	public long rewardResourceAmount { get; set; }
+
+	public MissionData Clone() {
+		var result = new MissionData();
+		result.id = id;
+		result.name = name;
+		result.missionGroupId = missionGroupId;
+		result.type = type;
+		result.toAchieveProgress = toAchieveProgress;
+		result.paramA = paramA;
+		result.paramB = paramB;
+		result.rewardResourceType = rewardResourceType;
+		result.rewardResourceId = rewardResourceId;
+		result.rewardResourceAmount = rewardResourceAmount;
+		return result;
 	}
 
-	public static int Count => dataTable.Count;
+	public string idNameText => GetIdNameText(id, name);
 
-	public static List<MissionData> GetDataList()
+	public override string ToString()
 	{
-		return dataTable.dataList;
+		return JsonConvert.SerializeObject(this);
 	}
-
-	public static void SetData(MissionData data)
-	{
-		dataTable.Insert(data);
-	}
-
-	public static void AddDataList(IEnumerable<MissionData> dataList)
-	{
-		dataTable.InsertRange(dataList);
-	}
-
-	public static void SetDataList(IEnumerable<MissionData> dataList)
-	{
-		Clear();
-		dataTable.InsertRange(dataList);
-	}
-
-	public static void Clear()
-	{
-		dataTable.DeleteAll();
-	}
-
-	static partial void SetupMissionDataTableIndex(DataTable<long, MissionData> targetDataTable);
-
-	private static void SetupMissionDataTableIndexGenerated(DataTable<long, MissionData> targetDataTable)
-	{
-		targetDataTable.CreateUniqueIndex("Id", aData => (object)aData.id);
-		targetDataTable.CreateIndex("Type", aData => (object)aData.type);
-	}
-	#endregion
-	#region DataTableUniqueIndex(Id)
-	public static MissionData GetDataById(long id)
-	{
-		return dataTable.GetData("Id", (object)id);
-	}
-
-	public static void RemoveDataByIds(ICollection<long> ids)
-	{
-		ids.ForEach(aId => RemoveDataById(aId));
-	}
-
-	public static void RemoveDataById(long id)
-	{
-		dataTable.DeleteByKey("Id", (object)id);
-	}
-	#endregion
-	#region DataTableIndex (Type)
-	public static List<MissionData> GetDataListByType(MissionType type)
-	{
-		return dataTable.GetDataList("Type", (object)type);
-	}
-	#endregion
 }
-

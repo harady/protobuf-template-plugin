@@ -1,84 +1,32 @@
-﻿using System.Collections.Generic;
+using System;
+using System.Collections.Generic;
+using System.Runtime.Serialization;
+using Newtonsoft.Json;
 
-public partial class QuestGroupData : IUnique<long>
+[DataContract]
+public partial class QuestGroupData : AbstractData
 {
-	#region NullObject
-	public static QuestGroupData Null => NullObjectContainer.Get<QuestGroupData>();
+	[DataMember(Name = "id")]
+	public long id { get; set; }
 
-	public bool isNull => (this == Null);
-	#endregion
-	#region GameDbWrapper(DataTable)
-	public static DataTable<long, QuestGroupData> dataTable {
-		get {
-			DataTable<long, QuestGroupData> result;
-			if (GameDb.TableExists<long, QuestGroupData>()) {
-				result = GameDb.From<long, QuestGroupData>();
-			} else {
-				result = GameDb.CreateTable<long, QuestGroupData>();
-				SetupQuestGroupDataTableIndexGenerated(result);
-				SetupQuestGroupDataTableIndex(result);
-			}
-			return result;
-		}
+	[DataMember(Name = "name")]
+	public string name { get; set; }
+
+	[DataMember(Name = "type")]
+	public QuestGroupType type { get; set; }
+
+	public QuestGroupData Clone() {
+		var result = new QuestGroupData();
+		result.id = id;
+		result.name = name;
+		result.type = type;
+		return result;
 	}
 
-	public static int Count => dataTable.Count;
+	public string idNameText => GetIdNameText(id, name);
 
-	public static List<QuestGroupData> GetDataList()
+	public override string ToString()
 	{
-		return dataTable.dataList;
+		return JsonConvert.SerializeObject(this);
 	}
-
-	public static void SetData(QuestGroupData data)
-	{
-		dataTable.Insert(data);
-	}
-
-	public static void AddDataList(IEnumerable<QuestGroupData> dataList)
-	{
-		dataTable.InsertRange(dataList);
-	}
-
-	public static void SetDataList(IEnumerable<QuestGroupData> dataList)
-	{
-		Clear();
-		dataTable.InsertRange(dataList);
-	}
-
-	public static void Clear()
-	{
-		dataTable.DeleteAll();
-	}
-
-	static partial void SetupQuestGroupDataTableIndex(DataTable<long, QuestGroupData> targetDataTable);
-
-	private static void SetupQuestGroupDataTableIndexGenerated(DataTable<long, QuestGroupData> targetDataTable)
-	{
-		targetDataTable.CreateUniqueIndex("Id", aData => (object)aData.id);
-		targetDataTable.CreateIndex("Type", aData => (object)aData.type);
-	}
-	#endregion
-	#region DataTableUniqueIndex(Id)
-	public static QuestGroupData GetDataById(long id)
-	{
-		return dataTable.GetData("Id", (object)id);
-	}
-
-	public static void RemoveDataByIds(ICollection<long> ids)
-	{
-		ids.ForEach(aId => RemoveDataById(aId));
-	}
-
-	public static void RemoveDataById(long id)
-	{
-		dataTable.DeleteByKey("Id", (object)id);
-	}
-	#endregion
-	#region DataTableIndex (Type)
-	public static List<QuestGroupData> GetDataListByType(QuestGroupType type)
-	{
-		return dataTable.GetDataList("Type", (object)type);
-	}
-	#endregion
 }
-

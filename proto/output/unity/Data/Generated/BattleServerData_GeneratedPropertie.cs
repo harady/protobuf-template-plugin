@@ -15,7 +15,6 @@ public partial class BattleServerData : AbstractData
 		return result;
 	}
 
-
 	public override string ToString()
 	{
 		return JsonConvert.SerializeObject(this);

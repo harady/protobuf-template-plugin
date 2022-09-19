@@ -1,84 +1,44 @@
-﻿using System.Collections.Generic;
+using System;
+using System.Collections.Generic;
+using System.Runtime.Serialization;
+using Newtonsoft.Json;
 
-public partial class EventScheduleData : IUnique<long>
+[DataContract]
+public partial class EventScheduleData : AbstractData
 {
-	#region NullObject
-	public static EventScheduleData Null => NullObjectContainer.Get<EventScheduleData>();
+	[DataMember(Name = "id")]
+	public long id { get; set; }
 
-	public bool isNull => (this == Null);
-	#endregion
-	#region GameDbWrapper(DataTable)
-	public static DataTable<long, EventScheduleData> dataTable {
-		get {
-			DataTable<long, EventScheduleData> result;
-			if (GameDb.TableExists<long, EventScheduleData>()) {
-				result = GameDb.From<long, EventScheduleData>();
-			} else {
-				result = GameDb.CreateTable<long, EventScheduleData>();
-				SetupEventScheduleDataTableIndexGenerated(result);
-				SetupEventScheduleDataTableIndex(result);
-			}
-			return result;
-		}
+	[DataMember(Name = "questId")]
+	public long questId { get; set; }
+
+	[DataMember(Name = "openAt")]
+	public long openAt { get; set; }
+
+	public DateTime OpenAt {
+		get { return ServerDateTimeUtil.FromEpoch(openAt); }
+		set { openAt = ServerDateTimeUtil.ToEpoch(value); }
 	}
 
-	public static int Count => dataTable.Count;
+	[DataMember(Name = "closeAt")]
+	public long closeAt { get; set; }
 
-	public static List<EventScheduleData> GetDataList()
+	public DateTime CloseAt {
+		get { return ServerDateTimeUtil.FromEpoch(closeAt); }
+		set { closeAt = ServerDateTimeUtil.ToEpoch(value); }
+	}
+
+	public EventScheduleData Clone() {
+		var result = new EventScheduleData();
+		result.id = id;
+		result.questId = questId;
+		result.openAt = openAt;
+		result.closeAt = closeAt;
+		return result;
+	}
+
+	public override string ToString()
 	{
-		return dataTable.dataList;
+		return JsonConvert.SerializeObject(this);
 	}
-
-	public static void SetData(EventScheduleData data)
-	{
-		dataTable.Insert(data);
-	}
-
-	public static void AddDataList(IEnumerable<EventScheduleData> dataList)
-	{
-		dataTable.InsertRange(dataList);
-	}
-
-	public static void SetDataList(IEnumerable<EventScheduleData> dataList)
-	{
-		Clear();
-		dataTable.InsertRange(dataList);
-	}
-
-	public static void Clear()
-	{
-		dataTable.DeleteAll();
-	}
-
-	static partial void SetupEventScheduleDataTableIndex(DataTable<long, EventScheduleData> targetDataTable);
-
-	private static void SetupEventScheduleDataTableIndexGenerated(DataTable<long, EventScheduleData> targetDataTable)
-	{
-		targetDataTable.CreateUniqueIndex("Id", aData => (object)aData.id);
-		targetDataTable.CreateIndex("QuestId", aData => (object)aData.questId);
-	}
-	#endregion
-	#region DataTableUniqueIndex(Id)
-	public static EventScheduleData GetDataById(long id)
-	{
-		return dataTable.GetData("Id", (object)id);
-	}
-
-	public static void RemoveDataByIds(ICollection<long> ids)
-	{
-		ids.ForEach(aId => RemoveDataById(aId));
-	}
-
-	public static void RemoveDataById(long id)
-	{
-		dataTable.DeleteByKey("Id", (object)id);
-	}
-	#endregion
-	#region DataTableIndex (QuestId)
-	public static List<EventScheduleData> GetDataListByQuestId(long questId)
-	{
-		return dataTable.GetDataList("QuestId", (object)questId);
-	}
-	#endregion
 }
-

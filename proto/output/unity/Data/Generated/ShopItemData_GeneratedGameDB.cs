@@ -1,101 +1,52 @@
-﻿using System.Collections.Generic;
+using System;
+using System.Collections.Generic;
+using System.Runtime.Serialization;
+using Newtonsoft.Json;
 
-public partial class ShopItemData : IUnique<long>
+[DataContract]
+public partial class ShopItemData : AbstractData
 {
-	#region NullObject
-	public static ShopItemData Null => NullObjectContainer.Get<ShopItemData>();
+	[DataMember(Name = "id")]
+	public long id { get; set; }
 
-	public bool isNull => (this == Null);
-	#endregion
-	#region GameDbWrapper(DataTable)
-	public static DataTable<long, ShopItemData> dataTable {
-		get {
-			DataTable<long, ShopItemData> result;
-			if (GameDb.TableExists<long, ShopItemData>()) {
-				result = GameDb.From<long, ShopItemData>();
-			} else {
-				result = GameDb.CreateTable<long, ShopItemData>();
-				SetupShopItemDataTableIndexGenerated(result);
-				SetupShopItemDataTableIndex(result);
-			}
-			return result;
-		}
-	}
+	[DataMember(Name = "name")]
+	public string name { get; set; }
 
-	public static int Count => dataTable.Count;
+	[DataMember(Name = "shopId")]
+	public long shopId { get; set; }
 
-	public static List<ShopItemData> GetDataList()
-	{
-		return dataTable.dataList;
-	}
+	[DataMember(Name = "purchasePlatformType")]
+	public PurchasePlatformType purchasePlatformType { get; set; }
 
-	public static void SetData(ShopItemData data)
-	{
-		dataTable.Insert(data);
-	}
+	[DataMember(Name = "platformProductId")]
+	public string platformProductId { get; set; }
 
-	public static void AddDataList(IEnumerable<ShopItemData> dataList)
-	{
-		dataTable.InsertRange(dataList);
-	}
+	[DataMember(Name = "price")]
+	public long price { get; set; }
 
-	public static void SetDataList(IEnumerable<ShopItemData> dataList)
-	{
-		Clear();
-		dataTable.InsertRange(dataList);
+	[DataMember(Name = "resourceSetId")]
+	public long resourceSetId { get; set; }
+
+	[DataMember(Name = "limitCount")]
+	public long limitCount { get; set; }
+
+	public ShopItemData Clone() {
+		var result = new ShopItemData();
+		result.id = id;
+		result.name = name;
+		result.shopId = shopId;
+		result.purchasePlatformType = purchasePlatformType;
+		result.platformProductId = platformProductId;
+		result.price = price;
+		result.resourceSetId = resourceSetId;
+		result.limitCount = limitCount;
+		return result;
 	}
 
-	public static void Clear()
-	{
-		dataTable.DeleteAll();
-	}
+	public string idNameText => GetIdNameText(id, name);
 
-	static partial void SetupShopItemDataTableIndex(DataTable<long, ShopItemData> targetDataTable);
-
-	private static void SetupShopItemDataTableIndexGenerated(DataTable<long, ShopItemData> targetDataTable)
+	public override string ToString()
 	{
-		targetDataTable.CreateUniqueIndex("Id", aData => (object)aData.id);
-		targetDataTable.CreateUniqueIndex("PlatformProductId", aData => (object)aData.platformProductId);
-		targetDataTable.CreateIndex("ShopId", aData => (object)aData.shopId);
+		return JsonConvert.SerializeObject(this);
 	}
-	#endregion
-	#region DataTableUniqueIndex(Id)
-	public static ShopItemData GetDataById(long id)
-	{
-		return dataTable.GetData("Id", (object)id);
-	}
-
-	public static void RemoveDataByIds(ICollection<long> ids)
-	{
-		ids.ForEach(aId => RemoveDataById(aId));
-	}
-
-	public static void RemoveDataById(long id)
-	{
-		dataTable.DeleteByKey("Id", (object)id);
-	}
-	#endregion
-	#region DataTableUniqueIndex(PlatformProductId)
-	public static ShopItemData GetDataByPlatformProductId(string platformProductId)
-	{
-		return dataTable.GetData("PlatformProductId", (object)platformProductId);
-	}
-
-	public static void RemoveDataByPlatformProductIds(ICollection<string> platformProductIds)
-	{
-		platformProductIds.ForEach(aPlatformProductId => RemoveDataByPlatformProductId(aPlatformProductId));
-	}
-
-	public static void RemoveDataByPlatformProductId(string platformProductId)
-	{
-		dataTable.DeleteByKey("PlatformProductId", (object)platformProductId);
-	}
-	#endregion
-	#region DataTableIndex (ShopId)
-	public static List<ShopItemData> GetDataListByShopId(long shopId)
-	{
-		return dataTable.GetDataList("ShopId", (object)shopId);
-	}
-	#endregion
 }
-
