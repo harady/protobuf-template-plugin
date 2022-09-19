@@ -6,7 +6,7 @@
   "compilationOptions": {},
   "targets": {
     ".NETCoreApp,Version=v5.0": {
-      "protoc-gen-myplugincsharp/1.0.0": {
+      "protoc-gen-template/1.0.0": {
         "dependencies": {
           "Google.Protobuf": "3.21.6",
           "Google.Protobuf.Tools": "3.21.6",
@@ -15,7 +15,7 @@
           "Newtonsoft.Json": "13.0.1"
         },
         "runtime": {
-          "protoc-gen-myplugincsharp.dll": {}
+          "protoc-gen-template.dll": {}
         }
       },
       "Google.Protobuf/3.21.6": {
@@ -56,7 +56,7 @@
     }
   },
   "libraries": {
-    "protoc-gen-myplugincsharp/1.0.0": {
+    "protoc-gen-template/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""
