@@ -27,6 +27,7 @@ public partial class UnitLevelExpData : AbstractData
 		return result;
 	}
 
+
 	public override string ToString()
 	{
 		return JsonConvert.SerializeObject(this);

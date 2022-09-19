@@ -39,6 +39,8 @@ public partial class EquipmentData : AbstractData
 		return result;
 	}
 
+	public string idNameText => GetIdNameText(id, name);
+
 	public override string ToString()
 	{
 		return JsonConvert.SerializeObject(this);

@@ -27,6 +27,7 @@ public partial class ConfigData : AbstractData
 		return result;
 	}
 
+
 	public override string ToString()
 	{
 		return JsonConvert.SerializeObject(this);

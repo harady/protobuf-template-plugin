@@ -31,6 +31,7 @@ public partial class UserIdentifableItemData : AbstractData
 		return result;
 	}
 
+
 	public override string ToString()
 	{
 		return JsonConvert.SerializeObject(this);

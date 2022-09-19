@@ -23,6 +23,7 @@ public partial class UserFriendRequestData : AbstractData
 		return result;
 	}
 
+
 	public override string ToString()
 	{
 		return JsonConvert.SerializeObject(this);

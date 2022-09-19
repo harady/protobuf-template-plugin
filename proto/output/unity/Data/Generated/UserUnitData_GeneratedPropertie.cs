@@ -80,6 +80,7 @@ public partial class UserUnitData : AbstractData
 		return result;
 	}
 
+
 	public override string ToString()
 	{
 		return JsonConvert.SerializeObject(this);

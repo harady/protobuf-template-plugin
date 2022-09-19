@@ -44,6 +44,7 @@ public partial class UserBattleData : AbstractData
 		return result;
 	}
 
+
 	public override string ToString()
 	{
 		return JsonConvert.SerializeObject(this);

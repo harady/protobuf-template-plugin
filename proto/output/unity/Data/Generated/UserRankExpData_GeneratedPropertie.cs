@@ -39,6 +39,7 @@ public partial class UserRankExpData : AbstractData
 		return result;
 	}
 
+
 	public override string ToString()
 	{
 		return JsonConvert.SerializeObject(this);

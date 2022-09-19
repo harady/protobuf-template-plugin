@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
-{{- has_id = (file.message_type[0].name == "id") }}
 {{ for message in file.message_type }}
+{{- has_id = (message.field[0].name == "id") }}
 [DataContract]
 public partial class {{ message.name }} : AbstractData
 {
@@ -30,7 +30,7 @@ public partial class {{ message.name }} : AbstractData
 	}
 {{ if has_id }}
 {{- for field in message.field }}
-{{ if (field.name == "name") }}
+{{- if (field.name == "name") }}
 	public string idNameText => GetIdNameText(id, name);
 {{- end }}
 {{- end }}

@@ -63,6 +63,7 @@ public partial class EnemyActionData : AbstractData
 		return result;
 	}
 
+
 	public override string ToString()
 	{
 		return JsonConvert.SerializeObject(this);

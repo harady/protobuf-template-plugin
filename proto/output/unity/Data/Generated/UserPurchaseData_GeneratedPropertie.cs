@@ -60,6 +60,7 @@ public partial class UserPurchaseData : AbstractData
 		return result;
 	}
 
+
 	public override string ToString()
 	{
 		return JsonConvert.SerializeObject(this);

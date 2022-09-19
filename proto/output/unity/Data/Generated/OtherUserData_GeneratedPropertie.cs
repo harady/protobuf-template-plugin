@@ -35,6 +35,8 @@ public partial class OtherUserData : AbstractData
 		return result;
 	}
 
+	public string idNameText => GetIdNameText(id, name);
+
 	public override string ToString()
 	{
 		return JsonConvert.SerializeObject(this);

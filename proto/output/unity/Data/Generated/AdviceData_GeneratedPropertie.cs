@@ -19,6 +19,7 @@ public partial class AdviceData : AbstractData
 		return result;
 	}
 
+
 	public override string ToString()
 	{
 		return JsonConvert.SerializeObject(this);

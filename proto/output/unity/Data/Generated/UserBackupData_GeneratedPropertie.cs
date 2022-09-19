@@ -27,6 +27,7 @@ public partial class UserBackupData : AbstractData
 		return result;
 	}
 
+
 	public override string ToString()
 	{
 		return JsonConvert.SerializeObject(this);
