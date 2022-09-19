@@ -7,9 +7,9 @@ using UnityEngine;
 public partial class SystemService
 {
 
-	public void Ping(Action<> onSuccess)
+	public void Ping(Action<SystemPingResponse> onSuccess)
 	{
-		var request = new ();
+		var request = new SystemPingRequest();
 		PingInner(
 			request: request,
 			onSuccess: (response) => {
@@ -18,9 +18,9 @@ public partial class SystemService
 		);
 	}
 
-	public void Signup(Action<> onSuccess)
+	public void Signup(Action<SystemSignupResponse> onSuccess)
 	{
-		var request = new ();
+		var request = new SystemSignupRequest();
 		SignupInner(
 			request: request,
 			onSuccess: (response) => {
@@ -29,9 +29,9 @@ public partial class SystemService
 		);
 	}
 
-	public void Login(Action<> onSuccess)
+	public void Login(Action<SystemLoginResponse> onSuccess)
 	{
-		var request = new ();
+		var request = new SystemLoginRequest();
 		LoginInner(
 			request: request,
 			onSuccess: (response) => {

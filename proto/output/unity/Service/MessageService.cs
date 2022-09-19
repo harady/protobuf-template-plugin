@@ -7,9 +7,9 @@ using UnityEngine;
 public partial class MessageService
 {
 
-	public void List(Action<> onSuccess)
+	public void List(Action<MessageListResponse> onSuccess)
 	{
-		var request = new ();
+		var request = new MessageListRequest();
 		ListInner(
 			request: request,
 			onSuccess: (response) => {
@@ -18,9 +18,9 @@ public partial class MessageService
 		);
 	}
 
-	public void Receive(Action<> onSuccess)
+	public void Receive(Action<MessageReceiveResponse> onSuccess)
 	{
-		var request = new ();
+		var request = new MessageReceiveRequest();
 		ReceiveInner(
 			request: request,
 			onSuccess: (response) => {

@@ -7,9 +7,9 @@ using UnityEngine;
 public partial class MissionService
 {
 
-	public void Achieve(Action<> onSuccess)
+	public void Achieve(Action<MissionAchieveResponse> onSuccess)
 	{
-		var request = new ();
+		var request = new MissionAchieveRequest();
 		AchieveInner(
 			request: request,
 			onSuccess: (response) => {
@@ -18,9 +18,9 @@ public partial class MissionService
 		);
 	}
 
-	public void Receive(Action<> onSuccess)
+	public void Receive(Action<MissionReceiveResponse> onSuccess)
 	{
-		var request = new ();
+		var request = new MissionReceiveRequest();
 		ReceiveInner(
 			request: request,
 			onSuccess: (response) => {

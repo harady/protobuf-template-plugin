@@ -7,9 +7,9 @@ using UnityEngine;
 public partial class ShopService
 {
 
-	public void PurchaseGooglePlay(Action<> onSuccess)
+	public void PurchaseGooglePlay(Action<ShopPurchaseGooglePlayResponse> onSuccess)
 	{
-		var request = new ();
+		var request = new ShopPurchaseGooglePlayRequest();
 		PurchaseGooglePlayInner(
 			request: request,
 			onSuccess: (response) => {
@@ -18,9 +18,9 @@ public partial class ShopService
 		);
 	}
 
-	public void PurchaseAppStore(Action<> onSuccess)
+	public void PurchaseAppStore(Action<ShopPurchaseAppStoreResponse> onSuccess)
 	{
-		var request = new ();
+		var request = new ShopPurchaseAppStoreRequest();
 		PurchaseAppStoreInner(
 			request: request,
 			onSuccess: (response) => {
@@ -29,9 +29,9 @@ public partial class ShopService
 		);
 	}
 
-	public void PurchaseDebug(Action<> onSuccess)
+	public void PurchaseDebug(Action<ShopPurchaseDebugResponse> onSuccess)
 	{
-		var request = new ();
+		var request = new ShopPurchaseDebugRequest();
 		PurchaseDebugInner(
 			request: request,
 			onSuccess: (response) => {

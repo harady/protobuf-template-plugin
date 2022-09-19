@@ -7,9 +7,9 @@ using UnityEngine;
 public partial class FriendRequestService
 {
 
-	public void List(Action<> onSuccess)
+	public void List(Action<FriendRequestListResponse> onSuccess)
 	{
-		var request = new ();
+		var request = new FriendRequestListRequest();
 		ListInner(
 			request: request,
 			onSuccess: (response) => {
@@ -18,9 +18,9 @@ public partial class FriendRequestService
 		);
 	}
 
-	public void Accept(Action<> onSuccess)
+	public void Accept(Action<FriendRequestAcceptResponse> onSuccess)
 	{
-		var request = new ();
+		var request = new FriendRequestAcceptRequest();
 		AcceptInner(
 			request: request,
 			onSuccess: (response) => {
@@ -29,9 +29,9 @@ public partial class FriendRequestService
 		);
 	}
 
-	public void Reject(Action<> onSuccess)
+	public void Reject(Action<FriendRequestRejectResponse> onSuccess)
 	{
-		var request = new ();
+		var request = new FriendRequestRejectRequest();
 		RejectInner(
 			request: request,
 			onSuccess: (response) => {

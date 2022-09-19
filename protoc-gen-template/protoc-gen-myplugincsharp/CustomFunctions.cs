@@ -30,10 +30,15 @@ public class CustomFunctions : ScriptObject
 		return text.ToSnakeCase().ToUpper();
 	}
 
+	public static string ToShortName(string text)
+	{
+		return text.ReplaceRegex(".*\\.", "");
+	}
+
 	public static string ToCsType(FieldDescriptorProto param)
 	{
 		return param.HasTypeName
-			? param.TypeName.ReplaceRegex(".*\\.", "")
+			? ToShortName(param.TypeName)
 			: param.Type.ToCsTypeName();
 	}
 
@@ -54,6 +59,9 @@ public class CustomFunctions : ScriptObject
 			new Func<string, string>(text => ToLowerSnake(text)));
 		target.Import("to_upper_snake",
 			new Func<string, string>(text => ToUpperSnake(text)));
+
+		target.Import("to_short_name",
+			new Func<string, string>(text => ToShortName(text)));
 
 		target.Import("to_cs_type",
 			new Func<FieldDescriptorProto, string>(type => ToCsType(type)));

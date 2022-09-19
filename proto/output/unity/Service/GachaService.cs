@@ -7,9 +7,9 @@ using UnityEngine;
 public partial class GachaService
 {
 
-	public void Draw(Action<> onSuccess)
+	public void Draw(Action<GachaDrawResponse> onSuccess)
 	{
-		var request = new ();
+		var request = new GachaDrawRequest();
 		DrawInner(
 			request: request,
 			onSuccess: (response) => {

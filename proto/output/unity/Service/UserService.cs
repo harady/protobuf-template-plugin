@@ -7,9 +7,9 @@ using UnityEngine;
 public partial class UserService
 {
 
-	public void DataList(Action<> onSuccess)
+	public void DataList(Action<UserDataListResponse> onSuccess)
 	{
-		var request = new ();
+		var request = new UserDataListRequest();
 		DataListInner(
 			request: request,
 			onSuccess: (response) => {
@@ -18,9 +18,9 @@ public partial class UserService
 		);
 	}
 
-	public void NameEdit(Action<> onSuccess)
+	public void NameEdit(Action<UserNameEditResponse> onSuccess)
 	{
-		var request = new ();
+		var request = new UserNameEditRequest();
 		NameEditInner(
 			request: request,
 			onSuccess: (response) => {

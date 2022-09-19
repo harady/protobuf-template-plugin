@@ -7,9 +7,9 @@ using UnityEngine;
 public partial class UnitService
 {
 
-	public void DeckEdit(Action<> onSuccess)
+	public void DeckEdit(Action<UnitDeckEditResponse> onSuccess)
 	{
-		var request = new ();
+		var request = new UnitDeckEditRequest();
 		DeckEditInner(
 			request: request,
 			onSuccess: (response) => {
@@ -18,9 +18,9 @@ public partial class UnitService
 		);
 	}
 
-	public void Powerup(Action<> onSuccess)
+	public void Powerup(Action<UnitPowerupResponse> onSuccess)
 	{
-		var request = new ();
+		var request = new UnitPowerupRequest();
 		PowerupInner(
 			request: request,
 			onSuccess: (response) => {
@@ -29,9 +29,9 @@ public partial class UnitService
 		);
 	}
 
-	public void Evolution(Action<> onSuccess)
+	public void Evolution(Action<UnitEvolutionResponse> onSuccess)
 	{
-		var request = new ();
+		var request = new UnitEvolutionRequest();
 		EvolutionInner(
 			request: request,
 			onSuccess: (response) => {
@@ -40,9 +40,9 @@ public partial class UnitService
 		);
 	}
 
-	public void Sell(Action<> onSuccess)
+	public void Sell(Action<UnitSellResponse> onSuccess)
 	{
-		var request = new ();
+		var request = new UnitSellRequest();
 		SellInner(
 			request: request,
 			onSuccess: (response) => {
@@ -51,9 +51,9 @@ public partial class UnitService
 		);
 	}
 
-	public void Lock(Action<> onSuccess)
+	public void Lock(Action<UnitLockResponse> onSuccess)
 	{
-		var request = new ();
+		var request = new UnitLockRequest();
 		LockInner(
 			request: request,
 			onSuccess: (response) => {

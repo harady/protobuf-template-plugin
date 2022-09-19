@@ -13,7 +13,8 @@
           "Grpc.Tools": "2.48.1",
           "NUnit": "3.13.3",
           "Newtonsoft.Json": "13.0.1",
-          "Scriban": "5.5.0"
+          "Scriban": "5.5.0",
+          "runtime.win10-x64.Microsoft.DotNet.Framework.NativeImageCompiler": "1.0.0"
         },
         "runtime": {
           "protoc-gen-template.dll": {}
@@ -54,6 +55,7 @@
           }
         }
       },
+      "runtime.win10-x64.Microsoft.DotNet.Framework.NativeImageCompiler/1.0.0": {},
       "Scriban/5.5.0": {
         "runtime": {
           "lib/net5.0/Scriban.dll": {
@@ -118,6 +120,13 @@
       "sha512": "sha512-KNPDpls6EfHwC3+nnA67fh5wpxeLb3VLFAfLxrug6JMYDLHH6InaQIWR7Sc3y75d/9IKzMksH/gi08W7XWbmnQ==",
       "path": "nunit/3.13.3",
       "hashPath": "nunit.3.13.3.nupkg.sha512"
+    },
+    "runtime.win10-x64.Microsoft.DotNet.Framework.NativeImageCompiler/1.0.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-rll2/h5WmIkV3dzRQxC6e2l55ZEiwHs8IF9JuPoV1p57YvLCOzjJ1+ajTUkVNpgxu3HhkR9M5YrUa5f+EpLQUQ==",
+      "path": "runtime.win10-x64.microsoft.dotnet.framework.nativeimagecompiler/1.0.0",
+      "hashPath": "runtime.win10-x64.microsoft.dotnet.framework.nativeimagecompiler.1.0.0.nupkg.sha512"
     },
     "Scriban/5.5.0": {
       "type": "package",

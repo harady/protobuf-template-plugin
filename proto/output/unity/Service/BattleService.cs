@@ -7,9 +7,9 @@ using UnityEngine;
 public partial class BattleService
 {
 
-	public void HelperList(Action<> onSuccess)
+	public void HelperList(Action<BattleHelperListResponse> onSuccess)
 	{
-		var request = new ();
+		var request = new BattleHelperListRequest();
 		HelperListInner(
 			request: request,
 			onSuccess: (response) => {
@@ -18,9 +18,9 @@ public partial class BattleService
 		);
 	}
 
-	public void Start(Action<> onSuccess)
+	public void Start(Action<BattleStartResponse> onSuccess)
 	{
-		var request = new ();
+		var request = new BattleStartRequest();
 		StartInner(
 			request: request,
 			onSuccess: (response) => {
@@ -29,9 +29,9 @@ public partial class BattleService
 		);
 	}
 
-	public void Continue(Action<> onSuccess)
+	public void Continue(Action<BattleContinueResponse> onSuccess)
 	{
-		var request = new ();
+		var request = new BattleContinueRequest();
 		ContinueInner(
 			request: request,
 			onSuccess: (response) => {
@@ -40,9 +40,9 @@ public partial class BattleService
 		);
 	}
 
-	public void Giveup(Action<> onSuccess)
+	public void Giveup(Action<BattleGiveupResponse> onSuccess)
 	{
-		var request = new ();
+		var request = new BattleGiveupRequest();
 		GiveupInner(
 			request: request,
 			onSuccess: (response) => {
@@ -51,9 +51,9 @@ public partial class BattleService
 		);
 	}
 
-	public void Clear(Action<> onSuccess)
+	public void Clear(Action<BattleClearResponse> onSuccess)
 	{
-		var request = new ();
+		var request = new BattleClearRequest();
 		ClearInner(
 			request: request,
 			onSuccess: (response) => {
