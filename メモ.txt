@@ -41,6 +41,7 @@ ngen.exeを使ってみるか。
 https://learn.microsoft.com/ja-jp/windows/msix/desktop/desktop-to-uwp-r2r
 　→すでに非推奨だった
 
+C:\Windows\Microsoft.NET\Framework64\v4.0.30319\ngen.exe install ./plugin2\protoc-gen-template.exe
 
 GrのテンプレートエンジンはGo標準のtext/templateを使用している。
 C#に移植したものは見当たらない
@@ -55,27 +56,4 @@ https://github.com/scriban/scriban
 
 
 Scribanを採用することにした。
-
-
-//https://developers.google.com/protocol-buffers/docs/proto3#scalar
-var FieldDescriptorProto_Type_Csharp = map[string]string{
-	"TYPE_DOUBLE":   "double",
-	"TYPE_FLOAT":    "float",
-	"TYPE_INT64":    "long",
-	"TYPE_UINT64":   "ulong",
-	"TYPE_INT32":    "int",
-	"TYPE_FIXED64":  "uint",
-	"TYPE_FIXED32":  "ulong",
-	"TYPE_BOOL":     "bool",
-	"TYPE_STRING":   "string",
-	"TYPE_GROUP":    "GROUP", //deprecated, https://developers.google.com/protocol-buffers/docs/proto#groups
-	"TYPE_MESSAGE":  "MESSAGE",
-	"TYPE_BYTES":    "Google.Protobuf.ByteString",
-	"TYPE_UINT32":   "uint",
-	"TYPE_ENUM":     "ENUM",
-	"TYPE_SFIXED32": "int",
-	"TYPE_SFIXED64": "long",
-	"TYPE_SINT32":   "int",
-	"TYPE_SINT64":   "long",
-}
 
