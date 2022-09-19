@@ -62,6 +62,9 @@ namespace protoc_gen_myplugincsharp
 						.ToPascalCase();
 				filename += paramDict["fileSuffix"];
 
+				output.AppendLine(request.Parameter);
+
+
 				// set as response
 				response.File.Add(
 					new CodeGeneratorResponse.Types.File() {

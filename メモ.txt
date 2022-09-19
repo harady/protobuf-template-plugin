@@ -34,4 +34,19 @@ https://developers.google.com/protocol-buffers/docs/csharptutorial
 これいいんちゃうん？、C#のプラグイン
 https://github.com/cactuaroid/protoc-gen-myplugincsharp
 
+C#で作ったプラグインの起動速度が遅すぎる
+ngen.exeを使ってみるか。
 
+
+GrのテンプレートエンジンはGo標準のtext/templateを使用している。
+C#に移植したものは見当たらない
+代替としてT4 テキスト テンプレートを使用するか？
+
+
+テンプレートエンジンあれこれ
+https://zenn.dev/nuits_jp/articles/2022-05-26-text-template-benckmarks
+
+Scriban:Goのtext/templateに近い？
+https://github.com/scriban/scriban
+
+DotLiquid:良さそうどうだろう？

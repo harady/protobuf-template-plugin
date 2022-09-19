@@ -9,6 +9,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="package\Editor\**" />
+    <EmbeddedResource Remove="package\Editor\**" />
+    <None Remove="package\Editor\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Remove="plugin.proto" />
   </ItemGroup>
 
@@ -31,10 +37,6 @@
     <None Update="chat.proto" GrpcServices="None">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="package\Editor\" />
   </ItemGroup>
 
 </Project>
