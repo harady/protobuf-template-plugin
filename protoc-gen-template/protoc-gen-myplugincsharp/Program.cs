@@ -2,14 +2,10 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
 using Google.Protobuf;
 using Google.Protobuf.Compiler;
 using Scriban;
 using Scriban.Runtime;
-using Scriban.Helpers;
-using Scriban.Parsing;
-using Scriban.Syntax;
 
 namespace protoc_gen_myplugincsharp
 {
@@ -42,14 +38,12 @@ namespace protoc_gen_myplugincsharp
 
 				var model = new { File = fileDesc };
 				var scriptObject = new ScriptObject();
+				CustomFunctions.SetupCustomFunction(scriptObject);
 				scriptObject.Import(model);
-				scriptObject.Import("to_camel",
-					new Func<string, string>(text => CustomFunctions.ToCamel(text)));
 
 				var context = new TemplateContext();
 				context.PushGlobal(scriptObject);
 				var output = template.Render(context);
-				context.PopGlobal();
 
 				// set as response
 				response.File.Add(
