@@ -1,5 +1,1 @@
-
-public enum EquipmentType
-{
-	None = 0,
-}
+Hello {{ name }}!

@@ -1,5 +1,1 @@
-
-public enum SkillEffectType
-{
-	None = 0,
-}
+Hello {{ name }}!

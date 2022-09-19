@@ -1,10 +1,1 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-
-public partial class UserFriendData
-{
-
-}
-
-
+Hello {{ name }}!
