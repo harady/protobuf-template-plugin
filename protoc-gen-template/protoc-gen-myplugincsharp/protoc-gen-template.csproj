@@ -27,6 +27,7 @@
     </PackageReference>
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
     <PackageReference Include="NUnit" Version="3.13.3" />
+    <PackageReference Include="Scriban" Version="5.5.0" />
   </ItemGroup>
 
   <ItemGroup>
