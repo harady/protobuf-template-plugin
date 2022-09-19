@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 
-
 public partial class QuestData : IUnique<long>
 {
 	#region NullObject

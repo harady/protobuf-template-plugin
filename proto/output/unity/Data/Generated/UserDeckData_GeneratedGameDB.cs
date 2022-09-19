@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 
-
 public partial class UserDeckData : IUnique<long>
 {
 	#region NullObject

@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 
-
 public partial class EnemyClusterData : IUnique<long>
 {
 	#region NullObject

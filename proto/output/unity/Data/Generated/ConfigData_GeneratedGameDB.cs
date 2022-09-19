@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 
-
 public partial class ConfigData : IUnique<long>
 {
 	#region NullObject

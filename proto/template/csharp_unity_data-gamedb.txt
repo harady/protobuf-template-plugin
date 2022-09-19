@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-
 {{ for message in file.message_type }}
 {{- has_id = (message.field[0].name == "id") }}
 public partial class {{ message.name }} : IUnique<long>

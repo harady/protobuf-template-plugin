@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 
-
 public partial class GachaPoolItemData : IUnique<long>
 {
 	#region NullObject

@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 
-
 public partial class WeakPointData : IUnique<long>
 {
 	#region NullObject

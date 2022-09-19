@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 
-
 public partial class EventScheduleTermData : IUnique<long>
 {
 	#region NullObject

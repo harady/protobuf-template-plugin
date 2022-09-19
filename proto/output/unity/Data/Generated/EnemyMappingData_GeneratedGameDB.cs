@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 
-
 public partial class EnemyMappingData : IUnique<long>
 {
 	#region NullObject

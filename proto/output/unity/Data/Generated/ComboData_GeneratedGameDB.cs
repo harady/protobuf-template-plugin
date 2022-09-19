@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 
-
 public partial class ComboData : IUnique<long>
 {
 	#region NullObject

@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 
-
 public partial class CanpaignData : IUnique<long>
 {
 	#region NullObject

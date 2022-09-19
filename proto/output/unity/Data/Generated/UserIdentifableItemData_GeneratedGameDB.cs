@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 
-
 public partial class UserIdentifableItemData : IUnique<long>
 {
 	#region NullObject

@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 
-
 public partial class AbilityData : IUnique<long>
 {
 	#region NullObject

@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 
-
 public partial class MissionData : IUnique<long>
 {
 	#region NullObject

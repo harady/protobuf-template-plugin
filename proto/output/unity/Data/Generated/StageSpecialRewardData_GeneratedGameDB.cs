@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 
-
 public partial class StageSpecialRewardData : IUnique<long>
 {
 	#region NullObject

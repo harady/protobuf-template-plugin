@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 
-
 public partial class UserPurchaseData : IUnique<long>
 {
 	#region NullObject

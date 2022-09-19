@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 
-
 public partial class RoundData : IUnique<long>
 {
 	#region NullObject

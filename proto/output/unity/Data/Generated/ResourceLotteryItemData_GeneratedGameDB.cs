@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 
-
 public partial class ResourceLotteryItemData : IUnique<long>
 {
 	#region NullObject

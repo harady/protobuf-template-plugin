@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 
-
 public partial class LoginBonusItemData : IUnique<long>
 {
 	#region NullObject

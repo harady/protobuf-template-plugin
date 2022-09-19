@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 
-
 public partial class ExchangeItemData : IUnique<long>
 {
 	#region NullObject
