@@ -7,8 +7,6 @@ require "fileutils"
 #====================================================================
 class CodeGenerator
   attr_accessor :message
-  attr_accessor :protoc_path
-  attr_accessor :protoc_plugin_path
   attr_accessor :src_base_path
   attr_accessor :src_path_pattern
   attr_accessor :template_base_path
@@ -21,8 +19,6 @@ class CodeGenerator
 
   def initialize
     @message = ""
-    @protoc_path = ""
-    @protoc_plugin_path = ""
     @src_base_path = ""
     @src_path_pattern = ""
     @template_base_path = ""
@@ -72,8 +68,6 @@ class CodeGenerator
   def setup_by_data(data:)
     setup(
       message: data.dig("message"),
-      protoc_path: data.dig("protoc_path"),
-      protoc_plugin_path: data.dig("protoc_plugin_path"),
       src_base_path: data.dig("src_base_path"),
       src_path_pattern: data.dig("src_path_pattern"),
       template_base_path: data.dig("template_base_path"),
@@ -92,8 +86,6 @@ class CodeGenerator
   #============================================================
   def setup(
     message: nil,
-    protoc_path: nil,
-    protoc_plugin_path: nil,
     src_base_path: nil,
     src_path_pattern: nil,
     template_base_path: nil,
@@ -106,8 +98,6 @@ class CodeGenerator
     target_content_pattern: nil
   )
     self.message = message if !message.nil?
-    self.protoc_path = protoc_path if !protoc_path.nil?
-    self.protoc_plugin_path = protoc_plugin_path if !protoc_plugin_path.nil?
     self.src_base_path = src_base_path if !src_base_path.nil?
     self.src_path_pattern = src_path_pattern if !src_path_pattern.nil?
     self.template_base_path = template_base_path if !template_base_path.nil?
@@ -162,7 +152,7 @@ class CodeGenerator
     return if skip
 
     # コード生成コマンド実行.
-    command = "#{protoc_path} --csharp-template_out=template=#{actual_template_path},"
+    command = "bin/protoc --csharp-template_out=template=#{actual_template_path},"
     command += "fileSuffix=#{file_suffix}:#{actual_out_dir_path} "
     command += "--plugin=plugin/protoc-gen-csharp-template #{src_file_path}"
     `#{command}`
