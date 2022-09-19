@@ -2,7 +2,7 @@
 
 namespace protoc_gen_myplugincsharp
 {
-	public class ScribanHelper : ScriptObject
+	public class CustomScriptObject : ScriptObject
 	{
 		public static string ToCamel(string text)
 		{

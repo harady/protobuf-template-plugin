@@ -6,6 +6,7 @@ using System.Text;
 using Google.Protobuf;
 using Google.Protobuf.Compiler;
 using Scriban;
+using Scriban.Runtime;
 
 namespace protoc_gen_myplugincsharp
 {
@@ -38,9 +39,10 @@ namespace protoc_gen_myplugincsharp
 
 				//fileDesc.MessageType[0].Field[0].TypeName;
 
-				var helper = new ScribanHelper();
-				var context = new TemplateContext(helper);
-				var output = template.Render(new { File = fileDesc });
+				var scriptObj = new CustomScriptObject();
+				scriptObj.Import(new { File = fileDesc });
+				var context = new TemplateContext(scriptObj);
+				var output = template.Render(context);
 
 				// set as response
 				response.File.Add(
