@@ -6,7 +6,7 @@ public partial class {{ message.name }}
 	{
 {{- for field in message.field }}
 	{{- if (field.name == "client_master") }}
-		{{ field.name | to_camel}}.SetToGameDb();
+		{{ field.name | to_camel }}.SetToGameDb();
 	{{- else if (field | is_repeated) }}
 		{{ field | to_cs_type }}.SetDataList({{ field.name | to_camel }});
 	{{- else }}

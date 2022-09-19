@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
-
 {{ for message in file.message_type }}
 public partial class {{ message.name }}
 {
@@ -9,7 +8,7 @@ public partial class {{ message.name }}
 	{
 {{- for field in message.field }}
 	{{- if (field | is_repeated) }}
-		{{.BaseType }}.SetDataList({{ field.name | to_camel }});
+		{{ field | to_cs_type }}.SetDataList({{ field.name | to_camel }});
 	{{- else }}
 		UserDataManager.instance.{{ field.name | to_camel }}Data = {{ field.name | to_camel }};
 	{{- end }}
@@ -21,7 +20,7 @@ public partial class {{ message.name }}
 	{
 {{- for field in message.field }}
 	{{- if (field | is_repeated) }}
-		{{.BaseType }}.AddDataList({{ field.name | to_camel }});
+		{{ field | to_cs_type }}.AddDataList({{ field.name | to_camel }});
 	{{- else }}
 		UserDataManager.instance.{{ field.name | to_camel }}Data = {{ field.name | to_camel }};
 	{{- end }}
@@ -34,7 +33,7 @@ public partial class {{ message.name }}
 {{- for field in message.field }}
 	{{- if (field | is_repeated) }}
 		{{- deletedIdsPropertieName = (("deleted" + (field.name | to_pascal) + "_Ids") | string.replace "s_Ids" "Ids") }}
-		{{.BaseType }}.RemoveDataByIds({{ deletedIdsPropertieName }});
+		{{ field | to_cs_type }}.RemoveDataByIds({{ deletedIdsPropertieName }});
 	{{- end }}
 {{- end }}
 	}
