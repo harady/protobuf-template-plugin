@@ -1,0 +1,130 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v5.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v5.0": {
+      "protoc-gen-template/1.0.0": {
+        "dependencies": {
+          "Google.Protobuf": "3.21.6",
+          "Google.Protobuf.Tools": "3.21.6",
+          "Grpc.Tools": "2.48.1",
+          "NUnit": "3.13.3",
+          "Newtonsoft.Json": "13.0.1",
+          "Scriban": "5.5.0"
+        },
+        "runtime": {
+          "protoc-gen-template.dll": {}
+        }
+      },
+      "Google.Protobuf/3.21.6": {
+        "runtime": {
+          "lib/net5.0/Google.Protobuf.dll": {
+            "assemblyVersion": "3.21.6.0",
+            "fileVersion": "3.21.6.0"
+          }
+        }
+      },
+      "Google.Protobuf.Tools/3.21.6": {},
+      "Grpc.Tools/2.48.1": {},
+      "Microsoft.NETCore.Platforms/1.1.0": {},
+      "NETStandard.Library/2.0.0": {
+        "dependencies": {
+          "Microsoft.NETCore.Platforms": "1.1.0"
+        }
+      },
+      "Newtonsoft.Json/13.0.1": {
+        "runtime": {
+          "lib/netstandard2.0/Newtonsoft.Json.dll": {
+            "assemblyVersion": "13.0.0.0",
+            "fileVersion": "13.0.1.25517"
+          }
+        }
+      },
+      "NUnit/3.13.3": {
+        "dependencies": {
+          "NETStandard.Library": "2.0.0"
+        },
+        "runtime": {
+          "lib/netstandard2.0/nunit.framework.dll": {
+            "assemblyVersion": "3.13.3.0",
+            "fileVersion": "3.13.3.0"
+          }
+        }
+      },
+      "Scriban/5.5.0": {
+        "runtime": {
+          "lib/net5.0/Scriban.dll": {
+            "assemblyVersion": "5.0.0.0",
+            "fileVersion": "5.5.0.0"
+          }
+        }
+      }
+    }
+  },
+  "libraries": {
+    "protoc-gen-template/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Google.Protobuf/3.21.6": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-HSYHFnfuTu/O4Ijy0mCW9zxLI8MJfCZJ10dk3JGPrkLaRR4LsiPKzZrrnapf2G0tP2yRMkHCl+2LKLTXqGBn2A==",
+      "path": "google.protobuf/3.21.6",
+      "hashPath": "google.protobuf.3.21.6.nupkg.sha512"
+    },
+    "Google.Protobuf.Tools/3.21.6": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-6f7nicP+ghhrRN5I7B8E3kGI+/6PuB1VlNIqj/dFrCALbMlWVihzgsdwTEJ8pBM1yFloQTve6ee+2GvEWABOHg==",
+      "path": "google.protobuf.tools/3.21.6",
+      "hashPath": "google.protobuf.tools.3.21.6.nupkg.sha512"
+    },
+    "Grpc.Tools/2.48.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-OHUorqVY2Ya9y5PQItM132EeklQUTu1OI1g90YDIJ6a+yUvu9dsJxnEYw56L57DplD1O22QC6sVUxpnJD7/txg==",
+      "path": "grpc.tools/2.48.1",
+      "hashPath": "grpc.tools.2.48.1.nupkg.sha512"
+    },
+    "Microsoft.NETCore.Platforms/1.1.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-jAmcAh3xcEe6W9tBfVzVOCC8HKgcvd5r3VOfyuypn8kYBw2n6QkUBOfBF1YTSJOLEeKBQsXwTo4CUgYoCppmfQ==",
+      "path": "microsoft.netcore.platforms/1.1.0",
+      "hashPath": "microsoft.netcore.platforms.1.1.0.nupkg.sha512"
+    },
+    "NETStandard.Library/2.0.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-49ZAcrnNn56GIJwGoiaI7NpwcEJ8mjUyfSqVYIJMDhOBzPe8HSHS74swF2H0v8fzj7pxLfcYjS9P5PdIqsTQxw==",
+      "path": "netstandard.library/2.0.0",
+      "hashPath": "netstandard.library.2.0.0.nupkg.sha512"
+    },
+    "Newtonsoft.Json/13.0.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-ppPFpBcvxdsfUonNcvITKqLl3bqxWbDCZIzDWHzjpdAHRFfZe0Dw9HmA0+za13IdyrgJwpkDTDA9fHaxOrt20A==",
+      "path": "newtonsoft.json/13.0.1",
+      "hashPath": "newtonsoft.json.13.0.1.nupkg.sha512"
+    },
+    "NUnit/3.13.3": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-KNPDpls6EfHwC3+nnA67fh5wpxeLb3VLFAfLxrug6JMYDLHH6InaQIWR7Sc3y75d/9IKzMksH/gi08W7XWbmnQ==",
+      "path": "nunit/3.13.3",
+      "hashPath": "nunit.3.13.3.nupkg.sha512"
+    },
+    "Scriban/5.5.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-e6n2qpSPlOx43+y1PeEukwu5n4i0slIUIMaFSndiIydfNuVqRbqL2QLd4y+BzFWDfN349YT71N/J38CH2IYb+w==",
+      "path": "scriban/5.5.0",
+      "hashPath": "scriban.5.5.0.nupkg.sha512"
+    }
+  }
+}

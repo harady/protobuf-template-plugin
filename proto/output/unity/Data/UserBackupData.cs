@@ -1,5 +1,10 @@
-message UserBackupData
-    id
-    user_id
-   .monstershot.BackupType backup_type
-    backup_token
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+
+public partial class UserBackupData
+{
+
+}
+
+

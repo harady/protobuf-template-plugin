@@ -1,15 +1,35 @@
-service System
-   .monstershot.SystemPingResponse Ping(.monstershot.SystemPingRequest)
-   .monstershot.SystemSignupResponse Signup(.monstershot.SystemSignupRequest)
-   .monstershot.SystemLoginResponse Login(.monstershot.SystemLoginRequest)
-message SystemPingRequest
-message SystemPingResponse
-message SystemSignupRequest
-    name
-message SystemSignupResponse
-    token
-    session_id
-message SystemLoginRequest
-    token
-message SystemLoginResponse
-    session_id
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+
+public partial class SystemLoginRequest
+{
+
+}
+
+public partial class SystemLoginResponse
+{
+
+}
+
+public partial class SystemPingRequest
+{
+
+}
+
+public partial class SystemPingResponse
+{
+
+}
+
+public partial class SystemSignupRequest
+{
+
+}
+
+public partial class SystemSignupResponse
+{
+
+}
+
+

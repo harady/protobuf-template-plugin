@@ -1,6 +1,2 @@
-message UserGachaButtonData
-    id
-    user_id
-    gacha_button_id
-    gacha_schedule_id
-    purchase_count
+・user_gacha_buttons
+id	userId	gachaButtonId	gachaScheduleId	purchaseCount	

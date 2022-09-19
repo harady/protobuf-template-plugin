@@ -1,5 +1,10 @@
-message UserPaidCrystalData
-    id
-    user_id
-   .monstershot.PurchasePlatformType purchase_platform_type
-    amount
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+
+public partial class UserPaidCrystalData
+{
+
+}
+
+

@@ -1,9 +1,26 @@
-service Mission
-   .monstershot.MissionAchieveResponse Achieve(.monstershot.MissionAchieveRequest)
-   .monstershot.MissionReceiveResponse Receive(.monstershot.MissionReceiveRequest)
-message MissionAchieveRequest
-    mission_id
-message MissionAchieveResponse
-message MissionReceiveRequest
-    mission_ids
-message MissionReceiveResponse
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+
+namespace AwsDotnetCsharp
+{
+	public partial class MissionAchieveRequest
+	{
+
+	}
+
+	public partial class MissionAchieveResponse
+	{
+
+	}
+
+	public partial class MissionReceiveRequest
+	{
+
+	}
+
+	public partial class MissionReceiveResponse
+	{
+
+	}
+}

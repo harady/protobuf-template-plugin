@@ -1,4 +1,10 @@
-message AssetbundleData
-    name
-    hash
-    size
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+
+public partial class AssetbundleData
+{
+
+}
+
+

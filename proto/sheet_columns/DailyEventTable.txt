@@ -1,3 +1,2 @@
-message DailyEventTableData
-    id
-    name
+・daily_event_tables
+id	name	

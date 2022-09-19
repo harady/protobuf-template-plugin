@@ -1,4 +1,2 @@
-message ExchangeData
-    id
-    name
-   .monstershot.ExchangeType type
+・exchanges
+id	name	type	

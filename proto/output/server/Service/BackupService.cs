@@ -1,17 +1,36 @@
-service Backup
-   .monstershot.BackupSaveTokenResponse SaveToken(.monstershot.BackupSaveTokenRequest)
-   .monstershot.BackupRemoveTokenResponse RemoveToken(.monstershot.BackupRemoveTokenRequest)
-   .monstershot.BackupTransferResponse Transfer(.monstershot.BackupTransferRequest)
-message BackupSaveTokenRequest
-   .monstershot.BackupType backup_type
-    backup_token
-message BackupSaveTokenResponse
-message BackupRemoveTokenRequest
-   .monstershot.BackupType backup_type
-message BackupRemoveTokenResponse
-message BackupTransferRequest
-   .monstershot.BackupType backup_type
-    backup_token
-message BackupTransferResponse
-    token
-    session_id
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using Amazon.Lambda.Core;
+
+namespace AwsDotnetCsharp
+{
+	public partial class BackupService : BackupServiceBase
+	{
+
+		public override async Task<BackupSaveTokenResponse> SaveTokenImpl(
+			BackupSaveTokenRequest request, ILambdaContext context)
+		{
+			await Task.Run(() => Console.WriteLine("SaveTokenImpl is not implemented"));
+			var result = new BackupSaveTokenResponse();
+			return result;
+		}
+
+		public override async Task<BackupRemoveTokenResponse> RemoveTokenImpl(
+			BackupRemoveTokenRequest request, ILambdaContext context)
+		{
+			await Task.Run(() => Console.WriteLine("RemoveTokenImpl is not implemented"));
+			var result = new BackupRemoveTokenResponse();
+			return result;
+		}
+
+		public override async Task<BackupTransferResponse> TransferImpl(
+			BackupTransferRequest request, ILambdaContext context)
+		{
+			await Task.Run(() => Console.WriteLine("TransferImpl is not implemented"));
+			var result = new BackupTransferResponse();
+			return result;
+		}
+
+	}
+}

@@ -1,5 +1,2 @@
-message UserSessionData
-    id
-    user_id
-    session_id
-    expire_at
+・user_sessions
+id	userId	sessionId	expireAt	

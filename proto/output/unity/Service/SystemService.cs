@@ -1,15 +1,43 @@
-service System
-   .monstershot.SystemPingResponse Ping(.monstershot.SystemPingRequest)
-   .monstershot.SystemSignupResponse Signup(.monstershot.SystemSignupRequest)
-   .monstershot.SystemLoginResponse Login(.monstershot.SystemLoginRequest)
-message SystemPingRequest
-message SystemPingResponse
-message SystemSignupRequest
-    name
-message SystemSignupResponse
-    token
-    session_id
-message SystemLoginRequest
-    token
-message SystemLoginResponse
-    session_id
+﻿using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using UnityEngine;
+
+
+public partial class SystemService
+{
+
+	public void Ping(Action<SystemPingResponse> onSuccess)
+	{
+		var request = new SystemPingRequest();
+		PingInner(
+			request: request,
+			onSuccess: (response) => {
+				onSuccess?.Invoke(response);
+			}
+		);
+	}
+
+	public void Signup(Action<SystemSignupResponse> onSuccess)
+	{
+		var request = new SystemSignupRequest();
+		SignupInner(
+			request: request,
+			onSuccess: (response) => {
+				onSuccess?.Invoke(response);
+			}
+		);
+	}
+
+	public void Login(Action<SystemLoginResponse> onSuccess)
+	{
+		var request = new SystemLoginRequest();
+		LoginInner(
+			request: request,
+			onSuccess: (response) => {
+				onSuccess?.Invoke(response);
+			}
+		);
+	}
+
+}

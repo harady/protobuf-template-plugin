@@ -1,10 +1,11 @@
-message QuestData
-    id
-    name
-    quest_group_id
-    noContinue
-   .monstershot.QuestDifficultyType quest_difficulty_type
-    boss_unit_id
-    open_at
-    close_at
-    open_dow
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+
+namespace AwsDotnetCsharp
+{
+	public partial class QuestData
+	{
+
+	}
+}

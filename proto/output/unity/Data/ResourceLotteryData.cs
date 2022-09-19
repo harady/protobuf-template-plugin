@@ -1,4 +1,10 @@
-message ResourceLotteryData
-    id
-    name
-    has_empty
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+
+public partial class ResourceLotteryData
+{
+
+}
+
+

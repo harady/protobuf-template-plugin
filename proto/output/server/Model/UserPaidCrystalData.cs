@@ -1,5 +1,11 @@
-message UserPaidCrystalData
-    id
-    user_id
-   .monstershot.PurchasePlatformType purchase_platform_type
-    amount
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+
+namespace AwsDotnetCsharp
+{
+	public partial class UserPaidCrystalData
+	{
+
+	}
+}

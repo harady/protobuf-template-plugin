@@ -1,13 +1,36 @@
-service FriendRequest
-   .monstershot.FriendRequestListResponse List(.monstershot.FriendRequestListRequest)
-   .monstershot.FriendRequestAcceptResponse Accept(.monstershot.FriendRequestAcceptRequest)
-   .monstershot.FriendRequestRejectResponse Reject(.monstershot.FriendRequestRejectRequest)
-message FriendRequestListRequest
-message FriendRequestListResponse
-   .monstershot.OtherUserData other_users
-message FriendRequestAcceptRequest
-    user_id
-message FriendRequestAcceptResponse
-message FriendRequestRejectRequest
-    user_id
-message FriendRequestRejectResponse
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+
+namespace AwsDotnetCsharp
+{
+	public partial class FriendRequestAcceptRequest
+	{
+
+	}
+
+	public partial class FriendRequestAcceptResponse
+	{
+
+	}
+
+	public partial class FriendRequestListRequest
+	{
+
+	}
+
+	public partial class FriendRequestListResponse
+	{
+
+	}
+
+	public partial class FriendRequestRejectRequest
+	{
+
+	}
+
+	public partial class FriendRequestRejectResponse
+	{
+
+	}
+}

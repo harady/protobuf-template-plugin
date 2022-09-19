@@ -1,5 +1,10 @@
-message UserItemData
-    id
-    user_id
-    item_id
-    amount
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+
+public partial class UserItemData
+{
+
+}
+
+

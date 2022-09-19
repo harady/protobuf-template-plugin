@@ -1,5 +1,11 @@
-message UserMissionData
-    id
-    user_id
-    mission_id
-    progress
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+
+namespace AwsDotnetCsharp
+{
+	public partial class UserMissionData
+	{
+
+	}
+}

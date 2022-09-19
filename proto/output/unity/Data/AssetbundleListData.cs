@@ -1,3 +1,10 @@
-message AssetbundleListData
-    version
-   .monstershot.AssetbundleData assetbundles
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+
+public partial class AssetbundleListData
+{
+
+}
+
+

@@ -1,6 +1,15 @@
-service Exchange
-   .monstershot.ExchangeExchangeResponse Exchange(.monstershot.ExchangeExchangeRequest)
-message ExchangeExchangeRequest
-    exchange_item_id
-    exchange_count
-message ExchangeExchangeResponse
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+
+public partial class ExchangeExchangeRequest
+{
+
+}
+
+public partial class ExchangeExchangeResponse
+{
+
+}
+
+

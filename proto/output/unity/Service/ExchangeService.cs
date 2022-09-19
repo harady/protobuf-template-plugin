@@ -1,6 +1,21 @@
-service Exchange
-   .monstershot.ExchangeExchangeResponse Exchange(.monstershot.ExchangeExchangeRequest)
-message ExchangeExchangeRequest
-    exchange_item_id
-    exchange_count
-message ExchangeExchangeResponse
+﻿using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using UnityEngine;
+
+
+public partial class ExchangeService
+{
+
+	public void Exchange(Action<ExchangeExchangeResponse> onSuccess)
+	{
+		var request = new ExchangeExchangeRequest();
+		ExchangeInner(
+			request: request,
+			onSuccess: (response) => {
+				onSuccess?.Invoke(response);
+			}
+		);
+	}
+
+}

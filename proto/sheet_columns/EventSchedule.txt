@@ -1,5 +1,2 @@
-message EventScheduleData
-    id
-    quest_id
-    open_at
-    close_at
+・event_schedules
+id	questId	openAt	closeAt	

@@ -1,3 +1,11 @@
-message BattleUserData
-   .monstershot.OtherUserData other_user
-    user_unit_ids
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+
+namespace AwsDotnetCsharp
+{
+	public partial class BattleUserData
+	{
+
+	}
+}

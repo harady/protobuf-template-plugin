@@ -1,4 +1,11 @@
-message BattleRewardsUsersData
-   .monstershot.OtherUserData host_users
-   .monstershot.OtherUserData guest_users
-   .monstershot.OtherUserData helper_users
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+
+namespace AwsDotnetCsharp
+{
+	public partial class BattleRewardsUsersData
+	{
+
+	}
+}

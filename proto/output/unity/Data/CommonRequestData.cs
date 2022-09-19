@@ -1,2 +1,10 @@
-message CommonRequest
-    session_id
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+
+public partial class CommonRequest
+{
+
+}
+
+

@@ -1,3 +1,2 @@
-message VersionData
-    id
-    name
+・versions
+id	name	

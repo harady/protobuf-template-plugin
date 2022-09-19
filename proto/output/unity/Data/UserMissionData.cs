@@ -1,5 +1,10 @@
-message UserMissionData
-    id
-    user_id
-    mission_id
-    progress
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+
+public partial class UserMissionData
+{
+
+}
+
+

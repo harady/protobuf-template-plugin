@@ -1,5 +1,11 @@
-message GachaResultItemData
-   .monstershot.ResourceData resource
-    is_extra
-    is_pickup
-    is_guarantee
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+
+namespace AwsDotnetCsharp
+{
+	public partial class GachaResultItemData
+	{
+
+	}
+}

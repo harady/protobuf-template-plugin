@@ -1,5 +1,11 @@
-message BattleRewardsData
-    stage_id
-   .monstershot.BattleRewardsSpecialRewardsData special_rewards
-   .monstershot.BattleRewardsQuestRewardsData quest_rewards
-   .monstershot.BattleRewardsUsersData users
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+
+namespace AwsDotnetCsharp
+{
+	public partial class BattleRewardsData
+	{
+
+	}
+}

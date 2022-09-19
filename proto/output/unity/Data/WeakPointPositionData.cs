@@ -1,6 +1,10 @@
-message WeakPointPositionData
-    id
-    weak_point_id
-    angle
-    radius_rate
-    size_rate
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+
+public partial class WeakPointPositionData
+{
+
+}
+
+

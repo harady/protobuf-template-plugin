@@ -1,10 +1,11 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
-using System.Collections.Generic;
 using Google.Protobuf;
 using Google.Protobuf.Compiler;
+using Scriban;
 
 namespace protoc_gen_myplugincsharp
 {
@@ -24,9 +25,14 @@ namespace protoc_gen_myplugincsharp
 				request = Deserialize<CodeGeneratorRequest>(stdin);
 			}
 
-			var response = new CodeGeneratorResponse();
 			var paramDict = ParseParameter(request.Parameter);
+			var templatePath = (string)paramDict["template"];
 
+			var templateStr = File.ReadAllText(templatePath);
+			var template = Template.Parse(templateStr);
+			var result = template.Render(new { Name = "World" }); // => "Hello World!" 
+
+			var response = new CodeGeneratorResponse();
 			var fileToGenerates = request.FileToGenerate.ToHashSet();
 
 			var outputFileDescs = request.ProtoFile
@@ -62,14 +68,11 @@ namespace protoc_gen_myplugincsharp
 						.ToPascalCase();
 				filename += paramDict["fileSuffix"];
 
-				output.AppendLine(request.Parameter);
-
-
 				// set as response
 				response.File.Add(
 					new CodeGeneratorResponse.Types.File() {
 						Name = filename,
-						Content = output.ToString(),
+						Content = result.ToString(),
 					}
 				);
 			}

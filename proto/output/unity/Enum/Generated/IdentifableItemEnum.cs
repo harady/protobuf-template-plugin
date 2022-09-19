@@ -1,6 +1,6 @@
-message IdentifableItemData
-    id
-    name
-    description
-   .monstershot.IdentifableItemType type
-    owned_limit
+
+public enum IdentifableItemType
+{
+	None = 0,
+	QuestTicket = 1,
+}

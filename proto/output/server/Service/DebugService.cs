@@ -1,17 +1,76 @@
-service Debug
-   .monstershot.DebugSetServerTimeResponse SetServerTime(.monstershot.DebugSetServerTimeRequest)
-   .monstershot.DebugTestResponse Test(.monstershot.DebugTestRequest)
-   .monstershot.DebugTestResponse Test1(.monstershot.DebugTestRequest)
-   .monstershot.DebugTestResponse Test2(.monstershot.DebugTestRequest)
-   .monstershot.DebugTestResponse Test3(.monstershot.DebugTestRequest)
-   .monstershot.DebugTestResponse Test4(.monstershot.DebugTestRequest)
-   .monstershot.DebugTestResponse Test5(.monstershot.DebugTestRequest)
-   .monstershot.DebugTestResponse Test6(.monstershot.DebugTestRequest)
-message DebugSetServerTimeRequest
-    is_clear
-    to_set_server_time
-message DebugSetServerTimeResponse
-message DebugTestRequest
-    message
-message DebugTestResponse
-    message
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using Amazon.Lambda.Core;
+
+namespace AwsDotnetCsharp
+{
+	public partial class DebugService : DebugServiceBase
+	{
+
+		public override async Task<DebugSetServerTimeResponse> SetServerTimeImpl(
+			DebugSetServerTimeRequest request, ILambdaContext context)
+		{
+			await Task.Run(() => Console.WriteLine("SetServerTimeImpl is not implemented"));
+			var result = new DebugSetServerTimeResponse();
+			return result;
+		}
+
+		public override async Task<DebugTestResponse> TestImpl(
+			DebugTestRequest request, ILambdaContext context)
+		{
+			await Task.Run(() => Console.WriteLine("TestImpl is not implemented"));
+			var result = new DebugTestResponse();
+			return result;
+		}
+
+		public override async Task<DebugTestResponse> Test1Impl(
+			DebugTestRequest request, ILambdaContext context)
+		{
+			await Task.Run(() => Console.WriteLine("Test1Impl is not implemented"));
+			var result = new DebugTestResponse();
+			return result;
+		}
+
+		public override async Task<DebugTestResponse> Test2Impl(
+			DebugTestRequest request, ILambdaContext context)
+		{
+			await Task.Run(() => Console.WriteLine("Test2Impl is not implemented"));
+			var result = new DebugTestResponse();
+			return result;
+		}
+
+		public override async Task<DebugTestResponse> Test3Impl(
+			DebugTestRequest request, ILambdaContext context)
+		{
+			await Task.Run(() => Console.WriteLine("Test3Impl is not implemented"));
+			var result = new DebugTestResponse();
+			return result;
+		}
+
+		public override async Task<DebugTestResponse> Test4Impl(
+			DebugTestRequest request, ILambdaContext context)
+		{
+			await Task.Run(() => Console.WriteLine("Test4Impl is not implemented"));
+			var result = new DebugTestResponse();
+			return result;
+		}
+
+		public override async Task<DebugTestResponse> Test5Impl(
+			DebugTestRequest request, ILambdaContext context)
+		{
+			await Task.Run(() => Console.WriteLine("Test5Impl is not implemented"));
+			var result = new DebugTestResponse();
+			return result;
+		}
+
+		public override async Task<DebugTestResponse> Test6Impl(
+			DebugTestRequest request, ILambdaContext context)
+		{
+			await Task.Run(() => Console.WriteLine("Test6Impl is not implemented"));
+			var result = new DebugTestResponse();
+			return result;
+		}
+
+	}
+}

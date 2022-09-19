@@ -1,5 +1,10 @@
-message UnitLevelExpData
-    id
-    growth_type
-    level
-    total_exp
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+
+public partial class UnitLevelExpData
+{
+
+}
+
+

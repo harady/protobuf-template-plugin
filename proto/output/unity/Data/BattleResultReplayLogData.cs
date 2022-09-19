@@ -1,4 +1,10 @@
-message BattleResultReplayLogData
-    time
-    type
-    data
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+
+public partial class BattleResultReplayLogData
+{
+
+}
+
+

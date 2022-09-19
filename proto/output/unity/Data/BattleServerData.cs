@@ -1,2 +1,10 @@
-message BattleServerData
-    id
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+
+public partial class BattleServerData
+{
+
+}
+
+

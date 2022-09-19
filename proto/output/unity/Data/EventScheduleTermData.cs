@@ -1,5 +1,10 @@
-message EventScheduleTermData
-    id
-    daily_event_table_id
-    open_at
-    close_at
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+
+public partial class EventScheduleTermData
+{
+
+}
+
+

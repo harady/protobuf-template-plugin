@@ -1,3 +1,2 @@
-message UnitCategoryData
-    id
-    name
+・unit_categorys
+id	name	

@@ -1,5 +1,10 @@
-message ErrorResponse
-    code
-    title
-    message
-    description
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+
+public partial class ErrorResponse
+{
+
+}
+
+

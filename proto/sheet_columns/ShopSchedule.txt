@@ -1,5 +1,2 @@
-message ShopScheduleData
-    id
-    shop_id
-    open_at
-    close_at
+・shop_schedules
+id	shopId	openAt	closeAt	

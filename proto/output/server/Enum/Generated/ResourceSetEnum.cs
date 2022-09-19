@@ -1,3 +1,6 @@
-message ResourceSetData
-    id
-    name
+
+public enum ResourceSetType
+{
+	None = 0,
+	EvolutionMaterial = 1,
+}

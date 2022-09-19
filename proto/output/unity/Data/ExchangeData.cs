@@ -1,4 +1,10 @@
-message ExchangeData
-    id
-    name
-   .monstershot.ExchangeType type
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+
+public partial class ExchangeData
+{
+
+}
+
+

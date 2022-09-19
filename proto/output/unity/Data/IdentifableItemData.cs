@@ -1,6 +1,10 @@
-message IdentifableItemData
-    id
-    name
-    description
-   .monstershot.IdentifableItemType type
-    owned_limit
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+
+public partial class IdentifableItemData
+{
+
+}
+
+

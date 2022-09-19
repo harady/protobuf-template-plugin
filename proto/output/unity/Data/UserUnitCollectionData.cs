@@ -1,6 +1,10 @@
-message UserUnitCollectionData
-    id
-    user_id
-    unit_id
-    has_earned
-    used_count
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+
+public partial class UserUnitCollectionData
+{
+
+}
+
+

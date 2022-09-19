@@ -1,7 +1,10 @@
-message UserFriendData
-    id
-    user_id
-    friend_user_id
-    is_favorite
-    last_used_at
-    used_count
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+
+public partial class UserFriendData
+{
+
+}
+
+

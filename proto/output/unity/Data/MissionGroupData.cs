@@ -1,3 +1,10 @@
-message MissionGroupData
-    id
-   .monstershot.MissionGroupType type
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+
+public partial class MissionGroupData
+{
+
+}
+
+

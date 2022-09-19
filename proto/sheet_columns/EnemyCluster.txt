@@ -1,3 +1,2 @@
-message EnemyClusterData
-    id
-    name
+・enemy_clusters
+id	name	

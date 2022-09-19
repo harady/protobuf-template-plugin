@@ -1,5 +1,11 @@
-message UserSessionData
-    id
-    user_id
-    session_id
-    expire_at
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+
+namespace AwsDotnetCsharp
+{
+	public partial class UserSessionData
+	{
+
+	}
+}

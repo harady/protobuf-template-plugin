@@ -1,7 +1,11 @@
-message UserStageData
-    id
-    user_id
-    stage_id
-    clear_count
-    failed_count
-    best_clear_time
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+
+namespace AwsDotnetCsharp
+{
+	public partial class UserStageData
+	{
+
+	}
+}

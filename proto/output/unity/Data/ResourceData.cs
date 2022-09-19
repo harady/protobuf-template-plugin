@@ -1,5 +1,10 @@
-message ResourceData
-   .monstershot.ResourceType resource_type
-    resource_id
-    resource_amount
-    resource_extra
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+
+public partial class ResourceData
+{
+
+}
+
+

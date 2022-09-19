@@ -1,7 +1,10 @@
-message UnitEvolutionData
-    id
-    name
-   .monstershot.UnitEvolutionType type
-    base_unit_id
-    result_unit_id
-    cost_resource_set_id
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+
+public partial class UnitEvolutionData
+{
+
+}
+
+

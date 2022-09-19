@@ -1,5 +1,10 @@
-message RoundData
-    id
-    name
-    stage_id
-    round_no
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+
+public partial class RoundData
+{
+
+}
+
+

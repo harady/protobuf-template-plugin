@@ -1,5 +1,10 @@
-message ExchangeScheduleData
-    id
-    exchange_id
-    open_at
-    close_at
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+
+public partial class ExchangeScheduleData
+{
+
+}
+
+
