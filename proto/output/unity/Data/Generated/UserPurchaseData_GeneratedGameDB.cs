@@ -55,18 +55,23 @@ public partial class UserPurchaseData : IUnique<long>
 
 	private static void SetupUserPurchaseDataTableIndexGenerated(DataTable<long, UserPurchaseData> targetDataTable)
 	{
-		targetDataTable.CreateUniqueIndex("Userpurchasedata", aData => (object)aData.userpurchasedata);
-		targetDataTable.CreateIndex("Userpurchasedata", aData => (object)aData.userpurchasedata);
-		targetDataTable.CreateIndex("Userpurchasedata", aData => (object)aData.userpurchasedata);
-		targetDataTable.CreateIndex("Userpurchasedata", aData => (object)aData.userpurchasedata);
-		targetDataTable.CreateIndex("Userpurchasedata", aData => (object)aData.userpurchasedata);
-		targetDataTable.CreateIndex("Userpurchasedata", aData => (object)aData.userpurchasedata);
-		targetDataTable.CreateIndex("Userpurchasedata", aData => (object)aData.userpurchasedata);
-		targetDataTable.CreateIndex("Userpurchasedata", aData => (object)aData.userpurchasedata);
-		targetDataTable.CreateIndex("Userpurchasedata", aData => (object)aData.userpurchasedata);
-		targetDataTable.CreateIndex("Userpurchasedata", aData => (object)aData.userpurchasedata);
-		targetDataTable.CreateIndex("Userpurchasedata", aData => (object)aData.userpurchasedata);
-		targetDataTable.CreateIndex("Userpurchasedata", aData => (object)aData.userpurchasedata);
+		targetDataTable.CreateUniqueIndex("Id", aData => (object)aData.id);
+	}
+	#endregion
+	#region DataTableUniqueIndex(Id)
+	public static UserPurchaseData GetDataById(long id)
+	{
+		return dataTable.GetData("Id", (object)id);
+	}
+
+	public static void RemoveDataByIds(ICollection<long> ids)
+	{
+		ids.ForEach(aId => RemoveDataById(aId));
+	}
+
+	public static void RemoveDataById(long id)
+	{
+		dataTable.DeleteByKey("Id", (object)id);
 	}
 	#endregion
 }

@@ -55,9 +55,23 @@ public partial class MissionScheduleData : IUnique<long>
 
 	private static void SetupMissionScheduleDataTableIndexGenerated(DataTable<long, MissionScheduleData> targetDataTable)
 	{
-		targetDataTable.CreateUniqueIndex("Missionscheduledata", aData => (object)aData.missionscheduledata);
-		targetDataTable.CreateIndex("Missionscheduledata", aData => (object)aData.missionscheduledata);
-		targetDataTable.CreateIndex("Missionscheduledata", aData => (object)aData.missionscheduledata);
+		targetDataTable.CreateUniqueIndex("Id", aData => (object)aData.id);
+	}
+	#endregion
+	#region DataTableUniqueIndex(Id)
+	public static MissionScheduleData GetDataById(long id)
+	{
+		return dataTable.GetData("Id", (object)id);
+	}
+
+	public static void RemoveDataByIds(ICollection<long> ids)
+	{
+		ids.ForEach(aId => RemoveDataById(aId));
+	}
+
+	public static void RemoveDataById(long id)
+	{
+		dataTable.DeleteByKey("Id", (object)id);
 	}
 	#endregion
 }

@@ -55,9 +55,23 @@ public partial class ShopData : IUnique<long>
 
 	private static void SetupShopDataTableIndexGenerated(DataTable<long, ShopData> targetDataTable)
 	{
-		targetDataTable.CreateUniqueIndex("Shopdata", aData => (object)aData.shopdata);
-		targetDataTable.CreateIndex("Shopdata", aData => (object)aData.shopdata);
-		targetDataTable.CreateIndex("Shopdata", aData => (object)aData.shopdata);
+		targetDataTable.CreateUniqueIndex("Id", aData => (object)aData.id);
+	}
+	#endregion
+	#region DataTableUniqueIndex(Id)
+	public static ShopData GetDataById(long id)
+	{
+		return dataTable.GetData("Id", (object)id);
+	}
+
+	public static void RemoveDataByIds(ICollection<long> ids)
+	{
+		ids.ForEach(aId => RemoveDataById(aId));
+	}
+
+	public static void RemoveDataById(long id)
+	{
+		dataTable.DeleteByKey("Id", (object)id);
 	}
 	#endregion
 }

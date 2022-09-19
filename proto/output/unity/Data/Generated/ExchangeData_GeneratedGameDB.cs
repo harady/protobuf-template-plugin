@@ -55,10 +55,23 @@ public partial class ExchangeData : IUnique<long>
 
 	private static void SetupExchangeDataTableIndexGenerated(DataTable<long, ExchangeData> targetDataTable)
 	{
-		targetDataTable.CreateUniqueIndex("Exchangedata", aData => (object)aData.exchangedata);
-		targetDataTable.CreateIndex("Exchangedata", aData => (object)aData.exchangedata);
-		targetDataTable.CreateIndex("Exchangedata", aData => (object)aData.exchangedata);
-		targetDataTable.CreateIndex("Exchangedata", aData => (object)aData.exchangedata);
+		targetDataTable.CreateUniqueIndex("Id", aData => (object)aData.id);
+	}
+	#endregion
+	#region DataTableUniqueIndex(Id)
+	public static ExchangeData GetDataById(long id)
+	{
+		return dataTable.GetData("Id", (object)id);
+	}
+
+	public static void RemoveDataByIds(ICollection<long> ids)
+	{
+		ids.ForEach(aId => RemoveDataById(aId));
+	}
+
+	public static void RemoveDataById(long id)
+	{
+		dataTable.DeleteByKey("Id", (object)id);
 	}
 	#endregion
 }

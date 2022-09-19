@@ -55,16 +55,23 @@ public partial class QuestData : IUnique<long>
 
 	private static void SetupQuestDataTableIndexGenerated(DataTable<long, QuestData> targetDataTable)
 	{
-		targetDataTable.CreateUniqueIndex("Questdata", aData => (object)aData.questdata);
-		targetDataTable.CreateIndex("Questdata", aData => (object)aData.questdata);
-		targetDataTable.CreateIndex("Questdata", aData => (object)aData.questdata);
-		targetDataTable.CreateIndex("Questdata", aData => (object)aData.questdata);
-		targetDataTable.CreateIndex("Questdata", aData => (object)aData.questdata);
-		targetDataTable.CreateIndex("Questdata", aData => (object)aData.questdata);
-		targetDataTable.CreateIndex("Questdata", aData => (object)aData.questdata);
-		targetDataTable.CreateIndex("Questdata", aData => (object)aData.questdata);
-		targetDataTable.CreateIndex("Questdata", aData => (object)aData.questdata);
-		targetDataTable.CreateIndex("Questdata", aData => (object)aData.questdata);
+		targetDataTable.CreateUniqueIndex("Id", aData => (object)aData.id);
+	}
+	#endregion
+	#region DataTableUniqueIndex(Id)
+	public static QuestData GetDataById(long id)
+	{
+		return dataTable.GetData("Id", (object)id);
+	}
+
+	public static void RemoveDataByIds(ICollection<long> ids)
+	{
+		ids.ForEach(aId => RemoveDataById(aId));
+	}
+
+	public static void RemoveDataById(long id)
+	{
+		dataTable.DeleteByKey("Id", (object)id);
 	}
 	#endregion
 }

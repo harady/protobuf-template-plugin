@@ -55,12 +55,23 @@ public partial class UserGachaButtonData : IUnique<long>
 
 	private static void SetupUserGachaButtonDataTableIndexGenerated(DataTable<long, UserGachaButtonData> targetDataTable)
 	{
-		targetDataTable.CreateUniqueIndex("Usergachabuttondata", aData => (object)aData.usergachabuttondata);
-		targetDataTable.CreateIndex("Usergachabuttondata", aData => (object)aData.usergachabuttondata);
-		targetDataTable.CreateIndex("Usergachabuttondata", aData => (object)aData.usergachabuttondata);
-		targetDataTable.CreateIndex("Usergachabuttondata", aData => (object)aData.usergachabuttondata);
-		targetDataTable.CreateIndex("Usergachabuttondata", aData => (object)aData.usergachabuttondata);
-		targetDataTable.CreateIndex("Usergachabuttondata", aData => (object)aData.usergachabuttondata);
+		targetDataTable.CreateUniqueIndex("Id", aData => (object)aData.id);
+	}
+	#endregion
+	#region DataTableUniqueIndex(Id)
+	public static UserGachaButtonData GetDataById(long id)
+	{
+		return dataTable.GetData("Id", (object)id);
+	}
+
+	public static void RemoveDataByIds(ICollection<long> ids)
+	{
+		ids.ForEach(aId => RemoveDataById(aId));
+	}
+
+	public static void RemoveDataById(long id)
+	{
+		dataTable.DeleteByKey("Id", (object)id);
 	}
 	#endregion
 }

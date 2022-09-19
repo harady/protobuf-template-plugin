@@ -55,9 +55,23 @@ public partial class LoginBonusData : IUnique<long>
 
 	private static void SetupLoginBonusDataTableIndexGenerated(DataTable<long, LoginBonusData> targetDataTable)
 	{
-		targetDataTable.CreateUniqueIndex("Loginbonusdata", aData => (object)aData.loginbonusdata);
-		targetDataTable.CreateIndex("Loginbonusdata", aData => (object)aData.loginbonusdata);
-		targetDataTable.CreateIndex("Loginbonusdata", aData => (object)aData.loginbonusdata);
+		targetDataTable.CreateUniqueIndex("Id", aData => (object)aData.id);
+	}
+	#endregion
+	#region DataTableUniqueIndex(Id)
+	public static LoginBonusData GetDataById(long id)
+	{
+		return dataTable.GetData("Id", (object)id);
+	}
+
+	public static void RemoveDataByIds(ICollection<long> ids)
+	{
+		ids.ForEach(aId => RemoveDataById(aId));
+	}
+
+	public static void RemoveDataById(long id)
+	{
+		dataTable.DeleteByKey("Id", (object)id);
 	}
 	#endregion
 }

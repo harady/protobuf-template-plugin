@@ -55,11 +55,23 @@ public partial class UserMissionData : IUnique<long>
 
 	private static void SetupUserMissionDataTableIndexGenerated(DataTable<long, UserMissionData> targetDataTable)
 	{
-		targetDataTable.CreateUniqueIndex("Usermissiondata", aData => (object)aData.usermissiondata);
-		targetDataTable.CreateIndex("Usermissiondata", aData => (object)aData.usermissiondata);
-		targetDataTable.CreateIndex("Usermissiondata", aData => (object)aData.usermissiondata);
-		targetDataTable.CreateIndex("Usermissiondata", aData => (object)aData.usermissiondata);
-		targetDataTable.CreateIndex("Usermissiondata", aData => (object)aData.usermissiondata);
+		targetDataTable.CreateUniqueIndex("Id", aData => (object)aData.id);
+	}
+	#endregion
+	#region DataTableUniqueIndex(Id)
+	public static UserMissionData GetDataById(long id)
+	{
+		return dataTable.GetData("Id", (object)id);
+	}
+
+	public static void RemoveDataByIds(ICollection<long> ids)
+	{
+		ids.ForEach(aId => RemoveDataById(aId));
+	}
+
+	public static void RemoveDataById(long id)
+	{
+		dataTable.DeleteByKey("Id", (object)id);
 	}
 	#endregion
 }

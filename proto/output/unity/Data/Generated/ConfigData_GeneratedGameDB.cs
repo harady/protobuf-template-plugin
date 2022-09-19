@@ -55,11 +55,23 @@ public partial class ConfigData : IUnique<long>
 
 	private static void SetupConfigDataTableIndexGenerated(DataTable<long, ConfigData> targetDataTable)
 	{
-		targetDataTable.CreateUniqueIndex("Configdata", aData => (object)aData.configdata);
-		targetDataTable.CreateIndex("Configdata", aData => (object)aData.configdata);
-		targetDataTable.CreateIndex("Configdata", aData => (object)aData.configdata);
-		targetDataTable.CreateIndex("Configdata", aData => (object)aData.configdata);
-		targetDataTable.CreateIndex("Configdata", aData => (object)aData.configdata);
+		targetDataTable.CreateUniqueIndex("Id", aData => (object)aData.id);
+	}
+	#endregion
+	#region DataTableUniqueIndex(Id)
+	public static ConfigData GetDataById(long id)
+	{
+		return dataTable.GetData("Id", (object)id);
+	}
+
+	public static void RemoveDataByIds(ICollection<long> ids)
+	{
+		ids.ForEach(aId => RemoveDataById(aId));
+	}
+
+	public static void RemoveDataById(long id)
+	{
+		dataTable.DeleteByKey("Id", (object)id);
 	}
 	#endregion
 }

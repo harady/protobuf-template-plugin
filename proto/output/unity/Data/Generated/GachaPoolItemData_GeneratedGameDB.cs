@@ -55,15 +55,23 @@ public partial class GachaPoolItemData : IUnique<long>
 
 	private static void SetupGachaPoolItemDataTableIndexGenerated(DataTable<long, GachaPoolItemData> targetDataTable)
 	{
-		targetDataTable.CreateUniqueIndex("Gachapoolitemdata", aData => (object)aData.gachapoolitemdata);
-		targetDataTable.CreateIndex("Gachapoolitemdata", aData => (object)aData.gachapoolitemdata);
-		targetDataTable.CreateIndex("Gachapoolitemdata", aData => (object)aData.gachapoolitemdata);
-		targetDataTable.CreateIndex("Gachapoolitemdata", aData => (object)aData.gachapoolitemdata);
-		targetDataTable.CreateIndex("Gachapoolitemdata", aData => (object)aData.gachapoolitemdata);
-		targetDataTable.CreateIndex("Gachapoolitemdata", aData => (object)aData.gachapoolitemdata);
-		targetDataTable.CreateIndex("Gachapoolitemdata", aData => (object)aData.gachapoolitemdata);
-		targetDataTable.CreateIndex("Gachapoolitemdata", aData => (object)aData.gachapoolitemdata);
-		targetDataTable.CreateIndex("Gachapoolitemdata", aData => (object)aData.gachapoolitemdata);
+		targetDataTable.CreateUniqueIndex("Id", aData => (object)aData.id);
+	}
+	#endregion
+	#region DataTableUniqueIndex(Id)
+	public static GachaPoolItemData GetDataById(long id)
+	{
+		return dataTable.GetData("Id", (object)id);
+	}
+
+	public static void RemoveDataByIds(ICollection<long> ids)
+	{
+		ids.ForEach(aId => RemoveDataById(aId));
+	}
+
+	public static void RemoveDataById(long id)
+	{
+		dataTable.DeleteByKey("Id", (object)id);
 	}
 	#endregion
 }

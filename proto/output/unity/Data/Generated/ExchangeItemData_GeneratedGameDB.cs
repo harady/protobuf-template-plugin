@@ -55,18 +55,23 @@ public partial class ExchangeItemData : IUnique<long>
 
 	private static void SetupExchangeItemDataTableIndexGenerated(DataTable<long, ExchangeItemData> targetDataTable)
 	{
-		targetDataTable.CreateUniqueIndex("Exchangeitemdata", aData => (object)aData.exchangeitemdata);
-		targetDataTable.CreateIndex("Exchangeitemdata", aData => (object)aData.exchangeitemdata);
-		targetDataTable.CreateIndex("Exchangeitemdata", aData => (object)aData.exchangeitemdata);
-		targetDataTable.CreateIndex("Exchangeitemdata", aData => (object)aData.exchangeitemdata);
-		targetDataTable.CreateIndex("Exchangeitemdata", aData => (object)aData.exchangeitemdata);
-		targetDataTable.CreateIndex("Exchangeitemdata", aData => (object)aData.exchangeitemdata);
-		targetDataTable.CreateIndex("Exchangeitemdata", aData => (object)aData.exchangeitemdata);
-		targetDataTable.CreateIndex("Exchangeitemdata", aData => (object)aData.exchangeitemdata);
-		targetDataTable.CreateIndex("Exchangeitemdata", aData => (object)aData.exchangeitemdata);
-		targetDataTable.CreateIndex("Exchangeitemdata", aData => (object)aData.exchangeitemdata);
-		targetDataTable.CreateIndex("Exchangeitemdata", aData => (object)aData.exchangeitemdata);
-		targetDataTable.CreateIndex("Exchangeitemdata", aData => (object)aData.exchangeitemdata);
+		targetDataTable.CreateUniqueIndex("Id", aData => (object)aData.id);
+	}
+	#endregion
+	#region DataTableUniqueIndex(Id)
+	public static ExchangeItemData GetDataById(long id)
+	{
+		return dataTable.GetData("Id", (object)id);
+	}
+
+	public static void RemoveDataByIds(ICollection<long> ids)
+	{
+		ids.ForEach(aId => RemoveDataById(aId));
+	}
+
+	public static void RemoveDataById(long id)
+	{
+		dataTable.DeleteByKey("Id", (object)id);
 	}
 	#endregion
 }

@@ -55,9 +55,23 @@ public partial class AdviceData : IUnique<long>
 
 	private static void SetupAdviceDataTableIndexGenerated(DataTable<long, AdviceData> targetDataTable)
 	{
-		targetDataTable.CreateUniqueIndex("Advicedata", aData => (object)aData.advicedata);
-		targetDataTable.CreateIndex("Advicedata", aData => (object)aData.advicedata);
-		targetDataTable.CreateIndex("Advicedata", aData => (object)aData.advicedata);
+		targetDataTable.CreateUniqueIndex("Id", aData => (object)aData.id);
+	}
+	#endregion
+	#region DataTableUniqueIndex(Id)
+	public static AdviceData GetDataById(long id)
+	{
+		return dataTable.GetData("Id", (object)id);
+	}
+
+	public static void RemoveDataByIds(ICollection<long> ids)
+	{
+		ids.ForEach(aId => RemoveDataById(aId));
+	}
+
+	public static void RemoveDataById(long id)
+	{
+		dataTable.DeleteByKey("Id", (object)id);
 	}
 	#endregion
 }

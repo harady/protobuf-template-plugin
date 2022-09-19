@@ -55,14 +55,23 @@ public partial class EquipmentData : IUnique<long>
 
 	private static void SetupEquipmentDataTableIndexGenerated(DataTable<long, EquipmentData> targetDataTable)
 	{
-		targetDataTable.CreateUniqueIndex("Equipmentdata", aData => (object)aData.equipmentdata);
-		targetDataTable.CreateIndex("Equipmentdata", aData => (object)aData.equipmentdata);
-		targetDataTable.CreateIndex("Equipmentdata", aData => (object)aData.equipmentdata);
-		targetDataTable.CreateIndex("Equipmentdata", aData => (object)aData.equipmentdata);
-		targetDataTable.CreateIndex("Equipmentdata", aData => (object)aData.equipmentdata);
-		targetDataTable.CreateIndex("Equipmentdata", aData => (object)aData.equipmentdata);
-		targetDataTable.CreateIndex("Equipmentdata", aData => (object)aData.equipmentdata);
-		targetDataTable.CreateIndex("Equipmentdata", aData => (object)aData.equipmentdata);
+		targetDataTable.CreateUniqueIndex("Id", aData => (object)aData.id);
+	}
+	#endregion
+	#region DataTableUniqueIndex(Id)
+	public static EquipmentData GetDataById(long id)
+	{
+		return dataTable.GetData("Id", (object)id);
+	}
+
+	public static void RemoveDataByIds(ICollection<long> ids)
+	{
+		ids.ForEach(aId => RemoveDataById(aId));
+	}
+
+	public static void RemoveDataById(long id)
+	{
+		dataTable.DeleteByKey("Id", (object)id);
 	}
 	#endregion
 }

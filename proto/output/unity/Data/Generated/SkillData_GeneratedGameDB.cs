@@ -55,22 +55,23 @@ public partial class SkillData : IUnique<long>
 
 	private static void SetupSkillDataTableIndexGenerated(DataTable<long, SkillData> targetDataTable)
 	{
-		targetDataTable.CreateUniqueIndex("Skilldata", aData => (object)aData.skilldata);
-		targetDataTable.CreateIndex("Skilldata", aData => (object)aData.skilldata);
-		targetDataTable.CreateIndex("Skilldata", aData => (object)aData.skilldata);
-		targetDataTable.CreateIndex("Skilldata", aData => (object)aData.skilldata);
-		targetDataTable.CreateIndex("Skilldata", aData => (object)aData.skilldata);
-		targetDataTable.CreateIndex("Skilldata", aData => (object)aData.skilldata);
-		targetDataTable.CreateIndex("Skilldata", aData => (object)aData.skilldata);
-		targetDataTable.CreateIndex("Skilldata", aData => (object)aData.skilldata);
-		targetDataTable.CreateIndex("Skilldata", aData => (object)aData.skilldata);
-		targetDataTable.CreateIndex("Skilldata", aData => (object)aData.skilldata);
-		targetDataTable.CreateIndex("Skilldata", aData => (object)aData.skilldata);
-		targetDataTable.CreateIndex("Skilldata", aData => (object)aData.skilldata);
-		targetDataTable.CreateIndex("Skilldata", aData => (object)aData.skilldata);
-		targetDataTable.CreateIndex("Skilldata", aData => (object)aData.skilldata);
-		targetDataTable.CreateIndex("Skilldata", aData => (object)aData.skilldata);
-		targetDataTable.CreateIndex("Skilldata", aData => (object)aData.skilldata);
+		targetDataTable.CreateUniqueIndex("Id", aData => (object)aData.id);
+	}
+	#endregion
+	#region DataTableUniqueIndex(Id)
+	public static SkillData GetDataById(long id)
+	{
+		return dataTable.GetData("Id", (object)id);
+	}
+
+	public static void RemoveDataByIds(ICollection<long> ids)
+	{
+		ids.ForEach(aId => RemoveDataById(aId));
+	}
+
+	public static void RemoveDataById(long id)
+	{
+		dataTable.DeleteByKey("Id", (object)id);
 	}
 	#endregion
 }

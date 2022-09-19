@@ -55,16 +55,23 @@ public partial class AbilityData : IUnique<long>
 
 	private static void SetupAbilityDataTableIndexGenerated(DataTable<long, AbilityData> targetDataTable)
 	{
-		targetDataTable.CreateUniqueIndex("Abilitydata", aData => (object)aData.abilitydata);
-		targetDataTable.CreateIndex("Abilitydata", aData => (object)aData.abilitydata);
-		targetDataTable.CreateIndex("Abilitydata", aData => (object)aData.abilitydata);
-		targetDataTable.CreateIndex("Abilitydata", aData => (object)aData.abilitydata);
-		targetDataTable.CreateIndex("Abilitydata", aData => (object)aData.abilitydata);
-		targetDataTable.CreateIndex("Abilitydata", aData => (object)aData.abilitydata);
-		targetDataTable.CreateIndex("Abilitydata", aData => (object)aData.abilitydata);
-		targetDataTable.CreateIndex("Abilitydata", aData => (object)aData.abilitydata);
-		targetDataTable.CreateIndex("Abilitydata", aData => (object)aData.abilitydata);
-		targetDataTable.CreateIndex("Abilitydata", aData => (object)aData.abilitydata);
+		targetDataTable.CreateUniqueIndex("Id", aData => (object)aData.id);
+	}
+	#endregion
+	#region DataTableUniqueIndex(Id)
+	public static AbilityData GetDataById(long id)
+	{
+		return dataTable.GetData("Id", (object)id);
+	}
+
+	public static void RemoveDataByIds(ICollection<long> ids)
+	{
+		ids.ForEach(aId => RemoveDataById(aId));
+	}
+
+	public static void RemoveDataById(long id)
+	{
+		dataTable.DeleteByKey("Id", (object)id);
 	}
 	#endregion
 }

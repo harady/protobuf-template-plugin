@@ -55,9 +55,23 @@ public partial class DailyEventTableData : IUnique<long>
 
 	private static void SetupDailyEventTableDataTableIndexGenerated(DataTable<long, DailyEventTableData> targetDataTable)
 	{
-		targetDataTable.CreateUniqueIndex("Dailyeventtabledata", aData => (object)aData.dailyeventtabledata);
-		targetDataTable.CreateIndex("Dailyeventtabledata", aData => (object)aData.dailyeventtabledata);
-		targetDataTable.CreateIndex("Dailyeventtabledata", aData => (object)aData.dailyeventtabledata);
+		targetDataTable.CreateUniqueIndex("Id", aData => (object)aData.id);
+	}
+	#endregion
+	#region DataTableUniqueIndex(Id)
+	public static DailyEventTableData GetDataById(long id)
+	{
+		return dataTable.GetData("Id", (object)id);
+	}
+
+	public static void RemoveDataByIds(ICollection<long> ids)
+	{
+		ids.ForEach(aId => RemoveDataById(aId));
+	}
+
+	public static void RemoveDataById(long id)
+	{
+		dataTable.DeleteByKey("Id", (object)id);
 	}
 	#endregion
 }

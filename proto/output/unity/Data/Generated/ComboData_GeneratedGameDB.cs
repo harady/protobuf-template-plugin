@@ -55,18 +55,23 @@ public partial class ComboData : IUnique<long>
 
 	private static void SetupComboDataTableIndexGenerated(DataTable<long, ComboData> targetDataTable)
 	{
-		targetDataTable.CreateUniqueIndex("Combodata", aData => (object)aData.combodata);
-		targetDataTable.CreateIndex("Combodata", aData => (object)aData.combodata);
-		targetDataTable.CreateIndex("Combodata", aData => (object)aData.combodata);
-		targetDataTable.CreateIndex("Combodata", aData => (object)aData.combodata);
-		targetDataTable.CreateIndex("Combodata", aData => (object)aData.combodata);
-		targetDataTable.CreateIndex("Combodata", aData => (object)aData.combodata);
-		targetDataTable.CreateIndex("Combodata", aData => (object)aData.combodata);
-		targetDataTable.CreateIndex("Combodata", aData => (object)aData.combodata);
-		targetDataTable.CreateIndex("Combodata", aData => (object)aData.combodata);
-		targetDataTable.CreateIndex("Combodata", aData => (object)aData.combodata);
-		targetDataTable.CreateIndex("Combodata", aData => (object)aData.combodata);
-		targetDataTable.CreateIndex("Combodata", aData => (object)aData.combodata);
+		targetDataTable.CreateUniqueIndex("Id", aData => (object)aData.id);
+	}
+	#endregion
+	#region DataTableUniqueIndex(Id)
+	public static ComboData GetDataById(long id)
+	{
+		return dataTable.GetData("Id", (object)id);
+	}
+
+	public static void RemoveDataByIds(ICollection<long> ids)
+	{
+		ids.ForEach(aId => RemoveDataById(aId));
+	}
+
+	public static void RemoveDataById(long id)
+	{
+		dataTable.DeleteByKey("Id", (object)id);
 	}
 	#endregion
 }

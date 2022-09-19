@@ -59,7 +59,7 @@ public partial class {{ message.name }} : IUnique<long>
 	{
 		{{- for field in message.field }}
 			{{- if (field.name == "id") }}
-		targetDataTable.CreateUniqueIndex("{{ message.name | to_pascal }}", aData => (object)aData.{{ message.name | to_camel }});
+		targetDataTable.CreateUniqueIndex("{{ field.name | to_pascal }}", aData => (object)aData.{{ field.name | to_camel }});
 			{{- end }}
 		{{- end }}
 		{{- for field in message.field }}
@@ -70,32 +70,32 @@ public partial class {{ message.name }} : IUnique<long>
 	}
 	#endregion
 	{{- end }}
-	{{- range .Fields }}
-		{{- if (message.name "id") }}
-	#region DataTableUniqueIndex({{ message.name | to_pascal }})
-	public static {{ message.name }} GetDataBy{{ message.name | to_pascal }}({{ .BaseType }} {{ message.name | to_camel }})
+	{{- for field in message.field }}
+		{{- if (field.name == "id") }}
+	#region DataTableUniqueIndex({{ field.name | to_pascal }})
+	public static {{ message.name }} GetDataBy{{ field.name | to_pascal }}({{ field | to_cs_type }} {{ field.name | to_camel }})
 	{
-		return dataTable.GetData("{{ message.name | to_pascal }}", (object){{ message.name | to_camel }});
+		return dataTable.GetData("{{ field.name | to_pascal }}", (object){{ field.name | to_camel }});
 	}
 
-	public static void RemoveDataBy{{ message.name | to_pascal }}s(ICollection<{{ .BaseType }}> {{ message.name | to_camel }}s)
+	public static void RemoveDataBy{{ field.name | to_pascal }}s(ICollection<{{ field | to_cs_type }}> {{ field.name | to_camel }}s)
 	{
-		{{ message.name | to_camel }}s.ForEach(a{{ message.name | to_pascal }} => RemoveDataBy{{ message.name | to_pascal }}(a{{ message.name | to_pascal }}));
+		{{ field.name | to_camel }}s.ForEach(a{{ field.name | to_pascal }} => RemoveDataBy{{ field.name | to_pascal }}(a{{ field.name | to_pascal }}));
 	}
 
-	public static void RemoveDataBy{{ message.name | to_pascal }}({{ .BaseType }} {{ message.name | to_camel }})
+	public static void RemoveDataBy{{ field.name | to_pascal }}({{ field | to_cs_type }} {{ field.name | to_camel }})
 	{
-		dataTable.DeleteByKey("{{ message.name | to_pascal }}", (object){{ message.name | to_camel }});
+		dataTable.DeleteByKey("{{ field.name | to_pascal }}", (object){{ field.name | to_camel }});
 	}
 	#endregion
 		{{- end }}
 	{{- end }}
-	{{- range .Fields }}
-		{{- if (StrArrayContains $Indexess message.name) }}
-	#region DataTableIndex ({{message.name | to_pascal}})
-	public static List<{{ $messageName }}> GetDataListBy{{ message.name | to_pascal }}({{ .BaseType }} {{ message.name | to_camel }})
+	{{- for field in message.field }}
+		{{- if false }}
+	#region DataTableIndex ({{ message.name | to_pascal }})
+	public static List<{{ message.name }}> GetDataListBy{{ field.name | to_pascal }}({{ field | to_cs_type }} {{ field.name | to_camel }})
 	{
-		return dataTable.GetDataList("{{ message.name | to_pascal }}", (object){{ message.name | to_camel }});
+		return dataTable.GetDataList("{{ field.name | to_pascal }}", (object){{ field.name | to_camel }});
 	}
 	#endregion
 		{{- end }}

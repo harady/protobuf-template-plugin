@@ -55,13 +55,23 @@ public partial class UnitEvolutionData : IUnique<long>
 
 	private static void SetupUnitEvolutionDataTableIndexGenerated(DataTable<long, UnitEvolutionData> targetDataTable)
 	{
-		targetDataTable.CreateUniqueIndex("Unitevolutiondata", aData => (object)aData.unitevolutiondata);
-		targetDataTable.CreateIndex("Unitevolutiondata", aData => (object)aData.unitevolutiondata);
-		targetDataTable.CreateIndex("Unitevolutiondata", aData => (object)aData.unitevolutiondata);
-		targetDataTable.CreateIndex("Unitevolutiondata", aData => (object)aData.unitevolutiondata);
-		targetDataTable.CreateIndex("Unitevolutiondata", aData => (object)aData.unitevolutiondata);
-		targetDataTable.CreateIndex("Unitevolutiondata", aData => (object)aData.unitevolutiondata);
-		targetDataTable.CreateIndex("Unitevolutiondata", aData => (object)aData.unitevolutiondata);
+		targetDataTable.CreateUniqueIndex("Id", aData => (object)aData.id);
+	}
+	#endregion
+	#region DataTableUniqueIndex(Id)
+	public static UnitEvolutionData GetDataById(long id)
+	{
+		return dataTable.GetData("Id", (object)id);
+	}
+
+	public static void RemoveDataByIds(ICollection<long> ids)
+	{
+		ids.ForEach(aId => RemoveDataById(aId));
+	}
+
+	public static void RemoveDataById(long id)
+	{
+		dataTable.DeleteByKey("Id", (object)id);
 	}
 	#endregion
 }

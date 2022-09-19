@@ -55,14 +55,23 @@ public partial class EventQuestCategoryData : IUnique<long>
 
 	private static void SetupEventQuestCategoryDataTableIndexGenerated(DataTable<long, EventQuestCategoryData> targetDataTable)
 	{
-		targetDataTable.CreateUniqueIndex("Eventquestcategorydata", aData => (object)aData.eventquestcategorydata);
-		targetDataTable.CreateIndex("Eventquestcategorydata", aData => (object)aData.eventquestcategorydata);
-		targetDataTable.CreateIndex("Eventquestcategorydata", aData => (object)aData.eventquestcategorydata);
-		targetDataTable.CreateIndex("Eventquestcategorydata", aData => (object)aData.eventquestcategorydata);
-		targetDataTable.CreateIndex("Eventquestcategorydata", aData => (object)aData.eventquestcategorydata);
-		targetDataTable.CreateIndex("Eventquestcategorydata", aData => (object)aData.eventquestcategorydata);
-		targetDataTable.CreateIndex("Eventquestcategorydata", aData => (object)aData.eventquestcategorydata);
-		targetDataTable.CreateIndex("Eventquestcategorydata", aData => (object)aData.eventquestcategorydata);
+		targetDataTable.CreateUniqueIndex("Id", aData => (object)aData.id);
+	}
+	#endregion
+	#region DataTableUniqueIndex(Id)
+	public static EventQuestCategoryData GetDataById(long id)
+	{
+		return dataTable.GetData("Id", (object)id);
+	}
+
+	public static void RemoveDataByIds(ICollection<long> ids)
+	{
+		ids.ForEach(aId => RemoveDataById(aId));
+	}
+
+	public static void RemoveDataById(long id)
+	{
+		dataTable.DeleteByKey("Id", (object)id);
 	}
 	#endregion
 }

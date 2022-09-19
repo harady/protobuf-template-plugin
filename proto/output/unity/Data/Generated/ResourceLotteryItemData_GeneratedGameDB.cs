@@ -55,14 +55,23 @@ public partial class ResourceLotteryItemData : IUnique<long>
 
 	private static void SetupResourceLotteryItemDataTableIndexGenerated(DataTable<long, ResourceLotteryItemData> targetDataTable)
 	{
-		targetDataTable.CreateUniqueIndex("Resourcelotteryitemdata", aData => (object)aData.resourcelotteryitemdata);
-		targetDataTable.CreateIndex("Resourcelotteryitemdata", aData => (object)aData.resourcelotteryitemdata);
-		targetDataTable.CreateIndex("Resourcelotteryitemdata", aData => (object)aData.resourcelotteryitemdata);
-		targetDataTable.CreateIndex("Resourcelotteryitemdata", aData => (object)aData.resourcelotteryitemdata);
-		targetDataTable.CreateIndex("Resourcelotteryitemdata", aData => (object)aData.resourcelotteryitemdata);
-		targetDataTable.CreateIndex("Resourcelotteryitemdata", aData => (object)aData.resourcelotteryitemdata);
-		targetDataTable.CreateIndex("Resourcelotteryitemdata", aData => (object)aData.resourcelotteryitemdata);
-		targetDataTable.CreateIndex("Resourcelotteryitemdata", aData => (object)aData.resourcelotteryitemdata);
+		targetDataTable.CreateUniqueIndex("Id", aData => (object)aData.id);
+	}
+	#endregion
+	#region DataTableUniqueIndex(Id)
+	public static ResourceLotteryItemData GetDataById(long id)
+	{
+		return dataTable.GetData("Id", (object)id);
+	}
+
+	public static void RemoveDataByIds(ICollection<long> ids)
+	{
+		ids.ForEach(aId => RemoveDataById(aId));
+	}
+
+	public static void RemoveDataById(long id)
+	{
+		dataTable.DeleteByKey("Id", (object)id);
 	}
 	#endregion
 }

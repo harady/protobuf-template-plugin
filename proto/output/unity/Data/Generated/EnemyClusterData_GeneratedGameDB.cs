@@ -55,9 +55,23 @@ public partial class EnemyClusterData : IUnique<long>
 
 	private static void SetupEnemyClusterDataTableIndexGenerated(DataTable<long, EnemyClusterData> targetDataTable)
 	{
-		targetDataTable.CreateUniqueIndex("Enemyclusterdata", aData => (object)aData.enemyclusterdata);
-		targetDataTable.CreateIndex("Enemyclusterdata", aData => (object)aData.enemyclusterdata);
-		targetDataTable.CreateIndex("Enemyclusterdata", aData => (object)aData.enemyclusterdata);
+		targetDataTable.CreateUniqueIndex("Id", aData => (object)aData.id);
+	}
+	#endregion
+	#region DataTableUniqueIndex(Id)
+	public static EnemyClusterData GetDataById(long id)
+	{
+		return dataTable.GetData("Id", (object)id);
+	}
+
+	public static void RemoveDataByIds(ICollection<long> ids)
+	{
+		ids.ForEach(aId => RemoveDataById(aId));
+	}
+
+	public static void RemoveDataById(long id)
+	{
+		dataTable.DeleteByKey("Id", (object)id);
 	}
 	#endregion
 }

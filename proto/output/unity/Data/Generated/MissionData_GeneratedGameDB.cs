@@ -55,17 +55,23 @@ public partial class MissionData : IUnique<long>
 
 	private static void SetupMissionDataTableIndexGenerated(DataTable<long, MissionData> targetDataTable)
 	{
-		targetDataTable.CreateUniqueIndex("Missiondata", aData => (object)aData.missiondata);
-		targetDataTable.CreateIndex("Missiondata", aData => (object)aData.missiondata);
-		targetDataTable.CreateIndex("Missiondata", aData => (object)aData.missiondata);
-		targetDataTable.CreateIndex("Missiondata", aData => (object)aData.missiondata);
-		targetDataTable.CreateIndex("Missiondata", aData => (object)aData.missiondata);
-		targetDataTable.CreateIndex("Missiondata", aData => (object)aData.missiondata);
-		targetDataTable.CreateIndex("Missiondata", aData => (object)aData.missiondata);
-		targetDataTable.CreateIndex("Missiondata", aData => (object)aData.missiondata);
-		targetDataTable.CreateIndex("Missiondata", aData => (object)aData.missiondata);
-		targetDataTable.CreateIndex("Missiondata", aData => (object)aData.missiondata);
-		targetDataTable.CreateIndex("Missiondata", aData => (object)aData.missiondata);
+		targetDataTable.CreateUniqueIndex("Id", aData => (object)aData.id);
+	}
+	#endregion
+	#region DataTableUniqueIndex(Id)
+	public static MissionData GetDataById(long id)
+	{
+		return dataTable.GetData("Id", (object)id);
+	}
+
+	public static void RemoveDataByIds(ICollection<long> ids)
+	{
+		ids.ForEach(aId => RemoveDataById(aId));
+	}
+
+	public static void RemoveDataById(long id)
+	{
+		dataTable.DeleteByKey("Id", (object)id);
 	}
 	#endregion
 }

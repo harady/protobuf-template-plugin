@@ -55,21 +55,23 @@ public partial class EnemyData : IUnique<long>
 
 	private static void SetupEnemyDataTableIndexGenerated(DataTable<long, EnemyData> targetDataTable)
 	{
-		targetDataTable.CreateUniqueIndex("Enemydata", aData => (object)aData.enemydata);
-		targetDataTable.CreateIndex("Enemydata", aData => (object)aData.enemydata);
-		targetDataTable.CreateIndex("Enemydata", aData => (object)aData.enemydata);
-		targetDataTable.CreateIndex("Enemydata", aData => (object)aData.enemydata);
-		targetDataTable.CreateIndex("Enemydata", aData => (object)aData.enemydata);
-		targetDataTable.CreateIndex("Enemydata", aData => (object)aData.enemydata);
-		targetDataTable.CreateIndex("Enemydata", aData => (object)aData.enemydata);
-		targetDataTable.CreateIndex("Enemydata", aData => (object)aData.enemydata);
-		targetDataTable.CreateIndex("Enemydata", aData => (object)aData.enemydata);
-		targetDataTable.CreateIndex("Enemydata", aData => (object)aData.enemydata);
-		targetDataTable.CreateIndex("Enemydata", aData => (object)aData.enemydata);
-		targetDataTable.CreateIndex("Enemydata", aData => (object)aData.enemydata);
-		targetDataTable.CreateIndex("Enemydata", aData => (object)aData.enemydata);
-		targetDataTable.CreateIndex("Enemydata", aData => (object)aData.enemydata);
-		targetDataTable.CreateIndex("Enemydata", aData => (object)aData.enemydata);
+		targetDataTable.CreateUniqueIndex("Id", aData => (object)aData.id);
+	}
+	#endregion
+	#region DataTableUniqueIndex(Id)
+	public static EnemyData GetDataById(long id)
+	{
+		return dataTable.GetData("Id", (object)id);
+	}
+
+	public static void RemoveDataByIds(ICollection<long> ids)
+	{
+		ids.ForEach(aId => RemoveDataById(aId));
+	}
+
+	public static void RemoveDataById(long id)
+	{
+		dataTable.DeleteByKey("Id", (object)id);
 	}
 	#endregion
 }

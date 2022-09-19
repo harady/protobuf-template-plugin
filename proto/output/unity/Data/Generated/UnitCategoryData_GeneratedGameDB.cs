@@ -55,9 +55,23 @@ public partial class UnitCategoryData : IUnique<long>
 
 	private static void SetupUnitCategoryDataTableIndexGenerated(DataTable<long, UnitCategoryData> targetDataTable)
 	{
-		targetDataTable.CreateUniqueIndex("Unitcategorydata", aData => (object)aData.unitcategorydata);
-		targetDataTable.CreateIndex("Unitcategorydata", aData => (object)aData.unitcategorydata);
-		targetDataTable.CreateIndex("Unitcategorydata", aData => (object)aData.unitcategorydata);
+		targetDataTable.CreateUniqueIndex("Id", aData => (object)aData.id);
+	}
+	#endregion
+	#region DataTableUniqueIndex(Id)
+	public static UnitCategoryData GetDataById(long id)
+	{
+		return dataTable.GetData("Id", (object)id);
+	}
+
+	public static void RemoveDataByIds(ICollection<long> ids)
+	{
+		ids.ForEach(aId => RemoveDataById(aId));
+	}
+
+	public static void RemoveDataById(long id)
+	{
+		dataTable.DeleteByKey("Id", (object)id);
 	}
 	#endregion
 }
