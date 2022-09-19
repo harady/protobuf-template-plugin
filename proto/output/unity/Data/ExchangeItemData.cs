@@ -10,3 +10,4 @@ message ExchangeItemData
     resource_amount
     resource_set_id
     limit_count
+template=template/csharp_unity_data-partial.txt,fileSuffix=Data.cs

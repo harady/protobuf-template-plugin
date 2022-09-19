@@ -5,3 +5,4 @@ message BattleInitEnemyData
     pos_x
     pos_y
    .monstershot.ResourceData drop_reward_resource
+template=template/csharp_unity_data-gamedb.txt,fileSuffix=Data_GeneratedGameDB.cs

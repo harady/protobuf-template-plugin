@@ -8,3 +8,4 @@ message ItemData
     owned_limit
     param_a
     param_b
+template=template/csharp_unity_data-gamedb.txt,fileSuffix=Data_GeneratedGameDB.cs

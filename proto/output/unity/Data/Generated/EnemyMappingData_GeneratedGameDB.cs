@@ -6,3 +6,4 @@ message EnemyMappingData
     pos_y
     drop_rate
     reward_resource_lottery_id
+template=template/csharp_unity_data-gamedb.txt,fileSuffix=Data_GeneratedGameDB.cs

@@ -6,3 +6,4 @@ message EventQuestCategoryData
     open_hours
     quest_group_id
    .monstershot.QuestDifficultyType questDifficultyType
+template=template/csharp_unity_data-partial.txt,fileSuffix=Data.cs

@@ -6,3 +6,4 @@ message ResourceLotteryItemData
     resource_id
     resource_amount_min
     resource_amount_max
+template=template/csharp_unity_data-partial.txt,fileSuffix=Data.cs

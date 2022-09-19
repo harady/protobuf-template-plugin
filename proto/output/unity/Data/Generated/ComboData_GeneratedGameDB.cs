@@ -10,3 +10,4 @@ message ComboData
     param_b
     param_c
     icon_id
+template=template/csharp_unity_data-gamedb.txt,fileSuffix=Data_GeneratedGameDB.cs

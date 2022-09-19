@@ -1,3 +1,0 @@
-message VersionData
-    id
-    name

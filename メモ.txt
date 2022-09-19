@@ -49,6 +49,9 @@ https://zenn.dev/nuits_jp/articles/2022-05-26-text-template-benckmarks
 Scriban:Goのtext/templateに近い？
 https://github.com/scriban/scriban
 
-DotLiquid:良さそうどうだろう？
-http://dotliquidmarkup.org/
+Scribanを採用することにした。
+
+template=template/sheet_columns.gotemplate,fileSuffix=.txt
+
+
 

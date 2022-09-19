@@ -15,3 +15,4 @@ message UserUnitData
     hero_badge
     is_locked
     get_at
+template=template/csharp_unity_data-gamedb.txt,fileSuffix=Data_GeneratedGameDB.cs

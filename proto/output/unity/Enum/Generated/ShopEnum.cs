@@ -1,3 +1,0 @@
-message ShopData
-    id
-    name

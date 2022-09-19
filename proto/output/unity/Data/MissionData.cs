@@ -9,3 +9,4 @@ message MissionData
    .monstershot.ResourceType reward_resource_type
     reward_resource_id
     reward_resource_amount
+template=template/csharp_unity_data-partial.txt,fileSuffix=Data.cs
