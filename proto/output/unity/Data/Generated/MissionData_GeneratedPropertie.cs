@@ -7,34 +7,34 @@ using Newtonsoft.Json;
 public partial class MissionData : AbstractData
 {
 	[DataMember(Name = "id")]
-	public Int64 id { get; set; }
+	public long id { get; set; }
 
 	[DataMember(Name = "name")]
-	public String name { get; set; }
+	public string name { get; set; }
 
 	[DataMember(Name = "missionGroupId")]
-	public Int64 missionGroupId { get; set; }
+	public long missionGroupId { get; set; }
 
 	[DataMember(Name = "type")]
-	public Enum type { get; set; }
+	public MissionType type { get; set; }
 
 	[DataMember(Name = "toAchieveProgress")]
-	public Int64 toAchieveProgress { get; set; }
+	public long toAchieveProgress { get; set; }
 
 	[DataMember(Name = "paramA")]
-	public Int64 paramA { get; set; }
+	public long paramA { get; set; }
 
 	[DataMember(Name = "paramB")]
-	public Int64 paramB { get; set; }
+	public long paramB { get; set; }
 
 	[DataMember(Name = "rewardResourceType")]
-	public Enum rewardResourceType { get; set; }
+	public ResourceType rewardResourceType { get; set; }
 
 	[DataMember(Name = "rewardResourceId")]
-	public Int64 rewardResourceId { get; set; }
+	public long rewardResourceId { get; set; }
 
 	[DataMember(Name = "rewardResourceAmount")]
-	public Int64 rewardResourceAmount { get; set; }
+	public long rewardResourceAmount { get; set; }
 
 	public AbilityData Clone() {
 		var result = new MissionData();

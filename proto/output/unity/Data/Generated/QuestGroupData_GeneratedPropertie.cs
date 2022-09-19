@@ -7,13 +7,13 @@ using Newtonsoft.Json;
 public partial class QuestGroupData : AbstractData
 {
 	[DataMember(Name = "id")]
-	public Int64 id { get; set; }
+	public long id { get; set; }
 
 	[DataMember(Name = "name")]
-	public String name { get; set; }
+	public string name { get; set; }
 
 	[DataMember(Name = "type")]
-	public Enum type { get; set; }
+	public QuestGroupType type { get; set; }
 
 	public AbilityData Clone() {
 		var result = new QuestGroupData();

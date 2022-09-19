@@ -7,16 +7,16 @@ using Newtonsoft.Json;
 public partial class ResourceData : AbstractData
 {
 	[DataMember(Name = "resourceType")]
-	public Enum resourceType { get; set; }
+	public ResourceType resourceType { get; set; }
 
 	[DataMember(Name = "resourceId")]
-	public Int64 resourceId { get; set; }
+	public long resourceId { get; set; }
 
 	[DataMember(Name = "resourceAmount")]
-	public Int64 resourceAmount { get; set; }
+	public long resourceAmount { get; set; }
 
 	[DataMember(Name = "resourceExtra")]
-	public String resourceExtra { get; set; }
+	public string resourceExtra { get; set; }
 
 	public AbilityData Clone() {
 		var result = new ResourceData();

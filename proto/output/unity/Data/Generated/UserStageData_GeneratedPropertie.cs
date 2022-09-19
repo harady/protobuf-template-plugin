@@ -7,22 +7,22 @@ using Newtonsoft.Json;
 public partial class UserStageData : AbstractData
 {
 	[DataMember(Name = "id")]
-	public Int64 id { get; set; }
+	public long id { get; set; }
 
 	[DataMember(Name = "userId")]
-	public Int64 userId { get; set; }
+	public long userId { get; set; }
 
 	[DataMember(Name = "stageId")]
-	public Int64 stageId { get; set; }
+	public long stageId { get; set; }
 
 	[DataMember(Name = "clearCount")]
-	public Int64 clearCount { get; set; }
+	public long clearCount { get; set; }
 
 	[DataMember(Name = "failedCount")]
-	public Int64 failedCount { get; set; }
+	public long failedCount { get; set; }
 
 	[DataMember(Name = "bestClearTime")]
-	public Int64 bestClearTime { get; set; }
+	public long bestClearTime { get; set; }
 
 	public AbilityData Clone() {
 		var result = new UserStageData();

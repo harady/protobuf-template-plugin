@@ -7,25 +7,25 @@ using Newtonsoft.Json;
 public partial class UserBattleData : AbstractData
 {
 	[DataMember(Name = "id")]
-	public Int64 id { get; set; }
+	public long id { get; set; }
 
 	[DataMember(Name = "userId")]
-	public Int64 userId { get; set; }
+	public long userId { get; set; }
 
 	[DataMember(Name = "stageId")]
-	public Int64 stageId { get; set; }
+	public long stageId { get; set; }
 
 	[DataMember(Name = "continueCount")]
-	public Int64 continueCount { get; set; }
+	public long continueCount { get; set; }
 
 	[DataMember(Name = "battleClientData")]
-	public Message battleClientData { get; set; }
+	public BattleClientData battleClientData { get; set; }
 
 	[DataMember(Name = "battleServerData")]
-	public Message battleServerData { get; set; }
+	public BattleServerData battleServerData { get; set; }
 
 	[DataMember(Name = "startAt")]
-	public Int64 startAt { get; set; }
+	public long startAt { get; set; }
 
 	public AbilityData Clone() {
 		var result = new UserBattleData();

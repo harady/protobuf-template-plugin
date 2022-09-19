@@ -7,7 +7,7 @@ using Newtonsoft.Json;
 public partial class CommonRequest : AbstractData
 {
 	[DataMember(Name = "sessionId")]
-	public String sessionId { get; set; }
+	public string sessionId { get; set; }
 
 	public AbilityData Clone() {
 		var result = new CommonRequest();

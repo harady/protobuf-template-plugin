@@ -7,55 +7,55 @@ using Newtonsoft.Json;
 public partial class UserData : AbstractData
 {
 	[DataMember(Name = "id")]
-	public Int64 id { get; set; }
+	public long id { get; set; }
 
 	[DataMember(Name = "name")]
-	public String name { get; set; }
+	public string name { get; set; }
 
 	[DataMember(Name = "token")]
-	public String token { get; set; }
+	public string token { get; set; }
 
 	[DataMember(Name = "code")]
-	public Int64 code { get; set; }
+	public long code { get; set; }
 
 	[DataMember(Name = "rank")]
-	public Int64 rank { get; set; }
+	public long rank { get; set; }
 
 	[DataMember(Name = "exp")]
-	public Int64 exp { get; set; }
+	public long exp { get; set; }
 
 	[DataMember(Name = "money")]
-	public Int64 money { get; set; }
+	public long money { get; set; }
 
 	[DataMember(Name = "stamina")]
-	public Int64 stamina { get; set; }
+	public long stamina { get; set; }
 
 	[DataMember(Name = "lastStaminaUpdateAt")]
-	public Int64 lastStaminaUpdateAt { get; set; }
+	public long lastStaminaUpdateAt { get; set; }
 
 	[DataMember(Name = "freeCrystal")]
-	public Int64 freeCrystal { get; set; }
+	public long freeCrystal { get; set; }
 
 	[DataMember(Name = "paidCrystal")]
-	public Int64 paidCrystal { get; set; }
+	public long paidCrystal { get; set; }
 
 	[DataMember(Name = "currentDeckId")]
-	public Int64 currentDeckId { get; set; }
+	public long currentDeckId { get; set; }
 
 	[DataMember(Name = "maxStaminaPlus")]
-	public Int64 maxStaminaPlus { get; set; }
+	public long maxStaminaPlus { get; set; }
 
 	[DataMember(Name = "deckNumPlus")]
-	public Int64 deckNumPlus { get; set; }
+	public long deckNumPlus { get; set; }
 
 	[DataMember(Name = "maxFriendNumPlus")]
-	public Int64 maxFriendNumPlus { get; set; }
+	public long maxFriendNumPlus { get; set; }
 
 	[DataMember(Name = "unitBoxNumPlus")]
-	public Int64 unitBoxNumPlus { get; set; }
+	public long unitBoxNumPlus { get; set; }
 
 	[DataMember(Name = "friendUserUnitId")]
-	public Int64 friendUserUnitId { get; set; }
+	public long friendUserUnitId { get; set; }
 
 	public AbilityData Clone() {
 		var result = new UserData();

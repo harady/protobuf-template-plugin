@@ -7,28 +7,28 @@ using Newtonsoft.Json;
 public partial class ShopItemData : AbstractData
 {
 	[DataMember(Name = "id")]
-	public Int64 id { get; set; }
+	public long id { get; set; }
 
 	[DataMember(Name = "name")]
-	public String name { get; set; }
+	public string name { get; set; }
 
 	[DataMember(Name = "shopId")]
-	public Int64 shopId { get; set; }
+	public long shopId { get; set; }
 
 	[DataMember(Name = "purchasePlatformType")]
-	public Enum purchasePlatformType { get; set; }
+	public PurchasePlatformType purchasePlatformType { get; set; }
 
 	[DataMember(Name = "platformProductId")]
-	public String platformProductId { get; set; }
+	public string platformProductId { get; set; }
 
 	[DataMember(Name = "price")]
-	public Int64 price { get; set; }
+	public long price { get; set; }
 
 	[DataMember(Name = "resourceSetId")]
-	public Int64 resourceSetId { get; set; }
+	public long resourceSetId { get; set; }
 
 	[DataMember(Name = "limitCount")]
-	public Int64 limitCount { get; set; }
+	public long limitCount { get; set; }
 
 	public AbilityData Clone() {
 		var result = new ShopItemData();

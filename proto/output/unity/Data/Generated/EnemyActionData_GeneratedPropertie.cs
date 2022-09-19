@@ -7,43 +7,43 @@ using Newtonsoft.Json;
 public partial class EnemyActionData : AbstractData
 {
 	[DataMember(Name = "id")]
-	public Int64 id { get; set; }
+	public long id { get; set; }
 
 	[DataMember(Name = "enemyId")]
-	public Int64 enemyId { get; set; }
+	public long enemyId { get; set; }
 
 	[DataMember(Name = "actionNo")]
-	public Int64 actionNo { get; set; }
+	public long actionNo { get; set; }
 
 	[DataMember(Name = "triggerType")]
-	public Enum triggerType { get; set; }
+	public TriggerType triggerType { get; set; }
 
 	[DataMember(Name = "triggerParamA")]
-	public Int64 triggerParamA { get; set; }
+	public long triggerParamA { get; set; }
 
 	[DataMember(Name = "triggerParamB")]
-	public Int64 triggerParamB { get; set; }
+	public long triggerParamB { get; set; }
 
 	[DataMember(Name = "triggerParamC")]
-	public Int64 triggerParamC { get; set; }
+	public long triggerParamC { get; set; }
 
 	[DataMember(Name = "triggerParamD")]
-	public Int64 triggerParamD { get; set; }
+	public long triggerParamD { get; set; }
 
 	[DataMember(Name = "actionType")]
-	public Enum actionType { get; set; }
+	public ActionType actionType { get; set; }
 
 	[DataMember(Name = "actionParamA")]
-	public Int64 actionParamA { get; set; }
+	public long actionParamA { get; set; }
 
 	[DataMember(Name = "actionParamB")]
-	public Int64 actionParamB { get; set; }
+	public long actionParamB { get; set; }
 
 	[DataMember(Name = "actionParamC")]
-	public Int64 actionParamC { get; set; }
+	public long actionParamC { get; set; }
 
 	[DataMember(Name = "actionParamD")]
-	public Int64 actionParamD { get; set; }
+	public long actionParamD { get; set; }
 
 	public AbilityData Clone() {
 		var result = new EnemyActionData();

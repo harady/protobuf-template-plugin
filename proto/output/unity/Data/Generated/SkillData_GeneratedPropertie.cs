@@ -7,49 +7,49 @@ using Newtonsoft.Json;
 public partial class SkillData : AbstractData
 {
 	[DataMember(Name = "id")]
-	public Int64 id { get; set; }
+	public long id { get; set; }
 
 	[DataMember(Name = "name")]
-	public String name { get; set; }
+	public string name { get; set; }
 
 	[DataMember(Name = "description")]
-	public String description { get; set; }
+	public string description { get; set; }
 
 	[DataMember(Name = "turn")]
-	public Int64 turn { get; set; }
+	public long turn { get; set; }
 
 	[DataMember(Name = "attackRate")]
-	public Int64 attackRate { get; set; }
+	public long attackRate { get; set; }
 
 	[DataMember(Name = "speedRate")]
-	public Int64 speedRate { get; set; }
+	public long speedRate { get; set; }
 
 	[DataMember(Name = "brakeRate")]
-	public Int64 brakeRate { get; set; }
+	public long brakeRate { get; set; }
 
 	[DataMember(Name = "effect1Type")]
-	public Enum effect1Type { get; set; }
+	public SkillEffectType effect1Type { get; set; }
 
 	[DataMember(Name = "effect1Rank")]
-	public Int64 effect1Rank { get; set; }
+	public long effect1Rank { get; set; }
 
 	[DataMember(Name = "effect1ParamA")]
-	public Int64 effect1ParamA { get; set; }
+	public long effect1ParamA { get; set; }
 
 	[DataMember(Name = "effect1ParamB")]
-	public Int64 effect1ParamB { get; set; }
+	public long effect1ParamB { get; set; }
 
 	[DataMember(Name = "effect2Type")]
-	public Enum effect2Type { get; set; }
+	public SkillEffectType effect2Type { get; set; }
 
 	[DataMember(Name = "effect2Rank")]
-	public Int64 effect2Rank { get; set; }
+	public long effect2Rank { get; set; }
 
 	[DataMember(Name = "effect2ParamA")]
-	public Int64 effect2ParamA { get; set; }
+	public long effect2ParamA { get; set; }
 
 	[DataMember(Name = "effect2ParamB")]
-	public Int64 effect2ParamB { get; set; }
+	public long effect2ParamB { get; set; }
 
 	public AbilityData Clone() {
 		var result = new SkillData();

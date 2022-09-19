@@ -7,13 +7,13 @@ using Newtonsoft.Json;
 public partial class ResourceLotteryData : AbstractData
 {
 	[DataMember(Name = "id")]
-	public Int64 id { get; set; }
+	public long id { get; set; }
 
 	[DataMember(Name = "name")]
-	public String name { get; set; }
+	public string name { get; set; }
 
 	[DataMember(Name = "hasEmpty")]
-	public Bool hasEmpty { get; set; }
+	public bool hasEmpty { get; set; }
 
 	public AbilityData Clone() {
 		var result = new ResourceLotteryData();

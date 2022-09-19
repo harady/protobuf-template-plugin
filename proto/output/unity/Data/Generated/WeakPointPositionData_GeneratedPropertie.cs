@@ -7,19 +7,19 @@ using Newtonsoft.Json;
 public partial class WeakPointPositionData : AbstractData
 {
 	[DataMember(Name = "id")]
-	public Int64 id { get; set; }
+	public long id { get; set; }
 
 	[DataMember(Name = "weakPointId")]
-	public Int64 weakPointId { get; set; }
+	public long weakPointId { get; set; }
 
 	[DataMember(Name = "angle")]
-	public Int64 angle { get; set; }
+	public long angle { get; set; }
 
 	[DataMember(Name = "radiusRate")]
-	public Int64 radiusRate { get; set; }
+	public long radiusRate { get; set; }
 
 	[DataMember(Name = "sizeRate")]
-	public Int64 sizeRate { get; set; }
+	public long sizeRate { get; set; }
 
 	public AbilityData Clone() {
 		var result = new WeakPointPositionData();

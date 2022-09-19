@@ -7,37 +7,37 @@ using Newtonsoft.Json;
 public partial class UserPurchaseData : AbstractData
 {
 	[DataMember(Name = "id")]
-	public Int64 id { get; set; }
+	public long id { get; set; }
 
 	[DataMember(Name = "userId")]
-	public Int64 userId { get; set; }
+	public long userId { get; set; }
 
 	[DataMember(Name = "purchasePlatformType")]
-	public Enum purchasePlatformType { get; set; }
+	public PurchasePlatformType purchasePlatformType { get; set; }
 
 	[DataMember(Name = "shopItemId")]
-	public Int64 shopItemId { get; set; }
+	public long shopItemId { get; set; }
 
 	[DataMember(Name = "price")]
-	public Int64 price { get; set; }
+	public long price { get; set; }
 
 	[DataMember(Name = "googlePlayRequest")]
-	public Message googlePlayRequest { get; set; }
+	public ShopPurchaseGooglePlayRequest googlePlayRequest { get; set; }
 
 	[DataMember(Name = "appStoreRequest")]
-	public Message appStoreRequest { get; set; }
+	public ShopPurchaseAppStoreRequest appStoreRequest { get; set; }
 
 	[DataMember(Name = "debugRequest")]
-	public Message debugRequest { get; set; }
+	public ShopPurchaseDebugRequest debugRequest { get; set; }
 
 	[DataMember(Name = "isReceiptInquired")]
-	public Bool isReceiptInquired { get; set; }
+	public bool isReceiptInquired { get; set; }
 
 	[DataMember(Name = "isResourceGranted")]
-	public Bool isResourceGranted { get; set; }
+	public bool isResourceGranted { get; set; }
 
 	[DataMember(Name = "purchaseAt")]
-	public Int64 purchaseAt { get; set; }
+	public long purchaseAt { get; set; }
 
 	public AbilityData Clone() {
 		var result = new UserPurchaseData();

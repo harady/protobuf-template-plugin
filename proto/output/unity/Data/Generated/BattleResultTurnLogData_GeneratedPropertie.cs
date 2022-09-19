@@ -7,40 +7,40 @@ using Newtonsoft.Json;
 public partial class BattleResultTurnLogData : AbstractData
 {
 	[DataMember(Name = "turnNo")]
-	public Int64 turnNo { get; set; }
+	public long turnNo { get; set; }
 
 	[DataMember(Name = "roundNo")]
-	public Int64 roundNo { get; set; }
+	public long roundNo { get; set; }
 
 	[DataMember(Name = "hitCount")]
-	public Int64 hitCount { get; set; }
+	public long hitCount { get; set; }
 
 	[DataMember(Name = "totalDamage")]
-	public Int64 totalDamage { get; set; }
+	public long totalDamage { get; set; }
 
 	[DataMember(Name = "killedEnemyMappingIds")]
-	public Int64 killedEnemyMappingIds { get; set; }
+	public long killedEnemyMappingIds { get; set; }
 
 	[DataMember(Name = "totalWaitingTime")]
-	public Float totalWaitingTime { get; set; }
+	public float totalWaitingTime { get; set; }
 
 	[DataMember(Name = "turnEndTime")]
-	public Float turnEndTime { get; set; }
+	public float turnEndTime { get; set; }
 
 	[DataMember(Name = "turnEndRealtime")]
-	public Float turnEndRealtime { get; set; }
+	public float turnEndRealtime { get; set; }
 
 	[DataMember(Name = "isShot")]
-	public Bool isShot { get; set; }
+	public bool isShot { get; set; }
 
 	[DataMember(Name = "isUseSkill")]
-	public Bool isUseSkill { get; set; }
+	public bool isUseSkill { get; set; }
 
 	[DataMember(Name = "shotAngle")]
-	public Float shotAngle { get; set; }
+	public float shotAngle { get; set; }
 
 	[DataMember(Name = "hash")]
-	public String hash { get; set; }
+	public string hash { get; set; }
 
 	public AbilityData Clone() {
 		var result = new BattleResultTurnLogData();

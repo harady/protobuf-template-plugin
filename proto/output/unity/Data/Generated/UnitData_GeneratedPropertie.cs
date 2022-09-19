@@ -7,100 +7,100 @@ using Newtonsoft.Json;
 public partial class UnitData : AbstractData
 {
 	[DataMember(Name = "id")]
-	public Int64 id { get; set; }
+	public long id { get; set; }
 
 	[DataMember(Name = "name")]
-	public String name { get; set; }
+	public string name { get; set; }
 
 	[DataMember(Name = "number")]
-	public Int64 number { get; set; }
+	public long number { get; set; }
 
 	[DataMember(Name = "baseUnitNumber")]
-	public Int64 baseUnitNumber { get; set; }
+	public long baseUnitNumber { get; set; }
 
 	[DataMember(Name = "rarity")]
-	public Int64 rarity { get; set; }
+	public long rarity { get; set; }
 
 	[DataMember(Name = "attribute")]
-	public Enum attribute { get; set; }
+	public UnitAttribute attribute { get; set; }
 
 	[DataMember(Name = "attackType")]
-	public Enum attackType { get; set; }
+	public UnitAttackType attackType { get; set; }
 
 	[DataMember(Name = "unitCategoryId")]
-	public Int64 unitCategoryId { get; set; }
+	public long unitCategoryId { get; set; }
 
 	[DataMember(Name = "growthType")]
-	public Int64 growthType { get; set; }
+	public long growthType { get; set; }
 
 	[DataMember(Name = "maxLevel")]
-	public Int64 maxLevel { get; set; }
+	public long maxLevel { get; set; }
 
 	[DataMember(Name = "maxLuck")]
-	public Int64 maxLuck { get; set; }
+	public long maxLuck { get; set; }
 
 	[DataMember(Name = "obtainType")]
-	public Enum obtainType { get; set; }
+	public UnitObtainType obtainType { get; set; }
 
 	[DataMember(Name = "baseHp")]
-	public Int64 baseHp { get; set; }
+	public long baseHp { get; set; }
 
 	[DataMember(Name = "baseAttack")]
-	public Int64 baseAttack { get; set; }
+	public long baseAttack { get; set; }
 
 	[DataMember(Name = "baseSpeed")]
-	public Int64 baseSpeed { get; set; }
+	public long baseSpeed { get; set; }
 
 	[DataMember(Name = "maxHp")]
-	public Int64 maxHp { get; set; }
+	public long maxHp { get; set; }
 
 	[DataMember(Name = "maxAttack")]
-	public Int64 maxAttack { get; set; }
+	public long maxAttack { get; set; }
 
 	[DataMember(Name = "maxSpeed")]
-	public Int64 maxSpeed { get; set; }
+	public long maxSpeed { get; set; }
 
 	[DataMember(Name = "maxPlusHp")]
-	public Int64 maxPlusHp { get; set; }
+	public long maxPlusHp { get; set; }
 
 	[DataMember(Name = "maxPlusAttack")]
-	public Int64 maxPlusAttack { get; set; }
+	public long maxPlusAttack { get; set; }
 
 	[DataMember(Name = "maxPlusSpeed")]
-	public Int64 maxPlusSpeed { get; set; }
+	public long maxPlusSpeed { get; set; }
 
 	[DataMember(Name = "skillId")]
-	public Int64 skillId { get; set; }
+	public long skillId { get; set; }
 
 	[DataMember(Name = "combo1Id")]
-	public Int64 combo1Id { get; set; }
+	public long combo1Id { get; set; }
 
 	[DataMember(Name = "combo2Id")]
-	public Int64 combo2Id { get; set; }
+	public long combo2Id { get; set; }
 
 	[DataMember(Name = "ability1Id")]
-	public Int64 ability1Id { get; set; }
+	public long ability1Id { get; set; }
 
 	[DataMember(Name = "ability2Id")]
-	public Int64 ability2Id { get; set; }
+	public long ability2Id { get; set; }
 
 	[DataMember(Name = "ability3Id")]
-	public Int64 ability3Id { get; set; }
+	public long ability3Id { get; set; }
 
 	[DataMember(Name = "ability4Id")]
-	public Int64 ability4Id { get; set; }
+	public long ability4Id { get; set; }
 
 	[DataMember(Name = "ability5Id")]
-	public Int64 ability5Id { get; set; }
+	public long ability5Id { get; set; }
 
 	[DataMember(Name = "equipmentSlotCount")]
-	public Int64 equipmentSlotCount { get; set; }
+	public long equipmentSlotCount { get; set; }
 
 	[DataMember(Name = "salePrice")]
-	public Int64 salePrice { get; set; }
+	public long salePrice { get; set; }
 
 	[DataMember(Name = "baseexp")]
-	public Int64 baseexp { get; set; }
+	public long baseexp { get; set; }
 
 	public AbilityData Clone() {
 		var result = new UnitData();

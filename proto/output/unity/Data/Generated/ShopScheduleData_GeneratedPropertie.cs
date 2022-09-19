@@ -7,16 +7,16 @@ using Newtonsoft.Json;
 public partial class ShopScheduleData : AbstractData
 {
 	[DataMember(Name = "id")]
-	public Int64 id { get; set; }
+	public long id { get; set; }
 
 	[DataMember(Name = "shopId")]
-	public Int64 shopId { get; set; }
+	public long shopId { get; set; }
 
 	[DataMember(Name = "openAt")]
-	public Int64 openAt { get; set; }
+	public long openAt { get; set; }
 
 	[DataMember(Name = "closeAt")]
-	public Int64 closeAt { get; set; }
+	public long closeAt { get; set; }
 
 	public AbilityData Clone() {
 		var result = new ShopScheduleData();

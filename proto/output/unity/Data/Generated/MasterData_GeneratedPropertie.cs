@@ -7,25 +7,25 @@ using Newtonsoft.Json;
 public partial class MasterData : AbstractData
 {
 	[DataMember(Name = "clientMaster")]
-	public Message clientMaster { get; set; }
+	public ClientMasterData clientMaster { get; set; }
 
 	[DataMember(Name = "enemyClusters")]
-	public Message enemyClusters { get; set; }
+	public EnemyClusterData enemyClusters { get; set; }
 
 	[DataMember(Name = "enemyMappings")]
-	public Message enemyMappings { get; set; }
+	public EnemyMappingData enemyMappings { get; set; }
 
 	[DataMember(Name = "eventQuestCategorys")]
-	public Message eventQuestCategorys { get; set; }
+	public EventQuestCategoryData eventQuestCategorys { get; set; }
 
 	[DataMember(Name = "eventScheduleTerms")]
-	public Message eventScheduleTerms { get; set; }
+	public EventScheduleTermData eventScheduleTerms { get; set; }
 
 	[DataMember(Name = "gachaPools")]
-	public Message gachaPools { get; set; }
+	public GachaPoolData gachaPools { get; set; }
 
 	[DataMember(Name = "gachaPoolItems")]
-	public Message gachaPoolItems { get; set; }
+	public GachaPoolItemData gachaPoolItems { get; set; }
 
 	public AbilityData Clone() {
 		var result = new MasterData();

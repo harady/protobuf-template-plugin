@@ -7,25 +7,25 @@ using Newtonsoft.Json;
 public partial class ResourceLotteryItemData : AbstractData
 {
 	[DataMember(Name = "id")]
-	public Int64 id { get; set; }
+	public long id { get; set; }
 
 	[DataMember(Name = "resourceLotteryId")]
-	public Int64 resourceLotteryId { get; set; }
+	public long resourceLotteryId { get; set; }
 
 	[DataMember(Name = "weight")]
-	public Int64 weight { get; set; }
+	public long weight { get; set; }
 
 	[DataMember(Name = "resourceType")]
-	public Enum resourceType { get; set; }
+	public ResourceType resourceType { get; set; }
 
 	[DataMember(Name = "resourceId")]
-	public Int64 resourceId { get; set; }
+	public long resourceId { get; set; }
 
 	[DataMember(Name = "resourceAmountMin")]
-	public Int64 resourceAmountMin { get; set; }
+	public long resourceAmountMin { get; set; }
 
 	[DataMember(Name = "resourceAmountMax")]
-	public Int64 resourceAmountMax { get; set; }
+	public long resourceAmountMax { get; set; }
 
 	public AbilityData Clone() {
 		var result = new ResourceLotteryItemData();

@@ -7,16 +7,16 @@ using Newtonsoft.Json;
 public partial class UserBackupData : AbstractData
 {
 	[DataMember(Name = "id")]
-	public Int64 id { get; set; }
+	public long id { get; set; }
 
 	[DataMember(Name = "userId")]
-	public Int64 userId { get; set; }
+	public long userId { get; set; }
 
 	[DataMember(Name = "backupType")]
-	public Enum backupType { get; set; }
+	public BackupType backupType { get; set; }
 
 	[DataMember(Name = "backupToken")]
-	public String backupToken { get; set; }
+	public string backupToken { get; set; }
 
 	public AbilityData Clone() {
 		var result = new UserBackupData();

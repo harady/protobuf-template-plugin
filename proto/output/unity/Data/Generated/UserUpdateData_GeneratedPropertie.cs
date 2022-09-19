@@ -7,43 +7,43 @@ using Newtonsoft.Json;
 public partial class UserUpdateData : AbstractData
 {
 	[DataMember(Name = "user")]
-	public Message user { get; set; }
+	public UserData user { get; set; }
 
 	[DataMember(Name = "userBackups")]
-	public Message userBackups { get; set; }
+	public UserBackupData userBackups { get; set; }
 
 	[DataMember(Name = "userDecks")]
-	public Message userDecks { get; set; }
+	public UserDeckData userDecks { get; set; }
 
 	[DataMember(Name = "userExchangeItems")]
-	public Message userExchangeItems { get; set; }
+	public UserExchangeItemData userExchangeItems { get; set; }
 
 	[DataMember(Name = "userGachaButtons")]
-	public Message userGachaButtons { get; set; }
+	public UserGachaButtonData userGachaButtons { get; set; }
 
 	[DataMember(Name = "userItems")]
-	public Message userItems { get; set; }
+	public UserItemData userItems { get; set; }
 
 	[DataMember(Name = "userMessages")]
-	public Message userMessages { get; set; }
+	public UserMessageData userMessages { get; set; }
 
 	[DataMember(Name = "userMissions")]
-	public Message userMissions { get; set; }
+	public UserMissionData userMissions { get; set; }
 
 	[DataMember(Name = "userPaidCrystals")]
-	public Message userPaidCrystals { get; set; }
+	public UserPaidCrystalData userPaidCrystals { get; set; }
 
 	[DataMember(Name = "userShopItems")]
-	public Message userShopItems { get; set; }
+	public UserShopItemData userShopItems { get; set; }
 
 	[DataMember(Name = "userStages")]
-	public Message userStages { get; set; }
+	public UserStageData userStages { get; set; }
 
 	[DataMember(Name = "userUnits")]
-	public Message userUnits { get; set; }
+	public UserUnitData userUnits { get; set; }
 
 	[DataMember(Name = "userUnitCollections")]
-	public Message userUnitCollections { get; set; }
+	public UserUnitCollectionData userUnitCollections { get; set; }
 
 	public AbilityData Clone() {
 		var result = new UserUpdateData();

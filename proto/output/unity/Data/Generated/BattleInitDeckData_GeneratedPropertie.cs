@@ -7,7 +7,7 @@ using Newtonsoft.Json;
 public partial class BattleInitDeckData : AbstractData
 {
 	[DataMember(Name = "userUnits")]
-	public Message userUnits { get; set; }
+	public UserUnitData userUnits { get; set; }
 
 	public AbilityData Clone() {
 		var result = new BattleInitDeckData();

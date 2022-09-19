@@ -7,16 +7,16 @@ using Newtonsoft.Json;
 public partial class UnitLevelExpData : AbstractData
 {
 	[DataMember(Name = "id")]
-	public Int64 id { get; set; }
+	public long id { get; set; }
 
 	[DataMember(Name = "growthType")]
-	public Int64 growthType { get; set; }
+	public long growthType { get; set; }
 
 	[DataMember(Name = "level")]
-	public Int64 level { get; set; }
+	public long level { get; set; }
 
 	[DataMember(Name = "totalExp")]
-	public Int64 totalExp { get; set; }
+	public long totalExp { get; set; }
 
 	public AbilityData Clone() {
 		var result = new UnitLevelExpData();

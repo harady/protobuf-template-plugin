@@ -7,19 +7,19 @@ using Newtonsoft.Json;
 public partial class UserIdentifableItemData : AbstractData
 {
 	[DataMember(Name = "id")]
-	public Int64 id { get; set; }
+	public long id { get; set; }
 
 	[DataMember(Name = "userId")]
-	public Int64 userId { get; set; }
+	public long userId { get; set; }
 
 	[DataMember(Name = "identifableItemId")]
-	public Int64 identifableItemId { get; set; }
+	public long identifableItemId { get; set; }
 
 	[DataMember(Name = "paramA")]
-	public Int64 paramA { get; set; }
+	public long paramA { get; set; }
 
 	[DataMember(Name = "paramB")]
-	public Int64 paramB { get; set; }
+	public long paramB { get; set; }
 
 	public AbilityData Clone() {
 		var result = new UserIdentifableItemData();

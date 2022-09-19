@@ -7,19 +7,19 @@ using Newtonsoft.Json;
 public partial class ResourceSetItemData : AbstractData
 {
 	[DataMember(Name = "id")]
-	public Int64 id { get; set; }
+	public long id { get; set; }
 
 	[DataMember(Name = "resourceSetId")]
-	public Int64 resourceSetId { get; set; }
+	public long resourceSetId { get; set; }
 
 	[DataMember(Name = "resourceType")]
-	public Enum resourceType { get; set; }
+	public ResourceType resourceType { get; set; }
 
 	[DataMember(Name = "resourceId")]
-	public Int64 resourceId { get; set; }
+	public long resourceId { get; set; }
 
 	[DataMember(Name = "resourceAmount")]
-	public Int64 resourceAmount { get; set; }
+	public long resourceAmount { get; set; }
 
 	public AbilityData Clone() {
 		var result = new ResourceSetItemData();

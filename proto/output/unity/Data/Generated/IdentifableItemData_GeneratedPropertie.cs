@@ -7,19 +7,19 @@ using Newtonsoft.Json;
 public partial class IdentifableItemData : AbstractData
 {
 	[DataMember(Name = "id")]
-	public Int64 id { get; set; }
+	public long id { get; set; }
 
 	[DataMember(Name = "name")]
-	public String name { get; set; }
+	public string name { get; set; }
 
 	[DataMember(Name = "description")]
-	public String description { get; set; }
+	public string description { get; set; }
 
 	[DataMember(Name = "type")]
-	public Enum type { get; set; }
+	public IdentifableItemType type { get; set; }
 
 	[DataMember(Name = "ownedLimit")]
-	public Int64 ownedLimit { get; set; }
+	public long ownedLimit { get; set; }
 
 	public AbilityData Clone() {
 		var result = new IdentifableItemData();

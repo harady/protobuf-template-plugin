@@ -7,37 +7,37 @@ using Newtonsoft.Json;
 public partial class ComboData : AbstractData
 {
 	[DataMember(Name = "id")]
-	public Int64 id { get; set; }
+	public long id { get; set; }
 
 	[DataMember(Name = "name")]
-	public String name { get; set; }
+	public string name { get; set; }
 
 	[DataMember(Name = "type")]
-	public Enum type { get; set; }
+	public ComboType type { get; set; }
 
 	[DataMember(Name = "description")]
-	public String description { get; set; }
+	public string description { get; set; }
 
 	[DataMember(Name = "rank")]
-	public Int64 rank { get; set; }
+	public long rank { get; set; }
 
 	[DataMember(Name = "baseAttack")]
-	public Int64 baseAttack { get; set; }
+	public long baseAttack { get; set; }
 
 	[DataMember(Name = "maxAttack")]
-	public Int64 maxAttack { get; set; }
+	public long maxAttack { get; set; }
 
 	[DataMember(Name = "paramA")]
-	public Int64 paramA { get; set; }
+	public long paramA { get; set; }
 
 	[DataMember(Name = "paramB")]
-	public Int64 paramB { get; set; }
+	public long paramB { get; set; }
 
 	[DataMember(Name = "paramC")]
-	public Int64 paramC { get; set; }
+	public long paramC { get; set; }
 
 	[DataMember(Name = "iconId")]
-	public Int64 iconId { get; set; }
+	public long iconId { get; set; }
 
 	public AbilityData Clone() {
 		var result = new ComboData();

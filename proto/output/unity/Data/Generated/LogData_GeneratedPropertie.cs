@@ -7,10 +7,10 @@ using Newtonsoft.Json;
 public partial class LogData : AbstractData
 {
 	[DataMember(Name = "id")]
-	public Int64 id { get; set; }
+	public long id { get; set; }
 
 	[DataMember(Name = "name")]
-	public String name { get; set; }
+	public string name { get; set; }
 
 	public AbilityData Clone() {
 		var result = new LogData();

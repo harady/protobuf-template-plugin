@@ -7,13 +7,13 @@ using Newtonsoft.Json;
 public partial class UserFriendRequestData : AbstractData
 {
 	[DataMember(Name = "id")]
-	public Int64 id { get; set; }
+	public long id { get; set; }
 
 	[DataMember(Name = "senderUserId")]
-	public Int64 senderUserId { get; set; }
+	public long senderUserId { get; set; }
 
 	[DataMember(Name = "targetUserId")]
-	public Int64 targetUserId { get; set; }
+	public long targetUserId { get; set; }
 
 	public AbilityData Clone() {
 		var result = new UserFriendRequestData();

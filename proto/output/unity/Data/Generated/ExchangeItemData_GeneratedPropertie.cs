@@ -7,37 +7,37 @@ using Newtonsoft.Json;
 public partial class ExchangeItemData : AbstractData
 {
 	[DataMember(Name = "id")]
-	public Int64 id { get; set; }
+	public long id { get; set; }
 
 	[DataMember(Name = "name")]
-	public String name { get; set; }
+	public string name { get; set; }
 
 	[DataMember(Name = "exchangeId")]
-	public Int64 exchangeId { get; set; }
+	public long exchangeId { get; set; }
 
 	[DataMember(Name = "costResourceType")]
-	public Enum costResourceType { get; set; }
+	public ResourceType costResourceType { get; set; }
 
 	[DataMember(Name = "costResourceId")]
-	public Int64 costResourceId { get; set; }
+	public long costResourceId { get; set; }
 
 	[DataMember(Name = "costResourceAmount")]
-	public Int64 costResourceAmount { get; set; }
+	public long costResourceAmount { get; set; }
 
 	[DataMember(Name = "resourceType")]
-	public Enum resourceType { get; set; }
+	public ResourceType resourceType { get; set; }
 
 	[DataMember(Name = "resourceId")]
-	public Int64 resourceId { get; set; }
+	public long resourceId { get; set; }
 
 	[DataMember(Name = "resourceAmount")]
-	public Int64 resourceAmount { get; set; }
+	public long resourceAmount { get; set; }
 
 	[DataMember(Name = "resourceSetId")]
-	public Int64 resourceSetId { get; set; }
+	public long resourceSetId { get; set; }
 
 	[DataMember(Name = "limitCount")]
-	public Int64 limitCount { get; set; }
+	public long limitCount { get; set; }
 
 	public AbilityData Clone() {
 		var result = new ExchangeItemData();

@@ -7,16 +7,16 @@ using Newtonsoft.Json;
 public partial class UserPaidCrystalData : AbstractData
 {
 	[DataMember(Name = "id")]
-	public Int64 id { get; set; }
+	public long id { get; set; }
 
 	[DataMember(Name = "userId")]
-	public Int64 userId { get; set; }
+	public long userId { get; set; }
 
 	[DataMember(Name = "purchasePlatformType")]
-	public Enum purchasePlatformType { get; set; }
+	public PurchasePlatformType purchasePlatformType { get; set; }
 
 	[DataMember(Name = "amount")]
-	public Int64 amount { get; set; }
+	public long amount { get; set; }
 
 	public AbilityData Clone() {
 		var result = new UserPaidCrystalData();

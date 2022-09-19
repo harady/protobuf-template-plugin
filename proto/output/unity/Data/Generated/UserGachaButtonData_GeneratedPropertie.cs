@@ -7,19 +7,19 @@ using Newtonsoft.Json;
 public partial class UserGachaButtonData : AbstractData
 {
 	[DataMember(Name = "id")]
-	public Int64 id { get; set; }
+	public long id { get; set; }
 
 	[DataMember(Name = "userId")]
-	public Int64 userId { get; set; }
+	public long userId { get; set; }
 
 	[DataMember(Name = "gachaButtonId")]
-	public Int64 gachaButtonId { get; set; }
+	public long gachaButtonId { get; set; }
 
 	[DataMember(Name = "gachaScheduleId")]
-	public Int64 gachaScheduleId { get; set; }
+	public long gachaScheduleId { get; set; }
 
 	[DataMember(Name = "purchaseCount")]
-	public Int64 purchaseCount { get; set; }
+	public long purchaseCount { get; set; }
 
 	public AbilityData Clone() {
 		var result = new UserGachaButtonData();

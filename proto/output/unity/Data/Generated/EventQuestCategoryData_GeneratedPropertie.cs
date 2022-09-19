@@ -7,25 +7,25 @@ using Newtonsoft.Json;
 public partial class EventQuestCategoryData : AbstractData
 {
 	[DataMember(Name = "id")]
-	public Int64 id { get; set; }
+	public long id { get; set; }
 
 	[DataMember(Name = "name")]
-	public String name { get; set; }
+	public string name { get; set; }
 
 	[DataMember(Name = "minStartTime")]
-	public Int64 minStartTime { get; set; }
+	public long minStartTime { get; set; }
 
 	[DataMember(Name = "maxStartTime")]
-	public Int64 maxStartTime { get; set; }
+	public long maxStartTime { get; set; }
 
 	[DataMember(Name = "openHours")]
-	public Int64 openHours { get; set; }
+	public long openHours { get; set; }
 
 	[DataMember(Name = "questGroupId")]
-	public Int64 questGroupId { get; set; }
+	public long questGroupId { get; set; }
 
 	[DataMember(Name = "questdifficultytype")]
-	public Enum questdifficultytype { get; set; }
+	public QuestDifficultyType questdifficultytype { get; set; }
 
 	public AbilityData Clone() {
 		var result = new EventQuestCategoryData();

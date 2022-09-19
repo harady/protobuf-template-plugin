@@ -7,31 +7,31 @@ using Newtonsoft.Json;
 public partial class QuestData : AbstractData
 {
 	[DataMember(Name = "id")]
-	public Int64 id { get; set; }
+	public long id { get; set; }
 
 	[DataMember(Name = "name")]
-	public String name { get; set; }
+	public string name { get; set; }
 
 	[DataMember(Name = "questGroupId")]
-	public Int64 questGroupId { get; set; }
+	public long questGroupId { get; set; }
 
 	[DataMember(Name = "nocontinue")]
-	public Bool nocontinue { get; set; }
+	public bool nocontinue { get; set; }
 
 	[DataMember(Name = "questDifficultyType")]
-	public Enum questDifficultyType { get; set; }
+	public QuestDifficultyType questDifficultyType { get; set; }
 
 	[DataMember(Name = "bossUnitId")]
-	public Int64 bossUnitId { get; set; }
+	public long bossUnitId { get; set; }
 
 	[DataMember(Name = "openAt")]
-	public Int64 openAt { get; set; }
+	public long openAt { get; set; }
 
 	[DataMember(Name = "closeAt")]
-	public Int64 closeAt { get; set; }
+	public long closeAt { get; set; }
 
 	[DataMember(Name = "openDow")]
-	public Int64 openDow { get; set; }
+	public long openDow { get; set; }
 
 	public AbilityData Clone() {
 		var result = new QuestData();

@@ -7,19 +7,19 @@ using Newtonsoft.Json;
 public partial class UserExchangeItemData : AbstractData
 {
 	[DataMember(Name = "id")]
-	public Int64 id { get; set; }
+	public long id { get; set; }
 
 	[DataMember(Name = "userId")]
-	public Int64 userId { get; set; }
+	public long userId { get; set; }
 
 	[DataMember(Name = "exchangeItemId")]
-	public Int64 exchangeItemId { get; set; }
+	public long exchangeItemId { get; set; }
 
 	[DataMember(Name = "exchangeScheduleId")]
-	public Int64 exchangeScheduleId { get; set; }
+	public long exchangeScheduleId { get; set; }
 
 	[DataMember(Name = "exchangedCount")]
-	public Int64 exchangedCount { get; set; }
+	public long exchangedCount { get; set; }
 
 	public AbilityData Clone() {
 		var result = new UserExchangeItemData();

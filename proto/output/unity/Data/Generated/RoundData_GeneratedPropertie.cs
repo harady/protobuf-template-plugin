@@ -7,16 +7,16 @@ using Newtonsoft.Json;
 public partial class RoundData : AbstractData
 {
 	[DataMember(Name = "id")]
-	public Int64 id { get; set; }
+	public long id { get; set; }
 
 	[DataMember(Name = "name")]
-	public String name { get; set; }
+	public string name { get; set; }
 
 	[DataMember(Name = "stageId")]
-	public Int64 stageId { get; set; }
+	public long stageId { get; set; }
 
 	[DataMember(Name = "roundNo")]
-	public Int64 roundNo { get; set; }
+	public long roundNo { get; set; }
 
 	public AbilityData Clone() {
 		var result = new RoundData();

@@ -7,22 +7,22 @@ using Newtonsoft.Json;
 public partial class UserFriendData : AbstractData
 {
 	[DataMember(Name = "id")]
-	public Int64 id { get; set; }
+	public long id { get; set; }
 
 	[DataMember(Name = "userId")]
-	public Int64 userId { get; set; }
+	public long userId { get; set; }
 
 	[DataMember(Name = "friendUserId")]
-	public Int64 friendUserId { get; set; }
+	public long friendUserId { get; set; }
 
 	[DataMember(Name = "isFavorite")]
-	public Bool isFavorite { get; set; }
+	public bool isFavorite { get; set; }
 
 	[DataMember(Name = "lastUsedAt")]
-	public Int64 lastUsedAt { get; set; }
+	public long lastUsedAt { get; set; }
 
 	[DataMember(Name = "usedCount")]
-	public Int64 usedCount { get; set; }
+	public long usedCount { get; set; }
 
 	public AbilityData Clone() {
 		var result = new UserFriendData();

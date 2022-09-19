@@ -7,31 +7,31 @@ using Newtonsoft.Json;
 public partial class StageData : AbstractData
 {
 	[DataMember(Name = "id")]
-	public Int64 id { get; set; }
+	public long id { get; set; }
 
 	[DataMember(Name = "name")]
-	public String name { get; set; }
+	public string name { get; set; }
 
 	[DataMember(Name = "questId")]
-	public Int64 questId { get; set; }
+	public long questId { get; set; }
 
 	[DataMember(Name = "stamina")]
-	public Int64 stamina { get; set; }
+	public long stamina { get; set; }
 
 	[DataMember(Name = "earnExp")]
-	public Int64 earnExp { get; set; }
+	public long earnExp { get; set; }
 
 	[DataMember(Name = "earnMoney")]
-	public Int64 earnMoney { get; set; }
+	public long earnMoney { get; set; }
 
 	[DataMember(Name = "questDifficultyType")]
-	public Enum questDifficultyType { get; set; }
+	public QuestDifficultyType questDifficultyType { get; set; }
 
 	[DataMember(Name = "toUnlockStageId")]
-	public Int64 toUnlockStageId { get; set; }
+	public long toUnlockStageId { get; set; }
 
 	[DataMember(Name = "baseStageId")]
-	public Int64 baseStageId { get; set; }
+	public long baseStageId { get; set; }
 
 	public AbilityData Clone() {
 		var result = new StageData();

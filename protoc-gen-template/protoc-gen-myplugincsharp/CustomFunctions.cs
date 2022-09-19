@@ -1,6 +1,7 @@
 ﻿using System;
 using Scriban.Runtime;
 using Google.Protobuf.Reflection;
+using System.IO;
 
 public class CustomFunctions : ScriptObject
 {
@@ -30,11 +31,12 @@ public class CustomFunctions : ScriptObject
 		return text.ToSnakeCase().ToUpper();
 	}
 
-	public static string CsType(FieldDescriptorProto param)
+	public static string ToCsType(FieldDescriptorProto param)
 	{
-		return param.HasName ? ;
+		return param.HasTypeName
+			? param.TypeName.ReplaceRegex(".*\\.", "")
+			: param.Type.ToCsTypeName();
 	}
-
 
 	public static void SetupCustomFunction(ScriptObject target)
 	{
@@ -49,5 +51,7 @@ public class CustomFunctions : ScriptObject
 		target.Import("to_upper_snake",
 			new Func<string, string>(text => ToUpperSnake(text)));
 
+		target.Import("to_cs_type",
+			new Func<FieldDescriptorProto, string>(type => ToCsType(type)));
 	}
 }

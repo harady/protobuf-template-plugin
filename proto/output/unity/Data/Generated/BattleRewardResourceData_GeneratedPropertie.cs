@@ -7,16 +7,16 @@ using Newtonsoft.Json;
 public partial class BattleRewardResourceData : AbstractData
 {
 	[DataMember(Name = "resource")]
-	public Message resource { get; set; }
+	public ResourceData resource { get; set; }
 
 	[DataMember(Name = "type")]
-	public Enum type { get; set; }
+	public BattleRewardType type { get; set; }
 
 	[DataMember(Name = "param")]
-	public Int64 param { get; set; }
+	public long param { get; set; }
 
 	[DataMember(Name = "tag")]
-	public String tag { get; set; }
+	public string tag { get; set; }
 
 	public AbilityData Clone() {
 		var result = new BattleRewardResourceData();

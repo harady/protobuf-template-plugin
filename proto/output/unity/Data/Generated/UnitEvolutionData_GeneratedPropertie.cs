@@ -7,22 +7,22 @@ using Newtonsoft.Json;
 public partial class UnitEvolutionData : AbstractData
 {
 	[DataMember(Name = "id")]
-	public Int64 id { get; set; }
+	public long id { get; set; }
 
 	[DataMember(Name = "name")]
-	public String name { get; set; }
+	public string name { get; set; }
 
 	[DataMember(Name = "type")]
-	public Enum type { get; set; }
+	public UnitEvolutionType type { get; set; }
 
 	[DataMember(Name = "baseUnitId")]
-	public Int64 baseUnitId { get; set; }
+	public long baseUnitId { get; set; }
 
 	[DataMember(Name = "resultUnitId")]
-	public Int64 resultUnitId { get; set; }
+	public long resultUnitId { get; set; }
 
 	[DataMember(Name = "costResourceSetId")]
-	public Int64 costResourceSetId { get; set; }
+	public long costResourceSetId { get; set; }
 
 	public AbilityData Clone() {
 		var result = new UnitEvolutionData();

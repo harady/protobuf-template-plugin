@@ -7,34 +7,34 @@ using Newtonsoft.Json;
 public partial class GachaPoolData : AbstractData
 {
 	[DataMember(Name = "id")]
-	public Int64 id { get; set; }
+	public long id { get; set; }
 
 	[DataMember(Name = "name")]
-	public String name { get; set; }
+	public string name { get; set; }
 
 	[DataMember(Name = "gachaId")]
-	public Int64 gachaId { get; set; }
+	public long gachaId { get; set; }
 
 	[DataMember(Name = "baseGachaPoolId")]
-	public Int64 baseGachaPoolId { get; set; }
+	public long baseGachaPoolId { get; set; }
 
 	[DataMember(Name = "isExtra")]
-	public Bool isExtra { get; set; }
+	public bool isExtra { get; set; }
 
 	[DataMember(Name = "isPickup")]
-	public Bool isPickup { get; set; }
+	public bool isPickup { get; set; }
 
 	[DataMember(Name = "isGuarantee")]
-	public Bool isGuarantee { get; set; }
+	public bool isGuarantee { get; set; }
 
 	[DataMember(Name = "rarity")]
-	public Int64 rarity { get; set; }
+	public long rarity { get; set; }
 
 	[DataMember(Name = "attribute")]
-	public Enum attribute { get; set; }
+	public UnitAttribute attribute { get; set; }
 
 	[DataMember(Name = "weight")]
-	public Int64 weight { get; set; }
+	public long weight { get; set; }
 
 	public AbilityData Clone() {
 		var result = new GachaPoolData();

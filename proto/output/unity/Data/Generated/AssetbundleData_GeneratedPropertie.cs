@@ -7,13 +7,13 @@ using Newtonsoft.Json;
 public partial class AssetbundleData : AbstractData
 {
 	[DataMember(Name = "name")]
-	public String name { get; set; }
+	public string name { get; set; }
 
 	[DataMember(Name = "hash")]
-	public String hash { get; set; }
+	public string hash { get; set; }
 
 	[DataMember(Name = "size")]
-	public Int64 size { get; set; }
+	public long size { get; set; }
 
 	public AbilityData Clone() {
 		var result = new AssetbundleData();

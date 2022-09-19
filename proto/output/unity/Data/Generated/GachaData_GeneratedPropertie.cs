@@ -7,16 +7,16 @@ using Newtonsoft.Json;
 public partial class GachaData : AbstractData
 {
 	[DataMember(Name = "id")]
-	public Int64 id { get; set; }
+	public long id { get; set; }
 
 	[DataMember(Name = "name")]
-	public String name { get; set; }
+	public string name { get; set; }
 
 	[DataMember(Name = "baseGachaId")]
-	public Int64 baseGachaId { get; set; }
+	public long baseGachaId { get; set; }
 
 	[DataMember(Name = "isPremium")]
-	public Bool isPremium { get; set; }
+	public bool isPremium { get; set; }
 
 	public AbilityData Clone() {
 		var result = new GachaData();

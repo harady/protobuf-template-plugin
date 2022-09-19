@@ -7,46 +7,46 @@ using Newtonsoft.Json;
 public partial class EnemyData : AbstractData
 {
 	[DataMember(Name = "id")]
-	public Int64 id { get; set; }
+	public long id { get; set; }
 
 	[DataMember(Name = "name")]
-	public String name { get; set; }
+	public string name { get; set; }
 
 	[DataMember(Name = "unitId")]
-	public Int64 unitId { get; set; }
+	public long unitId { get; set; }
 
 	[DataMember(Name = "hp")]
-	public Int64 hp { get; set; }
+	public long hp { get; set; }
 
 	[DataMember(Name = "size")]
-	public Int64 size { get; set; }
+	public long size { get; set; }
 
 	[DataMember(Name = "weakPointId")]
-	public Int64 weakPointId { get; set; }
+	public long weakPointId { get; set; }
 
 	[DataMember(Name = "isBoss")]
-	public Bool isBoss { get; set; }
+	public bool isBoss { get; set; }
 
 	[DataMember(Name = "isEscape")]
-	public Bool isEscape { get; set; }
+	public bool isEscape { get; set; }
 
 	[DataMember(Name = "damageRate")]
-	public Int64 damageRate { get; set; }
+	public long damageRate { get; set; }
 
 	[DataMember(Name = "directDamageRate")]
-	public Int64 directDamageRate { get; set; }
+	public long directDamageRate { get; set; }
 
 	[DataMember(Name = "indirectDamageRate")]
-	public Int64 indirectDamageRate { get; set; }
+	public long indirectDamageRate { get; set; }
 
 	[DataMember(Name = "baseEnemyId")]
-	public Int64 baseEnemyId { get; set; }
+	public long baseEnemyId { get; set; }
 
 	[DataMember(Name = "dropRate")]
-	public Int64 dropRate { get; set; }
+	public long dropRate { get; set; }
 
 	[DataMember(Name = "rewardResourceLotteryId")]
-	public Int64 rewardResourceLotteryId { get; set; }
+	public long rewardResourceLotteryId { get; set; }
 
 	public AbilityData Clone() {
 		var result = new EnemyData();

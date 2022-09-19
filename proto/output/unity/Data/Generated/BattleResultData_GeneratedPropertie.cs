@@ -7,13 +7,13 @@ using Newtonsoft.Json;
 public partial class BattleResultData : AbstractData
 {
 	[DataMember(Name = "id")]
-	public Int64 id { get; set; }
+	public long id { get; set; }
 
 	[DataMember(Name = "turnLogs")]
-	public Message turnLogs { get; set; }
+	public BattleResultTurnLogData turnLogs { get; set; }
 
 	[DataMember(Name = "replayLogs")]
-	public Message replayLogs { get; set; }
+	public BattleResultReplayLogData replayLogs { get; set; }
 
 	public AbilityData Clone() {
 		var result = new BattleResultData();

@@ -7,145 +7,145 @@ using Newtonsoft.Json;
 public partial class ClientMasterData : AbstractData
 {
 	[DataMember(Name = "enemys")]
-	public Message enemys { get; set; }
+	public EnemyData enemys { get; set; }
 
 	[DataMember(Name = "enemyActions")]
-	public Message enemyActions { get; set; }
+	public EnemyActionData enemyActions { get; set; }
 
 	[DataMember(Name = "rounds")]
-	public Message rounds { get; set; }
+	public RoundData rounds { get; set; }
 
 	[DataMember(Name = "weakPoints")]
-	public Message weakPoints { get; set; }
+	public WeakPointData weakPoints { get; set; }
 
 	[DataMember(Name = "weakPointPositions")]
-	public Message weakPointPositions { get; set; }
+	public WeakPointPositionData weakPointPositions { get; set; }
 
 	[DataMember(Name = "canpaigns")]
-	public Message canpaigns { get; set; }
+	public CanpaignData canpaigns { get; set; }
 
 	[DataMember(Name = "configs")]
-	public Message configs { get; set; }
+	public ConfigData configs { get; set; }
 
 	[DataMember(Name = "identifableItems")]
-	public Message identifableItems { get; set; }
+	public IdentifableItemData identifableItems { get; set; }
 
 	[DataMember(Name = "items")]
-	public Message items { get; set; }
+	public ItemData items { get; set; }
 
 	[DataMember(Name = "resourceLotterys")]
-	public Message resourceLotterys { get; set; }
+	public ResourceLotteryData resourceLotterys { get; set; }
 
 	[DataMember(Name = "resourceLotteryItems")]
-	public Message resourceLotteryItems { get; set; }
+	public ResourceLotteryItemData resourceLotteryItems { get; set; }
 
 	[DataMember(Name = "resourceSets")]
-	public Message resourceSets { get; set; }
+	public ResourceSetData resourceSets { get; set; }
 
 	[DataMember(Name = "resourceSetItems")]
-	public Message resourceSetItems { get; set; }
+	public ResourceSetItemData resourceSetItems { get; set; }
 
 	[DataMember(Name = "dailyEventTables")]
-	public Message dailyEventTables { get; set; }
+	public DailyEventTableData dailyEventTables { get; set; }
 
 	[DataMember(Name = "dailyEventTableItems")]
-	public Message dailyEventTableItems { get; set; }
+	public DailyEventTableItemData dailyEventTableItems { get; set; }
 
 	[DataMember(Name = "gachas")]
-	public Message gachas { get; set; }
+	public GachaData gachas { get; set; }
 
 	[DataMember(Name = "gachaButtons")]
-	public Message gachaButtons { get; set; }
+	public GachaButtonData gachaButtons { get; set; }
 
 	[DataMember(Name = "gachaSchedules")]
-	public Message gachaSchedules { get; set; }
+	public GachaScheduleData gachaSchedules { get; set; }
 
 	[DataMember(Name = "messages")]
-	public Message messages { get; set; }
+	public MessageData messages { get; set; }
 
 	[DataMember(Name = "missions")]
-	public Message missions { get; set; }
+	public MissionData missions { get; set; }
 
 	[DataMember(Name = "missionGroups")]
-	public Message missionGroups { get; set; }
+	public MissionGroupData missionGroups { get; set; }
 
 	[DataMember(Name = "missionSchedules")]
-	public Message missionSchedules { get; set; }
+	public MissionScheduleData missionSchedules { get; set; }
 
 	[DataMember(Name = "advices")]
-	public Message advices { get; set; }
+	public AdviceData advices { get; set; }
 
 	[DataMember(Name = "logs")]
-	public Message logs { get; set; }
+	public LogData logs { get; set; }
 
 	[DataMember(Name = "loginBonuss")]
-	public Message loginBonuss { get; set; }
+	public LoginBonusData loginBonuss { get; set; }
 
 	[DataMember(Name = "loginBonusItems")]
-	public Message loginBonusItems { get; set; }
+	public LoginBonusItemData loginBonusItems { get; set; }
 
 	[DataMember(Name = "userRankExps")]
-	public Message userRankExps { get; set; }
+	public UserRankExpData userRankExps { get; set; }
 
 	[DataMember(Name = "versions")]
-	public Message versions { get; set; }
+	public VersionData versions { get; set; }
 
 	[DataMember(Name = "eventSchedules")]
-	public Message eventSchedules { get; set; }
+	public EventScheduleData eventSchedules { get; set; }
 
 	[DataMember(Name = "quests")]
-	public Message quests { get; set; }
+	public QuestData quests { get; set; }
 
 	[DataMember(Name = "questGroups")]
-	public Message questGroups { get; set; }
+	public QuestGroupData questGroups { get; set; }
 
 	[DataMember(Name = "stages")]
-	public Message stages { get; set; }
+	public StageData stages { get; set; }
 
 	[DataMember(Name = "stageSpecialRewards")]
-	public Message stageSpecialRewards { get; set; }
+	public StageSpecialRewardData stageSpecialRewards { get; set; }
 
 	[DataMember(Name = "exchanges")]
-	public Message exchanges { get; set; }
+	public ExchangeData exchanges { get; set; }
 
 	[DataMember(Name = "exchangeItems")]
-	public Message exchangeItems { get; set; }
+	public ExchangeItemData exchangeItems { get; set; }
 
 	[DataMember(Name = "exchangeSchedules")]
-	public Message exchangeSchedules { get; set; }
+	public ExchangeScheduleData exchangeSchedules { get; set; }
 
 	[DataMember(Name = "shops")]
-	public Message shops { get; set; }
+	public ShopData shops { get; set; }
 
 	[DataMember(Name = "shopItems")]
-	public Message shopItems { get; set; }
+	public ShopItemData shopItems { get; set; }
 
 	[DataMember(Name = "shopSchedules")]
-	public Message shopSchedules { get; set; }
+	public ShopScheduleData shopSchedules { get; set; }
 
 	[DataMember(Name = "abilitys")]
-	public Message abilitys { get; set; }
+	public AbilityData abilitys { get; set; }
 
 	[DataMember(Name = "combos")]
-	public Message combos { get; set; }
+	public ComboData combos { get; set; }
 
 	[DataMember(Name = "equipments")]
-	public Message equipments { get; set; }
+	public EquipmentData equipments { get; set; }
 
 	[DataMember(Name = "skills")]
-	public Message skills { get; set; }
+	public SkillData skills { get; set; }
 
 	[DataMember(Name = "units")]
-	public Message units { get; set; }
+	public UnitData units { get; set; }
 
 	[DataMember(Name = "unitCategorys")]
-	public Message unitCategorys { get; set; }
+	public UnitCategoryData unitCategorys { get; set; }
 
 	[DataMember(Name = "unitEvolutions")]
-	public Message unitEvolutions { get; set; }
+	public UnitEvolutionData unitEvolutions { get; set; }
 
 	[DataMember(Name = "unitLevelExps")]
-	public Message unitLevelExps { get; set; }
+	public UnitLevelExpData unitLevelExps { get; set; }
 
 	public AbilityData Clone() {
 		var result = new ClientMasterData();

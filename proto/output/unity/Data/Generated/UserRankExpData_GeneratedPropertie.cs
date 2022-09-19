@@ -7,25 +7,25 @@ using Newtonsoft.Json;
 public partial class UserRankExpData : AbstractData
 {
 	[DataMember(Name = "id")]
-	public Int64 id { get; set; }
+	public long id { get; set; }
 
 	[DataMember(Name = "rank")]
-	public Int64 rank { get; set; }
+	public long rank { get; set; }
 
 	[DataMember(Name = "totalExp")]
-	public Int64 totalExp { get; set; }
+	public long totalExp { get; set; }
 
 	[DataMember(Name = "maxStamina")]
-	public Int64 maxStamina { get; set; }
+	public long maxStamina { get; set; }
 
 	[DataMember(Name = "deckNum")]
-	public Int64 deckNum { get; set; }
+	public long deckNum { get; set; }
 
 	[DataMember(Name = "maxFriendNum")]
-	public Int64 maxFriendNum { get; set; }
+	public long maxFriendNum { get; set; }
 
 	[DataMember(Name = "unitBoxNum")]
-	public Int64 unitBoxNum { get; set; }
+	public long unitBoxNum { get; set; }
 
 	public AbilityData Clone() {
 		var result = new UserRankExpData();

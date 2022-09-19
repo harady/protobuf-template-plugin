@@ -7,10 +7,10 @@ using Newtonsoft.Json;
 public partial class MissionGroupData : AbstractData
 {
 	[DataMember(Name = "id")]
-	public Int64 id { get; set; }
+	public long id { get; set; }
 
 	[DataMember(Name = "type")]
-	public Enum type { get; set; }
+	public MissionGroupType type { get; set; }
 
 	public AbilityData Clone() {
 		var result = new MissionGroupData();

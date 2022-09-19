@@ -7,16 +7,16 @@ using Newtonsoft.Json;
 public partial class ErrorResponse : AbstractData
 {
 	[DataMember(Name = "code")]
-	public Int32 code { get; set; }
+	public int code { get; set; }
 
 	[DataMember(Name = "title")]
-	public String title { get; set; }
+	public string title { get; set; }
 
 	[DataMember(Name = "message")]
-	public String message { get; set; }
+	public string message { get; set; }
 
 	[DataMember(Name = "description")]
-	public String description { get; set; }
+	public string description { get; set; }
 
 	public AbilityData Clone() {
 		var result = new ErrorResponse();

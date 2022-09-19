@@ -7,7 +7,7 @@ using Newtonsoft.Json;
 public partial class BattleServerData : AbstractData
 {
 	[DataMember(Name = "id")]
-	public Int64 id { get; set; }
+	public long id { get; set; }
 
 	public AbilityData Clone() {
 		var result = new BattleServerData();

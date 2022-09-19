@@ -7,16 +7,16 @@ using Newtonsoft.Json;
 public partial class ConfigData : AbstractData
 {
 	[DataMember(Name = "id")]
-	public Int64 id { get; set; }
+	public long id { get; set; }
 
 	[DataMember(Name = "key")]
-	public String key { get; set; }
+	public string key { get; set; }
 
 	[DataMember(Name = "value")]
-	public Int64 value { get; set; }
+	public long value { get; set; }
 
 	[DataMember(Name = "text")]
-	public String text { get; set; }
+	public string text { get; set; }
 
 	public AbilityData Clone() {
 		var result = new ConfigData();

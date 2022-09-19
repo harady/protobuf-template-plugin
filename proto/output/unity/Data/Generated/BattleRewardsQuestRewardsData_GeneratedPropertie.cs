@@ -7,13 +7,13 @@ using Newtonsoft.Json;
 public partial class BattleRewardsQuestRewardsData : AbstractData
 {
 	[DataMember(Name = "earnedMoney")]
-	public Int64 earnedMoney { get; set; }
+	public long earnedMoney { get; set; }
 
 	[DataMember(Name = "earnedExp")]
-	public Int64 earnedExp { get; set; }
+	public long earnedExp { get; set; }
 
 	[DataMember(Name = "battleRewardResources")]
-	public Message battleRewardResources { get; set; }
+	public BattleRewardResourceData battleRewardResources { get; set; }
 
 	public AbilityData Clone() {
 		var result = new BattleRewardsQuestRewardsData();

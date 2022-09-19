@@ -7,10 +7,10 @@ using Newtonsoft.Json;
 public partial class AssetbundleListData : AbstractData
 {
 	[DataMember(Name = "version")]
-	public Int64 version { get; set; }
+	public long version { get; set; }
 
 	[DataMember(Name = "assetbundles")]
-	public Message assetbundles { get; set; }
+	public AssetbundleData assetbundles { get; set; }
 
 	public AbilityData Clone() {
 		var result = new AssetbundleListData();

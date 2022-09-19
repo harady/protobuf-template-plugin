@@ -8,7 +8,7 @@ public partial class {{ message.name }} : AbstractData
 {
 {{- for field in message.field }}
 	[DataMember(Name = "{{ field.name | to_camel }}")]
-	public {{ field.type }} {{ field.name | to_camel }} { get; set; }
+	public {{ field | to_cs_type }} {{ field.name | to_camel }} { get; set; }
 {{ end }}
 	public AbilityData Clone() {
 		var result = new {{ message.name }}();

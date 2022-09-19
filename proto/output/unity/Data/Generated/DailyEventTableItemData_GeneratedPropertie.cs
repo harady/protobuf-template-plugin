@@ -7,16 +7,16 @@ using Newtonsoft.Json;
 public partial class DailyEventTableItemData : AbstractData
 {
 	[DataMember(Name = "id")]
-	public Int64 id { get; set; }
+	public long id { get; set; }
 
 	[DataMember(Name = "dailyEventTableId")]
-	public Int64 dailyEventTableId { get; set; }
+	public long dailyEventTableId { get; set; }
 
 	[DataMember(Name = "eventQuestCategoryId")]
-	public Int64 eventQuestCategoryId { get; set; }
+	public long eventQuestCategoryId { get; set; }
 
 	[DataMember(Name = "count")]
-	public Int64 count { get; set; }
+	public long count { get; set; }
 
 	public AbilityData Clone() {
 		var result = new DailyEventTableItemData();

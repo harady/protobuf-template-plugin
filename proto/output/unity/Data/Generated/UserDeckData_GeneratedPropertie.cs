@@ -7,25 +7,25 @@ using Newtonsoft.Json;
 public partial class UserDeckData : AbstractData
 {
 	[DataMember(Name = "id")]
-	public Int64 id { get; set; }
+	public long id { get; set; }
 
 	[DataMember(Name = "userId")]
-	public Int64 userId { get; set; }
+	public long userId { get; set; }
 
 	[DataMember(Name = "deckNo")]
-	public Int64 deckNo { get; set; }
+	public long deckNo { get; set; }
 
 	[DataMember(Name = "name")]
-	public String name { get; set; }
+	public string name { get; set; }
 
 	[DataMember(Name = "userUnit1Id")]
-	public Int64 userUnit1Id { get; set; }
+	public long userUnit1Id { get; set; }
 
 	[DataMember(Name = "userUnit2Id")]
-	public Int64 userUnit2Id { get; set; }
+	public long userUnit2Id { get; set; }
 
 	[DataMember(Name = "userUnit3Id")]
-	public Int64 userUnit3Id { get; set; }
+	public long userUnit3Id { get; set; }
 
 	public AbilityData Clone() {
 		var result = new UserDeckData();

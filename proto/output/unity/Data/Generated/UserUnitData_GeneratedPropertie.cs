@@ -7,52 +7,52 @@ using Newtonsoft.Json;
 public partial class UserUnitData : AbstractData
 {
 	[DataMember(Name = "id")]
-	public Int64 id { get; set; }
+	public long id { get; set; }
 
 	[DataMember(Name = "userId")]
-	public Int64 userId { get; set; }
+	public long userId { get; set; }
 
 	[DataMember(Name = "unitId")]
-	public Int64 unitId { get; set; }
+	public long unitId { get; set; }
 
 	[DataMember(Name = "level")]
-	public Int64 level { get; set; }
+	public long level { get; set; }
 
 	[DataMember(Name = "exp")]
-	public Int64 exp { get; set; }
+	public long exp { get; set; }
 
 	[DataMember(Name = "luck")]
-	public Int64 luck { get; set; }
+	public long luck { get; set; }
 
 	[DataMember(Name = "plusHp")]
-	public Int64 plusHp { get; set; }
+	public long plusHp { get; set; }
 
 	[DataMember(Name = "plusAttack")]
-	public Int64 plusAttack { get; set; }
+	public long plusAttack { get; set; }
 
 	[DataMember(Name = "plusSpeed")]
-	public Int64 plusSpeed { get; set; }
+	public long plusSpeed { get; set; }
 
 	[DataMember(Name = "equipment1Id")]
-	public Int64 equipment1Id { get; set; }
+	public long equipment1Id { get; set; }
 
 	[DataMember(Name = "equipment2Id")]
-	public Int64 equipment2Id { get; set; }
+	public long equipment2Id { get; set; }
 
 	[DataMember(Name = "equipment3Id")]
-	public Int64 equipment3Id { get; set; }
+	public long equipment3Id { get; set; }
 
 	[DataMember(Name = "heroMark")]
-	public Bool heroMark { get; set; }
+	public bool heroMark { get; set; }
 
 	[DataMember(Name = "heroBadge")]
-	public Bool heroBadge { get; set; }
+	public bool heroBadge { get; set; }
 
 	[DataMember(Name = "isLocked")]
-	public Bool isLocked { get; set; }
+	public bool isLocked { get; set; }
 
 	[DataMember(Name = "getAt")]
-	public Int64 getAt { get; set; }
+	public long getAt { get; set; }
 
 	public AbilityData Clone() {
 		var result = new UserUnitData();

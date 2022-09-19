@@ -7,28 +7,28 @@ using Newtonsoft.Json;
 public partial class CommonResponse : AbstractData
 {
 	[DataMember(Name = "userUpdate")]
-	public Message userUpdate { get; set; }
+	public UserUpdateData userUpdate { get; set; }
 
 	[DataMember(Name = "serverTime")]
-	public Int64 serverTime { get; set; }
+	public long serverTime { get; set; }
 
 	[DataMember(Name = "appVersion")]
-	public String appVersion { get; set; }
+	public string appVersion { get; set; }
 
 	[DataMember(Name = "masterDataVersion")]
-	public Int64 masterDataVersion { get; set; }
+	public long masterDataVersion { get; set; }
 
 	[DataMember(Name = "masterDataUrl")]
-	public String masterDataUrl { get; set; }
+	public string masterDataUrl { get; set; }
 
 	[DataMember(Name = "assetListVersion")]
-	public Int64 assetListVersion { get; set; }
+	public long assetListVersion { get; set; }
 
 	[DataMember(Name = "assetListUrl")]
-	public String assetListUrl { get; set; }
+	public string assetListUrl { get; set; }
 
 	[DataMember(Name = "assetBaseUrl")]
-	public String assetBaseUrl { get; set; }
+	public string assetBaseUrl { get; set; }
 
 	public AbilityData Clone() {
 		var result = new CommonResponse();
