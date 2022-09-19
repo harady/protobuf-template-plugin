@@ -33,17 +33,17 @@ public partial class {{ message.name }}
 	{
 {{- for field in message.field }}
 	{{- if (field | is_repeated) }}
-		{{- $deletedIdsPropertieName := (Replace (Join (Join "deleted" (field.name | to_pascal)) "_Ids") "s_Ids" "Ids") }}
-		{{.BaseType }}.RemoveDataByIds({{ $deletedIdsPropertieName }});
+		{{- deletedIdsPropertieName = (("deleted" + (field.name | to_pascal) + "_Ids") | string.replace "s_Ids" "Ids") }}
+		{{.BaseType }}.RemoveDataByIds({{ deletedIdsPropertieName }});
 	{{- end }}
 {{- end }}
 	}
 {{- for field in message.field }}
-	{{- $deletedIdsPropertieName := (Replace (Join (Join "deleted" (field.name | to_pascal)) "_Ids") "s_Ids" "Ids") }}
+	{{- deletedIdsPropertieName = (("deleted" + (field.name | to_pascal) + "_Ids") | string.replace "s_Ids" "Ids") }}
 	{{- if (field | is_repeated) }}
 
-	[DataMember(Name = "{{ $deletedIdsPropertieName }}")]
-	public List<long> {{ $deletedIdsPropertieName }} { get; set; } = new List<long>();
+	[DataMember(Name = "{{ deletedIdsPropertieName }}")]
+	public List<long> {{ deletedIdsPropertieName }} { get; set; } = new List<long>();
 	{{- end }}
 {{- end }}
 }
