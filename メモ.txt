@@ -51,7 +51,26 @@ https://github.com/scriban/scriban
 
 Scribanを採用することにした。
 
-template=template/sheet_columns.gotemplate,fileSuffix=.txt
 
-
+//https://developers.google.com/protocol-buffers/docs/proto3#scalar
+var FieldDescriptorProto_Type_Csharp = map[string]string{
+	"TYPE_DOUBLE":   "double",
+	"TYPE_FLOAT":    "float",
+	"TYPE_INT64":    "long",
+	"TYPE_UINT64":   "ulong",
+	"TYPE_INT32":    "int",
+	"TYPE_FIXED64":  "uint",
+	"TYPE_FIXED32":  "ulong",
+	"TYPE_BOOL":     "bool",
+	"TYPE_STRING":   "string",
+	"TYPE_GROUP":    "GROUP", //deprecated, https://developers.google.com/protocol-buffers/docs/proto#groups
+	"TYPE_MESSAGE":  "MESSAGE",
+	"TYPE_BYTES":    "Google.Protobuf.ByteString",
+	"TYPE_UINT32":   "uint",
+	"TYPE_ENUM":     "ENUM",
+	"TYPE_SFIXED32": "int",
+	"TYPE_SFIXED64": "long",
+	"TYPE_SINT32":   "int",
+	"TYPE_SINT64":   "long",
+}
 
