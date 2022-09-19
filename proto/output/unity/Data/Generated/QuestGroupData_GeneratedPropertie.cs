@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
@@ -15,7 +15,7 @@ public partial class QuestGroupData : AbstractData
 	[DataMember(Name = "type")]
 	public QuestGroupType type { get; set; }
 
-	public AbilityData Clone() {
+	public QuestGroupData Clone() {
 		var result = new QuestGroupData();
 		result.id = id;
 		result.name = name;

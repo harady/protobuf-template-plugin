@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
@@ -12,14 +12,12 @@ public partial class MissionGroupData : AbstractData
 	[DataMember(Name = "type")]
 	public MissionGroupType type { get; set; }
 
-	public AbilityData Clone() {
+	public MissionGroupData Clone() {
 		var result = new MissionGroupData();
 		result.id = id;
 		result.type = type;
 		return result;
 	}
-
-	public string idNameText => GetIdNameText(id, name);
 
 	public override string ToString()
 	{

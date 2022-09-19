@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
@@ -45,7 +45,7 @@ public partial class EnemyActionData : AbstractData
 	[DataMember(Name = "actionParamD")]
 	public long actionParamD { get; set; }
 
-	public AbilityData Clone() {
+	public EnemyActionData Clone() {
 		var result = new EnemyActionData();
 		result.id = id;
 		result.enemyId = enemyId;
@@ -62,8 +62,6 @@ public partial class EnemyActionData : AbstractData
 		result.actionParamD = actionParamD;
 		return result;
 	}
-
-	public string idNameText => GetIdNameText(id, name);
 
 	public override string ToString()
 	{

@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
@@ -21,7 +21,7 @@ public partial class UserGachaButtonData : AbstractData
 	[DataMember(Name = "purchaseCount")]
 	public long purchaseCount { get; set; }
 
-	public AbilityData Clone() {
+	public UserGachaButtonData Clone() {
 		var result = new UserGachaButtonData();
 		result.id = id;
 		result.userId = userId;
@@ -30,8 +30,6 @@ public partial class UserGachaButtonData : AbstractData
 		result.purchaseCount = purchaseCount;
 		return result;
 	}
-
-	public string idNameText => GetIdNameText(id, name);
 
 	public override string ToString()
 	{

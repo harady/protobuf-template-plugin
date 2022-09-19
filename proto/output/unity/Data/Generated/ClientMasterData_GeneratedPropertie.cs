@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
@@ -7,147 +7,147 @@ using Newtonsoft.Json;
 public partial class ClientMasterData : AbstractData
 {
 	[DataMember(Name = "enemys")]
-	public EnemyData enemys { get; set; }
+	public List<EnemyData> enemys { get; set; } = new List<EnemyData>();
 
 	[DataMember(Name = "enemyActions")]
-	public EnemyActionData enemyActions { get; set; }
+	public List<EnemyActionData> enemyActions { get; set; } = new List<EnemyActionData>();
 
 	[DataMember(Name = "rounds")]
-	public RoundData rounds { get; set; }
+	public List<RoundData> rounds { get; set; } = new List<RoundData>();
 
 	[DataMember(Name = "weakPoints")]
-	public WeakPointData weakPoints { get; set; }
+	public List<WeakPointData> weakPoints { get; set; } = new List<WeakPointData>();
 
 	[DataMember(Name = "weakPointPositions")]
-	public WeakPointPositionData weakPointPositions { get; set; }
+	public List<WeakPointPositionData> weakPointPositions { get; set; } = new List<WeakPointPositionData>();
 
 	[DataMember(Name = "canpaigns")]
-	public CanpaignData canpaigns { get; set; }
+	public List<CanpaignData> canpaigns { get; set; } = new List<CanpaignData>();
 
 	[DataMember(Name = "configs")]
-	public ConfigData configs { get; set; }
+	public List<ConfigData> configs { get; set; } = new List<ConfigData>();
 
 	[DataMember(Name = "identifableItems")]
-	public IdentifableItemData identifableItems { get; set; }
+	public List<IdentifableItemData> identifableItems { get; set; } = new List<IdentifableItemData>();
 
 	[DataMember(Name = "items")]
-	public ItemData items { get; set; }
+	public List<ItemData> items { get; set; } = new List<ItemData>();
 
 	[DataMember(Name = "resourceLotterys")]
-	public ResourceLotteryData resourceLotterys { get; set; }
+	public List<ResourceLotteryData> resourceLotterys { get; set; } = new List<ResourceLotteryData>();
 
 	[DataMember(Name = "resourceLotteryItems")]
-	public ResourceLotteryItemData resourceLotteryItems { get; set; }
+	public List<ResourceLotteryItemData> resourceLotteryItems { get; set; } = new List<ResourceLotteryItemData>();
 
 	[DataMember(Name = "resourceSets")]
-	public ResourceSetData resourceSets { get; set; }
+	public List<ResourceSetData> resourceSets { get; set; } = new List<ResourceSetData>();
 
 	[DataMember(Name = "resourceSetItems")]
-	public ResourceSetItemData resourceSetItems { get; set; }
+	public List<ResourceSetItemData> resourceSetItems { get; set; } = new List<ResourceSetItemData>();
 
 	[DataMember(Name = "dailyEventTables")]
-	public DailyEventTableData dailyEventTables { get; set; }
+	public List<DailyEventTableData> dailyEventTables { get; set; } = new List<DailyEventTableData>();
 
 	[DataMember(Name = "dailyEventTableItems")]
-	public DailyEventTableItemData dailyEventTableItems { get; set; }
+	public List<DailyEventTableItemData> dailyEventTableItems { get; set; } = new List<DailyEventTableItemData>();
 
 	[DataMember(Name = "gachas")]
-	public GachaData gachas { get; set; }
+	public List<GachaData> gachas { get; set; } = new List<GachaData>();
 
 	[DataMember(Name = "gachaButtons")]
-	public GachaButtonData gachaButtons { get; set; }
+	public List<GachaButtonData> gachaButtons { get; set; } = new List<GachaButtonData>();
 
 	[DataMember(Name = "gachaSchedules")]
-	public GachaScheduleData gachaSchedules { get; set; }
+	public List<GachaScheduleData> gachaSchedules { get; set; } = new List<GachaScheduleData>();
 
 	[DataMember(Name = "messages")]
-	public MessageData messages { get; set; }
+	public List<MessageData> messages { get; set; } = new List<MessageData>();
 
 	[DataMember(Name = "missions")]
-	public MissionData missions { get; set; }
+	public List<MissionData> missions { get; set; } = new List<MissionData>();
 
 	[DataMember(Name = "missionGroups")]
-	public MissionGroupData missionGroups { get; set; }
+	public List<MissionGroupData> missionGroups { get; set; } = new List<MissionGroupData>();
 
 	[DataMember(Name = "missionSchedules")]
-	public MissionScheduleData missionSchedules { get; set; }
+	public List<MissionScheduleData> missionSchedules { get; set; } = new List<MissionScheduleData>();
 
 	[DataMember(Name = "advices")]
-	public AdviceData advices { get; set; }
+	public List<AdviceData> advices { get; set; } = new List<AdviceData>();
 
 	[DataMember(Name = "logs")]
-	public LogData logs { get; set; }
+	public List<LogData> logs { get; set; } = new List<LogData>();
 
 	[DataMember(Name = "loginBonuss")]
-	public LoginBonusData loginBonuss { get; set; }
+	public List<LoginBonusData> loginBonuss { get; set; } = new List<LoginBonusData>();
 
 	[DataMember(Name = "loginBonusItems")]
-	public LoginBonusItemData loginBonusItems { get; set; }
+	public List<LoginBonusItemData> loginBonusItems { get; set; } = new List<LoginBonusItemData>();
 
 	[DataMember(Name = "userRankExps")]
-	public UserRankExpData userRankExps { get; set; }
+	public List<UserRankExpData> userRankExps { get; set; } = new List<UserRankExpData>();
 
 	[DataMember(Name = "versions")]
-	public VersionData versions { get; set; }
+	public List<VersionData> versions { get; set; } = new List<VersionData>();
 
 	[DataMember(Name = "eventSchedules")]
-	public EventScheduleData eventSchedules { get; set; }
+	public List<EventScheduleData> eventSchedules { get; set; } = new List<EventScheduleData>();
 
 	[DataMember(Name = "quests")]
-	public QuestData quests { get; set; }
+	public List<QuestData> quests { get; set; } = new List<QuestData>();
 
 	[DataMember(Name = "questGroups")]
-	public QuestGroupData questGroups { get; set; }
+	public List<QuestGroupData> questGroups { get; set; } = new List<QuestGroupData>();
 
 	[DataMember(Name = "stages")]
-	public StageData stages { get; set; }
+	public List<StageData> stages { get; set; } = new List<StageData>();
 
 	[DataMember(Name = "stageSpecialRewards")]
-	public StageSpecialRewardData stageSpecialRewards { get; set; }
+	public List<StageSpecialRewardData> stageSpecialRewards { get; set; } = new List<StageSpecialRewardData>();
 
 	[DataMember(Name = "exchanges")]
-	public ExchangeData exchanges { get; set; }
+	public List<ExchangeData> exchanges { get; set; } = new List<ExchangeData>();
 
 	[DataMember(Name = "exchangeItems")]
-	public ExchangeItemData exchangeItems { get; set; }
+	public List<ExchangeItemData> exchangeItems { get; set; } = new List<ExchangeItemData>();
 
 	[DataMember(Name = "exchangeSchedules")]
-	public ExchangeScheduleData exchangeSchedules { get; set; }
+	public List<ExchangeScheduleData> exchangeSchedules { get; set; } = new List<ExchangeScheduleData>();
 
 	[DataMember(Name = "shops")]
-	public ShopData shops { get; set; }
+	public List<ShopData> shops { get; set; } = new List<ShopData>();
 
 	[DataMember(Name = "shopItems")]
-	public ShopItemData shopItems { get; set; }
+	public List<ShopItemData> shopItems { get; set; } = new List<ShopItemData>();
 
 	[DataMember(Name = "shopSchedules")]
-	public ShopScheduleData shopSchedules { get; set; }
+	public List<ShopScheduleData> shopSchedules { get; set; } = new List<ShopScheduleData>();
 
 	[DataMember(Name = "abilitys")]
-	public AbilityData abilitys { get; set; }
+	public List<AbilityData> abilitys { get; set; } = new List<AbilityData>();
 
 	[DataMember(Name = "combos")]
-	public ComboData combos { get; set; }
+	public List<ComboData> combos { get; set; } = new List<ComboData>();
 
 	[DataMember(Name = "equipments")]
-	public EquipmentData equipments { get; set; }
+	public List<EquipmentData> equipments { get; set; } = new List<EquipmentData>();
 
 	[DataMember(Name = "skills")]
-	public SkillData skills { get; set; }
+	public List<SkillData> skills { get; set; } = new List<SkillData>();
 
 	[DataMember(Name = "units")]
-	public UnitData units { get; set; }
+	public List<UnitData> units { get; set; } = new List<UnitData>();
 
 	[DataMember(Name = "unitCategorys")]
-	public UnitCategoryData unitCategorys { get; set; }
+	public List<UnitCategoryData> unitCategorys { get; set; } = new List<UnitCategoryData>();
 
 	[DataMember(Name = "unitEvolutions")]
-	public UnitEvolutionData unitEvolutions { get; set; }
+	public List<UnitEvolutionData> unitEvolutions { get; set; } = new List<UnitEvolutionData>();
 
 	[DataMember(Name = "unitLevelExps")]
-	public UnitLevelExpData unitLevelExps { get; set; }
+	public List<UnitLevelExpData> unitLevelExps { get; set; } = new List<UnitLevelExpData>();
 
-	public AbilityData Clone() {
+	public ClientMasterData Clone() {
 		var result = new ClientMasterData();
 		result.enemys = enemys;
 		result.enemyActions = enemyActions;
@@ -198,8 +198,6 @@ public partial class ClientMasterData : AbstractData
 		result.unitLevelExps = unitLevelExps;
 		return result;
 	}
-
-	public string idNameText => GetIdNameText(id, name);
 
 	public override string ToString()
 	{

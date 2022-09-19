@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
@@ -30,7 +30,7 @@ public partial class ShopItemData : AbstractData
 	[DataMember(Name = "limitCount")]
 	public long limitCount { get; set; }
 
-	public AbilityData Clone() {
+	public ShopItemData Clone() {
 		var result = new ShopItemData();
 		result.id = id;
 		result.name = name;

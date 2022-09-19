@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
@@ -18,7 +18,7 @@ public partial class UserBackupData : AbstractData
 	[DataMember(Name = "backupToken")]
 	public string backupToken { get; set; }
 
-	public AbilityData Clone() {
+	public UserBackupData Clone() {
 		var result = new UserBackupData();
 		result.id = id;
 		result.userId = userId;
@@ -26,8 +26,6 @@ public partial class UserBackupData : AbstractData
 		result.backupToken = backupToken;
 		return result;
 	}
-
-	public string idNameText => GetIdNameText(id, name);
 
 	public override string ToString()
 	{

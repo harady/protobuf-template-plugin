@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
@@ -21,7 +21,7 @@ public partial class WeakPointPositionData : AbstractData
 	[DataMember(Name = "sizeRate")]
 	public long sizeRate { get; set; }
 
-	public AbilityData Clone() {
+	public WeakPointPositionData Clone() {
 		var result = new WeakPointPositionData();
 		result.id = id;
 		result.weakPointId = weakPointId;
@@ -30,8 +30,6 @@ public partial class WeakPointPositionData : AbstractData
 		result.sizeRate = sizeRate;
 		return result;
 	}
-
-	public string idNameText => GetIdNameText(id, name);
 
 	public override string ToString()
 	{

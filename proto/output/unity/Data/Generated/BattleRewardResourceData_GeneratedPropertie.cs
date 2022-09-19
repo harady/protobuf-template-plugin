@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
@@ -18,7 +18,7 @@ public partial class BattleRewardResourceData : AbstractData
 	[DataMember(Name = "tag")]
 	public string tag { get; set; }
 
-	public AbilityData Clone() {
+	public BattleRewardResourceData Clone() {
 		var result = new BattleRewardResourceData();
 		result.resource = resource;
 		result.type = type;
@@ -26,8 +26,6 @@ public partial class BattleRewardResourceData : AbstractData
 		result.tag = tag;
 		return result;
 	}
-
-	public string idNameText => GetIdNameText(id, name);
 
 	public override string ToString()
 	{

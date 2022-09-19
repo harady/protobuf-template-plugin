@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
@@ -36,7 +36,7 @@ public partial class MissionData : AbstractData
 	[DataMember(Name = "rewardResourceAmount")]
 	public long rewardResourceAmount { get; set; }
 
-	public AbilityData Clone() {
+	public MissionData Clone() {
 		var result = new MissionData();
 		result.id = id;
 		result.name = name;

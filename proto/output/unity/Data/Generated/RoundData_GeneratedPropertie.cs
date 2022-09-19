@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
@@ -18,7 +18,7 @@ public partial class RoundData : AbstractData
 	[DataMember(Name = "roundNo")]
 	public long roundNo { get; set; }
 
-	public AbilityData Clone() {
+	public RoundData Clone() {
 		var result = new RoundData();
 		result.id = id;
 		result.name = name;

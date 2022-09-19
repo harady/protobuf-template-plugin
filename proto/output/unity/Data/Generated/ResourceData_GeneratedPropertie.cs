@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
@@ -18,7 +18,7 @@ public partial class ResourceData : AbstractData
 	[DataMember(Name = "resourceExtra")]
 	public string resourceExtra { get; set; }
 
-	public AbilityData Clone() {
+	public ResourceData Clone() {
 		var result = new ResourceData();
 		result.resourceType = resourceType;
 		result.resourceId = resourceId;
@@ -26,8 +26,6 @@ public partial class ResourceData : AbstractData
 		result.resourceExtra = resourceExtra;
 		return result;
 	}
-
-	public string idNameText => GetIdNameText(id, name);
 
 	public override string ToString()
 	{

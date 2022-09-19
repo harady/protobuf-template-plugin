@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
@@ -27,7 +27,7 @@ public partial class ResourceLotteryItemData : AbstractData
 	[DataMember(Name = "resourceAmountMax")]
 	public long resourceAmountMax { get; set; }
 
-	public AbilityData Clone() {
+	public ResourceLotteryItemData Clone() {
 		var result = new ResourceLotteryItemData();
 		result.id = id;
 		result.resourceLotteryId = resourceLotteryId;
@@ -38,8 +38,6 @@ public partial class ResourceLotteryItemData : AbstractData
 		result.resourceAmountMax = resourceAmountMax;
 		return result;
 	}
-
-	public string idNameText => GetIdNameText(id, name);
 
 	public override string ToString()
 	{

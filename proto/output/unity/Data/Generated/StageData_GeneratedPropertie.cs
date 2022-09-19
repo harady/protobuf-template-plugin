@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
@@ -33,7 +33,7 @@ public partial class StageData : AbstractData
 	[DataMember(Name = "baseStageId")]
 	public long baseStageId { get; set; }
 
-	public AbilityData Clone() {
+	public StageData Clone() {
 		var result = new StageData();
 		result.id = id;
 		result.name = name;

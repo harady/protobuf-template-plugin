@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
@@ -18,7 +18,7 @@ public partial class UnitLevelExpData : AbstractData
 	[DataMember(Name = "totalExp")]
 	public long totalExp { get; set; }
 
-	public AbilityData Clone() {
+	public UnitLevelExpData Clone() {
 		var result = new UnitLevelExpData();
 		result.id = id;
 		result.growthType = growthType;
@@ -26,8 +26,6 @@ public partial class UnitLevelExpData : AbstractData
 		result.totalExp = totalExp;
 		return result;
 	}
-
-	public string idNameText => GetIdNameText(id, name);
 
 	public override string ToString()
 	{

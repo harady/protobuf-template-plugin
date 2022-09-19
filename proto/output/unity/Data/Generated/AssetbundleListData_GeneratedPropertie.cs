@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
@@ -10,16 +10,14 @@ public partial class AssetbundleListData : AbstractData
 	public long version { get; set; }
 
 	[DataMember(Name = "assetbundles")]
-	public AssetbundleData assetbundles { get; set; }
+	public List<AssetbundleData> assetbundles { get; set; } = new List<AssetbundleData>();
 
-	public AbilityData Clone() {
+	public AssetbundleListData Clone() {
 		var result = new AssetbundleListData();
 		result.version = version;
 		result.assetbundles = assetbundles;
 		return result;
 	}
-
-	public string idNameText => GetIdNameText(id, name);
 
 	public override string ToString()
 	{

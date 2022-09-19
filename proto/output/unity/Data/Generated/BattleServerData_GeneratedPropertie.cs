@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
@@ -9,13 +9,11 @@ public partial class BattleServerData : AbstractData
 	[DataMember(Name = "id")]
 	public long id { get; set; }
 
-	public AbilityData Clone() {
+	public BattleServerData Clone() {
 		var result = new BattleServerData();
 		result.id = id;
 		return result;
 	}
-
-	public string idNameText => GetIdNameText(id, name);
 
 	public override string ToString()
 	{

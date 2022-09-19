@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
@@ -39,7 +39,7 @@ public partial class ComboData : AbstractData
 	[DataMember(Name = "iconId")]
 	public long iconId { get; set; }
 
-	public AbilityData Clone() {
+	public ComboData Clone() {
 		var result = new ComboData();
 		result.id = id;
 		result.name = name;

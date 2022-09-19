@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
@@ -18,7 +18,7 @@ public partial class UserMissionData : AbstractData
 	[DataMember(Name = "progress")]
 	public long progress { get; set; }
 
-	public AbilityData Clone() {
+	public UserMissionData Clone() {
 		var result = new UserMissionData();
 		result.id = id;
 		result.userId = userId;
@@ -26,8 +26,6 @@ public partial class UserMissionData : AbstractData
 		result.progress = progress;
 		return result;
 	}
-
-	public string idNameText => GetIdNameText(id, name);
 
 	public override string ToString()
 	{

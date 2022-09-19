@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
@@ -10,24 +10,24 @@ public partial class MasterData : AbstractData
 	public ClientMasterData clientMaster { get; set; }
 
 	[DataMember(Name = "enemyClusters")]
-	public EnemyClusterData enemyClusters { get; set; }
+	public List<EnemyClusterData> enemyClusters { get; set; } = new List<EnemyClusterData>();
 
 	[DataMember(Name = "enemyMappings")]
-	public EnemyMappingData enemyMappings { get; set; }
+	public List<EnemyMappingData> enemyMappings { get; set; } = new List<EnemyMappingData>();
 
 	[DataMember(Name = "eventQuestCategorys")]
-	public EventQuestCategoryData eventQuestCategorys { get; set; }
+	public List<EventQuestCategoryData> eventQuestCategorys { get; set; } = new List<EventQuestCategoryData>();
 
 	[DataMember(Name = "eventScheduleTerms")]
-	public EventScheduleTermData eventScheduleTerms { get; set; }
+	public List<EventScheduleTermData> eventScheduleTerms { get; set; } = new List<EventScheduleTermData>();
 
 	[DataMember(Name = "gachaPools")]
-	public GachaPoolData gachaPools { get; set; }
+	public List<GachaPoolData> gachaPools { get; set; } = new List<GachaPoolData>();
 
 	[DataMember(Name = "gachaPoolItems")]
-	public GachaPoolItemData gachaPoolItems { get; set; }
+	public List<GachaPoolItemData> gachaPoolItems { get; set; } = new List<GachaPoolItemData>();
 
-	public AbilityData Clone() {
+	public MasterData Clone() {
 		var result = new MasterData();
 		result.clientMaster = clientMaster;
 		result.enemyClusters = enemyClusters;
@@ -38,8 +38,6 @@ public partial class MasterData : AbstractData
 		result.gachaPoolItems = gachaPoolItems;
 		return result;
 	}
-
-	public string idNameText => GetIdNameText(id, name);
 
 	public override string ToString()
 	{

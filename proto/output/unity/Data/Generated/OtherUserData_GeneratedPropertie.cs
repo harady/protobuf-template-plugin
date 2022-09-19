@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
@@ -24,7 +24,7 @@ public partial class OtherUserData : AbstractData
 	[DataMember(Name = "isFriend")]
 	public bool isFriend { get; set; }
 
-	public AbilityData Clone() {
+	public OtherUserData Clone() {
 		var result = new OtherUserData();
 		result.id = id;
 		result.name = name;

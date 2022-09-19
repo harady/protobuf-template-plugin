@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
@@ -33,6 +33,11 @@ public partial class UserData : AbstractData
 	[DataMember(Name = "lastStaminaUpdateAt")]
 	public long lastStaminaUpdateAt { get; set; }
 
+	public DateTime LastStaminaUpdateAt {
+		get { return ServerDateTimeUtil.FromEpoch(lastStaminaUpdateAt); }
+		set { lastStaminaUpdateAt = ServerDateTimeUtil.ToEpoch(value); }
+	}
+
 	[DataMember(Name = "freeCrystal")]
 	public long freeCrystal { get; set; }
 
@@ -57,7 +62,7 @@ public partial class UserData : AbstractData
 	[DataMember(Name = "friendUserUnitId")]
 	public long friendUserUnitId { get; set; }
 
-	public AbilityData Clone() {
+	public UserData Clone() {
 		var result = new UserData();
 		result.id = id;
 		result.name = name;

@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
@@ -18,7 +18,7 @@ public partial class DailyEventTableItemData : AbstractData
 	[DataMember(Name = "count")]
 	public long count { get; set; }
 
-	public AbilityData Clone() {
+	public DailyEventTableItemData Clone() {
 		var result = new DailyEventTableItemData();
 		result.id = id;
 		result.dailyEventTableId = dailyEventTableId;
@@ -26,8 +26,6 @@ public partial class DailyEventTableItemData : AbstractData
 		result.count = count;
 		return result;
 	}
-
-	public string idNameText => GetIdNameText(id, name);
 
 	public override string ToString()
 	{

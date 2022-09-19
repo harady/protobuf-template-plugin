@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
@@ -18,7 +18,7 @@ public partial class UserItemData : AbstractData
 	[DataMember(Name = "amount")]
 	public long amount { get; set; }
 
-	public AbilityData Clone() {
+	public UserItemData Clone() {
 		var result = new UserItemData();
 		result.id = id;
 		result.userId = userId;
@@ -26,8 +26,6 @@ public partial class UserItemData : AbstractData
 		result.amount = amount;
 		return result;
 	}
-
-	public string idNameText => GetIdNameText(id, name);
 
 	public override string ToString()
 	{

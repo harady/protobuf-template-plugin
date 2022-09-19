@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
@@ -18,7 +18,7 @@ public partial class GachaData : AbstractData
 	[DataMember(Name = "isPremium")]
 	public bool isPremium { get; set; }
 
-	public AbilityData Clone() {
+	public GachaData Clone() {
 		var result = new GachaData();
 		result.id = id;
 		result.name = name;

@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
@@ -19,7 +19,7 @@ public partial class BattleResultTurnLogData : AbstractData
 	public long totalDamage { get; set; }
 
 	[DataMember(Name = "killedEnemyMappingIds")]
-	public long killedEnemyMappingIds { get; set; }
+	public List<long> killedEnemyMappingIds { get; set; } = new List<long>();
 
 	[DataMember(Name = "totalWaitingTime")]
 	public float totalWaitingTime { get; set; }
@@ -42,7 +42,7 @@ public partial class BattleResultTurnLogData : AbstractData
 	[DataMember(Name = "hash")]
 	public string hash { get; set; }
 
-	public AbilityData Clone() {
+	public BattleResultTurnLogData Clone() {
 		var result = new BattleResultTurnLogData();
 		result.turnNo = turnNo;
 		result.roundNo = roundNo;
@@ -58,8 +58,6 @@ public partial class BattleResultTurnLogData : AbstractData
 		result.hash = hash;
 		return result;
 	}
-
-	public string idNameText => GetIdNameText(id, name);
 
 	public override string ToString()
 	{

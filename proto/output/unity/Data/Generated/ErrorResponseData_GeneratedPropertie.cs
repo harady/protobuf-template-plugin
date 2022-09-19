@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
@@ -18,7 +18,7 @@ public partial class ErrorResponse : AbstractData
 	[DataMember(Name = "description")]
 	public string description { get; set; }
 
-	public AbilityData Clone() {
+	public ErrorResponse Clone() {
 		var result = new ErrorResponse();
 		result.code = code;
 		result.title = title;
@@ -26,8 +26,6 @@ public partial class ErrorResponse : AbstractData
 		result.description = description;
 		return result;
 	}
-
-	public string idNameText => GetIdNameText(id, name);
 
 	public override string ToString()
 	{

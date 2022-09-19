@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
@@ -30,7 +30,7 @@ public partial class CommonResponse : AbstractData
 	[DataMember(Name = "assetBaseUrl")]
 	public string assetBaseUrl { get; set; }
 
-	public AbilityData Clone() {
+	public CommonResponse Clone() {
 		var result = new CommonResponse();
 		result.userUpdate = userUpdate;
 		result.serverTime = serverTime;
@@ -42,8 +42,6 @@ public partial class CommonResponse : AbstractData
 		result.assetBaseUrl = assetBaseUrl;
 		return result;
 	}
-
-	public string idNameText => GetIdNameText(id, name);
 
 	public override string ToString()
 	{

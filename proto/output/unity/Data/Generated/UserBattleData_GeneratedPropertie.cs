@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
@@ -27,7 +27,12 @@ public partial class UserBattleData : AbstractData
 	[DataMember(Name = "startAt")]
 	public long startAt { get; set; }
 
-	public AbilityData Clone() {
+	public DateTime StartAt {
+		get { return ServerDateTimeUtil.FromEpoch(startAt); }
+		set { startAt = ServerDateTimeUtil.ToEpoch(value); }
+	}
+
+	public UserBattleData Clone() {
 		var result = new UserBattleData();
 		result.id = id;
 		result.userId = userId;
@@ -38,8 +43,6 @@ public partial class UserBattleData : AbstractData
 		result.startAt = startAt;
 		return result;
 	}
-
-	public string idNameText => GetIdNameText(id, name);
 
 	public override string ToString()
 	{

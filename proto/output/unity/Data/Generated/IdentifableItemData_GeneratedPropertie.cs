@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
@@ -21,7 +21,7 @@ public partial class IdentifableItemData : AbstractData
 	[DataMember(Name = "ownedLimit")]
 	public long ownedLimit { get; set; }
 
-	public AbilityData Clone() {
+	public IdentifableItemData Clone() {
 		var result = new IdentifableItemData();
 		result.id = id;
 		result.name = name;

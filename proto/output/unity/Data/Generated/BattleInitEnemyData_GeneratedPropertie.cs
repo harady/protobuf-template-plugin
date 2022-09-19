@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
@@ -24,7 +24,7 @@ public partial class BattleInitEnemyData : AbstractData
 	[DataMember(Name = "dropRewardResource")]
 	public ResourceData dropRewardResource { get; set; }
 
-	public AbilityData Clone() {
+	public BattleInitEnemyData Clone() {
 		var result = new BattleInitEnemyData();
 		result.id = id;
 		result.roundId = roundId;
@@ -34,8 +34,6 @@ public partial class BattleInitEnemyData : AbstractData
 		result.dropRewardResource = dropRewardResource;
 		return result;
 	}
-
-	public string idNameText => GetIdNameText(id, name);
 
 	public override string ToString()
 	{

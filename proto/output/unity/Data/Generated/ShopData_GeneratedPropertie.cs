@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
@@ -12,7 +12,7 @@ public partial class ShopData : AbstractData
 	[DataMember(Name = "name")]
 	public string name { get; set; }
 
-	public AbilityData Clone() {
+	public ShopData Clone() {
 		var result = new ShopData();
 		result.id = id;
 		result.name = name;

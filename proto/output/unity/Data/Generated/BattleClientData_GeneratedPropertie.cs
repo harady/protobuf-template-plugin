@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
@@ -13,24 +13,24 @@ public partial class BattleClientData : AbstractData
 	public long randomSeed { get; set; }
 
 	[DataMember(Name = "battleUsers")]
-	public BattleUserData battleUsers { get; set; }
+	public List<BattleUserData> battleUsers { get; set; } = new List<BattleUserData>();
 
 	[DataMember(Name = "battleInitDeck")]
 	public BattleInitDeckData battleInitDeck { get; set; }
 
 	[DataMember(Name = "rounds")]
-	public RoundData rounds { get; set; }
+	public List<RoundData> rounds { get; set; } = new List<RoundData>();
 
 	[DataMember(Name = "battleInitEnemys")]
-	public BattleInitEnemyData battleInitEnemys { get; set; }
+	public List<BattleInitEnemyData> battleInitEnemys { get; set; } = new List<BattleInitEnemyData>();
 
 	[DataMember(Name = "enemys")]
-	public EnemyData enemys { get; set; }
+	public List<EnemyData> enemys { get; set; } = new List<EnemyData>();
 
 	[DataMember(Name = "enemyActions")]
-	public EnemyActionData enemyActions { get; set; }
+	public List<EnemyActionData> enemyActions { get; set; } = new List<EnemyActionData>();
 
-	public AbilityData Clone() {
+	public BattleClientData Clone() {
 		var result = new BattleClientData();
 		result.stageId = stageId;
 		result.randomSeed = randomSeed;
@@ -42,8 +42,6 @@ public partial class BattleClientData : AbstractData
 		result.enemyActions = enemyActions;
 		return result;
 	}
-
-	public string idNameText => GetIdNameText(id, name);
 
 	public override string ToString()
 	{

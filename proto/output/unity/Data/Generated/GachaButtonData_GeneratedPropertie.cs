@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
@@ -39,7 +39,7 @@ public partial class GachaButtonData : AbstractData
 	[DataMember(Name = "costResourceAmount")]
 	public long costResourceAmount { get; set; }
 
-	public AbilityData Clone() {
+	public GachaButtonData Clone() {
 		var result = new GachaButtonData();
 		result.id = id;
 		result.name = name;

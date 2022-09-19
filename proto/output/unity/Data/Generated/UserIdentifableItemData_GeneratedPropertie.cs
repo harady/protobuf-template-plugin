@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
@@ -21,7 +21,7 @@ public partial class UserIdentifableItemData : AbstractData
 	[DataMember(Name = "paramB")]
 	public long paramB { get; set; }
 
-	public AbilityData Clone() {
+	public UserIdentifableItemData Clone() {
 		var result = new UserIdentifableItemData();
 		result.id = id;
 		result.userId = userId;
@@ -30,8 +30,6 @@ public partial class UserIdentifableItemData : AbstractData
 		result.paramB = paramB;
 		return result;
 	}
-
-	public string idNameText => GetIdNameText(id, name);
 
 	public override string ToString()
 	{

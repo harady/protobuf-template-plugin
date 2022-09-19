@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
@@ -27,7 +27,7 @@ public partial class EnemyMappingData : AbstractData
 	[DataMember(Name = "rewardResourceLotteryId")]
 	public long rewardResourceLotteryId { get; set; }
 
-	public AbilityData Clone() {
+	public EnemyMappingData Clone() {
 		var result = new EnemyMappingData();
 		result.id = id;
 		result.roundId = roundId;
@@ -38,8 +38,6 @@ public partial class EnemyMappingData : AbstractData
 		result.rewardResourceLotteryId = rewardResourceLotteryId;
 		return result;
 	}
-
-	public string idNameText => GetIdNameText(id, name);
 
 	public override string ToString()
 	{

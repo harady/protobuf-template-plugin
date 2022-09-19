@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
@@ -27,7 +27,7 @@ public partial class UserDeckData : AbstractData
 	[DataMember(Name = "userUnit3Id")]
 	public long userUnit3Id { get; set; }
 
-	public AbilityData Clone() {
+	public UserDeckData Clone() {
 		var result = new UserDeckData();
 		result.id = id;
 		result.userId = userId;

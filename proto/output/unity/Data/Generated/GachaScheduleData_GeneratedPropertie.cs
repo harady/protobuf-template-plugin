@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
@@ -15,10 +15,20 @@ public partial class GachaScheduleData : AbstractData
 	[DataMember(Name = "openAt")]
 	public long openAt { get; set; }
 
+	public DateTime OpenAt {
+		get { return ServerDateTimeUtil.FromEpoch(openAt); }
+		set { openAt = ServerDateTimeUtil.ToEpoch(value); }
+	}
+
 	[DataMember(Name = "closeAt")]
 	public long closeAt { get; set; }
 
-	public AbilityData Clone() {
+	public DateTime CloseAt {
+		get { return ServerDateTimeUtil.FromEpoch(closeAt); }
+		set { closeAt = ServerDateTimeUtil.ToEpoch(value); }
+	}
+
+	public GachaScheduleData Clone() {
 		var result = new GachaScheduleData();
 		result.id = id;
 		result.gachaId = gachaId;
@@ -26,8 +36,6 @@ public partial class GachaScheduleData : AbstractData
 		result.closeAt = closeAt;
 		return result;
 	}
-
-	public string idNameText => GetIdNameText(id, name);
 
 	public override string ToString()
 	{

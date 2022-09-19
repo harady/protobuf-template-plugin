@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
@@ -15,7 +15,7 @@ public partial class ExchangeData : AbstractData
 	[DataMember(Name = "type")]
 	public ExchangeType type { get; set; }
 
-	public AbilityData Clone() {
+	public ExchangeData Clone() {
 		var result = new ExchangeData();
 		result.id = id;
 		result.name = name;

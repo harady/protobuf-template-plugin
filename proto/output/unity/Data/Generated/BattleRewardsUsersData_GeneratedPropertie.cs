@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
@@ -7,23 +7,21 @@ using Newtonsoft.Json;
 public partial class BattleRewardsUsersData : AbstractData
 {
 	[DataMember(Name = "hostUsers")]
-	public OtherUserData hostUsers { get; set; }
+	public List<OtherUserData> hostUsers { get; set; } = new List<OtherUserData>();
 
 	[DataMember(Name = "guestUsers")]
-	public OtherUserData guestUsers { get; set; }
+	public List<OtherUserData> guestUsers { get; set; } = new List<OtherUserData>();
 
 	[DataMember(Name = "helperUsers")]
-	public OtherUserData helperUsers { get; set; }
+	public List<OtherUserData> helperUsers { get; set; } = new List<OtherUserData>();
 
-	public AbilityData Clone() {
+	public BattleRewardsUsersData Clone() {
 		var result = new BattleRewardsUsersData();
 		result.hostUsers = hostUsers;
 		result.guestUsers = guestUsers;
 		result.helperUsers = helperUsers;
 		return result;
 	}
-
-	public string idNameText => GetIdNameText(id, name);
 
 	public override string ToString()
 	{

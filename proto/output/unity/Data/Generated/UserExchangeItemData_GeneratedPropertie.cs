@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
@@ -21,7 +21,7 @@ public partial class UserExchangeItemData : AbstractData
 	[DataMember(Name = "exchangedCount")]
 	public long exchangedCount { get; set; }
 
-	public AbilityData Clone() {
+	public UserExchangeItemData Clone() {
 		var result = new UserExchangeItemData();
 		result.id = id;
 		result.userId = userId;
@@ -30,8 +30,6 @@ public partial class UserExchangeItemData : AbstractData
 		result.exchangedCount = exchangedCount;
 		return result;
 	}
-
-	public string idNameText => GetIdNameText(id, name);
 
 	public override string ToString()
 	{

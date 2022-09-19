@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
@@ -21,7 +21,7 @@ public partial class UserUnitCollectionData : AbstractData
 	[DataMember(Name = "usedCount")]
 	public long usedCount { get; set; }
 
-	public AbilityData Clone() {
+	public UserUnitCollectionData Clone() {
 		var result = new UserUnitCollectionData();
 		result.id = id;
 		result.userId = userId;
@@ -30,8 +30,6 @@ public partial class UserUnitCollectionData : AbstractData
 		result.usedCount = usedCount;
 		return result;
 	}
-
-	public string idNameText => GetIdNameText(id, name);
 
 	public override string ToString()
 	{

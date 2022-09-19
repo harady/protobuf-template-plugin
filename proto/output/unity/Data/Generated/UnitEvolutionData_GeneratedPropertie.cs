@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
@@ -24,7 +24,7 @@ public partial class UnitEvolutionData : AbstractData
 	[DataMember(Name = "costResourceSetId")]
 	public long costResourceSetId { get; set; }
 
-	public AbilityData Clone() {
+	public UnitEvolutionData Clone() {
 		var result = new UnitEvolutionData();
 		result.id = id;
 		result.name = name;

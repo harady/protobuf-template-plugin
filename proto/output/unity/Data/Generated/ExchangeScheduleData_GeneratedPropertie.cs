@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
@@ -15,10 +15,20 @@ public partial class ExchangeScheduleData : AbstractData
 	[DataMember(Name = "openAt")]
 	public long openAt { get; set; }
 
+	public DateTime OpenAt {
+		get { return ServerDateTimeUtil.FromEpoch(openAt); }
+		set { openAt = ServerDateTimeUtil.ToEpoch(value); }
+	}
+
 	[DataMember(Name = "closeAt")]
 	public long closeAt { get; set; }
 
-	public AbilityData Clone() {
+	public DateTime CloseAt {
+		get { return ServerDateTimeUtil.FromEpoch(closeAt); }
+		set { closeAt = ServerDateTimeUtil.ToEpoch(value); }
+	}
+
+	public ExchangeScheduleData Clone() {
 		var result = new ExchangeScheduleData();
 		result.id = id;
 		result.exchangeId = exchangeId;
@@ -26,8 +36,6 @@ public partial class ExchangeScheduleData : AbstractData
 		result.closeAt = closeAt;
 		return result;
 	}
-
-	public string idNameText => GetIdNameText(id, name);
 
 	public override string ToString()
 	{

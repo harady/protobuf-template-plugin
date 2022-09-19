@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
@@ -15,7 +15,7 @@ public partial class UserMessageData : AbstractData
 	[DataMember(Name = "name")]
 	public string name { get; set; }
 
-	public AbilityData Clone() {
+	public UserMessageData Clone() {
 		var result = new UserMessageData();
 		result.id = id;
 		result.userId = userId;

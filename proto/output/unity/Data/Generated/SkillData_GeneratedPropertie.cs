@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
@@ -51,7 +51,7 @@ public partial class SkillData : AbstractData
 	[DataMember(Name = "effect2ParamB")]
 	public long effect2ParamB { get; set; }
 
-	public AbilityData Clone() {
+	public SkillData Clone() {
 		var result = new SkillData();
 		result.id = id;
 		result.name = name;

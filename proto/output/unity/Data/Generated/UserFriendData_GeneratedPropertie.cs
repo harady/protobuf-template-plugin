@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
@@ -21,10 +21,15 @@ public partial class UserFriendData : AbstractData
 	[DataMember(Name = "lastUsedAt")]
 	public long lastUsedAt { get; set; }
 
+	public DateTime LastUsedAt {
+		get { return ServerDateTimeUtil.FromEpoch(lastUsedAt); }
+		set { lastUsedAt = ServerDateTimeUtil.ToEpoch(value); }
+	}
+
 	[DataMember(Name = "usedCount")]
 	public long usedCount { get; set; }
 
-	public AbilityData Clone() {
+	public UserFriendData Clone() {
 		var result = new UserFriendData();
 		result.id = id;
 		result.userId = userId;
@@ -34,8 +39,6 @@ public partial class UserFriendData : AbstractData
 		result.usedCount = usedCount;
 		return result;
 	}
-
-	public string idNameText => GetIdNameText(id, name);
 
 	public override string ToString()
 	{

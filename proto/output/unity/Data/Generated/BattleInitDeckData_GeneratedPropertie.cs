@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
@@ -7,15 +7,13 @@ using Newtonsoft.Json;
 public partial class BattleInitDeckData : AbstractData
 {
 	[DataMember(Name = "userUnits")]
-	public UserUnitData userUnits { get; set; }
+	public List<UserUnitData> userUnits { get; set; } = new List<UserUnitData>();
 
-	public AbilityData Clone() {
+	public BattleInitDeckData Clone() {
 		var result = new BattleInitDeckData();
 		result.userUnits = userUnits;
 		return result;
 	}
-
-	public string idNameText => GetIdNameText(id, name);
 
 	public override string ToString()
 	{

@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
@@ -27,7 +27,7 @@ public partial class StageSpecialRewardData : AbstractData
 	[DataMember(Name = "resourceLotteryId")]
 	public long resourceLotteryId { get; set; }
 
-	public AbilityData Clone() {
+	public StageSpecialRewardData Clone() {
 		var result = new StageSpecialRewardData();
 		result.id = id;
 		result.name = name;

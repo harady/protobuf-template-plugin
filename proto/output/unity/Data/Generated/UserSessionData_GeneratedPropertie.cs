@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
@@ -18,7 +18,12 @@ public partial class UserSessionData : AbstractData
 	[DataMember(Name = "expireAt")]
 	public long expireAt { get; set; }
 
-	public AbilityData Clone() {
+	public DateTime ExpireAt {
+		get { return ServerDateTimeUtil.FromEpoch(expireAt); }
+		set { expireAt = ServerDateTimeUtil.ToEpoch(value); }
+	}
+
+	public UserSessionData Clone() {
 		var result = new UserSessionData();
 		result.id = id;
 		result.userId = userId;
@@ -26,8 +31,6 @@ public partial class UserSessionData : AbstractData
 		result.expireAt = expireAt;
 		return result;
 	}
-
-	public string idNameText => GetIdNameText(id, name);
 
 	public override string ToString()
 	{

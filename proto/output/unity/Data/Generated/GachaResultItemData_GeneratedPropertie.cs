@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
@@ -18,7 +18,7 @@ public partial class GachaResultItemData : AbstractData
 	[DataMember(Name = "isGuarantee")]
 	public bool isGuarantee { get; set; }
 
-	public AbilityData Clone() {
+	public GachaResultItemData Clone() {
 		var result = new GachaResultItemData();
 		result.resource = resource;
 		result.isExtra = isExtra;
@@ -26,8 +26,6 @@ public partial class GachaResultItemData : AbstractData
 		result.isGuarantee = isGuarantee;
 		return result;
 	}
-
-	public string idNameText => GetIdNameText(id, name);
 
 	public override string ToString()
 	{

@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
@@ -33,7 +33,7 @@ public partial class ItemData : AbstractData
 	[DataMember(Name = "paramB")]
 	public long paramB { get; set; }
 
-	public AbilityData Clone() {
+	public ItemData Clone() {
 		var result = new ItemData();
 		result.id = id;
 		result.name = name;

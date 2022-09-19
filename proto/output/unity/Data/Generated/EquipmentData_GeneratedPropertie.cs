@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
@@ -27,7 +27,7 @@ public partial class EquipmentData : AbstractData
 	[DataMember(Name = "iconId")]
 	public long iconId { get; set; }
 
-	public AbilityData Clone() {
+	public EquipmentData Clone() {
 		var result = new EquipmentData();
 		result.id = id;
 		result.name = name;

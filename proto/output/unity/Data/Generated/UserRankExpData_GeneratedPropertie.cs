@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
@@ -27,7 +27,7 @@ public partial class UserRankExpData : AbstractData
 	[DataMember(Name = "unitBoxNum")]
 	public long unitBoxNum { get; set; }
 
-	public AbilityData Clone() {
+	public UserRankExpData Clone() {
 		var result = new UserRankExpData();
 		result.id = id;
 		result.rank = rank;
@@ -38,8 +38,6 @@ public partial class UserRankExpData : AbstractData
 		result.unitBoxNum = unitBoxNum;
 		return result;
 	}
-
-	public string idNameText => GetIdNameText(id, name);
 
 	public override string ToString()
 	{

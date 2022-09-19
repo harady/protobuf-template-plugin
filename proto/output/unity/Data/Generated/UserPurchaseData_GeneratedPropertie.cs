@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
@@ -39,7 +39,12 @@ public partial class UserPurchaseData : AbstractData
 	[DataMember(Name = "purchaseAt")]
 	public long purchaseAt { get; set; }
 
-	public AbilityData Clone() {
+	public DateTime PurchaseAt {
+		get { return ServerDateTimeUtil.FromEpoch(purchaseAt); }
+		set { purchaseAt = ServerDateTimeUtil.ToEpoch(value); }
+	}
+
+	public UserPurchaseData Clone() {
 		var result = new UserPurchaseData();
 		result.id = id;
 		result.userId = userId;
@@ -54,8 +59,6 @@ public partial class UserPurchaseData : AbstractData
 		result.purchaseAt = purchaseAt;
 		return result;
 	}
-
-	public string idNameText => GetIdNameText(id, name);
 
 	public override string ToString()
 	{

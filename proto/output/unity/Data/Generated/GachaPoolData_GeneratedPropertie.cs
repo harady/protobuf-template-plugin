@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
@@ -36,7 +36,7 @@ public partial class GachaPoolData : AbstractData
 	[DataMember(Name = "weight")]
 	public long weight { get; set; }
 
-	public AbilityData Clone() {
+	public GachaPoolData Clone() {
 		var result = new GachaPoolData();
 		result.id = id;
 		result.name = name;

@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
@@ -15,7 +15,7 @@ public partial class ResourceLotteryData : AbstractData
 	[DataMember(Name = "hasEmpty")]
 	public bool hasEmpty { get; set; }
 
-	public AbilityData Clone() {
+	public ResourceLotteryData Clone() {
 		var result = new ResourceLotteryData();
 		result.id = id;
 		result.name = name;

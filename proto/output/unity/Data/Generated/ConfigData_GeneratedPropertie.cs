@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
@@ -18,7 +18,7 @@ public partial class ConfigData : AbstractData
 	[DataMember(Name = "text")]
 	public string text { get; set; }
 
-	public AbilityData Clone() {
+	public ConfigData Clone() {
 		var result = new ConfigData();
 		result.id = id;
 		result.key = key;
@@ -26,8 +26,6 @@ public partial class ConfigData : AbstractData
 		result.text = text;
 		return result;
 	}
-
-	public string idNameText => GetIdNameText(id, name);
 
 	public override string ToString()
 	{

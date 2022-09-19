@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
@@ -10,42 +10,42 @@ public partial class UserUpdateData : AbstractData
 	public UserData user { get; set; }
 
 	[DataMember(Name = "userBackups")]
-	public UserBackupData userBackups { get; set; }
+	public List<UserBackupData> userBackups { get; set; } = new List<UserBackupData>();
 
 	[DataMember(Name = "userDecks")]
-	public UserDeckData userDecks { get; set; }
+	public List<UserDeckData> userDecks { get; set; } = new List<UserDeckData>();
 
 	[DataMember(Name = "userExchangeItems")]
-	public UserExchangeItemData userExchangeItems { get; set; }
+	public List<UserExchangeItemData> userExchangeItems { get; set; } = new List<UserExchangeItemData>();
 
 	[DataMember(Name = "userGachaButtons")]
-	public UserGachaButtonData userGachaButtons { get; set; }
+	public List<UserGachaButtonData> userGachaButtons { get; set; } = new List<UserGachaButtonData>();
 
 	[DataMember(Name = "userItems")]
-	public UserItemData userItems { get; set; }
+	public List<UserItemData> userItems { get; set; } = new List<UserItemData>();
 
 	[DataMember(Name = "userMessages")]
-	public UserMessageData userMessages { get; set; }
+	public List<UserMessageData> userMessages { get; set; } = new List<UserMessageData>();
 
 	[DataMember(Name = "userMissions")]
-	public UserMissionData userMissions { get; set; }
+	public List<UserMissionData> userMissions { get; set; } = new List<UserMissionData>();
 
 	[DataMember(Name = "userPaidCrystals")]
-	public UserPaidCrystalData userPaidCrystals { get; set; }
+	public List<UserPaidCrystalData> userPaidCrystals { get; set; } = new List<UserPaidCrystalData>();
 
 	[DataMember(Name = "userShopItems")]
-	public UserShopItemData userShopItems { get; set; }
+	public List<UserShopItemData> userShopItems { get; set; } = new List<UserShopItemData>();
 
 	[DataMember(Name = "userStages")]
-	public UserStageData userStages { get; set; }
+	public List<UserStageData> userStages { get; set; } = new List<UserStageData>();
 
 	[DataMember(Name = "userUnits")]
-	public UserUnitData userUnits { get; set; }
+	public List<UserUnitData> userUnits { get; set; } = new List<UserUnitData>();
 
 	[DataMember(Name = "userUnitCollections")]
-	public UserUnitCollectionData userUnitCollections { get; set; }
+	public List<UserUnitCollectionData> userUnitCollections { get; set; } = new List<UserUnitCollectionData>();
 
-	public AbilityData Clone() {
+	public UserUpdateData Clone() {
 		var result = new UserUpdateData();
 		result.user = user;
 		result.userBackups = userBackups;
@@ -62,8 +62,6 @@ public partial class UserUpdateData : AbstractData
 		result.userUnitCollections = userUnitCollections;
 		return result;
 	}
-
-	public string idNameText => GetIdNameText(id, name);
 
 	public override string ToString()
 	{
