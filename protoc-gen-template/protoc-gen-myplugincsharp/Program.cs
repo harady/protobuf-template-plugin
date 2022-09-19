@@ -30,7 +30,6 @@ namespace protoc_gen_myplugincsharp
 
 			var templateStr = File.ReadAllText(templatePath);
 			var template = Template.Parse(templateStr);
-			var result = template.Render(new { Name = "World" }); // => "Hello World!" 
 
 			var response = new CodeGeneratorResponse();
 			var fileToGenerates = request.FileToGenerate.ToHashSet();
@@ -39,40 +38,43 @@ namespace protoc_gen_myplugincsharp
 				.Where(file => fileToGenerates.Contains(file.Name));
 
 			foreach (var fileDesc in outputFileDescs) {
-				var output = new StringBuilder();
+				//var output = new StringBuilder();
 
-				// make service method list
-				foreach (var serviceType in fileDesc.Service) {
-					output.AppendLine($"service {serviceType.Name}");
+				//// make service method list
+				//foreach (var serviceType in fileDesc.Service) {
+				//	output.AppendLine($"service {serviceType.Name}");
 
-					foreach (var method in serviceType.Method) {
-						output.AppendLine($"   {method.OutputType} {method.Name}({method.InputType})");
-					}
-				}
+				//	foreach (var method in serviceType.Method) {
+				//		output.AppendLine($"   {method.OutputType} {method.Name}({method.InputType})");
+				//	}
+				//}
 
-				// make message field list
-				foreach (var messageDesc in fileDesc.MessageType) {
-					output.AppendLine($"message {messageDesc.Name}");
+				//// make message field list
+				//foreach (var messageDesc in fileDesc.MessageType) {
+				//	output.AppendLine($"message {messageDesc.Name}");
 
-					foreach (var fieldDesc in messageDesc.Field) {
-						output.AppendLine($"   {fieldDesc.TypeName} {fieldDesc.Name}");
-					}
+				//	foreach (var fieldDesc in messageDesc.Field) {
+				//		output.AppendLine($"   {fieldDesc.TypeName} {fieldDesc.Name}");
+				//	}
 
-					foreach (var enumDesc in messageDesc.EnumType) {
-						output.AppendLine($"   {enumDesc.Name}");
-					}
-				}
+				//	foreach (var enumDesc in messageDesc.EnumType) {
+				//		output.AppendLine($"   {enumDesc.Name}");
+				//	}
+				//}
 
 				var filename
 					= Path.GetFileNameWithoutExtension(fileDesc.Name)
 						.ToPascalCase();
 				filename += paramDict["fileSuffix"];
 
+				var output = template.Render(new { File = fileDesc }); // => "Hello World!" 
+
+
 				// set as response
 				response.File.Add(
 					new CodeGeneratorResponse.Types.File() {
 						Name = filename,
-						Content = result.ToString(),
+						Content = output.ToString(),
 					}
 				);
 			}

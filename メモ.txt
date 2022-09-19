@@ -51,7 +51,6 @@ https://github.com/scriban/scriban
 
 Scribanを採用することにした。
 
-template=template/sheet_columns.gotemplate,fileSuffix=.txt
 
 
 
