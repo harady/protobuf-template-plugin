@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using UnityEngine;
 
-{{ range .Services }}
+{{ for service in file.service }}
 public partial class {{ .Name }}Service
 {
 {{ range .Methods }}

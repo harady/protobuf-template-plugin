@@ -1,7 +1,6 @@
 ﻿using System;
-using Scriban.Runtime;
 using Google.Protobuf.Reflection;
-using System.IO;
+using Scriban.Runtime;
 
 public class CustomFunctions : ScriptObject
 {

@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
 
-
 public partial class UserUpdateData
 {
 	public void SetToGameDb()
