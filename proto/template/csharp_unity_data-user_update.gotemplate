@@ -1,0 +1,51 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Runtime.Serialization;
+
+{{ range .Messages }}
+{{- $className := .Name -}}
+public partial class {{ $className }}
+{
+	public void SetToGameDb()
+	{
+{{- range .Fields }}
+	{{- if .IsRepeated }}
+		{{.BaseType }}.SetDataList({{.Name | ToCamelCase}});
+	{{- else }}
+		UserDataManager.instance.{{.Name | ToCamelCase}}Data = {{.Name | ToCamelCase}};
+	{{- end }}
+{{- end }}
+		RemoveFromGameDb();
+	}
+	
+	public void AddToGameDb()
+	{
+{{- range .Fields }}
+	{{- if .IsRepeated }}
+		{{.BaseType }}.AddDataList({{.Name | ToCamelCase}});
+	{{- else }}
+		UserDataManager.instance.{{.Name | ToCamelCase}}Data = {{.Name | ToCamelCase}};
+	{{- end }}
+{{- end }}
+		RemoveFromGameDb();
+	}
+
+	public void RemoveFromGameDb()
+	{
+{{- range .Fields }}
+	{{- if .IsRepeated }}
+		{{- $deletedIdsPropertieName := (Replace (Join (Join "deleted" (.Name | SnakeToPascal)) "_Ids") "s_Ids" "Ids") }}
+		{{.BaseType }}.RemoveDataByIds({{ $deletedIdsPropertieName }});
+	{{- end }}
+{{- end }}
+	}
+{{- range .Fields }}
+	{{- $deletedIdsPropertieName := (Replace (Join (Join "deleted" (.Name | SnakeToPascal)) "_Ids") "s_Ids" "Ids") }}
+	{{- if .IsRepeated  }}
+
+	[DataMember(Name = "{{ $deletedIdsPropertieName }}")]
+	public List<long> {{ $deletedIdsPropertieName }} { get; set; } = new List<long>();
+	{{- end }}
+{{- end }}
+}
+{{ end -}}

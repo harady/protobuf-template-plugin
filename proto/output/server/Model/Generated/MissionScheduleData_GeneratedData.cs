@@ -1,0 +1,3 @@
+message MissionScheduleData
+    id
+    name

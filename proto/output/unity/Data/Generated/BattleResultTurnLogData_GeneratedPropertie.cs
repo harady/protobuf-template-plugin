@@ -1,0 +1,13 @@
+message BattleResultTurnLogData
+    turn_no
+    round_no
+    hit_count
+    total_damage
+    killed_enemy_mapping_ids
+    total_waiting_time
+    turn_end_time
+    turn_end_realtime
+    is_shot
+    is_use_skill
+    shot_angle
+    hash

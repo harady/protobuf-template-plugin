@@ -1,0 +1,3 @@
+message EnemyClusterData
+    id
+    name

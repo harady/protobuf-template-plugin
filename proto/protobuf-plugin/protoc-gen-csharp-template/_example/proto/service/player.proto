@@ -1,0 +1,20 @@
+syntax = "proto3";
+
+package service;
+
+import "data/player.proto";
+import "service/common.proto";
+
+service Player {
+    rpc Info (PlayerInfoRequest) returns (PlayerInfoResponse) {};
+}
+
+message PlayerInfoRequest {
+    SessionData session = 10;
+    data.PlayerNormalData player = 20;
+}
+
+message PlayerInfoResponse {
+    CommonResponseData common = 1;
+    data.PlayerNormalData player = 10;
+}

@@ -1,0 +1,3 @@
+message WeakPointData
+    id
+    name

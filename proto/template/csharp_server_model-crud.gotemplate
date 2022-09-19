@@ -1,0 +1,427 @@
+{{- if gt (len .Messages) 0 -}}
+using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Threading.Tasks;
+using System.Linq;
+using MongoDB.Bson;
+using MongoDB.Driver;
+
+namespace AwsDotnetCsharp
+{
+{{- range .Messages }}
+	{{- $className := .Name }}
+	{{- $messageNameCamel := (Replace (Join (.Name | ToSnakeCase | ToCamelCase) "___") "Data___" "") }}
+	{{- $messageNamePascal := (Replace (Join .Name "___") "Data___" "") }}
+	{{- $hasId := (eq (index .Fields 0).Name "id") }}
+	{{- $uniqueIndexes := .UniqueIndexes }}
+	{{- $indexes := .Indexes }}
+	{{- $tags := .Tags }}
+	{{- $isMaster := (or (StrArrayContains $tags "is_master") (StrArrayContains $tags "is_client_master")) }}
+	{{- $isClientUserData := (StrArrayContains $tags "is_client_user_data") }}
+	public partial class {{ $className }}{{ if eq $hasId true }} : IUnique<long>{{ end }}
+	{
+		private static bool isMaster => {{ $isMaster }};
+
+		private static IMongoCollection<{{ $className }}> _collection = null;
+		private static IMongoCollection<{{ $className }}> collection
+			=> _collection ?? (_collection = mongoDatabase.GetCollection<{{ $className }}>("{{ Replace .Name "Data" "" | ToSnakeCase }}s"));
+
+		public static IClientSessionHandle sessionHandle
+			=> MongoSessionManager.sessionHandle;
+
+		{{- if eq $hasId true }}
+		#region MongoDb
+		public static {{ $className }} DbCreateNew()
+		{
+			var result = new {{ $className }}();
+			result._id = ObjectId.GenerateNewId();
+			result.id = IdUtil.GenerateNewId();
+			return result;
+		}
+
+		public static async Task<List<{{ $className }}>> DbGetDataList()
+		{
+			var sw = Stopwatch.StartNew();
+			var result = await collection
+				.Find(
+					sessionHandle,
+					new BsonDocument())
+				.ToListAsync();
+			Console.WriteLine($"{{ $className }}#DbGetDataList {sw.Elapsed.TotalSeconds}[秒]");
+			return result;
+		}
+
+		public static async Task<bool> DbSetData(
+			{{ $className }} data)
+		{
+			var sw = Stopwatch.StartNew();
+			var replaceOneResult = await collection
+				.ReplaceOneAsync(
+					sessionHandle,
+					aData => aData.id.Equals(data.id),
+					data,
+					new ReplaceOptions { IsUpsert = true });
+			bool result = replaceOneResult.IsAcknowledged && (replaceOneResult.ModifiedCount > 0);
+			Console.WriteLine($"{{ $className }}#DbSetData {sw.Elapsed.TotalSeconds}[秒]");
+			{{- if eq $isClientUserData true }}
+			if (result) { userUpdateCache.{{ $messageNameCamel }}TableUpdate.Upsert(data); }
+			{{- end }}
+			return result;
+		}
+
+		public static async Task<bool> DbSetDataList(
+			IEnumerable<{{ $className }}> dataList)
+		{
+			var sw = Stopwatch.StartNew();
+			var models = new List<WriteModel<{{ $className }}>>();
+			dataList.ForEach(toSetData => {
+				var filter = Builders<{{ $className }}>.Filter;
+				var model = new ReplaceOneModel<{{ $className }}>(
+					filter.Eq(aData => aData.id, toSetData.id), toSetData);
+				model.IsUpsert = true;
+				models.Add(model);
+			});
+			var requestResult = await collection
+				.BulkWriteAsync(
+					sessionHandle,
+					models,
+					new BulkWriteOptions());
+			Console.WriteLine($"{{ $className }}#DbSetDataList {sw.Elapsed.TotalSeconds}[秒]");
+			var result = requestResult.RequestCount == requestResult.ProcessedRequests.Count;
+			{{- if eq $isClientUserData true }}
+			if (result) { userUpdateCache.{{ $messageNameCamel }}TableUpdate.Upsert(dataList); }
+			{{- end }}
+			return result;
+		}
+		#endregion
+		{{- end }}
+{{- if $isMaster }}
+		#region MongoDb
+		public static async Task<bool> DbDeleteDataById(
+			long id)
+		{
+			var sw = Stopwatch.StartNew();
+			var deleteResult = await collection
+				.DeleteOneAsync(
+					sessionHandle,
+					aData => aData.id == id);
+			Console.WriteLine($"{{ $className }}#DbDeleteDataById {sw.Elapsed.TotalSeconds}[秒]");
+			var result = deleteResult.IsAcknowledged;
+			{{- if eq $isClientUserData true }}
+			if (result) { userUpdateCache.{{ $messageNameCamel }}TableUpdate.Delete(id); }
+			{{- end }}
+			return result;
+		}
+
+		public static async Task<bool> DbDeleteDataByIds(
+			IEnumerable<long> ids)
+		{
+			var sw = Stopwatch.StartNew();
+			var keySet = ids.ToHashSet();
+			var deleteResult = await collection
+				.DeleteManyAsync(
+					sessionHandle,
+					aData => keySet.Contains(aData.id));
+			Console.WriteLine($"{{ $className }}#DbDeleteDataByIds {sw.Elapsed.TotalSeconds}[秒]");
+			var result = deleteResult.IsAcknowledged;
+			{{- if eq $isClientUserData true }}
+			if (result) { userUpdateCache.{{ $messageNameCamel }}TableUpdate.Delete(ids); }
+			{{- end }}
+			return result;
+		}
+		#endregion
+		#region NullObject
+		public static {{ .Name }} Null => NullObjectContainer.Get<{{ .Name }}>();
+	
+		public bool isNull => this == Null;
+		#endregion
+		{{- if eq $hasId true }}
+		#region GameDbWrapper(DataTable)
+		public static DataTable<long, {{ .Name }}> dataTable {
+			get {
+				DataTable<long, {{ .Name }}> result;
+				if (GameDb.TableExists<long, {{ .Name }}>()) {
+					result = GameDb.From<long, {{ .Name }}>();
+				} else {
+					result = GameDb.CreateTable<long, {{ .Name }}>();
+					Setup{{ .Name }}TableIndexGenerated(result);
+					Setup{{ .Name }}TableIndex(result);
+				}
+				return result;
+			}
+		}
+
+		public static int Count => dataTable.Count;
+
+		public static List<{{ .Name }}> GetDataList()
+		{
+			return dataTable.dataList;
+		}
+
+		public static void SetDataList(IEnumerable<{{ .Name }}> dataList)
+		{
+			Clear();
+			dataTable.InsertRange(dataList);
+		}
+
+		public static void Clear()
+		{
+			dataTable.DeleteAll();
+		}
+
+		static partial void Setup{{ .Name }}TableIndex(DataTable<long, {{ .Name }}> targetDataTable);
+
+		private static void Setup{{ .Name }}TableIndexGenerated(DataTable<long, {{ .Name }}> targetDataTable)
+		{
+			{{- range .Fields }}
+				{{- if or (eq .Name "id") (StrArrayContains $uniqueIndexes .Name) }}
+			targetDataTable.CreateUniqueIndex("{{ .Name | SnakeToPascal }}", aData => (object)aData.{{ .Name | ToCamelCase }});
+				{{- end }}
+			{{- end }}
+			{{- range .Fields }}
+				{{- if (StrArrayContains $indexes .Name) }}
+			targetDataTable.CreateIndex("{{ .Name | SnakeToPascal }}", aData => (object)aData.{{ .Name | ToCamelCase }});
+				{{- end }}
+			{{- end }}
+		}
+		#endregion
+		{{- end }}
+		{{- $messageName := .Name }}
+		{{- range .Fields }}
+			{{- if or (eq .Name "id") (StrArrayContains $uniqueIndexes .Name) }}
+		#region DataTableUniqueIndex({{.Name | SnakeToPascal}})
+		public static {{ $messageName }} GetDataBy{{ .Name | SnakeToPascal }}(
+			{{ .BaseType }} {{ .Name | ToCamelCase }})
+		{
+			return dataTable.GetData("{{ .Name | SnakeToPascal }}", (object){{ .Name | ToCamelCase }});
+		}
+		#endregion
+			{{- end }}
+		{{- end }}
+		{{- range .Fields }}
+			{{- if (StrArrayContains $indexes .Name) }}
+		#region DataTableIndex ({{.Name | SnakeToPascal}})
+		public static List<{{ $messageName }}> GetDataListBy{{ .Name | SnakeToPascal }}(
+			{{ .BaseType }} {{ .Name | ToCamelCase }})
+		{
+			return dataTable.GetDataList("{{ .Name | SnakeToPascal }}", (object){{ .Name | ToCamelCase }});
+		}
+		#endregion
+			{{- end }}
+		{{- end }}
+{{- else }}
+		#region DataTableSetupIndex
+		public static async Task DbSetupIndex()
+		{
+			var builder = Builders<{{ $className }}>.IndexKeys;
+			{{- range .Fields }}
+				{{- if or (StrArrayContains $uniqueIndexes .Name) (StrArrayContains $indexes .Name) }}
+			await DbSetupOneIndex(builder.Ascending(aData => aData.{{ .Name | ToCamelCase }}));
+				{{- end }}
+			{{- end }}
+		}
+
+		public static async Task DbSetupOneIndex(
+			IndexKeysDefinition<{{ $className }}> indexKeys)
+		{
+			var indexModel = new CreateIndexModel<{{ $className }}>(indexKeys);
+			await collection.Indexes
+				.CreateOneAsync(
+					sessionHandle,
+					indexModel);
+		}
+		#endregion
+		{{- range .Fields }}
+			{{- if or (eq .Name "id") (StrArrayContains $uniqueIndexes .Name) }}
+		#region MongoDbUniqueIndex({{.Name | SnakeToPascal}})
+		public static async Task<{{ $className }}> DbGetDataBy{{ .Name | SnakeToPascal }}(
+			{{ .BaseType }} {{ .Name | ToCamelCase }})
+		{
+			var sw = Stopwatch.StartNew();
+			var cacheKey = "{{ $className }}/GetDataBy{{ .Name | SnakeToPascal }}_" + {{ .Name | ToCamelCase }};
+			var result = await collection
+				.Find(
+					sessionHandle,
+					aData => aData.{{ .Name | ToCamelCase }} == {{ .Name | ToCamelCase }})
+				.FirstOrDefaultAsync();
+			Console.WriteLine($"{{ $className }}#DbGetDataBy{{ .Name | SnakeToPascal }} {sw.Elapsed.TotalSeconds}[秒]");
+			return result;
+		}
+
+		public static async Task<List<{{ $className }}>> DbGetDataListIn{{ .Name | SnakeToPascal }}s(
+			IEnumerable<{{ .BaseType }}> {{ .Name | ToCamelCase }}s)
+		{
+			var sw = Stopwatch.StartNew();
+			var filter = Builders<{{ $className }}>.Filter.In(aData => aData.{{ .Name | ToCamelCase }}, {{ .Name | ToCamelCase }}s);
+			var result = await collection
+				.Find(
+					sessionHandle,
+					filter)
+				.ToListAsync();
+			Console.WriteLine($"{{ $className }}#DbGetDataListIn{{ .Name | SnakeToPascal }}s {sw.Elapsed.TotalSeconds}[秒]");
+			return result;
+		}
+{{ if (or (eq .Name "id") (eq $hasId false)) }}
+		public static async Task<bool> DbDeleteDataBy{{ .Name | SnakeToPascal }}(
+			{{ .BaseType }} {{ .Name | ToCamelCase }})
+		{
+			var sw = Stopwatch.StartNew();
+			var deleteResult = await collection
+				.DeleteOneAsync(
+					sessionHandle,
+					aData => aData.{{ .Name | ToCamelCase }} == {{ .Name | ToCamelCase }});
+			Console.WriteLine($"{{ $className }}#DbDeleteDataBy{{ .Name | SnakeToPascal }} {sw.Elapsed.TotalSeconds}[秒]");
+			var result = deleteResult.IsAcknowledged;
+			{{- if (and (eq .Name "id") (eq $isClientUserData true)) }}
+			if (result) { userUpdateCache.{{ $messageNameCamel }}TableUpdate.Delete(id); }
+			{{- end }}
+			return result;
+		}
+
+		public static async Task<bool> DbDeleteDataBy{{ .Name | SnakeToPascal }}s(
+			IEnumerable<{{ .BaseType }}> {{ .Name | ToCamelCase }}s)
+		{
+			var sw = Stopwatch.StartNew();
+			var keySet = {{ .Name | ToCamelCase }}s.ToHashSet();
+			var deleteResult = await collection
+				.DeleteManyAsync(
+					sessionHandle,
+					aData => keySet.Contains(aData.{{ .Name | ToCamelCase }}));
+			Console.WriteLine($"{{ $className }}#DbDeleteDataBy{{ .Name | SnakeToPascal }}s {sw.Elapsed.TotalSeconds}[秒]");
+			var result = deleteResult.IsAcknowledged;
+			{{- if (and (eq .Name "id") (eq $isClientUserData true)) }}
+			if (result) { userUpdateCache.{{ $messageNameCamel }}TableUpdate.Delete(ids); }
+			{{- end }}
+			return result;
+		}
+{{- else }}
+		public static async Task<bool> DbDeleteDataBy{{ .Name | SnakeToPascal }}(
+			{{ .BaseType }} {{ .Name | ToCamelCase }})
+		{
+			var data = await DbGetDataBy{{ .Name | SnakeToPascal }}({{ .Name | ToCamelCase }});
+			var result = await DbDeleteDataById(data.id);
+			return result;
+		}
+
+		public static async Task<bool> DbDeleteDataBy{{ .Name | SnakeToPascal }}s(
+			IEnumerable<{{ .BaseType }}> {{ .Name | ToCamelCase }}s)
+		{
+			var dataList = await DbGetDataListIn{{ .Name | SnakeToPascal }}s({{ .Name | ToCamelCase }}s);
+			var ids = dataList.Select(data => data.id);
+			var result = await DbDeleteDataByIds(ids);
+			return result;
+		}
+{{- end }}
+		#endregion
+			{{- end }}
+			{{- if (StrArrayContains $indexes .Name) }}
+		#region MongoDbIndex({{.Name | SnakeToPascal}})
+		public static async Task<{{ $className }}> DbGetDataBy{{ .Name | SnakeToPascal }}(
+			{{ .BaseType }} {{ .Name | ToCamelCase }})
+		{
+			var sw = Stopwatch.StartNew();
+			var result = await collection
+				.Find(
+					sessionHandle,
+					aData => aData.{{ .Name | ToCamelCase }} == {{ .Name | ToCamelCase }})
+				.FirstOrDefaultAsync();
+			Console.WriteLine($"{{ $className }}#DbGetDataBy{{ .Name | SnakeToPascal }} {sw.Elapsed.TotalSeconds}[秒]");
+			return result;
+		}
+
+		public static async Task<List<{{ $className }}>> DbGetDataListBy{{ .Name | SnakeToPascal }}(
+			{{ .BaseType }} {{ .Name | ToCamelCase }})
+		{
+			var sw = Stopwatch.StartNew();
+			var result = await collection
+				.Find(
+					sessionHandle,
+					aData => aData.{{ .Name | ToCamelCase }} == {{ .Name | ToCamelCase }})
+				.ToListAsync();
+			Console.WriteLine($"{{ $className }}#DbGetDataListBy{{ .Name | SnakeToPascal }} {sw.Elapsed.TotalSeconds}[秒]");
+			return result;
+		}
+		
+		public static async Task<List<{{ $className }}>> DbGetDataListBy{{ .Name | SnakeToPascal }}s(
+			IEnumerable<{{ .BaseType }}> {{ .Name | ToCamelCase }}s)
+		{
+			var sw = Stopwatch.StartNew();
+			var keySet = {{ .Name | ToCamelCase }}s.ToHashSet();
+			var result = await collection
+				.Find(
+					sessionHandle,
+					data => keySet.Contains(data.{{ .Name | ToCamelCase }}))
+				.ToListAsync();
+			Console.WriteLine($"{{ $className }}#DbGetDataListBy{{ .Name | SnakeToPascal }}s {sw.Elapsed.TotalSeconds}[秒]");
+			return result;
+		}
+{{ if (eq $hasId false) }}
+		public static async Task<bool> DbDeleteDataBy{{ .Name | SnakeToPascal }}(
+			{{ .BaseType }} {{ .Name | ToCamelCase }})
+		{
+			var sw = Stopwatch.StartNew();
+			var deleteResult = await collection
+				.DeleteManyAsync(
+					sessionHandle,
+					aData => aData.{{ .Name | ToCamelCase }} == {{ .Name | ToCamelCase }});
+			Console.WriteLine($"{{ $className }}#DbDeleteDataBy{{ .Name | SnakeToPascal }} {sw.Elapsed.TotalSeconds}[秒]");
+			var result = deleteResult.IsAcknowledged;
+			return result;
+		}
+
+		public static async Task<bool> DbDeleteDataBy{{ .Name | SnakeToPascal }}s(
+			IEnumerable<{{ .BaseType }}> {{ .Name | ToCamelCase }}s)
+		{
+			var sw = Stopwatch.StartNew();
+			var keySet = {{ .Name | ToCamelCase }}s.ToHashSet();
+			var deleteResult = await collection
+				.DeleteManyAsync(
+					sessionHandle,
+					aData => keySet.Contains(aData.{{ .Name | ToCamelCase }}));
+			Console.WriteLine($"{{ $className }}#Db.DeleteDeleteDataBy{{ .Name | SnakeToPascal }}s {sw.Elapsed.TotalSeconds}[秒]");
+			var result = deleteResult.IsAcknowledged;
+			return result;
+		}
+{{- else }}
+		public static async Task<bool> DbDeleteDataBy{{ .Name | SnakeToPascal }}(
+			{{ .BaseType }} {{ .Name | ToCamelCase }})
+		{
+			var dataList = await DbGetDataListBy{{ .Name | SnakeToPascal }}({{ .Name | ToCamelCase }});
+			var ids = dataList.Select(data => data.id);
+			var result = await DbDeleteDataByIds(ids);
+			return result;
+		}
+
+		public static async Task<bool> DbDeleteDataBy{{ .Name | SnakeToPascal }}s(
+			IEnumerable<{{ .BaseType }}> {{ .Name | ToCamelCase }}s)
+		{
+			var dataList = await DbGetDataListBy{{ .Name | SnakeToPascal }}s({{ .Name | ToCamelCase }}s);
+			var ids = dataList.Select(data => data.id);
+			var result = await DbDeleteDataByIds(ids);
+			return result;
+		}
+{{- end }}
+		#endregion
+			{{- end }}
+		{{- end }}
+		#region Methods
+		public async Task<bool> DbSave()
+		{
+			if (this._id == ObjectId.Empty) {
+				var data = await DbGetDataById(this.id);
+				this._id = (data != null) ? data._id : this._id;
+			}
+			return await DbSetData(this);
+		}
+
+		public async Task<bool> DbDelete()
+		{
+			return await DbDeleteDataById(this.id);
+		}
+		#endregion
+{{- end }}
+	}
+{{ end -}}
+}
+{{- end }}

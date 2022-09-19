@@ -1,0 +1,39 @@
+{{- if gt (len .Services) 0 -}}
+using Google.Protobuf;
+using System.Collections.Generic;
+
+//GENERATED CODE, DO NOT EDIT !
+namespace {{ .CsharpNamespace }}
+{
+    {{ range .Services }}
+    {{- $service_name := .Name -}}
+    public partial class {{ $service_name }}Service : BaseService
+    {
+        public static {{ $service_name }}Service New()
+        {
+            return new {{ $service_name }}Service();
+        }
+
+        {{- range .Methods }}
+
+        public void {{ .Name }}(
+        {{- range .Request.Fields -}}
+        {{ .ActualType }} {{ .Name| ToCamelCase }}{{ ", "}}
+        {{- end -}}
+        OnProtoResponseSuccess<{{ .Response.Name }}> onSuccess, OnProtoResponseFailure onFailure)
+        {
+            {{ .Request.Name }} request = new {{ .Request.Name }}();
+            {{ range .Request.Fields -}}
+            {{ if .IsRepeated -}}
+            request.{{ .Name | SnakeToPascal }}.Add({{ .Name | ToCamelCase }});
+            {{ else -}}
+            request.{{ .Name | SnakeToPascal }} = {{ .Name | ToCamelCase }};
+            {{ end -}}
+            {{ end }}
+            GetProtoResponse<{{ .Response.Name }}>("{{ $service_name }}/{{ .Name }}", request, {{ .Response.Name }}.Parser, onSuccess, onFailure);
+        }
+        {{- end }}
+    }
+    {{ end }}
+}
+{{- end -}}

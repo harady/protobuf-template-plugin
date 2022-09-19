@@ -1,0 +1,54 @@
+
+
+## プロトコルバッファコンパイラ
+*.protoから各言語のmessage,rpcのデータを生成する
+
+
+## プロトコルバッファランタイム
+プロトコルバッファコンパイラで生成した型をプロトコルバッファ形式のバイナリにシリアライズ
+プロトコルバッファ形式のバイナリをプロトコルバッファコンパイラで生成した型にデシリアライズ
+するプログラム各言語用のものが用意されている
+
+
+## プロトコルバッファリリースバイナリ
+https://github.com/protocolbuffers/protobuf/releases
+
+protobuf-all-21.6.zip
+
+protobuf-csharp-3.21.6.zip
+プロトコルバッファランタイムのソースコード
+
+protoc-21.6-win64.zip
+プロトコルバッファコンパイラのバイナリ
+
+
+
+protobufのプラグインを実装する方法但しGo
+https://qiita.com/yugui/items/87d00d77dee159e74886
+
+
+protobufのプラグインをC#で実装する方法？ではなかった。
+https://developers.google.com/protocol-buffers/docs/csharptutorial
+
+
+これいいんちゃうん？、C#のプラグイン
+https://github.com/cactuaroid/protoc-gen-myplugincsharp
+
+C#で作ったプラグインの起動速度が遅すぎる
+ngen.exeを使ってみるか。
+
+
+GrのテンプレートエンジンはGo標準のtext/templateを使用している。
+C#に移植したものは見当たらない
+代替としてT4 テキスト テンプレートを使用するか？
+
+
+テンプレートエンジンあれこれ
+https://zenn.dev/nuits_jp/articles/2022-05-26-text-template-benckmarks
+
+Scriban:Goのtext/templateに近い？
+https://github.com/scriban/scriban
+
+DotLiquid:良さそうどうだろう？
+http://dotliquidmarkup.org/
+

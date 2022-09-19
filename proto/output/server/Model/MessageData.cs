@@ -1,0 +1,3 @@
+message MessageData
+    id
+    name

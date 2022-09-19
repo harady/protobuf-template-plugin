@@ -1,0 +1,20 @@
+﻿using System;
+
+{{ range .Messages }}
+{{- $className := .Name -}}
+public partial class {{ $className }}
+{
+	public void SetToGameDb()
+	{
+{{- range .Fields }}
+	{{- if eq .Name "client_master" }}
+		{{.Name | ToCamelCase}}.SetToGameDb();
+	{{- else if .IsRepeated }}
+		{{.BaseType }}.SetDataList({{.Name | ToCamelCase}});
+	{{- else }}
+		MasterDataManager.instance.{{.Name | ToCamelCase}}Data = {{.Name | ToCamelCase}};
+	{{- end }}
+{{- end }}
+	}
+}
+{{ end -}}

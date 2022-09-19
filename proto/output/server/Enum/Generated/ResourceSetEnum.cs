@@ -1,0 +1,3 @@
+message ResourceSetData
+    id
+    name

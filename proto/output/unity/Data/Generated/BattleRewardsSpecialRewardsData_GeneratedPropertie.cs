@@ -1,0 +1,2 @@
+message BattleRewardsSpecialRewardsData
+   .monstershot.BattleRewardResourceData battle_reward_resources
