@@ -11,8 +11,10 @@ public partial class BattleResultData : AbstractData
 
 	[DataMember(Name = "turnLogs")]
 	public List<BattleResultTurnLogData> turnLogs { get; set; } = new List<BattleResultTurnLogData>();
+
 	[DataMember(Name = "replayLogs")]
 	public List<BattleResultReplayLogData> replayLogs { get; set; } = new List<BattleResultReplayLogData>();
+
 	public BattleResultData Clone() {
 		var result = new BattleResultData();
 		result.id = id;

@@ -13,7 +13,7 @@ public partial class {{ message.name }} : AbstractData
 	public {{ field | to_cs_type }} {{ field.name | to_camel }} { get; set; }
 {{ else }}
 	public List<{{ field | to_cs_type }}> {{ field.name | to_camel }} { get; set; } = new List<{{ field | to_cs_type }}>();
-{{- end }}
+{{ end -}}
 {{- end }}
 	public {{ message.name }} Clone() {
 		var result = new {{ message.name }}();
@@ -24,7 +24,7 @@ public partial class {{ message.name }} : AbstractData
 	}
 {{ if has_id }}
 {{- for field in message.field }}
-{{ if field.name == "name" }}
+{{ if (field.name == "name") }}
 	public string idNameText => GetIdNameText(id, name);
 {{- end }}
 {{- end }}
