@@ -1,4 +1,10 @@
-message DailyEventTableData
-    id
-    name
-template=template/csharp_unity_data-partial.txt,fileSuffix=Data.cs
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+
+public partial class DailyEventTableData
+{
+
+}
+
+

@@ -25,9 +25,9 @@ namespace protoc_gen_myplugincsharp
 			}
 
 			var paramDict = ParseParameter(request.Parameter);
-			//var templatePath = (string)paramDict["template"];
+			var templatePath = (string)paramDict["template"];
 
-			//var templateStr = File.ReadAllText(templatePath);
+			var templateStr = File.ReadAllText(templatePath);
 			//var template = Template.Parse(templateStr);
 			//var result = template.Render(new { Name = "World" }); // => "Hello World!" 
 
@@ -71,7 +71,7 @@ namespace protoc_gen_myplugincsharp
 				response.File.Add(
 					new CodeGeneratorResponse.Types.File() {
 						Name = filename,
-						Content = output.ToString(),
+						Content = templateStr.ToString(),
 					}
 				);
 			}

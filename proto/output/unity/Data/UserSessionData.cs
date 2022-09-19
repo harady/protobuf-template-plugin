@@ -1,6 +1,10 @@
-message UserSessionData
-    id
-    user_id
-    session_id
-    expire_at
-template=template/csharp_unity_data-partial.txt,fileSuffix=Data.cs
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+
+public partial class UserSessionData
+{
+
+}
+
+
