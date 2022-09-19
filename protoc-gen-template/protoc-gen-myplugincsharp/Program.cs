@@ -40,12 +40,16 @@ namespace protoc_gen_myplugincsharp
 						.ToPascalCase();
 				filename += paramDict["fileSuffix"];
 
-				//fileDesc.MessageType[0].Field[0].TypeName;
+				var model = new { File = fileDesc };
+				var scriptObject = new ScriptObject();
+				scriptObject.Import(model);
+				scriptObject.Import("to_camel",
+					new Func<string, string>(text => CustomFunctions.ToCamel(text)));
 
-				//var scriptObj = new ScriptObject();
-				//scriptObj.Import(new { File = fileDesc });
-				//var context = new TemplateContext(scriptObj);
-				var output = template.Render(new { File = fileDesc });
+				var context = new TemplateContext();
+				context.PushGlobal(scriptObject);
+				var output = template.Render(context);
+				context.PopGlobal();
 
 				// set as response
 				response.File.Add(

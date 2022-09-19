@@ -36,15 +36,15 @@ public partial class ItemData : AbstractData
 
 	public AbilityData Clone() {
 		var result = new AbilityData();
-		result.ID = ID;
-		result.NAME = NAME;
-		result.ATTRIBUTE = ATTRIBUTE;
-		result.DESCRIPTION = DESCRIPTION;
-		result.CATEGORY = CATEGORY;
-		result.TYPE = TYPE;
-		result.OWNED_LIMIT = OWNED_LIMIT;
-		result.PARAM_A = PARAM_A;
-		result.PARAM_B = PARAM_B;
+		result.id = id;
+		result.name = name;
+		result.attribute = attribute;
+		result.description = description;
+		result.category = category;
+		result.type = type;
+		result.ownedLimit = ownedLimit;
+		result.paramA = paramA;
+		result.paramB = paramB;
 		return result;
 	}
 

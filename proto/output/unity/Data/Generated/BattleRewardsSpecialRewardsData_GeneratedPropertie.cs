@@ -12,7 +12,7 @@ public partial class BattleRewardsSpecialRewardsData : AbstractData
 
 	public AbilityData Clone() {
 		var result = new AbilityData();
-		result.BATTLE_REWARD_RESOURCES = BATTLE_REWARD_RESOURCES;
+		result.battleRewardResources = battleRewardResources;
 		return result;
 	}
 

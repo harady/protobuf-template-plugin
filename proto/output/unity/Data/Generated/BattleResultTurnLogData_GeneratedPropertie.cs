@@ -45,18 +45,18 @@ public partial class BattleResultTurnLogData : AbstractData
 
 	public AbilityData Clone() {
 		var result = new AbilityData();
-		result.TURN_NO = TURN_NO;
-		result.ROUND_NO = ROUND_NO;
-		result.HIT_COUNT = HIT_COUNT;
-		result.TOTAL_DAMAGE = TOTAL_DAMAGE;
-		result.KILLED_ENEMY_MAPPING_IDS = KILLED_ENEMY_MAPPING_IDS;
-		result.TOTAL_WAITING_TIME = TOTAL_WAITING_TIME;
-		result.TURN_END_TIME = TURN_END_TIME;
-		result.TURN_END_REALTIME = TURN_END_REALTIME;
-		result.IS_SHOT = IS_SHOT;
-		result.IS_USE_SKILL = IS_USE_SKILL;
-		result.SHOT_ANGLE = SHOT_ANGLE;
-		result.HASH = HASH;
+		result.turnNo = turnNo;
+		result.roundNo = roundNo;
+		result.hitCount = hitCount;
+		result.totalDamage = totalDamage;
+		result.killedEnemyMappingIds = killedEnemyMappingIds;
+		result.totalWaitingTime = totalWaitingTime;
+		result.turnEndTime = turnEndTime;
+		result.turnEndRealtime = turnEndRealtime;
+		result.isShot = isShot;
+		result.isUseSkill = isUseSkill;
+		result.shotAngle = shotAngle;
+		result.hash = hash;
 		return result;
 	}
 

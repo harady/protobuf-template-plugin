@@ -27,12 +27,12 @@ public partial class UserStageData : AbstractData
 
 	public AbilityData Clone() {
 		var result = new AbilityData();
-		result.ID = ID;
-		result.USER_ID = USER_ID;
-		result.STAGE_ID = STAGE_ID;
-		result.CLEAR_COUNT = CLEAR_COUNT;
-		result.FAILED_COUNT = FAILED_COUNT;
-		result.BEST_CLEAR_TIME = BEST_CLEAR_TIME;
+		result.id = id;
+		result.userId = userId;
+		result.stageId = stageId;
+		result.clearCount = clearCount;
+		result.failedCount = failedCount;
+		result.bestClearTime = bestClearTime;
 		return result;
 	}
 

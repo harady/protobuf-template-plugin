@@ -33,14 +33,14 @@ public partial class BattleClientData : AbstractData
 
 	public AbilityData Clone() {
 		var result = new AbilityData();
-		result.STAGE_ID = STAGE_ID;
-		result.RANDOM_SEED = RANDOM_SEED;
-		result.BATTLE_USERS = BATTLE_USERS;
-		result.BATTLE_INIT_DECK = BATTLE_INIT_DECK;
-		result.ROUNDS = ROUNDS;
-		result.BATTLE_INIT_ENEMYS = BATTLE_INIT_ENEMYS;
-		result.ENEMYS = ENEMYS;
-		result.ENEMY_ACTIONS = ENEMY_ACTIONS;
+		result.stageId = stageId;
+		result.randomSeed = randomSeed;
+		result.battleUsers = battleUsers;
+		result.battleInitDeck = battleInitDeck;
+		result.rounds = rounds;
+		result.battleInitEnemys = battleInitEnemys;
+		result.enemys = enemys;
+		result.enemyActions = enemyActions;
 		return result;
 	}
 

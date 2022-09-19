@@ -15,8 +15,8 @@ public partial class AssetbundleListData : AbstractData
 
 	public AbilityData Clone() {
 		var result = new AbilityData();
-		result.VERSION = VERSION;
-		result.ASSETBUNDLES = ASSETBUNDLES;
+		result.version = version;
+		result.assetbundles = assetbundles;
 		return result;
 	}
 

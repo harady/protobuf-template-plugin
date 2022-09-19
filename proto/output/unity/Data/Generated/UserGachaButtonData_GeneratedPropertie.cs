@@ -24,11 +24,11 @@ public partial class UserGachaButtonData : AbstractData
 
 	public AbilityData Clone() {
 		var result = new AbilityData();
-		result.ID = ID;
-		result.USER_ID = USER_ID;
-		result.GACHA_BUTTON_ID = GACHA_BUTTON_ID;
-		result.GACHA_SCHEDULE_ID = GACHA_SCHEDULE_ID;
-		result.PURCHASE_COUNT = PURCHASE_COUNT;
+		result.id = id;
+		result.userId = userId;
+		result.gachaButtonId = gachaButtonId;
+		result.gachaScheduleId = gachaScheduleId;
+		result.purchaseCount = purchaseCount;
 		return result;
 	}
 

@@ -42,17 +42,17 @@ public partial class GachaButtonData : AbstractData
 
 	public AbilityData Clone() {
 		var result = new AbilityData();
-		result.ID = ID;
-		result.NAME = NAME;
-		result.GACHA_ID = GACHA_ID;
-		result.VIEW_ORDER = VIEW_ORDER;
-		result.DRAW_COUNT = DRAW_COUNT;
-		result.EXTRA_COUNT = EXTRA_COUNT;
-		result.GUARANTEE_COUNT = GUARANTEE_COUNT;
-		result.PURCHASE_COUNT = PURCHASE_COUNT;
-		result.COST_RESOURCE_TYPE = COST_RESOURCE_TYPE;
-		result.COST_RESOURCE_ID = COST_RESOURCE_ID;
-		result.COST_RESOURCE_AMOUNT = COST_RESOURCE_AMOUNT;
+		result.id = id;
+		result.name = name;
+		result.gachaId = gachaId;
+		result.viewOrder = viewOrder;
+		result.drawCount = drawCount;
+		result.extraCount = extraCount;
+		result.guaranteeCount = guaranteeCount;
+		result.purchaseCount = purchaseCount;
+		result.costResourceType = costResourceType;
+		result.costResourceId = costResourceId;
+		result.costResourceAmount = costResourceAmount;
 		return result;
 	}
 

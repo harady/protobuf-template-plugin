@@ -15,8 +15,8 @@ public partial class AdviceData : AbstractData
 
 	public AbilityData Clone() {
 		var result = new AbilityData();
-		result.ID = ID;
-		result.MESSAGE = MESSAGE;
+		result.id = id;
+		result.message = message;
 		return result;
 	}
 

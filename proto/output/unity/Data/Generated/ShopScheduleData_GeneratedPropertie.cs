@@ -21,10 +21,10 @@ public partial class ShopScheduleData : AbstractData
 
 	public AbilityData Clone() {
 		var result = new AbilityData();
-		result.ID = ID;
-		result.SHOP_ID = SHOP_ID;
-		result.OPEN_AT = OPEN_AT;
-		result.CLOSE_AT = CLOSE_AT;
+		result.id = id;
+		result.shopId = shopId;
+		result.openAt = openAt;
+		result.closeAt = closeAt;
 		return result;
 	}
 

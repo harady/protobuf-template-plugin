@@ -18,9 +18,9 @@ public partial class ResourceLotteryData : AbstractData
 
 	public AbilityData Clone() {
 		var result = new AbilityData();
-		result.ID = ID;
-		result.NAME = NAME;
-		result.HAS_EMPTY = HAS_EMPTY;
+		result.id = id;
+		result.name = name;
+		result.hasEmpty = hasEmpty;
 		return result;
 	}
 

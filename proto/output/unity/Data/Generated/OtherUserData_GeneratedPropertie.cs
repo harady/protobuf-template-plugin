@@ -27,12 +27,12 @@ public partial class OtherUserData : AbstractData
 
 	public AbilityData Clone() {
 		var result = new AbilityData();
-		result.ID = ID;
-		result.NAME = NAME;
-		result.CODE = CODE;
-		result.RANK = RANK;
-		result.USER_UNIT = USER_UNIT;
-		result.IS_FRIEND = IS_FRIEND;
+		result.id = id;
+		result.name = name;
+		result.code = code;
+		result.rank = rank;
+		result.userUnit = userUnit;
+		result.isFriend = isFriend;
 		return result;
 	}
 

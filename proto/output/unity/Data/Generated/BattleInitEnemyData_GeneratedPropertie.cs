@@ -27,12 +27,12 @@ public partial class BattleInitEnemyData : AbstractData
 
 	public AbilityData Clone() {
 		var result = new AbilityData();
-		result.ID = ID;
-		result.ROUND_ID = ROUND_ID;
-		result.ENEMY_ID = ENEMY_ID;
-		result.POS_X = POS_X;
-		result.POS_Y = POS_Y;
-		result.DROP_REWARD_RESOURCE = DROP_REWARD_RESOURCE;
+		result.id = id;
+		result.roundId = roundId;
+		result.enemyId = enemyId;
+		result.posX = posX;
+		result.posY = posY;
+		result.dropRewardResource = dropRewardResource;
 		return result;
 	}
 

@@ -30,13 +30,13 @@ public partial class MasterData : AbstractData
 
 	public AbilityData Clone() {
 		var result = new AbilityData();
-		result.CLIENT_MASTER = CLIENT_MASTER;
-		result.ENEMY_CLUSTERS = ENEMY_CLUSTERS;
-		result.ENEMY_MAPPINGS = ENEMY_MAPPINGS;
-		result.EVENT_QUEST_CATEGORYS = EVENT_QUEST_CATEGORYS;
-		result.EVENT_SCHEDULE_TERMS = EVENT_SCHEDULE_TERMS;
-		result.GACHA_POOLS = GACHA_POOLS;
-		result.GACHA_POOL_ITEMS = GACHA_POOL_ITEMS;
+		result.clientMaster = clientMaster;
+		result.enemyClusters = enemyClusters;
+		result.enemyMappings = enemyMappings;
+		result.eventQuestCategorys = eventQuestCategorys;
+		result.eventScheduleTerms = eventScheduleTerms;
+		result.gachaPools = gachaPools;
+		result.gachaPoolItems = gachaPoolItems;
 		return result;
 	}
 

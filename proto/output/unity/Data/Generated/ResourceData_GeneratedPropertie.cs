@@ -21,10 +21,10 @@ public partial class ResourceData : AbstractData
 
 	public AbilityData Clone() {
 		var result = new AbilityData();
-		result.RESOURCE_TYPE = RESOURCE_TYPE;
-		result.RESOURCE_ID = RESOURCE_ID;
-		result.RESOURCE_AMOUNT = RESOURCE_AMOUNT;
-		result.RESOURCE_EXTRA = RESOURCE_EXTRA;
+		result.resourceType = resourceType;
+		result.resourceId = resourceId;
+		result.resourceAmount = resourceAmount;
+		result.resourceExtra = resourceExtra;
 		return result;
 	}
 

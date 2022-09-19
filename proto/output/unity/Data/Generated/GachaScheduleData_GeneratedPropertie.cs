@@ -21,10 +21,10 @@ public partial class GachaScheduleData : AbstractData
 
 	public AbilityData Clone() {
 		var result = new AbilityData();
-		result.ID = ID;
-		result.GACHA_ID = GACHA_ID;
-		result.OPEN_AT = OPEN_AT;
-		result.CLOSE_AT = CLOSE_AT;
+		result.id = id;
+		result.gachaId = gachaId;
+		result.openAt = openAt;
+		result.closeAt = closeAt;
 		return result;
 	}
 

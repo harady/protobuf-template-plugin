@@ -42,17 +42,17 @@ public partial class UserPurchaseData : AbstractData
 
 	public AbilityData Clone() {
 		var result = new AbilityData();
-		result.ID = ID;
-		result.USER_ID = USER_ID;
-		result.PURCHASE_PLATFORM_TYPE = PURCHASE_PLATFORM_TYPE;
-		result.SHOP_ITEM_ID = SHOP_ITEM_ID;
-		result.PRICE = PRICE;
-		result.GOOGLE_PLAY_REQUEST = GOOGLE_PLAY_REQUEST;
-		result.APP_STORE_REQUEST = APP_STORE_REQUEST;
-		result.DEBUG_REQUEST = DEBUG_REQUEST;
-		result.IS_RECEIPT_INQUIRED = IS_RECEIPT_INQUIRED;
-		result.IS_RESOURCE_GRANTED = IS_RESOURCE_GRANTED;
-		result.PURCHASE_AT = PURCHASE_AT;
+		result.id = id;
+		result.userId = userId;
+		result.purchasePlatformType = purchasePlatformType;
+		result.shopItemId = shopItemId;
+		result.price = price;
+		result.googlePlayRequest = googlePlayRequest;
+		result.appStoreRequest = appStoreRequest;
+		result.debugRequest = debugRequest;
+		result.isReceiptInquired = isReceiptInquired;
+		result.isResourceGranted = isResourceGranted;
+		result.purchaseAt = purchaseAt;
 		return result;
 	}
 

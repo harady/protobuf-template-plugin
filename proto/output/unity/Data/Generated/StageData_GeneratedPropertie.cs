@@ -36,15 +36,15 @@ public partial class StageData : AbstractData
 
 	public AbilityData Clone() {
 		var result = new AbilityData();
-		result.ID = ID;
-		result.NAME = NAME;
-		result.QUEST_ID = QUEST_ID;
-		result.STAMINA = STAMINA;
-		result.EARN_EXP = EARN_EXP;
-		result.EARN_MONEY = EARN_MONEY;
-		result.QUEST_DIFFICULTY_TYPE = QUEST_DIFFICULTY_TYPE;
-		result.TO_UNLOCK_STAGE_ID = TO_UNLOCK_STAGE_ID;
-		result.BASE_STAGE_ID = BASE_STAGE_ID;
+		result.id = id;
+		result.name = name;
+		result.questId = questId;
+		result.stamina = stamina;
+		result.earnExp = earnExp;
+		result.earnMoney = earnMoney;
+		result.questDifficultyType = questDifficultyType;
+		result.toUnlockStageId = toUnlockStageId;
+		result.baseStageId = baseStageId;
 		return result;
 	}
 

@@ -39,16 +39,16 @@ public partial class MissionData : AbstractData
 
 	public AbilityData Clone() {
 		var result = new AbilityData();
-		result.ID = ID;
-		result.NAME = NAME;
-		result.MISSION_GROUP_ID = MISSION_GROUP_ID;
-		result.TYPE = TYPE;
-		result.TO_ACHIEVE_PROGRESS = TO_ACHIEVE_PROGRESS;
-		result.PARAM_A = PARAM_A;
-		result.PARAM_B = PARAM_B;
-		result.REWARD_RESOURCE_TYPE = REWARD_RESOURCE_TYPE;
-		result.REWARD_RESOURCE_ID = REWARD_RESOURCE_ID;
-		result.REWARD_RESOURCE_AMOUNT = REWARD_RESOURCE_AMOUNT;
+		result.id = id;
+		result.name = name;
+		result.missionGroupId = missionGroupId;
+		result.type = type;
+		result.toAchieveProgress = toAchieveProgress;
+		result.paramA = paramA;
+		result.paramB = paramB;
+		result.rewardResourceType = rewardResourceType;
+		result.rewardResourceId = rewardResourceId;
+		result.rewardResourceAmount = rewardResourceAmount;
 		return result;
 	}
 

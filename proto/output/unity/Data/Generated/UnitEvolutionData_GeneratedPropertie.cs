@@ -27,12 +27,12 @@ public partial class UnitEvolutionData : AbstractData
 
 	public AbilityData Clone() {
 		var result = new AbilityData();
-		result.ID = ID;
-		result.NAME = NAME;
-		result.TYPE = TYPE;
-		result.BASE_UNIT_ID = BASE_UNIT_ID;
-		result.RESULT_UNIT_ID = RESULT_UNIT_ID;
-		result.COST_RESOURCE_SET_ID = COST_RESOURCE_SET_ID;
+		result.id = id;
+		result.name = name;
+		result.type = type;
+		result.baseUnitId = baseUnitId;
+		result.resultUnitId = resultUnitId;
+		result.costResourceSetId = costResourceSetId;
 		return result;
 	}
 

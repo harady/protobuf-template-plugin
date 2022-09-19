@@ -21,10 +21,10 @@ public partial class UserItemData : AbstractData
 
 	public AbilityData Clone() {
 		var result = new AbilityData();
-		result.ID = ID;
-		result.USER_ID = USER_ID;
-		result.ITEM_ID = ITEM_ID;
-		result.AMOUNT = AMOUNT;
+		result.id = id;
+		result.userId = userId;
+		result.itemId = itemId;
+		result.amount = amount;
 		return result;
 	}
 

@@ -33,14 +33,14 @@ public partial class ShopItemData : AbstractData
 
 	public AbilityData Clone() {
 		var result = new AbilityData();
-		result.ID = ID;
-		result.NAME = NAME;
-		result.SHOP_ID = SHOP_ID;
-		result.PURCHASE_PLATFORM_TYPE = PURCHASE_PLATFORM_TYPE;
-		result.PLATFORM_PRODUCT_ID = PLATFORM_PRODUCT_ID;
-		result.PRICE = PRICE;
-		result.RESOURCE_SET_ID = RESOURCE_SET_ID;
-		result.LIMIT_COUNT = LIMIT_COUNT;
+		result.id = id;
+		result.name = name;
+		result.shopId = shopId;
+		result.purchasePlatformType = purchasePlatformType;
+		result.platformProductId = platformProductId;
+		result.price = price;
+		result.resourceSetId = resourceSetId;
+		result.limitCount = limitCount;
 		return result;
 	}
 

@@ -18,9 +18,9 @@ public partial class BattleResultData : AbstractData
 
 	public AbilityData Clone() {
 		var result = new AbilityData();
-		result.ID = ID;
-		result.TURN_LOGS = TURN_LOGS;
-		result.REPLAY_LOGS = REPLAY_LOGS;
+		result.id = id;
+		result.turnLogs = turnLogs;
+		result.replayLogs = replayLogs;
 		return result;
 	}
 

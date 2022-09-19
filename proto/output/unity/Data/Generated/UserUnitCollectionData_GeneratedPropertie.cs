@@ -24,11 +24,11 @@ public partial class UserUnitCollectionData : AbstractData
 
 	public AbilityData Clone() {
 		var result = new AbilityData();
-		result.ID = ID;
-		result.USER_ID = USER_ID;
-		result.UNIT_ID = UNIT_ID;
-		result.HAS_EARNED = HAS_EARNED;
-		result.USED_COUNT = USED_COUNT;
+		result.id = id;
+		result.userId = userId;
+		result.unitId = unitId;
+		result.hasEarned = hasEarned;
+		result.usedCount = usedCount;
 		return result;
 	}
 

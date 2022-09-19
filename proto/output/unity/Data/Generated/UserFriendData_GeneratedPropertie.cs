@@ -27,12 +27,12 @@ public partial class UserFriendData : AbstractData
 
 	public AbilityData Clone() {
 		var result = new AbilityData();
-		result.ID = ID;
-		result.USER_ID = USER_ID;
-		result.FRIEND_USER_ID = FRIEND_USER_ID;
-		result.IS_FAVORITE = IS_FAVORITE;
-		result.LAST_USED_AT = LAST_USED_AT;
-		result.USED_COUNT = USED_COUNT;
+		result.id = id;
+		result.userId = userId;
+		result.friendUserId = friendUserId;
+		result.isFavorite = isFavorite;
+		result.lastUsedAt = lastUsedAt;
+		result.usedCount = usedCount;
 		return result;
 	}
 

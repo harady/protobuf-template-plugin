@@ -33,14 +33,14 @@ public partial class CommonResponse : AbstractData
 
 	public AbilityData Clone() {
 		var result = new AbilityData();
-		result.USER_UPDATE = USER_UPDATE;
-		result.SERVER_TIME = SERVER_TIME;
-		result.APP_VERSION = APP_VERSION;
-		result.MASTER_DATA_VERSION = MASTER_DATA_VERSION;
-		result.MASTER_DATA_URL = MASTER_DATA_URL;
-		result.ASSET_LIST_VERSION = ASSET_LIST_VERSION;
-		result.ASSET_LIST_URL = ASSET_LIST_URL;
-		result.ASSET_BASE_URL = ASSET_BASE_URL;
+		result.userUpdate = userUpdate;
+		result.serverTime = serverTime;
+		result.appVersion = appVersion;
+		result.masterDataVersion = masterDataVersion;
+		result.masterDataUrl = masterDataUrl;
+		result.assetListVersion = assetListVersion;
+		result.assetListUrl = assetListUrl;
+		result.assetBaseUrl = assetBaseUrl;
 		return result;
 	}
 

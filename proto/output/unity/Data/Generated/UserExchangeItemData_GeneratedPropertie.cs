@@ -24,11 +24,11 @@ public partial class UserExchangeItemData : AbstractData
 
 	public AbilityData Clone() {
 		var result = new AbilityData();
-		result.ID = ID;
-		result.USER_ID = USER_ID;
-		result.EXCHANGE_ITEM_ID = EXCHANGE_ITEM_ID;
-		result.EXCHANGE_SCHEDULE_ID = EXCHANGE_SCHEDULE_ID;
-		result.EXCHANGED_COUNT = EXCHANGED_COUNT;
+		result.id = id;
+		result.userId = userId;
+		result.exchangeItemId = exchangeItemId;
+		result.exchangeScheduleId = exchangeScheduleId;
+		result.exchangedCount = exchangedCount;
 		return result;
 	}
 

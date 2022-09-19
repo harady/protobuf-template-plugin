@@ -21,10 +21,10 @@ public partial class GachaData : AbstractData
 
 	public AbilityData Clone() {
 		var result = new AbilityData();
-		result.ID = ID;
-		result.NAME = NAME;
-		result.BASE_GACHA_ID = BASE_GACHA_ID;
-		result.IS_PREMIUM = IS_PREMIUM;
+		result.id = id;
+		result.name = name;
+		result.baseGachaId = baseGachaId;
+		result.isPremium = isPremium;
 		return result;
 	}
 

@@ -24,11 +24,11 @@ public partial class ResourceSetItemData : AbstractData
 
 	public AbilityData Clone() {
 		var result = new AbilityData();
-		result.ID = ID;
-		result.RESOURCE_SET_ID = RESOURCE_SET_ID;
-		result.RESOURCE_TYPE = RESOURCE_TYPE;
-		result.RESOURCE_ID = RESOURCE_ID;
-		result.RESOURCE_AMOUNT = RESOURCE_AMOUNT;
+		result.id = id;
+		result.resourceSetId = resourceSetId;
+		result.resourceType = resourceType;
+		result.resourceId = resourceId;
+		result.resourceAmount = resourceAmount;
 		return result;
 	}
 

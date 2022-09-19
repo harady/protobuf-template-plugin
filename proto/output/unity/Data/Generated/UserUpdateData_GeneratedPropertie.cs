@@ -48,19 +48,19 @@ public partial class UserUpdateData : AbstractData
 
 	public AbilityData Clone() {
 		var result = new AbilityData();
-		result.USER = USER;
-		result.USER_BACKUPS = USER_BACKUPS;
-		result.USER_DECKS = USER_DECKS;
-		result.USER_EXCHANGE_ITEMS = USER_EXCHANGE_ITEMS;
-		result.USER_GACHA_BUTTONS = USER_GACHA_BUTTONS;
-		result.USER_ITEMS = USER_ITEMS;
-		result.USER_MESSAGES = USER_MESSAGES;
-		result.USER_MISSIONS = USER_MISSIONS;
-		result.USER_PAID_CRYSTALS = USER_PAID_CRYSTALS;
-		result.USER_SHOP_ITEMS = USER_SHOP_ITEMS;
-		result.USER_STAGES = USER_STAGES;
-		result.USER_UNITS = USER_UNITS;
-		result.USER_UNIT_COLLECTIONS = USER_UNIT_COLLECTIONS;
+		result.user = user;
+		result.userBackups = userBackups;
+		result.userDecks = userDecks;
+		result.userExchangeItems = userExchangeItems;
+		result.userGachaButtons = userGachaButtons;
+		result.userItems = userItems;
+		result.userMessages = userMessages;
+		result.userMissions = userMissions;
+		result.userPaidCrystals = userPaidCrystals;
+		result.userShopItems = userShopItems;
+		result.userStages = userStages;
+		result.userUnits = userUnits;
+		result.userUnitCollections = userUnitCollections;
 		return result;
 	}
 

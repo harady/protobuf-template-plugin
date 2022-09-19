@@ -51,20 +51,20 @@ public partial class EnemyData : AbstractData
 
 	public AbilityData Clone() {
 		var result = new AbilityData();
-		result.ID = ID;
-		result.NAME = NAME;
-		result.UNIT_ID = UNIT_ID;
-		result.HP = HP;
-		result.SIZE = SIZE;
-		result.WEAK_POINT_ID = WEAK_POINT_ID;
-		result.IS_BOSS = IS_BOSS;
-		result.IS_ESCAPE = IS_ESCAPE;
-		result.DAMAGE_RATE = DAMAGE_RATE;
-		result.DIRECT_DAMAGE_RATE = DIRECT_DAMAGE_RATE;
-		result.INDIRECT_DAMAGE_RATE = INDIRECT_DAMAGE_RATE;
-		result.BASE_ENEMY_ID = BASE_ENEMY_ID;
-		result.DROP_RATE = DROP_RATE;
-		result.REWARD_RESOURCE_LOTTERY_ID = REWARD_RESOURCE_LOTTERY_ID;
+		result.id = id;
+		result.name = name;
+		result.unitId = unitId;
+		result.hp = hp;
+		result.size = size;
+		result.weakPointId = weakPointId;
+		result.isBoss = isBoss;
+		result.isEscape = isEscape;
+		result.damageRate = damageRate;
+		result.directDamageRate = directDamageRate;
+		result.indirectDamageRate = indirectDamageRate;
+		result.baseEnemyId = baseEnemyId;
+		result.dropRate = dropRate;
+		result.rewardResourceLotteryId = rewardResourceLotteryId;
 		return result;
 	}
 

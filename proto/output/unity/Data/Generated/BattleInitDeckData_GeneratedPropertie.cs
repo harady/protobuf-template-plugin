@@ -12,7 +12,7 @@ public partial class BattleInitDeckData : AbstractData
 
 	public AbilityData Clone() {
 		var result = new AbilityData();
-		result.USER_UNITS = USER_UNITS;
+		result.userUnits = userUnits;
 		return result;
 	}
 

@@ -21,10 +21,10 @@ public partial class BattleRewardResourceData : AbstractData
 
 	public AbilityData Clone() {
 		var result = new AbilityData();
-		result.RESOURCE = RESOURCE;
-		result.TYPE = TYPE;
-		result.PARAM = PARAM;
-		result.TAG = TAG;
+		result.resource = resource;
+		result.type = type;
+		result.param = param;
+		result.tag = tag;
 		return result;
 	}
 

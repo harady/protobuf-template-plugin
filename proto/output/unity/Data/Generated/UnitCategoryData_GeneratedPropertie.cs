@@ -15,8 +15,8 @@ public partial class UnitCategoryData : AbstractData
 
 	public AbilityData Clone() {
 		var result = new AbilityData();
-		result.ID = ID;
-		result.NAME = NAME;
+		result.id = id;
+		result.name = name;
 		return result;
 	}
 

@@ -12,7 +12,7 @@ public partial class CommonRequest : AbstractData
 
 	public AbilityData Clone() {
 		var result = new AbilityData();
-		result.SESSION_ID = SESSION_ID;
+		result.sessionId = sessionId;
 		return result;
 	}
 

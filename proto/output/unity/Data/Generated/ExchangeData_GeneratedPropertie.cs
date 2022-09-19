@@ -18,9 +18,9 @@ public partial class ExchangeData : AbstractData
 
 	public AbilityData Clone() {
 		var result = new AbilityData();
-		result.ID = ID;
-		result.NAME = NAME;
-		result.TYPE = TYPE;
+		result.id = id;
+		result.name = name;
+		result.type = type;
 		return result;
 	}
 

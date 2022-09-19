@@ -18,9 +18,9 @@ public partial class UserFriendRequestData : AbstractData
 
 	public AbilityData Clone() {
 		var result = new AbilityData();
-		result.ID = ID;
-		result.SENDER_USER_ID = SENDER_USER_ID;
-		result.TARGET_USER_ID = TARGET_USER_ID;
+		result.id = id;
+		result.senderUserId = senderUserId;
+		result.targetUserId = targetUserId;
 		return result;
 	}
 
