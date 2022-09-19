@@ -1,10 +1,32 @@
-service Mission
-   .monstershot.MissionAchieveResponse Achieve(.monstershot.MissionAchieveRequest)
-   .monstershot.MissionReceiveResponse Receive(.monstershot.MissionReceiveRequest)
-message MissionAchieveRequest
-    mission_id
-message MissionAchieveResponse
-message MissionReceiveRequest
-    mission_ids
-message MissionReceiveResponse
-template=template/csharp_unity_service-partial.gotemplate,fileSuffix=Service.cs
+﻿using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using UnityEngine;
+
+
+public partial class MissionService
+{
+
+	public void Achieve(Action<MissionAchieveResponse> onSuccess)
+	{
+		var request = new MissionAchieveRequest();
+		AchieveInner(
+			request: request,
+			onSuccess: (response) => {
+				onSuccess?.Invoke(response);
+			}
+		);
+	}
+
+	public void Receive(Action<MissionReceiveResponse> onSuccess)
+	{
+		var request = new MissionReceiveRequest();
+		ReceiveInner(
+			request: request,
+			onSuccess: (response) => {
+				onSuccess?.Invoke(response);
+			}
+		);
+	}
+
+}

@@ -1,18 +1,43 @@
-service Backup
-   .monstershot.BackupSaveTokenResponse SaveToken(.monstershot.BackupSaveTokenRequest)
-   .monstershot.BackupRemoveTokenResponse RemoveToken(.monstershot.BackupRemoveTokenRequest)
-   .monstershot.BackupTransferResponse Transfer(.monstershot.BackupTransferRequest)
-message BackupSaveTokenRequest
-   .monstershot.BackupType backup_type
-    backup_token
-message BackupSaveTokenResponse
-message BackupRemoveTokenRequest
-   .monstershot.BackupType backup_type
-message BackupRemoveTokenResponse
-message BackupTransferRequest
-   .monstershot.BackupType backup_type
-    backup_token
-message BackupTransferResponse
-    token
-    session_id
-template=template/csharp_unity_service-partial.gotemplate,fileSuffix=Service.cs
+﻿using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using UnityEngine;
+
+
+public partial class BackupService
+{
+
+	public void SaveToken(Action<BackupSaveTokenResponse> onSuccess)
+	{
+		var request = new BackupSaveTokenRequest();
+		SaveTokenInner(
+			request: request,
+			onSuccess: (response) => {
+				onSuccess?.Invoke(response);
+			}
+		);
+	}
+
+	public void RemoveToken(Action<BackupRemoveTokenResponse> onSuccess)
+	{
+		var request = new BackupRemoveTokenRequest();
+		RemoveTokenInner(
+			request: request,
+			onSuccess: (response) => {
+				onSuccess?.Invoke(response);
+			}
+		);
+	}
+
+	public void Transfer(Action<BackupTransferResponse> onSuccess)
+	{
+		var request = new BackupTransferRequest();
+		TransferInner(
+			request: request,
+			onSuccess: (response) => {
+				onSuccess?.Invoke(response);
+			}
+		);
+	}
+
+}

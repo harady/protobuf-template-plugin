@@ -1,17 +1,11 @@
-message SkillData
-    id
-    name
-    description
-    turn
-    attack_rate
-    speed_rate
-    brake_rate
-   .monstershot.SkillEffectType effect1_type
-    effect1_rank
-    effect1_param_a
-    effect1_param_b
-   .monstershot.SkillEffectType effect2_type
-    effect2_rank
-    effect2_param_a
-    effect2_param_b
-template=template/csharp_server_model-partial.gotemplate,fileSuffix=Data.cs
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+
+namespace AwsDotnetCsharp
+{
+	public partial class SkillData
+	{
+
+	}
+}

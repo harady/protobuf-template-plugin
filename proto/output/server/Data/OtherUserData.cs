@@ -1,8 +1,11 @@
-message OtherUserData
-    id
-    name
-    code
-    rank
-   .monstershot.UserUnitData user_unit
-    is_friend
-template=template/csharp_server_model-partial.gotemplate,fileSuffix=Data.cs
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+
+namespace AwsDotnetCsharp
+{
+	public partial class OtherUserData
+	{
+
+	}
+}

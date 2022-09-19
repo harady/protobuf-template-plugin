@@ -72,7 +72,7 @@ namespace protoc_gen_myplugincsharp
 				response.File.Add(
 					new CodeGeneratorResponse.Types.File() {
 						Name = filename,
-						Content = output.ToString(),
+						Content = result,
 					}
 				);
 			}

@@ -1,3 +1,11 @@
-message CommonRequest
-    session_id
-template=template/csharp_server_model-partial.gotemplate,fileSuffix=Data.cs
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+
+namespace AwsDotnetCsharp
+{
+	public partial class CommonRequest
+	{
+
+	}
+}

@@ -1,10 +1,50 @@
-message CommonResponse
-   .monstershot.UserUpdateData user_update
-    server_time
-    app_version
-    master_data_version
-    master_data_url
-    asset_list_version
-    asset_list_url
-    asset_base_url
-template=template/csharp_server_model-data.gotemplate,fileSuffix=Data_GeneratedData.cs
+using System;
+using System.Collections.Generic;
+using System.Runtime.Serialization;
+using MongoDB.Bson;
+using MongoDB.Bson.Serialization.Attributes;
+using Newtonsoft.Json;
+using MessagePack;
+
+namespace AwsDotnetCsharp
+{
+	[BsonIgnoreExtraElements]
+	[DataContract]
+	public partial class CommonResponse : AbstractData
+	{
+		[BsonId]
+		public ObjectId _id { get; set; }
+		[BsonElement("userUpdate")]
+		[DataMember(Name = "userUpdate")]
+		public UserUpdateData userUpdate { get; set; }
+
+		[BsonElement("serverTime")]
+		[DataMember(Name = "serverTime")]
+		public long serverTime { get; set; }
+
+		[BsonElement("appVersion")]
+		[DataMember(Name = "appVersion")]
+		public string appVersion { get; set; }
+
+		[BsonElement("masterDataVersion")]
+		[DataMember(Name = "masterDataVersion")]
+		public long masterDataVersion { get; set; }
+
+		[BsonElement("masterDataUrl")]
+		[DataMember(Name = "masterDataUrl")]
+		public string masterDataUrl { get; set; }
+
+		[BsonElement("assetListVersion")]
+		[DataMember(Name = "assetListVersion")]
+		public long assetListVersion { get; set; }
+
+		[BsonElement("assetListUrl")]
+		[DataMember(Name = "assetListUrl")]
+		public string assetListUrl { get; set; }
+
+		[BsonElement("assetBaseUrl")]
+		[DataMember(Name = "assetBaseUrl")]
+		public string assetBaseUrl { get; set; }
+
+	}
+}

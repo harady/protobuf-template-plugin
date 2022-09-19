@@ -1,6 +1,2 @@
-message ExchangeScheduleData
-    id
-    exchange_id
-    open_at
-    close_at
-template=template/sheet_columns.gotemplate,fileSuffix=.txt
+・exchange_schedules
+id	exchangeId	openAt	closeAt	

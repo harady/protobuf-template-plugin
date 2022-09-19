@@ -1,14 +1,43 @@
-service FriendRequest
-   .monstershot.FriendRequestListResponse List(.monstershot.FriendRequestListRequest)
-   .monstershot.FriendRequestAcceptResponse Accept(.monstershot.FriendRequestAcceptRequest)
-   .monstershot.FriendRequestRejectResponse Reject(.monstershot.FriendRequestRejectRequest)
-message FriendRequestListRequest
-message FriendRequestListResponse
-   .monstershot.OtherUserData other_users
-message FriendRequestAcceptRequest
-    user_id
-message FriendRequestAcceptResponse
-message FriendRequestRejectRequest
-    user_id
-message FriendRequestRejectResponse
-template=template/csharp_unity_service-partial.gotemplate,fileSuffix=Service.cs
+﻿using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using UnityEngine;
+
+
+public partial class FriendRequestService
+{
+
+	public void List(Action<FriendRequestListResponse> onSuccess)
+	{
+		var request = new FriendRequestListRequest();
+		ListInner(
+			request: request,
+			onSuccess: (response) => {
+				onSuccess?.Invoke(response);
+			}
+		);
+	}
+
+	public void Accept(Action<FriendRequestAcceptResponse> onSuccess)
+	{
+		var request = new FriendRequestAcceptRequest();
+		AcceptInner(
+			request: request,
+			onSuccess: (response) => {
+				onSuccess?.Invoke(response);
+			}
+		);
+	}
+
+	public void Reject(Action<FriendRequestRejectResponse> onSuccess)
+	{
+		var request = new FriendRequestRejectRequest();
+		RejectInner(
+			request: request,
+			onSuccess: (response) => {
+				onSuccess?.Invoke(response);
+			}
+		);
+	}
+
+}

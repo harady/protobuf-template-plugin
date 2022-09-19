@@ -1,6 +1,44 @@
-message GachaScheduleData
-    id
-    gacha_id
-    open_at
-    close_at
-template=template/csharp_server_model-data.gotemplate,fileSuffix=Data_GeneratedData.cs
+using System;
+using System.Collections.Generic;
+using System.Runtime.Serialization;
+using MongoDB.Bson;
+using MongoDB.Bson.Serialization.Attributes;
+using Newtonsoft.Json;
+using MessagePack;
+
+namespace AwsDotnetCsharp
+{
+	[BsonIgnoreExtraElements]
+	[DataContract]
+	public partial class GachaScheduleData : AbstractData
+	{
+		[BsonId]
+		public ObjectId _id { get; set; }
+		[BsonElement("id")]
+		[DataMember(Name = "id")]
+		public long id { get; set; }
+
+		[BsonElement("gachaId")]
+		[DataMember(Name = "gachaId")]
+		public long gachaId { get; set; }
+
+		[BsonElement("openAt")]
+		[DataMember(Name = "openAt")]
+		public long openAt { get; set; }
+		[BsonIgnore]
+		public DateTime OpenAt {
+			get { return DateTimeUtil.FromEpochTime(openAt); }
+			set { openAt = value.ToEpochTime(); }
+		}
+
+		[BsonElement("closeAt")]
+		[DataMember(Name = "closeAt")]
+		public long closeAt { get; set; }
+		[BsonIgnore]
+		public DateTime CloseAt {
+			get { return DateTimeUtil.FromEpochTime(closeAt); }
+			set { closeAt = value.ToEpochTime(); }
+		}
+
+	}
+}

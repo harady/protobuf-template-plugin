@@ -1,19 +1,54 @@
-service Friend
-   .monstershot.FriendListResponse List(.monstershot.FriendListRequest)
-   .monstershot.FriendRemoveResponse Remove(.monstershot.FriendRemoveRequest)
-   .monstershot.FriendSearchResponse Search(.monstershot.FriendSearchRequest)
-   .monstershot.FriendRequestResponse Request(.monstershot.FriendRequestRequest)
-message FriendListRequest
-message FriendListResponse
-   .monstershot.OtherUserData other_users
-message FriendRemoveRequest
-    user_id
-message FriendRemoveResponse
-message FriendSearchRequest
-    code
-message FriendSearchResponse
-   .monstershot.OtherUserData other_user
-message FriendRequestRequest
-    user_id
-message FriendRequestResponse
-template=template/csharp_unity_service-partial.gotemplate,fileSuffix=Service.cs
+﻿using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using UnityEngine;
+
+
+public partial class FriendService
+{
+
+	public void List(Action<FriendListResponse> onSuccess)
+	{
+		var request = new FriendListRequest();
+		ListInner(
+			request: request,
+			onSuccess: (response) => {
+				onSuccess?.Invoke(response);
+			}
+		);
+	}
+
+	public void Remove(Action<FriendRemoveResponse> onSuccess)
+	{
+		var request = new FriendRemoveRequest();
+		RemoveInner(
+			request: request,
+			onSuccess: (response) => {
+				onSuccess?.Invoke(response);
+			}
+		);
+	}
+
+	public void Search(Action<FriendSearchResponse> onSuccess)
+	{
+		var request = new FriendSearchRequest();
+		SearchInner(
+			request: request,
+			onSuccess: (response) => {
+				onSuccess?.Invoke(response);
+			}
+		);
+	}
+
+	public void Request(Action<FriendRequestResponse> onSuccess)
+	{
+		var request = new FriendRequestRequest();
+		RequestInner(
+			request: request,
+			onSuccess: (response) => {
+				onSuccess?.Invoke(response);
+			}
+		);
+	}
+
+}

@@ -1,12 +1,10 @@
-message GachaPoolData
-    id
-    name
-    gacha_id
-    base_gacha_pool_id
-    is_extra
-    is_pickup
-    is_guarantee
-    rarity
-   .monstershot.UnitAttribute attribute
-    weight
-template=template/csharp_unity_data-partial.gotemplate,fileSuffix=Data.cs
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+
+public partial class GachaPoolData
+{
+
+}
+
+

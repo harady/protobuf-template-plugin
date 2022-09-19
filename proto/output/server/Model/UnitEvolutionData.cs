@@ -1,8 +1,11 @@
-message UnitEvolutionData
-    id
-    name
-   .monstershot.UnitEvolutionType type
-    base_unit_id
-    result_unit_id
-    cost_resource_set_id
-template=template/csharp_server_model-partial.gotemplate,fileSuffix=Data.cs
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+
+namespace AwsDotnetCsharp
+{
+	public partial class UnitEvolutionData
+	{
+
+	}
+}

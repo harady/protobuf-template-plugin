@@ -1,3 +1,22 @@
-message BattleInitDeckData
-   .monstershot.UserUnitData user_units
-template=template/csharp_unity_data-propertie.gotemplate,fileSuffix=Data_GeneratedPropertie.cs
+﻿using System;
+using System.Collections.Generic;
+using System.Runtime.Serialization;
+using Newtonsoft.Json;
+
+[DataContract]
+public partial class BattleInitDeckData : AbstractData
+{
+	[DataMember(Name = "userUnits")]
+	public List<UserUnitData> userUnits { get; set; } = new List<UserUnitData>();
+
+	public BattleInitDeckData Clone() {
+		var result = new BattleInitDeckData();
+		result.userUnits = userUnits;
+		return result;
+	}
+
+	public override string ToString()
+	{
+		return JsonConvert.SerializeObject(this);
+	}
+}

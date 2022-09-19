@@ -1,7 +1,2 @@
-message WeakPointPositionData
-    id
-    weak_point_id
-    angle
-    radius_rate
-    size_rate
-template=template/sheet_columns.gotemplate,fileSuffix=.txt
+・weak_point_positions
+id	weakPointId	angle	radiusRate	sizeRate	

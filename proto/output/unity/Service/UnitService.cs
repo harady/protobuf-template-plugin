@@ -1,26 +1,65 @@
-service Unit
-   .monstershot.UnitDeckEditResponse DeckEdit(.monstershot.UnitDeckEditRequest)
-   .monstershot.UnitPowerupResponse Powerup(.monstershot.UnitPowerupRequest)
-   .monstershot.UnitEvolutionResponse Evolution(.monstershot.UnitEvolutionRequest)
-   .monstershot.UnitSellResponse Sell(.monstershot.UnitSellRequest)
-   .monstershot.UnitLockResponse Lock(.monstershot.UnitLockRequest)
-message UnitDeckEditRequest
-   .monstershot.UserDeckData user_deck
-message UnitDeckEditResponse
-message UnitPowerupRequest
-    user_unit_id
-   .monstershot.ResourceData consume_resources
-message UnitPowerupResponse
-message UnitEvolutionRequest
-    user_unit_id
-    unit_evolution_id
-   .monstershot.ResourceData consume_resources
-message UnitEvolutionResponse
-message UnitSellRequest
-    user_unit_ids
-message UnitSellResponse
-message UnitLockRequest
-    user_unit_id
-    is_locked
-message UnitLockResponse
-template=template/csharp_unity_service-partial.gotemplate,fileSuffix=Service.cs
+﻿using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using UnityEngine;
+
+
+public partial class UnitService
+{
+
+	public void DeckEdit(Action<UnitDeckEditResponse> onSuccess)
+	{
+		var request = new UnitDeckEditRequest();
+		DeckEditInner(
+			request: request,
+			onSuccess: (response) => {
+				onSuccess?.Invoke(response);
+			}
+		);
+	}
+
+	public void Powerup(Action<UnitPowerupResponse> onSuccess)
+	{
+		var request = new UnitPowerupRequest();
+		PowerupInner(
+			request: request,
+			onSuccess: (response) => {
+				onSuccess?.Invoke(response);
+			}
+		);
+	}
+
+	public void Evolution(Action<UnitEvolutionResponse> onSuccess)
+	{
+		var request = new UnitEvolutionRequest();
+		EvolutionInner(
+			request: request,
+			onSuccess: (response) => {
+				onSuccess?.Invoke(response);
+			}
+		);
+	}
+
+	public void Sell(Action<UnitSellResponse> onSuccess)
+	{
+		var request = new UnitSellRequest();
+		SellInner(
+			request: request,
+			onSuccess: (response) => {
+				onSuccess?.Invoke(response);
+			}
+		);
+	}
+
+	public void Lock(Action<UnitLockResponse> onSuccess)
+	{
+		var request = new UnitLockRequest();
+		LockInner(
+			request: request,
+			onSuccess: (response) => {
+				onSuccess?.Invoke(response);
+			}
+		);
+	}
+
+}

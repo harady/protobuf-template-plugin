@@ -1,9 +1,11 @@
-message ResourceLotteryItemData
-    id
-    resource_lottery_id
-    weight
-   .monstershot.ResourceType resource_type
-    resource_id
-    resource_amount_min
-    resource_amount_max
-template=template/csharp_server_model-partial.gotemplate,fileSuffix=Data.cs
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+
+namespace AwsDotnetCsharp
+{
+	public partial class ResourceLotteryItemData
+	{
+
+	}
+}

@@ -1,5 +1,8 @@
-message ExchangeData
-    id
-    name
-   .monstershot.ExchangeType type
-template=template/csharp_enum.gotemplate,fileSuffix=Enum.cs
+
+public enum ExchangeType
+{
+	None = 0,
+	Shop = 1,
+	Hidden = 2,
+	Debug = 99,
+}

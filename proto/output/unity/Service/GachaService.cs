@@ -1,7 +1,21 @@
-service Gacha
-   .monstershot.GachaDrawResponse Draw(.monstershot.GachaDrawRequest)
-message GachaDrawRequest
-    gacha_button_id
-message GachaDrawResponse
-   .monstershot.GachaResultItemData gacha_result_items
-template=template/csharp_unity_service-partial.gotemplate,fileSuffix=Service.cs
+﻿using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using UnityEngine;
+
+
+public partial class GachaService
+{
+
+	public void Draw(Action<GachaDrawResponse> onSuccess)
+	{
+		var request = new GachaDrawRequest();
+		DrawInner(
+			request: request,
+			onSuccess: (response) => {
+				onSuccess?.Invoke(response);
+			}
+		);
+	}
+
+}

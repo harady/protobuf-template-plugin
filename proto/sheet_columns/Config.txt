@@ -1,6 +1,2 @@
-message ConfigData
-    id
-    key
-    value
-    text
-template=template/sheet_columns.gotemplate,fileSuffix=.txt
+・configs
+id	key	value	text	

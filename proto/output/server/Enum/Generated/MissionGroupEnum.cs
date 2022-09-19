@@ -1,4 +1,8 @@
-message MissionGroupData
-    id
-   .monstershot.MissionGroupType type
-template=template/csharp_enum.gotemplate,fileSuffix=Enum.cs
+
+public enum MissionGroupType
+{
+	None = 0,
+	Normal = 1,
+	Weakly = 2,
+	Event = 3,
+}

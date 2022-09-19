@@ -1,7 +1,2 @@
-message UserShopItemData
-    id
-    user_id
-    shop_item_id
-    shop_schedule_id
-    purchased_count
-template=template/sheet_columns.gotemplate,fileSuffix=.txt
+・user_shop_items
+id	userId	shopItemId	shopScheduleId	purchasedCount	

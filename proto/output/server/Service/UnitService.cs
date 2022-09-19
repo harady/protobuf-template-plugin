@@ -1,26 +1,52 @@
-service Unit
-   .monstershot.UnitDeckEditResponse DeckEdit(.monstershot.UnitDeckEditRequest)
-   .monstershot.UnitPowerupResponse Powerup(.monstershot.UnitPowerupRequest)
-   .monstershot.UnitEvolutionResponse Evolution(.monstershot.UnitEvolutionRequest)
-   .monstershot.UnitSellResponse Sell(.monstershot.UnitSellRequest)
-   .monstershot.UnitLockResponse Lock(.monstershot.UnitLockRequest)
-message UnitDeckEditRequest
-   .monstershot.UserDeckData user_deck
-message UnitDeckEditResponse
-message UnitPowerupRequest
-    user_unit_id
-   .monstershot.ResourceData consume_resources
-message UnitPowerupResponse
-message UnitEvolutionRequest
-    user_unit_id
-    unit_evolution_id
-   .monstershot.ResourceData consume_resources
-message UnitEvolutionResponse
-message UnitSellRequest
-    user_unit_ids
-message UnitSellResponse
-message UnitLockRequest
-    user_unit_id
-    is_locked
-message UnitLockResponse
-template=template/csharp_server_service-partial.gotemplate,fileSuffix=Service.cs
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using Amazon.Lambda.Core;
+
+namespace AwsDotnetCsharp
+{
+	public partial class UnitService : UnitServiceBase
+	{
+
+		public override async Task<UnitDeckEditResponse> DeckEditImpl(
+			UnitDeckEditRequest request, ILambdaContext context)
+		{
+			await Task.Run(() => Console.WriteLine("DeckEditImpl is not implemented"));
+			var result = new UnitDeckEditResponse();
+			return result;
+		}
+
+		public override async Task<UnitPowerupResponse> PowerupImpl(
+			UnitPowerupRequest request, ILambdaContext context)
+		{
+			await Task.Run(() => Console.WriteLine("PowerupImpl is not implemented"));
+			var result = new UnitPowerupResponse();
+			return result;
+		}
+
+		public override async Task<UnitEvolutionResponse> EvolutionImpl(
+			UnitEvolutionRequest request, ILambdaContext context)
+		{
+			await Task.Run(() => Console.WriteLine("EvolutionImpl is not implemented"));
+			var result = new UnitEvolutionResponse();
+			return result;
+		}
+
+		public override async Task<UnitSellResponse> SellImpl(
+			UnitSellRequest request, ILambdaContext context)
+		{
+			await Task.Run(() => Console.WriteLine("SellImpl is not implemented"));
+			var result = new UnitSellResponse();
+			return result;
+		}
+
+		public override async Task<UnitLockResponse> LockImpl(
+			UnitLockRequest request, ILambdaContext context)
+		{
+			await Task.Run(() => Console.WriteLine("LockImpl is not implemented"));
+			var result = new UnitLockResponse();
+			return result;
+		}
+
+	}
+}

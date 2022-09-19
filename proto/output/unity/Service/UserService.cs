@@ -1,9 +1,32 @@
-service User
-   .monstershot.UserDataListResponse DataList(.monstershot.UserDataListRequest)
-   .monstershot.UserNameEditResponse NameEdit(.monstershot.UserNameEditRequest)
-message UserDataListRequest
-message UserDataListResponse
-message UserNameEditRequest
-    name
-message UserNameEditResponse
-template=template/csharp_unity_service-partial.gotemplate,fileSuffix=Service.cs
+﻿using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using UnityEngine;
+
+
+public partial class UserService
+{
+
+	public void DataList(Action<UserDataListResponse> onSuccess)
+	{
+		var request = new UserDataListRequest();
+		DataListInner(
+			request: request,
+			onSuccess: (response) => {
+				onSuccess?.Invoke(response);
+			}
+		);
+	}
+
+	public void NameEdit(Action<UserNameEditResponse> onSuccess)
+	{
+		var request = new UserNameEditRequest();
+		NameEditInner(
+			request: request,
+			onSuccess: (response) => {
+				onSuccess?.Invoke(response);
+			}
+		);
+	}
+
+}

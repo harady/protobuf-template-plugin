@@ -1,6 +1,8 @@
-message UserBackupData
-    id
-    user_id
-   .monstershot.BackupType backup_type
-    backup_token
-template=template/csharp_enum.gotemplate,fileSuffix=Enum.cs
+
+public enum BackupType
+{
+	None = 0,
+	Code = 1,
+	Twitter = 2,
+	Line = 3,
+}

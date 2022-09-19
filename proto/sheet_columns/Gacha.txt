@@ -1,6 +1,2 @@
-message GachaData
-    id
-    name
-    base_gacha_id
-    is_premium
-template=template/sheet_columns.gotemplate,fileSuffix=.txt
+・gachas
+id	name	baseGachaId	isPremium	

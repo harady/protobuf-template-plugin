@@ -1,7 +1,20 @@
-service Exchange
-   .monstershot.ExchangeExchangeResponse Exchange(.monstershot.ExchangeExchangeRequest)
-message ExchangeExchangeRequest
-    exchange_item_id
-    exchange_count
-message ExchangeExchangeResponse
-template=template/csharp_server_service-partial.gotemplate,fileSuffix=Service.cs
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using Amazon.Lambda.Core;
+
+namespace AwsDotnetCsharp
+{
+	public partial class ExchangeService : ExchangeServiceBase
+	{
+
+		public override async Task<ExchangeExchangeResponse> ExchangeImpl(
+			ExchangeExchangeRequest request, ILambdaContext context)
+		{
+			await Task.Run(() => Console.WriteLine("ExchangeImpl is not implemented"));
+			var result = new ExchangeExchangeResponse();
+			return result;
+		}
+
+	}
+}

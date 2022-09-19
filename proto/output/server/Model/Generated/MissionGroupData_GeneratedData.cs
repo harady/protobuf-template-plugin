@@ -1,4 +1,26 @@
-message MissionGroupData
-    id
-   .monstershot.MissionGroupType type
-template=template/csharp_server_model-data.gotemplate,fileSuffix=Data_GeneratedData.cs
+using System;
+using System.Collections.Generic;
+using System.Runtime.Serialization;
+using MongoDB.Bson;
+using MongoDB.Bson.Serialization.Attributes;
+using Newtonsoft.Json;
+using MessagePack;
+
+namespace AwsDotnetCsharp
+{
+	[BsonIgnoreExtraElements]
+	[DataContract]
+	public partial class MissionGroupData : AbstractData
+	{
+		[BsonId]
+		public ObjectId _id { get; set; }
+		[BsonElement("id")]
+		[DataMember(Name = "id")]
+		public long id { get; set; }
+
+		[BsonElement("type")]
+		[DataMember(Name = "type")]
+		public MissionGroupType type { get; set; }
+
+	}
+}

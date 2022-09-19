@@ -1,4 +1,2 @@
-message MissionGroupData
-    id
-   .monstershot.MissionGroupType type
-template=template/sheet_columns.gotemplate,fileSuffix=.txt
+・mission_groups
+id	type	

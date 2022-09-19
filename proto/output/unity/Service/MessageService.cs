@@ -1,9 +1,32 @@
-service Message
-   .monstershot.MessageListResponse List(.monstershot.MessageListRequest)
-   .monstershot.MessageReceiveResponse Receive(.monstershot.MessageReceiveRequest)
-message MessageListRequest
-message MessageListResponse
-message MessageReceiveRequest
-    user_message_id
-message MessageReceiveResponse
-template=template/csharp_unity_service-partial.gotemplate,fileSuffix=Service.cs
+﻿using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using UnityEngine;
+
+
+public partial class MessageService
+{
+
+	public void List(Action<MessageListResponse> onSuccess)
+	{
+		var request = new MessageListRequest();
+		ListInner(
+			request: request,
+			onSuccess: (response) => {
+				onSuccess?.Invoke(response);
+			}
+		);
+	}
+
+	public void Receive(Action<MessageReceiveResponse> onSuccess)
+	{
+		var request = new MessageReceiveRequest();
+		ReceiveInner(
+			request: request,
+			onSuccess: (response) => {
+				onSuccess?.Invoke(response);
+			}
+		);
+	}
+
+}

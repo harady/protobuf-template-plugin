@@ -1,22 +1,76 @@
-service Operation
-   .monstershot.OperationTestResponse Test(.monstershot.OperationTestRequest)
-   .monstershot.OperationTestResponse Test1(.monstershot.OperationTestRequest)
-   .monstershot.OperationTestResponse Test2(.monstershot.OperationTestRequest)
-   .monstershot.OperationTestResponse Test3(.monstershot.OperationTestRequest)
-   .monstershot.OperationTestResponse Test4(.monstershot.OperationTestRequest)
-   .monstershot.OperationTestResponse Test5(.monstershot.OperationTestRequest)
-   .monstershot.OperationUpdateMasterVersionResponse UpdateMasterVersion(.monstershot.OperationUpdateMasterVersionRequest)
-   .monstershot.OperationUpdateEventScheduleResponse UpdateEventSchedule(.monstershot.OperationUpdateEventScheduleRequest)
-message OperationTestRequest
-    message
-message OperationTestResponse
-    message
-message OperationUpdateMasterVersionRequest
-    message
-message OperationUpdateMasterVersionResponse
-    message
-message OperationUpdateEventScheduleRequest
-    message
-message OperationUpdateEventScheduleResponse
-    message
-template=template/csharp_server_service-partial.gotemplate,fileSuffix=Service.cs
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using Amazon.Lambda.Core;
+
+namespace AwsDotnetCsharp
+{
+	public partial class OperationService : OperationServiceBase
+	{
+
+		public override async Task<OperationTestResponse> TestImpl(
+			OperationTestRequest request, ILambdaContext context)
+		{
+			await Task.Run(() => Console.WriteLine("TestImpl is not implemented"));
+			var result = new OperationTestResponse();
+			return result;
+		}
+
+		public override async Task<OperationTestResponse> Test1Impl(
+			OperationTestRequest request, ILambdaContext context)
+		{
+			await Task.Run(() => Console.WriteLine("Test1Impl is not implemented"));
+			var result = new OperationTestResponse();
+			return result;
+		}
+
+		public override async Task<OperationTestResponse> Test2Impl(
+			OperationTestRequest request, ILambdaContext context)
+		{
+			await Task.Run(() => Console.WriteLine("Test2Impl is not implemented"));
+			var result = new OperationTestResponse();
+			return result;
+		}
+
+		public override async Task<OperationTestResponse> Test3Impl(
+			OperationTestRequest request, ILambdaContext context)
+		{
+			await Task.Run(() => Console.WriteLine("Test3Impl is not implemented"));
+			var result = new OperationTestResponse();
+			return result;
+		}
+
+		public override async Task<OperationTestResponse> Test4Impl(
+			OperationTestRequest request, ILambdaContext context)
+		{
+			await Task.Run(() => Console.WriteLine("Test4Impl is not implemented"));
+			var result = new OperationTestResponse();
+			return result;
+		}
+
+		public override async Task<OperationTestResponse> Test5Impl(
+			OperationTestRequest request, ILambdaContext context)
+		{
+			await Task.Run(() => Console.WriteLine("Test5Impl is not implemented"));
+			var result = new OperationTestResponse();
+			return result;
+		}
+
+		public override async Task<OperationUpdateMasterVersionResponse> UpdateMasterVersionImpl(
+			OperationUpdateMasterVersionRequest request, ILambdaContext context)
+		{
+			await Task.Run(() => Console.WriteLine("UpdateMasterVersionImpl is not implemented"));
+			var result = new OperationUpdateMasterVersionResponse();
+			return result;
+		}
+
+		public override async Task<OperationUpdateEventScheduleResponse> UpdateEventScheduleImpl(
+			OperationUpdateEventScheduleRequest request, ILambdaContext context)
+		{
+			await Task.Run(() => Console.WriteLine("UpdateEventScheduleImpl is not implemented"));
+			var result = new OperationUpdateEventScheduleResponse();
+			return result;
+		}
+
+	}
+}

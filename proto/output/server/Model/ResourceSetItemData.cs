@@ -1,7 +1,11 @@
-message ResourceSetItemData
-    id
-    resource_set_id
-   .monstershot.ResourceType resource_type
-    resource_id
-    resource_amount
-template=template/csharp_server_model-partial.gotemplate,fileSuffix=Data.cs
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+
+namespace AwsDotnetCsharp
+{
+	public partial class ResourceSetItemData
+	{
+
+	}
+}

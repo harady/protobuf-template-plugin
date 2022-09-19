@@ -1,12 +1,11 @@
-message MissionData
-    id
-    name
-    mission_group_id
-   .monstershot.MissionType type
-    to_achieve_progress
-    param_a
-    param_b
-   .monstershot.ResourceType reward_resource_type
-    reward_resource_id
-    reward_resource_amount
-template=template/csharp_server_model-partial.gotemplate,fileSuffix=Data.cs
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+
+namespace AwsDotnetCsharp
+{
+	public partial class MissionData
+	{
+
+	}
+}

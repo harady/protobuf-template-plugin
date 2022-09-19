@@ -1,3 +1,0 @@
-message BattleRewardsSpecialRewardsData
-   .monstershot.BattleRewardResourceData battle_reward_resources
-template=template/csharp_enum.gotemplate,fileSuffix=Enum.cs

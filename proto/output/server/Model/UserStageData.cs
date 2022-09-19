@@ -1,8 +1,11 @@
-message UserStageData
-    id
-    user_id
-    stage_id
-    clear_count
-    failed_count
-    best_clear_time
-template=template/csharp_server_model-partial.gotemplate,fileSuffix=Data.cs
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+
+namespace AwsDotnetCsharp
+{
+	public partial class UserStageData
+	{
+
+	}
+}

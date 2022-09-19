@@ -1,11 +1,11 @@
-message AbilityData
-    id
-    name
-   .monstershot.AbilityCategory category
-   .monstershot.AbilityType type
-    description
-    target
-    param_a
-    param_b
-    param_c
-template=template/csharp_server_model-partial.gotemplate,fileSuffix=Data.cs
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+
+namespace AwsDotnetCsharp
+{
+	public partial class AbilityData
+	{
+
+	}
+}

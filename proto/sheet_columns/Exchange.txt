@@ -1,5 +1,2 @@
-message ExchangeData
-    id
-    name
-   .monstershot.ExchangeType type
-template=template/sheet_columns.gotemplate,fileSuffix=.txt
+・exchanges
+id	name	type	

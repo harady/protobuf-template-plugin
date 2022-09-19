@@ -1,7 +1,10 @@
-message WeakPointPositionData
-    id
-    weak_point_id
-    angle
-    radius_rate
-    size_rate
-template=template/csharp_unity_data-partial.gotemplate,fileSuffix=Data.cs
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+
+public partial class WeakPointPositionData
+{
+
+}
+
+

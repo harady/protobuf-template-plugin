@@ -1,13 +1,11 @@
-message ComboData
-    id
-    name
-   .monstershot.ComboType type
-    description
-    rank
-    base_attack
-    max_attack
-    param_a
-    param_b
-    param_c
-    icon_id
-template=template/csharp_server_model-partial.gotemplate,fileSuffix=Data.cs
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+
+namespace AwsDotnetCsharp
+{
+	public partial class ComboData
+	{
+
+	}
+}

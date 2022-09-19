@@ -1,7 +1,2 @@
-message UserIdentifableItemData
-    id
-    user_id
-    identifable_item_id
-    param_a
-    param_b
-template=template/sheet_columns.gotemplate,fileSuffix=.txt
+・user_identifable_items
+id	userId	identifableItemId	paramA	paramB	

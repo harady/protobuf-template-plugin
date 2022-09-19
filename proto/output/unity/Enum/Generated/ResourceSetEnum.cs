@@ -1,4 +1,6 @@
-message ResourceSetData
-    id
-    name
-template=template/csharp_enum.gotemplate,fileSuffix=Enum.cs
+
+public enum ResourceSetType
+{
+	None = 0,
+	EvolutionMaterial = 1,
+}

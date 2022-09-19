@@ -1,9 +1,10 @@
-message EquipmentData
-    id
-    name
-   .monstershot.EquipmentType type
-    description
-    param_a
-    param_b
-    icon_id
-template=template/csharp_unity_data-partial.gotemplate,fileSuffix=Data.cs
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+
+public partial class EquipmentData
+{
+
+}
+
+

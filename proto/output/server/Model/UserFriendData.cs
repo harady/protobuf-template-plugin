@@ -1,8 +1,11 @@
-message UserFriendData
-    id
-    user_id
-    friend_user_id
-    is_favorite
-    last_used_at
-    used_count
-template=template/csharp_server_model-partial.gotemplate,fileSuffix=Data.cs
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+
+namespace AwsDotnetCsharp
+{
+	public partial class UserFriendData
+	{
+
+	}
+}

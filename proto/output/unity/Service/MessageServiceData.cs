@@ -1,9 +1,25 @@
-service Message
-   .monstershot.MessageListResponse List(.monstershot.MessageListRequest)
-   .monstershot.MessageReceiveResponse Receive(.monstershot.MessageReceiveRequest)
-message MessageListRequest
-message MessageListResponse
-message MessageReceiveRequest
-    user_message_id
-message MessageReceiveResponse
-template=template/csharp_unity_data-partial.gotemplate,fileSuffix=ServiceData.cs
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+
+public partial class MessageListRequest
+{
+
+}
+
+public partial class MessageListResponse
+{
+
+}
+
+public partial class MessageReceiveRequest
+{
+
+}
+
+public partial class MessageReceiveResponse
+{
+
+}
+
+

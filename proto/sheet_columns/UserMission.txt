@@ -1,6 +1,2 @@
-message UserMissionData
-    id
-    user_id
-    mission_id
-    progress
-template=template/sheet_columns.gotemplate,fileSuffix=.txt
+・user_missions
+id	userId	missionId	progress	

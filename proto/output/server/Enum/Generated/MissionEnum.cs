@@ -1,12 +1,13 @@
-message MissionData
-    id
-    name
-    mission_group_id
-   .monstershot.MissionType type
-    to_achieve_progress
-    param_a
-    param_b
-   .monstershot.ResourceType reward_resource_type
-    reward_resource_id
-    reward_resource_amount
-template=template/csharp_enum.gotemplate,fileSuffix=Enum.cs
+
+public enum MissionType
+{
+	None = 0,
+	TotalLoginCount = 1,
+	TotalLuckMaxUnitCount = 2,
+	TotalFirstMultiPlayCount = 3,
+	TotalClearCount = 4,
+	TotalUnitCollectionCount = 5,
+	TotalPlayCount = 6,
+	TargetQuestClear = 7,
+	TargetStageClearSRank = 8,
+}

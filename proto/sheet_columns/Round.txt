@@ -1,6 +1,2 @@
-message RoundData
-    id
-    name
-    stage_id
-    round_no
-template=template/sheet_columns.gotemplate,fileSuffix=.txt
+・rounds
+id	name	stageId	roundNo	

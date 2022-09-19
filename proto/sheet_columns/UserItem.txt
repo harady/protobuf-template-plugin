@@ -1,6 +1,2 @@
-message UserItemData
-    id
-    user_id
-    item_id
-    amount
-template=template/sheet_columns.gotemplate,fileSuffix=.txt
+・user_items
+id	userId	itemId	amount	

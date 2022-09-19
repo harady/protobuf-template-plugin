@@ -1,4 +1,2 @@
-message UnitCategoryData
-    id
-    name
-template=template/sheet_columns.gotemplate,fileSuffix=.txt
+・unit_categorys
+id	name	

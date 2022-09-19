@@ -1,17 +1,35 @@
-service Shop
-   .monstershot.ShopPurchaseGooglePlayResponse PurchaseGooglePlay(.monstershot.ShopPurchaseGooglePlayRequest)
-   .monstershot.ShopPurchaseAppStoreResponse PurchaseAppStore(.monstershot.ShopPurchaseAppStoreRequest)
-   .monstershot.ShopPurchaseDebugResponse PurchaseDebug(.monstershot.ShopPurchaseDebugRequest)
-message ShopPurchaseGooglePlayRequest
-    shop_item_id
-    signed_data
-    signature
-message ShopPurchaseGooglePlayResponse
-message ShopPurchaseAppStoreRequest
-    shop_item_id
-    receipt
-message ShopPurchaseAppStoreResponse
-message ShopPurchaseDebugRequest
-    shop_item_id
-message ShopPurchaseDebugResponse
-template=template/csharp_unity_data-partial.gotemplate,fileSuffix=ServiceData.cs
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+
+public partial class ShopPurchaseAppStoreRequest
+{
+
+}
+
+public partial class ShopPurchaseAppStoreResponse
+{
+
+}
+
+public partial class ShopPurchaseDebugRequest
+{
+
+}
+
+public partial class ShopPurchaseDebugResponse
+{
+
+}
+
+public partial class ShopPurchaseGooglePlayRequest
+{
+
+}
+
+public partial class ShopPurchaseGooglePlayResponse
+{
+
+}
+
+

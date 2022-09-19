@@ -1,6 +1,11 @@
-message GachaData
-    id
-    name
-    base_gacha_id
-    is_premium
-template=template/csharp_server_model-partial.gotemplate,fileSuffix=Data.cs
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+
+namespace AwsDotnetCsharp
+{
+	public partial class GachaData
+	{
+
+	}
+}

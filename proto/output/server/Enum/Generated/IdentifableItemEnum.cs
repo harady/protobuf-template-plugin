@@ -1,7 +1,6 @@
-message IdentifableItemData
-    id
-    name
-    description
-   .monstershot.IdentifableItemType type
-    owned_limit
-template=template/csharp_enum.gotemplate,fileSuffix=Enum.cs
+
+public enum IdentifableItemType
+{
+	None = 0,
+	QuestTicket = 1,
+}
