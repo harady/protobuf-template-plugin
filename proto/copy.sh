@@ -1,1 +1,1 @@
-cp -pR ../protoc-gen-template/protoc-gen-myplugincsharp/bin/Debug/net50/* ./plugin
+cp -pR ../protoc-gen-template/protoc-gen-myplugincsharp/bin/Debug/net50/* ./plugin2
