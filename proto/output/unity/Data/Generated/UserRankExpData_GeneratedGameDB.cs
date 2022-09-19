@@ -1,44 +1,68 @@
 using System.Collections.Generic;
 
 
-[DataContract]
 public partial class UserRankExpData : IUnique<long>
 {
-	[DataMember(Name = "id")]
-	public long id { get; set; }
+	#region NullObject
+	public static UserRankExpData Null => NullObjectContainer.Get<UserRankExpData>();
 
-	[DataMember(Name = "rank")]
-	public long rank { get; set; }
-
-	[DataMember(Name = "totalExp")]
-	public long totalExp { get; set; }
-
-	[DataMember(Name = "maxStamina")]
-	public long maxStamina { get; set; }
-
-	[DataMember(Name = "deckNum")]
-	public long deckNum { get; set; }
-
-	[DataMember(Name = "maxFriendNum")]
-	public long maxFriendNum { get; set; }
-
-	[DataMember(Name = "unitBoxNum")]
-	public long unitBoxNum { get; set; }
-
-	public UserRankExpData Clone() {
-		var result = new UserRankExpData();
-		result.id = id;
-		result.rank = rank;
-		result.totalExp = totalExp;
-		result.maxStamina = maxStamina;
-		result.deckNum = deckNum;
-		result.maxFriendNum = maxFriendNum;
-		result.unitBoxNum = unitBoxNum;
-		return result;
+	public bool isNull => (this == Null);
+	#endregion
+	#region GameDbWrapper(DataTable)
+	public static DataTable<long, UserRankExpData> dataTable {
+		get {
+			DataTable<long, UserRankExpData> result;
+			if (GameDb.TableExists<long, UserRankExpData>()) {
+				result = GameDb.From<long, UserRankExpData>();
+			} else {
+				result = GameDb.CreateTable<long, UserRankExpData>();
+				SetupUserRankExpDataTableIndexGenerated(result);
+				SetupUserRankExpDataTableIndex(result);
+			}
+			return result;
+		}
 	}
 
-	public override string ToString()
+	public static int Count => dataTable.Count;
+
+	public static List<UserRankExpData> GetDataList()
 	{
-		return JsonConvert.SerializeObject(this);
+		return dataTable.dataList;
 	}
+
+	public static void SetData(UserRankExpData data)
+	{
+		dataTable.Insert(data);
+	}
+
+	public static void AddDataList(IEnumerable<UserRankExpData> dataList)
+	{
+		dataTable.InsertRange(dataList);
+	}
+
+	public static void SetDataList(IEnumerable<UserRankExpData> dataList)
+	{
+		Clear();
+		dataTable.InsertRange(dataList);
+	}
+
+	public static void Clear()
+	{
+		dataTable.DeleteAll();
+	}
+
+	static partial void SetupUserRankExpDataTableIndex(DataTable<long, UserRankExpData> targetDataTable);
+
+	private static void SetupUserRankExpDataTableIndexGenerated(DataTable<long, UserRankExpData> targetDataTable)
+	{
+		targetDataTable.CreateUniqueIndex("Userrankexpdata", aData => (object)aData.userrankexpdata);
+		targetDataTable.CreateIndex("Userrankexpdata", aData => (object)aData.userrankexpdata);
+		targetDataTable.CreateIndex("Userrankexpdata", aData => (object)aData.userrankexpdata);
+		targetDataTable.CreateIndex("Userrankexpdata", aData => (object)aData.userrankexpdata);
+		targetDataTable.CreateIndex("Userrankexpdata", aData => (object)aData.userrankexpdata);
+		targetDataTable.CreateIndex("Userrankexpdata", aData => (object)aData.userrankexpdata);
+		targetDataTable.CreateIndex("Userrankexpdata", aData => (object)aData.userrankexpdata);
+		targetDataTable.CreateIndex("Userrankexpdata", aData => (object)aData.userrankexpdata);
+	}
+	#endregion
 }

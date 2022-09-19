@@ -1,30 +1,64 @@
 using System.Collections.Generic;
 
 
-[DataContract]
 public partial class UserMessageData : IUnique<long>
 {
-	[DataMember(Name = "id")]
-	public long id { get; set; }
+	#region NullObject
+	public static UserMessageData Null => NullObjectContainer.Get<UserMessageData>();
 
-	[DataMember(Name = "userId")]
-	public long userId { get; set; }
-
-	[DataMember(Name = "name")]
-	public string name { get; set; }
-
-	public UserMessageData Clone() {
-		var result = new UserMessageData();
-		result.id = id;
-		result.userId = userId;
-		result.name = name;
-		return result;
+	public bool isNull => (this == Null);
+	#endregion
+	#region GameDbWrapper(DataTable)
+	public static DataTable<long, UserMessageData> dataTable {
+		get {
+			DataTable<long, UserMessageData> result;
+			if (GameDb.TableExists<long, UserMessageData>()) {
+				result = GameDb.From<long, UserMessageData>();
+			} else {
+				result = GameDb.CreateTable<long, UserMessageData>();
+				SetupUserMessageDataTableIndexGenerated(result);
+				SetupUserMessageDataTableIndex(result);
+			}
+			return result;
+		}
 	}
 
-	public string idNameText => GetIdNameText(id, name);
+	public static int Count => dataTable.Count;
 
-	public override string ToString()
+	public static List<UserMessageData> GetDataList()
 	{
-		return JsonConvert.SerializeObject(this);
+		return dataTable.dataList;
 	}
+
+	public static void SetData(UserMessageData data)
+	{
+		dataTable.Insert(data);
+	}
+
+	public static void AddDataList(IEnumerable<UserMessageData> dataList)
+	{
+		dataTable.InsertRange(dataList);
+	}
+
+	public static void SetDataList(IEnumerable<UserMessageData> dataList)
+	{
+		Clear();
+		dataTable.InsertRange(dataList);
+	}
+
+	public static void Clear()
+	{
+		dataTable.DeleteAll();
+	}
+
+	static partial void SetupUserMessageDataTableIndex(DataTable<long, UserMessageData> targetDataTable);
+
+	private static void SetupUserMessageDataTableIndexGenerated(DataTable<long, UserMessageData> targetDataTable)
+	{
+		targetDataTable.CreateUniqueIndex("Usermessagedata", aData => (object)aData.usermessagedata);
+		targetDataTable.CreateIndex("Usermessagedata", aData => (object)aData.usermessagedata);
+		targetDataTable.CreateIndex("Usermessagedata", aData => (object)aData.usermessagedata);
+		targetDataTable.CreateIndex("Usermessagedata", aData => (object)aData.usermessagedata);
+	}
+	#endregion
 }

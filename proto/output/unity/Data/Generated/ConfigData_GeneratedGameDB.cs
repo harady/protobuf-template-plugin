@@ -1,32 +1,65 @@
 using System.Collections.Generic;
 
 
-[DataContract]
 public partial class ConfigData : IUnique<long>
 {
-	[DataMember(Name = "id")]
-	public long id { get; set; }
+	#region NullObject
+	public static ConfigData Null => NullObjectContainer.Get<ConfigData>();
 
-	[DataMember(Name = "key")]
-	public string key { get; set; }
-
-	[DataMember(Name = "value")]
-	public long value { get; set; }
-
-	[DataMember(Name = "text")]
-	public string text { get; set; }
-
-	public ConfigData Clone() {
-		var result = new ConfigData();
-		result.id = id;
-		result.key = key;
-		result.value = value;
-		result.text = text;
-		return result;
+	public bool isNull => (this == Null);
+	#endregion
+	#region GameDbWrapper(DataTable)
+	public static DataTable<long, ConfigData> dataTable {
+		get {
+			DataTable<long, ConfigData> result;
+			if (GameDb.TableExists<long, ConfigData>()) {
+				result = GameDb.From<long, ConfigData>();
+			} else {
+				result = GameDb.CreateTable<long, ConfigData>();
+				SetupConfigDataTableIndexGenerated(result);
+				SetupConfigDataTableIndex(result);
+			}
+			return result;
+		}
 	}
 
-	public override string ToString()
+	public static int Count => dataTable.Count;
+
+	public static List<ConfigData> GetDataList()
 	{
-		return JsonConvert.SerializeObject(this);
+		return dataTable.dataList;
 	}
+
+	public static void SetData(ConfigData data)
+	{
+		dataTable.Insert(data);
+	}
+
+	public static void AddDataList(IEnumerable<ConfigData> dataList)
+	{
+		dataTable.InsertRange(dataList);
+	}
+
+	public static void SetDataList(IEnumerable<ConfigData> dataList)
+	{
+		Clear();
+		dataTable.InsertRange(dataList);
+	}
+
+	public static void Clear()
+	{
+		dataTable.DeleteAll();
+	}
+
+	static partial void SetupConfigDataTableIndex(DataTable<long, ConfigData> targetDataTable);
+
+	private static void SetupConfigDataTableIndexGenerated(DataTable<long, ConfigData> targetDataTable)
+	{
+		targetDataTable.CreateUniqueIndex("Configdata", aData => (object)aData.configdata);
+		targetDataTable.CreateIndex("Configdata", aData => (object)aData.configdata);
+		targetDataTable.CreateIndex("Configdata", aData => (object)aData.configdata);
+		targetDataTable.CreateIndex("Configdata", aData => (object)aData.configdata);
+		targetDataTable.CreateIndex("Configdata", aData => (object)aData.configdata);
+	}
+	#endregion
 }

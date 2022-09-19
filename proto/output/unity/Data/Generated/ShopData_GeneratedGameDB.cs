@@ -1,26 +1,63 @@
 using System.Collections.Generic;
 
 
-[DataContract]
 public partial class ShopData : IUnique<long>
 {
-	[DataMember(Name = "id")]
-	public long id { get; set; }
+	#region NullObject
+	public static ShopData Null => NullObjectContainer.Get<ShopData>();
 
-	[DataMember(Name = "name")]
-	public string name { get; set; }
-
-	public ShopData Clone() {
-		var result = new ShopData();
-		result.id = id;
-		result.name = name;
-		return result;
+	public bool isNull => (this == Null);
+	#endregion
+	#region GameDbWrapper(DataTable)
+	public static DataTable<long, ShopData> dataTable {
+		get {
+			DataTable<long, ShopData> result;
+			if (GameDb.TableExists<long, ShopData>()) {
+				result = GameDb.From<long, ShopData>();
+			} else {
+				result = GameDb.CreateTable<long, ShopData>();
+				SetupShopDataTableIndexGenerated(result);
+				SetupShopDataTableIndex(result);
+			}
+			return result;
+		}
 	}
 
-	public string idNameText => GetIdNameText(id, name);
+	public static int Count => dataTable.Count;
 
-	public override string ToString()
+	public static List<ShopData> GetDataList()
 	{
-		return JsonConvert.SerializeObject(this);
+		return dataTable.dataList;
 	}
+
+	public static void SetData(ShopData data)
+	{
+		dataTable.Insert(data);
+	}
+
+	public static void AddDataList(IEnumerable<ShopData> dataList)
+	{
+		dataTable.InsertRange(dataList);
+	}
+
+	public static void SetDataList(IEnumerable<ShopData> dataList)
+	{
+		Clear();
+		dataTable.InsertRange(dataList);
+	}
+
+	public static void Clear()
+	{
+		dataTable.DeleteAll();
+	}
+
+	static partial void SetupShopDataTableIndex(DataTable<long, ShopData> targetDataTable);
+
+	private static void SetupShopDataTableIndexGenerated(DataTable<long, ShopData> targetDataTable)
+	{
+		targetDataTable.CreateUniqueIndex("Shopdata", aData => (object)aData.shopdata);
+		targetDataTable.CreateIndex("Shopdata", aData => (object)aData.shopdata);
+		targetDataTable.CreateIndex("Shopdata", aData => (object)aData.shopdata);
+	}
+	#endregion
 }

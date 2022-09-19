@@ -1,46 +1,68 @@
 using System.Collections.Generic;
 
 
-[DataContract]
 public partial class StageSpecialRewardData : IUnique<long>
 {
-	[DataMember(Name = "id")]
-	public long id { get; set; }
+	#region NullObject
+	public static StageSpecialRewardData Null => NullObjectContainer.Get<StageSpecialRewardData>();
 
-	[DataMember(Name = "name")]
-	public string name { get; set; }
-
-	[DataMember(Name = "stageId")]
-	public long stageId { get; set; }
-
-	[DataMember(Name = "battleRewardType")]
-	public BattleRewardType battleRewardType { get; set; }
-
-	[DataMember(Name = "paramA")]
-	public long paramA { get; set; }
-
-	[DataMember(Name = "paramB")]
-	public long paramB { get; set; }
-
-	[DataMember(Name = "resourceLotteryId")]
-	public long resourceLotteryId { get; set; }
-
-	public StageSpecialRewardData Clone() {
-		var result = new StageSpecialRewardData();
-		result.id = id;
-		result.name = name;
-		result.stageId = stageId;
-		result.battleRewardType = battleRewardType;
-		result.paramA = paramA;
-		result.paramB = paramB;
-		result.resourceLotteryId = resourceLotteryId;
-		return result;
+	public bool isNull => (this == Null);
+	#endregion
+	#region GameDbWrapper(DataTable)
+	public static DataTable<long, StageSpecialRewardData> dataTable {
+		get {
+			DataTable<long, StageSpecialRewardData> result;
+			if (GameDb.TableExists<long, StageSpecialRewardData>()) {
+				result = GameDb.From<long, StageSpecialRewardData>();
+			} else {
+				result = GameDb.CreateTable<long, StageSpecialRewardData>();
+				SetupStageSpecialRewardDataTableIndexGenerated(result);
+				SetupStageSpecialRewardDataTableIndex(result);
+			}
+			return result;
+		}
 	}
 
-	public string idNameText => GetIdNameText(id, name);
+	public static int Count => dataTable.Count;
 
-	public override string ToString()
+	public static List<StageSpecialRewardData> GetDataList()
 	{
-		return JsonConvert.SerializeObject(this);
+		return dataTable.dataList;
 	}
+
+	public static void SetData(StageSpecialRewardData data)
+	{
+		dataTable.Insert(data);
+	}
+
+	public static void AddDataList(IEnumerable<StageSpecialRewardData> dataList)
+	{
+		dataTable.InsertRange(dataList);
+	}
+
+	public static void SetDataList(IEnumerable<StageSpecialRewardData> dataList)
+	{
+		Clear();
+		dataTable.InsertRange(dataList);
+	}
+
+	public static void Clear()
+	{
+		dataTable.DeleteAll();
+	}
+
+	static partial void SetupStageSpecialRewardDataTableIndex(DataTable<long, StageSpecialRewardData> targetDataTable);
+
+	private static void SetupStageSpecialRewardDataTableIndexGenerated(DataTable<long, StageSpecialRewardData> targetDataTable)
+	{
+		targetDataTable.CreateUniqueIndex("Stagespecialrewarddata", aData => (object)aData.stagespecialrewarddata);
+		targetDataTable.CreateIndex("Stagespecialrewarddata", aData => (object)aData.stagespecialrewarddata);
+		targetDataTable.CreateIndex("Stagespecialrewarddata", aData => (object)aData.stagespecialrewarddata);
+		targetDataTable.CreateIndex("Stagespecialrewarddata", aData => (object)aData.stagespecialrewarddata);
+		targetDataTable.CreateIndex("Stagespecialrewarddata", aData => (object)aData.stagespecialrewarddata);
+		targetDataTable.CreateIndex("Stagespecialrewarddata", aData => (object)aData.stagespecialrewarddata);
+		targetDataTable.CreateIndex("Stagespecialrewarddata", aData => (object)aData.stagespecialrewarddata);
+		targetDataTable.CreateIndex("Stagespecialrewarddata", aData => (object)aData.stagespecialrewarddata);
+	}
+	#endregion
 }

@@ -1,42 +1,67 @@
 using System.Collections.Generic;
 
 
-[DataContract]
 public partial class UnitEvolutionData : IUnique<long>
 {
-	[DataMember(Name = "id")]
-	public long id { get; set; }
+	#region NullObject
+	public static UnitEvolutionData Null => NullObjectContainer.Get<UnitEvolutionData>();
 
-	[DataMember(Name = "name")]
-	public string name { get; set; }
-
-	[DataMember(Name = "type")]
-	public UnitEvolutionType type { get; set; }
-
-	[DataMember(Name = "baseUnitId")]
-	public long baseUnitId { get; set; }
-
-	[DataMember(Name = "resultUnitId")]
-	public long resultUnitId { get; set; }
-
-	[DataMember(Name = "costResourceSetId")]
-	public long costResourceSetId { get; set; }
-
-	public UnitEvolutionData Clone() {
-		var result = new UnitEvolutionData();
-		result.id = id;
-		result.name = name;
-		result.type = type;
-		result.baseUnitId = baseUnitId;
-		result.resultUnitId = resultUnitId;
-		result.costResourceSetId = costResourceSetId;
-		return result;
+	public bool isNull => (this == Null);
+	#endregion
+	#region GameDbWrapper(DataTable)
+	public static DataTable<long, UnitEvolutionData> dataTable {
+		get {
+			DataTable<long, UnitEvolutionData> result;
+			if (GameDb.TableExists<long, UnitEvolutionData>()) {
+				result = GameDb.From<long, UnitEvolutionData>();
+			} else {
+				result = GameDb.CreateTable<long, UnitEvolutionData>();
+				SetupUnitEvolutionDataTableIndexGenerated(result);
+				SetupUnitEvolutionDataTableIndex(result);
+			}
+			return result;
+		}
 	}
 
-	public string idNameText => GetIdNameText(id, name);
+	public static int Count => dataTable.Count;
 
-	public override string ToString()
+	public static List<UnitEvolutionData> GetDataList()
 	{
-		return JsonConvert.SerializeObject(this);
+		return dataTable.dataList;
 	}
+
+	public static void SetData(UnitEvolutionData data)
+	{
+		dataTable.Insert(data);
+	}
+
+	public static void AddDataList(IEnumerable<UnitEvolutionData> dataList)
+	{
+		dataTable.InsertRange(dataList);
+	}
+
+	public static void SetDataList(IEnumerable<UnitEvolutionData> dataList)
+	{
+		Clear();
+		dataTable.InsertRange(dataList);
+	}
+
+	public static void Clear()
+	{
+		dataTable.DeleteAll();
+	}
+
+	static partial void SetupUnitEvolutionDataTableIndex(DataTable<long, UnitEvolutionData> targetDataTable);
+
+	private static void SetupUnitEvolutionDataTableIndexGenerated(DataTable<long, UnitEvolutionData> targetDataTable)
+	{
+		targetDataTable.CreateUniqueIndex("Unitevolutiondata", aData => (object)aData.unitevolutiondata);
+		targetDataTable.CreateIndex("Unitevolutiondata", aData => (object)aData.unitevolutiondata);
+		targetDataTable.CreateIndex("Unitevolutiondata", aData => (object)aData.unitevolutiondata);
+		targetDataTable.CreateIndex("Unitevolutiondata", aData => (object)aData.unitevolutiondata);
+		targetDataTable.CreateIndex("Unitevolutiondata", aData => (object)aData.unitevolutiondata);
+		targetDataTable.CreateIndex("Unitevolutiondata", aData => (object)aData.unitevolutiondata);
+		targetDataTable.CreateIndex("Unitevolutiondata", aData => (object)aData.unitevolutiondata);
+	}
+	#endregion
 }

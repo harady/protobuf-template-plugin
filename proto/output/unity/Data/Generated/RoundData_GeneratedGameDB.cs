@@ -1,34 +1,65 @@
 using System.Collections.Generic;
 
 
-[DataContract]
 public partial class RoundData : IUnique<long>
 {
-	[DataMember(Name = "id")]
-	public long id { get; set; }
+	#region NullObject
+	public static RoundData Null => NullObjectContainer.Get<RoundData>();
 
-	[DataMember(Name = "name")]
-	public string name { get; set; }
-
-	[DataMember(Name = "stageId")]
-	public long stageId { get; set; }
-
-	[DataMember(Name = "roundNo")]
-	public long roundNo { get; set; }
-
-	public RoundData Clone() {
-		var result = new RoundData();
-		result.id = id;
-		result.name = name;
-		result.stageId = stageId;
-		result.roundNo = roundNo;
-		return result;
+	public bool isNull => (this == Null);
+	#endregion
+	#region GameDbWrapper(DataTable)
+	public static DataTable<long, RoundData> dataTable {
+		get {
+			DataTable<long, RoundData> result;
+			if (GameDb.TableExists<long, RoundData>()) {
+				result = GameDb.From<long, RoundData>();
+			} else {
+				result = GameDb.CreateTable<long, RoundData>();
+				SetupRoundDataTableIndexGenerated(result);
+				SetupRoundDataTableIndex(result);
+			}
+			return result;
+		}
 	}
 
-	public string idNameText => GetIdNameText(id, name);
+	public static int Count => dataTable.Count;
 
-	public override string ToString()
+	public static List<RoundData> GetDataList()
 	{
-		return JsonConvert.SerializeObject(this);
+		return dataTable.dataList;
 	}
+
+	public static void SetData(RoundData data)
+	{
+		dataTable.Insert(data);
+	}
+
+	public static void AddDataList(IEnumerable<RoundData> dataList)
+	{
+		dataTable.InsertRange(dataList);
+	}
+
+	public static void SetDataList(IEnumerable<RoundData> dataList)
+	{
+		Clear();
+		dataTable.InsertRange(dataList);
+	}
+
+	public static void Clear()
+	{
+		dataTable.DeleteAll();
+	}
+
+	static partial void SetupRoundDataTableIndex(DataTable<long, RoundData> targetDataTable);
+
+	private static void SetupRoundDataTableIndexGenerated(DataTable<long, RoundData> targetDataTable)
+	{
+		targetDataTable.CreateUniqueIndex("Rounddata", aData => (object)aData.rounddata);
+		targetDataTable.CreateIndex("Rounddata", aData => (object)aData.rounddata);
+		targetDataTable.CreateIndex("Rounddata", aData => (object)aData.rounddata);
+		targetDataTable.CreateIndex("Rounddata", aData => (object)aData.rounddata);
+		targetDataTable.CreateIndex("Rounddata", aData => (object)aData.rounddata);
+	}
+	#endregion
 }

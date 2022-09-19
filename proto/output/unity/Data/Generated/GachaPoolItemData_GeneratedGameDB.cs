@@ -1,58 +1,69 @@
 using System.Collections.Generic;
 
 
-[DataContract]
 public partial class GachaPoolItemData : IUnique<long>
 {
-	[DataMember(Name = "id")]
-	public long id { get; set; }
+	#region NullObject
+	public static GachaPoolItemData Null => NullObjectContainer.Get<GachaPoolItemData>();
 
-	[DataMember(Name = "gachaPoolId")]
-	public long gachaPoolId { get; set; }
-
-	[DataMember(Name = "resourceType")]
-	public ResourceType resourceType { get; set; }
-
-	[DataMember(Name = "resourceId")]
-	public long resourceId { get; set; }
-
-	[DataMember(Name = "resourceAmount")]
-	public long resourceAmount { get; set; }
-
-	[DataMember(Name = "weight")]
-	public long weight { get; set; }
-
-	[DataMember(Name = "openAt")]
-	public long openAt { get; set; }
-
-	public DateTime OpenAt {
-		get { return ServerDateTimeUtil.FromEpoch(openAt); }
-		set { openAt = ServerDateTimeUtil.ToEpoch(value); }
+	public bool isNull => (this == Null);
+	#endregion
+	#region GameDbWrapper(DataTable)
+	public static DataTable<long, GachaPoolItemData> dataTable {
+		get {
+			DataTable<long, GachaPoolItemData> result;
+			if (GameDb.TableExists<long, GachaPoolItemData>()) {
+				result = GameDb.From<long, GachaPoolItemData>();
+			} else {
+				result = GameDb.CreateTable<long, GachaPoolItemData>();
+				SetupGachaPoolItemDataTableIndexGenerated(result);
+				SetupGachaPoolItemDataTableIndex(result);
+			}
+			return result;
+		}
 	}
 
-	[DataMember(Name = "closeAt")]
-	public long closeAt { get; set; }
+	public static int Count => dataTable.Count;
 
-	public DateTime CloseAt {
-		get { return ServerDateTimeUtil.FromEpoch(closeAt); }
-		set { closeAt = ServerDateTimeUtil.ToEpoch(value); }
-	}
-
-	public GachaPoolItemData Clone() {
-		var result = new GachaPoolItemData();
-		result.id = id;
-		result.gachaPoolId = gachaPoolId;
-		result.resourceType = resourceType;
-		result.resourceId = resourceId;
-		result.resourceAmount = resourceAmount;
-		result.weight = weight;
-		result.openAt = openAt;
-		result.closeAt = closeAt;
-		return result;
-	}
-
-	public override string ToString()
+	public static List<GachaPoolItemData> GetDataList()
 	{
-		return JsonConvert.SerializeObject(this);
+		return dataTable.dataList;
 	}
+
+	public static void SetData(GachaPoolItemData data)
+	{
+		dataTable.Insert(data);
+	}
+
+	public static void AddDataList(IEnumerable<GachaPoolItemData> dataList)
+	{
+		dataTable.InsertRange(dataList);
+	}
+
+	public static void SetDataList(IEnumerable<GachaPoolItemData> dataList)
+	{
+		Clear();
+		dataTable.InsertRange(dataList);
+	}
+
+	public static void Clear()
+	{
+		dataTable.DeleteAll();
+	}
+
+	static partial void SetupGachaPoolItemDataTableIndex(DataTable<long, GachaPoolItemData> targetDataTable);
+
+	private static void SetupGachaPoolItemDataTableIndexGenerated(DataTable<long, GachaPoolItemData> targetDataTable)
+	{
+		targetDataTable.CreateUniqueIndex("Gachapoolitemdata", aData => (object)aData.gachapoolitemdata);
+		targetDataTable.CreateIndex("Gachapoolitemdata", aData => (object)aData.gachapoolitemdata);
+		targetDataTable.CreateIndex("Gachapoolitemdata", aData => (object)aData.gachapoolitemdata);
+		targetDataTable.CreateIndex("Gachapoolitemdata", aData => (object)aData.gachapoolitemdata);
+		targetDataTable.CreateIndex("Gachapoolitemdata", aData => (object)aData.gachapoolitemdata);
+		targetDataTable.CreateIndex("Gachapoolitemdata", aData => (object)aData.gachapoolitemdata);
+		targetDataTable.CreateIndex("Gachapoolitemdata", aData => (object)aData.gachapoolitemdata);
+		targetDataTable.CreateIndex("Gachapoolitemdata", aData => (object)aData.gachapoolitemdata);
+		targetDataTable.CreateIndex("Gachapoolitemdata", aData => (object)aData.gachapoolitemdata);
+	}
+	#endregion
 }

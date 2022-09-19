@@ -1,46 +1,68 @@
 using System.Collections.Generic;
 
 
-[DataContract]
 public partial class EventQuestCategoryData : IUnique<long>
 {
-	[DataMember(Name = "id")]
-	public long id { get; set; }
+	#region NullObject
+	public static EventQuestCategoryData Null => NullObjectContainer.Get<EventQuestCategoryData>();
 
-	[DataMember(Name = "name")]
-	public string name { get; set; }
-
-	[DataMember(Name = "minStartTime")]
-	public long minStartTime { get; set; }
-
-	[DataMember(Name = "maxStartTime")]
-	public long maxStartTime { get; set; }
-
-	[DataMember(Name = "openHours")]
-	public long openHours { get; set; }
-
-	[DataMember(Name = "questGroupId")]
-	public long questGroupId { get; set; }
-
-	[DataMember(Name = "questdifficultytype")]
-	public QuestDifficultyType questdifficultytype { get; set; }
-
-	public EventQuestCategoryData Clone() {
-		var result = new EventQuestCategoryData();
-		result.id = id;
-		result.name = name;
-		result.minStartTime = minStartTime;
-		result.maxStartTime = maxStartTime;
-		result.openHours = openHours;
-		result.questGroupId = questGroupId;
-		result.questdifficultytype = questdifficultytype;
-		return result;
+	public bool isNull => (this == Null);
+	#endregion
+	#region GameDbWrapper(DataTable)
+	public static DataTable<long, EventQuestCategoryData> dataTable {
+		get {
+			DataTable<long, EventQuestCategoryData> result;
+			if (GameDb.TableExists<long, EventQuestCategoryData>()) {
+				result = GameDb.From<long, EventQuestCategoryData>();
+			} else {
+				result = GameDb.CreateTable<long, EventQuestCategoryData>();
+				SetupEventQuestCategoryDataTableIndexGenerated(result);
+				SetupEventQuestCategoryDataTableIndex(result);
+			}
+			return result;
+		}
 	}
 
-	public string idNameText => GetIdNameText(id, name);
+	public static int Count => dataTable.Count;
 
-	public override string ToString()
+	public static List<EventQuestCategoryData> GetDataList()
 	{
-		return JsonConvert.SerializeObject(this);
+		return dataTable.dataList;
 	}
+
+	public static void SetData(EventQuestCategoryData data)
+	{
+		dataTable.Insert(data);
+	}
+
+	public static void AddDataList(IEnumerable<EventQuestCategoryData> dataList)
+	{
+		dataTable.InsertRange(dataList);
+	}
+
+	public static void SetDataList(IEnumerable<EventQuestCategoryData> dataList)
+	{
+		Clear();
+		dataTable.InsertRange(dataList);
+	}
+
+	public static void Clear()
+	{
+		dataTable.DeleteAll();
+	}
+
+	static partial void SetupEventQuestCategoryDataTableIndex(DataTable<long, EventQuestCategoryData> targetDataTable);
+
+	private static void SetupEventQuestCategoryDataTableIndexGenerated(DataTable<long, EventQuestCategoryData> targetDataTable)
+	{
+		targetDataTable.CreateUniqueIndex("Eventquestcategorydata", aData => (object)aData.eventquestcategorydata);
+		targetDataTable.CreateIndex("Eventquestcategorydata", aData => (object)aData.eventquestcategorydata);
+		targetDataTable.CreateIndex("Eventquestcategorydata", aData => (object)aData.eventquestcategorydata);
+		targetDataTable.CreateIndex("Eventquestcategorydata", aData => (object)aData.eventquestcategorydata);
+		targetDataTable.CreateIndex("Eventquestcategorydata", aData => (object)aData.eventquestcategorydata);
+		targetDataTable.CreateIndex("Eventquestcategorydata", aData => (object)aData.eventquestcategorydata);
+		targetDataTable.CreateIndex("Eventquestcategorydata", aData => (object)aData.eventquestcategorydata);
+		targetDataTable.CreateIndex("Eventquestcategorydata", aData => (object)aData.eventquestcategorydata);
+	}
+	#endregion
 }

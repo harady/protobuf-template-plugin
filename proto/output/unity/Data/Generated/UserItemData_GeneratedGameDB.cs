@@ -1,32 +1,65 @@
 using System.Collections.Generic;
 
 
-[DataContract]
 public partial class UserItemData : IUnique<long>
 {
-	[DataMember(Name = "id")]
-	public long id { get; set; }
+	#region NullObject
+	public static UserItemData Null => NullObjectContainer.Get<UserItemData>();
 
-	[DataMember(Name = "userId")]
-	public long userId { get; set; }
-
-	[DataMember(Name = "itemId")]
-	public long itemId { get; set; }
-
-	[DataMember(Name = "amount")]
-	public long amount { get; set; }
-
-	public UserItemData Clone() {
-		var result = new UserItemData();
-		result.id = id;
-		result.userId = userId;
-		result.itemId = itemId;
-		result.amount = amount;
-		return result;
+	public bool isNull => (this == Null);
+	#endregion
+	#region GameDbWrapper(DataTable)
+	public static DataTable<long, UserItemData> dataTable {
+		get {
+			DataTable<long, UserItemData> result;
+			if (GameDb.TableExists<long, UserItemData>()) {
+				result = GameDb.From<long, UserItemData>();
+			} else {
+				result = GameDb.CreateTable<long, UserItemData>();
+				SetupUserItemDataTableIndexGenerated(result);
+				SetupUserItemDataTableIndex(result);
+			}
+			return result;
+		}
 	}
 
-	public override string ToString()
+	public static int Count => dataTable.Count;
+
+	public static List<UserItemData> GetDataList()
 	{
-		return JsonConvert.SerializeObject(this);
+		return dataTable.dataList;
 	}
+
+	public static void SetData(UserItemData data)
+	{
+		dataTable.Insert(data);
+	}
+
+	public static void AddDataList(IEnumerable<UserItemData> dataList)
+	{
+		dataTable.InsertRange(dataList);
+	}
+
+	public static void SetDataList(IEnumerable<UserItemData> dataList)
+	{
+		Clear();
+		dataTable.InsertRange(dataList);
+	}
+
+	public static void Clear()
+	{
+		dataTable.DeleteAll();
+	}
+
+	static partial void SetupUserItemDataTableIndex(DataTable<long, UserItemData> targetDataTable);
+
+	private static void SetupUserItemDataTableIndexGenerated(DataTable<long, UserItemData> targetDataTable)
+	{
+		targetDataTable.CreateUniqueIndex("Useritemdata", aData => (object)aData.useritemdata);
+		targetDataTable.CreateIndex("Useritemdata", aData => (object)aData.useritemdata);
+		targetDataTable.CreateIndex("Useritemdata", aData => (object)aData.useritemdata);
+		targetDataTable.CreateIndex("Useritemdata", aData => (object)aData.useritemdata);
+		targetDataTable.CreateIndex("Useritemdata", aData => (object)aData.useritemdata);
+	}
+	#endregion
 }

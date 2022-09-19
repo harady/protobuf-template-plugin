@@ -1,26 +1,63 @@
 using System.Collections.Generic;
 
 
-[DataContract]
 public partial class MissionScheduleData : IUnique<long>
 {
-	[DataMember(Name = "id")]
-	public long id { get; set; }
+	#region NullObject
+	public static MissionScheduleData Null => NullObjectContainer.Get<MissionScheduleData>();
 
-	[DataMember(Name = "name")]
-	public string name { get; set; }
-
-	public MissionScheduleData Clone() {
-		var result = new MissionScheduleData();
-		result.id = id;
-		result.name = name;
-		return result;
+	public bool isNull => (this == Null);
+	#endregion
+	#region GameDbWrapper(DataTable)
+	public static DataTable<long, MissionScheduleData> dataTable {
+		get {
+			DataTable<long, MissionScheduleData> result;
+			if (GameDb.TableExists<long, MissionScheduleData>()) {
+				result = GameDb.From<long, MissionScheduleData>();
+			} else {
+				result = GameDb.CreateTable<long, MissionScheduleData>();
+				SetupMissionScheduleDataTableIndexGenerated(result);
+				SetupMissionScheduleDataTableIndex(result);
+			}
+			return result;
+		}
 	}
 
-	public string idNameText => GetIdNameText(id, name);
+	public static int Count => dataTable.Count;
 
-	public override string ToString()
+	public static List<MissionScheduleData> GetDataList()
 	{
-		return JsonConvert.SerializeObject(this);
+		return dataTable.dataList;
 	}
+
+	public static void SetData(MissionScheduleData data)
+	{
+		dataTable.Insert(data);
+	}
+
+	public static void AddDataList(IEnumerable<MissionScheduleData> dataList)
+	{
+		dataTable.InsertRange(dataList);
+	}
+
+	public static void SetDataList(IEnumerable<MissionScheduleData> dataList)
+	{
+		Clear();
+		dataTable.InsertRange(dataList);
+	}
+
+	public static void Clear()
+	{
+		dataTable.DeleteAll();
+	}
+
+	static partial void SetupMissionScheduleDataTableIndex(DataTable<long, MissionScheduleData> targetDataTable);
+
+	private static void SetupMissionScheduleDataTableIndexGenerated(DataTable<long, MissionScheduleData> targetDataTable)
+	{
+		targetDataTable.CreateUniqueIndex("Missionscheduledata", aData => (object)aData.missionscheduledata);
+		targetDataTable.CreateIndex("Missionscheduledata", aData => (object)aData.missionscheduledata);
+		targetDataTable.CreateIndex("Missionscheduledata", aData => (object)aData.missionscheduledata);
+	}
+	#endregion
 }

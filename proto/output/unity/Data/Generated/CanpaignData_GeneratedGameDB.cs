@@ -1,26 +1,63 @@
 using System.Collections.Generic;
 
 
-[DataContract]
 public partial class CanpaignData : IUnique<long>
 {
-	[DataMember(Name = "id")]
-	public long id { get; set; }
+	#region NullObject
+	public static CanpaignData Null => NullObjectContainer.Get<CanpaignData>();
 
-	[DataMember(Name = "name")]
-	public string name { get; set; }
-
-	public CanpaignData Clone() {
-		var result = new CanpaignData();
-		result.id = id;
-		result.name = name;
-		return result;
+	public bool isNull => (this == Null);
+	#endregion
+	#region GameDbWrapper(DataTable)
+	public static DataTable<long, CanpaignData> dataTable {
+		get {
+			DataTable<long, CanpaignData> result;
+			if (GameDb.TableExists<long, CanpaignData>()) {
+				result = GameDb.From<long, CanpaignData>();
+			} else {
+				result = GameDb.CreateTable<long, CanpaignData>();
+				SetupCanpaignDataTableIndexGenerated(result);
+				SetupCanpaignDataTableIndex(result);
+			}
+			return result;
+		}
 	}
 
-	public string idNameText => GetIdNameText(id, name);
+	public static int Count => dataTable.Count;
 
-	public override string ToString()
+	public static List<CanpaignData> GetDataList()
 	{
-		return JsonConvert.SerializeObject(this);
+		return dataTable.dataList;
 	}
+
+	public static void SetData(CanpaignData data)
+	{
+		dataTable.Insert(data);
+	}
+
+	public static void AddDataList(IEnumerable<CanpaignData> dataList)
+	{
+		dataTable.InsertRange(dataList);
+	}
+
+	public static void SetDataList(IEnumerable<CanpaignData> dataList)
+	{
+		Clear();
+		dataTable.InsertRange(dataList);
+	}
+
+	public static void Clear()
+	{
+		dataTable.DeleteAll();
+	}
+
+	static partial void SetupCanpaignDataTableIndex(DataTable<long, CanpaignData> targetDataTable);
+
+	private static void SetupCanpaignDataTableIndexGenerated(DataTable<long, CanpaignData> targetDataTable)
+	{
+		targetDataTable.CreateUniqueIndex("Canpaigndata", aData => (object)aData.canpaigndata);
+		targetDataTable.CreateIndex("Canpaigndata", aData => (object)aData.canpaigndata);
+		targetDataTable.CreateIndex("Canpaigndata", aData => (object)aData.canpaigndata);
+	}
+	#endregion
 }

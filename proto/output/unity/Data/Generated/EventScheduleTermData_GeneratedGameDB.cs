@@ -1,42 +1,65 @@
 using System.Collections.Generic;
 
 
-[DataContract]
 public partial class EventScheduleTermData : IUnique<long>
 {
-	[DataMember(Name = "id")]
-	public long id { get; set; }
+	#region NullObject
+	public static EventScheduleTermData Null => NullObjectContainer.Get<EventScheduleTermData>();
 
-	[DataMember(Name = "dailyEventTableId")]
-	public long dailyEventTableId { get; set; }
-
-	[DataMember(Name = "openAt")]
-	public long openAt { get; set; }
-
-	public DateTime OpenAt {
-		get { return ServerDateTimeUtil.FromEpoch(openAt); }
-		set { openAt = ServerDateTimeUtil.ToEpoch(value); }
+	public bool isNull => (this == Null);
+	#endregion
+	#region GameDbWrapper(DataTable)
+	public static DataTable<long, EventScheduleTermData> dataTable {
+		get {
+			DataTable<long, EventScheduleTermData> result;
+			if (GameDb.TableExists<long, EventScheduleTermData>()) {
+				result = GameDb.From<long, EventScheduleTermData>();
+			} else {
+				result = GameDb.CreateTable<long, EventScheduleTermData>();
+				SetupEventScheduleTermDataTableIndexGenerated(result);
+				SetupEventScheduleTermDataTableIndex(result);
+			}
+			return result;
+		}
 	}
 
-	[DataMember(Name = "closeAt")]
-	public long closeAt { get; set; }
+	public static int Count => dataTable.Count;
 
-	public DateTime CloseAt {
-		get { return ServerDateTimeUtil.FromEpoch(closeAt); }
-		set { closeAt = ServerDateTimeUtil.ToEpoch(value); }
-	}
-
-	public EventScheduleTermData Clone() {
-		var result = new EventScheduleTermData();
-		result.id = id;
-		result.dailyEventTableId = dailyEventTableId;
-		result.openAt = openAt;
-		result.closeAt = closeAt;
-		return result;
-	}
-
-	public override string ToString()
+	public static List<EventScheduleTermData> GetDataList()
 	{
-		return JsonConvert.SerializeObject(this);
+		return dataTable.dataList;
 	}
+
+	public static void SetData(EventScheduleTermData data)
+	{
+		dataTable.Insert(data);
+	}
+
+	public static void AddDataList(IEnumerable<EventScheduleTermData> dataList)
+	{
+		dataTable.InsertRange(dataList);
+	}
+
+	public static void SetDataList(IEnumerable<EventScheduleTermData> dataList)
+	{
+		Clear();
+		dataTable.InsertRange(dataList);
+	}
+
+	public static void Clear()
+	{
+		dataTable.DeleteAll();
+	}
+
+	static partial void SetupEventScheduleTermDataTableIndex(DataTable<long, EventScheduleTermData> targetDataTable);
+
+	private static void SetupEventScheduleTermDataTableIndexGenerated(DataTable<long, EventScheduleTermData> targetDataTable)
+	{
+		targetDataTable.CreateUniqueIndex("Eventscheduletermdata", aData => (object)aData.eventscheduletermdata);
+		targetDataTable.CreateIndex("Eventscheduletermdata", aData => (object)aData.eventscheduletermdata);
+		targetDataTable.CreateIndex("Eventscheduletermdata", aData => (object)aData.eventscheduletermdata);
+		targetDataTable.CreateIndex("Eventscheduletermdata", aData => (object)aData.eventscheduletermdata);
+		targetDataTable.CreateIndex("Eventscheduletermdata", aData => (object)aData.eventscheduletermdata);
+	}
+	#endregion
 }

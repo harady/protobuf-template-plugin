@@ -1,40 +1,67 @@
 using System.Collections.Generic;
 
 
-[DataContract]
 public partial class BattleInitEnemyData : IUnique<long>
 {
-	[DataMember(Name = "id")]
-	public long id { get; set; }
+	#region NullObject
+	public static BattleInitEnemyData Null => NullObjectContainer.Get<BattleInitEnemyData>();
 
-	[DataMember(Name = "roundId")]
-	public long roundId { get; set; }
-
-	[DataMember(Name = "enemyId")]
-	public long enemyId { get; set; }
-
-	[DataMember(Name = "posX")]
-	public long posX { get; set; }
-
-	[DataMember(Name = "posY")]
-	public long posY { get; set; }
-
-	[DataMember(Name = "dropRewardResource")]
-	public ResourceData dropRewardResource { get; set; }
-
-	public BattleInitEnemyData Clone() {
-		var result = new BattleInitEnemyData();
-		result.id = id;
-		result.roundId = roundId;
-		result.enemyId = enemyId;
-		result.posX = posX;
-		result.posY = posY;
-		result.dropRewardResource = dropRewardResource;
-		return result;
+	public bool isNull => (this == Null);
+	#endregion
+	#region GameDbWrapper(DataTable)
+	public static DataTable<long, BattleInitEnemyData> dataTable {
+		get {
+			DataTable<long, BattleInitEnemyData> result;
+			if (GameDb.TableExists<long, BattleInitEnemyData>()) {
+				result = GameDb.From<long, BattleInitEnemyData>();
+			} else {
+				result = GameDb.CreateTable<long, BattleInitEnemyData>();
+				SetupBattleInitEnemyDataTableIndexGenerated(result);
+				SetupBattleInitEnemyDataTableIndex(result);
+			}
+			return result;
+		}
 	}
 
-	public override string ToString()
+	public static int Count => dataTable.Count;
+
+	public static List<BattleInitEnemyData> GetDataList()
 	{
-		return JsonConvert.SerializeObject(this);
+		return dataTable.dataList;
 	}
+
+	public static void SetData(BattleInitEnemyData data)
+	{
+		dataTable.Insert(data);
+	}
+
+	public static void AddDataList(IEnumerable<BattleInitEnemyData> dataList)
+	{
+		dataTable.InsertRange(dataList);
+	}
+
+	public static void SetDataList(IEnumerable<BattleInitEnemyData> dataList)
+	{
+		Clear();
+		dataTable.InsertRange(dataList);
+	}
+
+	public static void Clear()
+	{
+		dataTable.DeleteAll();
+	}
+
+	static partial void SetupBattleInitEnemyDataTableIndex(DataTable<long, BattleInitEnemyData> targetDataTable);
+
+	private static void SetupBattleInitEnemyDataTableIndexGenerated(DataTable<long, BattleInitEnemyData> targetDataTable)
+	{
+		targetDataTable.CreateUniqueIndex("Battleinitenemydata", aData => (object)aData.battleinitenemydata);
+		targetDataTable.CreateIndex("Battleinitenemydata", aData => (object)aData.battleinitenemydata);
+		targetDataTable.CreateIndex("Battleinitenemydata", aData => (object)aData.battleinitenemydata);
+		targetDataTable.CreateIndex("Battleinitenemydata", aData => (object)aData.battleinitenemydata);
+		targetDataTable.CreateIndex("Battleinitenemydata", aData => (object)aData.battleinitenemydata);
+		targetDataTable.CreateIndex("Battleinitenemydata", aData => (object)aData.battleinitenemydata);
+		targetDataTable.CreateIndex("Battleinitenemydata", aData => (object)aData.battleinitenemydata);
+	}
+	#endregion
 }

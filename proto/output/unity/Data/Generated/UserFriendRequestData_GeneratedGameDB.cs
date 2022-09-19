@@ -1,28 +1,64 @@
 using System.Collections.Generic;
 
 
-[DataContract]
 public partial class UserFriendRequestData : IUnique<long>
 {
-	[DataMember(Name = "id")]
-	public long id { get; set; }
+	#region NullObject
+	public static UserFriendRequestData Null => NullObjectContainer.Get<UserFriendRequestData>();
 
-	[DataMember(Name = "senderUserId")]
-	public long senderUserId { get; set; }
-
-	[DataMember(Name = "targetUserId")]
-	public long targetUserId { get; set; }
-
-	public UserFriendRequestData Clone() {
-		var result = new UserFriendRequestData();
-		result.id = id;
-		result.senderUserId = senderUserId;
-		result.targetUserId = targetUserId;
-		return result;
+	public bool isNull => (this == Null);
+	#endregion
+	#region GameDbWrapper(DataTable)
+	public static DataTable<long, UserFriendRequestData> dataTable {
+		get {
+			DataTable<long, UserFriendRequestData> result;
+			if (GameDb.TableExists<long, UserFriendRequestData>()) {
+				result = GameDb.From<long, UserFriendRequestData>();
+			} else {
+				result = GameDb.CreateTable<long, UserFriendRequestData>();
+				SetupUserFriendRequestDataTableIndexGenerated(result);
+				SetupUserFriendRequestDataTableIndex(result);
+			}
+			return result;
+		}
 	}
 
-	public override string ToString()
+	public static int Count => dataTable.Count;
+
+	public static List<UserFriendRequestData> GetDataList()
 	{
-		return JsonConvert.SerializeObject(this);
+		return dataTable.dataList;
 	}
+
+	public static void SetData(UserFriendRequestData data)
+	{
+		dataTable.Insert(data);
+	}
+
+	public static void AddDataList(IEnumerable<UserFriendRequestData> dataList)
+	{
+		dataTable.InsertRange(dataList);
+	}
+
+	public static void SetDataList(IEnumerable<UserFriendRequestData> dataList)
+	{
+		Clear();
+		dataTable.InsertRange(dataList);
+	}
+
+	public static void Clear()
+	{
+		dataTable.DeleteAll();
+	}
+
+	static partial void SetupUserFriendRequestDataTableIndex(DataTable<long, UserFriendRequestData> targetDataTable);
+
+	private static void SetupUserFriendRequestDataTableIndexGenerated(DataTable<long, UserFriendRequestData> targetDataTable)
+	{
+		targetDataTable.CreateUniqueIndex("Userfriendrequestdata", aData => (object)aData.userfriendrequestdata);
+		targetDataTable.CreateIndex("Userfriendrequestdata", aData => (object)aData.userfriendrequestdata);
+		targetDataTable.CreateIndex("Userfriendrequestdata", aData => (object)aData.userfriendrequestdata);
+		targetDataTable.CreateIndex("Userfriendrequestdata", aData => (object)aData.userfriendrequestdata);
+	}
+	#endregion
 }

@@ -1,42 +1,65 @@
 using System.Collections.Generic;
 
 
-[DataContract]
 public partial class GachaScheduleData : IUnique<long>
 {
-	[DataMember(Name = "id")]
-	public long id { get; set; }
+	#region NullObject
+	public static GachaScheduleData Null => NullObjectContainer.Get<GachaScheduleData>();
 
-	[DataMember(Name = "gachaId")]
-	public long gachaId { get; set; }
-
-	[DataMember(Name = "openAt")]
-	public long openAt { get; set; }
-
-	public DateTime OpenAt {
-		get { return ServerDateTimeUtil.FromEpoch(openAt); }
-		set { openAt = ServerDateTimeUtil.ToEpoch(value); }
+	public bool isNull => (this == Null);
+	#endregion
+	#region GameDbWrapper(DataTable)
+	public static DataTable<long, GachaScheduleData> dataTable {
+		get {
+			DataTable<long, GachaScheduleData> result;
+			if (GameDb.TableExists<long, GachaScheduleData>()) {
+				result = GameDb.From<long, GachaScheduleData>();
+			} else {
+				result = GameDb.CreateTable<long, GachaScheduleData>();
+				SetupGachaScheduleDataTableIndexGenerated(result);
+				SetupGachaScheduleDataTableIndex(result);
+			}
+			return result;
+		}
 	}
 
-	[DataMember(Name = "closeAt")]
-	public long closeAt { get; set; }
+	public static int Count => dataTable.Count;
 
-	public DateTime CloseAt {
-		get { return ServerDateTimeUtil.FromEpoch(closeAt); }
-		set { closeAt = ServerDateTimeUtil.ToEpoch(value); }
-	}
-
-	public GachaScheduleData Clone() {
-		var result = new GachaScheduleData();
-		result.id = id;
-		result.gachaId = gachaId;
-		result.openAt = openAt;
-		result.closeAt = closeAt;
-		return result;
-	}
-
-	public override string ToString()
+	public static List<GachaScheduleData> GetDataList()
 	{
-		return JsonConvert.SerializeObject(this);
+		return dataTable.dataList;
 	}
+
+	public static void SetData(GachaScheduleData data)
+	{
+		dataTable.Insert(data);
+	}
+
+	public static void AddDataList(IEnumerable<GachaScheduleData> dataList)
+	{
+		dataTable.InsertRange(dataList);
+	}
+
+	public static void SetDataList(IEnumerable<GachaScheduleData> dataList)
+	{
+		Clear();
+		dataTable.InsertRange(dataList);
+	}
+
+	public static void Clear()
+	{
+		dataTable.DeleteAll();
+	}
+
+	static partial void SetupGachaScheduleDataTableIndex(DataTable<long, GachaScheduleData> targetDataTable);
+
+	private static void SetupGachaScheduleDataTableIndexGenerated(DataTable<long, GachaScheduleData> targetDataTable)
+	{
+		targetDataTable.CreateUniqueIndex("Gachascheduledata", aData => (object)aData.gachascheduledata);
+		targetDataTable.CreateIndex("Gachascheduledata", aData => (object)aData.gachascheduledata);
+		targetDataTable.CreateIndex("Gachascheduledata", aData => (object)aData.gachascheduledata);
+		targetDataTable.CreateIndex("Gachascheduledata", aData => (object)aData.gachascheduledata);
+		targetDataTable.CreateIndex("Gachascheduledata", aData => (object)aData.gachascheduledata);
+	}
+	#endregion
 }

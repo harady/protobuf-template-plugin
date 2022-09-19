@@ -1,26 +1,63 @@
 using System.Collections.Generic;
 
 
-[DataContract]
 public partial class LogData : IUnique<long>
 {
-	[DataMember(Name = "id")]
-	public long id { get; set; }
+	#region NullObject
+	public static LogData Null => NullObjectContainer.Get<LogData>();
 
-	[DataMember(Name = "name")]
-	public string name { get; set; }
-
-	public LogData Clone() {
-		var result = new LogData();
-		result.id = id;
-		result.name = name;
-		return result;
+	public bool isNull => (this == Null);
+	#endregion
+	#region GameDbWrapper(DataTable)
+	public static DataTable<long, LogData> dataTable {
+		get {
+			DataTable<long, LogData> result;
+			if (GameDb.TableExists<long, LogData>()) {
+				result = GameDb.From<long, LogData>();
+			} else {
+				result = GameDb.CreateTable<long, LogData>();
+				SetupLogDataTableIndexGenerated(result);
+				SetupLogDataTableIndex(result);
+			}
+			return result;
+		}
 	}
 
-	public string idNameText => GetIdNameText(id, name);
+	public static int Count => dataTable.Count;
 
-	public override string ToString()
+	public static List<LogData> GetDataList()
 	{
-		return JsonConvert.SerializeObject(this);
+		return dataTable.dataList;
 	}
+
+	public static void SetData(LogData data)
+	{
+		dataTable.Insert(data);
+	}
+
+	public static void AddDataList(IEnumerable<LogData> dataList)
+	{
+		dataTable.InsertRange(dataList);
+	}
+
+	public static void SetDataList(IEnumerable<LogData> dataList)
+	{
+		Clear();
+		dataTable.InsertRange(dataList);
+	}
+
+	public static void Clear()
+	{
+		dataTable.DeleteAll();
+	}
+
+	static partial void SetupLogDataTableIndex(DataTable<long, LogData> targetDataTable);
+
+	private static void SetupLogDataTableIndexGenerated(DataTable<long, LogData> targetDataTable)
+	{
+		targetDataTable.CreateUniqueIndex("Logdata", aData => (object)aData.logdata);
+		targetDataTable.CreateIndex("Logdata", aData => (object)aData.logdata);
+		targetDataTable.CreateIndex("Logdata", aData => (object)aData.logdata);
+	}
+	#endregion
 }

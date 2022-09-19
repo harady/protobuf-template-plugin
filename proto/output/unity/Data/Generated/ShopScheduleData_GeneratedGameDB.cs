@@ -1,42 +1,65 @@
 using System.Collections.Generic;
 
 
-[DataContract]
 public partial class ShopScheduleData : IUnique<long>
 {
-	[DataMember(Name = "id")]
-	public long id { get; set; }
+	#region NullObject
+	public static ShopScheduleData Null => NullObjectContainer.Get<ShopScheduleData>();
 
-	[DataMember(Name = "shopId")]
-	public long shopId { get; set; }
-
-	[DataMember(Name = "openAt")]
-	public long openAt { get; set; }
-
-	public DateTime OpenAt {
-		get { return ServerDateTimeUtil.FromEpoch(openAt); }
-		set { openAt = ServerDateTimeUtil.ToEpoch(value); }
+	public bool isNull => (this == Null);
+	#endregion
+	#region GameDbWrapper(DataTable)
+	public static DataTable<long, ShopScheduleData> dataTable {
+		get {
+			DataTable<long, ShopScheduleData> result;
+			if (GameDb.TableExists<long, ShopScheduleData>()) {
+				result = GameDb.From<long, ShopScheduleData>();
+			} else {
+				result = GameDb.CreateTable<long, ShopScheduleData>();
+				SetupShopScheduleDataTableIndexGenerated(result);
+				SetupShopScheduleDataTableIndex(result);
+			}
+			return result;
+		}
 	}
 
-	[DataMember(Name = "closeAt")]
-	public long closeAt { get; set; }
+	public static int Count => dataTable.Count;
 
-	public DateTime CloseAt {
-		get { return ServerDateTimeUtil.FromEpoch(closeAt); }
-		set { closeAt = ServerDateTimeUtil.ToEpoch(value); }
-	}
-
-	public ShopScheduleData Clone() {
-		var result = new ShopScheduleData();
-		result.id = id;
-		result.shopId = shopId;
-		result.openAt = openAt;
-		result.closeAt = closeAt;
-		return result;
-	}
-
-	public override string ToString()
+	public static List<ShopScheduleData> GetDataList()
 	{
-		return JsonConvert.SerializeObject(this);
+		return dataTable.dataList;
 	}
+
+	public static void SetData(ShopScheduleData data)
+	{
+		dataTable.Insert(data);
+	}
+
+	public static void AddDataList(IEnumerable<ShopScheduleData> dataList)
+	{
+		dataTable.InsertRange(dataList);
+	}
+
+	public static void SetDataList(IEnumerable<ShopScheduleData> dataList)
+	{
+		Clear();
+		dataTable.InsertRange(dataList);
+	}
+
+	public static void Clear()
+	{
+		dataTable.DeleteAll();
+	}
+
+	static partial void SetupShopScheduleDataTableIndex(DataTable<long, ShopScheduleData> targetDataTable);
+
+	private static void SetupShopScheduleDataTableIndexGenerated(DataTable<long, ShopScheduleData> targetDataTable)
+	{
+		targetDataTable.CreateUniqueIndex("Shopscheduledata", aData => (object)aData.shopscheduledata);
+		targetDataTable.CreateIndex("Shopscheduledata", aData => (object)aData.shopscheduledata);
+		targetDataTable.CreateIndex("Shopscheduledata", aData => (object)aData.shopscheduledata);
+		targetDataTable.CreateIndex("Shopscheduledata", aData => (object)aData.shopscheduledata);
+		targetDataTable.CreateIndex("Shopscheduledata", aData => (object)aData.shopscheduledata);
+	}
+	#endregion
 }

@@ -1,54 +1,70 @@
 using System.Collections.Generic;
 
 
-[DataContract]
 public partial class AbilityData : IUnique<long>
 {
-	[DataMember(Name = "id")]
-	public long id { get; set; }
+	#region NullObject
+	public static AbilityData Null => NullObjectContainer.Get<AbilityData>();
 
-	[DataMember(Name = "name")]
-	public string name { get; set; }
-
-	[DataMember(Name = "category")]
-	public AbilityCategory category { get; set; }
-
-	[DataMember(Name = "type")]
-	public AbilityType type { get; set; }
-
-	[DataMember(Name = "description")]
-	public string description { get; set; }
-
-	[DataMember(Name = "target")]
-	public long target { get; set; }
-
-	[DataMember(Name = "paramA")]
-	public long paramA { get; set; }
-
-	[DataMember(Name = "paramB")]
-	public long paramB { get; set; }
-
-	[DataMember(Name = "paramC")]
-	public long paramC { get; set; }
-
-	public AbilityData Clone() {
-		var result = new AbilityData();
-		result.id = id;
-		result.name = name;
-		result.category = category;
-		result.type = type;
-		result.description = description;
-		result.target = target;
-		result.paramA = paramA;
-		result.paramB = paramB;
-		result.paramC = paramC;
-		return result;
+	public bool isNull => (this == Null);
+	#endregion
+	#region GameDbWrapper(DataTable)
+	public static DataTable<long, AbilityData> dataTable {
+		get {
+			DataTable<long, AbilityData> result;
+			if (GameDb.TableExists<long, AbilityData>()) {
+				result = GameDb.From<long, AbilityData>();
+			} else {
+				result = GameDb.CreateTable<long, AbilityData>();
+				SetupAbilityDataTableIndexGenerated(result);
+				SetupAbilityDataTableIndex(result);
+			}
+			return result;
+		}
 	}
 
-	public string idNameText => GetIdNameText(id, name);
+	public static int Count => dataTable.Count;
 
-	public override string ToString()
+	public static List<AbilityData> GetDataList()
 	{
-		return JsonConvert.SerializeObject(this);
+		return dataTable.dataList;
 	}
+
+	public static void SetData(AbilityData data)
+	{
+		dataTable.Insert(data);
+	}
+
+	public static void AddDataList(IEnumerable<AbilityData> dataList)
+	{
+		dataTable.InsertRange(dataList);
+	}
+
+	public static void SetDataList(IEnumerable<AbilityData> dataList)
+	{
+		Clear();
+		dataTable.InsertRange(dataList);
+	}
+
+	public static void Clear()
+	{
+		dataTable.DeleteAll();
+	}
+
+	static partial void SetupAbilityDataTableIndex(DataTable<long, AbilityData> targetDataTable);
+
+	private static void SetupAbilityDataTableIndexGenerated(DataTable<long, AbilityData> targetDataTable)
+	{
+		targetDataTable.CreateUniqueIndex("Abilitydata", aData => (object)aData.abilitydata);
+		targetDataTable.CreateIndex("Abilitydata", aData => (object)aData.abilitydata);
+		targetDataTable.CreateIndex("Abilitydata", aData => (object)aData.abilitydata);
+		targetDataTable.CreateIndex("Abilitydata", aData => (object)aData.abilitydata);
+		targetDataTable.CreateIndex("Abilitydata", aData => (object)aData.abilitydata);
+		targetDataTable.CreateIndex("Abilitydata", aData => (object)aData.abilitydata);
+		targetDataTable.CreateIndex("Abilitydata", aData => (object)aData.abilitydata);
+		targetDataTable.CreateIndex("Abilitydata", aData => (object)aData.abilitydata);
+		targetDataTable.CreateIndex("Abilitydata", aData => (object)aData.abilitydata);
+		targetDataTable.CreateIndex("Abilitydata", aData => (object)aData.abilitydata);
+	}
+	#endregion
 }

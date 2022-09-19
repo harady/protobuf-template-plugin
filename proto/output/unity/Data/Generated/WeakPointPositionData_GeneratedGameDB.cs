@@ -1,36 +1,66 @@
 using System.Collections.Generic;
 
 
-[DataContract]
 public partial class WeakPointPositionData : IUnique<long>
 {
-	[DataMember(Name = "id")]
-	public long id { get; set; }
+	#region NullObject
+	public static WeakPointPositionData Null => NullObjectContainer.Get<WeakPointPositionData>();
 
-	[DataMember(Name = "weakPointId")]
-	public long weakPointId { get; set; }
-
-	[DataMember(Name = "angle")]
-	public long angle { get; set; }
-
-	[DataMember(Name = "radiusRate")]
-	public long radiusRate { get; set; }
-
-	[DataMember(Name = "sizeRate")]
-	public long sizeRate { get; set; }
-
-	public WeakPointPositionData Clone() {
-		var result = new WeakPointPositionData();
-		result.id = id;
-		result.weakPointId = weakPointId;
-		result.angle = angle;
-		result.radiusRate = radiusRate;
-		result.sizeRate = sizeRate;
-		return result;
+	public bool isNull => (this == Null);
+	#endregion
+	#region GameDbWrapper(DataTable)
+	public static DataTable<long, WeakPointPositionData> dataTable {
+		get {
+			DataTable<long, WeakPointPositionData> result;
+			if (GameDb.TableExists<long, WeakPointPositionData>()) {
+				result = GameDb.From<long, WeakPointPositionData>();
+			} else {
+				result = GameDb.CreateTable<long, WeakPointPositionData>();
+				SetupWeakPointPositionDataTableIndexGenerated(result);
+				SetupWeakPointPositionDataTableIndex(result);
+			}
+			return result;
+		}
 	}
 
-	public override string ToString()
+	public static int Count => dataTable.Count;
+
+	public static List<WeakPointPositionData> GetDataList()
 	{
-		return JsonConvert.SerializeObject(this);
+		return dataTable.dataList;
 	}
+
+	public static void SetData(WeakPointPositionData data)
+	{
+		dataTable.Insert(data);
+	}
+
+	public static void AddDataList(IEnumerable<WeakPointPositionData> dataList)
+	{
+		dataTable.InsertRange(dataList);
+	}
+
+	public static void SetDataList(IEnumerable<WeakPointPositionData> dataList)
+	{
+		Clear();
+		dataTable.InsertRange(dataList);
+	}
+
+	public static void Clear()
+	{
+		dataTable.DeleteAll();
+	}
+
+	static partial void SetupWeakPointPositionDataTableIndex(DataTable<long, WeakPointPositionData> targetDataTable);
+
+	private static void SetupWeakPointPositionDataTableIndexGenerated(DataTable<long, WeakPointPositionData> targetDataTable)
+	{
+		targetDataTable.CreateUniqueIndex("Weakpointpositiondata", aData => (object)aData.weakpointpositiondata);
+		targetDataTable.CreateIndex("Weakpointpositiondata", aData => (object)aData.weakpointpositiondata);
+		targetDataTable.CreateIndex("Weakpointpositiondata", aData => (object)aData.weakpointpositiondata);
+		targetDataTable.CreateIndex("Weakpointpositiondata", aData => (object)aData.weakpointpositiondata);
+		targetDataTable.CreateIndex("Weakpointpositiondata", aData => (object)aData.weakpointpositiondata);
+		targetDataTable.CreateIndex("Weakpointpositiondata", aData => (object)aData.weakpointpositiondata);
+	}
+	#endregion
 }

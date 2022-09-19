@@ -1,37 +1,65 @@
 using System.Collections.Generic;
 
 
-[DataContract]
 public partial class UserSessionData : IUnique<long>
 {
-	[DataMember(Name = "id")]
-	public long id { get; set; }
+	#region NullObject
+	public static UserSessionData Null => NullObjectContainer.Get<UserSessionData>();
 
-	[DataMember(Name = "userId")]
-	public long userId { get; set; }
-
-	[DataMember(Name = "sessionId")]
-	public string sessionId { get; set; }
-
-	[DataMember(Name = "expireAt")]
-	public long expireAt { get; set; }
-
-	public DateTime ExpireAt {
-		get { return ServerDateTimeUtil.FromEpoch(expireAt); }
-		set { expireAt = ServerDateTimeUtil.ToEpoch(value); }
+	public bool isNull => (this == Null);
+	#endregion
+	#region GameDbWrapper(DataTable)
+	public static DataTable<long, UserSessionData> dataTable {
+		get {
+			DataTable<long, UserSessionData> result;
+			if (GameDb.TableExists<long, UserSessionData>()) {
+				result = GameDb.From<long, UserSessionData>();
+			} else {
+				result = GameDb.CreateTable<long, UserSessionData>();
+				SetupUserSessionDataTableIndexGenerated(result);
+				SetupUserSessionDataTableIndex(result);
+			}
+			return result;
+		}
 	}
 
-	public UserSessionData Clone() {
-		var result = new UserSessionData();
-		result.id = id;
-		result.userId = userId;
-		result.sessionId = sessionId;
-		result.expireAt = expireAt;
-		return result;
-	}
+	public static int Count => dataTable.Count;
 
-	public override string ToString()
+	public static List<UserSessionData> GetDataList()
 	{
-		return JsonConvert.SerializeObject(this);
+		return dataTable.dataList;
 	}
+
+	public static void SetData(UserSessionData data)
+	{
+		dataTable.Insert(data);
+	}
+
+	public static void AddDataList(IEnumerable<UserSessionData> dataList)
+	{
+		dataTable.InsertRange(dataList);
+	}
+
+	public static void SetDataList(IEnumerable<UserSessionData> dataList)
+	{
+		Clear();
+		dataTable.InsertRange(dataList);
+	}
+
+	public static void Clear()
+	{
+		dataTable.DeleteAll();
+	}
+
+	static partial void SetupUserSessionDataTableIndex(DataTable<long, UserSessionData> targetDataTable);
+
+	private static void SetupUserSessionDataTableIndexGenerated(DataTable<long, UserSessionData> targetDataTable)
+	{
+		targetDataTable.CreateUniqueIndex("Usersessiondata", aData => (object)aData.usersessiondata);
+		targetDataTable.CreateIndex("Usersessiondata", aData => (object)aData.usersessiondata);
+		targetDataTable.CreateIndex("Usersessiondata", aData => (object)aData.usersessiondata);
+		targetDataTable.CreateIndex("Usersessiondata", aData => (object)aData.usersessiondata);
+		targetDataTable.CreateIndex("Usersessiondata", aData => (object)aData.usersessiondata);
+	}
+	#endregion
 }

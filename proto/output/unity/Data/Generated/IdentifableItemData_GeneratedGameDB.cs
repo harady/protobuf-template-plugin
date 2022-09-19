@@ -1,38 +1,66 @@
 using System.Collections.Generic;
 
 
-[DataContract]
 public partial class IdentifableItemData : IUnique<long>
 {
-	[DataMember(Name = "id")]
-	public long id { get; set; }
+	#region NullObject
+	public static IdentifableItemData Null => NullObjectContainer.Get<IdentifableItemData>();
 
-	[DataMember(Name = "name")]
-	public string name { get; set; }
-
-	[DataMember(Name = "description")]
-	public string description { get; set; }
-
-	[DataMember(Name = "type")]
-	public IdentifableItemType type { get; set; }
-
-	[DataMember(Name = "ownedLimit")]
-	public long ownedLimit { get; set; }
-
-	public IdentifableItemData Clone() {
-		var result = new IdentifableItemData();
-		result.id = id;
-		result.name = name;
-		result.description = description;
-		result.type = type;
-		result.ownedLimit = ownedLimit;
-		return result;
+	public bool isNull => (this == Null);
+	#endregion
+	#region GameDbWrapper(DataTable)
+	public static DataTable<long, IdentifableItemData> dataTable {
+		get {
+			DataTable<long, IdentifableItemData> result;
+			if (GameDb.TableExists<long, IdentifableItemData>()) {
+				result = GameDb.From<long, IdentifableItemData>();
+			} else {
+				result = GameDb.CreateTable<long, IdentifableItemData>();
+				SetupIdentifableItemDataTableIndexGenerated(result);
+				SetupIdentifableItemDataTableIndex(result);
+			}
+			return result;
+		}
 	}
 
-	public string idNameText => GetIdNameText(id, name);
+	public static int Count => dataTable.Count;
 
-	public override string ToString()
+	public static List<IdentifableItemData> GetDataList()
 	{
-		return JsonConvert.SerializeObject(this);
+		return dataTable.dataList;
 	}
+
+	public static void SetData(IdentifableItemData data)
+	{
+		dataTable.Insert(data);
+	}
+
+	public static void AddDataList(IEnumerable<IdentifableItemData> dataList)
+	{
+		dataTable.InsertRange(dataList);
+	}
+
+	public static void SetDataList(IEnumerable<IdentifableItemData> dataList)
+	{
+		Clear();
+		dataTable.InsertRange(dataList);
+	}
+
+	public static void Clear()
+	{
+		dataTable.DeleteAll();
+	}
+
+	static partial void SetupIdentifableItemDataTableIndex(DataTable<long, IdentifableItemData> targetDataTable);
+
+	private static void SetupIdentifableItemDataTableIndexGenerated(DataTable<long, IdentifableItemData> targetDataTable)
+	{
+		targetDataTable.CreateUniqueIndex("Identifableitemdata", aData => (object)aData.identifableitemdata);
+		targetDataTable.CreateIndex("Identifableitemdata", aData => (object)aData.identifableitemdata);
+		targetDataTable.CreateIndex("Identifableitemdata", aData => (object)aData.identifableitemdata);
+		targetDataTable.CreateIndex("Identifableitemdata", aData => (object)aData.identifableitemdata);
+		targetDataTable.CreateIndex("Identifableitemdata", aData => (object)aData.identifableitemdata);
+		targetDataTable.CreateIndex("Identifableitemdata", aData => (object)aData.identifableitemdata);
+	}
+	#endregion
 }

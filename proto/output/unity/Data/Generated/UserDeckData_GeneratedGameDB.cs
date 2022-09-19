@@ -1,46 +1,68 @@
 using System.Collections.Generic;
 
 
-[DataContract]
 public partial class UserDeckData : IUnique<long>
 {
-	[DataMember(Name = "id")]
-	public long id { get; set; }
+	#region NullObject
+	public static UserDeckData Null => NullObjectContainer.Get<UserDeckData>();
 
-	[DataMember(Name = "userId")]
-	public long userId { get; set; }
-
-	[DataMember(Name = "deckNo")]
-	public long deckNo { get; set; }
-
-	[DataMember(Name = "name")]
-	public string name { get; set; }
-
-	[DataMember(Name = "userUnit1Id")]
-	public long userUnit1Id { get; set; }
-
-	[DataMember(Name = "userUnit2Id")]
-	public long userUnit2Id { get; set; }
-
-	[DataMember(Name = "userUnit3Id")]
-	public long userUnit3Id { get; set; }
-
-	public UserDeckData Clone() {
-		var result = new UserDeckData();
-		result.id = id;
-		result.userId = userId;
-		result.deckNo = deckNo;
-		result.name = name;
-		result.userUnit1Id = userUnit1Id;
-		result.userUnit2Id = userUnit2Id;
-		result.userUnit3Id = userUnit3Id;
-		return result;
+	public bool isNull => (this == Null);
+	#endregion
+	#region GameDbWrapper(DataTable)
+	public static DataTable<long, UserDeckData> dataTable {
+		get {
+			DataTable<long, UserDeckData> result;
+			if (GameDb.TableExists<long, UserDeckData>()) {
+				result = GameDb.From<long, UserDeckData>();
+			} else {
+				result = GameDb.CreateTable<long, UserDeckData>();
+				SetupUserDeckDataTableIndexGenerated(result);
+				SetupUserDeckDataTableIndex(result);
+			}
+			return result;
+		}
 	}
 
-	public string idNameText => GetIdNameText(id, name);
+	public static int Count => dataTable.Count;
 
-	public override string ToString()
+	public static List<UserDeckData> GetDataList()
 	{
-		return JsonConvert.SerializeObject(this);
+		return dataTable.dataList;
 	}
+
+	public static void SetData(UserDeckData data)
+	{
+		dataTable.Insert(data);
+	}
+
+	public static void AddDataList(IEnumerable<UserDeckData> dataList)
+	{
+		dataTable.InsertRange(dataList);
+	}
+
+	public static void SetDataList(IEnumerable<UserDeckData> dataList)
+	{
+		Clear();
+		dataTable.InsertRange(dataList);
+	}
+
+	public static void Clear()
+	{
+		dataTable.DeleteAll();
+	}
+
+	static partial void SetupUserDeckDataTableIndex(DataTable<long, UserDeckData> targetDataTable);
+
+	private static void SetupUserDeckDataTableIndexGenerated(DataTable<long, UserDeckData> targetDataTable)
+	{
+		targetDataTable.CreateUniqueIndex("Userdeckdata", aData => (object)aData.userdeckdata);
+		targetDataTable.CreateIndex("Userdeckdata", aData => (object)aData.userdeckdata);
+		targetDataTable.CreateIndex("Userdeckdata", aData => (object)aData.userdeckdata);
+		targetDataTable.CreateIndex("Userdeckdata", aData => (object)aData.userdeckdata);
+		targetDataTable.CreateIndex("Userdeckdata", aData => (object)aData.userdeckdata);
+		targetDataTable.CreateIndex("Userdeckdata", aData => (object)aData.userdeckdata);
+		targetDataTable.CreateIndex("Userdeckdata", aData => (object)aData.userdeckdata);
+		targetDataTable.CreateIndex("Userdeckdata", aData => (object)aData.userdeckdata);
+	}
+	#endregion
 }

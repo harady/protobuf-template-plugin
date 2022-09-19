@@ -1,85 +1,77 @@
 using System.Collections.Generic;
 
 
-[DataContract]
 public partial class UserUnitData : IUnique<long>
 {
-	[DataMember(Name = "id")]
-	public long id { get; set; }
+	#region NullObject
+	public static UserUnitData Null => NullObjectContainer.Get<UserUnitData>();
 
-	[DataMember(Name = "userId")]
-	public long userId { get; set; }
-
-	[DataMember(Name = "unitId")]
-	public long unitId { get; set; }
-
-	[DataMember(Name = "level")]
-	public long level { get; set; }
-
-	[DataMember(Name = "exp")]
-	public long exp { get; set; }
-
-	[DataMember(Name = "luck")]
-	public long luck { get; set; }
-
-	[DataMember(Name = "plusHp")]
-	public long plusHp { get; set; }
-
-	[DataMember(Name = "plusAttack")]
-	public long plusAttack { get; set; }
-
-	[DataMember(Name = "plusSpeed")]
-	public long plusSpeed { get; set; }
-
-	[DataMember(Name = "equipment1Id")]
-	public long equipment1Id { get; set; }
-
-	[DataMember(Name = "equipment2Id")]
-	public long equipment2Id { get; set; }
-
-	[DataMember(Name = "equipment3Id")]
-	public long equipment3Id { get; set; }
-
-	[DataMember(Name = "heroMark")]
-	public bool heroMark { get; set; }
-
-	[DataMember(Name = "heroBadge")]
-	public bool heroBadge { get; set; }
-
-	[DataMember(Name = "isLocked")]
-	public bool isLocked { get; set; }
-
-	[DataMember(Name = "getAt")]
-	public long getAt { get; set; }
-
-	public DateTime GetAt {
-		get { return ServerDateTimeUtil.FromEpoch(getAt); }
-		set { getAt = ServerDateTimeUtil.ToEpoch(value); }
+	public bool isNull => (this == Null);
+	#endregion
+	#region GameDbWrapper(DataTable)
+	public static DataTable<long, UserUnitData> dataTable {
+		get {
+			DataTable<long, UserUnitData> result;
+			if (GameDb.TableExists<long, UserUnitData>()) {
+				result = GameDb.From<long, UserUnitData>();
+			} else {
+				result = GameDb.CreateTable<long, UserUnitData>();
+				SetupUserUnitDataTableIndexGenerated(result);
+				SetupUserUnitDataTableIndex(result);
+			}
+			return result;
+		}
 	}
 
-	public UserUnitData Clone() {
-		var result = new UserUnitData();
-		result.id = id;
-		result.userId = userId;
-		result.unitId = unitId;
-		result.level = level;
-		result.exp = exp;
-		result.luck = luck;
-		result.plusHp = plusHp;
-		result.plusAttack = plusAttack;
-		result.plusSpeed = plusSpeed;
-		result.equipment1Id = equipment1Id;
-		result.equipment2Id = equipment2Id;
-		result.equipment3Id = equipment3Id;
-		result.heroMark = heroMark;
-		result.heroBadge = heroBadge;
-		result.isLocked = isLocked;
-		result.getAt = getAt;
-		return result;
-	}
+	public static int Count => dataTable.Count;
 
-	public override string ToString()
+	public static List<UserUnitData> GetDataList()
 	{
-		return JsonConvert.SerializeObject(this);
+		return dataTable.dataList;
 	}
+
+	public static void SetData(UserUnitData data)
+	{
+		dataTable.Insert(data);
+	}
+
+	public static void AddDataList(IEnumerable<UserUnitData> dataList)
+	{
+		dataTable.InsertRange(dataList);
+	}
+
+	public static void SetDataList(IEnumerable<UserUnitData> dataList)
+	{
+		Clear();
+		dataTable.InsertRange(dataList);
+	}
+
+	public static void Clear()
+	{
+		dataTable.DeleteAll();
+	}
+
+	static partial void SetupUserUnitDataTableIndex(DataTable<long, UserUnitData> targetDataTable);
+
+	private static void SetupUserUnitDataTableIndexGenerated(DataTable<long, UserUnitData> targetDataTable)
+	{
+		targetDataTable.CreateUniqueIndex("Userunitdata", aData => (object)aData.userunitdata);
+		targetDataTable.CreateIndex("Userunitdata", aData => (object)aData.userunitdata);
+		targetDataTable.CreateIndex("Userunitdata", aData => (object)aData.userunitdata);
+		targetDataTable.CreateIndex("Userunitdata", aData => (object)aData.userunitdata);
+		targetDataTable.CreateIndex("Userunitdata", aData => (object)aData.userunitdata);
+		targetDataTable.CreateIndex("Userunitdata", aData => (object)aData.userunitdata);
+		targetDataTable.CreateIndex("Userunitdata", aData => (object)aData.userunitdata);
+		targetDataTable.CreateIndex("Userunitdata", aData => (object)aData.userunitdata);
+		targetDataTable.CreateIndex("Userunitdata", aData => (object)aData.userunitdata);
+		targetDataTable.CreateIndex("Userunitdata", aData => (object)aData.userunitdata);
+		targetDataTable.CreateIndex("Userunitdata", aData => (object)aData.userunitdata);
+		targetDataTable.CreateIndex("Userunitdata", aData => (object)aData.userunitdata);
+		targetDataTable.CreateIndex("Userunitdata", aData => (object)aData.userunitdata);
+		targetDataTable.CreateIndex("Userunitdata", aData => (object)aData.userunitdata);
+		targetDataTable.CreateIndex("Userunitdata", aData => (object)aData.userunitdata);
+		targetDataTable.CreateIndex("Userunitdata", aData => (object)aData.userunitdata);
+		targetDataTable.CreateIndex("Userunitdata", aData => (object)aData.userunitdata);
+	}
+	#endregion
 }

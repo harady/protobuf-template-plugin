@@ -1,68 +1,74 @@
 using System.Collections.Generic;
 
 
-[DataContract]
 public partial class EnemyActionData : IUnique<long>
 {
-	[DataMember(Name = "id")]
-	public long id { get; set; }
+	#region NullObject
+	public static EnemyActionData Null => NullObjectContainer.Get<EnemyActionData>();
 
-	[DataMember(Name = "enemyId")]
-	public long enemyId { get; set; }
-
-	[DataMember(Name = "actionNo")]
-	public long actionNo { get; set; }
-
-	[DataMember(Name = "triggerType")]
-	public TriggerType triggerType { get; set; }
-
-	[DataMember(Name = "triggerParamA")]
-	public long triggerParamA { get; set; }
-
-	[DataMember(Name = "triggerParamB")]
-	public long triggerParamB { get; set; }
-
-	[DataMember(Name = "triggerParamC")]
-	public long triggerParamC { get; set; }
-
-	[DataMember(Name = "triggerParamD")]
-	public long triggerParamD { get; set; }
-
-	[DataMember(Name = "actionType")]
-	public ActionType actionType { get; set; }
-
-	[DataMember(Name = "actionParamA")]
-	public long actionParamA { get; set; }
-
-	[DataMember(Name = "actionParamB")]
-	public long actionParamB { get; set; }
-
-	[DataMember(Name = "actionParamC")]
-	public long actionParamC { get; set; }
-
-	[DataMember(Name = "actionParamD")]
-	public long actionParamD { get; set; }
-
-	public EnemyActionData Clone() {
-		var result = new EnemyActionData();
-		result.id = id;
-		result.enemyId = enemyId;
-		result.actionNo = actionNo;
-		result.triggerType = triggerType;
-		result.triggerParamA = triggerParamA;
-		result.triggerParamB = triggerParamB;
-		result.triggerParamC = triggerParamC;
-		result.triggerParamD = triggerParamD;
-		result.actionType = actionType;
-		result.actionParamA = actionParamA;
-		result.actionParamB = actionParamB;
-		result.actionParamC = actionParamC;
-		result.actionParamD = actionParamD;
-		return result;
+	public bool isNull => (this == Null);
+	#endregion
+	#region GameDbWrapper(DataTable)
+	public static DataTable<long, EnemyActionData> dataTable {
+		get {
+			DataTable<long, EnemyActionData> result;
+			if (GameDb.TableExists<long, EnemyActionData>()) {
+				result = GameDb.From<long, EnemyActionData>();
+			} else {
+				result = GameDb.CreateTable<long, EnemyActionData>();
+				SetupEnemyActionDataTableIndexGenerated(result);
+				SetupEnemyActionDataTableIndex(result);
+			}
+			return result;
+		}
 	}
 
-	public override string ToString()
+	public static int Count => dataTable.Count;
+
+	public static List<EnemyActionData> GetDataList()
 	{
-		return JsonConvert.SerializeObject(this);
+		return dataTable.dataList;
 	}
+
+	public static void SetData(EnemyActionData data)
+	{
+		dataTable.Insert(data);
+	}
+
+	public static void AddDataList(IEnumerable<EnemyActionData> dataList)
+	{
+		dataTable.InsertRange(dataList);
+	}
+
+	public static void SetDataList(IEnumerable<EnemyActionData> dataList)
+	{
+		Clear();
+		dataTable.InsertRange(dataList);
+	}
+
+	public static void Clear()
+	{
+		dataTable.DeleteAll();
+	}
+
+	static partial void SetupEnemyActionDataTableIndex(DataTable<long, EnemyActionData> targetDataTable);
+
+	private static void SetupEnemyActionDataTableIndexGenerated(DataTable<long, EnemyActionData> targetDataTable)
+	{
+		targetDataTable.CreateUniqueIndex("Enemyactiondata", aData => (object)aData.enemyactiondata);
+		targetDataTable.CreateIndex("Enemyactiondata", aData => (object)aData.enemyactiondata);
+		targetDataTable.CreateIndex("Enemyactiondata", aData => (object)aData.enemyactiondata);
+		targetDataTable.CreateIndex("Enemyactiondata", aData => (object)aData.enemyactiondata);
+		targetDataTable.CreateIndex("Enemyactiondata", aData => (object)aData.enemyactiondata);
+		targetDataTable.CreateIndex("Enemyactiondata", aData => (object)aData.enemyactiondata);
+		targetDataTable.CreateIndex("Enemyactiondata", aData => (object)aData.enemyactiondata);
+		targetDataTable.CreateIndex("Enemyactiondata", aData => (object)aData.enemyactiondata);
+		targetDataTable.CreateIndex("Enemyactiondata", aData => (object)aData.enemyactiondata);
+		targetDataTable.CreateIndex("Enemyactiondata", aData => (object)aData.enemyactiondata);
+		targetDataTable.CreateIndex("Enemyactiondata", aData => (object)aData.enemyactiondata);
+		targetDataTable.CreateIndex("Enemyactiondata", aData => (object)aData.enemyactiondata);
+		targetDataTable.CreateIndex("Enemyactiondata", aData => (object)aData.enemyactiondata);
+		targetDataTable.CreateIndex("Enemyactiondata", aData => (object)aData.enemyactiondata);
+	}
+	#endregion
 }

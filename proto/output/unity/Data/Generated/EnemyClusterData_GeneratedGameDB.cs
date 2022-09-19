@@ -1,26 +1,63 @@
 using System.Collections.Generic;
 
 
-[DataContract]
 public partial class EnemyClusterData : IUnique<long>
 {
-	[DataMember(Name = "id")]
-	public long id { get; set; }
+	#region NullObject
+	public static EnemyClusterData Null => NullObjectContainer.Get<EnemyClusterData>();
 
-	[DataMember(Name = "name")]
-	public string name { get; set; }
-
-	public EnemyClusterData Clone() {
-		var result = new EnemyClusterData();
-		result.id = id;
-		result.name = name;
-		return result;
+	public bool isNull => (this == Null);
+	#endregion
+	#region GameDbWrapper(DataTable)
+	public static DataTable<long, EnemyClusterData> dataTable {
+		get {
+			DataTable<long, EnemyClusterData> result;
+			if (GameDb.TableExists<long, EnemyClusterData>()) {
+				result = GameDb.From<long, EnemyClusterData>();
+			} else {
+				result = GameDb.CreateTable<long, EnemyClusterData>();
+				SetupEnemyClusterDataTableIndexGenerated(result);
+				SetupEnemyClusterDataTableIndex(result);
+			}
+			return result;
+		}
 	}
 
-	public string idNameText => GetIdNameText(id, name);
+	public static int Count => dataTable.Count;
 
-	public override string ToString()
+	public static List<EnemyClusterData> GetDataList()
 	{
-		return JsonConvert.SerializeObject(this);
+		return dataTable.dataList;
 	}
+
+	public static void SetData(EnemyClusterData data)
+	{
+		dataTable.Insert(data);
+	}
+
+	public static void AddDataList(IEnumerable<EnemyClusterData> dataList)
+	{
+		dataTable.InsertRange(dataList);
+	}
+
+	public static void SetDataList(IEnumerable<EnemyClusterData> dataList)
+	{
+		Clear();
+		dataTable.InsertRange(dataList);
+	}
+
+	public static void Clear()
+	{
+		dataTable.DeleteAll();
+	}
+
+	static partial void SetupEnemyClusterDataTableIndex(DataTable<long, EnemyClusterData> targetDataTable);
+
+	private static void SetupEnemyClusterDataTableIndexGenerated(DataTable<long, EnemyClusterData> targetDataTable)
+	{
+		targetDataTable.CreateUniqueIndex("Enemyclusterdata", aData => (object)aData.enemyclusterdata);
+		targetDataTable.CreateIndex("Enemyclusterdata", aData => (object)aData.enemyclusterdata);
+		targetDataTable.CreateIndex("Enemyclusterdata", aData => (object)aData.enemyclusterdata);
+	}
+	#endregion
 }

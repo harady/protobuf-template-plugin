@@ -1,54 +1,70 @@
 using System.Collections.Generic;
 
 
-[DataContract]
 public partial class StageData : IUnique<long>
 {
-	[DataMember(Name = "id")]
-	public long id { get; set; }
+	#region NullObject
+	public static StageData Null => NullObjectContainer.Get<StageData>();
 
-	[DataMember(Name = "name")]
-	public string name { get; set; }
-
-	[DataMember(Name = "questId")]
-	public long questId { get; set; }
-
-	[DataMember(Name = "stamina")]
-	public long stamina { get; set; }
-
-	[DataMember(Name = "earnExp")]
-	public long earnExp { get; set; }
-
-	[DataMember(Name = "earnMoney")]
-	public long earnMoney { get; set; }
-
-	[DataMember(Name = "questDifficultyType")]
-	public QuestDifficultyType questDifficultyType { get; set; }
-
-	[DataMember(Name = "toUnlockStageId")]
-	public long toUnlockStageId { get; set; }
-
-	[DataMember(Name = "baseStageId")]
-	public long baseStageId { get; set; }
-
-	public StageData Clone() {
-		var result = new StageData();
-		result.id = id;
-		result.name = name;
-		result.questId = questId;
-		result.stamina = stamina;
-		result.earnExp = earnExp;
-		result.earnMoney = earnMoney;
-		result.questDifficultyType = questDifficultyType;
-		result.toUnlockStageId = toUnlockStageId;
-		result.baseStageId = baseStageId;
-		return result;
+	public bool isNull => (this == Null);
+	#endregion
+	#region GameDbWrapper(DataTable)
+	public static DataTable<long, StageData> dataTable {
+		get {
+			DataTable<long, StageData> result;
+			if (GameDb.TableExists<long, StageData>()) {
+				result = GameDb.From<long, StageData>();
+			} else {
+				result = GameDb.CreateTable<long, StageData>();
+				SetupStageDataTableIndexGenerated(result);
+				SetupStageDataTableIndex(result);
+			}
+			return result;
+		}
 	}
 
-	public string idNameText => GetIdNameText(id, name);
+	public static int Count => dataTable.Count;
 
-	public override string ToString()
+	public static List<StageData> GetDataList()
 	{
-		return JsonConvert.SerializeObject(this);
+		return dataTable.dataList;
 	}
+
+	public static void SetData(StageData data)
+	{
+		dataTable.Insert(data);
+	}
+
+	public static void AddDataList(IEnumerable<StageData> dataList)
+	{
+		dataTable.InsertRange(dataList);
+	}
+
+	public static void SetDataList(IEnumerable<StageData> dataList)
+	{
+		Clear();
+		dataTable.InsertRange(dataList);
+	}
+
+	public static void Clear()
+	{
+		dataTable.DeleteAll();
+	}
+
+	static partial void SetupStageDataTableIndex(DataTable<long, StageData> targetDataTable);
+
+	private static void SetupStageDataTableIndexGenerated(DataTable<long, StageData> targetDataTable)
+	{
+		targetDataTable.CreateUniqueIndex("Stagedata", aData => (object)aData.stagedata);
+		targetDataTable.CreateIndex("Stagedata", aData => (object)aData.stagedata);
+		targetDataTable.CreateIndex("Stagedata", aData => (object)aData.stagedata);
+		targetDataTable.CreateIndex("Stagedata", aData => (object)aData.stagedata);
+		targetDataTable.CreateIndex("Stagedata", aData => (object)aData.stagedata);
+		targetDataTable.CreateIndex("Stagedata", aData => (object)aData.stagedata);
+		targetDataTable.CreateIndex("Stagedata", aData => (object)aData.stagedata);
+		targetDataTable.CreateIndex("Stagedata", aData => (object)aData.stagedata);
+		targetDataTable.CreateIndex("Stagedata", aData => (object)aData.stagedata);
+		targetDataTable.CreateIndex("Stagedata", aData => (object)aData.stagedata);
+	}
+	#endregion
 }

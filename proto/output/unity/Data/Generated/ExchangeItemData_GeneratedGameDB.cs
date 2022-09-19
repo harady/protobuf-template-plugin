@@ -1,62 +1,72 @@
 using System.Collections.Generic;
 
 
-[DataContract]
 public partial class ExchangeItemData : IUnique<long>
 {
-	[DataMember(Name = "id")]
-	public long id { get; set; }
+	#region NullObject
+	public static ExchangeItemData Null => NullObjectContainer.Get<ExchangeItemData>();
 
-	[DataMember(Name = "name")]
-	public string name { get; set; }
-
-	[DataMember(Name = "exchangeId")]
-	public long exchangeId { get; set; }
-
-	[DataMember(Name = "costResourceType")]
-	public ResourceType costResourceType { get; set; }
-
-	[DataMember(Name = "costResourceId")]
-	public long costResourceId { get; set; }
-
-	[DataMember(Name = "costResourceAmount")]
-	public long costResourceAmount { get; set; }
-
-	[DataMember(Name = "resourceType")]
-	public ResourceType resourceType { get; set; }
-
-	[DataMember(Name = "resourceId")]
-	public long resourceId { get; set; }
-
-	[DataMember(Name = "resourceAmount")]
-	public long resourceAmount { get; set; }
-
-	[DataMember(Name = "resourceSetId")]
-	public long resourceSetId { get; set; }
-
-	[DataMember(Name = "limitCount")]
-	public long limitCount { get; set; }
-
-	public ExchangeItemData Clone() {
-		var result = new ExchangeItemData();
-		result.id = id;
-		result.name = name;
-		result.exchangeId = exchangeId;
-		result.costResourceType = costResourceType;
-		result.costResourceId = costResourceId;
-		result.costResourceAmount = costResourceAmount;
-		result.resourceType = resourceType;
-		result.resourceId = resourceId;
-		result.resourceAmount = resourceAmount;
-		result.resourceSetId = resourceSetId;
-		result.limitCount = limitCount;
-		return result;
+	public bool isNull => (this == Null);
+	#endregion
+	#region GameDbWrapper(DataTable)
+	public static DataTable<long, ExchangeItemData> dataTable {
+		get {
+			DataTable<long, ExchangeItemData> result;
+			if (GameDb.TableExists<long, ExchangeItemData>()) {
+				result = GameDb.From<long, ExchangeItemData>();
+			} else {
+				result = GameDb.CreateTable<long, ExchangeItemData>();
+				SetupExchangeItemDataTableIndexGenerated(result);
+				SetupExchangeItemDataTableIndex(result);
+			}
+			return result;
+		}
 	}
 
-	public string idNameText => GetIdNameText(id, name);
+	public static int Count => dataTable.Count;
 
-	public override string ToString()
+	public static List<ExchangeItemData> GetDataList()
 	{
-		return JsonConvert.SerializeObject(this);
+		return dataTable.dataList;
 	}
+
+	public static void SetData(ExchangeItemData data)
+	{
+		dataTable.Insert(data);
+	}
+
+	public static void AddDataList(IEnumerable<ExchangeItemData> dataList)
+	{
+		dataTable.InsertRange(dataList);
+	}
+
+	public static void SetDataList(IEnumerable<ExchangeItemData> dataList)
+	{
+		Clear();
+		dataTable.InsertRange(dataList);
+	}
+
+	public static void Clear()
+	{
+		dataTable.DeleteAll();
+	}
+
+	static partial void SetupExchangeItemDataTableIndex(DataTable<long, ExchangeItemData> targetDataTable);
+
+	private static void SetupExchangeItemDataTableIndexGenerated(DataTable<long, ExchangeItemData> targetDataTable)
+	{
+		targetDataTable.CreateUniqueIndex("Exchangeitemdata", aData => (object)aData.exchangeitemdata);
+		targetDataTable.CreateIndex("Exchangeitemdata", aData => (object)aData.exchangeitemdata);
+		targetDataTable.CreateIndex("Exchangeitemdata", aData => (object)aData.exchangeitemdata);
+		targetDataTable.CreateIndex("Exchangeitemdata", aData => (object)aData.exchangeitemdata);
+		targetDataTable.CreateIndex("Exchangeitemdata", aData => (object)aData.exchangeitemdata);
+		targetDataTable.CreateIndex("Exchangeitemdata", aData => (object)aData.exchangeitemdata);
+		targetDataTable.CreateIndex("Exchangeitemdata", aData => (object)aData.exchangeitemdata);
+		targetDataTable.CreateIndex("Exchangeitemdata", aData => (object)aData.exchangeitemdata);
+		targetDataTable.CreateIndex("Exchangeitemdata", aData => (object)aData.exchangeitemdata);
+		targetDataTable.CreateIndex("Exchangeitemdata", aData => (object)aData.exchangeitemdata);
+		targetDataTable.CreateIndex("Exchangeitemdata", aData => (object)aData.exchangeitemdata);
+		targetDataTable.CreateIndex("Exchangeitemdata", aData => (object)aData.exchangeitemdata);
+	}
+	#endregion
 }

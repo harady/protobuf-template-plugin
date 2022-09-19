@@ -1,32 +1,65 @@
 using System.Collections.Generic;
 
 
-[DataContract]
 public partial class DailyEventTableItemData : IUnique<long>
 {
-	[DataMember(Name = "id")]
-	public long id { get; set; }
+	#region NullObject
+	public static DailyEventTableItemData Null => NullObjectContainer.Get<DailyEventTableItemData>();
 
-	[DataMember(Name = "dailyEventTableId")]
-	public long dailyEventTableId { get; set; }
-
-	[DataMember(Name = "eventQuestCategoryId")]
-	public long eventQuestCategoryId { get; set; }
-
-	[DataMember(Name = "count")]
-	public long count { get; set; }
-
-	public DailyEventTableItemData Clone() {
-		var result = new DailyEventTableItemData();
-		result.id = id;
-		result.dailyEventTableId = dailyEventTableId;
-		result.eventQuestCategoryId = eventQuestCategoryId;
-		result.count = count;
-		return result;
+	public bool isNull => (this == Null);
+	#endregion
+	#region GameDbWrapper(DataTable)
+	public static DataTable<long, DailyEventTableItemData> dataTable {
+		get {
+			DataTable<long, DailyEventTableItemData> result;
+			if (GameDb.TableExists<long, DailyEventTableItemData>()) {
+				result = GameDb.From<long, DailyEventTableItemData>();
+			} else {
+				result = GameDb.CreateTable<long, DailyEventTableItemData>();
+				SetupDailyEventTableItemDataTableIndexGenerated(result);
+				SetupDailyEventTableItemDataTableIndex(result);
+			}
+			return result;
+		}
 	}
 
-	public override string ToString()
+	public static int Count => dataTable.Count;
+
+	public static List<DailyEventTableItemData> GetDataList()
 	{
-		return JsonConvert.SerializeObject(this);
+		return dataTable.dataList;
 	}
+
+	public static void SetData(DailyEventTableItemData data)
+	{
+		dataTable.Insert(data);
+	}
+
+	public static void AddDataList(IEnumerable<DailyEventTableItemData> dataList)
+	{
+		dataTable.InsertRange(dataList);
+	}
+
+	public static void SetDataList(IEnumerable<DailyEventTableItemData> dataList)
+	{
+		Clear();
+		dataTable.InsertRange(dataList);
+	}
+
+	public static void Clear()
+	{
+		dataTable.DeleteAll();
+	}
+
+	static partial void SetupDailyEventTableItemDataTableIndex(DataTable<long, DailyEventTableItemData> targetDataTable);
+
+	private static void SetupDailyEventTableItemDataTableIndexGenerated(DataTable<long, DailyEventTableItemData> targetDataTable)
+	{
+		targetDataTable.CreateUniqueIndex("Dailyeventtableitemdata", aData => (object)aData.dailyeventtableitemdata);
+		targetDataTable.CreateIndex("Dailyeventtableitemdata", aData => (object)aData.dailyeventtableitemdata);
+		targetDataTable.CreateIndex("Dailyeventtableitemdata", aData => (object)aData.dailyeventtableitemdata);
+		targetDataTable.CreateIndex("Dailyeventtableitemdata", aData => (object)aData.dailyeventtableitemdata);
+		targetDataTable.CreateIndex("Dailyeventtableitemdata", aData => (object)aData.dailyeventtableitemdata);
+	}
+	#endregion
 }

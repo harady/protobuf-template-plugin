@@ -1,58 +1,71 @@
 using System.Collections.Generic;
 
 
-[DataContract]
 public partial class MissionData : IUnique<long>
 {
-	[DataMember(Name = "id")]
-	public long id { get; set; }
+	#region NullObject
+	public static MissionData Null => NullObjectContainer.Get<MissionData>();
 
-	[DataMember(Name = "name")]
-	public string name { get; set; }
-
-	[DataMember(Name = "missionGroupId")]
-	public long missionGroupId { get; set; }
-
-	[DataMember(Name = "type")]
-	public MissionType type { get; set; }
-
-	[DataMember(Name = "toAchieveProgress")]
-	public long toAchieveProgress { get; set; }
-
-	[DataMember(Name = "paramA")]
-	public long paramA { get; set; }
-
-	[DataMember(Name = "paramB")]
-	public long paramB { get; set; }
-
-	[DataMember(Name = "rewardResourceType")]
-	public ResourceType rewardResourceType { get; set; }
-
-	[DataMember(Name = "rewardResourceId")]
-	public long rewardResourceId { get; set; }
-
-	[DataMember(Name = "rewardResourceAmount")]
-	public long rewardResourceAmount { get; set; }
-
-	public MissionData Clone() {
-		var result = new MissionData();
-		result.id = id;
-		result.name = name;
-		result.missionGroupId = missionGroupId;
-		result.type = type;
-		result.toAchieveProgress = toAchieveProgress;
-		result.paramA = paramA;
-		result.paramB = paramB;
-		result.rewardResourceType = rewardResourceType;
-		result.rewardResourceId = rewardResourceId;
-		result.rewardResourceAmount = rewardResourceAmount;
-		return result;
+	public bool isNull => (this == Null);
+	#endregion
+	#region GameDbWrapper(DataTable)
+	public static DataTable<long, MissionData> dataTable {
+		get {
+			DataTable<long, MissionData> result;
+			if (GameDb.TableExists<long, MissionData>()) {
+				result = GameDb.From<long, MissionData>();
+			} else {
+				result = GameDb.CreateTable<long, MissionData>();
+				SetupMissionDataTableIndexGenerated(result);
+				SetupMissionDataTableIndex(result);
+			}
+			return result;
+		}
 	}
 
-	public string idNameText => GetIdNameText(id, name);
+	public static int Count => dataTable.Count;
 
-	public override string ToString()
+	public static List<MissionData> GetDataList()
 	{
-		return JsonConvert.SerializeObject(this);
+		return dataTable.dataList;
 	}
+
+	public static void SetData(MissionData data)
+	{
+		dataTable.Insert(data);
+	}
+
+	public static void AddDataList(IEnumerable<MissionData> dataList)
+	{
+		dataTable.InsertRange(dataList);
+	}
+
+	public static void SetDataList(IEnumerable<MissionData> dataList)
+	{
+		Clear();
+		dataTable.InsertRange(dataList);
+	}
+
+	public static void Clear()
+	{
+		dataTable.DeleteAll();
+	}
+
+	static partial void SetupMissionDataTableIndex(DataTable<long, MissionData> targetDataTable);
+
+	private static void SetupMissionDataTableIndexGenerated(DataTable<long, MissionData> targetDataTable)
+	{
+		targetDataTable.CreateUniqueIndex("Missiondata", aData => (object)aData.missiondata);
+		targetDataTable.CreateIndex("Missiondata", aData => (object)aData.missiondata);
+		targetDataTable.CreateIndex("Missiondata", aData => (object)aData.missiondata);
+		targetDataTable.CreateIndex("Missiondata", aData => (object)aData.missiondata);
+		targetDataTable.CreateIndex("Missiondata", aData => (object)aData.missiondata);
+		targetDataTable.CreateIndex("Missiondata", aData => (object)aData.missiondata);
+		targetDataTable.CreateIndex("Missiondata", aData => (object)aData.missiondata);
+		targetDataTable.CreateIndex("Missiondata", aData => (object)aData.missiondata);
+		targetDataTable.CreateIndex("Missiondata", aData => (object)aData.missiondata);
+		targetDataTable.CreateIndex("Missiondata", aData => (object)aData.missiondata);
+		targetDataTable.CreateIndex("Missiondata", aData => (object)aData.missiondata);
+	}
+	#endregion
 }

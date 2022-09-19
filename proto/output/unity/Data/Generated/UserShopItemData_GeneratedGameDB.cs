@@ -1,36 +1,66 @@
 using System.Collections.Generic;
 
 
-[DataContract]
 public partial class UserShopItemData : IUnique<long>
 {
-	[DataMember(Name = "id")]
-	public long id { get; set; }
+	#region NullObject
+	public static UserShopItemData Null => NullObjectContainer.Get<UserShopItemData>();
 
-	[DataMember(Name = "userId")]
-	public long userId { get; set; }
-
-	[DataMember(Name = "shopItemId")]
-	public long shopItemId { get; set; }
-
-	[DataMember(Name = "shopScheduleId")]
-	public long shopScheduleId { get; set; }
-
-	[DataMember(Name = "purchasedCount")]
-	public long purchasedCount { get; set; }
-
-	public UserShopItemData Clone() {
-		var result = new UserShopItemData();
-		result.id = id;
-		result.userId = userId;
-		result.shopItemId = shopItemId;
-		result.shopScheduleId = shopScheduleId;
-		result.purchasedCount = purchasedCount;
-		return result;
+	public bool isNull => (this == Null);
+	#endregion
+	#region GameDbWrapper(DataTable)
+	public static DataTable<long, UserShopItemData> dataTable {
+		get {
+			DataTable<long, UserShopItemData> result;
+			if (GameDb.TableExists<long, UserShopItemData>()) {
+				result = GameDb.From<long, UserShopItemData>();
+			} else {
+				result = GameDb.CreateTable<long, UserShopItemData>();
+				SetupUserShopItemDataTableIndexGenerated(result);
+				SetupUserShopItemDataTableIndex(result);
+			}
+			return result;
+		}
 	}
 
-	public override string ToString()
+	public static int Count => dataTable.Count;
+
+	public static List<UserShopItemData> GetDataList()
 	{
-		return JsonConvert.SerializeObject(this);
+		return dataTable.dataList;
 	}
+
+	public static void SetData(UserShopItemData data)
+	{
+		dataTable.Insert(data);
+	}
+
+	public static void AddDataList(IEnumerable<UserShopItemData> dataList)
+	{
+		dataTable.InsertRange(dataList);
+	}
+
+	public static void SetDataList(IEnumerable<UserShopItemData> dataList)
+	{
+		Clear();
+		dataTable.InsertRange(dataList);
+	}
+
+	public static void Clear()
+	{
+		dataTable.DeleteAll();
+	}
+
+	static partial void SetupUserShopItemDataTableIndex(DataTable<long, UserShopItemData> targetDataTable);
+
+	private static void SetupUserShopItemDataTableIndexGenerated(DataTable<long, UserShopItemData> targetDataTable)
+	{
+		targetDataTable.CreateUniqueIndex("Usershopitemdata", aData => (object)aData.usershopitemdata);
+		targetDataTable.CreateIndex("Usershopitemdata", aData => (object)aData.usershopitemdata);
+		targetDataTable.CreateIndex("Usershopitemdata", aData => (object)aData.usershopitemdata);
+		targetDataTable.CreateIndex("Usershopitemdata", aData => (object)aData.usershopitemdata);
+		targetDataTable.CreateIndex("Usershopitemdata", aData => (object)aData.usershopitemdata);
+		targetDataTable.CreateIndex("Usershopitemdata", aData => (object)aData.usershopitemdata);
+	}
+	#endregion
 }

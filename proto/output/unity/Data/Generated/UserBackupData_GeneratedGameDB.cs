@@ -1,32 +1,65 @@
 using System.Collections.Generic;
 
 
-[DataContract]
 public partial class UserBackupData : IUnique<long>
 {
-	[DataMember(Name = "id")]
-	public long id { get; set; }
+	#region NullObject
+	public static UserBackupData Null => NullObjectContainer.Get<UserBackupData>();
 
-	[DataMember(Name = "userId")]
-	public long userId { get; set; }
-
-	[DataMember(Name = "backupType")]
-	public BackupType backupType { get; set; }
-
-	[DataMember(Name = "backupToken")]
-	public string backupToken { get; set; }
-
-	public UserBackupData Clone() {
-		var result = new UserBackupData();
-		result.id = id;
-		result.userId = userId;
-		result.backupType = backupType;
-		result.backupToken = backupToken;
-		return result;
+	public bool isNull => (this == Null);
+	#endregion
+	#region GameDbWrapper(DataTable)
+	public static DataTable<long, UserBackupData> dataTable {
+		get {
+			DataTable<long, UserBackupData> result;
+			if (GameDb.TableExists<long, UserBackupData>()) {
+				result = GameDb.From<long, UserBackupData>();
+			} else {
+				result = GameDb.CreateTable<long, UserBackupData>();
+				SetupUserBackupDataTableIndexGenerated(result);
+				SetupUserBackupDataTableIndex(result);
+			}
+			return result;
+		}
 	}
 
-	public override string ToString()
+	public static int Count => dataTable.Count;
+
+	public static List<UserBackupData> GetDataList()
 	{
-		return JsonConvert.SerializeObject(this);
+		return dataTable.dataList;
 	}
+
+	public static void SetData(UserBackupData data)
+	{
+		dataTable.Insert(data);
+	}
+
+	public static void AddDataList(IEnumerable<UserBackupData> dataList)
+	{
+		dataTable.InsertRange(dataList);
+	}
+
+	public static void SetDataList(IEnumerable<UserBackupData> dataList)
+	{
+		Clear();
+		dataTable.InsertRange(dataList);
+	}
+
+	public static void Clear()
+	{
+		dataTable.DeleteAll();
+	}
+
+	static partial void SetupUserBackupDataTableIndex(DataTable<long, UserBackupData> targetDataTable);
+
+	private static void SetupUserBackupDataTableIndexGenerated(DataTable<long, UserBackupData> targetDataTable)
+	{
+		targetDataTable.CreateUniqueIndex("Userbackupdata", aData => (object)aData.userbackupdata);
+		targetDataTable.CreateIndex("Userbackupdata", aData => (object)aData.userbackupdata);
+		targetDataTable.CreateIndex("Userbackupdata", aData => (object)aData.userbackupdata);
+		targetDataTable.CreateIndex("Userbackupdata", aData => (object)aData.userbackupdata);
+		targetDataTable.CreateIndex("Userbackupdata", aData => (object)aData.userbackupdata);
+	}
+	#endregion
 }

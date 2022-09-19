@@ -1,62 +1,72 @@
 using System.Collections.Generic;
 
 
-[DataContract]
 public partial class ComboData : IUnique<long>
 {
-	[DataMember(Name = "id")]
-	public long id { get; set; }
+	#region NullObject
+	public static ComboData Null => NullObjectContainer.Get<ComboData>();
 
-	[DataMember(Name = "name")]
-	public string name { get; set; }
-
-	[DataMember(Name = "type")]
-	public ComboType type { get; set; }
-
-	[DataMember(Name = "description")]
-	public string description { get; set; }
-
-	[DataMember(Name = "rank")]
-	public long rank { get; set; }
-
-	[DataMember(Name = "baseAttack")]
-	public long baseAttack { get; set; }
-
-	[DataMember(Name = "maxAttack")]
-	public long maxAttack { get; set; }
-
-	[DataMember(Name = "paramA")]
-	public long paramA { get; set; }
-
-	[DataMember(Name = "paramB")]
-	public long paramB { get; set; }
-
-	[DataMember(Name = "paramC")]
-	public long paramC { get; set; }
-
-	[DataMember(Name = "iconId")]
-	public long iconId { get; set; }
-
-	public ComboData Clone() {
-		var result = new ComboData();
-		result.id = id;
-		result.name = name;
-		result.type = type;
-		result.description = description;
-		result.rank = rank;
-		result.baseAttack = baseAttack;
-		result.maxAttack = maxAttack;
-		result.paramA = paramA;
-		result.paramB = paramB;
-		result.paramC = paramC;
-		result.iconId = iconId;
-		return result;
+	public bool isNull => (this == Null);
+	#endregion
+	#region GameDbWrapper(DataTable)
+	public static DataTable<long, ComboData> dataTable {
+		get {
+			DataTable<long, ComboData> result;
+			if (GameDb.TableExists<long, ComboData>()) {
+				result = GameDb.From<long, ComboData>();
+			} else {
+				result = GameDb.CreateTable<long, ComboData>();
+				SetupComboDataTableIndexGenerated(result);
+				SetupComboDataTableIndex(result);
+			}
+			return result;
+		}
 	}
 
-	public string idNameText => GetIdNameText(id, name);
+	public static int Count => dataTable.Count;
 
-	public override string ToString()
+	public static List<ComboData> GetDataList()
 	{
-		return JsonConvert.SerializeObject(this);
+		return dataTable.dataList;
 	}
+
+	public static void SetData(ComboData data)
+	{
+		dataTable.Insert(data);
+	}
+
+	public static void AddDataList(IEnumerable<ComboData> dataList)
+	{
+		dataTable.InsertRange(dataList);
+	}
+
+	public static void SetDataList(IEnumerable<ComboData> dataList)
+	{
+		Clear();
+		dataTable.InsertRange(dataList);
+	}
+
+	public static void Clear()
+	{
+		dataTable.DeleteAll();
+	}
+
+	static partial void SetupComboDataTableIndex(DataTable<long, ComboData> targetDataTable);
+
+	private static void SetupComboDataTableIndexGenerated(DataTable<long, ComboData> targetDataTable)
+	{
+		targetDataTable.CreateUniqueIndex("Combodata", aData => (object)aData.combodata);
+		targetDataTable.CreateIndex("Combodata", aData => (object)aData.combodata);
+		targetDataTable.CreateIndex("Combodata", aData => (object)aData.combodata);
+		targetDataTable.CreateIndex("Combodata", aData => (object)aData.combodata);
+		targetDataTable.CreateIndex("Combodata", aData => (object)aData.combodata);
+		targetDataTable.CreateIndex("Combodata", aData => (object)aData.combodata);
+		targetDataTable.CreateIndex("Combodata", aData => (object)aData.combodata);
+		targetDataTable.CreateIndex("Combodata", aData => (object)aData.combodata);
+		targetDataTable.CreateIndex("Combodata", aData => (object)aData.combodata);
+		targetDataTable.CreateIndex("Combodata", aData => (object)aData.combodata);
+		targetDataTable.CreateIndex("Combodata", aData => (object)aData.combodata);
+		targetDataTable.CreateIndex("Combodata", aData => (object)aData.combodata);
+	}
+	#endregion
 }

@@ -1,26 +1,63 @@
 using System.Collections.Generic;
 
 
-[DataContract]
 public partial class MessageData : IUnique<long>
 {
-	[DataMember(Name = "id")]
-	public long id { get; set; }
+	#region NullObject
+	public static MessageData Null => NullObjectContainer.Get<MessageData>();
 
-	[DataMember(Name = "name")]
-	public string name { get; set; }
-
-	public MessageData Clone() {
-		var result = new MessageData();
-		result.id = id;
-		result.name = name;
-		return result;
+	public bool isNull => (this == Null);
+	#endregion
+	#region GameDbWrapper(DataTable)
+	public static DataTable<long, MessageData> dataTable {
+		get {
+			DataTable<long, MessageData> result;
+			if (GameDb.TableExists<long, MessageData>()) {
+				result = GameDb.From<long, MessageData>();
+			} else {
+				result = GameDb.CreateTable<long, MessageData>();
+				SetupMessageDataTableIndexGenerated(result);
+				SetupMessageDataTableIndex(result);
+			}
+			return result;
+		}
 	}
 
-	public string idNameText => GetIdNameText(id, name);
+	public static int Count => dataTable.Count;
 
-	public override string ToString()
+	public static List<MessageData> GetDataList()
 	{
-		return JsonConvert.SerializeObject(this);
+		return dataTable.dataList;
 	}
+
+	public static void SetData(MessageData data)
+	{
+		dataTable.Insert(data);
+	}
+
+	public static void AddDataList(IEnumerable<MessageData> dataList)
+	{
+		dataTable.InsertRange(dataList);
+	}
+
+	public static void SetDataList(IEnumerable<MessageData> dataList)
+	{
+		Clear();
+		dataTable.InsertRange(dataList);
+	}
+
+	public static void Clear()
+	{
+		dataTable.DeleteAll();
+	}
+
+	static partial void SetupMessageDataTableIndex(DataTable<long, MessageData> targetDataTable);
+
+	private static void SetupMessageDataTableIndexGenerated(DataTable<long, MessageData> targetDataTable)
+	{
+		targetDataTable.CreateUniqueIndex("Messagedata", aData => (object)aData.messagedata);
+		targetDataTable.CreateIndex("Messagedata", aData => (object)aData.messagedata);
+		targetDataTable.CreateIndex("Messagedata", aData => (object)aData.messagedata);
+	}
+	#endregion
 }

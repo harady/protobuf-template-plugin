@@ -1,32 +1,65 @@
 using System.Collections.Generic;
 
 
-[DataContract]
 public partial class UserMissionData : IUnique<long>
 {
-	[DataMember(Name = "id")]
-	public long id { get; set; }
+	#region NullObject
+	public static UserMissionData Null => NullObjectContainer.Get<UserMissionData>();
 
-	[DataMember(Name = "userId")]
-	public long userId { get; set; }
-
-	[DataMember(Name = "missionId")]
-	public long missionId { get; set; }
-
-	[DataMember(Name = "progress")]
-	public long progress { get; set; }
-
-	public UserMissionData Clone() {
-		var result = new UserMissionData();
-		result.id = id;
-		result.userId = userId;
-		result.missionId = missionId;
-		result.progress = progress;
-		return result;
+	public bool isNull => (this == Null);
+	#endregion
+	#region GameDbWrapper(DataTable)
+	public static DataTable<long, UserMissionData> dataTable {
+		get {
+			DataTable<long, UserMissionData> result;
+			if (GameDb.TableExists<long, UserMissionData>()) {
+				result = GameDb.From<long, UserMissionData>();
+			} else {
+				result = GameDb.CreateTable<long, UserMissionData>();
+				SetupUserMissionDataTableIndexGenerated(result);
+				SetupUserMissionDataTableIndex(result);
+			}
+			return result;
+		}
 	}
 
-	public override string ToString()
+	public static int Count => dataTable.Count;
+
+	public static List<UserMissionData> GetDataList()
 	{
-		return JsonConvert.SerializeObject(this);
+		return dataTable.dataList;
 	}
+
+	public static void SetData(UserMissionData data)
+	{
+		dataTable.Insert(data);
+	}
+
+	public static void AddDataList(IEnumerable<UserMissionData> dataList)
+	{
+		dataTable.InsertRange(dataList);
+	}
+
+	public static void SetDataList(IEnumerable<UserMissionData> dataList)
+	{
+		Clear();
+		dataTable.InsertRange(dataList);
+	}
+
+	public static void Clear()
+	{
+		dataTable.DeleteAll();
+	}
+
+	static partial void SetupUserMissionDataTableIndex(DataTable<long, UserMissionData> targetDataTable);
+
+	private static void SetupUserMissionDataTableIndexGenerated(DataTable<long, UserMissionData> targetDataTable)
+	{
+		targetDataTable.CreateUniqueIndex("Usermissiondata", aData => (object)aData.usermissiondata);
+		targetDataTable.CreateIndex("Usermissiondata", aData => (object)aData.usermissiondata);
+		targetDataTable.CreateIndex("Usermissiondata", aData => (object)aData.usermissiondata);
+		targetDataTable.CreateIndex("Usermissiondata", aData => (object)aData.usermissiondata);
+		targetDataTable.CreateIndex("Usermissiondata", aData => (object)aData.usermissiondata);
+	}
+	#endregion
 }

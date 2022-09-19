@@ -1,32 +1,65 @@
 using System.Collections.Generic;
 
 
-[DataContract]
 public partial class UnitLevelExpData : IUnique<long>
 {
-	[DataMember(Name = "id")]
-	public long id { get; set; }
+	#region NullObject
+	public static UnitLevelExpData Null => NullObjectContainer.Get<UnitLevelExpData>();
 
-	[DataMember(Name = "growthType")]
-	public long growthType { get; set; }
-
-	[DataMember(Name = "level")]
-	public long level { get; set; }
-
-	[DataMember(Name = "totalExp")]
-	public long totalExp { get; set; }
-
-	public UnitLevelExpData Clone() {
-		var result = new UnitLevelExpData();
-		result.id = id;
-		result.growthType = growthType;
-		result.level = level;
-		result.totalExp = totalExp;
-		return result;
+	public bool isNull => (this == Null);
+	#endregion
+	#region GameDbWrapper(DataTable)
+	public static DataTable<long, UnitLevelExpData> dataTable {
+		get {
+			DataTable<long, UnitLevelExpData> result;
+			if (GameDb.TableExists<long, UnitLevelExpData>()) {
+				result = GameDb.From<long, UnitLevelExpData>();
+			} else {
+				result = GameDb.CreateTable<long, UnitLevelExpData>();
+				SetupUnitLevelExpDataTableIndexGenerated(result);
+				SetupUnitLevelExpDataTableIndex(result);
+			}
+			return result;
+		}
 	}
 
-	public override string ToString()
+	public static int Count => dataTable.Count;
+
+	public static List<UnitLevelExpData> GetDataList()
 	{
-		return JsonConvert.SerializeObject(this);
+		return dataTable.dataList;
 	}
+
+	public static void SetData(UnitLevelExpData data)
+	{
+		dataTable.Insert(data);
+	}
+
+	public static void AddDataList(IEnumerable<UnitLevelExpData> dataList)
+	{
+		dataTable.InsertRange(dataList);
+	}
+
+	public static void SetDataList(IEnumerable<UnitLevelExpData> dataList)
+	{
+		Clear();
+		dataTable.InsertRange(dataList);
+	}
+
+	public static void Clear()
+	{
+		dataTable.DeleteAll();
+	}
+
+	static partial void SetupUnitLevelExpDataTableIndex(DataTable<long, UnitLevelExpData> targetDataTable);
+
+	private static void SetupUnitLevelExpDataTableIndexGenerated(DataTable<long, UnitLevelExpData> targetDataTable)
+	{
+		targetDataTable.CreateUniqueIndex("Unitlevelexpdata", aData => (object)aData.unitlevelexpdata);
+		targetDataTable.CreateIndex("Unitlevelexpdata", aData => (object)aData.unitlevelexpdata);
+		targetDataTable.CreateIndex("Unitlevelexpdata", aData => (object)aData.unitlevelexpdata);
+		targetDataTable.CreateIndex("Unitlevelexpdata", aData => (object)aData.unitlevelexpdata);
+		targetDataTable.CreateIndex("Unitlevelexpdata", aData => (object)aData.unitlevelexpdata);
+	}
+	#endregion
 }

@@ -1,46 +1,68 @@
 using System.Collections.Generic;
 
 
-[DataContract]
 public partial class EquipmentData : IUnique<long>
 {
-	[DataMember(Name = "id")]
-	public long id { get; set; }
+	#region NullObject
+	public static EquipmentData Null => NullObjectContainer.Get<EquipmentData>();
 
-	[DataMember(Name = "name")]
-	public string name { get; set; }
-
-	[DataMember(Name = "type")]
-	public EquipmentType type { get; set; }
-
-	[DataMember(Name = "description")]
-	public string description { get; set; }
-
-	[DataMember(Name = "paramA")]
-	public long paramA { get; set; }
-
-	[DataMember(Name = "paramB")]
-	public long paramB { get; set; }
-
-	[DataMember(Name = "iconId")]
-	public long iconId { get; set; }
-
-	public EquipmentData Clone() {
-		var result = new EquipmentData();
-		result.id = id;
-		result.name = name;
-		result.type = type;
-		result.description = description;
-		result.paramA = paramA;
-		result.paramB = paramB;
-		result.iconId = iconId;
-		return result;
+	public bool isNull => (this == Null);
+	#endregion
+	#region GameDbWrapper(DataTable)
+	public static DataTable<long, EquipmentData> dataTable {
+		get {
+			DataTable<long, EquipmentData> result;
+			if (GameDb.TableExists<long, EquipmentData>()) {
+				result = GameDb.From<long, EquipmentData>();
+			} else {
+				result = GameDb.CreateTable<long, EquipmentData>();
+				SetupEquipmentDataTableIndexGenerated(result);
+				SetupEquipmentDataTableIndex(result);
+			}
+			return result;
+		}
 	}
 
-	public string idNameText => GetIdNameText(id, name);
+	public static int Count => dataTable.Count;
 
-	public override string ToString()
+	public static List<EquipmentData> GetDataList()
 	{
-		return JsonConvert.SerializeObject(this);
+		return dataTable.dataList;
 	}
+
+	public static void SetData(EquipmentData data)
+	{
+		dataTable.Insert(data);
+	}
+
+	public static void AddDataList(IEnumerable<EquipmentData> dataList)
+	{
+		dataTable.InsertRange(dataList);
+	}
+
+	public static void SetDataList(IEnumerable<EquipmentData> dataList)
+	{
+		Clear();
+		dataTable.InsertRange(dataList);
+	}
+
+	public static void Clear()
+	{
+		dataTable.DeleteAll();
+	}
+
+	static partial void SetupEquipmentDataTableIndex(DataTable<long, EquipmentData> targetDataTable);
+
+	private static void SetupEquipmentDataTableIndexGenerated(DataTable<long, EquipmentData> targetDataTable)
+	{
+		targetDataTable.CreateUniqueIndex("Equipmentdata", aData => (object)aData.equipmentdata);
+		targetDataTable.CreateIndex("Equipmentdata", aData => (object)aData.equipmentdata);
+		targetDataTable.CreateIndex("Equipmentdata", aData => (object)aData.equipmentdata);
+		targetDataTable.CreateIndex("Equipmentdata", aData => (object)aData.equipmentdata);
+		targetDataTable.CreateIndex("Equipmentdata", aData => (object)aData.equipmentdata);
+		targetDataTable.CreateIndex("Equipmentdata", aData => (object)aData.equipmentdata);
+		targetDataTable.CreateIndex("Equipmentdata", aData => (object)aData.equipmentdata);
+		targetDataTable.CreateIndex("Equipmentdata", aData => (object)aData.equipmentdata);
+	}
+	#endregion
 }

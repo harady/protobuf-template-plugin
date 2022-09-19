@@ -1,24 +1,63 @@
 using System.Collections.Generic;
 
 
-[DataContract]
 public partial class AdviceData : IUnique<long>
 {
-	[DataMember(Name = "id")]
-	public long id { get; set; }
+	#region NullObject
+	public static AdviceData Null => NullObjectContainer.Get<AdviceData>();
 
-	[DataMember(Name = "message")]
-	public string message { get; set; }
-
-	public AdviceData Clone() {
-		var result = new AdviceData();
-		result.id = id;
-		result.message = message;
-		return result;
+	public bool isNull => (this == Null);
+	#endregion
+	#region GameDbWrapper(DataTable)
+	public static DataTable<long, AdviceData> dataTable {
+		get {
+			DataTable<long, AdviceData> result;
+			if (GameDb.TableExists<long, AdviceData>()) {
+				result = GameDb.From<long, AdviceData>();
+			} else {
+				result = GameDb.CreateTable<long, AdviceData>();
+				SetupAdviceDataTableIndexGenerated(result);
+				SetupAdviceDataTableIndex(result);
+			}
+			return result;
+		}
 	}
 
-	public override string ToString()
+	public static int Count => dataTable.Count;
+
+	public static List<AdviceData> GetDataList()
 	{
-		return JsonConvert.SerializeObject(this);
+		return dataTable.dataList;
 	}
+
+	public static void SetData(AdviceData data)
+	{
+		dataTable.Insert(data);
+	}
+
+	public static void AddDataList(IEnumerable<AdviceData> dataList)
+	{
+		dataTable.InsertRange(dataList);
+	}
+
+	public static void SetDataList(IEnumerable<AdviceData> dataList)
+	{
+		Clear();
+		dataTable.InsertRange(dataList);
+	}
+
+	public static void Clear()
+	{
+		dataTable.DeleteAll();
+	}
+
+	static partial void SetupAdviceDataTableIndex(DataTable<long, AdviceData> targetDataTable);
+
+	private static void SetupAdviceDataTableIndexGenerated(DataTable<long, AdviceData> targetDataTable)
+	{
+		targetDataTable.CreateUniqueIndex("Advicedata", aData => (object)aData.advicedata);
+		targetDataTable.CreateIndex("Advicedata", aData => (object)aData.advicedata);
+		targetDataTable.CreateIndex("Advicedata", aData => (object)aData.advicedata);
+	}
+	#endregion
 }

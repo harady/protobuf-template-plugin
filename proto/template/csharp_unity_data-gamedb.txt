@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 
 {{ for message in file.message_type }}
-{{- has_id = (message.field[0]message.name == "id") }}
+{{- has_id = (message.field[0].name == "id") }}
 public partial class {{ message.name }} : IUnique<long>
 {
 	#region NullObject
@@ -58,17 +58,47 @@ public partial class {{ message.name }} : IUnique<long>
 	private static void Setup{{ message.name }}TableIndexGenerated(DataTable<long, {{ message.name }}> targetDataTable)
 	{
 		{{- for field in message.field }}
-			{{- if or (eq field.name "id") (StrArrayContains $uniqueIndexess message.name) }}
-		targetDataTable.CreateUniqueIndex("{{ message.name | SnakeToPascal }}", aData => (object)aData.{{ message.name | to_camel }});
+			{{- if (field.name == "id") }}
+		targetDataTable.CreateUniqueIndex("{{ message.name | to_pascal }}", aData => (object)aData.{{ message.name | to_camel }});
 			{{- end }}
 		{{- end }}
 		{{- for field in message.field }}
-			{{- if (StrArrayContains $Indexess message.name) }}
+			{{- if false }}
 		targetDataTable.CreateIndex("{{ message.name | to_pascal }}", aData => (object)aData.{{ message.name | to_camel }});
 			{{- end }}
 		{{- end }}
 	}
 	#endregion
+	{{- end }}
+	{{- range .Fields }}
+		{{- if (message.name "id") }}
+	#region DataTableUniqueIndex({{ message.name | to_pascal }})
+	public static {{ message.name }} GetDataBy{{ message.name | to_pascal }}({{ .BaseType }} {{ message.name | to_camel }})
+	{
+		return dataTable.GetData("{{ message.name | to_pascal }}", (object){{ message.name | to_camel }});
+	}
+
+	public static void RemoveDataBy{{ message.name | to_pascal }}s(ICollection<{{ .BaseType }}> {{ message.name | to_camel }}s)
+	{
+		{{ message.name | to_camel }}s.ForEach(a{{ message.name | to_pascal }} => RemoveDataBy{{ message.name | to_pascal }}(a{{ message.name | to_pascal }}));
+	}
+
+	public static void RemoveDataBy{{ message.name | to_pascal }}({{ .BaseType }} {{ message.name | to_camel }})
+	{
+		dataTable.DeleteByKey("{{ message.name | to_pascal }}", (object){{ message.name | to_camel }});
+	}
+	#endregion
+		{{- end }}
+	{{- end }}
+	{{- range .Fields }}
+		{{- if (StrArrayContains $Indexess message.name) }}
+	#region DataTableIndex ({{message.name | to_pascal}})
+	public static List<{{ $messageName }}> GetDataListBy{{ message.name | to_pascal }}({{ .BaseType }} {{ message.name | to_camel }})
+	{
+		return dataTable.GetDataList("{{ message.name | to_pascal }}", (object){{ message.name | to_camel }});
+	}
+	#endregion
+		{{- end }}
 	{{- end }}
 }
 {{- end }}

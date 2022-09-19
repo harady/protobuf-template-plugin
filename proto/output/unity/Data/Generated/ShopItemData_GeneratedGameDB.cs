@@ -1,50 +1,69 @@
 using System.Collections.Generic;
 
 
-[DataContract]
 public partial class ShopItemData : IUnique<long>
 {
-	[DataMember(Name = "id")]
-	public long id { get; set; }
+	#region NullObject
+	public static ShopItemData Null => NullObjectContainer.Get<ShopItemData>();
 
-	[DataMember(Name = "name")]
-	public string name { get; set; }
-
-	[DataMember(Name = "shopId")]
-	public long shopId { get; set; }
-
-	[DataMember(Name = "purchasePlatformType")]
-	public PurchasePlatformType purchasePlatformType { get; set; }
-
-	[DataMember(Name = "platformProductId")]
-	public string platformProductId { get; set; }
-
-	[DataMember(Name = "price")]
-	public long price { get; set; }
-
-	[DataMember(Name = "resourceSetId")]
-	public long resourceSetId { get; set; }
-
-	[DataMember(Name = "limitCount")]
-	public long limitCount { get; set; }
-
-	public ShopItemData Clone() {
-		var result = new ShopItemData();
-		result.id = id;
-		result.name = name;
-		result.shopId = shopId;
-		result.purchasePlatformType = purchasePlatformType;
-		result.platformProductId = platformProductId;
-		result.price = price;
-		result.resourceSetId = resourceSetId;
-		result.limitCount = limitCount;
-		return result;
+	public bool isNull => (this == Null);
+	#endregion
+	#region GameDbWrapper(DataTable)
+	public static DataTable<long, ShopItemData> dataTable {
+		get {
+			DataTable<long, ShopItemData> result;
+			if (GameDb.TableExists<long, ShopItemData>()) {
+				result = GameDb.From<long, ShopItemData>();
+			} else {
+				result = GameDb.CreateTable<long, ShopItemData>();
+				SetupShopItemDataTableIndexGenerated(result);
+				SetupShopItemDataTableIndex(result);
+			}
+			return result;
+		}
 	}
 
-	public string idNameText => GetIdNameText(id, name);
+	public static int Count => dataTable.Count;
 
-	public override string ToString()
+	public static List<ShopItemData> GetDataList()
 	{
-		return JsonConvert.SerializeObject(this);
+		return dataTable.dataList;
 	}
+
+	public static void SetData(ShopItemData data)
+	{
+		dataTable.Insert(data);
+	}
+
+	public static void AddDataList(IEnumerable<ShopItemData> dataList)
+	{
+		dataTable.InsertRange(dataList);
+	}
+
+	public static void SetDataList(IEnumerable<ShopItemData> dataList)
+	{
+		Clear();
+		dataTable.InsertRange(dataList);
+	}
+
+	public static void Clear()
+	{
+		dataTable.DeleteAll();
+	}
+
+	static partial void SetupShopItemDataTableIndex(DataTable<long, ShopItemData> targetDataTable);
+
+	private static void SetupShopItemDataTableIndexGenerated(DataTable<long, ShopItemData> targetDataTable)
+	{
+		targetDataTable.CreateUniqueIndex("Shopitemdata", aData => (object)aData.shopitemdata);
+		targetDataTable.CreateIndex("Shopitemdata", aData => (object)aData.shopitemdata);
+		targetDataTable.CreateIndex("Shopitemdata", aData => (object)aData.shopitemdata);
+		targetDataTable.CreateIndex("Shopitemdata", aData => (object)aData.shopitemdata);
+		targetDataTable.CreateIndex("Shopitemdata", aData => (object)aData.shopitemdata);
+		targetDataTable.CreateIndex("Shopitemdata", aData => (object)aData.shopitemdata);
+		targetDataTable.CreateIndex("Shopitemdata", aData => (object)aData.shopitemdata);
+		targetDataTable.CreateIndex("Shopitemdata", aData => (object)aData.shopitemdata);
+		targetDataTable.CreateIndex("Shopitemdata", aData => (object)aData.shopitemdata);
+	}
+	#endregion
 }

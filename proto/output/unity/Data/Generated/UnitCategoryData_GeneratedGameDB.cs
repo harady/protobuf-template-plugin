@@ -1,26 +1,63 @@
 using System.Collections.Generic;
 
 
-[DataContract]
 public partial class UnitCategoryData : IUnique<long>
 {
-	[DataMember(Name = "id")]
-	public long id { get; set; }
+	#region NullObject
+	public static UnitCategoryData Null => NullObjectContainer.Get<UnitCategoryData>();
 
-	[DataMember(Name = "name")]
-	public string name { get; set; }
-
-	public UnitCategoryData Clone() {
-		var result = new UnitCategoryData();
-		result.id = id;
-		result.name = name;
-		return result;
+	public bool isNull => (this == Null);
+	#endregion
+	#region GameDbWrapper(DataTable)
+	public static DataTable<long, UnitCategoryData> dataTable {
+		get {
+			DataTable<long, UnitCategoryData> result;
+			if (GameDb.TableExists<long, UnitCategoryData>()) {
+				result = GameDb.From<long, UnitCategoryData>();
+			} else {
+				result = GameDb.CreateTable<long, UnitCategoryData>();
+				SetupUnitCategoryDataTableIndexGenerated(result);
+				SetupUnitCategoryDataTableIndex(result);
+			}
+			return result;
+		}
 	}
 
-	public string idNameText => GetIdNameText(id, name);
+	public static int Count => dataTable.Count;
 
-	public override string ToString()
+	public static List<UnitCategoryData> GetDataList()
 	{
-		return JsonConvert.SerializeObject(this);
+		return dataTable.dataList;
 	}
+
+	public static void SetData(UnitCategoryData data)
+	{
+		dataTable.Insert(data);
+	}
+
+	public static void AddDataList(IEnumerable<UnitCategoryData> dataList)
+	{
+		dataTable.InsertRange(dataList);
+	}
+
+	public static void SetDataList(IEnumerable<UnitCategoryData> dataList)
+	{
+		Clear();
+		dataTable.InsertRange(dataList);
+	}
+
+	public static void Clear()
+	{
+		dataTable.DeleteAll();
+	}
+
+	static partial void SetupUnitCategoryDataTableIndex(DataTable<long, UnitCategoryData> targetDataTable);
+
+	private static void SetupUnitCategoryDataTableIndexGenerated(DataTable<long, UnitCategoryData> targetDataTable)
+	{
+		targetDataTable.CreateUniqueIndex("Unitcategorydata", aData => (object)aData.unitcategorydata);
+		targetDataTable.CreateIndex("Unitcategorydata", aData => (object)aData.unitcategorydata);
+		targetDataTable.CreateIndex("Unitcategorydata", aData => (object)aData.unitcategorydata);
+	}
+	#endregion
 }

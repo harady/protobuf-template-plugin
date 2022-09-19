@@ -1,32 +1,65 @@
 using System.Collections.Generic;
 
 
-[DataContract]
 public partial class UserPaidCrystalData : IUnique<long>
 {
-	[DataMember(Name = "id")]
-	public long id { get; set; }
+	#region NullObject
+	public static UserPaidCrystalData Null => NullObjectContainer.Get<UserPaidCrystalData>();
 
-	[DataMember(Name = "userId")]
-	public long userId { get; set; }
-
-	[DataMember(Name = "purchasePlatformType")]
-	public PurchasePlatformType purchasePlatformType { get; set; }
-
-	[DataMember(Name = "amount")]
-	public long amount { get; set; }
-
-	public UserPaidCrystalData Clone() {
-		var result = new UserPaidCrystalData();
-		result.id = id;
-		result.userId = userId;
-		result.purchasePlatformType = purchasePlatformType;
-		result.amount = amount;
-		return result;
+	public bool isNull => (this == Null);
+	#endregion
+	#region GameDbWrapper(DataTable)
+	public static DataTable<long, UserPaidCrystalData> dataTable {
+		get {
+			DataTable<long, UserPaidCrystalData> result;
+			if (GameDb.TableExists<long, UserPaidCrystalData>()) {
+				result = GameDb.From<long, UserPaidCrystalData>();
+			} else {
+				result = GameDb.CreateTable<long, UserPaidCrystalData>();
+				SetupUserPaidCrystalDataTableIndexGenerated(result);
+				SetupUserPaidCrystalDataTableIndex(result);
+			}
+			return result;
+		}
 	}
 
-	public override string ToString()
+	public static int Count => dataTable.Count;
+
+	public static List<UserPaidCrystalData> GetDataList()
 	{
-		return JsonConvert.SerializeObject(this);
+		return dataTable.dataList;
 	}
+
+	public static void SetData(UserPaidCrystalData data)
+	{
+		dataTable.Insert(data);
+	}
+
+	public static void AddDataList(IEnumerable<UserPaidCrystalData> dataList)
+	{
+		dataTable.InsertRange(dataList);
+	}
+
+	public static void SetDataList(IEnumerable<UserPaidCrystalData> dataList)
+	{
+		Clear();
+		dataTable.InsertRange(dataList);
+	}
+
+	public static void Clear()
+	{
+		dataTable.DeleteAll();
+	}
+
+	static partial void SetupUserPaidCrystalDataTableIndex(DataTable<long, UserPaidCrystalData> targetDataTable);
+
+	private static void SetupUserPaidCrystalDataTableIndexGenerated(DataTable<long, UserPaidCrystalData> targetDataTable)
+	{
+		targetDataTable.CreateUniqueIndex("Userpaidcrystaldata", aData => (object)aData.userpaidcrystaldata);
+		targetDataTable.CreateIndex("Userpaidcrystaldata", aData => (object)aData.userpaidcrystaldata);
+		targetDataTable.CreateIndex("Userpaidcrystaldata", aData => (object)aData.userpaidcrystaldata);
+		targetDataTable.CreateIndex("Userpaidcrystaldata", aData => (object)aData.userpaidcrystaldata);
+		targetDataTable.CreateIndex("Userpaidcrystaldata", aData => (object)aData.userpaidcrystaldata);
+	}
+	#endregion
 }

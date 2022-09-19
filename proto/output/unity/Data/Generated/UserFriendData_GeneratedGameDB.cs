@@ -1,45 +1,67 @@
 using System.Collections.Generic;
 
 
-[DataContract]
 public partial class UserFriendData : IUnique<long>
 {
-	[DataMember(Name = "id")]
-	public long id { get; set; }
+	#region NullObject
+	public static UserFriendData Null => NullObjectContainer.Get<UserFriendData>();
 
-	[DataMember(Name = "userId")]
-	public long userId { get; set; }
-
-	[DataMember(Name = "friendUserId")]
-	public long friendUserId { get; set; }
-
-	[DataMember(Name = "isFavorite")]
-	public bool isFavorite { get; set; }
-
-	[DataMember(Name = "lastUsedAt")]
-	public long lastUsedAt { get; set; }
-
-	public DateTime LastUsedAt {
-		get { return ServerDateTimeUtil.FromEpoch(lastUsedAt); }
-		set { lastUsedAt = ServerDateTimeUtil.ToEpoch(value); }
+	public bool isNull => (this == Null);
+	#endregion
+	#region GameDbWrapper(DataTable)
+	public static DataTable<long, UserFriendData> dataTable {
+		get {
+			DataTable<long, UserFriendData> result;
+			if (GameDb.TableExists<long, UserFriendData>()) {
+				result = GameDb.From<long, UserFriendData>();
+			} else {
+				result = GameDb.CreateTable<long, UserFriendData>();
+				SetupUserFriendDataTableIndexGenerated(result);
+				SetupUserFriendDataTableIndex(result);
+			}
+			return result;
+		}
 	}
 
-	[DataMember(Name = "usedCount")]
-	public long usedCount { get; set; }
+	public static int Count => dataTable.Count;
 
-	public UserFriendData Clone() {
-		var result = new UserFriendData();
-		result.id = id;
-		result.userId = userId;
-		result.friendUserId = friendUserId;
-		result.isFavorite = isFavorite;
-		result.lastUsedAt = lastUsedAt;
-		result.usedCount = usedCount;
-		return result;
-	}
-
-	public override string ToString()
+	public static List<UserFriendData> GetDataList()
 	{
-		return JsonConvert.SerializeObject(this);
+		return dataTable.dataList;
 	}
+
+	public static void SetData(UserFriendData data)
+	{
+		dataTable.Insert(data);
+	}
+
+	public static void AddDataList(IEnumerable<UserFriendData> dataList)
+	{
+		dataTable.InsertRange(dataList);
+	}
+
+	public static void SetDataList(IEnumerable<UserFriendData> dataList)
+	{
+		Clear();
+		dataTable.InsertRange(dataList);
+	}
+
+	public static void Clear()
+	{
+		dataTable.DeleteAll();
+	}
+
+	static partial void SetupUserFriendDataTableIndex(DataTable<long, UserFriendData> targetDataTable);
+
+	private static void SetupUserFriendDataTableIndexGenerated(DataTable<long, UserFriendData> targetDataTable)
+	{
+		targetDataTable.CreateUniqueIndex("Userfrienddata", aData => (object)aData.userfrienddata);
+		targetDataTable.CreateIndex("Userfrienddata", aData => (object)aData.userfrienddata);
+		targetDataTable.CreateIndex("Userfrienddata", aData => (object)aData.userfrienddata);
+		targetDataTable.CreateIndex("Userfrienddata", aData => (object)aData.userfrienddata);
+		targetDataTable.CreateIndex("Userfrienddata", aData => (object)aData.userfrienddata);
+		targetDataTable.CreateIndex("Userfrienddata", aData => (object)aData.userfrienddata);
+		targetDataTable.CreateIndex("Userfrienddata", aData => (object)aData.userfrienddata);
+	}
+	#endregion
 }

@@ -1,49 +1,68 @@
 using System.Collections.Generic;
 
 
-[DataContract]
 public partial class UserBattleData : IUnique<long>
 {
-	[DataMember(Name = "id")]
-	public long id { get; set; }
+	#region NullObject
+	public static UserBattleData Null => NullObjectContainer.Get<UserBattleData>();
 
-	[DataMember(Name = "userId")]
-	public long userId { get; set; }
-
-	[DataMember(Name = "stageId")]
-	public long stageId { get; set; }
-
-	[DataMember(Name = "continueCount")]
-	public long continueCount { get; set; }
-
-	[DataMember(Name = "battleClientData")]
-	public BattleClientData battleClientData { get; set; }
-
-	[DataMember(Name = "battleServerData")]
-	public BattleServerData battleServerData { get; set; }
-
-	[DataMember(Name = "startAt")]
-	public long startAt { get; set; }
-
-	public DateTime StartAt {
-		get { return ServerDateTimeUtil.FromEpoch(startAt); }
-		set { startAt = ServerDateTimeUtil.ToEpoch(value); }
+	public bool isNull => (this == Null);
+	#endregion
+	#region GameDbWrapper(DataTable)
+	public static DataTable<long, UserBattleData> dataTable {
+		get {
+			DataTable<long, UserBattleData> result;
+			if (GameDb.TableExists<long, UserBattleData>()) {
+				result = GameDb.From<long, UserBattleData>();
+			} else {
+				result = GameDb.CreateTable<long, UserBattleData>();
+				SetupUserBattleDataTableIndexGenerated(result);
+				SetupUserBattleDataTableIndex(result);
+			}
+			return result;
+		}
 	}
 
-	public UserBattleData Clone() {
-		var result = new UserBattleData();
-		result.id = id;
-		result.userId = userId;
-		result.stageId = stageId;
-		result.continueCount = continueCount;
-		result.battleClientData = battleClientData;
-		result.battleServerData = battleServerData;
-		result.startAt = startAt;
-		return result;
-	}
+	public static int Count => dataTable.Count;
 
-	public override string ToString()
+	public static List<UserBattleData> GetDataList()
 	{
-		return JsonConvert.SerializeObject(this);
+		return dataTable.dataList;
 	}
+
+	public static void SetData(UserBattleData data)
+	{
+		dataTable.Insert(data);
+	}
+
+	public static void AddDataList(IEnumerable<UserBattleData> dataList)
+	{
+		dataTable.InsertRange(dataList);
+	}
+
+	public static void SetDataList(IEnumerable<UserBattleData> dataList)
+	{
+		Clear();
+		dataTable.InsertRange(dataList);
+	}
+
+	public static void Clear()
+	{
+		dataTable.DeleteAll();
+	}
+
+	static partial void SetupUserBattleDataTableIndex(DataTable<long, UserBattleData> targetDataTable);
+
+	private static void SetupUserBattleDataTableIndexGenerated(DataTable<long, UserBattleData> targetDataTable)
+	{
+		targetDataTable.CreateUniqueIndex("Userbattledata", aData => (object)aData.userbattledata);
+		targetDataTable.CreateIndex("Userbattledata", aData => (object)aData.userbattledata);
+		targetDataTable.CreateIndex("Userbattledata", aData => (object)aData.userbattledata);
+		targetDataTable.CreateIndex("Userbattledata", aData => (object)aData.userbattledata);
+		targetDataTable.CreateIndex("Userbattledata", aData => (object)aData.userbattledata);
+		targetDataTable.CreateIndex("Userbattledata", aData => (object)aData.userbattledata);
+		targetDataTable.CreateIndex("Userbattledata", aData => (object)aData.userbattledata);
+		targetDataTable.CreateIndex("Userbattledata", aData => (object)aData.userbattledata);
+	}
+	#endregion
 }

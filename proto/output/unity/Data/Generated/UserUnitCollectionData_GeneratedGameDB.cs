@@ -1,36 +1,66 @@
 using System.Collections.Generic;
 
 
-[DataContract]
 public partial class UserUnitCollectionData : IUnique<long>
 {
-	[DataMember(Name = "id")]
-	public long id { get; set; }
+	#region NullObject
+	public static UserUnitCollectionData Null => NullObjectContainer.Get<UserUnitCollectionData>();
 
-	[DataMember(Name = "userId")]
-	public long userId { get; set; }
-
-	[DataMember(Name = "unitId")]
-	public long unitId { get; set; }
-
-	[DataMember(Name = "hasEarned")]
-	public bool hasEarned { get; set; }
-
-	[DataMember(Name = "usedCount")]
-	public long usedCount { get; set; }
-
-	public UserUnitCollectionData Clone() {
-		var result = new UserUnitCollectionData();
-		result.id = id;
-		result.userId = userId;
-		result.unitId = unitId;
-		result.hasEarned = hasEarned;
-		result.usedCount = usedCount;
-		return result;
+	public bool isNull => (this == Null);
+	#endregion
+	#region GameDbWrapper(DataTable)
+	public static DataTable<long, UserUnitCollectionData> dataTable {
+		get {
+			DataTable<long, UserUnitCollectionData> result;
+			if (GameDb.TableExists<long, UserUnitCollectionData>()) {
+				result = GameDb.From<long, UserUnitCollectionData>();
+			} else {
+				result = GameDb.CreateTable<long, UserUnitCollectionData>();
+				SetupUserUnitCollectionDataTableIndexGenerated(result);
+				SetupUserUnitCollectionDataTableIndex(result);
+			}
+			return result;
+		}
 	}
 
-	public override string ToString()
+	public static int Count => dataTable.Count;
+
+	public static List<UserUnitCollectionData> GetDataList()
 	{
-		return JsonConvert.SerializeObject(this);
+		return dataTable.dataList;
 	}
+
+	public static void SetData(UserUnitCollectionData data)
+	{
+		dataTable.Insert(data);
+	}
+
+	public static void AddDataList(IEnumerable<UserUnitCollectionData> dataList)
+	{
+		dataTable.InsertRange(dataList);
+	}
+
+	public static void SetDataList(IEnumerable<UserUnitCollectionData> dataList)
+	{
+		Clear();
+		dataTable.InsertRange(dataList);
+	}
+
+	public static void Clear()
+	{
+		dataTable.DeleteAll();
+	}
+
+	static partial void SetupUserUnitCollectionDataTableIndex(DataTable<long, UserUnitCollectionData> targetDataTable);
+
+	private static void SetupUserUnitCollectionDataTableIndexGenerated(DataTable<long, UserUnitCollectionData> targetDataTable)
+	{
+		targetDataTable.CreateUniqueIndex("Userunitcollectiondata", aData => (object)aData.userunitcollectiondata);
+		targetDataTable.CreateIndex("Userunitcollectiondata", aData => (object)aData.userunitcollectiondata);
+		targetDataTable.CreateIndex("Userunitcollectiondata", aData => (object)aData.userunitcollectiondata);
+		targetDataTable.CreateIndex("Userunitcollectiondata", aData => (object)aData.userunitcollectiondata);
+		targetDataTable.CreateIndex("Userunitcollectiondata", aData => (object)aData.userunitcollectiondata);
+		targetDataTable.CreateIndex("Userunitcollectiondata", aData => (object)aData.userunitcollectiondata);
+	}
+	#endregion
 }

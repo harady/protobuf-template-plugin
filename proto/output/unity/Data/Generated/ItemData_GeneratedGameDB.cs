@@ -1,54 +1,70 @@
 using System.Collections.Generic;
 
 
-[DataContract]
 public partial class ItemData : IUnique<long>
 {
-	[DataMember(Name = "id")]
-	public long id { get; set; }
+	#region NullObject
+	public static ItemData Null => NullObjectContainer.Get<ItemData>();
 
-	[DataMember(Name = "name")]
-	public string name { get; set; }
-
-	[DataMember(Name = "attribute")]
-	public long attribute { get; set; }
-
-	[DataMember(Name = "description")]
-	public string description { get; set; }
-
-	[DataMember(Name = "category")]
-	public ItemCategory category { get; set; }
-
-	[DataMember(Name = "type")]
-	public ItemType type { get; set; }
-
-	[DataMember(Name = "ownedLimit")]
-	public long ownedLimit { get; set; }
-
-	[DataMember(Name = "paramA")]
-	public long paramA { get; set; }
-
-	[DataMember(Name = "paramB")]
-	public long paramB { get; set; }
-
-	public ItemData Clone() {
-		var result = new ItemData();
-		result.id = id;
-		result.name = name;
-		result.attribute = attribute;
-		result.description = description;
-		result.category = category;
-		result.type = type;
-		result.ownedLimit = ownedLimit;
-		result.paramA = paramA;
-		result.paramB = paramB;
-		return result;
+	public bool isNull => (this == Null);
+	#endregion
+	#region GameDbWrapper(DataTable)
+	public static DataTable<long, ItemData> dataTable {
+		get {
+			DataTable<long, ItemData> result;
+			if (GameDb.TableExists<long, ItemData>()) {
+				result = GameDb.From<long, ItemData>();
+			} else {
+				result = GameDb.CreateTable<long, ItemData>();
+				SetupItemDataTableIndexGenerated(result);
+				SetupItemDataTableIndex(result);
+			}
+			return result;
+		}
 	}
 
-	public string idNameText => GetIdNameText(id, name);
+	public static int Count => dataTable.Count;
 
-	public override string ToString()
+	public static List<ItemData> GetDataList()
 	{
-		return JsonConvert.SerializeObject(this);
+		return dataTable.dataList;
 	}
+
+	public static void SetData(ItemData data)
+	{
+		dataTable.Insert(data);
+	}
+
+	public static void AddDataList(IEnumerable<ItemData> dataList)
+	{
+		dataTable.InsertRange(dataList);
+	}
+
+	public static void SetDataList(IEnumerable<ItemData> dataList)
+	{
+		Clear();
+		dataTable.InsertRange(dataList);
+	}
+
+	public static void Clear()
+	{
+		dataTable.DeleteAll();
+	}
+
+	static partial void SetupItemDataTableIndex(DataTable<long, ItemData> targetDataTable);
+
+	private static void SetupItemDataTableIndexGenerated(DataTable<long, ItemData> targetDataTable)
+	{
+		targetDataTable.CreateUniqueIndex("Itemdata", aData => (object)aData.itemdata);
+		targetDataTable.CreateIndex("Itemdata", aData => (object)aData.itemdata);
+		targetDataTable.CreateIndex("Itemdata", aData => (object)aData.itemdata);
+		targetDataTable.CreateIndex("Itemdata", aData => (object)aData.itemdata);
+		targetDataTable.CreateIndex("Itemdata", aData => (object)aData.itemdata);
+		targetDataTable.CreateIndex("Itemdata", aData => (object)aData.itemdata);
+		targetDataTable.CreateIndex("Itemdata", aData => (object)aData.itemdata);
+		targetDataTable.CreateIndex("Itemdata", aData => (object)aData.itemdata);
+		targetDataTable.CreateIndex("Itemdata", aData => (object)aData.itemdata);
+		targetDataTable.CreateIndex("Itemdata", aData => (object)aData.itemdata);
+	}
+	#endregion
 }

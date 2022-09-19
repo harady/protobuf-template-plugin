@@ -1,30 +1,64 @@
 using System.Collections.Generic;
 
 
-[DataContract]
 public partial class QuestGroupData : IUnique<long>
 {
-	[DataMember(Name = "id")]
-	public long id { get; set; }
+	#region NullObject
+	public static QuestGroupData Null => NullObjectContainer.Get<QuestGroupData>();
 
-	[DataMember(Name = "name")]
-	public string name { get; set; }
-
-	[DataMember(Name = "type")]
-	public QuestGroupType type { get; set; }
-
-	public QuestGroupData Clone() {
-		var result = new QuestGroupData();
-		result.id = id;
-		result.name = name;
-		result.type = type;
-		return result;
+	public bool isNull => (this == Null);
+	#endregion
+	#region GameDbWrapper(DataTable)
+	public static DataTable<long, QuestGroupData> dataTable {
+		get {
+			DataTable<long, QuestGroupData> result;
+			if (GameDb.TableExists<long, QuestGroupData>()) {
+				result = GameDb.From<long, QuestGroupData>();
+			} else {
+				result = GameDb.CreateTable<long, QuestGroupData>();
+				SetupQuestGroupDataTableIndexGenerated(result);
+				SetupQuestGroupDataTableIndex(result);
+			}
+			return result;
+		}
 	}
 
-	public string idNameText => GetIdNameText(id, name);
+	public static int Count => dataTable.Count;
 
-	public override string ToString()
+	public static List<QuestGroupData> GetDataList()
 	{
-		return JsonConvert.SerializeObject(this);
+		return dataTable.dataList;
 	}
+
+	public static void SetData(QuestGroupData data)
+	{
+		dataTable.Insert(data);
+	}
+
+	public static void AddDataList(IEnumerable<QuestGroupData> dataList)
+	{
+		dataTable.InsertRange(dataList);
+	}
+
+	public static void SetDataList(IEnumerable<QuestGroupData> dataList)
+	{
+		Clear();
+		dataTable.InsertRange(dataList);
+	}
+
+	public static void Clear()
+	{
+		dataTable.DeleteAll();
+	}
+
+	static partial void SetupQuestGroupDataTableIndex(DataTable<long, QuestGroupData> targetDataTable);
+
+	private static void SetupQuestGroupDataTableIndexGenerated(DataTable<long, QuestGroupData> targetDataTable)
+	{
+		targetDataTable.CreateUniqueIndex("Questgroupdata", aData => (object)aData.questgroupdata);
+		targetDataTable.CreateIndex("Questgroupdata", aData => (object)aData.questgroupdata);
+		targetDataTable.CreateIndex("Questgroupdata", aData => (object)aData.questgroupdata);
+		targetDataTable.CreateIndex("Questgroupdata", aData => (object)aData.questgroupdata);
+	}
+	#endregion
 }

@@ -1,36 +1,66 @@
 using System.Collections.Generic;
 
 
-[DataContract]
 public partial class UserIdentifableItemData : IUnique<long>
 {
-	[DataMember(Name = "id")]
-	public long id { get; set; }
+	#region NullObject
+	public static UserIdentifableItemData Null => NullObjectContainer.Get<UserIdentifableItemData>();
 
-	[DataMember(Name = "userId")]
-	public long userId { get; set; }
-
-	[DataMember(Name = "identifableItemId")]
-	public long identifableItemId { get; set; }
-
-	[DataMember(Name = "paramA")]
-	public long paramA { get; set; }
-
-	[DataMember(Name = "paramB")]
-	public long paramB { get; set; }
-
-	public UserIdentifableItemData Clone() {
-		var result = new UserIdentifableItemData();
-		result.id = id;
-		result.userId = userId;
-		result.identifableItemId = identifableItemId;
-		result.paramA = paramA;
-		result.paramB = paramB;
-		return result;
+	public bool isNull => (this == Null);
+	#endregion
+	#region GameDbWrapper(DataTable)
+	public static DataTable<long, UserIdentifableItemData> dataTable {
+		get {
+			DataTable<long, UserIdentifableItemData> result;
+			if (GameDb.TableExists<long, UserIdentifableItemData>()) {
+				result = GameDb.From<long, UserIdentifableItemData>();
+			} else {
+				result = GameDb.CreateTable<long, UserIdentifableItemData>();
+				SetupUserIdentifableItemDataTableIndexGenerated(result);
+				SetupUserIdentifableItemDataTableIndex(result);
+			}
+			return result;
+		}
 	}
 
-	public override string ToString()
+	public static int Count => dataTable.Count;
+
+	public static List<UserIdentifableItemData> GetDataList()
 	{
-		return JsonConvert.SerializeObject(this);
+		return dataTable.dataList;
 	}
+
+	public static void SetData(UserIdentifableItemData data)
+	{
+		dataTable.Insert(data);
+	}
+
+	public static void AddDataList(IEnumerable<UserIdentifableItemData> dataList)
+	{
+		dataTable.InsertRange(dataList);
+	}
+
+	public static void SetDataList(IEnumerable<UserIdentifableItemData> dataList)
+	{
+		Clear();
+		dataTable.InsertRange(dataList);
+	}
+
+	public static void Clear()
+	{
+		dataTable.DeleteAll();
+	}
+
+	static partial void SetupUserIdentifableItemDataTableIndex(DataTable<long, UserIdentifableItemData> targetDataTable);
+
+	private static void SetupUserIdentifableItemDataTableIndexGenerated(DataTable<long, UserIdentifableItemData> targetDataTable)
+	{
+		targetDataTable.CreateUniqueIndex("Useridentifableitemdata", aData => (object)aData.useridentifableitemdata);
+		targetDataTable.CreateIndex("Useridentifableitemdata", aData => (object)aData.useridentifableitemdata);
+		targetDataTable.CreateIndex("Useridentifableitemdata", aData => (object)aData.useridentifableitemdata);
+		targetDataTable.CreateIndex("Useridentifableitemdata", aData => (object)aData.useridentifableitemdata);
+		targetDataTable.CreateIndex("Useridentifableitemdata", aData => (object)aData.useridentifableitemdata);
+		targetDataTable.CreateIndex("Useridentifableitemdata", aData => (object)aData.useridentifableitemdata);
+	}
+	#endregion
 }
