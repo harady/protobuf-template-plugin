@@ -30,13 +30,13 @@ public partial class StageSpecialRewardData : AbstractData
 
 	public AbilityData Clone() {
 		var result = new AbilityData();
-		result.id = id;
-		result.name = name;
-		result.stage_id = stage_id;
-		result.battle_reward_type = battle_reward_type;
-		result.param_a = param_a;
-		result.param_b = param_b;
-		result.resource_lottery_id = resource_lottery_id;
+		result.ID = ID;
+		result.NAME = NAME;
+		result.STAGE_ID = STAGE_ID;
+		result.BATTLE_REWARD_TYPE = BATTLE_REWARD_TYPE;
+		result.PARAM_A = PARAM_A;
+		result.PARAM_B = PARAM_B;
+		result.RESOURCE_LOTTERY_ID = RESOURCE_LOTTERY_ID;
 		return result;
 	}
 

@@ -48,19 +48,19 @@ public partial class EnemyActionData : AbstractData
 
 	public AbilityData Clone() {
 		var result = new AbilityData();
-		result.id = id;
-		result.enemy_id = enemy_id;
-		result.action_no = action_no;
-		result.trigger_type = trigger_type;
-		result.trigger_param_a = trigger_param_a;
-		result.trigger_param_b = trigger_param_b;
-		result.trigger_param_c = trigger_param_c;
-		result.trigger_param_d = trigger_param_d;
-		result.action_type = action_type;
-		result.action_param_a = action_param_a;
-		result.action_param_b = action_param_b;
-		result.action_param_c = action_param_c;
-		result.action_param_d = action_param_d;
+		result.ID = ID;
+		result.ENEMY_ID = ENEMY_ID;
+		result.ACTION_NO = ACTION_NO;
+		result.TRIGGER_TYPE = TRIGGER_TYPE;
+		result.TRIGGER_PARAM_A = TRIGGER_PARAM_A;
+		result.TRIGGER_PARAM_B = TRIGGER_PARAM_B;
+		result.TRIGGER_PARAM_C = TRIGGER_PARAM_C;
+		result.TRIGGER_PARAM_D = TRIGGER_PARAM_D;
+		result.ACTION_TYPE = ACTION_TYPE;
+		result.ACTION_PARAM_A = ACTION_PARAM_A;
+		result.ACTION_PARAM_B = ACTION_PARAM_B;
+		result.ACTION_PARAM_C = ACTION_PARAM_C;
+		result.ACTION_PARAM_D = ACTION_PARAM_D;
 		return result;
 	}
 

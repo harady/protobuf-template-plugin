@@ -24,11 +24,11 @@ public partial class WeakPointPositionData : AbstractData
 
 	public AbilityData Clone() {
 		var result = new AbilityData();
-		result.id = id;
-		result.weak_point_id = weak_point_id;
-		result.angle = angle;
-		result.radius_rate = radius_rate;
-		result.size_rate = size_rate;
+		result.ID = ID;
+		result.WEAK_POINT_ID = WEAK_POINT_ID;
+		result.ANGLE = ANGLE;
+		result.RADIUS_RATE = RADIUS_RATE;
+		result.SIZE_RATE = SIZE_RATE;
 		return result;
 	}
 

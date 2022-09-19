@@ -18,9 +18,9 @@ public partial class UserMessageData : AbstractData
 
 	public AbilityData Clone() {
 		var result = new AbilityData();
-		result.id = id;
-		result.user_id = user_id;
-		result.name = name;
+		result.ID = ID;
+		result.USER_ID = USER_ID;
+		result.NAME = NAME;
 		return result;
 	}
 

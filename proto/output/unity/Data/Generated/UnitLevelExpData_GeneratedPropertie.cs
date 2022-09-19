@@ -21,10 +21,10 @@ public partial class UnitLevelExpData : AbstractData
 
 	public AbilityData Clone() {
 		var result = new AbilityData();
-		result.id = id;
-		result.growth_type = growth_type;
-		result.level = level;
-		result.total_exp = total_exp;
+		result.ID = ID;
+		result.GROWTH_TYPE = GROWTH_TYPE;
+		result.LEVEL = LEVEL;
+		result.TOTAL_EXP = TOTAL_EXP;
 		return result;
 	}
 

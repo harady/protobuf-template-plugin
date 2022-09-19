@@ -57,22 +57,22 @@ public partial class UserUnitData : AbstractData
 
 	public AbilityData Clone() {
 		var result = new AbilityData();
-		result.id = id;
-		result.user_id = user_id;
-		result.unit_id = unit_id;
-		result.level = level;
-		result.exp = exp;
-		result.luck = luck;
-		result.plus_hp = plus_hp;
-		result.plus_attack = plus_attack;
-		result.plus_speed = plus_speed;
-		result.equipment1_id = equipment1_id;
-		result.equipment2_id = equipment2_id;
-		result.equipment3_id = equipment3_id;
-		result.hero_mark = hero_mark;
-		result.hero_badge = hero_badge;
-		result.is_locked = is_locked;
-		result.get_at = get_at;
+		result.ID = ID;
+		result.USER_ID = USER_ID;
+		result.UNIT_ID = UNIT_ID;
+		result.LEVEL = LEVEL;
+		result.EXP = EXP;
+		result.LUCK = LUCK;
+		result.PLUS_HP = PLUS_HP;
+		result.PLUS_ATTACK = PLUS_ATTACK;
+		result.PLUS_SPEED = PLUS_SPEED;
+		result.EQUIPMENT1_ID = EQUIPMENT1_ID;
+		result.EQUIPMENT2_ID = EQUIPMENT2_ID;
+		result.EQUIPMENT3_ID = EQUIPMENT3_ID;
+		result.HERO_MARK = HERO_MARK;
+		result.HERO_BADGE = HERO_BADGE;
+		result.IS_LOCKED = IS_LOCKED;
+		result.GET_AT = GET_AT;
 		return result;
 	}
 

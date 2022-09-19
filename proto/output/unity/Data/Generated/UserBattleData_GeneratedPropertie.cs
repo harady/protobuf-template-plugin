@@ -30,13 +30,13 @@ public partial class UserBattleData : AbstractData
 
 	public AbilityData Clone() {
 		var result = new AbilityData();
-		result.id = id;
-		result.user_id = user_id;
-		result.stage_id = stage_id;
-		result.continue_count = continue_count;
-		result.battle_client_data = battle_client_data;
-		result.battle_server_data = battle_server_data;
-		result.start_at = start_at;
+		result.ID = ID;
+		result.USER_ID = USER_ID;
+		result.STAGE_ID = STAGE_ID;
+		result.CONTINUE_COUNT = CONTINUE_COUNT;
+		result.BATTLE_CLIENT_DATA = BATTLE_CLIENT_DATA;
+		result.BATTLE_SERVER_DATA = BATTLE_SERVER_DATA;
+		result.START_AT = START_AT;
 		return result;
 	}
 

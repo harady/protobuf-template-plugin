@@ -21,10 +21,10 @@ public partial class GachaResultItemData : AbstractData
 
 	public AbilityData Clone() {
 		var result = new AbilityData();
-		result.resource = resource;
-		result.is_extra = is_extra;
-		result.is_pickup = is_pickup;
-		result.is_guarantee = is_guarantee;
+		result.RESOURCE = RESOURCE;
+		result.IS_EXTRA = IS_EXTRA;
+		result.IS_PICKUP = IS_PICKUP;
+		result.IS_GUARANTEE = IS_GUARANTEE;
 		return result;
 	}
 

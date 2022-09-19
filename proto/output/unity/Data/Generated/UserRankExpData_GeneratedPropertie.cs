@@ -30,13 +30,13 @@ public partial class UserRankExpData : AbstractData
 
 	public AbilityData Clone() {
 		var result = new AbilityData();
-		result.id = id;
-		result.rank = rank;
-		result.total_exp = total_exp;
-		result.max_stamina = max_stamina;
-		result.deck_num = deck_num;
-		result.max_friend_num = max_friend_num;
-		result.unit_box_num = unit_box_num;
+		result.ID = ID;
+		result.RANK = RANK;
+		result.TOTAL_EXP = TOTAL_EXP;
+		result.MAX_STAMINA = MAX_STAMINA;
+		result.DECK_NUM = DECK_NUM;
+		result.MAX_FRIEND_NUM = MAX_FRIEND_NUM;
+		result.UNIT_BOX_NUM = UNIT_BOX_NUM;
 		return result;
 	}
 

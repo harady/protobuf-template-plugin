@@ -21,10 +21,10 @@ public partial class UserBackupData : AbstractData
 
 	public AbilityData Clone() {
 		var result = new AbilityData();
-		result.id = id;
-		result.user_id = user_id;
-		result.backup_type = backup_type;
-		result.backup_token = backup_token;
+		result.ID = ID;
+		result.USER_ID = USER_ID;
+		result.BACKUP_TYPE = BACKUP_TYPE;
+		result.BACKUP_TOKEN = BACKUP_TOKEN;
 		return result;
 	}
 

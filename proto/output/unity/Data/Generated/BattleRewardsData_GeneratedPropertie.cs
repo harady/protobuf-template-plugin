@@ -21,10 +21,10 @@ public partial class BattleRewardsData : AbstractData
 
 	public AbilityData Clone() {
 		var result = new AbilityData();
-		result.stage_id = stage_id;
-		result.special_rewards = special_rewards;
-		result.quest_rewards = quest_rewards;
-		result.users = users;
+		result.STAGE_ID = STAGE_ID;
+		result.SPECIAL_REWARDS = SPECIAL_REWARDS;
+		result.QUEST_REWARDS = QUEST_REWARDS;
+		result.USERS = USERS;
 		return result;
 	}
 

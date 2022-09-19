@@ -21,10 +21,10 @@ public partial class ErrorResponse : AbstractData
 
 	public AbilityData Clone() {
 		var result = new AbilityData();
-		result.code = code;
-		result.title = title;
-		result.message = message;
-		result.description = description;
+		result.CODE = CODE;
+		result.TITLE = TITLE;
+		result.MESSAGE = MESSAGE;
+		result.DESCRIPTION = DESCRIPTION;
 		return result;
 	}
 

@@ -12,7 +12,7 @@ public partial class BattleServerData : AbstractData
 
 	public AbilityData Clone() {
 		var result = new AbilityData();
-		result.id = id;
+		result.ID = ID;
 		return result;
 	}
 

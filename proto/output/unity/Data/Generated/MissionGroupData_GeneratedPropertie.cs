@@ -15,8 +15,8 @@ public partial class MissionGroupData : AbstractData
 
 	public AbilityData Clone() {
 		var result = new AbilityData();
-		result.id = id;
-		result.type = type;
+		result.ID = ID;
+		result.TYPE = TYPE;
 		return result;
 	}
 

@@ -21,10 +21,10 @@ public partial class UserPaidCrystalData : AbstractData
 
 	public AbilityData Clone() {
 		var result = new AbilityData();
-		result.id = id;
-		result.user_id = user_id;
-		result.purchase_platform_type = purchase_platform_type;
-		result.amount = amount;
+		result.ID = ID;
+		result.USER_ID = USER_ID;
+		result.PURCHASE_PLATFORM_TYPE = PURCHASE_PLATFORM_TYPE;
+		result.AMOUNT = AMOUNT;
 		return result;
 	}
 

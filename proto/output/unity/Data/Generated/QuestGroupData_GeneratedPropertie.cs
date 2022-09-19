@@ -18,9 +18,9 @@ public partial class QuestGroupData : AbstractData
 
 	public AbilityData Clone() {
 		var result = new AbilityData();
-		result.id = id;
-		result.name = name;
-		result.type = type;
+		result.ID = ID;
+		result.NAME = NAME;
+		result.TYPE = TYPE;
 		return result;
 	}
 

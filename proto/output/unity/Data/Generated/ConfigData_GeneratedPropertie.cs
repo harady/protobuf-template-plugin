@@ -21,10 +21,10 @@ public partial class ConfigData : AbstractData
 
 	public AbilityData Clone() {
 		var result = new AbilityData();
-		result.id = id;
-		result.key = key;
-		result.value = value;
-		result.text = text;
+		result.ID = ID;
+		result.KEY = KEY;
+		result.VALUE = VALUE;
+		result.TEXT = TEXT;
 		return result;
 	}
 

@@ -18,9 +18,9 @@ public partial class BattleRewardsQuestRewardsData : AbstractData
 
 	public AbilityData Clone() {
 		var result = new AbilityData();
-		result.earned_money = earned_money;
-		result.earned_exp = earned_exp;
-		result.battle_reward_resources = battle_reward_resources;
+		result.EARNED_MONEY = EARNED_MONEY;
+		result.EARNED_EXP = EARNED_EXP;
+		result.BATTLE_REWARD_RESOURCES = BATTLE_REWARD_RESOURCES;
 		return result;
 	}
 

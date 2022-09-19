@@ -21,10 +21,10 @@ public partial class UserMissionData : AbstractData
 
 	public AbilityData Clone() {
 		var result = new AbilityData();
-		result.id = id;
-		result.user_id = user_id;
-		result.mission_id = mission_id;
-		result.progress = progress;
+		result.ID = ID;
+		result.USER_ID = USER_ID;
+		result.MISSION_ID = MISSION_ID;
+		result.PROGRESS = PROGRESS;
 		return result;
 	}
 

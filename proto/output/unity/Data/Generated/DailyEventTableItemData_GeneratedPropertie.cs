@@ -21,10 +21,10 @@ public partial class DailyEventTableItemData : AbstractData
 
 	public AbilityData Clone() {
 		var result = new AbilityData();
-		result.id = id;
-		result.daily_event_table_id = daily_event_table_id;
-		result.event_quest_category_id = event_quest_category_id;
-		result.count = count;
+		result.ID = ID;
+		result.DAILY_EVENT_TABLE_ID = DAILY_EVENT_TABLE_ID;
+		result.EVENT_QUEST_CATEGORY_ID = EVENT_QUEST_CATEGORY_ID;
+		result.COUNT = COUNT;
 		return result;
 	}
 

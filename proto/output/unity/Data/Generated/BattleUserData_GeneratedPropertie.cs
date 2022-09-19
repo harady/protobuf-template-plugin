@@ -15,8 +15,8 @@ public partial class BattleUserData : AbstractData
 
 	public AbilityData Clone() {
 		var result = new AbilityData();
-		result.other_user = other_user;
-		result.user_unit_ids = user_unit_ids;
+		result.OTHER_USER = OTHER_USER;
+		result.USER_UNIT_IDS = USER_UNIT_IDS;
 		return result;
 	}
 

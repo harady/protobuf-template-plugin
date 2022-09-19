@@ -30,13 +30,13 @@ public partial class EventQuestCategoryData : AbstractData
 
 	public AbilityData Clone() {
 		var result = new AbilityData();
-		result.id = id;
-		result.name = name;
-		result.min_start_time = min_start_time;
-		result.max_start_time = max_start_time;
-		result.open_hours = open_hours;
-		result.quest_group_id = quest_group_id;
-		result.questDifficultyType = questDifficultyType;
+		result.ID = ID;
+		result.NAME = NAME;
+		result.MIN_START_TIME = MIN_START_TIME;
+		result.MAX_START_TIME = MAX_START_TIME;
+		result.OPEN_HOURS = OPEN_HOURS;
+		result.QUEST_GROUP_ID = QUEST_GROUP_ID;
+		result.QUESTDIFFICULTYTYPE = QUESTDIFFICULTYTYPE;
 		return result;
 	}
 

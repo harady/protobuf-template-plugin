@@ -21,10 +21,10 @@ public partial class EventScheduleTermData : AbstractData
 
 	public AbilityData Clone() {
 		var result = new AbilityData();
-		result.id = id;
-		result.daily_event_table_id = daily_event_table_id;
-		result.open_at = open_at;
-		result.close_at = close_at;
+		result.ID = ID;
+		result.DAILY_EVENT_TABLE_ID = DAILY_EVENT_TABLE_ID;
+		result.OPEN_AT = OPEN_AT;
+		result.CLOSE_AT = CLOSE_AT;
 		return result;
 	}
 

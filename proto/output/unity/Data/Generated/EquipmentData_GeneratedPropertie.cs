@@ -30,13 +30,13 @@ public partial class EquipmentData : AbstractData
 
 	public AbilityData Clone() {
 		var result = new AbilityData();
-		result.id = id;
-		result.name = name;
-		result.type = type;
-		result.description = description;
-		result.param_a = param_a;
-		result.param_b = param_b;
-		result.icon_id = icon_id;
+		result.ID = ID;
+		result.NAME = NAME;
+		result.TYPE = TYPE;
+		result.DESCRIPTION = DESCRIPTION;
+		result.PARAM_A = PARAM_A;
+		result.PARAM_B = PARAM_B;
+		result.ICON_ID = ICON_ID;
 		return result;
 	}
 

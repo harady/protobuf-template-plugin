@@ -42,17 +42,17 @@ public partial class ComboData : AbstractData
 
 	public AbilityData Clone() {
 		var result = new AbilityData();
-		result.id = id;
-		result.name = name;
-		result.type = type;
-		result.description = description;
-		result.rank = rank;
-		result.base_attack = base_attack;
-		result.max_attack = max_attack;
-		result.param_a = param_a;
-		result.param_b = param_b;
-		result.param_c = param_c;
-		result.icon_id = icon_id;
+		result.ID = ID;
+		result.NAME = NAME;
+		result.TYPE = TYPE;
+		result.DESCRIPTION = DESCRIPTION;
+		result.RANK = RANK;
+		result.BASE_ATTACK = BASE_ATTACK;
+		result.MAX_ATTACK = MAX_ATTACK;
+		result.PARAM_A = PARAM_A;
+		result.PARAM_B = PARAM_B;
+		result.PARAM_C = PARAM_C;
+		result.ICON_ID = ICON_ID;
 		return result;
 	}
 

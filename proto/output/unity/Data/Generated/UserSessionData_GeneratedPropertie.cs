@@ -21,10 +21,10 @@ public partial class UserSessionData : AbstractData
 
 	public AbilityData Clone() {
 		var result = new AbilityData();
-		result.id = id;
-		result.user_id = user_id;
-		result.session_id = session_id;
-		result.expire_at = expire_at;
+		result.ID = ID;
+		result.USER_ID = USER_ID;
+		result.SESSION_ID = SESSION_ID;
+		result.EXPIRE_AT = EXPIRE_AT;
 		return result;
 	}
 

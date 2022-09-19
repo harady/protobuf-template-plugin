@@ -42,17 +42,17 @@ public partial class ExchangeItemData : AbstractData
 
 	public AbilityData Clone() {
 		var result = new AbilityData();
-		result.id = id;
-		result.name = name;
-		result.exchange_id = exchange_id;
-		result.cost_resource_type = cost_resource_type;
-		result.cost_resource_id = cost_resource_id;
-		result.cost_resource_amount = cost_resource_amount;
-		result.resource_type = resource_type;
-		result.resource_id = resource_id;
-		result.resource_amount = resource_amount;
-		result.resource_set_id = resource_set_id;
-		result.limit_count = limit_count;
+		result.ID = ID;
+		result.NAME = NAME;
+		result.EXCHANGE_ID = EXCHANGE_ID;
+		result.COST_RESOURCE_TYPE = COST_RESOURCE_TYPE;
+		result.COST_RESOURCE_ID = COST_RESOURCE_ID;
+		result.COST_RESOURCE_AMOUNT = COST_RESOURCE_AMOUNT;
+		result.RESOURCE_TYPE = RESOURCE_TYPE;
+		result.RESOURCE_ID = RESOURCE_ID;
+		result.RESOURCE_AMOUNT = RESOURCE_AMOUNT;
+		result.RESOURCE_SET_ID = RESOURCE_SET_ID;
+		result.LIMIT_COUNT = LIMIT_COUNT;
 		return result;
 	}
 

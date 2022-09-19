@@ -15,8 +15,8 @@ public partial class ShopData : AbstractData
 
 	public AbilityData Clone() {
 		var result = new AbilityData();
-		result.id = id;
-		result.name = name;
+		result.ID = ID;
+		result.NAME = NAME;
 		return result;
 	}
 

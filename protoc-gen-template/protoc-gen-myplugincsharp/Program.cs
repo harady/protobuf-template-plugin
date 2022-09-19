@@ -7,6 +7,9 @@ using Google.Protobuf;
 using Google.Protobuf.Compiler;
 using Scriban;
 using Scriban.Runtime;
+using Scriban.Helpers;
+using Scriban.Parsing;
+using Scriban.Syntax;
 
 namespace protoc_gen_myplugincsharp
 {
@@ -39,10 +42,10 @@ namespace protoc_gen_myplugincsharp
 
 				//fileDesc.MessageType[0].Field[0].TypeName;
 
-				var scriptObj = new CustomScriptObject();
-				scriptObj.Import(new { File = fileDesc });
-				var context = new TemplateContext(scriptObj);
-				var output = template.Render(context);
+				//var scriptObj = new ScriptObject();
+				//scriptObj.Import(new { File = fileDesc });
+				//var context = new TemplateContext(scriptObj);
+				var output = template.Render(new { File = fileDesc });
 
 				// set as response
 				response.File.Add(
@@ -72,7 +75,6 @@ namespace protoc_gen_myplugincsharp
 
 			return result;
 		}
-
 
 		static T Deserialize<T>(Stream stream) where T : IMessage<T>, new()
 			=> new MessageParser<T>(() => new T()).ParseFrom(stream);

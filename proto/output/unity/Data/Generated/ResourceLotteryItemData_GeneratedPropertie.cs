@@ -30,13 +30,13 @@ public partial class ResourceLotteryItemData : AbstractData
 
 	public AbilityData Clone() {
 		var result = new AbilityData();
-		result.id = id;
-		result.resource_lottery_id = resource_lottery_id;
-		result.weight = weight;
-		result.resource_type = resource_type;
-		result.resource_id = resource_id;
-		result.resource_amount_min = resource_amount_min;
-		result.resource_amount_max = resource_amount_max;
+		result.ID = ID;
+		result.RESOURCE_LOTTERY_ID = RESOURCE_LOTTERY_ID;
+		result.WEIGHT = WEIGHT;
+		result.RESOURCE_TYPE = RESOURCE_TYPE;
+		result.RESOURCE_ID = RESOURCE_ID;
+		result.RESOURCE_AMOUNT_MIN = RESOURCE_AMOUNT_MIN;
+		result.RESOURCE_AMOUNT_MAX = RESOURCE_AMOUNT_MAX;
 		return result;
 	}
 

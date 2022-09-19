@@ -30,13 +30,13 @@ public partial class UserDeckData : AbstractData
 
 	public AbilityData Clone() {
 		var result = new AbilityData();
-		result.id = id;
-		result.user_id = user_id;
-		result.deck_no = deck_no;
-		result.name = name;
-		result.user_unit1_id = user_unit1_id;
-		result.user_unit2_id = user_unit2_id;
-		result.user_unit3_id = user_unit3_id;
+		result.ID = ID;
+		result.USER_ID = USER_ID;
+		result.DECK_NO = DECK_NO;
+		result.NAME = NAME;
+		result.USER_UNIT1_ID = USER_UNIT1_ID;
+		result.USER_UNIT2_ID = USER_UNIT2_ID;
+		result.USER_UNIT3_ID = USER_UNIT3_ID;
 		return result;
 	}
 

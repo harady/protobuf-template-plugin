@@ -24,11 +24,11 @@ public partial class UserIdentifableItemData : AbstractData
 
 	public AbilityData Clone() {
 		var result = new AbilityData();
-		result.id = id;
-		result.user_id = user_id;
-		result.identifable_item_id = identifable_item_id;
-		result.param_a = param_a;
-		result.param_b = param_b;
+		result.ID = ID;
+		result.USER_ID = USER_ID;
+		result.IDENTIFABLE_ITEM_ID = IDENTIFABLE_ITEM_ID;
+		result.PARAM_A = PARAM_A;
+		result.PARAM_B = PARAM_B;
 		return result;
 	}
 

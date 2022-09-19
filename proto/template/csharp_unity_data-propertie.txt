@@ -14,7 +14,7 @@ public partial class {{ message.name }} : AbstractData
 	public AbilityData Clone() {
 		var result = new AbilityData();
 {{- for field in message.field }}
-		result.{{ field.name }} = {{ field.name }};
+		result.{{ field.name | string.upcase }} = {{ field.name | string.upcase }};
 {{- end }}
 		return result;
 	}

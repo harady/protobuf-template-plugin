@@ -54,21 +54,21 @@ public partial class SkillData : AbstractData
 
 	public AbilityData Clone() {
 		var result = new AbilityData();
-		result.id = id;
-		result.name = name;
-		result.description = description;
-		result.turn = turn;
-		result.attack_rate = attack_rate;
-		result.speed_rate = speed_rate;
-		result.brake_rate = brake_rate;
-		result.effect1_type = effect1_type;
-		result.effect1_rank = effect1_rank;
-		result.effect1_param_a = effect1_param_a;
-		result.effect1_param_b = effect1_param_b;
-		result.effect2_type = effect2_type;
-		result.effect2_rank = effect2_rank;
-		result.effect2_param_a = effect2_param_a;
-		result.effect2_param_b = effect2_param_b;
+		result.ID = ID;
+		result.NAME = NAME;
+		result.DESCRIPTION = DESCRIPTION;
+		result.TURN = TURN;
+		result.ATTACK_RATE = ATTACK_RATE;
+		result.SPEED_RATE = SPEED_RATE;
+		result.BRAKE_RATE = BRAKE_RATE;
+		result.EFFECT1_TYPE = EFFECT1_TYPE;
+		result.EFFECT1_RANK = EFFECT1_RANK;
+		result.EFFECT1_PARAM_A = EFFECT1_PARAM_A;
+		result.EFFECT1_PARAM_B = EFFECT1_PARAM_B;
+		result.EFFECT2_TYPE = EFFECT2_TYPE;
+		result.EFFECT2_RANK = EFFECT2_RANK;
+		result.EFFECT2_PARAM_A = EFFECT2_PARAM_A;
+		result.EFFECT2_PARAM_B = EFFECT2_PARAM_B;
 		return result;
 	}
 

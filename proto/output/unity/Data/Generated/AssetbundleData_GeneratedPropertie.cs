@@ -18,9 +18,9 @@ public partial class AssetbundleData : AbstractData
 
 	public AbilityData Clone() {
 		var result = new AbilityData();
-		result.name = name;
-		result.hash = hash;
-		result.size = size;
+		result.NAME = NAME;
+		result.HASH = HASH;
+		result.SIZE = SIZE;
 		return result;
 	}
 

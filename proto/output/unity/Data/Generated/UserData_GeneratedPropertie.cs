@@ -60,23 +60,23 @@ public partial class UserData : AbstractData
 
 	public AbilityData Clone() {
 		var result = new AbilityData();
-		result.id = id;
-		result.name = name;
-		result.token = token;
-		result.code = code;
-		result.rank = rank;
-		result.exp = exp;
-		result.money = money;
-		result.stamina = stamina;
-		result.last_stamina_update_at = last_stamina_update_at;
-		result.free_crystal = free_crystal;
-		result.paid_crystal = paid_crystal;
-		result.current_deck_id = current_deck_id;
-		result.max_stamina_plus = max_stamina_plus;
-		result.deck_num_plus = deck_num_plus;
-		result.max_friend_num_plus = max_friend_num_plus;
-		result.unit_box_num_plus = unit_box_num_plus;
-		result.friend_user_unit_id = friend_user_unit_id;
+		result.ID = ID;
+		result.NAME = NAME;
+		result.TOKEN = TOKEN;
+		result.CODE = CODE;
+		result.RANK = RANK;
+		result.EXP = EXP;
+		result.MONEY = MONEY;
+		result.STAMINA = STAMINA;
+		result.LAST_STAMINA_UPDATE_AT = LAST_STAMINA_UPDATE_AT;
+		result.FREE_CRYSTAL = FREE_CRYSTAL;
+		result.PAID_CRYSTAL = PAID_CRYSTAL;
+		result.CURRENT_DECK_ID = CURRENT_DECK_ID;
+		result.MAX_STAMINA_PLUS = MAX_STAMINA_PLUS;
+		result.DECK_NUM_PLUS = DECK_NUM_PLUS;
+		result.MAX_FRIEND_NUM_PLUS = MAX_FRIEND_NUM_PLUS;
+		result.UNIT_BOX_NUM_PLUS = UNIT_BOX_NUM_PLUS;
+		result.FRIEND_USER_UNIT_ID = FRIEND_USER_UNIT_ID;
 		return result;
 	}
 

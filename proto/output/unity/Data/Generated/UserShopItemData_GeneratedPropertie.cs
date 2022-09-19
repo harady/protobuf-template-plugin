@@ -24,11 +24,11 @@ public partial class UserShopItemData : AbstractData
 
 	public AbilityData Clone() {
 		var result = new AbilityData();
-		result.id = id;
-		result.user_id = user_id;
-		result.shop_item_id = shop_item_id;
-		result.shop_schedule_id = shop_schedule_id;
-		result.purchased_count = purchased_count;
+		result.ID = ID;
+		result.USER_ID = USER_ID;
+		result.SHOP_ITEM_ID = SHOP_ITEM_ID;
+		result.SHOP_SCHEDULE_ID = SHOP_SCHEDULE_ID;
+		result.PURCHASED_COUNT = PURCHASED_COUNT;
 		return result;
 	}
 

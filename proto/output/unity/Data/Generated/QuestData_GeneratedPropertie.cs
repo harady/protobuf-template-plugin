@@ -36,15 +36,15 @@ public partial class QuestData : AbstractData
 
 	public AbilityData Clone() {
 		var result = new AbilityData();
-		result.id = id;
-		result.name = name;
-		result.quest_group_id = quest_group_id;
-		result.noContinue = noContinue;
-		result.quest_difficulty_type = quest_difficulty_type;
-		result.boss_unit_id = boss_unit_id;
-		result.open_at = open_at;
-		result.close_at = close_at;
-		result.open_dow = open_dow;
+		result.ID = ID;
+		result.NAME = NAME;
+		result.QUEST_GROUP_ID = QUEST_GROUP_ID;
+		result.NOCONTINUE = NOCONTINUE;
+		result.QUEST_DIFFICULTY_TYPE = QUEST_DIFFICULTY_TYPE;
+		result.BOSS_UNIT_ID = BOSS_UNIT_ID;
+		result.OPEN_AT = OPEN_AT;
+		result.CLOSE_AT = CLOSE_AT;
+		result.OPEN_DOW = OPEN_DOW;
 		return result;
 	}
 

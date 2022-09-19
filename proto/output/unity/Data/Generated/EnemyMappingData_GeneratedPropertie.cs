@@ -30,13 +30,13 @@ public partial class EnemyMappingData : AbstractData
 
 	public AbilityData Clone() {
 		var result = new AbilityData();
-		result.id = id;
-		result.round_id = round_id;
-		result.enemy_id = enemy_id;
-		result.pos_x = pos_x;
-		result.pos_y = pos_y;
-		result.drop_rate = drop_rate;
-		result.reward_resource_lottery_id = reward_resource_lottery_id;
+		result.ID = ID;
+		result.ROUND_ID = ROUND_ID;
+		result.ENEMY_ID = ENEMY_ID;
+		result.POS_X = POS_X;
+		result.POS_Y = POS_Y;
+		result.DROP_RATE = DROP_RATE;
+		result.REWARD_RESOURCE_LOTTERY_ID = REWARD_RESOURCE_LOTTERY_ID;
 		return result;
 	}
 

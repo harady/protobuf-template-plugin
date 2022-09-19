@@ -18,9 +18,9 @@ public partial class BattleRewardsUsersData : AbstractData
 
 	public AbilityData Clone() {
 		var result = new AbilityData();
-		result.host_users = host_users;
-		result.guest_users = guest_users;
-		result.helper_users = helper_users;
+		result.HOST_USERS = HOST_USERS;
+		result.GUEST_USERS = GUEST_USERS;
+		result.HELPER_USERS = HELPER_USERS;
 		return result;
 	}
 

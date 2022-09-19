@@ -21,10 +21,10 @@ public partial class RoundData : AbstractData
 
 	public AbilityData Clone() {
 		var result = new AbilityData();
-		result.id = id;
-		result.name = name;
-		result.stage_id = stage_id;
-		result.round_no = round_no;
+		result.ID = ID;
+		result.NAME = NAME;
+		result.STAGE_ID = STAGE_ID;
+		result.ROUND_NO = ROUND_NO;
 		return result;
 	}
 

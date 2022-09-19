@@ -24,11 +24,11 @@ public partial class IdentifableItemData : AbstractData
 
 	public AbilityData Clone() {
 		var result = new AbilityData();
-		result.id = id;
-		result.name = name;
-		result.description = description;
-		result.type = type;
-		result.owned_limit = owned_limit;
+		result.ID = ID;
+		result.NAME = NAME;
+		result.DESCRIPTION = DESCRIPTION;
+		result.TYPE = TYPE;
+		result.OWNED_LIMIT = OWNED_LIMIT;
 		return result;
 	}
 

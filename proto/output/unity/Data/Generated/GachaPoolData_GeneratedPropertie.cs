@@ -39,16 +39,16 @@ public partial class GachaPoolData : AbstractData
 
 	public AbilityData Clone() {
 		var result = new AbilityData();
-		result.id = id;
-		result.name = name;
-		result.gacha_id = gacha_id;
-		result.base_gacha_pool_id = base_gacha_pool_id;
-		result.is_extra = is_extra;
-		result.is_pickup = is_pickup;
-		result.is_guarantee = is_guarantee;
-		result.rarity = rarity;
-		result.attribute = attribute;
-		result.weight = weight;
+		result.ID = ID;
+		result.NAME = NAME;
+		result.GACHA_ID = GACHA_ID;
+		result.BASE_GACHA_POOL_ID = BASE_GACHA_POOL_ID;
+		result.IS_EXTRA = IS_EXTRA;
+		result.IS_PICKUP = IS_PICKUP;
+		result.IS_GUARANTEE = IS_GUARANTEE;
+		result.RARITY = RARITY;
+		result.ATTRIBUTE = ATTRIBUTE;
+		result.WEIGHT = WEIGHT;
 		return result;
 	}
 

@@ -15,8 +15,8 @@ public partial class ResourceTypeIdData : AbstractData
 
 	public AbilityData Clone() {
 		var result = new AbilityData();
-		result.resource_type = resource_type;
-		result.resource_id = resource_id;
+		result.RESOURCE_TYPE = RESOURCE_TYPE;
+		result.RESOURCE_ID = RESOURCE_ID;
 		return result;
 	}
 
