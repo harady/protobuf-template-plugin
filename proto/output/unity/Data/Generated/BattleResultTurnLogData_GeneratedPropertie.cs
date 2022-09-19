@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
@@ -20,7 +20,6 @@ public partial class BattleResultTurnLogData : AbstractData
 
 	[DataMember(Name = "killedEnemyMappingIds")]
 	public List<long> killedEnemyMappingIds { get; set; } = new List<long>();
-
 	[DataMember(Name = "totalWaitingTime")]
 	public float totalWaitingTime { get; set; }
 

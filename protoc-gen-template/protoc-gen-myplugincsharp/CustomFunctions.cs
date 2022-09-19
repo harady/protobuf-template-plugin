@@ -38,6 +38,11 @@ public class CustomFunctions : ScriptObject
 			: param.Type.ToCsTypeName();
 	}
 
+	public static bool IsRepeated(FieldDescriptorProto param)
+	{
+		return param.Label == FieldDescriptorProto.Types.Label.Repeated;
+	}
+
 	public static void SetupCustomFunction(ScriptObject target)
 	{
 		target.Import("to_camel",
@@ -53,5 +58,7 @@ public class CustomFunctions : ScriptObject
 
 		target.Import("to_cs_type",
 			new Func<FieldDescriptorProto, string>(type => ToCsType(type)));
+		target.Import("is_repeated",
+			new Func<FieldDescriptorProto, bool>(type => IsRepeated(type)));
 	}
 }

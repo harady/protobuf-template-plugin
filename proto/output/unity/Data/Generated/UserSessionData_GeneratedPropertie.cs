@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
@@ -17,11 +17,6 @@ public partial class UserSessionData : AbstractData
 
 	[DataMember(Name = "expireAt")]
 	public long expireAt { get; set; }
-
-	public DateTime ExpireAt {
-		get { return ServerDateTimeUtil.FromEpoch(expireAt); }
-		set { expireAt = ServerDateTimeUtil.ToEpoch(value); }
-	}
 
 	public UserSessionData Clone() {
 		var result = new UserSessionData();

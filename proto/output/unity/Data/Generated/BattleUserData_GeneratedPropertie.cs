@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
@@ -11,7 +11,6 @@ public partial class BattleUserData : AbstractData
 
 	[DataMember(Name = "userUnitIds")]
 	public List<long> userUnitIds { get; set; } = new List<long>();
-
 	public BattleUserData Clone() {
 		var result = new BattleUserData();
 		result.otherUser = otherUser;

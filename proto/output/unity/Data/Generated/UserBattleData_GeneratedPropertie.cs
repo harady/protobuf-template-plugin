@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
@@ -26,11 +26,6 @@ public partial class UserBattleData : AbstractData
 
 	[DataMember(Name = "startAt")]
 	public long startAt { get; set; }
-
-	public DateTime StartAt {
-		get { return ServerDateTimeUtil.FromEpoch(startAt); }
-		set { startAt = ServerDateTimeUtil.ToEpoch(value); }
-	}
 
 	public UserBattleData Clone() {
 		var result = new UserBattleData();

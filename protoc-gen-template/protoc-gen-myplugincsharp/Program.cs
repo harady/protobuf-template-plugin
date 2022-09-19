@@ -36,7 +36,7 @@ namespace protoc_gen_myplugincsharp
 						.ToPascalCase();
 				filename += paramDict["fileSuffix"];
 
-				//fileDesc.MessageType[0].Field[0].typ
+				//fileDesc.MessageType[0].Field[0].Label
 
 				var model = new { File = fileDesc };
 				var scriptObject = new ScriptObject();

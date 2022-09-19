@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
@@ -27,18 +27,8 @@ public partial class GachaPoolItemData : AbstractData
 	[DataMember(Name = "openAt")]
 	public long openAt { get; set; }
 
-	public DateTime OpenAt {
-		get { return ServerDateTimeUtil.FromEpoch(openAt); }
-		set { openAt = ServerDateTimeUtil.ToEpoch(value); }
-	}
-
 	[DataMember(Name = "closeAt")]
 	public long closeAt { get; set; }
-
-	public DateTime CloseAt {
-		get { return ServerDateTimeUtil.FromEpoch(closeAt); }
-		set { closeAt = ServerDateTimeUtil.ToEpoch(value); }
-	}
 
 	public GachaPoolItemData Clone() {
 		var result = new GachaPoolItemData();

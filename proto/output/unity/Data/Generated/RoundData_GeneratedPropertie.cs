@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
@@ -26,8 +26,6 @@ public partial class RoundData : AbstractData
 		result.roundNo = roundNo;
 		return result;
 	}
-
-	public string idNameText => GetIdNameText(id, name);
 
 	public override string ToString()
 	{

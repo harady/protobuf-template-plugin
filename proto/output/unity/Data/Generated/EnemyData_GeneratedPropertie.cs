@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
@@ -66,8 +66,6 @@ public partial class EnemyData : AbstractData
 		result.rewardResourceLotteryId = rewardResourceLotteryId;
 		return result;
 	}
-
-	public string idNameText => GetIdNameText(id, name);
 
 	public override string ToString()
 	{

@@ -2,24 +2,33 @@
 using System.Collections.Generic;
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
+{{- has_id = (file.message_type[0].name == "id") }}
 {{ for message in file.message_type }}
 [DataContract]
 public partial class {{ message.name }} : AbstractData
 {
 {{- for field in message.field }}
 	[DataMember(Name = "{{ field.name | to_camel }}")]
+{{- if !(field | is_repeated) }}
 	public {{ field | to_cs_type }} {{ field.name | to_camel }} { get; set; }
-{{ end }}
-	public AbilityData Clone() {
+{{ else }}
+	public List<{{ field | to_cs_type }}> {{ field.name | to_camel }} { get; set; } = new List<{{ field | to_cs_type }}>();
+{{- end }}
+{{- end }}
+	public {{ message.name }} Clone() {
 		var result = new {{ message.name }}();
 {{- for field in message.field }}
 		result.{{ field.name | to_camel }} = {{ field.name | to_camel }};
 {{- end }}
 		return result;
 	}
-
+{{ if has_id }}
+{{- for field in message.field }}
+{{ if field.name == "name" }}
 	public string idNameText => GetIdNameText(id, name);
-
+{{- end }}
+{{- end }}
+{{ end }}
 	public override string ToString()
 	{
 		return JsonConvert.SerializeObject(this);

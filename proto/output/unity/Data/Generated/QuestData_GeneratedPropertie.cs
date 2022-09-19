@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
@@ -15,8 +15,8 @@ public partial class QuestData : AbstractData
 	[DataMember(Name = "questGroupId")]
 	public long questGroupId { get; set; }
 
-	[DataMember(Name = "noContinue")]
-	public bool noContinue { get; set; }
+	[DataMember(Name = "nocontinue")]
+	public bool nocontinue { get; set; }
 
 	[DataMember(Name = "questDifficultyType")]
 	public QuestDifficultyType questDifficultyType { get; set; }
@@ -27,18 +27,8 @@ public partial class QuestData : AbstractData
 	[DataMember(Name = "openAt")]
 	public long openAt { get; set; }
 
-	public DateTime OpenAt {
-		get { return ServerDateTimeUtil.FromEpoch(openAt); }
-		set { openAt = ServerDateTimeUtil.ToEpoch(value); }
-	}
-
 	[DataMember(Name = "closeAt")]
 	public long closeAt { get; set; }
-
-	public DateTime CloseAt {
-		get { return ServerDateTimeUtil.FromEpoch(closeAt); }
-		set { closeAt = ServerDateTimeUtil.ToEpoch(value); }
-	}
 
 	[DataMember(Name = "openDow")]
 	public long openDow { get; set; }
@@ -48,7 +38,7 @@ public partial class QuestData : AbstractData
 		result.id = id;
 		result.name = name;
 		result.questGroupId = questGroupId;
-		result.noContinue = noContinue;
+		result.nocontinue = nocontinue;
 		result.questDifficultyType = questDifficultyType;
 		result.bossUnitId = bossUnitId;
 		result.openAt = openAt;
@@ -56,8 +46,6 @@ public partial class QuestData : AbstractData
 		result.openDow = openDow;
 		return result;
 	}
-
-	public string idNameText => GetIdNameText(id, name);
 
 	public override string ToString()
 	{
