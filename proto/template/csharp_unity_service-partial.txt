@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using UnityEngine;
 
-{{ for serv in file.service }}
-public partial class {{ serv.name }}Service
+{{ for service in file.service }}
+public partial class {{ service.name }}Service
 {
-{{ for method in serv.method }}
+{{ for method in service.method }}
 	public void {{ method.name }}(Action<{{ method.output_type }}> onSuccess)
 	{
-		var request = new {{ method.output_type }}();
+		var request = new {{ method.input_type }}();
 		{{ method.name }}Inner(
 			request: request,
 			onSuccess: (response) => {
