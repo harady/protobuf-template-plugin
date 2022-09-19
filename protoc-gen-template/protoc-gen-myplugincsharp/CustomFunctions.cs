@@ -1,5 +1,6 @@
 ﻿using System;
 using Scriban.Runtime;
+using Google.Protobuf.Reflection;
 
 public class CustomFunctions : ScriptObject
 {
@@ -28,6 +29,12 @@ public class CustomFunctions : ScriptObject
 	{
 		return text.ToSnakeCase().ToUpper();
 	}
+
+	public static string CsType(FieldDescriptorProto param)
+	{
+		return param.HasName ? ;
+	}
+
 
 	public static void SetupCustomFunction(ScriptObject target)
 	{
