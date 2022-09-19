@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using Google.Protobuf;
 using Google.Protobuf.Compiler;
+using Scriban;
 
 namespace protoc_gen_myplugincsharp
 {
@@ -28,8 +29,8 @@ namespace protoc_gen_myplugincsharp
 			var templatePath = (string)paramDict["template"];
 
 			var templateStr = File.ReadAllText(templatePath);
-			//var template = Template.Parse(templateStr);
-			//var result = template.Render(new { Name = "World" }); // => "Hello World!" 
+			var template = Template.Parse(templateStr);
+			var result = template.Render(new { Name = "World" }); // => "Hello World!" 
 
 			var response = new CodeGeneratorResponse();
 			var fileToGenerates = request.FileToGenerate.ToHashSet();
@@ -71,7 +72,7 @@ namespace protoc_gen_myplugincsharp
 				response.File.Add(
 					new CodeGeneratorResponse.Types.File() {
 						Name = filename,
-						Content = templateStr.ToString(),
+						Content = result.ToString(),
 					}
 				);
 			}
