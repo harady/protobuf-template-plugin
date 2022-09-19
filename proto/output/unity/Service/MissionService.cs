@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using UnityEngine;
@@ -7,9 +7,9 @@ using UnityEngine;
 public partial class MissionService
 {
 
-	public void Achieve(Action<MissionAchieveResponse> onSuccess)
+	public void Achieve(Action<> onSuccess)
 	{
-		var request = new MissionAchieveRequest();
+		var request = new ();
 		AchieveInner(
 			request: request,
 			onSuccess: (response) => {
@@ -18,9 +18,9 @@ public partial class MissionService
 		);
 	}
 
-	public void Receive(Action<MissionReceiveResponse> onSuccess)
+	public void Receive(Action<> onSuccess)
 	{
-		var request = new MissionReceiveRequest();
+		var request = new ();
 		ReceiveInner(
 			request: request,
 			onSuccess: (response) => {

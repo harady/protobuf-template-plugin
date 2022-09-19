@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using UnityEngine;
@@ -7,9 +7,9 @@ using UnityEngine;
 public partial class SystemService
 {
 
-	public void Ping(Action<SystemPingResponse> onSuccess)
+	public void Ping(Action<> onSuccess)
 	{
-		var request = new SystemPingRequest();
+		var request = new ();
 		PingInner(
 			request: request,
 			onSuccess: (response) => {
@@ -18,9 +18,9 @@ public partial class SystemService
 		);
 	}
 
-	public void Signup(Action<SystemSignupResponse> onSuccess)
+	public void Signup(Action<> onSuccess)
 	{
-		var request = new SystemSignupRequest();
+		var request = new ();
 		SignupInner(
 			request: request,
 			onSuccess: (response) => {
@@ -29,9 +29,9 @@ public partial class SystemService
 		);
 	}
 
-	public void Login(Action<SystemLoginResponse> onSuccess)
+	public void Login(Action<> onSuccess)
 	{
-		var request = new SystemLoginRequest();
+		var request = new ();
 		LoginInner(
 			request: request,
 			onSuccess: (response) => {

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using UnityEngine;
@@ -7,9 +7,9 @@ using UnityEngine;
 public partial class BattleService
 {
 
-	public void HelperList(Action<BattleHelperListResponse> onSuccess)
+	public void HelperList(Action<> onSuccess)
 	{
-		var request = new BattleHelperListRequest();
+		var request = new ();
 		HelperListInner(
 			request: request,
 			onSuccess: (response) => {
@@ -18,9 +18,9 @@ public partial class BattleService
 		);
 	}
 
-	public void Start(Action<BattleStartResponse> onSuccess)
+	public void Start(Action<> onSuccess)
 	{
-		var request = new BattleStartRequest();
+		var request = new ();
 		StartInner(
 			request: request,
 			onSuccess: (response) => {
@@ -29,9 +29,9 @@ public partial class BattleService
 		);
 	}
 
-	public void Continue(Action<BattleContinueResponse> onSuccess)
+	public void Continue(Action<> onSuccess)
 	{
-		var request = new BattleContinueRequest();
+		var request = new ();
 		ContinueInner(
 			request: request,
 			onSuccess: (response) => {
@@ -40,9 +40,9 @@ public partial class BattleService
 		);
 	}
 
-	public void Giveup(Action<BattleGiveupResponse> onSuccess)
+	public void Giveup(Action<> onSuccess)
 	{
-		var request = new BattleGiveupRequest();
+		var request = new ();
 		GiveupInner(
 			request: request,
 			onSuccess: (response) => {
@@ -51,9 +51,9 @@ public partial class BattleService
 		);
 	}
 
-	public void Clear(Action<BattleClearResponse> onSuccess)
+	public void Clear(Action<> onSuccess)
 	{
-		var request = new BattleClearRequest();
+		var request = new ();
 		ClearInner(
 			request: request,
 			onSuccess: (response) => {

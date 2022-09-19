@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using UnityEngine;
@@ -7,9 +7,9 @@ using UnityEngine;
 public partial class OperationService
 {
 
-	public void Test(Action<OperationTestResponse> onSuccess)
+	public void Test(Action<> onSuccess)
 	{
-		var request = new OperationTestRequest();
+		var request = new ();
 		TestInner(
 			request: request,
 			onSuccess: (response) => {
@@ -18,9 +18,9 @@ public partial class OperationService
 		);
 	}
 
-	public void Test1(Action<OperationTestResponse> onSuccess)
+	public void Test1(Action<> onSuccess)
 	{
-		var request = new OperationTestRequest();
+		var request = new ();
 		Test1Inner(
 			request: request,
 			onSuccess: (response) => {
@@ -29,9 +29,9 @@ public partial class OperationService
 		);
 	}
 
-	public void Test2(Action<OperationTestResponse> onSuccess)
+	public void Test2(Action<> onSuccess)
 	{
-		var request = new OperationTestRequest();
+		var request = new ();
 		Test2Inner(
 			request: request,
 			onSuccess: (response) => {
@@ -40,9 +40,9 @@ public partial class OperationService
 		);
 	}
 
-	public void Test3(Action<OperationTestResponse> onSuccess)
+	public void Test3(Action<> onSuccess)
 	{
-		var request = new OperationTestRequest();
+		var request = new ();
 		Test3Inner(
 			request: request,
 			onSuccess: (response) => {
@@ -51,9 +51,9 @@ public partial class OperationService
 		);
 	}
 
-	public void Test4(Action<OperationTestResponse> onSuccess)
+	public void Test4(Action<> onSuccess)
 	{
-		var request = new OperationTestRequest();
+		var request = new ();
 		Test4Inner(
 			request: request,
 			onSuccess: (response) => {
@@ -62,9 +62,9 @@ public partial class OperationService
 		);
 	}
 
-	public void Test5(Action<OperationTestResponse> onSuccess)
+	public void Test5(Action<> onSuccess)
 	{
-		var request = new OperationTestRequest();
+		var request = new ();
 		Test5Inner(
 			request: request,
 			onSuccess: (response) => {
@@ -73,9 +73,9 @@ public partial class OperationService
 		);
 	}
 
-	public void UpdateMasterVersion(Action<OperationUpdateMasterVersionResponse> onSuccess)
+	public void UpdateMasterVersion(Action<> onSuccess)
 	{
-		var request = new OperationUpdateMasterVersionRequest();
+		var request = new ();
 		UpdateMasterVersionInner(
 			request: request,
 			onSuccess: (response) => {
@@ -84,9 +84,9 @@ public partial class OperationService
 		);
 	}
 
-	public void UpdateEventSchedule(Action<OperationUpdateEventScheduleResponse> onSuccess)
+	public void UpdateEventSchedule(Action<> onSuccess)
 	{
-		var request = new OperationUpdateEventScheduleRequest();
+		var request = new ();
 		UpdateEventScheduleInner(
 			request: request,
 			onSuccess: (response) => {

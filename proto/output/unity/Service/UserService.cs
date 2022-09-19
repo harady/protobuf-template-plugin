@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using UnityEngine;
@@ -7,9 +7,9 @@ using UnityEngine;
 public partial class UserService
 {
 
-	public void DataList(Action<UserDataListResponse> onSuccess)
+	public void DataList(Action<> onSuccess)
 	{
-		var request = new UserDataListRequest();
+		var request = new ();
 		DataListInner(
 			request: request,
 			onSuccess: (response) => {
@@ -18,9 +18,9 @@ public partial class UserService
 		);
 	}
 
-	public void NameEdit(Action<UserNameEditResponse> onSuccess)
+	public void NameEdit(Action<> onSuccess)
 	{
-		var request = new UserNameEditRequest();
+		var request = new ();
 		NameEditInner(
 			request: request,
 			onSuccess: (response) => {

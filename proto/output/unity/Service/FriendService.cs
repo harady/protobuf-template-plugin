@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using UnityEngine;
@@ -7,9 +7,9 @@ using UnityEngine;
 public partial class FriendService
 {
 
-	public void List(Action<FriendListResponse> onSuccess)
+	public void List(Action<> onSuccess)
 	{
-		var request = new FriendListRequest();
+		var request = new ();
 		ListInner(
 			request: request,
 			onSuccess: (response) => {
@@ -18,9 +18,9 @@ public partial class FriendService
 		);
 	}
 
-	public void Remove(Action<FriendRemoveResponse> onSuccess)
+	public void Remove(Action<> onSuccess)
 	{
-		var request = new FriendRemoveRequest();
+		var request = new ();
 		RemoveInner(
 			request: request,
 			onSuccess: (response) => {
@@ -29,9 +29,9 @@ public partial class FriendService
 		);
 	}
 
-	public void Search(Action<FriendSearchResponse> onSuccess)
+	public void Search(Action<> onSuccess)
 	{
-		var request = new FriendSearchRequest();
+		var request = new ();
 		SearchInner(
 			request: request,
 			onSuccess: (response) => {
@@ -40,9 +40,9 @@ public partial class FriendService
 		);
 	}
 
-	public void Request(Action<FriendRequestResponse> onSuccess)
+	public void Request(Action<> onSuccess)
 	{
-		var request = new FriendRequestRequest();
+		var request = new ();
 		RequestInner(
 			request: request,
 			onSuccess: (response) => {

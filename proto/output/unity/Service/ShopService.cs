@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using UnityEngine;
@@ -7,9 +7,9 @@ using UnityEngine;
 public partial class ShopService
 {
 
-	public void PurchaseGooglePlay(Action<ShopPurchaseGooglePlayResponse> onSuccess)
+	public void PurchaseGooglePlay(Action<> onSuccess)
 	{
-		var request = new ShopPurchaseGooglePlayRequest();
+		var request = new ();
 		PurchaseGooglePlayInner(
 			request: request,
 			onSuccess: (response) => {
@@ -18,9 +18,9 @@ public partial class ShopService
 		);
 	}
 
-	public void PurchaseAppStore(Action<ShopPurchaseAppStoreResponse> onSuccess)
+	public void PurchaseAppStore(Action<> onSuccess)
 	{
-		var request = new ShopPurchaseAppStoreRequest();
+		var request = new ();
 		PurchaseAppStoreInner(
 			request: request,
 			onSuccess: (response) => {
@@ -29,9 +29,9 @@ public partial class ShopService
 		);
 	}
 
-	public void PurchaseDebug(Action<ShopPurchaseDebugResponse> onSuccess)
+	public void PurchaseDebug(Action<> onSuccess)
 	{
-		var request = new ShopPurchaseDebugRequest();
+		var request = new ();
 		PurchaseDebugInner(
 			request: request,
 			onSuccess: (response) => {

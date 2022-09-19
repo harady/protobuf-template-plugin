@@ -3,14 +3,14 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using UnityEngine;
 
-{{ for service in file.service }}
-public partial class {{ service.name }}Service
+{{ for serv in file.service }}
+public partial class {{ serv.name }}Service
 {
-{{ for service in service }}
-	public void {{ .Name }}(Action<{{ .Response.Name }}> onSuccess)
+{{ for method in serv.method }}
+	public void {{ method.name }}(Action<{{ method.output_type.name }}> onSuccess)
 	{
-		var request = new {{ .Request.Name }}();
-		{{ .Name }}Inner(
+		var request = new {{ method.output_type.name }}();
+		{{ method.name }}Inner(
 			request: request,
 			onSuccess: (response) => {
 				onSuccess?.Invoke(response);

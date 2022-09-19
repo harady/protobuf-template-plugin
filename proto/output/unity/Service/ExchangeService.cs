@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using UnityEngine;
@@ -7,9 +7,9 @@ using UnityEngine;
 public partial class ExchangeService
 {
 
-	public void Exchange(Action<ExchangeExchangeResponse> onSuccess)
+	public void Exchange(Action<> onSuccess)
 	{
-		var request = new ExchangeExchangeRequest();
+		var request = new ();
 		ExchangeInner(
 			request: request,
 			onSuccess: (response) => {

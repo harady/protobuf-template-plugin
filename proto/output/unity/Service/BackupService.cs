@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using UnityEngine;
@@ -7,9 +7,9 @@ using UnityEngine;
 public partial class BackupService
 {
 
-	public void SaveToken(Action<BackupSaveTokenResponse> onSuccess)
+	public void SaveToken(Action<> onSuccess)
 	{
-		var request = new BackupSaveTokenRequest();
+		var request = new ();
 		SaveTokenInner(
 			request: request,
 			onSuccess: (response) => {
@@ -18,9 +18,9 @@ public partial class BackupService
 		);
 	}
 
-	public void RemoveToken(Action<BackupRemoveTokenResponse> onSuccess)
+	public void RemoveToken(Action<> onSuccess)
 	{
-		var request = new BackupRemoveTokenRequest();
+		var request = new ();
 		RemoveTokenInner(
 			request: request,
 			onSuccess: (response) => {
@@ -29,9 +29,9 @@ public partial class BackupService
 		);
 	}
 
-	public void Transfer(Action<BackupTransferResponse> onSuccess)
+	public void Transfer(Action<> onSuccess)
 	{
-		var request = new BackupTransferRequest();
+		var request = new ();
 		TransferInner(
 			request: request,
 			onSuccess: (response) => {

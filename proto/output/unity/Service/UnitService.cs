@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using UnityEngine;
@@ -7,9 +7,9 @@ using UnityEngine;
 public partial class UnitService
 {
 
-	public void DeckEdit(Action<UnitDeckEditResponse> onSuccess)
+	public void DeckEdit(Action<> onSuccess)
 	{
-		var request = new UnitDeckEditRequest();
+		var request = new ();
 		DeckEditInner(
 			request: request,
 			onSuccess: (response) => {
@@ -18,9 +18,9 @@ public partial class UnitService
 		);
 	}
 
-	public void Powerup(Action<UnitPowerupResponse> onSuccess)
+	public void Powerup(Action<> onSuccess)
 	{
-		var request = new UnitPowerupRequest();
+		var request = new ();
 		PowerupInner(
 			request: request,
 			onSuccess: (response) => {
@@ -29,9 +29,9 @@ public partial class UnitService
 		);
 	}
 
-	public void Evolution(Action<UnitEvolutionResponse> onSuccess)
+	public void Evolution(Action<> onSuccess)
 	{
-		var request = new UnitEvolutionRequest();
+		var request = new ();
 		EvolutionInner(
 			request: request,
 			onSuccess: (response) => {
@@ -40,9 +40,9 @@ public partial class UnitService
 		);
 	}
 
-	public void Sell(Action<UnitSellResponse> onSuccess)
+	public void Sell(Action<> onSuccess)
 	{
-		var request = new UnitSellRequest();
+		var request = new ();
 		SellInner(
 			request: request,
 			onSuccess: (response) => {
@@ -51,9 +51,9 @@ public partial class UnitService
 		);
 	}
 
-	public void Lock(Action<UnitLockResponse> onSuccess)
+	public void Lock(Action<> onSuccess)
 	{
-		var request = new UnitLockRequest();
+		var request = new ();
 		LockInner(
 			request: request,
 			onSuccess: (response) => {

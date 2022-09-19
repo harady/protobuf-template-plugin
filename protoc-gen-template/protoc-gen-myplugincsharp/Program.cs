@@ -37,6 +37,8 @@ namespace protoc_gen_myplugincsharp
 				filename += paramDict["fileSuffix"];
 
 				//fileDesc.MessageType[0].Field[0].Name
+				//fileDesc.Service[0].Method[0].InputType
+				//fileDesc.Service[0]
 
 				var model = new { File = fileDesc };
 				var scriptObject = new ScriptObject();
