@@ -1,1 +1,41 @@
-Hello !
+using System;
+using System.Collections.Generic;
+using System.Runtime.Serialization;
+using Newtonsoft.Json;
+
+[DataContract]
+public partial class UserUnitCollectionData : AbstractData
+{
+	[DataMember(Name = "id")]
+	public Int64 id { get; set; }
+
+	[DataMember(Name = "user_id")]
+	public Int64 user_id { get; set; }
+
+	[DataMember(Name = "unit_id")]
+	public Int64 unit_id { get; set; }
+
+	[DataMember(Name = "has_earned")]
+	public Bool has_earned { get; set; }
+
+	[DataMember(Name = "used_count")]
+	public Int64 used_count { get; set; }
+
+
+	public AbilityData Clone() {
+		var result = new AbilityData();
+		result.id = id;
+		result.user_id = user_id;
+		result.unit_id = unit_id;
+		result.has_earned = has_earned;
+		result.used_count = used_count;
+		return result;
+	}
+
+	public string idNameText => GetIdNameText(id, name);
+
+	public override string ToString()
+	{
+		return JsonConvert.SerializeObject(this);
+	}
+}

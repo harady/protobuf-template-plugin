@@ -1,1 +1,29 @@
-﻿Hello {{ name }}!
+﻿using System;
+using System.Collections.Generic;
+using System.Runtime.Serialization;
+using Newtonsoft.Json;
+{{ for message in file.message_type }}
+[DataContract]
+public partial class {{ message.name }} : AbstractData
+{
+{{- for field in message.field }}
+	[DataMember(Name = "{{ field.name }}")]
+	public {{ field.type }} {{ field.name }} { get; set; }
+{{ end }}
+
+	public AbilityData Clone() {
+		var result = new AbilityData();
+{{- for field in message.field }}
+		result.{{ field.name }} = {{ field.name }};
+{{- end }}
+		return result;
+	}
+
+	public string idNameText => GetIdNameText(id, name);
+
+	public override string ToString()
+	{
+		return JsonConvert.SerializeObject(this);
+	}
+}
+{{- end }}
