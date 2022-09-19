@@ -1,10 +1,8 @@
-using System;
 using System.Collections.Generic;
-using System.Runtime.Serialization;
-using Newtonsoft.Json;
+
 
 [DataContract]
-public partial class UserGachaButtonData : AbstractData
+public partial class UserGachaButtonData : IUnique<long>
 {
 	[DataMember(Name = "id")]
 	public long id { get; set; }

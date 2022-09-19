@@ -1,10 +1,8 @@
-using System;
 using System.Collections.Generic;
-using System.Runtime.Serialization;
-using Newtonsoft.Json;
+
 
 [DataContract]
-public partial class ResourceLotteryData : AbstractData
+public partial class ResourceLotteryData : IUnique<long>
 {
 	[DataMember(Name = "id")]
 	public long id { get; set; }

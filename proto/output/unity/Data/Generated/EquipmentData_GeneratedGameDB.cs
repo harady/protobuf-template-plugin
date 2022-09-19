@@ -1,10 +1,8 @@
-using System;
 using System.Collections.Generic;
-using System.Runtime.Serialization;
-using Newtonsoft.Json;
+
 
 [DataContract]
-public partial class EquipmentData : AbstractData
+public partial class EquipmentData : IUnique<long>
 {
 	[DataMember(Name = "id")]
 	public long id { get; set; }

@@ -1,10 +1,8 @@
-using System;
 using System.Collections.Generic;
-using System.Runtime.Serialization;
-using Newtonsoft.Json;
+
 
 [DataContract]
-public partial class ShopScheduleData : AbstractData
+public partial class ShopScheduleData : IUnique<long>
 {
 	[DataMember(Name = "id")]
 	public long id { get; set; }

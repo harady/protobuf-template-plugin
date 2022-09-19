@@ -1,10 +1,8 @@
-using System;
 using System.Collections.Generic;
-using System.Runtime.Serialization;
-using Newtonsoft.Json;
+
 
 [DataContract]
-public partial class GachaScheduleData : AbstractData
+public partial class GachaScheduleData : IUnique<long>
 {
 	[DataMember(Name = "id")]
 	public long id { get; set; }

@@ -1,43 +1,74 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Runtime.Serialization;
-using Newtonsoft.Json;
+﻿using System.Collections.Generic;
+
 {{ for message in file.message_type }}
-{{- has_id = (message.field[0].name == "id") }}
-[DataContract]
-public partial class {{ message.name }} : AbstractData
+{{- has_id = (message.field[0]message.name == "id") }}
+public partial class {{ message.name }} : IUnique<long>
 {
-{{- for field in message.field }}
-	[DataMember(Name = "{{ field.name | to_camel }}")]
-{{- if !(field | is_repeated) }}
-	public {{ field | to_cs_type }} {{ field.name | to_camel }} { get; set; }
-{{ else }}
-	public List<{{ field | to_cs_type }}> {{ field.name | to_camel }} { get; set; } = new List<{{ field | to_cs_type }}>();
-{{ end -}}
-{{ if (field.name | string.ends_with "_at") }}
-	public DateTime {{ field.name | to_pascal }} {
-		get { return ServerDateTimeUtil.FromEpoch({{ field.name | to_camel }}); }
-		set { {{ field.name | to_camel }} = ServerDateTimeUtil.ToEpoch(value); }
+	#region NullObject
+	public static {{ message.name }} Null => NullObjectContainer.Get<{{ message.name }}>();
+
+	public bool isNull => (this == Null);
+	#endregion
+	{{- if has_id }}
+	#region GameDbWrapper(DataTable)
+	public static DataTable<long, {{ message.name }}> dataTable {
+		get {
+			DataTable<long, {{ message.name }}> result;
+			if (GameDb.TableExists<long, {{ message.name }}>()) {
+				result = GameDb.From<long, {{ message.name }}>();
+			} else {
+				result = GameDb.CreateTable<long, {{ message.name }}>();
+				Setup{{ message.name }}TableIndexGenerated(result);
+				Setup{{ message.name }}TableIndex(result);
+			}
+			return result;
+		}
 	}
-{{ end -}}
-{{- end }}
-	public {{ message.name }} Clone() {
-		var result = new {{ message.name }}();
-{{- for field in message.field }}
-		result.{{ field.name | to_camel }} = {{ field.name | to_camel }};
-{{- end }}
-		return result;
-	}
-{{ if has_id }}
-{{- for field in message.field }}
-{{- if (field.name == "name") }}
-	public string idNameText => GetIdNameText(id, name);
-{{ end }}
-{{- end }}
-{{- end }}
-	public override string ToString()
+
+	public static int Count => dataTable.Count;
+
+	public static List<{{ message.name }}> GetDataList()
 	{
-		return JsonConvert.SerializeObject(this);
+		return dataTable.dataList;
 	}
+
+	public static void SetData({{ message.name }} data)
+	{
+		dataTable.Insert(data);
+	}
+
+	public static void AddDataList(IEnumerable<{{ message.name }}> dataList)
+	{
+		dataTable.InsertRange(dataList);
+	}
+
+	public static void SetDataList(IEnumerable<{{ message.name }}> dataList)
+	{
+		Clear();
+		dataTable.InsertRange(dataList);
+	}
+
+	public static void Clear()
+	{
+		dataTable.DeleteAll();
+	}
+
+	static partial void Setup{{ message.name }}TableIndex(DataTable<long, {{ message.name }}> targetDataTable);
+
+	private static void Setup{{ message.name }}TableIndexGenerated(DataTable<long, {{ message.name }}> targetDataTable)
+	{
+		{{- for field in message.field }}
+			{{- if or (eq field.name "id") (StrArrayContains $uniqueIndexess message.name) }}
+		targetDataTable.CreateUniqueIndex("{{ message.name | SnakeToPascal }}", aData => (object)aData.{{ message.name | to_camel }});
+			{{- end }}
+		{{- end }}
+		{{- for field in message.field }}
+			{{- if (StrArrayContains $Indexess message.name) }}
+		targetDataTable.CreateIndex("{{ message.name | to_pascal }}", aData => (object)aData.{{ message.name | to_camel }});
+			{{- end }}
+		{{- end }}
+	}
+	#endregion
+	{{- end }}
 }
 {{- end }}
