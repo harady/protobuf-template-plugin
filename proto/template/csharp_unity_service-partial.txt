@@ -7,9 +7,9 @@ using UnityEngine;
 public partial class {{ serv.name }}Service
 {
 {{ for method in serv.method }}
-	public void {{ method.name }}(Action<{{ method.output_type.name }}> onSuccess)
+	public void {{ method.name }}(Action<{{ method.output_type }}> onSuccess)
 	{
-		var request = new {{ method.output_type.name }}();
+		var request = new {{ method.output_type }}();
 		{{ method.name }}Inner(
 			request: request,
 			onSuccess: (response) => {
