@@ -1,6 +1,6 @@
 protoc_path : "bin/protoc"
-protoc_plugin_path : "plugin/protoc-gen-csharp-template"
-src_base_path : "./"
+protoc_plugin_path : "bin/plugin/protoc-gen-csharp-template"
+src_base_path : "proto/"
 template_base_path : "template/"
 out_base_path : "output/unity/"
 items:
