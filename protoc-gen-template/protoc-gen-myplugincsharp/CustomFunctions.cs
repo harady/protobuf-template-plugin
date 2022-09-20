@@ -1,7 +1,6 @@
 ﻿using System;
-using Scriban.Runtime;
 using Google.Protobuf.Reflection;
-using System.IO;
+using Scriban.Runtime;
 
 public class CustomFunctions : ScriptObject
 {
@@ -31,11 +30,21 @@ public class CustomFunctions : ScriptObject
 		return text.ToSnakeCase().ToUpper();
 	}
 
+	public static string ToShortName(string text)
+	{
+		return text.ReplaceRegex(".*\\.", "");
+	}
+
 	public static string ToCsType(FieldDescriptorProto param)
 	{
 		return param.HasTypeName
-			? param.TypeName.ReplaceRegex(".*\\.", "")
+			? ToShortName(param.TypeName)
 			: param.Type.ToCsTypeName();
+	}
+
+	public static bool IsRepeated(FieldDescriptorProto param)
+	{
+		return param.Label == FieldDescriptorProto.Types.Label.Repeated;
 	}
 
 	public static void SetupCustomFunction(ScriptObject target)
@@ -51,7 +60,12 @@ public class CustomFunctions : ScriptObject
 		target.Import("to_upper_snake",
 			new Func<string, string>(text => ToUpperSnake(text)));
 
+		target.Import("to_short_name",
+			new Func<string, string>(text => ToShortName(text)));
+
 		target.Import("to_cs_type",
 			new Func<FieldDescriptorProto, string>(type => ToCsType(type)));
+		target.Import("is_repeated",
+			new Func<FieldDescriptorProto, bool>(type => IsRepeated(type)));
 	}
 }
