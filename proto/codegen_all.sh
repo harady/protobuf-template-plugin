@@ -8,6 +8,8 @@
 # codegen_all.sh cp
 #================================
 
+SECONDS=0
+
 # 引数セットアップ.
 if [ $# = 0 ]; then
     param=""
@@ -29,8 +31,8 @@ ruby codegen.rb -i codegen_unity_cs.yml
 # マスターデータ側
 sh protoc_sheet.sh
 
-
 # 一時停止
 if [[ "$param" == *p* ]]; then
+  echo "$SECONDS [sec]"
   read -p "Press [Enter] key to resume."
 fi
