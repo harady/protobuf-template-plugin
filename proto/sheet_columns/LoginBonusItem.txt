@@ -1,2 +1,0 @@
-・login_bonus_items
-id	name	

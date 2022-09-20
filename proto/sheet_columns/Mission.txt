@@ -1,2 +1,0 @@
-・missions
-id	name	missionGroupId	type	toAchieveProgress	paramA	paramB	rewardResourceType	rewardResourceId	rewardResourceAmount	

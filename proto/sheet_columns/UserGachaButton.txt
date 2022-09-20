@@ -1,2 +1,0 @@
-・user_gacha_buttons
-id	userId	gachaButtonId	gachaScheduleId	purchaseCount	

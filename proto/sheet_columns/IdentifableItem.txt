@@ -1,2 +1,0 @@
-・identifable_items
-id	name	description	type	ownedLimit	

@@ -1,2 +1,0 @@
-・stages
-id	name	questId	stamina	earnExp	earnMoney	questDifficultyType	toUnlockStageId	baseStageId	
