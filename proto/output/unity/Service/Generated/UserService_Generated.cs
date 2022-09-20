@@ -1,4 +1,4 @@
-//GENERATED CODE, DO NOT EDIT !
+﻿//GENERATED CODE, DO NOT EDIT !
 using System;
 using System.Collections.Generic;
 using Newtonsoft.Json;
@@ -17,7 +17,7 @@ public partial class UserService : AbstractApiService
 		Action<UserDataListResponse> onSuccess,
 		Action<ErrorResponse> onFailure = null)
 	{
-		const string Path = "api/user/datalist";
+		const string Path = "api/user/data_list";
 		request.SetupCommon();
 		var apiRequest = new APIRequest(Path, request);
 		// リクエストを送信.
@@ -36,7 +36,7 @@ public partial class UserService : AbstractApiService
 		Action<UserNameEditResponse> onSuccess,
 		Action<ErrorResponse> onFailure = null)
 	{
-		const string Path = "api/user/nameedit";
+		const string Path = "api/user/name_edit";
 		request.SetupCommon();
 		var apiRequest = new APIRequest(Path, request);
 		// リクエストを送信.

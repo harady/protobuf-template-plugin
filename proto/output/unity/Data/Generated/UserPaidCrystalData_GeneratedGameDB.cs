@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 public partial class UserPaidCrystalData : IUnique<long>
 {
@@ -55,6 +55,7 @@ public partial class UserPaidCrystalData : IUnique<long>
 	private static void SetupUserPaidCrystalDataTableIndexGenerated(DataTable<long, UserPaidCrystalData> targetDataTable)
 	{
 		targetDataTable.CreateUniqueIndex("Id", aData => (object)aData.id);
+		targetDataTable.CreateIndex("UserId", aData => (object)aData.userId);
 	}
 	#endregion
 	#region DataTableUniqueIndex(Id)
@@ -73,4 +74,11 @@ public partial class UserPaidCrystalData : IUnique<long>
 		dataTable.DeleteByKey("Id", (object)id);
 	}
 	#endregion
+	#region DataTableIndex (UserId)
+	public static List<UserPaidCrystalData> GetDataListByUserId(long userId)
+	{
+		return dataTable.GetDataList("UserId", (object)userId);
+	}
+	#endregion
 }
+

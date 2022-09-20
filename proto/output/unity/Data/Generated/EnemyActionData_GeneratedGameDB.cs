@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 public partial class EnemyActionData : IUnique<long>
 {
@@ -55,6 +55,7 @@ public partial class EnemyActionData : IUnique<long>
 	private static void SetupEnemyActionDataTableIndexGenerated(DataTable<long, EnemyActionData> targetDataTable)
 	{
 		targetDataTable.CreateUniqueIndex("Id", aData => (object)aData.id);
+		targetDataTable.CreateIndex("EnemyId", aData => (object)aData.enemyId);
 	}
 	#endregion
 	#region DataTableUniqueIndex(Id)
@@ -73,4 +74,11 @@ public partial class EnemyActionData : IUnique<long>
 		dataTable.DeleteByKey("Id", (object)id);
 	}
 	#endregion
+	#region DataTableIndex (EnemyId)
+	public static List<EnemyActionData> GetDataListByEnemyId(long enemyId)
+	{
+		return dataTable.GetDataList("EnemyId", (object)enemyId);
+	}
+	#endregion
 }
+

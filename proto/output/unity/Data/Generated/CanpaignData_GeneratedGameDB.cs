@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 public partial class CanpaignData : IUnique<long>
 {
@@ -74,3 +74,4 @@ public partial class CanpaignData : IUnique<long>
 	}
 	#endregion
 }
+

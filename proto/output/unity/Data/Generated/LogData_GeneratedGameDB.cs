@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 public partial class LogData : IUnique<long>
 {
@@ -74,3 +74,4 @@ public partial class LogData : IUnique<long>
 	}
 	#endregion
 }
+

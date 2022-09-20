@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
@@ -15,8 +15,8 @@ public partial class QuestData : AbstractData
 	[DataMember(Name = "questGroupId")]
 	public long questGroupId { get; set; }
 
-	[DataMember(Name = "nocontinue")]
-	public bool nocontinue { get; set; }
+	[DataMember(Name = "noContinue")]
+	public bool noContinue { get; set; }
 
 	[DataMember(Name = "questDifficultyType")]
 	public QuestDifficultyType questDifficultyType { get; set; }
@@ -48,7 +48,7 @@ public partial class QuestData : AbstractData
 		result.id = id;
 		result.name = name;
 		result.questGroupId = questGroupId;
-		result.nocontinue = nocontinue;
+		result.noContinue = noContinue;
 		result.questDifficultyType = questDifficultyType;
 		result.bossUnitId = bossUnitId;
 		result.openAt = openAt;
