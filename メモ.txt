@@ -57,3 +57,5 @@ https://github.com/scriban/scriban
 
 Scribanを採用することにした。
 
+VisualStudio用のScribanのextension
+https://marketplace.visualstudio.com/items?itemName=xoofx.scriban
