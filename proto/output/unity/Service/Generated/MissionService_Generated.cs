@@ -13,18 +13,18 @@ public partial class MissionService : AbstractApiService
 	#endregion
 
 	private void AchieveInner(
-		.monstershot.MissionAchieveRequest request,
-		Action<.monstershot.MissionAchieveResponse> onSuccess,
+		MissionAchieveRequest request,
+		Action<MissionAchieveResponse> onSuccess,
 		Action<ErrorResponse> onFailure = null)
 	{
 		const string Path = "api/mission/achieve";
 		request.SetupCommon();
 		var apiRequest = new APIRequest(Path, request);
 		// リクエストを送信.
-		GetApiSender().SendRequest<.monstershot.MissionAchieveResponse>(
+		GetApiSender().SendRequest<MissionAchieveResponse>(
 			apiRequest: apiRequest,
 			onSuccess: (apiResponse) => {
-				var response = (.monstershot.MissionAchieveResponse)apiResponse;
+				var response = (MissionAchieveResponse)apiResponse;
 				onSuccess?.Invoke(response);
 			},
 			onFailure: onFailure
@@ -32,18 +32,18 @@ public partial class MissionService : AbstractApiService
 	}
 
 	private void ReceiveInner(
-		.monstershot.MissionReceiveRequest request,
-		Action<.monstershot.MissionReceiveResponse> onSuccess,
+		MissionReceiveRequest request,
+		Action<MissionReceiveResponse> onSuccess,
 		Action<ErrorResponse> onFailure = null)
 	{
 		const string Path = "api/mission/receive";
 		request.SetupCommon();
 		var apiRequest = new APIRequest(Path, request);
 		// リクエストを送信.
-		GetApiSender().SendRequest<.monstershot.MissionReceiveResponse>(
+		GetApiSender().SendRequest<MissionReceiveResponse>(
 			apiRequest: apiRequest,
 			onSuccess: (apiResponse) => {
-				var response = (.monstershot.MissionReceiveResponse)apiResponse;
+				var response = (MissionReceiveResponse)apiResponse;
 				onSuccess?.Invoke(response);
 			},
 			onFailure: onFailure
@@ -62,7 +62,7 @@ public partial class MissionAchieveRequest : CommonRequest
 	public long missionId { get; set; }
 }
 
-public partial class MissionAchieveResponse : CommonRequest
+public partial class MissionAchieveResponse : APIResponse
 {
 }
 
@@ -73,7 +73,7 @@ public partial class MissionReceiveRequest : CommonRequest
 		= new List<long>();
 }
 
-public partial class MissionReceiveResponse : CommonRequest
+public partial class MissionReceiveResponse : APIResponse
 {
 }
 #endregion

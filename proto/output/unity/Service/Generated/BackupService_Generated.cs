@@ -13,18 +13,18 @@ public partial class BackupService : AbstractApiService
 	#endregion
 
 	private void SaveTokenInner(
-		.monstershot.BackupSaveTokenRequest request,
-		Action<.monstershot.BackupSaveTokenResponse> onSuccess,
+		BackupSaveTokenRequest request,
+		Action<BackupSaveTokenResponse> onSuccess,
 		Action<ErrorResponse> onFailure = null)
 	{
 		const string Path = "api/backup/savetoken";
 		request.SetupCommon();
 		var apiRequest = new APIRequest(Path, request);
 		// リクエストを送信.
-		GetApiSender().SendRequest<.monstershot.BackupSaveTokenResponse>(
+		GetApiSender().SendRequest<BackupSaveTokenResponse>(
 			apiRequest: apiRequest,
 			onSuccess: (apiResponse) => {
-				var response = (.monstershot.BackupSaveTokenResponse)apiResponse;
+				var response = (BackupSaveTokenResponse)apiResponse;
 				onSuccess?.Invoke(response);
 			},
 			onFailure: onFailure
@@ -32,18 +32,18 @@ public partial class BackupService : AbstractApiService
 	}
 
 	private void RemoveTokenInner(
-		.monstershot.BackupRemoveTokenRequest request,
-		Action<.monstershot.BackupRemoveTokenResponse> onSuccess,
+		BackupRemoveTokenRequest request,
+		Action<BackupRemoveTokenResponse> onSuccess,
 		Action<ErrorResponse> onFailure = null)
 	{
 		const string Path = "api/backup/removetoken";
 		request.SetupCommon();
 		var apiRequest = new APIRequest(Path, request);
 		// リクエストを送信.
-		GetApiSender().SendRequest<.monstershot.BackupRemoveTokenResponse>(
+		GetApiSender().SendRequest<BackupRemoveTokenResponse>(
 			apiRequest: apiRequest,
 			onSuccess: (apiResponse) => {
-				var response = (.monstershot.BackupRemoveTokenResponse)apiResponse;
+				var response = (BackupRemoveTokenResponse)apiResponse;
 				onSuccess?.Invoke(response);
 			},
 			onFailure: onFailure
@@ -51,18 +51,18 @@ public partial class BackupService : AbstractApiService
 	}
 
 	private void TransferInner(
-		.monstershot.BackupTransferRequest request,
-		Action<.monstershot.BackupTransferResponse> onSuccess,
+		BackupTransferRequest request,
+		Action<BackupTransferResponse> onSuccess,
 		Action<ErrorResponse> onFailure = null)
 	{
 		const string Path = "api/backup/transfer";
 		request.SetupCommon();
 		var apiRequest = new APIRequest(Path, request);
 		// リクエストを送信.
-		GetApiSender().SendRequest<.monstershot.BackupTransferResponse>(
+		GetApiSender().SendRequest<BackupTransferResponse>(
 			apiRequest: apiRequest,
 			onSuccess: (apiResponse) => {
-				var response = (.monstershot.BackupTransferResponse)apiResponse;
+				var response = (BackupTransferResponse)apiResponse;
 				onSuccess?.Invoke(response);
 			},
 			onFailure: onFailure
@@ -83,7 +83,7 @@ public partial class BackupSaveTokenRequest : CommonRequest
 	public string backupToken { get; set; }
 }
 
-public partial class BackupSaveTokenResponse : CommonRequest
+public partial class BackupSaveTokenResponse : APIResponse
 {
 }
 
@@ -93,7 +93,7 @@ public partial class BackupRemoveTokenRequest : CommonRequest
 	public BackupType backupType { get; set; }
 }
 
-public partial class BackupRemoveTokenResponse : CommonRequest
+public partial class BackupRemoveTokenResponse : APIResponse
 {
 }
 
@@ -105,7 +105,7 @@ public partial class BackupTransferRequest : CommonRequest
 	public string backupToken { get; set; }
 }
 
-public partial class BackupTransferResponse : CommonRequest
+public partial class BackupTransferResponse : APIResponse
 {
 	[JsonProperty("token")]
 	public string token { get; set; }

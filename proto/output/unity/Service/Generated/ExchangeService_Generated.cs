@@ -13,18 +13,18 @@ public partial class ExchangeService : AbstractApiService
 	#endregion
 
 	private void ExchangeInner(
-		.monstershot.ExchangeExchangeRequest request,
-		Action<.monstershot.ExchangeExchangeResponse> onSuccess,
+		ExchangeExchangeRequest request,
+		Action<ExchangeExchangeResponse> onSuccess,
 		Action<ErrorResponse> onFailure = null)
 	{
 		const string Path = "api/exchange/exchange";
 		request.SetupCommon();
 		var apiRequest = new APIRequest(Path, request);
 		// リクエストを送信.
-		GetApiSender().SendRequest<.monstershot.ExchangeExchangeResponse>(
+		GetApiSender().SendRequest<ExchangeExchangeResponse>(
 			apiRequest: apiRequest,
 			onSuccess: (apiResponse) => {
-				var response = (.monstershot.ExchangeExchangeResponse)apiResponse;
+				var response = (ExchangeExchangeResponse)apiResponse;
 				onSuccess?.Invoke(response);
 			},
 			onFailure: onFailure
@@ -45,7 +45,7 @@ public partial class ExchangeExchangeRequest : CommonRequest
 	public long exchangeCount { get; set; }
 }
 
-public partial class ExchangeExchangeResponse : CommonRequest
+public partial class ExchangeExchangeResponse : APIResponse
 {
 }
 #endregion

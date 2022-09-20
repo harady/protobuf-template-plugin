@@ -13,18 +13,18 @@ public partial class ShopService : AbstractApiService
 	#endregion
 
 	private void PurchaseGooglePlayInner(
-		.monstershot.ShopPurchaseGooglePlayRequest request,
-		Action<.monstershot.ShopPurchaseGooglePlayResponse> onSuccess,
+		ShopPurchaseGooglePlayRequest request,
+		Action<ShopPurchaseGooglePlayResponse> onSuccess,
 		Action<ErrorResponse> onFailure = null)
 	{
 		const string Path = "api/shop/purchasegoogleplay";
 		request.SetupCommon();
 		var apiRequest = new APIRequest(Path, request);
 		// リクエストを送信.
-		GetApiSender().SendRequest<.monstershot.ShopPurchaseGooglePlayResponse>(
+		GetApiSender().SendRequest<ShopPurchaseGooglePlayResponse>(
 			apiRequest: apiRequest,
 			onSuccess: (apiResponse) => {
-				var response = (.monstershot.ShopPurchaseGooglePlayResponse)apiResponse;
+				var response = (ShopPurchaseGooglePlayResponse)apiResponse;
 				onSuccess?.Invoke(response);
 			},
 			onFailure: onFailure
@@ -32,18 +32,18 @@ public partial class ShopService : AbstractApiService
 	}
 
 	private void PurchaseAppStoreInner(
-		.monstershot.ShopPurchaseAppStoreRequest request,
-		Action<.monstershot.ShopPurchaseAppStoreResponse> onSuccess,
+		ShopPurchaseAppStoreRequest request,
+		Action<ShopPurchaseAppStoreResponse> onSuccess,
 		Action<ErrorResponse> onFailure = null)
 	{
 		const string Path = "api/shop/purchaseappstore";
 		request.SetupCommon();
 		var apiRequest = new APIRequest(Path, request);
 		// リクエストを送信.
-		GetApiSender().SendRequest<.monstershot.ShopPurchaseAppStoreResponse>(
+		GetApiSender().SendRequest<ShopPurchaseAppStoreResponse>(
 			apiRequest: apiRequest,
 			onSuccess: (apiResponse) => {
-				var response = (.monstershot.ShopPurchaseAppStoreResponse)apiResponse;
+				var response = (ShopPurchaseAppStoreResponse)apiResponse;
 				onSuccess?.Invoke(response);
 			},
 			onFailure: onFailure
@@ -51,18 +51,18 @@ public partial class ShopService : AbstractApiService
 	}
 
 	private void PurchaseDebugInner(
-		.monstershot.ShopPurchaseDebugRequest request,
-		Action<.monstershot.ShopPurchaseDebugResponse> onSuccess,
+		ShopPurchaseDebugRequest request,
+		Action<ShopPurchaseDebugResponse> onSuccess,
 		Action<ErrorResponse> onFailure = null)
 	{
 		const string Path = "api/shop/purchasedebug";
 		request.SetupCommon();
 		var apiRequest = new APIRequest(Path, request);
 		// リクエストを送信.
-		GetApiSender().SendRequest<.monstershot.ShopPurchaseDebugResponse>(
+		GetApiSender().SendRequest<ShopPurchaseDebugResponse>(
 			apiRequest: apiRequest,
 			onSuccess: (apiResponse) => {
-				var response = (.monstershot.ShopPurchaseDebugResponse)apiResponse;
+				var response = (ShopPurchaseDebugResponse)apiResponse;
 				onSuccess?.Invoke(response);
 			},
 			onFailure: onFailure
@@ -85,7 +85,7 @@ public partial class ShopPurchaseGooglePlayRequest : CommonRequest
 	public string signature { get; set; }
 }
 
-public partial class ShopPurchaseGooglePlayResponse : CommonRequest
+public partial class ShopPurchaseGooglePlayResponse : APIResponse
 {
 }
 
@@ -97,7 +97,7 @@ public partial class ShopPurchaseAppStoreRequest : CommonRequest
 	public string receipt { get; set; }
 }
 
-public partial class ShopPurchaseAppStoreResponse : CommonRequest
+public partial class ShopPurchaseAppStoreResponse : APIResponse
 {
 }
 
@@ -107,7 +107,7 @@ public partial class ShopPurchaseDebugRequest : CommonRequest
 	public long shopItemId { get; set; }
 }
 
-public partial class ShopPurchaseDebugResponse : CommonRequest
+public partial class ShopPurchaseDebugResponse : APIResponse
 {
 }
 #endregion

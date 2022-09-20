@@ -13,18 +13,18 @@ public partial class BattleService : AbstractApiService
 	#endregion
 
 	private void HelperListInner(
-		.monstershot.BattleHelperListRequest request,
-		Action<.monstershot.BattleHelperListResponse> onSuccess,
+		BattleHelperListRequest request,
+		Action<BattleHelperListResponse> onSuccess,
 		Action<ErrorResponse> onFailure = null)
 	{
 		const string Path = "api/battle/helperlist";
 		request.SetupCommon();
 		var apiRequest = new APIRequest(Path, request);
 		// リクエストを送信.
-		GetApiSender().SendRequest<.monstershot.BattleHelperListResponse>(
+		GetApiSender().SendRequest<BattleHelperListResponse>(
 			apiRequest: apiRequest,
 			onSuccess: (apiResponse) => {
-				var response = (.monstershot.BattleHelperListResponse)apiResponse;
+				var response = (BattleHelperListResponse)apiResponse;
 				onSuccess?.Invoke(response);
 			},
 			onFailure: onFailure
@@ -32,18 +32,18 @@ public partial class BattleService : AbstractApiService
 	}
 
 	private void StartInner(
-		.monstershot.BattleStartRequest request,
-		Action<.monstershot.BattleStartResponse> onSuccess,
+		BattleStartRequest request,
+		Action<BattleStartResponse> onSuccess,
 		Action<ErrorResponse> onFailure = null)
 	{
 		const string Path = "api/battle/start";
 		request.SetupCommon();
 		var apiRequest = new APIRequest(Path, request);
 		// リクエストを送信.
-		GetApiSender().SendRequest<.monstershot.BattleStartResponse>(
+		GetApiSender().SendRequest<BattleStartResponse>(
 			apiRequest: apiRequest,
 			onSuccess: (apiResponse) => {
-				var response = (.monstershot.BattleStartResponse)apiResponse;
+				var response = (BattleStartResponse)apiResponse;
 				onSuccess?.Invoke(response);
 			},
 			onFailure: onFailure
@@ -51,18 +51,18 @@ public partial class BattleService : AbstractApiService
 	}
 
 	private void ContinueInner(
-		.monstershot.BattleContinueRequest request,
-		Action<.monstershot.BattleContinueResponse> onSuccess,
+		BattleContinueRequest request,
+		Action<BattleContinueResponse> onSuccess,
 		Action<ErrorResponse> onFailure = null)
 	{
 		const string Path = "api/battle/continue";
 		request.SetupCommon();
 		var apiRequest = new APIRequest(Path, request);
 		// リクエストを送信.
-		GetApiSender().SendRequest<.monstershot.BattleContinueResponse>(
+		GetApiSender().SendRequest<BattleContinueResponse>(
 			apiRequest: apiRequest,
 			onSuccess: (apiResponse) => {
-				var response = (.monstershot.BattleContinueResponse)apiResponse;
+				var response = (BattleContinueResponse)apiResponse;
 				onSuccess?.Invoke(response);
 			},
 			onFailure: onFailure
@@ -70,18 +70,18 @@ public partial class BattleService : AbstractApiService
 	}
 
 	private void GiveupInner(
-		.monstershot.BattleGiveupRequest request,
-		Action<.monstershot.BattleGiveupResponse> onSuccess,
+		BattleGiveupRequest request,
+		Action<BattleGiveupResponse> onSuccess,
 		Action<ErrorResponse> onFailure = null)
 	{
 		const string Path = "api/battle/giveup";
 		request.SetupCommon();
 		var apiRequest = new APIRequest(Path, request);
 		// リクエストを送信.
-		GetApiSender().SendRequest<.monstershot.BattleGiveupResponse>(
+		GetApiSender().SendRequest<BattleGiveupResponse>(
 			apiRequest: apiRequest,
 			onSuccess: (apiResponse) => {
-				var response = (.monstershot.BattleGiveupResponse)apiResponse;
+				var response = (BattleGiveupResponse)apiResponse;
 				onSuccess?.Invoke(response);
 			},
 			onFailure: onFailure
@@ -89,18 +89,18 @@ public partial class BattleService : AbstractApiService
 	}
 
 	private void ClearInner(
-		.monstershot.BattleClearRequest request,
-		Action<.monstershot.BattleClearResponse> onSuccess,
+		BattleClearRequest request,
+		Action<BattleClearResponse> onSuccess,
 		Action<ErrorResponse> onFailure = null)
 	{
 		const string Path = "api/battle/clear";
 		request.SetupCommon();
 		var apiRequest = new APIRequest(Path, request);
 		// リクエストを送信.
-		GetApiSender().SendRequest<.monstershot.BattleClearResponse>(
+		GetApiSender().SendRequest<BattleClearResponse>(
 			apiRequest: apiRequest,
 			onSuccess: (apiResponse) => {
-				var response = (.monstershot.BattleClearResponse)apiResponse;
+				var response = (BattleClearResponse)apiResponse;
 				onSuccess?.Invoke(response);
 			},
 			onFailure: onFailure
@@ -119,7 +119,7 @@ public partial class BattleHelperListRequest : CommonRequest
 	public long stageId { get; set; }
 }
 
-public partial class BattleHelperListResponse : CommonRequest
+public partial class BattleHelperListResponse : APIResponse
 {
 	[JsonProperty("other_users")]
 	public List<OtherUserData> otherUsers { get; set; } 
@@ -136,7 +136,7 @@ public partial class BattleStartRequest : CommonRequest
 	public long helperUserId { get; set; }
 }
 
-public partial class BattleStartResponse : CommonRequest
+public partial class BattleStartResponse : APIResponse
 {
 	[JsonProperty("battle_id")]
 	public long battleId { get; set; }
@@ -150,7 +150,7 @@ public partial class BattleContinueRequest : CommonRequest
 	public long battleId { get; set; }
 }
 
-public partial class BattleContinueResponse : CommonRequest
+public partial class BattleContinueResponse : APIResponse
 {
 }
 
@@ -160,7 +160,7 @@ public partial class BattleGiveupRequest : CommonRequest
 	public long battleId { get; set; }
 }
 
-public partial class BattleGiveupResponse : CommonRequest
+public partial class BattleGiveupResponse : APIResponse
 {
 }
 
@@ -172,7 +172,7 @@ public partial class BattleClearRequest : CommonRequest
 	public BattleResultData battleResult { get; set; }
 }
 
-public partial class BattleClearResponse : CommonRequest
+public partial class BattleClearResponse : APIResponse
 {
 	[JsonProperty("result")]
 	public long result { get; set; }

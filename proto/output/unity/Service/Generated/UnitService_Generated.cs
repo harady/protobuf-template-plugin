@@ -13,18 +13,18 @@ public partial class UnitService : AbstractApiService
 	#endregion
 
 	private void DeckEditInner(
-		.monstershot.UnitDeckEditRequest request,
-		Action<.monstershot.UnitDeckEditResponse> onSuccess,
+		UnitDeckEditRequest request,
+		Action<UnitDeckEditResponse> onSuccess,
 		Action<ErrorResponse> onFailure = null)
 	{
 		const string Path = "api/unit/deckedit";
 		request.SetupCommon();
 		var apiRequest = new APIRequest(Path, request);
 		// リクエストを送信.
-		GetApiSender().SendRequest<.monstershot.UnitDeckEditResponse>(
+		GetApiSender().SendRequest<UnitDeckEditResponse>(
 			apiRequest: apiRequest,
 			onSuccess: (apiResponse) => {
-				var response = (.monstershot.UnitDeckEditResponse)apiResponse;
+				var response = (UnitDeckEditResponse)apiResponse;
 				onSuccess?.Invoke(response);
 			},
 			onFailure: onFailure
@@ -32,18 +32,18 @@ public partial class UnitService : AbstractApiService
 	}
 
 	private void PowerupInner(
-		.monstershot.UnitPowerupRequest request,
-		Action<.monstershot.UnitPowerupResponse> onSuccess,
+		UnitPowerupRequest request,
+		Action<UnitPowerupResponse> onSuccess,
 		Action<ErrorResponse> onFailure = null)
 	{
 		const string Path = "api/unit/powerup";
 		request.SetupCommon();
 		var apiRequest = new APIRequest(Path, request);
 		// リクエストを送信.
-		GetApiSender().SendRequest<.monstershot.UnitPowerupResponse>(
+		GetApiSender().SendRequest<UnitPowerupResponse>(
 			apiRequest: apiRequest,
 			onSuccess: (apiResponse) => {
-				var response = (.monstershot.UnitPowerupResponse)apiResponse;
+				var response = (UnitPowerupResponse)apiResponse;
 				onSuccess?.Invoke(response);
 			},
 			onFailure: onFailure
@@ -51,18 +51,18 @@ public partial class UnitService : AbstractApiService
 	}
 
 	private void EvolutionInner(
-		.monstershot.UnitEvolutionRequest request,
-		Action<.monstershot.UnitEvolutionResponse> onSuccess,
+		UnitEvolutionRequest request,
+		Action<UnitEvolutionResponse> onSuccess,
 		Action<ErrorResponse> onFailure = null)
 	{
 		const string Path = "api/unit/evolution";
 		request.SetupCommon();
 		var apiRequest = new APIRequest(Path, request);
 		// リクエストを送信.
-		GetApiSender().SendRequest<.monstershot.UnitEvolutionResponse>(
+		GetApiSender().SendRequest<UnitEvolutionResponse>(
 			apiRequest: apiRequest,
 			onSuccess: (apiResponse) => {
-				var response = (.monstershot.UnitEvolutionResponse)apiResponse;
+				var response = (UnitEvolutionResponse)apiResponse;
 				onSuccess?.Invoke(response);
 			},
 			onFailure: onFailure
@@ -70,18 +70,18 @@ public partial class UnitService : AbstractApiService
 	}
 
 	private void SellInner(
-		.monstershot.UnitSellRequest request,
-		Action<.monstershot.UnitSellResponse> onSuccess,
+		UnitSellRequest request,
+		Action<UnitSellResponse> onSuccess,
 		Action<ErrorResponse> onFailure = null)
 	{
 		const string Path = "api/unit/sell";
 		request.SetupCommon();
 		var apiRequest = new APIRequest(Path, request);
 		// リクエストを送信.
-		GetApiSender().SendRequest<.monstershot.UnitSellResponse>(
+		GetApiSender().SendRequest<UnitSellResponse>(
 			apiRequest: apiRequest,
 			onSuccess: (apiResponse) => {
-				var response = (.monstershot.UnitSellResponse)apiResponse;
+				var response = (UnitSellResponse)apiResponse;
 				onSuccess?.Invoke(response);
 			},
 			onFailure: onFailure
@@ -89,18 +89,18 @@ public partial class UnitService : AbstractApiService
 	}
 
 	private void LockInner(
-		.monstershot.UnitLockRequest request,
-		Action<.monstershot.UnitLockResponse> onSuccess,
+		UnitLockRequest request,
+		Action<UnitLockResponse> onSuccess,
 		Action<ErrorResponse> onFailure = null)
 	{
 		const string Path = "api/unit/lock";
 		request.SetupCommon();
 		var apiRequest = new APIRequest(Path, request);
 		// リクエストを送信.
-		GetApiSender().SendRequest<.monstershot.UnitLockResponse>(
+		GetApiSender().SendRequest<UnitLockResponse>(
 			apiRequest: apiRequest,
 			onSuccess: (apiResponse) => {
-				var response = (.monstershot.UnitLockResponse)apiResponse;
+				var response = (UnitLockResponse)apiResponse;
 				onSuccess?.Invoke(response);
 			},
 			onFailure: onFailure
@@ -119,7 +119,7 @@ public partial class UnitDeckEditRequest : CommonRequest
 	public UserDeckData userDeck { get; set; }
 }
 
-public partial class UnitDeckEditResponse : CommonRequest
+public partial class UnitDeckEditResponse : APIResponse
 {
 }
 
@@ -132,7 +132,7 @@ public partial class UnitPowerupRequest : CommonRequest
 		= new List<ResourceData>();
 }
 
-public partial class UnitPowerupResponse : CommonRequest
+public partial class UnitPowerupResponse : APIResponse
 {
 }
 
@@ -147,7 +147,7 @@ public partial class UnitEvolutionRequest : CommonRequest
 		= new List<ResourceData>();
 }
 
-public partial class UnitEvolutionResponse : CommonRequest
+public partial class UnitEvolutionResponse : APIResponse
 {
 }
 
@@ -158,7 +158,7 @@ public partial class UnitSellRequest : CommonRequest
 		= new List<long>();
 }
 
-public partial class UnitSellResponse : CommonRequest
+public partial class UnitSellResponse : APIResponse
 {
 }
 
@@ -170,7 +170,7 @@ public partial class UnitLockRequest : CommonRequest
 	public bool isLocked { get; set; }
 }
 
-public partial class UnitLockResponse : CommonRequest
+public partial class UnitLockResponse : APIResponse
 {
 }
 #endregion

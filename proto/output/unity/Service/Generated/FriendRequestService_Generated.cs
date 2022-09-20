@@ -13,18 +13,18 @@ public partial class FriendRequestService : AbstractApiService
 	#endregion
 
 	private void ListInner(
-		.monstershot.FriendRequestListRequest request,
-		Action<.monstershot.FriendRequestListResponse> onSuccess,
+		FriendRequestListRequest request,
+		Action<FriendRequestListResponse> onSuccess,
 		Action<ErrorResponse> onFailure = null)
 	{
 		const string Path = "api/friendrequest/list";
 		request.SetupCommon();
 		var apiRequest = new APIRequest(Path, request);
 		// リクエストを送信.
-		GetApiSender().SendRequest<.monstershot.FriendRequestListResponse>(
+		GetApiSender().SendRequest<FriendRequestListResponse>(
 			apiRequest: apiRequest,
 			onSuccess: (apiResponse) => {
-				var response = (.monstershot.FriendRequestListResponse)apiResponse;
+				var response = (FriendRequestListResponse)apiResponse;
 				onSuccess?.Invoke(response);
 			},
 			onFailure: onFailure
@@ -32,18 +32,18 @@ public partial class FriendRequestService : AbstractApiService
 	}
 
 	private void AcceptInner(
-		.monstershot.FriendRequestAcceptRequest request,
-		Action<.monstershot.FriendRequestAcceptResponse> onSuccess,
+		FriendRequestAcceptRequest request,
+		Action<FriendRequestAcceptResponse> onSuccess,
 		Action<ErrorResponse> onFailure = null)
 	{
 		const string Path = "api/friendrequest/accept";
 		request.SetupCommon();
 		var apiRequest = new APIRequest(Path, request);
 		// リクエストを送信.
-		GetApiSender().SendRequest<.monstershot.FriendRequestAcceptResponse>(
+		GetApiSender().SendRequest<FriendRequestAcceptResponse>(
 			apiRequest: apiRequest,
 			onSuccess: (apiResponse) => {
-				var response = (.monstershot.FriendRequestAcceptResponse)apiResponse;
+				var response = (FriendRequestAcceptResponse)apiResponse;
 				onSuccess?.Invoke(response);
 			},
 			onFailure: onFailure
@@ -51,18 +51,18 @@ public partial class FriendRequestService : AbstractApiService
 	}
 
 	private void RejectInner(
-		.monstershot.FriendRequestRejectRequest request,
-		Action<.monstershot.FriendRequestRejectResponse> onSuccess,
+		FriendRequestRejectRequest request,
+		Action<FriendRequestRejectResponse> onSuccess,
 		Action<ErrorResponse> onFailure = null)
 	{
 		const string Path = "api/friendrequest/reject";
 		request.SetupCommon();
 		var apiRequest = new APIRequest(Path, request);
 		// リクエストを送信.
-		GetApiSender().SendRequest<.monstershot.FriendRequestRejectResponse>(
+		GetApiSender().SendRequest<FriendRequestRejectResponse>(
 			apiRequest: apiRequest,
 			onSuccess: (apiResponse) => {
-				var response = (.monstershot.FriendRequestRejectResponse)apiResponse;
+				var response = (FriendRequestRejectResponse)apiResponse;
 				onSuccess?.Invoke(response);
 			},
 			onFailure: onFailure
@@ -79,7 +79,7 @@ public partial class FriendRequestListRequest : CommonRequest
 {
 }
 
-public partial class FriendRequestListResponse : CommonRequest
+public partial class FriendRequestListResponse : APIResponse
 {
 	[JsonProperty("other_users")]
 	public List<OtherUserData> otherUsers { get; set; } 
@@ -92,7 +92,7 @@ public partial class FriendRequestAcceptRequest : CommonRequest
 	public long userId { get; set; }
 }
 
-public partial class FriendRequestAcceptResponse : CommonRequest
+public partial class FriendRequestAcceptResponse : APIResponse
 {
 }
 
@@ -102,7 +102,7 @@ public partial class FriendRequestRejectRequest : CommonRequest
 	public long userId { get; set; }
 }
 
-public partial class FriendRequestRejectResponse : CommonRequest
+public partial class FriendRequestRejectResponse : APIResponse
 {
 }
 #endregion

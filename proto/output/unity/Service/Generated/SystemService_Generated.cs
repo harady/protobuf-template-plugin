@@ -13,18 +13,18 @@ public partial class SystemService : AbstractApiService
 	#endregion
 
 	private void PingInner(
-		.monstershot.SystemPingRequest request,
-		Action<.monstershot.SystemPingResponse> onSuccess,
+		SystemPingRequest request,
+		Action<SystemPingResponse> onSuccess,
 		Action<ErrorResponse> onFailure = null)
 	{
 		const string Path = "api/system/ping";
 		request.SetupCommon();
 		var apiRequest = new APIRequest(Path, request);
 		// リクエストを送信.
-		GetApiSender().SendRequest<.monstershot.SystemPingResponse>(
+		GetApiSender().SendRequest<SystemPingResponse>(
 			apiRequest: apiRequest,
 			onSuccess: (apiResponse) => {
-				var response = (.monstershot.SystemPingResponse)apiResponse;
+				var response = (SystemPingResponse)apiResponse;
 				onSuccess?.Invoke(response);
 			},
 			onFailure: onFailure
@@ -32,18 +32,18 @@ public partial class SystemService : AbstractApiService
 	}
 
 	private void SignupInner(
-		.monstershot.SystemSignupRequest request,
-		Action<.monstershot.SystemSignupResponse> onSuccess,
+		SystemSignupRequest request,
+		Action<SystemSignupResponse> onSuccess,
 		Action<ErrorResponse> onFailure = null)
 	{
 		const string Path = "api/system/signup";
 		request.SetupCommon();
 		var apiRequest = new APIRequest(Path, request);
 		// リクエストを送信.
-		GetApiSender().SendRequest<.monstershot.SystemSignupResponse>(
+		GetApiSender().SendRequest<SystemSignupResponse>(
 			apiRequest: apiRequest,
 			onSuccess: (apiResponse) => {
-				var response = (.monstershot.SystemSignupResponse)apiResponse;
+				var response = (SystemSignupResponse)apiResponse;
 				onSuccess?.Invoke(response);
 			},
 			onFailure: onFailure
@@ -51,18 +51,18 @@ public partial class SystemService : AbstractApiService
 	}
 
 	private void LoginInner(
-		.monstershot.SystemLoginRequest request,
-		Action<.monstershot.SystemLoginResponse> onSuccess,
+		SystemLoginRequest request,
+		Action<SystemLoginResponse> onSuccess,
 		Action<ErrorResponse> onFailure = null)
 	{
 		const string Path = "api/system/login";
 		request.SetupCommon();
 		var apiRequest = new APIRequest(Path, request);
 		// リクエストを送信.
-		GetApiSender().SendRequest<.monstershot.SystemLoginResponse>(
+		GetApiSender().SendRequest<SystemLoginResponse>(
 			apiRequest: apiRequest,
 			onSuccess: (apiResponse) => {
-				var response = (.monstershot.SystemLoginResponse)apiResponse;
+				var response = (SystemLoginResponse)apiResponse;
 				onSuccess?.Invoke(response);
 			},
 			onFailure: onFailure
@@ -79,7 +79,7 @@ public partial class SystemPingRequest : CommonRequest
 {
 }
 
-public partial class SystemPingResponse : CommonRequest
+public partial class SystemPingResponse : APIResponse
 {
 }
 
@@ -89,7 +89,7 @@ public partial class SystemSignupRequest : CommonRequest
 	public string name { get; set; }
 }
 
-public partial class SystemSignupResponse : CommonRequest
+public partial class SystemSignupResponse : APIResponse
 {
 	[JsonProperty("token")]
 	public string token { get; set; }
@@ -103,7 +103,7 @@ public partial class SystemLoginRequest : CommonRequest
 	public string token { get; set; }
 }
 
-public partial class SystemLoginResponse : CommonRequest
+public partial class SystemLoginResponse : APIResponse
 {
 	[JsonProperty("session_id")]
 	public string sessionId { get; set; }

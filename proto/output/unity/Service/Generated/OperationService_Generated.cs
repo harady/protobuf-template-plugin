@@ -13,18 +13,18 @@ public partial class OperationService : AbstractApiService
 	#endregion
 
 	private void TestInner(
-		.monstershot.OperationTestRequest request,
-		Action<.monstershot.OperationTestResponse> onSuccess,
+		OperationTestRequest request,
+		Action<OperationTestResponse> onSuccess,
 		Action<ErrorResponse> onFailure = null)
 	{
 		const string Path = "api/operation/test";
 		request.SetupCommon();
 		var apiRequest = new APIRequest(Path, request);
 		// リクエストを送信.
-		GetApiSender().SendRequest<.monstershot.OperationTestResponse>(
+		GetApiSender().SendRequest<OperationTestResponse>(
 			apiRequest: apiRequest,
 			onSuccess: (apiResponse) => {
-				var response = (.monstershot.OperationTestResponse)apiResponse;
+				var response = (OperationTestResponse)apiResponse;
 				onSuccess?.Invoke(response);
 			},
 			onFailure: onFailure
@@ -32,18 +32,18 @@ public partial class OperationService : AbstractApiService
 	}
 
 	private void Test1Inner(
-		.monstershot.OperationTestRequest request,
-		Action<.monstershot.OperationTestResponse> onSuccess,
+		OperationTestRequest request,
+		Action<OperationTestResponse> onSuccess,
 		Action<ErrorResponse> onFailure = null)
 	{
 		const string Path = "api/operation/test1";
 		request.SetupCommon();
 		var apiRequest = new APIRequest(Path, request);
 		// リクエストを送信.
-		GetApiSender().SendRequest<.monstershot.OperationTestResponse>(
+		GetApiSender().SendRequest<OperationTestResponse>(
 			apiRequest: apiRequest,
 			onSuccess: (apiResponse) => {
-				var response = (.monstershot.OperationTestResponse)apiResponse;
+				var response = (OperationTestResponse)apiResponse;
 				onSuccess?.Invoke(response);
 			},
 			onFailure: onFailure
@@ -51,18 +51,18 @@ public partial class OperationService : AbstractApiService
 	}
 
 	private void Test2Inner(
-		.monstershot.OperationTestRequest request,
-		Action<.monstershot.OperationTestResponse> onSuccess,
+		OperationTestRequest request,
+		Action<OperationTestResponse> onSuccess,
 		Action<ErrorResponse> onFailure = null)
 	{
 		const string Path = "api/operation/test2";
 		request.SetupCommon();
 		var apiRequest = new APIRequest(Path, request);
 		// リクエストを送信.
-		GetApiSender().SendRequest<.monstershot.OperationTestResponse>(
+		GetApiSender().SendRequest<OperationTestResponse>(
 			apiRequest: apiRequest,
 			onSuccess: (apiResponse) => {
-				var response = (.monstershot.OperationTestResponse)apiResponse;
+				var response = (OperationTestResponse)apiResponse;
 				onSuccess?.Invoke(response);
 			},
 			onFailure: onFailure
@@ -70,18 +70,18 @@ public partial class OperationService : AbstractApiService
 	}
 
 	private void Test3Inner(
-		.monstershot.OperationTestRequest request,
-		Action<.monstershot.OperationTestResponse> onSuccess,
+		OperationTestRequest request,
+		Action<OperationTestResponse> onSuccess,
 		Action<ErrorResponse> onFailure = null)
 	{
 		const string Path = "api/operation/test3";
 		request.SetupCommon();
 		var apiRequest = new APIRequest(Path, request);
 		// リクエストを送信.
-		GetApiSender().SendRequest<.monstershot.OperationTestResponse>(
+		GetApiSender().SendRequest<OperationTestResponse>(
 			apiRequest: apiRequest,
 			onSuccess: (apiResponse) => {
-				var response = (.monstershot.OperationTestResponse)apiResponse;
+				var response = (OperationTestResponse)apiResponse;
 				onSuccess?.Invoke(response);
 			},
 			onFailure: onFailure
@@ -89,18 +89,18 @@ public partial class OperationService : AbstractApiService
 	}
 
 	private void Test4Inner(
-		.monstershot.OperationTestRequest request,
-		Action<.monstershot.OperationTestResponse> onSuccess,
+		OperationTestRequest request,
+		Action<OperationTestResponse> onSuccess,
 		Action<ErrorResponse> onFailure = null)
 	{
 		const string Path = "api/operation/test4";
 		request.SetupCommon();
 		var apiRequest = new APIRequest(Path, request);
 		// リクエストを送信.
-		GetApiSender().SendRequest<.monstershot.OperationTestResponse>(
+		GetApiSender().SendRequest<OperationTestResponse>(
 			apiRequest: apiRequest,
 			onSuccess: (apiResponse) => {
-				var response = (.monstershot.OperationTestResponse)apiResponse;
+				var response = (OperationTestResponse)apiResponse;
 				onSuccess?.Invoke(response);
 			},
 			onFailure: onFailure
@@ -108,18 +108,18 @@ public partial class OperationService : AbstractApiService
 	}
 
 	private void Test5Inner(
-		.monstershot.OperationTestRequest request,
-		Action<.monstershot.OperationTestResponse> onSuccess,
+		OperationTestRequest request,
+		Action<OperationTestResponse> onSuccess,
 		Action<ErrorResponse> onFailure = null)
 	{
 		const string Path = "api/operation/test5";
 		request.SetupCommon();
 		var apiRequest = new APIRequest(Path, request);
 		// リクエストを送信.
-		GetApiSender().SendRequest<.monstershot.OperationTestResponse>(
+		GetApiSender().SendRequest<OperationTestResponse>(
 			apiRequest: apiRequest,
 			onSuccess: (apiResponse) => {
-				var response = (.monstershot.OperationTestResponse)apiResponse;
+				var response = (OperationTestResponse)apiResponse;
 				onSuccess?.Invoke(response);
 			},
 			onFailure: onFailure
@@ -127,18 +127,18 @@ public partial class OperationService : AbstractApiService
 	}
 
 	private void UpdateMasterVersionInner(
-		.monstershot.OperationUpdateMasterVersionRequest request,
-		Action<.monstershot.OperationUpdateMasterVersionResponse> onSuccess,
+		OperationUpdateMasterVersionRequest request,
+		Action<OperationUpdateMasterVersionResponse> onSuccess,
 		Action<ErrorResponse> onFailure = null)
 	{
 		const string Path = "api/operation/updatemasterversion";
 		request.SetupCommon();
 		var apiRequest = new APIRequest(Path, request);
 		// リクエストを送信.
-		GetApiSender().SendRequest<.monstershot.OperationUpdateMasterVersionResponse>(
+		GetApiSender().SendRequest<OperationUpdateMasterVersionResponse>(
 			apiRequest: apiRequest,
 			onSuccess: (apiResponse) => {
-				var response = (.monstershot.OperationUpdateMasterVersionResponse)apiResponse;
+				var response = (OperationUpdateMasterVersionResponse)apiResponse;
 				onSuccess?.Invoke(response);
 			},
 			onFailure: onFailure
@@ -146,18 +146,18 @@ public partial class OperationService : AbstractApiService
 	}
 
 	private void UpdateEventScheduleInner(
-		.monstershot.OperationUpdateEventScheduleRequest request,
-		Action<.monstershot.OperationUpdateEventScheduleResponse> onSuccess,
+		OperationUpdateEventScheduleRequest request,
+		Action<OperationUpdateEventScheduleResponse> onSuccess,
 		Action<ErrorResponse> onFailure = null)
 	{
 		const string Path = "api/operation/updateeventschedule";
 		request.SetupCommon();
 		var apiRequest = new APIRequest(Path, request);
 		// リクエストを送信.
-		GetApiSender().SendRequest<.monstershot.OperationUpdateEventScheduleResponse>(
+		GetApiSender().SendRequest<OperationUpdateEventScheduleResponse>(
 			apiRequest: apiRequest,
 			onSuccess: (apiResponse) => {
-				var response = (.monstershot.OperationUpdateEventScheduleResponse)apiResponse;
+				var response = (OperationUpdateEventScheduleResponse)apiResponse;
 				onSuccess?.Invoke(response);
 			},
 			onFailure: onFailure
@@ -176,7 +176,7 @@ public partial class OperationTestRequest : CommonRequest
 	public string message { get; set; }
 }
 
-public partial class OperationTestResponse : CommonRequest
+public partial class OperationTestResponse : APIResponse
 {
 	[JsonProperty("message")]
 	public string message { get; set; }
@@ -188,7 +188,7 @@ public partial class OperationUpdateMasterVersionRequest : CommonRequest
 	public string message { get; set; }
 }
 
-public partial class OperationUpdateMasterVersionResponse : CommonRequest
+public partial class OperationUpdateMasterVersionResponse : APIResponse
 {
 	[JsonProperty("message")]
 	public string message { get; set; }
@@ -200,7 +200,7 @@ public partial class OperationUpdateEventScheduleRequest : CommonRequest
 	public string message { get; set; }
 }
 
-public partial class OperationUpdateEventScheduleResponse : CommonRequest
+public partial class OperationUpdateEventScheduleResponse : APIResponse
 {
 	[JsonProperty("message")]
 	public string message { get; set; }

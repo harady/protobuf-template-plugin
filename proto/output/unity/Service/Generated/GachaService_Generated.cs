@@ -13,18 +13,18 @@ public partial class GachaService : AbstractApiService
 	#endregion
 
 	private void DrawInner(
-		.monstershot.GachaDrawRequest request,
-		Action<.monstershot.GachaDrawResponse> onSuccess,
+		GachaDrawRequest request,
+		Action<GachaDrawResponse> onSuccess,
 		Action<ErrorResponse> onFailure = null)
 	{
 		const string Path = "api/gacha/draw";
 		request.SetupCommon();
 		var apiRequest = new APIRequest(Path, request);
 		// リクエストを送信.
-		GetApiSender().SendRequest<.monstershot.GachaDrawResponse>(
+		GetApiSender().SendRequest<GachaDrawResponse>(
 			apiRequest: apiRequest,
 			onSuccess: (apiResponse) => {
-				var response = (.monstershot.GachaDrawResponse)apiResponse;
+				var response = (GachaDrawResponse)apiResponse;
 				onSuccess?.Invoke(response);
 			},
 			onFailure: onFailure
@@ -43,7 +43,7 @@ public partial class GachaDrawRequest : CommonRequest
 	public long gachaButtonId { get; set; }
 }
 
-public partial class GachaDrawResponse : CommonRequest
+public partial class GachaDrawResponse : APIResponse
 {
 	[JsonProperty("gacha_result_items")]
 	public List<GachaResultItemData> gachaResultItems { get; set; } 

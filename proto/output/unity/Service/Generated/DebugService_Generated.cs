@@ -13,18 +13,18 @@ public partial class DebugService : AbstractApiService
 	#endregion
 
 	private void SetServerTimeInner(
-		.monstershot.DebugSetServerTimeRequest request,
-		Action<.monstershot.DebugSetServerTimeResponse> onSuccess,
+		DebugSetServerTimeRequest request,
+		Action<DebugSetServerTimeResponse> onSuccess,
 		Action<ErrorResponse> onFailure = null)
 	{
 		const string Path = "api/debug/setservertime";
 		request.SetupCommon();
 		var apiRequest = new APIRequest(Path, request);
 		// リクエストを送信.
-		GetApiSender().SendRequest<.monstershot.DebugSetServerTimeResponse>(
+		GetApiSender().SendRequest<DebugSetServerTimeResponse>(
 			apiRequest: apiRequest,
 			onSuccess: (apiResponse) => {
-				var response = (.monstershot.DebugSetServerTimeResponse)apiResponse;
+				var response = (DebugSetServerTimeResponse)apiResponse;
 				onSuccess?.Invoke(response);
 			},
 			onFailure: onFailure
@@ -32,18 +32,18 @@ public partial class DebugService : AbstractApiService
 	}
 
 	private void TestInner(
-		.monstershot.DebugTestRequest request,
-		Action<.monstershot.DebugTestResponse> onSuccess,
+		DebugTestRequest request,
+		Action<DebugTestResponse> onSuccess,
 		Action<ErrorResponse> onFailure = null)
 	{
 		const string Path = "api/debug/test";
 		request.SetupCommon();
 		var apiRequest = new APIRequest(Path, request);
 		// リクエストを送信.
-		GetApiSender().SendRequest<.monstershot.DebugTestResponse>(
+		GetApiSender().SendRequest<DebugTestResponse>(
 			apiRequest: apiRequest,
 			onSuccess: (apiResponse) => {
-				var response = (.monstershot.DebugTestResponse)apiResponse;
+				var response = (DebugTestResponse)apiResponse;
 				onSuccess?.Invoke(response);
 			},
 			onFailure: onFailure
@@ -51,18 +51,18 @@ public partial class DebugService : AbstractApiService
 	}
 
 	private void Test1Inner(
-		.monstershot.DebugTestRequest request,
-		Action<.monstershot.DebugTestResponse> onSuccess,
+		DebugTestRequest request,
+		Action<DebugTestResponse> onSuccess,
 		Action<ErrorResponse> onFailure = null)
 	{
 		const string Path = "api/debug/test1";
 		request.SetupCommon();
 		var apiRequest = new APIRequest(Path, request);
 		// リクエストを送信.
-		GetApiSender().SendRequest<.monstershot.DebugTestResponse>(
+		GetApiSender().SendRequest<DebugTestResponse>(
 			apiRequest: apiRequest,
 			onSuccess: (apiResponse) => {
-				var response = (.monstershot.DebugTestResponse)apiResponse;
+				var response = (DebugTestResponse)apiResponse;
 				onSuccess?.Invoke(response);
 			},
 			onFailure: onFailure
@@ -70,18 +70,18 @@ public partial class DebugService : AbstractApiService
 	}
 
 	private void Test2Inner(
-		.monstershot.DebugTestRequest request,
-		Action<.monstershot.DebugTestResponse> onSuccess,
+		DebugTestRequest request,
+		Action<DebugTestResponse> onSuccess,
 		Action<ErrorResponse> onFailure = null)
 	{
 		const string Path = "api/debug/test2";
 		request.SetupCommon();
 		var apiRequest = new APIRequest(Path, request);
 		// リクエストを送信.
-		GetApiSender().SendRequest<.monstershot.DebugTestResponse>(
+		GetApiSender().SendRequest<DebugTestResponse>(
 			apiRequest: apiRequest,
 			onSuccess: (apiResponse) => {
-				var response = (.monstershot.DebugTestResponse)apiResponse;
+				var response = (DebugTestResponse)apiResponse;
 				onSuccess?.Invoke(response);
 			},
 			onFailure: onFailure
@@ -89,18 +89,18 @@ public partial class DebugService : AbstractApiService
 	}
 
 	private void Test3Inner(
-		.monstershot.DebugTestRequest request,
-		Action<.monstershot.DebugTestResponse> onSuccess,
+		DebugTestRequest request,
+		Action<DebugTestResponse> onSuccess,
 		Action<ErrorResponse> onFailure = null)
 	{
 		const string Path = "api/debug/test3";
 		request.SetupCommon();
 		var apiRequest = new APIRequest(Path, request);
 		// リクエストを送信.
-		GetApiSender().SendRequest<.monstershot.DebugTestResponse>(
+		GetApiSender().SendRequest<DebugTestResponse>(
 			apiRequest: apiRequest,
 			onSuccess: (apiResponse) => {
-				var response = (.monstershot.DebugTestResponse)apiResponse;
+				var response = (DebugTestResponse)apiResponse;
 				onSuccess?.Invoke(response);
 			},
 			onFailure: onFailure
@@ -108,18 +108,18 @@ public partial class DebugService : AbstractApiService
 	}
 
 	private void Test4Inner(
-		.monstershot.DebugTestRequest request,
-		Action<.monstershot.DebugTestResponse> onSuccess,
+		DebugTestRequest request,
+		Action<DebugTestResponse> onSuccess,
 		Action<ErrorResponse> onFailure = null)
 	{
 		const string Path = "api/debug/test4";
 		request.SetupCommon();
 		var apiRequest = new APIRequest(Path, request);
 		// リクエストを送信.
-		GetApiSender().SendRequest<.monstershot.DebugTestResponse>(
+		GetApiSender().SendRequest<DebugTestResponse>(
 			apiRequest: apiRequest,
 			onSuccess: (apiResponse) => {
-				var response = (.monstershot.DebugTestResponse)apiResponse;
+				var response = (DebugTestResponse)apiResponse;
 				onSuccess?.Invoke(response);
 			},
 			onFailure: onFailure
@@ -127,18 +127,18 @@ public partial class DebugService : AbstractApiService
 	}
 
 	private void Test5Inner(
-		.monstershot.DebugTestRequest request,
-		Action<.monstershot.DebugTestResponse> onSuccess,
+		DebugTestRequest request,
+		Action<DebugTestResponse> onSuccess,
 		Action<ErrorResponse> onFailure = null)
 	{
 		const string Path = "api/debug/test5";
 		request.SetupCommon();
 		var apiRequest = new APIRequest(Path, request);
 		// リクエストを送信.
-		GetApiSender().SendRequest<.monstershot.DebugTestResponse>(
+		GetApiSender().SendRequest<DebugTestResponse>(
 			apiRequest: apiRequest,
 			onSuccess: (apiResponse) => {
-				var response = (.monstershot.DebugTestResponse)apiResponse;
+				var response = (DebugTestResponse)apiResponse;
 				onSuccess?.Invoke(response);
 			},
 			onFailure: onFailure
@@ -146,18 +146,18 @@ public partial class DebugService : AbstractApiService
 	}
 
 	private void Test6Inner(
-		.monstershot.DebugTestRequest request,
-		Action<.monstershot.DebugTestResponse> onSuccess,
+		DebugTestRequest request,
+		Action<DebugTestResponse> onSuccess,
 		Action<ErrorResponse> onFailure = null)
 	{
 		const string Path = "api/debug/test6";
 		request.SetupCommon();
 		var apiRequest = new APIRequest(Path, request);
 		// リクエストを送信.
-		GetApiSender().SendRequest<.monstershot.DebugTestResponse>(
+		GetApiSender().SendRequest<DebugTestResponse>(
 			apiRequest: apiRequest,
 			onSuccess: (apiResponse) => {
-				var response = (.monstershot.DebugTestResponse)apiResponse;
+				var response = (DebugTestResponse)apiResponse;
 				onSuccess?.Invoke(response);
 			},
 			onFailure: onFailure
@@ -178,7 +178,7 @@ public partial class DebugSetServerTimeRequest : CommonRequest
 	public long toSetServerTime { get; set; }
 }
 
-public partial class DebugSetServerTimeResponse : CommonRequest
+public partial class DebugSetServerTimeResponse : APIResponse
 {
 }
 
@@ -188,7 +188,7 @@ public partial class DebugTestRequest : CommonRequest
 	public string message { get; set; }
 }
 
-public partial class DebugTestResponse : CommonRequest
+public partial class DebugTestResponse : APIResponse
 {
 	[JsonProperty("message")]
 	public string message { get; set; }

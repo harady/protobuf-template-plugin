@@ -13,18 +13,18 @@ public partial class FriendService : AbstractApiService
 	#endregion
 
 	private void ListInner(
-		.monstershot.FriendListRequest request,
-		Action<.monstershot.FriendListResponse> onSuccess,
+		FriendListRequest request,
+		Action<FriendListResponse> onSuccess,
 		Action<ErrorResponse> onFailure = null)
 	{
 		const string Path = "api/friend/list";
 		request.SetupCommon();
 		var apiRequest = new APIRequest(Path, request);
 		// リクエストを送信.
-		GetApiSender().SendRequest<.monstershot.FriendListResponse>(
+		GetApiSender().SendRequest<FriendListResponse>(
 			apiRequest: apiRequest,
 			onSuccess: (apiResponse) => {
-				var response = (.monstershot.FriendListResponse)apiResponse;
+				var response = (FriendListResponse)apiResponse;
 				onSuccess?.Invoke(response);
 			},
 			onFailure: onFailure
@@ -32,18 +32,18 @@ public partial class FriendService : AbstractApiService
 	}
 
 	private void RemoveInner(
-		.monstershot.FriendRemoveRequest request,
-		Action<.monstershot.FriendRemoveResponse> onSuccess,
+		FriendRemoveRequest request,
+		Action<FriendRemoveResponse> onSuccess,
 		Action<ErrorResponse> onFailure = null)
 	{
 		const string Path = "api/friend/remove";
 		request.SetupCommon();
 		var apiRequest = new APIRequest(Path, request);
 		// リクエストを送信.
-		GetApiSender().SendRequest<.monstershot.FriendRemoveResponse>(
+		GetApiSender().SendRequest<FriendRemoveResponse>(
 			apiRequest: apiRequest,
 			onSuccess: (apiResponse) => {
-				var response = (.monstershot.FriendRemoveResponse)apiResponse;
+				var response = (FriendRemoveResponse)apiResponse;
 				onSuccess?.Invoke(response);
 			},
 			onFailure: onFailure
@@ -51,18 +51,18 @@ public partial class FriendService : AbstractApiService
 	}
 
 	private void SearchInner(
-		.monstershot.FriendSearchRequest request,
-		Action<.monstershot.FriendSearchResponse> onSuccess,
+		FriendSearchRequest request,
+		Action<FriendSearchResponse> onSuccess,
 		Action<ErrorResponse> onFailure = null)
 	{
 		const string Path = "api/friend/search";
 		request.SetupCommon();
 		var apiRequest = new APIRequest(Path, request);
 		// リクエストを送信.
-		GetApiSender().SendRequest<.monstershot.FriendSearchResponse>(
+		GetApiSender().SendRequest<FriendSearchResponse>(
 			apiRequest: apiRequest,
 			onSuccess: (apiResponse) => {
-				var response = (.monstershot.FriendSearchResponse)apiResponse;
+				var response = (FriendSearchResponse)apiResponse;
 				onSuccess?.Invoke(response);
 			},
 			onFailure: onFailure
@@ -70,18 +70,18 @@ public partial class FriendService : AbstractApiService
 	}
 
 	private void RequestInner(
-		.monstershot.FriendRequestRequest request,
-		Action<.monstershot.FriendRequestResponse> onSuccess,
+		FriendRequestRequest request,
+		Action<FriendRequestResponse> onSuccess,
 		Action<ErrorResponse> onFailure = null)
 	{
 		const string Path = "api/friend/request";
 		request.SetupCommon();
 		var apiRequest = new APIRequest(Path, request);
 		// リクエストを送信.
-		GetApiSender().SendRequest<.monstershot.FriendRequestResponse>(
+		GetApiSender().SendRequest<FriendRequestResponse>(
 			apiRequest: apiRequest,
 			onSuccess: (apiResponse) => {
-				var response = (.monstershot.FriendRequestResponse)apiResponse;
+				var response = (FriendRequestResponse)apiResponse;
 				onSuccess?.Invoke(response);
 			},
 			onFailure: onFailure
@@ -98,7 +98,7 @@ public partial class FriendListRequest : CommonRequest
 {
 }
 
-public partial class FriendListResponse : CommonRequest
+public partial class FriendListResponse : APIResponse
 {
 	[JsonProperty("other_users")]
 	public List<OtherUserData> otherUsers { get; set; } 
@@ -111,7 +111,7 @@ public partial class FriendRemoveRequest : CommonRequest
 	public long userId { get; set; }
 }
 
-public partial class FriendRemoveResponse : CommonRequest
+public partial class FriendRemoveResponse : APIResponse
 {
 }
 
@@ -121,7 +121,7 @@ public partial class FriendSearchRequest : CommonRequest
 	public long code { get; set; }
 }
 
-public partial class FriendSearchResponse : CommonRequest
+public partial class FriendSearchResponse : APIResponse
 {
 	[JsonProperty("other_user")]
 	public OtherUserData otherUser { get; set; }
@@ -133,7 +133,7 @@ public partial class FriendRequestRequest : CommonRequest
 	public long userId { get; set; }
 }
 
-public partial class FriendRequestResponse : CommonRequest
+public partial class FriendRequestResponse : APIResponse
 {
 }
 #endregion

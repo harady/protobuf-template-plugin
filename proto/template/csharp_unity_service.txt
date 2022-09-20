@@ -14,18 +14,18 @@ public partial class {{ serviceName }} : AbstractApiService
 	#endregion
 {{ for method in service.method }}
 	private void {{ method.name }}Inner(
-		{{ method.input_type }} request,
-		Action<{{ method.output_type }}> onSuccess,
+		{{ method.input_type | to_short_name }} request,
+		Action<{{ method.output_type | to_short_name }}> onSuccess,
 		Action<ErrorResponse> onFailure = null)
 	{
 		const string Path = "api/{{ service.name | to_snake }}/{{ method.name | to_snake }}";
 		request.SetupCommon();
 		var apiRequest = new APIRequest(Path, request);
 		// リクエストを送信.
-		GetApiSender().SendRequest<{{ method.output_type }}>(
+		GetApiSender().SendRequest<{{ method.output_type | to_short_name }}>(
 			apiRequest: apiRequest,
 			onSuccess: (apiResponse) => {
-				var response = ({{ method.output_type }})apiResponse;
+				var response = ({{ method.output_type | to_short_name }})apiResponse;
 				onSuccess?.Invoke(response);
 			},
 			onFailure: onFailure
@@ -42,7 +42,7 @@ public partial class Services {
 
 #region Request/Response
 {{- for message in file.message_type }}
-{{- if (message.name | string.starts_with "Response") }}
+{{- if (message.name | string.ends_with "Response") }}
 public partial class {{ message.name }} : APIResponse
 {
 {{- else }}

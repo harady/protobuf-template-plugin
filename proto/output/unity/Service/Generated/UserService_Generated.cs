@@ -13,18 +13,18 @@ public partial class UserService : AbstractApiService
 	#endregion
 
 	private void DataListInner(
-		.monstershot.UserDataListRequest request,
-		Action<.monstershot.UserDataListResponse> onSuccess,
+		UserDataListRequest request,
+		Action<UserDataListResponse> onSuccess,
 		Action<ErrorResponse> onFailure = null)
 	{
 		const string Path = "api/user/datalist";
 		request.SetupCommon();
 		var apiRequest = new APIRequest(Path, request);
 		// リクエストを送信.
-		GetApiSender().SendRequest<.monstershot.UserDataListResponse>(
+		GetApiSender().SendRequest<UserDataListResponse>(
 			apiRequest: apiRequest,
 			onSuccess: (apiResponse) => {
-				var response = (.monstershot.UserDataListResponse)apiResponse;
+				var response = (UserDataListResponse)apiResponse;
 				onSuccess?.Invoke(response);
 			},
 			onFailure: onFailure
@@ -32,18 +32,18 @@ public partial class UserService : AbstractApiService
 	}
 
 	private void NameEditInner(
-		.monstershot.UserNameEditRequest request,
-		Action<.monstershot.UserNameEditResponse> onSuccess,
+		UserNameEditRequest request,
+		Action<UserNameEditResponse> onSuccess,
 		Action<ErrorResponse> onFailure = null)
 	{
 		const string Path = "api/user/nameedit";
 		request.SetupCommon();
 		var apiRequest = new APIRequest(Path, request);
 		// リクエストを送信.
-		GetApiSender().SendRequest<.monstershot.UserNameEditResponse>(
+		GetApiSender().SendRequest<UserNameEditResponse>(
 			apiRequest: apiRequest,
 			onSuccess: (apiResponse) => {
-				var response = (.monstershot.UserNameEditResponse)apiResponse;
+				var response = (UserNameEditResponse)apiResponse;
 				onSuccess?.Invoke(response);
 			},
 			onFailure: onFailure
@@ -60,7 +60,7 @@ public partial class UserDataListRequest : CommonRequest
 {
 }
 
-public partial class UserDataListResponse : CommonRequest
+public partial class UserDataListResponse : APIResponse
 {
 }
 
@@ -70,7 +70,7 @@ public partial class UserNameEditRequest : CommonRequest
 	public string name { get; set; }
 }
 
-public partial class UserNameEditResponse : CommonRequest
+public partial class UserNameEditResponse : APIResponse
 {
 }
 #endregion

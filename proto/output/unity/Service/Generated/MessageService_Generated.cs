@@ -13,18 +13,18 @@ public partial class MessageService : AbstractApiService
 	#endregion
 
 	private void ListInner(
-		.monstershot.MessageListRequest request,
-		Action<.monstershot.MessageListResponse> onSuccess,
+		MessageListRequest request,
+		Action<MessageListResponse> onSuccess,
 		Action<ErrorResponse> onFailure = null)
 	{
 		const string Path = "api/message/list";
 		request.SetupCommon();
 		var apiRequest = new APIRequest(Path, request);
 		// リクエストを送信.
-		GetApiSender().SendRequest<.monstershot.MessageListResponse>(
+		GetApiSender().SendRequest<MessageListResponse>(
 			apiRequest: apiRequest,
 			onSuccess: (apiResponse) => {
-				var response = (.monstershot.MessageListResponse)apiResponse;
+				var response = (MessageListResponse)apiResponse;
 				onSuccess?.Invoke(response);
 			},
 			onFailure: onFailure
@@ -32,18 +32,18 @@ public partial class MessageService : AbstractApiService
 	}
 
 	private void ReceiveInner(
-		.monstershot.MessageReceiveRequest request,
-		Action<.monstershot.MessageReceiveResponse> onSuccess,
+		MessageReceiveRequest request,
+		Action<MessageReceiveResponse> onSuccess,
 		Action<ErrorResponse> onFailure = null)
 	{
 		const string Path = "api/message/receive";
 		request.SetupCommon();
 		var apiRequest = new APIRequest(Path, request);
 		// リクエストを送信.
-		GetApiSender().SendRequest<.monstershot.MessageReceiveResponse>(
+		GetApiSender().SendRequest<MessageReceiveResponse>(
 			apiRequest: apiRequest,
 			onSuccess: (apiResponse) => {
-				var response = (.monstershot.MessageReceiveResponse)apiResponse;
+				var response = (MessageReceiveResponse)apiResponse;
 				onSuccess?.Invoke(response);
 			},
 			onFailure: onFailure
@@ -60,7 +60,7 @@ public partial class MessageListRequest : CommonRequest
 {
 }
 
-public partial class MessageListResponse : CommonRequest
+public partial class MessageListResponse : APIResponse
 {
 }
 
@@ -70,7 +70,7 @@ public partial class MessageReceiveRequest : CommonRequest
 	public long userMessageId { get; set; }
 }
 
-public partial class MessageReceiveResponse : CommonRequest
+public partial class MessageReceiveResponse : APIResponse
 {
 }
 #endregion
