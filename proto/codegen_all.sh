@@ -33,6 +33,6 @@ sh protoc_sheet.sh
 
 # 一時停止
 if [[ "$param" == *p* ]]; then
-  echo "$SECONDS [sec]"
+  echo "total $SECONDS [sec]"
   read -p "Press [Enter] key to resume."
 fi
