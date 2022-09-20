@@ -3,30 +3,29 @@ using System;
 using System.Collections.Generic;
 using Newtonsoft.Json;
 
-{{ range .Services }}
-{{- $service := .Name }}
-{{- $serviceName := (Join .Name "Service") }}
-public partial class {{ $serviceName }} : AbstractApiService
+{{ for service in file.service }}
+{{- serviceName = (service.name + "Service") }}
+public partial class {{ serviceName }} : AbstractApiService
 {
 	#region Singleton
-	public static {{ $serviceName }} instance {
-		get { return SingletonContainer.GetInstance<{{ $serviceName }}>(); }
+	public static {{ serviceName }} instance {
+		get { return SingletonContainer.GetInstance<{{ serviceName }}>(); }
 	}
 	#endregion
-{{ range .Methods }}
-	private void {{ .Name }}Inner(
-		{{ .Request.Name }} request,
-		Action<{{ .Response.Name }}> onSuccess,
+{{ for method in service.method }}
+	private void {{ method.name }}Inner(
+		{{ method.input_type }} request,
+		Action<{{ method.output_type }}> onSuccess,
 		Action<ErrorResponse> onFailure = null)
 	{
-		const string Path = "api/{{ $service | ToSnakeCase }}/{{ .Name | ToSnakeCase }}";
+		const string Path = "api/{{ service.name | to_snake }}/{{ method.name | to_snake }}";
 		request.SetupCommon();
 		var apiRequest = new APIRequest(Path, request);
 		// リクエストを送信.
-		GetApiSender().SendRequest<{{ .Response.Name }}>(
+		GetApiSender().SendRequest<{{ method.output_type }}>(
 			apiRequest: apiRequest,
 			onSuccess: (apiResponse) => {
-				var response = ({{ .Response.Name }})apiResponse;
+				var response = ({{ method.output_type }})apiResponse;
 				onSuccess?.Invoke(response);
 			},
 			onFailure: onFailure
@@ -36,8 +35,8 @@ public partial class {{ $serviceName }} : AbstractApiService
 }
 
 public partial class Services {
-	public static {{ $serviceName }} {{ $serviceName }}
-		=> {{ $serviceName }}.instance;
+	public static {{ serviceName }} {{ serviceName }}
+		=> {{ serviceName }}.instance;
 }
 {{ end -}}
 
