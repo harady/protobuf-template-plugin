@@ -1,0 +1,2 @@
+・equipments
+id	name	type	description	paramA	paramB	iconId	

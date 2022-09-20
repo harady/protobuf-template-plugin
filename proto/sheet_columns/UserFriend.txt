@@ -1,0 +1,2 @@
+・user_friends
+id	userId	friendUserId	isFavorite	lastUsedAt	usedCount	

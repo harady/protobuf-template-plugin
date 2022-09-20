@@ -1,0 +1,2 @@
+・enemy_clusters
+id	name	

@@ -1,0 +1,2 @@
+・weak_points
+id	name	

@@ -1,0 +1,2 @@
+・quests
+id	name	questGroupId	noContinue	questDifficultyType	bossUnitId	openAt	closeAt	openDow	

@@ -1,0 +1,2 @@
+・user_friend_requests
+id	senderUserId	targetUserId	

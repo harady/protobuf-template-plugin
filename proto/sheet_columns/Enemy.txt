@@ -1,0 +1,2 @@
+・enemys
+id	name	unitId	hp	size	weakPointId	isBoss	isEscape	damageRate	directDamageRate	indirectDamageRate	baseEnemyId	dropRate	rewardResourceLotteryId	

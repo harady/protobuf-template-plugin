@@ -1,0 +1,2 @@
+・daily_event_tables
+id	name	

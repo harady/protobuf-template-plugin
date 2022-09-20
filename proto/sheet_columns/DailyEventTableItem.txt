@@ -1,0 +1,2 @@
+・daily_event_table_items
+id	dailyEventTableId	eventQuestCategoryId	count	

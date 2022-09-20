@@ -1,0 +1,2 @@
+・shop_schedules
+id	shopId	openAt	closeAt	

@@ -1,0 +1,2 @@
+・user_identifable_items
+id	userId	identifableItemId	paramA	paramB	

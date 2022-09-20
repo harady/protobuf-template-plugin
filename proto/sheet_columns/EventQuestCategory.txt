@@ -1,0 +1,2 @@
+・event_quest_categorys
+id	name	minStartTime	maxStartTime	openHours	questGroupId	questDifficultyType	

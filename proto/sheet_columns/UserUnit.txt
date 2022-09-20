@@ -1,0 +1,2 @@
+・user_units
+id	userId	unitId	level	exp	luck	plusHp	plusAttack	plusSpeed	equipment1Id	equipment2Id	equipment3Id	heroMark	heroBadge	isLocked	getAt	

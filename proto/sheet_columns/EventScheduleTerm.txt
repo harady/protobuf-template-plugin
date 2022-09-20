@@ -1,0 +1,2 @@
+・event_schedule_terms
+id	dailyEventTableId	openAt	closeAt	

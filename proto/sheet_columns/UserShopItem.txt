@@ -1,0 +1,2 @@
+・user_shop_items
+id	userId	shopItemId	shopScheduleId	purchasedCount	

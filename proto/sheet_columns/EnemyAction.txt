@@ -1,0 +1,2 @@
+・enemy_actions
+id	enemyId	actionNo	triggerType	triggerParamA	triggerParamB	triggerParamC	triggerParamD	actionType	actionParamA	actionParamB	actionParamC	actionParamD	

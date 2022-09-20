@@ -1,0 +1,2 @@
+・mission_groups
+id	type	

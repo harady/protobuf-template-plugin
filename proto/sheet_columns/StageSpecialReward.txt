@@ -1,0 +1,2 @@
+・stage_special_rewards
+id	name	stageId	battleRewardType	paramA	paramB	resourceLotteryId	

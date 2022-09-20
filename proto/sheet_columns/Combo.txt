@@ -1,0 +1,2 @@
+・combos
+id	name	type	description	rank	baseAttack	maxAttack	paramA	paramB	paramC	iconId	

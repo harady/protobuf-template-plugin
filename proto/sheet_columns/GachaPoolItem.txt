@@ -1,0 +1,2 @@
+・gacha_pool_items
+id	gachaPoolId	resourceType	resourceId	resourceAmount	weight	openAt	closeAt	

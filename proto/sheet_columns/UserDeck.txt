@@ -1,0 +1,2 @@
+・user_decks
+id	userId	deckNo	name	userUnit1Id	userUnit2Id	userUnit3Id	

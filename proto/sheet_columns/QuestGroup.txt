@@ -1,0 +1,2 @@
+・quest_groups
+id	name	type	
