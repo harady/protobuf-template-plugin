@@ -1,23 +1,22 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
-
+﻿<Project Sdk="Microsoft.NET.Sdk" ToolsVersion="Current">
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <TargetFramework>net50</TargetFramework>
+    <TargetFramework>net6.0</TargetFramework>
     <RootNamespace>protoc_gen_myplugincsharp</RootNamespace>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    <FileUpgradeFlags>40</FileUpgradeFlags>
+    <UpgradeBackupLocation>C:\Users\y.harada\Desktop\develop-stack\wc_harady\protobuf-template-plugin\protoc-gen-template\Backup5\</UpgradeBackupLocation>
+    <OldToolsVersion>Current</OldToolsVersion>
   </PropertyGroup>
-
   <ItemGroup>
     <Compile Remove="package\Editor\**" />
     <EmbeddedResource Remove="package\Editor\**" />
     <None Remove="package\Editor\**" />
   </ItemGroup>
-
   <ItemGroup>
     <None Remove="plugin.proto" />
   </ItemGroup>
-
   <ItemGroup>
     <PackageReference Include="Google.Protobuf" Version="3.21.6" />
     <PackageReference Include="Google.Protobuf.Tools" Version="3.21.6" />
@@ -29,15 +28,12 @@
     <PackageReference Include="NUnit" Version="3.13.3" />
     <PackageReference Include="Scriban" Version="5.5.0" />
   </ItemGroup>
-
   <ItemGroup>
     <Protobuf Include="plugin.proto" />
   </ItemGroup>
-
   <ItemGroup>
     <None Update="chat.proto" GrpcServices="None">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
-
 </Project>
