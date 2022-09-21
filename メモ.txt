@@ -40,8 +40,15 @@ ngen.exeを使ってみるか。
 →NativeImageCompilerを使用する
 https://learn.microsoft.com/ja-jp/windows/msix/desktop/desktop-to-uwp-r2r
 　→すでに非推奨だった
+→これは？
+Microsoft.Net.Native.Compiler 
+　→インストールできない
+→これは？
+https://qiita.com/yaju/items/d5a771f3f00672aa19ff
 
 C:\Windows\Microsoft.NET\Framework64\v4.0.30319\ngen.exe install ./plugin2\protoc-gen-template.exe
+
+NativeAOT visual studio
 
 GrのテンプレートエンジンはGo標準のtext/templateを使用している。
 C#に移植したものは見当たらない
@@ -57,3 +64,5 @@ https://github.com/scriban/scriban
 
 Scribanを採用することにした。
 
+VisualStudio用のScribanのextension
+https://marketplace.visualstudio.com/items?itemName=xoofx.scriban
