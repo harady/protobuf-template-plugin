@@ -31,11 +31,11 @@ protobufのプラグインをC#で実装する方法？ではなかった。
 https://developers.google.com/protocol-buffers/docs/csharptutorial
 
 
-これいいんちゃうん？、C#のプラグイン
+これいいんちゃうん？、ProtocのプラグインをC#で実装したもの
 https://github.com/cactuaroid/protoc-gen-myplugincsharp
 
 
-C#で作ったプラグインの起動速度が遅すぎる
+#### C#で作ったプラグインの起動速度が遅すぎるので最適化したい
 ngen.exeを使ってみるか。
 →NativeImageCompilerを使用する
 https://learn.microsoft.com/ja-jp/windows/msix/desktop/desktop-to-uwp-r2r
@@ -49,6 +49,24 @@ https://qiita.com/yaju/items/d5a771f3f00672aa19ff
 C:\Windows\Microsoft.NET\Framework64\v4.0.30319\ngen.exe install ./plugin2\protoc-gen-template.exe
 
 NativeAOT visual studio
+https://qiita.com/yaju/items/d5a771f3f00672aa19ff
+このソースでは利用できません
+
+単一実行ファイルの作成方法がわかる
+https://learn.microsoft.com/ja-jp/dotnet/core/deploying/trimming/trim-self-contained?source=recommendations
+
+これをやりたい ReadyToRun + Tiered Compilation
+
+.NET 6は、「 .NET Framework」と「 .NET Core」が統合
+https://devlog.grapecity.co.jp/dotnet-6-release/
+
+Tiered Compilationはデフォルトで有効っぽいのでここまででC#の最適化は限界か・・。
+
+.Net 7.0 でAOTが対応する。試してみる
+
+
+
+
 
 GrのテンプレートエンジンはGo標準のtext/templateを使用している。
 C#に移植したものは見当たらない
