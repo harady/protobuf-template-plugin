@@ -1,4 +1,4 @@
-﻿
+
 public enum ResourceSetType
 {
 	None = 0,

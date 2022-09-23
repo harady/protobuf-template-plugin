@@ -1,4 +1,4 @@
-﻿
+
 public enum QuestGroupType
 {
 	None = 0,
