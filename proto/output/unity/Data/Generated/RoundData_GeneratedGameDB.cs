@@ -55,6 +55,7 @@ public partial class RoundData : IUnique<long>
 	private static void SetupRoundDataTableIndexGenerated(DataTable<long, RoundData> targetDataTable)
 	{
 		targetDataTable.CreateUniqueIndex("Id", aData => (object)aData.id);
+		targetDataTable.CreateIndex("RoundData", aData => (object)aData.roundData);
 	}
 	#endregion
 	#region DataTableUniqueIndex(Id)
@@ -71,6 +72,12 @@ public partial class RoundData : IUnique<long>
 	public static void RemoveDataById(long id)
 	{
 		dataTable.DeleteByKey("Id", (object)id);
+	}
+	#endregion
+	#region DataTableIndex (RoundData)
+	public static List<RoundData> GetDataListByStageId(long stageId)
+	{
+		return dataTable.GetDataList("StageId", (object)stageId);
 	}
 	#endregion
 }

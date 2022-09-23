@@ -55,6 +55,8 @@ public partial class UnitLevelExpData : IUnique<long>
 	private static void SetupUnitLevelExpDataTableIndexGenerated(DataTable<long, UnitLevelExpData> targetDataTable)
 	{
 		targetDataTable.CreateUniqueIndex("Id", aData => (object)aData.id);
+		targetDataTable.CreateIndex("UnitLevelExpData", aData => (object)aData.unitLevelExpData);
+		targetDataTable.CreateIndex("UnitLevelExpData", aData => (object)aData.unitLevelExpData);
 	}
 	#endregion
 	#region DataTableUniqueIndex(Id)
@@ -71,6 +73,18 @@ public partial class UnitLevelExpData : IUnique<long>
 	public static void RemoveDataById(long id)
 	{
 		dataTable.DeleteByKey("Id", (object)id);
+	}
+	#endregion
+	#region DataTableIndex (UnitLevelExpData)
+	public static List<UnitLevelExpData> GetDataListByGrowthType(long growthType)
+	{
+		return dataTable.GetDataList("GrowthType", (object)growthType);
+	}
+	#endregion
+	#region DataTableIndex (UnitLevelExpData)
+	public static List<UnitLevelExpData> GetDataListByLevel(long level)
+	{
+		return dataTable.GetDataList("Level", (object)level);
 	}
 	#endregion
 }

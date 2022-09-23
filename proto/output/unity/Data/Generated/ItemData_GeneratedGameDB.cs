@@ -55,6 +55,8 @@ public partial class ItemData : IUnique<long>
 	private static void SetupItemDataTableIndexGenerated(DataTable<long, ItemData> targetDataTable)
 	{
 		targetDataTable.CreateUniqueIndex("Id", aData => (object)aData.id);
+		targetDataTable.CreateIndex("ItemData", aData => (object)aData.itemData);
+		targetDataTable.CreateIndex("ItemData", aData => (object)aData.itemData);
 	}
 	#endregion
 	#region DataTableUniqueIndex(Id)
@@ -71,6 +73,18 @@ public partial class ItemData : IUnique<long>
 	public static void RemoveDataById(long id)
 	{
 		dataTable.DeleteByKey("Id", (object)id);
+	}
+	#endregion
+	#region DataTableIndex (ItemData)
+	public static List<ItemData> GetDataListByCategory(ItemCategory category)
+	{
+		return dataTable.GetDataList("Category", (object)category);
+	}
+	#endregion
+	#region DataTableIndex (ItemData)
+	public static List<ItemData> GetDataListByType(ItemType type)
+	{
+		return dataTable.GetDataList("Type", (object)type);
 	}
 	#endregion
 }

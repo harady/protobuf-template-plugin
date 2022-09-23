@@ -55,6 +55,7 @@ public partial class GachaPoolData : IUnique<long>
 	private static void SetupGachaPoolDataTableIndexGenerated(DataTable<long, GachaPoolData> targetDataTable)
 	{
 		targetDataTable.CreateUniqueIndex("Id", aData => (object)aData.id);
+		targetDataTable.CreateIndex("GachaPoolData", aData => (object)aData.gachaPoolData);
 	}
 	#endregion
 	#region DataTableUniqueIndex(Id)
@@ -71,6 +72,12 @@ public partial class GachaPoolData : IUnique<long>
 	public static void RemoveDataById(long id)
 	{
 		dataTable.DeleteByKey("Id", (object)id);
+	}
+	#endregion
+	#region DataTableIndex (GachaPoolData)
+	public static List<GachaPoolData> GetDataListByGachaId(long gachaId)
+	{
+		return dataTable.GetDataList("GachaId", (object)gachaId);
 	}
 	#endregion
 }

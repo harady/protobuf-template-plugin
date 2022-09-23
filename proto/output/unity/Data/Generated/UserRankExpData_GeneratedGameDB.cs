@@ -55,6 +55,7 @@ public partial class UserRankExpData : IUnique<long>
 	private static void SetupUserRankExpDataTableIndexGenerated(DataTable<long, UserRankExpData> targetDataTable)
 	{
 		targetDataTable.CreateUniqueIndex("Id", aData => (object)aData.id);
+		targetDataTable.CreateUniqueIndex("Rank", aData => (object)aData.rank);
 	}
 	#endregion
 	#region DataTableUniqueIndex(Id)
@@ -71,6 +72,22 @@ public partial class UserRankExpData : IUnique<long>
 	public static void RemoveDataById(long id)
 	{
 		dataTable.DeleteByKey("Id", (object)id);
+	}
+	#endregion
+	#region DataTableUniqueIndex(Rank)
+	public static UserRankExpData GetDataByRank(long rank)
+	{
+		return dataTable.GetData("Rank", (object)rank);
+	}
+
+	public static void RemoveDataByRanks(ICollection<long> ranks)
+	{
+		ranks.ForEach(aRank => RemoveDataByRank(aRank));
+	}
+
+	public static void RemoveDataByRank(long rank)
+	{
+		dataTable.DeleteByKey("Rank", (object)rank);
 	}
 	#endregion
 }

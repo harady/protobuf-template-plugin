@@ -55,6 +55,9 @@ public partial class UserGachaButtonData : IUnique<long>
 	private static void SetupUserGachaButtonDataTableIndexGenerated(DataTable<long, UserGachaButtonData> targetDataTable)
 	{
 		targetDataTable.CreateUniqueIndex("Id", aData => (object)aData.id);
+		targetDataTable.CreateIndex("UserGachaButtonData", aData => (object)aData.userGachaButtonData);
+		targetDataTable.CreateIndex("UserGachaButtonData", aData => (object)aData.userGachaButtonData);
+		targetDataTable.CreateIndex("UserGachaButtonData", aData => (object)aData.userGachaButtonData);
 	}
 	#endregion
 	#region DataTableUniqueIndex(Id)
@@ -71,6 +74,24 @@ public partial class UserGachaButtonData : IUnique<long>
 	public static void RemoveDataById(long id)
 	{
 		dataTable.DeleteByKey("Id", (object)id);
+	}
+	#endregion
+	#region DataTableIndex (UserGachaButtonData)
+	public static List<UserGachaButtonData> GetDataListByUserId(long userId)
+	{
+		return dataTable.GetDataList("UserId", (object)userId);
+	}
+	#endregion
+	#region DataTableIndex (UserGachaButtonData)
+	public static List<UserGachaButtonData> GetDataListByGachaButtonId(long gachaButtonId)
+	{
+		return dataTable.GetDataList("GachaButtonId", (object)gachaButtonId);
+	}
+	#endregion
+	#region DataTableIndex (UserGachaButtonData)
+	public static List<UserGachaButtonData> GetDataListByGachaScheduleId(long gachaScheduleId)
+	{
+		return dataTable.GetDataList("GachaScheduleId", (object)gachaScheduleId);
 	}
 	#endregion
 }

@@ -55,6 +55,7 @@ public partial class WeakPointPositionData : IUnique<long>
 	private static void SetupWeakPointPositionDataTableIndexGenerated(DataTable<long, WeakPointPositionData> targetDataTable)
 	{
 		targetDataTable.CreateUniqueIndex("Id", aData => (object)aData.id);
+		targetDataTable.CreateIndex("WeakPointPositionData", aData => (object)aData.weakPointPositionData);
 	}
 	#endregion
 	#region DataTableUniqueIndex(Id)
@@ -71,6 +72,12 @@ public partial class WeakPointPositionData : IUnique<long>
 	public static void RemoveDataById(long id)
 	{
 		dataTable.DeleteByKey("Id", (object)id);
+	}
+	#endregion
+	#region DataTableIndex (WeakPointPositionData)
+	public static List<WeakPointPositionData> GetDataListByWeakPointId(long weakPointId)
+	{
+		return dataTable.GetDataList("WeakPointId", (object)weakPointId);
 	}
 	#endregion
 }

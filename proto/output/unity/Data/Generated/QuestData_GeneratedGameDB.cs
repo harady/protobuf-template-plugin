@@ -55,6 +55,7 @@ public partial class QuestData : IUnique<long>
 	private static void SetupQuestDataTableIndexGenerated(DataTable<long, QuestData> targetDataTable)
 	{
 		targetDataTable.CreateUniqueIndex("Id", aData => (object)aData.id);
+		targetDataTable.CreateIndex("QuestData", aData => (object)aData.questData);
 	}
 	#endregion
 	#region DataTableUniqueIndex(Id)
@@ -71,6 +72,12 @@ public partial class QuestData : IUnique<long>
 	public static void RemoveDataById(long id)
 	{
 		dataTable.DeleteByKey("Id", (object)id);
+	}
+	#endregion
+	#region DataTableIndex (QuestData)
+	public static List<QuestData> GetDataListByQuestGroupId(long questGroupId)
+	{
+		return dataTable.GetDataList("QuestGroupId", (object)questGroupId);
 	}
 	#endregion
 }

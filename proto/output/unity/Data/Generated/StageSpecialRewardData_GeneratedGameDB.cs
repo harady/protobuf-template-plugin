@@ -55,6 +55,7 @@ public partial class StageSpecialRewardData : IUnique<long>
 	private static void SetupStageSpecialRewardDataTableIndexGenerated(DataTable<long, StageSpecialRewardData> targetDataTable)
 	{
 		targetDataTable.CreateUniqueIndex("Id", aData => (object)aData.id);
+		targetDataTable.CreateIndex("StageSpecialRewardData", aData => (object)aData.stageSpecialRewardData);
 	}
 	#endregion
 	#region DataTableUniqueIndex(Id)
@@ -71,6 +72,12 @@ public partial class StageSpecialRewardData : IUnique<long>
 	public static void RemoveDataById(long id)
 	{
 		dataTable.DeleteByKey("Id", (object)id);
+	}
+	#endregion
+	#region DataTableIndex (StageSpecialRewardData)
+	public static List<StageSpecialRewardData> GetDataListByStageId(long stageId)
+	{
+		return dataTable.GetDataList("StageId", (object)stageId);
 	}
 	#endregion
 }

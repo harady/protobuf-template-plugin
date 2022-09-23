@@ -55,6 +55,7 @@ public partial class EnemyActionData : IUnique<long>
 	private static void SetupEnemyActionDataTableIndexGenerated(DataTable<long, EnemyActionData> targetDataTable)
 	{
 		targetDataTable.CreateUniqueIndex("Id", aData => (object)aData.id);
+		targetDataTable.CreateIndex("EnemyActionData", aData => (object)aData.enemyActionData);
 	}
 	#endregion
 	#region DataTableUniqueIndex(Id)
@@ -71,6 +72,12 @@ public partial class EnemyActionData : IUnique<long>
 	public static void RemoveDataById(long id)
 	{
 		dataTable.DeleteByKey("Id", (object)id);
+	}
+	#endregion
+	#region DataTableIndex (EnemyActionData)
+	public static List<EnemyActionData> GetDataListByEnemyId(long enemyId)
+	{
+		return dataTable.GetDataList("EnemyId", (object)enemyId);
 	}
 	#endregion
 }

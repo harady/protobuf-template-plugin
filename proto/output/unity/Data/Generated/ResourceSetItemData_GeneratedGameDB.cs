@@ -55,6 +55,7 @@ public partial class ResourceSetItemData : IUnique<long>
 	private static void SetupResourceSetItemDataTableIndexGenerated(DataTable<long, ResourceSetItemData> targetDataTable)
 	{
 		targetDataTable.CreateUniqueIndex("Id", aData => (object)aData.id);
+		targetDataTable.CreateIndex("ResourceSetItemData", aData => (object)aData.resourceSetItemData);
 	}
 	#endregion
 	#region DataTableUniqueIndex(Id)
@@ -71,6 +72,12 @@ public partial class ResourceSetItemData : IUnique<long>
 	public static void RemoveDataById(long id)
 	{
 		dataTable.DeleteByKey("Id", (object)id);
+	}
+	#endregion
+	#region DataTableIndex (ResourceSetItemData)
+	public static List<ResourceSetItemData> GetDataListByResourceSetId(long resourceSetId)
+	{
+		return dataTable.GetDataList("ResourceSetId", (object)resourceSetId);
 	}
 	#endregion
 }

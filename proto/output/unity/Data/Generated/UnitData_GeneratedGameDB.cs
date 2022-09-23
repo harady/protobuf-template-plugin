@@ -55,6 +55,7 @@ public partial class UnitData : IUnique<long>
 	private static void SetupUnitDataTableIndexGenerated(DataTable<long, UnitData> targetDataTable)
 	{
 		targetDataTable.CreateUniqueIndex("Id", aData => (object)aData.id);
+		targetDataTable.CreateIndex("UnitData", aData => (object)aData.unitData);
 	}
 	#endregion
 	#region DataTableUniqueIndex(Id)
@@ -71,6 +72,12 @@ public partial class UnitData : IUnique<long>
 	public static void RemoveDataById(long id)
 	{
 		dataTable.DeleteByKey("Id", (object)id);
+	}
+	#endregion
+	#region DataTableIndex (UnitData)
+	public static List<UnitData> GetDataListByBaseUnitNumber(long baseUnitNumber)
+	{
+		return dataTable.GetDataList("BaseUnitNumber", (object)baseUnitNumber);
 	}
 	#endregion
 }

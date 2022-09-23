@@ -55,6 +55,7 @@ public partial class ResourceLotteryItemData : IUnique<long>
 	private static void SetupResourceLotteryItemDataTableIndexGenerated(DataTable<long, ResourceLotteryItemData> targetDataTable)
 	{
 		targetDataTable.CreateUniqueIndex("Id", aData => (object)aData.id);
+		targetDataTable.CreateIndex("ResourceLotteryItemData", aData => (object)aData.resourceLotteryItemData);
 	}
 	#endregion
 	#region DataTableUniqueIndex(Id)
@@ -71,6 +72,12 @@ public partial class ResourceLotteryItemData : IUnique<long>
 	public static void RemoveDataById(long id)
 	{
 		dataTable.DeleteByKey("Id", (object)id);
+	}
+	#endregion
+	#region DataTableIndex (ResourceLotteryItemData)
+	public static List<ResourceLotteryItemData> GetDataListByResourceLotteryId(long resourceLotteryId)
+	{
+		return dataTable.GetDataList("ResourceLotteryId", (object)resourceLotteryId);
 	}
 	#endregion
 }
