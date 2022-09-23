@@ -1,4 +1,4 @@
-﻿{{- if (file.enum_type | array.size) > 0 -}}
+{{- if (file.enum_type | array.size) > 0 -}}
 {{- for enum in file.enum_type }}
 public enum {{ enum.name }}
 {

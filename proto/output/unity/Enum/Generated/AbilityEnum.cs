@@ -1,4 +1,4 @@
-﻿
+
 public enum AbilityType
 {
 	None = 0,

@@ -1,4 +1,4 @@
-﻿
+
 public enum ItemCategory
 {
 	None = 0,
