@@ -63,9 +63,9 @@ https://devlog.grapecity.co.jp/dotnet-6-release/
 Tiered Compilationはデフォルトで有効っぽいのでここまででC#の最適化は限界か・・。
 
 .Net 7.0 でAOTが対応する。試してみる
+→正式対応してから
 
-
-
+#### RubyでParallelを使用して並列処理をして高速化する作戦.
 
 
 GrのテンプレートエンジンはGo標準のtext/templateを使用している。
