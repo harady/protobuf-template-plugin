@@ -51,7 +51,6 @@ namespace AwsDotnetCsharp
 					new ReplaceOptions { IsUpsert = true });
 			bool result = replaceOneResult.IsAcknowledged && (replaceOneResult.ModifiedCount > 0);
 			Console.WriteLine($"LoginBonusData#DbSetData {sw.Elapsed.TotalSeconds}[秒]");
-			if (result) { userUpdateCache.loginBonusTableUpdate.Upsert(data); }
 			return result;
 		}
 
@@ -74,7 +73,6 @@ namespace AwsDotnetCsharp
 					new BulkWriteOptions());
 			Console.WriteLine($"LoginBonusData#DbSetDataList {sw.Elapsed.TotalSeconds}[秒]");
 			var result = requestResult.RequestCount == requestResult.ProcessedRequests.Count;
-			if (result) { userUpdateCache.loginBonusTableUpdate.Upsert(dataList); }
 			return result;
 		}
 		#endregion
@@ -89,7 +87,6 @@ namespace AwsDotnetCsharp
 					aData => aData.id == id);
 			Console.WriteLine($"LoginBonusData#DbDeleteDataById {sw.Elapsed.TotalSeconds}[秒]");
 			var result = deleteResult.IsAcknowledged;
-			if (result) { userUpdateCache.loginBonusTableUpdate.Delete(id); }
 			return result;
 		}
 
@@ -104,7 +101,6 @@ namespace AwsDotnetCsharp
 					aData => keySet.Contains(aData.id));
 			Console.WriteLine($"LoginBonusData#DbDeleteDataByIds {sw.Elapsed.TotalSeconds}[秒]");
 			var result = deleteResult.IsAcknowledged;
-			if (result) { userUpdateCache.loginBonusTableUpdate.Delete(ids); }
 			return result;
 		}
 		#endregion

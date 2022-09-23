@@ -51,7 +51,6 @@ namespace AwsDotnetCsharp
 					new ReplaceOptions { IsUpsert = true });
 			bool result = replaceOneResult.IsAcknowledged && (replaceOneResult.ModifiedCount > 0);
 			Console.WriteLine($"RoundData#DbSetData {sw.Elapsed.TotalSeconds}[秒]");
-			if (result) { userUpdateCache.roundTableUpdate.Upsert(data); }
 			return result;
 		}
 
@@ -74,7 +73,6 @@ namespace AwsDotnetCsharp
 					new BulkWriteOptions());
 			Console.WriteLine($"RoundData#DbSetDataList {sw.Elapsed.TotalSeconds}[秒]");
 			var result = requestResult.RequestCount == requestResult.ProcessedRequests.Count;
-			if (result) { userUpdateCache.roundTableUpdate.Upsert(dataList); }
 			return result;
 		}
 		#endregion
@@ -89,7 +87,6 @@ namespace AwsDotnetCsharp
 					aData => aData.id == id);
 			Console.WriteLine($"RoundData#DbDeleteDataById {sw.Elapsed.TotalSeconds}[秒]");
 			var result = deleteResult.IsAcknowledged;
-			if (result) { userUpdateCache.roundTableUpdate.Delete(id); }
 			return result;
 		}
 
@@ -104,7 +101,6 @@ namespace AwsDotnetCsharp
 					aData => keySet.Contains(aData.id));
 			Console.WriteLine($"RoundData#DbDeleteDataByIds {sw.Elapsed.TotalSeconds}[秒]");
 			var result = deleteResult.IsAcknowledged;
-			if (result) { userUpdateCache.roundTableUpdate.Delete(ids); }
 			return result;
 		}
 		#endregion

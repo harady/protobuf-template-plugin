@@ -12,8 +12,11 @@ namespace AwsDotnetCsharp
 	{{- message_name_prefix = (message.name | regex.replace "Data$" "") }}
 	{{- message_name_camel = (message_name_prefix | to_camel) }}
 	{{- has_id = (message.field[0].name == "id") }}
-	{{- is_master = true }}
-	{{- is_client_user_data = true }}
+	{{- unique_indexs = message | get_unique_indexs }}
+	{{- indexs = message | get_indexs }}
+	{{- tags = message | get_tags }}
+	{{- is_master = (tags | array.contains "is_master") || (tags | array.contains "is_client_master") }}
+	{{- is_client_user_data = (tags | array.contains "is_client_user_data") }}
 	public partial class {{ message.name }}{{ if has_id }} : IUnique<long>{{ end }}
 	{
 		private static bool isMaster => {{ is_master }};
@@ -256,7 +259,7 @@ namespace AwsDotnetCsharp
 			Console.WriteLine($"{{ message.name }}#DbGetDataListIn{{ field.name | to_pascal }}s {sw.Elapsed.TotalSeconds}[秒]");
 			return result;
 		}
-{{ if ((field.name == "id") or (has_id)) }}
+{{ if ((field.name == "id") || has_id) }}
 		public static async Task<bool> DbDeleteDataBy{{ field.name | to_pascal }}(
 			{{ field | to_cs_type }} {{ field.name | to_camel }})
 		{
@@ -284,7 +287,7 @@ namespace AwsDotnetCsharp
 					aData => keySet.Contains(aData.{{ field.name | to_camel }}));
 			Console.WriteLine($"{{ message.name }}#DbDeleteDataBy{{ field.name | to_pascal }}s {sw.Elapsed.TotalSeconds}[秒]");
 			var result = deleteResult.IsAcknowledged;
-			{{- if (and (field.name == "id") (is_client_user_data)) }}
+			{{- if ((field.name == "id") && is_client_user_data) }}
 			if (result) { userUpdateCache.{{ message_name_camel }}TableUpdate.Delete(ids); }
 			{{- end }}
 			return result;
@@ -309,7 +312,7 @@ namespace AwsDotnetCsharp
 {{- end }}
 		#endregion
 			{{- end }}
-			{{- if (StrArrayContains $indexes .Name) }}
+			{{- if (indexs | array.contains field.name) }}
 		#region MongoDbIndex({{ field.name | to_pascal }})
 		public static async Task<{{ message.name }}> DbGetDataBy{{ field.name | to_pascal }}(
 			{{ field | to_cs_type }} {{ field.name | to_camel }})
@@ -333,7 +336,7 @@ namespace AwsDotnetCsharp
 					sessionHandle,
 					aData => aData.{{ field.name | to_camel }} == {{ field.name | to_camel }})
 				.ToListAsync();
-			Console.WriteLine($"{{ message.name }}#DbGetDataListBy{{ field.name | to_pascall }} {sw.Elapsed.TotalSeconds}[秒]");
+			Console.WriteLine($"{{ message.name }}#DbGetDataListBy{{ field.name | to_pascal }} {sw.Elapsed.TotalSeconds}[秒]");
 			return result;
 		}
 		
