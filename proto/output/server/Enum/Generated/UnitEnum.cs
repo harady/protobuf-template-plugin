@@ -1,4 +1,4 @@
-﻿
+
 public enum UnitAttackType
 {
 	None = 0,

@@ -1,4 +1,4 @@
-﻿
+
 public enum BackupType
 {
 	None = 0,

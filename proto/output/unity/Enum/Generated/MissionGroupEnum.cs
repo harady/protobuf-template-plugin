@@ -1,4 +1,4 @@
-﻿
+
 public enum MissionGroupType
 {
 	None = 0,
