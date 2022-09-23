@@ -17,7 +17,7 @@ public partial class ShopService : AbstractApiService
 		Action<ShopPurchaseGooglePlayResponse> onSuccess,
 		Action<ErrorResponse> onFailure = null)
 	{
-		const string Path = "api/shop/purchasegoogleplay";
+		const string Path = "api/shop/purchase_google_play";
 		request.SetupCommon();
 		var apiRequest = new APIRequest(Path, request);
 		// リクエストを送信.
@@ -36,7 +36,7 @@ public partial class ShopService : AbstractApiService
 		Action<ShopPurchaseAppStoreResponse> onSuccess,
 		Action<ErrorResponse> onFailure = null)
 	{
-		const string Path = "api/shop/purchaseappstore";
+		const string Path = "api/shop/purchase_app_store";
 		request.SetupCommon();
 		var apiRequest = new APIRequest(Path, request);
 		// リクエストを送信.
@@ -55,7 +55,7 @@ public partial class ShopService : AbstractApiService
 		Action<ShopPurchaseDebugResponse> onSuccess,
 		Action<ErrorResponse> onFailure = null)
 	{
-		const string Path = "api/shop/purchasedebug";
+		const string Path = "api/shop/purchase_debug";
 		request.SetupCommon();
 		var apiRequest = new APIRequest(Path, request);
 		// リクエストを送信.

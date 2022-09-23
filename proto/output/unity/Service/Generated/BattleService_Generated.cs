@@ -17,7 +17,7 @@ public partial class BattleService : AbstractApiService
 		Action<BattleHelperListResponse> onSuccess,
 		Action<ErrorResponse> onFailure = null)
 	{
-		const string Path = "api/battle/helperlist";
+		const string Path = "api/battle/helper_list";
 		request.SetupCommon();
 		var apiRequest = new APIRequest(Path, request);
 		// リクエストを送信.

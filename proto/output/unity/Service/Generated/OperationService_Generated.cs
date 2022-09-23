@@ -131,7 +131,7 @@ public partial class OperationService : AbstractApiService
 		Action<OperationUpdateMasterVersionResponse> onSuccess,
 		Action<ErrorResponse> onFailure = null)
 	{
-		const string Path = "api/operation/updatemasterversion";
+		const string Path = "api/operation/update_master_version";
 		request.SetupCommon();
 		var apiRequest = new APIRequest(Path, request);
 		// リクエストを送信.
@@ -150,7 +150,7 @@ public partial class OperationService : AbstractApiService
 		Action<OperationUpdateEventScheduleResponse> onSuccess,
 		Action<ErrorResponse> onFailure = null)
 	{
-		const string Path = "api/operation/updateeventschedule";
+		const string Path = "api/operation/update_event_schedule";
 		request.SetupCommon();
 		var apiRequest = new APIRequest(Path, request);
 		// リクエストを送信.

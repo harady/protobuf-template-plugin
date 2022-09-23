@@ -17,7 +17,7 @@ public partial class FriendRequestService : AbstractApiService
 		Action<FriendRequestListResponse> onSuccess,
 		Action<ErrorResponse> onFailure = null)
 	{
-		const string Path = "api/friendrequest/list";
+		const string Path = "api/friend_request/list";
 		request.SetupCommon();
 		var apiRequest = new APIRequest(Path, request);
 		// リクエストを送信.
@@ -36,7 +36,7 @@ public partial class FriendRequestService : AbstractApiService
 		Action<FriendRequestAcceptResponse> onSuccess,
 		Action<ErrorResponse> onFailure = null)
 	{
-		const string Path = "api/friendrequest/accept";
+		const string Path = "api/friend_request/accept";
 		request.SetupCommon();
 		var apiRequest = new APIRequest(Path, request);
 		// リクエストを送信.
@@ -55,7 +55,7 @@ public partial class FriendRequestService : AbstractApiService
 		Action<FriendRequestRejectResponse> onSuccess,
 		Action<ErrorResponse> onFailure = null)
 	{
-		const string Path = "api/friendrequest/reject";
+		const string Path = "api/friend_request/reject";
 		request.SetupCommon();
 		var apiRequest = new APIRequest(Path, request);
 		// リクエストを送信.

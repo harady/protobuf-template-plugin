@@ -17,7 +17,7 @@ public partial class BackupService : AbstractApiService
 		Action<BackupSaveTokenResponse> onSuccess,
 		Action<ErrorResponse> onFailure = null)
 	{
-		const string Path = "api/backup/savetoken";
+		const string Path = "api/backup/save_token";
 		request.SetupCommon();
 		var apiRequest = new APIRequest(Path, request);
 		// リクエストを送信.
@@ -36,7 +36,7 @@ public partial class BackupService : AbstractApiService
 		Action<BackupRemoveTokenResponse> onSuccess,
 		Action<ErrorResponse> onFailure = null)
 	{
-		const string Path = "api/backup/removetoken";
+		const string Path = "api/backup/remove_token";
 		request.SetupCommon();
 		var apiRequest = new APIRequest(Path, request);
 		// リクエストを送信.

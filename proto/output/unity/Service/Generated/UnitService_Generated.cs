@@ -17,7 +17,7 @@ public partial class UnitService : AbstractApiService
 		Action<UnitDeckEditResponse> onSuccess,
 		Action<ErrorResponse> onFailure = null)
 	{
-		const string Path = "api/unit/deckedit";
+		const string Path = "api/unit/deck_edit";
 		request.SetupCommon();
 		var apiRequest = new APIRequest(Path, request);
 		// リクエストを送信.

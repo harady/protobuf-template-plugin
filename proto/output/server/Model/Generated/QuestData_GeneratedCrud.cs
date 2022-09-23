@@ -155,7 +155,7 @@ namespace AwsDotnetCsharp
 			targetDataTable.CreateIndex("Id", aData => (object)aData.id);
 			targetDataTable.CreateIndex("Name", aData => (object)aData.name);
 			targetDataTable.CreateIndex("QuestGroupId", aData => (object)aData.questGroupId);
-			targetDataTable.CreateIndex("Nocontinue", aData => (object)aData.nocontinue);
+			targetDataTable.CreateIndex("NoContinue", aData => (object)aData.noContinue);
 			targetDataTable.CreateIndex("QuestDifficultyType", aData => (object)aData.questDifficultyType);
 			targetDataTable.CreateIndex("BossUnitId", aData => (object)aData.bossUnitId);
 			targetDataTable.CreateIndex("OpenAt", aData => (object)aData.openAt);
@@ -191,11 +191,11 @@ namespace AwsDotnetCsharp
 			return dataTable.GetDataList("QuestGroupId", (object)questGroupId);
 		}
 		#endregion
-		#region DataTableIndex (Nocontinue)
-		public static List<QuestData> GetDataListByNocontinue(
-			bool nocontinue)
+		#region DataTableIndex (NoContinue)
+		public static List<QuestData> GetDataListByNoContinue(
+			bool noContinue)
 		{
-			return dataTable.GetDataList("Nocontinue", (object)nocontinue);
+			return dataTable.GetDataList("NoContinue", (object)noContinue);
 		}
 		#endregion
 		#region DataTableIndex (QuestDifficultyType)

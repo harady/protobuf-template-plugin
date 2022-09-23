@@ -17,7 +17,7 @@ public partial class DebugService : AbstractApiService
 		Action<DebugSetServerTimeResponse> onSuccess,
 		Action<ErrorResponse> onFailure = null)
 	{
-		const string Path = "api/debug/setservertime";
+		const string Path = "api/debug/set_server_time";
 		request.SetupCommon();
 		var apiRequest = new APIRequest(Path, request);
 		// リクエストを送信.

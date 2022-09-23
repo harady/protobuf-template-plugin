@@ -183,7 +183,7 @@ namespace AwsDotnetCsharp
 			targetDataTable.CreateIndex("Ability5Id", aData => (object)aData.ability5Id);
 			targetDataTable.CreateIndex("EquipmentSlotCount", aData => (object)aData.equipmentSlotCount);
 			targetDataTable.CreateIndex("SalePrice", aData => (object)aData.salePrice);
-			targetDataTable.CreateIndex("Baseexp", aData => (object)aData.baseexp);
+			targetDataTable.CreateIndex("BaseExp", aData => (object)aData.baseExp);
 		}
 		#endregion
 		#region DataTableUniqueIndex(Id)
@@ -410,11 +410,11 @@ namespace AwsDotnetCsharp
 			return dataTable.GetDataList("SalePrice", (object)salePrice);
 		}
 		#endregion
-		#region DataTableIndex (Baseexp)
-		public static List<UnitData> GetDataListByBaseexp(
-			long baseexp)
+		#region DataTableIndex (BaseExp)
+		public static List<UnitData> GetDataListByBaseExp(
+			long baseExp)
 		{
-			return dataTable.GetDataList("Baseexp", (object)baseexp);
+			return dataTable.GetDataList("BaseExp", (object)baseExp);
 		}
 		#endregion
 	}

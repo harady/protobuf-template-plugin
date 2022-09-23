@@ -158,7 +158,7 @@ namespace AwsDotnetCsharp
 			targetDataTable.CreateIndex("MaxStartTime", aData => (object)aData.maxStartTime);
 			targetDataTable.CreateIndex("OpenHours", aData => (object)aData.openHours);
 			targetDataTable.CreateIndex("QuestGroupId", aData => (object)aData.questGroupId);
-			targetDataTable.CreateIndex("Questdifficultytype", aData => (object)aData.questdifficultytype);
+			targetDataTable.CreateIndex("QuestDifficultyType", aData => (object)aData.questDifficultyType);
 		}
 		#endregion
 		#region DataTableUniqueIndex(Id)
@@ -210,11 +210,11 @@ namespace AwsDotnetCsharp
 			return dataTable.GetDataList("QuestGroupId", (object)questGroupId);
 		}
 		#endregion
-		#region DataTableIndex (Questdifficultytype)
-		public static List<EventQuestCategoryData> GetDataListByQuestdifficultytype(
-			QuestDifficultyType questdifficultytype)
+		#region DataTableIndex (QuestDifficultyType)
+		public static List<EventQuestCategoryData> GetDataListByQuestDifficultyType(
+			QuestDifficultyType questDifficultyType)
 		{
-			return dataTable.GetDataList("Questdifficultytype", (object)questdifficultytype);
+			return dataTable.GetDataList("QuestDifficultyType", (object)questDifficultyType);
 		}
 		#endregion
 	}

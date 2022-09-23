@@ -24,8 +24,8 @@ public partial class EventQuestCategoryData : AbstractData
 	[DataMember(Name = "questGroupId")]
 	public long questGroupId { get; set; }
 
-	[DataMember(Name = "questdifficultytype")]
-	public QuestDifficultyType questdifficultytype { get; set; }
+	[DataMember(Name = "questDifficultyType")]
+	public QuestDifficultyType questDifficultyType { get; set; }
 
 	public EventQuestCategoryData Clone() {
 		var result = new EventQuestCategoryData();
@@ -35,7 +35,7 @@ public partial class EventQuestCategoryData : AbstractData
 		result.maxStartTime = maxStartTime;
 		result.openHours = openHours;
 		result.questGroupId = questGroupId;
-		result.questdifficultytype = questdifficultytype;
+		result.questDifficultyType = questDifficultyType;
 		return result;
 	}
 
