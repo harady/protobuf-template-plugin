@@ -11,7 +11,6 @@ using Amazon.Lambda.APIGatewayEvents;
 //GENERATED CODE, DO NOT EDIT !
 namespace AwsDotnetCsharp
 {
-
 	public partial class OperationServiceBase : ServiceBase
 	{
 

@@ -6,7 +6,6 @@ using UnityEngine;
 
 public partial class BattleService
 {
-
 	public void HelperList(Action<BattleHelperListResponse> onSuccess)
 	{
 		var request = new BattleHelperListRequest();
@@ -17,7 +16,6 @@ public partial class BattleService
 			}
 		);
 	}
-
 	public void Start(Action<BattleStartResponse> onSuccess)
 	{
 		var request = new BattleStartRequest();
@@ -28,7 +26,6 @@ public partial class BattleService
 			}
 		);
 	}
-
 	public void Continue(Action<BattleContinueResponse> onSuccess)
 	{
 		var request = new BattleContinueRequest();
@@ -39,7 +36,6 @@ public partial class BattleService
 			}
 		);
 	}
-
 	public void Giveup(Action<BattleGiveupResponse> onSuccess)
 	{
 		var request = new BattleGiveupRequest();
@@ -50,7 +46,6 @@ public partial class BattleService
 			}
 		);
 	}
-
 	public void Clear(Action<BattleClearResponse> onSuccess)
 	{
 		var request = new BattleClearRequest();
@@ -61,5 +56,4 @@ public partial class BattleService
 			}
 		);
 	}
-
 }

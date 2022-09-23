@@ -11,7 +11,7 @@ using Amazon.Lambda.APIGatewayEvents;
 //GENERATED CODE, DO NOT EDIT !
 namespace AwsDotnetCsharp
 {
-{{ for service in file.service }}
+{{- for service in file.service }}
 	public partial class {{ service.name }}ServiceBase : ServiceBase
 	{
 {{ for method in service.method }}

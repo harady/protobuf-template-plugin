@@ -6,7 +6,6 @@ using UnityEngine;
 
 public partial class UserService
 {
-
 	public void DataList(Action<UserDataListResponse> onSuccess)
 	{
 		var request = new UserDataListRequest();
@@ -17,7 +16,6 @@ public partial class UserService
 			}
 		);
 	}
-
 	public void NameEdit(Action<UserNameEditResponse> onSuccess)
 	{
 		var request = new UserNameEditRequest();
@@ -28,5 +26,4 @@ public partial class UserService
 			}
 		);
 	}
-
 }

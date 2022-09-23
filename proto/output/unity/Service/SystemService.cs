@@ -6,7 +6,6 @@ using UnityEngine;
 
 public partial class SystemService
 {
-
 	public void Ping(Action<SystemPingResponse> onSuccess)
 	{
 		var request = new SystemPingRequest();
@@ -17,7 +16,6 @@ public partial class SystemService
 			}
 		);
 	}
-
 	public void Signup(Action<SystemSignupResponse> onSuccess)
 	{
 		var request = new SystemSignupRequest();
@@ -28,7 +26,6 @@ public partial class SystemService
 			}
 		);
 	}
-
 	public void Login(Action<SystemLoginResponse> onSuccess)
 	{
 		var request = new SystemLoginRequest();
@@ -39,5 +36,4 @@ public partial class SystemService
 			}
 		);
 	}
-
 }

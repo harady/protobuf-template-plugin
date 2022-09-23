@@ -6,7 +6,6 @@ using UnityEngine;
 
 public partial class MissionService
 {
-
 	public void Achieve(Action<MissionAchieveResponse> onSuccess)
 	{
 		var request = new MissionAchieveRequest();
@@ -17,7 +16,6 @@ public partial class MissionService
 			}
 		);
 	}
-
 	public void Receive(Action<MissionReceiveResponse> onSuccess)
 	{
 		var request = new MissionReceiveRequest();
@@ -28,5 +26,4 @@ public partial class MissionService
 			}
 		);
 	}
-
 }

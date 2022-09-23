@@ -6,7 +6,6 @@ using UnityEngine;
 
 public partial class GachaService
 {
-
 	public void Draw(Action<GachaDrawResponse> onSuccess)
 	{
 		var request = new GachaDrawRequest();
@@ -17,5 +16,4 @@ public partial class GachaService
 			}
 		);
 	}
-
 }

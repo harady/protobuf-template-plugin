@@ -6,7 +6,6 @@ using UnityEngine;
 
 public partial class ShopService
 {
-
 	public void PurchaseGooglePlay(Action<ShopPurchaseGooglePlayResponse> onSuccess)
 	{
 		var request = new ShopPurchaseGooglePlayRequest();
@@ -17,7 +16,6 @@ public partial class ShopService
 			}
 		);
 	}
-
 	public void PurchaseAppStore(Action<ShopPurchaseAppStoreResponse> onSuccess)
 	{
 		var request = new ShopPurchaseAppStoreRequest();
@@ -28,7 +26,6 @@ public partial class ShopService
 			}
 		);
 	}
-
 	public void PurchaseDebug(Action<ShopPurchaseDebugResponse> onSuccess)
 	{
 		var request = new ShopPurchaseDebugRequest();
@@ -39,5 +36,4 @@ public partial class ShopService
 			}
 		);
 	}
-
 }

@@ -6,7 +6,6 @@ using UnityEngine;
 
 public partial class DebugService
 {
-
 	public void SetServerTime(Action<DebugSetServerTimeResponse> onSuccess)
 	{
 		var request = new DebugSetServerTimeRequest();
@@ -17,7 +16,6 @@ public partial class DebugService
 			}
 		);
 	}
-
 	public void Test(Action<DebugTestResponse> onSuccess)
 	{
 		var request = new DebugTestRequest();
@@ -28,7 +26,6 @@ public partial class DebugService
 			}
 		);
 	}
-
 	public void Test1(Action<DebugTestResponse> onSuccess)
 	{
 		var request = new DebugTestRequest();
@@ -39,7 +36,6 @@ public partial class DebugService
 			}
 		);
 	}
-
 	public void Test2(Action<DebugTestResponse> onSuccess)
 	{
 		var request = new DebugTestRequest();
@@ -50,7 +46,6 @@ public partial class DebugService
 			}
 		);
 	}
-
 	public void Test3(Action<DebugTestResponse> onSuccess)
 	{
 		var request = new DebugTestRequest();
@@ -61,7 +56,6 @@ public partial class DebugService
 			}
 		);
 	}
-
 	public void Test4(Action<DebugTestResponse> onSuccess)
 	{
 		var request = new DebugTestRequest();
@@ -72,7 +66,6 @@ public partial class DebugService
 			}
 		);
 	}
-
 	public void Test5(Action<DebugTestResponse> onSuccess)
 	{
 		var request = new DebugTestRequest();
@@ -83,7 +76,6 @@ public partial class DebugService
 			}
 		);
 	}
-
 	public void Test6(Action<DebugTestResponse> onSuccess)
 	{
 		var request = new DebugTestRequest();
@@ -94,5 +86,4 @@ public partial class DebugService
 			}
 		);
 	}
-
 }

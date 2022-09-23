@@ -6,7 +6,6 @@ using UnityEngine;
 
 public partial class BackupService
 {
-
 	public void SaveToken(Action<BackupSaveTokenResponse> onSuccess)
 	{
 		var request = new BackupSaveTokenRequest();
@@ -17,7 +16,6 @@ public partial class BackupService
 			}
 		);
 	}
-
 	public void RemoveToken(Action<BackupRemoveTokenResponse> onSuccess)
 	{
 		var request = new BackupRemoveTokenRequest();
@@ -28,7 +26,6 @@ public partial class BackupService
 			}
 		);
 	}
-
 	public void Transfer(Action<BackupTransferResponse> onSuccess)
 	{
 		var request = new BackupTransferRequest();
@@ -39,5 +36,4 @@ public partial class BackupService
 			}
 		);
 	}
-
 }

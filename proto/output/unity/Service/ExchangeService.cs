@@ -6,7 +6,6 @@ using UnityEngine;
 
 public partial class ExchangeService
 {
-
 	public void Exchange(Action<ExchangeExchangeResponse> onSuccess)
 	{
 		var request = new ExchangeExchangeRequest();
@@ -17,5 +16,4 @@ public partial class ExchangeService
 			}
 		);
 	}
-
 }

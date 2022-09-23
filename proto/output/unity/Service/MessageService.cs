@@ -6,7 +6,6 @@ using UnityEngine;
 
 public partial class MessageService
 {
-
 	public void List(Action<MessageListResponse> onSuccess)
 	{
 		var request = new MessageListRequest();
@@ -17,7 +16,6 @@ public partial class MessageService
 			}
 		);
 	}
-
 	public void Receive(Action<MessageReceiveResponse> onSuccess)
 	{
 		var request = new MessageReceiveRequest();
@@ -28,5 +26,4 @@ public partial class MessageService
 			}
 		);
 	}
-
 }

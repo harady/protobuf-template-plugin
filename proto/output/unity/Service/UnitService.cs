@@ -6,7 +6,6 @@ using UnityEngine;
 
 public partial class UnitService
 {
-
 	public void DeckEdit(Action<UnitDeckEditResponse> onSuccess)
 	{
 		var request = new UnitDeckEditRequest();
@@ -17,7 +16,6 @@ public partial class UnitService
 			}
 		);
 	}
-
 	public void Powerup(Action<UnitPowerupResponse> onSuccess)
 	{
 		var request = new UnitPowerupRequest();
@@ -28,7 +26,6 @@ public partial class UnitService
 			}
 		);
 	}
-
 	public void Evolution(Action<UnitEvolutionResponse> onSuccess)
 	{
 		var request = new UnitEvolutionRequest();
@@ -39,7 +36,6 @@ public partial class UnitService
 			}
 		);
 	}
-
 	public void Sell(Action<UnitSellResponse> onSuccess)
 	{
 		var request = new UnitSellRequest();
@@ -50,7 +46,6 @@ public partial class UnitService
 			}
 		);
 	}
-
 	public void Lock(Action<UnitLockResponse> onSuccess)
 	{
 		var request = new UnitLockRequest();
@@ -61,5 +56,4 @@ public partial class UnitService
 			}
 		);
 	}
-
 }
