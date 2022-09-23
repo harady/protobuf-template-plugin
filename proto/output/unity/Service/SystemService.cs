@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using UnityEngine;
@@ -6,7 +6,6 @@ using UnityEngine;
 
 public partial class SystemService
 {
-
 	public void Ping(Action<SystemPingResponse> onSuccess)
 	{
 		var request = new SystemPingRequest();

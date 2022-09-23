@@ -328,21 +328,7 @@ namespace AwsDotnetCsharp
 	}
 
 	[JsonObject(MemberSerialization.OptIn)]
-	public partial class OperationTestResponse : APIResponse
-	{
-		[JsonProperty("message")]
-		public string message { get; set; }
-	}
-
-	[JsonObject(MemberSerialization.OptIn)]
-	public partial class OperationUpdateEventScheduleRequest : APIRequest
-	{
-		[JsonProperty("message")]
-		public string message { get; set; }
-	}
-
-	[JsonObject(MemberSerialization.OptIn)]
-	public partial class OperationUpdateEventScheduleResponse : APIResponse
+	public partial class OperationTestResponse : APIRequest
 	{
 		[JsonProperty("message")]
 		public string message { get; set; }
@@ -356,7 +342,21 @@ namespace AwsDotnetCsharp
 	}
 
 	[JsonObject(MemberSerialization.OptIn)]
-	public partial class OperationUpdateMasterVersionResponse : APIResponse
+	public partial class OperationUpdateMasterVersionResponse : APIRequest
+	{
+		[JsonProperty("message")]
+		public string message { get; set; }
+	}
+
+	[JsonObject(MemberSerialization.OptIn)]
+	public partial class OperationUpdateEventScheduleRequest : APIRequest
+	{
+		[JsonProperty("message")]
+		public string message { get; set; }
+	}
+
+	[JsonObject(MemberSerialization.OptIn)]
+	public partial class OperationUpdateEventScheduleResponse : APIRequest
 	{
 		[JsonProperty("message")]
 		public string message { get; set; }

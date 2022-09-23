@@ -1,4 +1,3 @@
-{{- if gt (len .Messages) 0 -}}
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -9,38 +8,33 @@ using MongoDB.Driver;
 
 namespace AwsDotnetCsharp
 {
-{{- range .Messages }}
-	{{- $className := .Name }}
-	{{- $messageNameCamel := (Replace (Join (.Name | ToSnakeCase | ToCamelCase) "___") "Data___" "") }}
-	{{- $messageNamePascal := (Replace (Join .Name "___") "Data___" "") }}
-	{{- $hasId := (eq (index .Fields 0).Name "id") }}
-	{{- $uniqueIndexes := .UniqueIndexes }}
-	{{- $indexes := .Indexes }}
-	{{- $tags := .Tags }}
-	{{- $isMaster := (or (StrArrayContains $tags "is_master") (StrArrayContains $tags "is_client_master")) }}
-	{{- $isClientUserData := (StrArrayContains $tags "is_client_user_data") }}
-	public partial class {{ $className }}{{ if eq $hasId true }} : IUnique<long>{{ end }}
+{{ for message in file.message_type }}
+	{{- message_name_camel = message.name }}
+	{{- has_id = (message.field[0].name == "id") }}
+	{{- is_master = true }}
+	{{- is_client_user_data = true }}
+	public partial class {{ message.name }}{{ if has_id }} : IUnique<long>{{ end }}
 	{
-		private static bool isMaster => {{ $isMaster }};
+		private static bool isMaster => {{ is_master }};
 
-		private static IMongoCollection<{{ $className }}> _collection = null;
-		private static IMongoCollection<{{ $className }}> collection
-			=> _collection ?? (_collection = mongoDatabase.GetCollection<{{ $className }}>("{{ Replace .Name "Data" "" | ToSnakeCase }}s"));
+		private static IMongoCollection<{{ message.name }}> _collection = null;
+		private static IMongoCollection<{{ message.name }}> collection
+			=> _collection ?? (_collection = mongoDatabase.GetCollection<{{ message.name }}>("{{ message.name }}s"));
 
 		public static IClientSessionHandle sessionHandle
 			=> MongoSessionManager.sessionHandle;
 
-		{{- if eq $hasId true }}
+		{{- if has_id }}
 		#region MongoDb
-		public static {{ $className }} DbCreateNew()
+		public static {{ message.name }} DbCreateNew()
 		{
-			var result = new {{ $className }}();
+			var result = new {{ message.name }}();
 			result._id = ObjectId.GenerateNewId();
 			result.id = IdUtil.GenerateNewId();
 			return result;
 		}
 
-		public static async Task<List<{{ $className }}>> DbGetDataList()
+		public static async Task<List<{{ message.name }}>> DbGetDataList()
 		{
 			var sw = Stopwatch.StartNew();
 			var result = await collection
@@ -48,12 +42,12 @@ namespace AwsDotnetCsharp
 					sessionHandle,
 					new BsonDocument())
 				.ToListAsync();
-			Console.WriteLine($"{{ $className }}#DbGetDataList {sw.Elapsed.TotalSeconds}[秒]");
+			Console.WriteLine($"{{ message.name }}#DbGetDataList {sw.Elapsed.TotalSeconds}[秒]");
 			return result;
 		}
 
 		public static async Task<bool> DbSetData(
-			{{ $className }} data)
+			{{ message.name }} data)
 		{
 			var sw = Stopwatch.StartNew();
 			var replaceOneResult = await collection
@@ -63,21 +57,21 @@ namespace AwsDotnetCsharp
 					data,
 					new ReplaceOptions { IsUpsert = true });
 			bool result = replaceOneResult.IsAcknowledged && (replaceOneResult.ModifiedCount > 0);
-			Console.WriteLine($"{{ $className }}#DbSetData {sw.Elapsed.TotalSeconds}[秒]");
-			{{- if eq $isClientUserData true }}
-			if (result) { userUpdateCache.{{ $messageNameCamel }}TableUpdate.Upsert(data); }
+			Console.WriteLine($"{{ message.name }}#DbSetData {sw.Elapsed.TotalSeconds}[秒]");
+			{{- if is_client_user_data }}
+			if (result) { userUpdateCache.{{ message_name_camel }}TableUpdate.Upsert(data); }
 			{{- end }}
 			return result;
 		}
 
 		public static async Task<bool> DbSetDataList(
-			IEnumerable<{{ $className }}> dataList)
+			IEnumerable<{{ message.name }}> dataList)
 		{
 			var sw = Stopwatch.StartNew();
-			var models = new List<WriteModel<{{ $className }}>>();
+			var models = new List<WriteModel<{{ message.name }}>>();
 			dataList.ForEach(toSetData => {
-				var filter = Builders<{{ $className }}>.Filter;
-				var model = new ReplaceOneModel<{{ $className }}>(
+				var filter = Builders<{{ message.name }}>.Filter;
+				var model = new ReplaceOneModel<{{ message.name }}>(
 					filter.Eq(aData => aData.id, toSetData.id), toSetData);
 				model.IsUpsert = true;
 				models.Add(model);
@@ -87,16 +81,16 @@ namespace AwsDotnetCsharp
 					sessionHandle,
 					models,
 					new BulkWriteOptions());
-			Console.WriteLine($"{{ $className }}#DbSetDataList {sw.Elapsed.TotalSeconds}[秒]");
+			Console.WriteLine($"{{ message.name }}#DbSetDataList {sw.Elapsed.TotalSeconds}[秒]");
 			var result = requestResult.RequestCount == requestResult.ProcessedRequests.Count;
-			{{- if eq $isClientUserData true }}
-			if (result) { userUpdateCache.{{ $messageNameCamel }}TableUpdate.Upsert(dataList); }
+			{{- if is_client_user_data }}
+			if (result) { userUpdateCache.{{ message_name_camel }}TableUpdate.Upsert(dataList); }
 			{{- end }}
 			return result;
 		}
 		#endregion
 		{{- end }}
-{{- if $isMaster }}
+{{- if is_master }}
 		#region MongoDb
 		public static async Task<bool> DbDeleteDataById(
 			long id)
@@ -106,10 +100,10 @@ namespace AwsDotnetCsharp
 				.DeleteOneAsync(
 					sessionHandle,
 					aData => aData.id == id);
-			Console.WriteLine($"{{ $className }}#DbDeleteDataById {sw.Elapsed.TotalSeconds}[秒]");
+			Console.WriteLine($"{{ message.name }}#DbDeleteDataById {sw.Elapsed.TotalSeconds}[秒]");
 			var result = deleteResult.IsAcknowledged;
-			{{- if eq $isClientUserData true }}
-			if (result) { userUpdateCache.{{ $messageNameCamel }}TableUpdate.Delete(id); }
+			{{- if is_client_user_data }}
+			if (result) { userUpdateCache.{{ message_name_camel }}TableUpdate.Delete(id); }
 			{{- end }}
 			return result;
 		}
@@ -123,30 +117,30 @@ namespace AwsDotnetCsharp
 				.DeleteManyAsync(
 					sessionHandle,
 					aData => keySet.Contains(aData.id));
-			Console.WriteLine($"{{ $className }}#DbDeleteDataByIds {sw.Elapsed.TotalSeconds}[秒]");
+			Console.WriteLine($"{{ message.name }}#DbDeleteDataByIds {sw.Elapsed.TotalSeconds}[秒]");
 			var result = deleteResult.IsAcknowledged;
-			{{- if eq $isClientUserData true }}
-			if (result) { userUpdateCache.{{ $messageNameCamel }}TableUpdate.Delete(ids); }
+			{{- if is_client_user_data }}
+			if (result) { userUpdateCache.{{ message_name_camel }}TableUpdate.Delete(ids); }
 			{{- end }}
 			return result;
 		}
 		#endregion
 		#region NullObject
-		public static {{ .Name }} Null => NullObjectContainer.Get<{{ .Name }}>();
+		public static {{ message.name }} Null => NullObjectContainer.Get<{{ message.name }}>();
 	
 		public bool isNull => this == Null;
 		#endregion
-		{{- if eq $hasId true }}
+		{{- if has_id }}
 		#region GameDbWrapper(DataTable)
-		public static DataTable<long, {{ .Name }}> dataTable {
+		public static DataTable<long, {{ message.name }}> dataTable {
 			get {
-				DataTable<long, {{ .Name }}> result;
-				if (GameDb.TableExists<long, {{ .Name }}>()) {
-					result = GameDb.From<long, {{ .Name }}>();
+				DataTable<long, {{ message.name }}> result;
+				if (GameDb.TableExists<long, {{ message.name }}>()) {
+					result = GameDb.From<long, {{ message.name }}>();
 				} else {
-					result = GameDb.CreateTable<long, {{ .Name }}>();
-					Setup{{ .Name }}TableIndexGenerated(result);
-					Setup{{ .Name }}TableIndex(result);
+					result = GameDb.CreateTable<long, {{ message.name }}>();
+					Setup{{ message.name }}TableIndexGenerated(result);
+					Setup{{ message.name }}TableIndex(result);
 				}
 				return result;
 			}
@@ -154,12 +148,12 @@ namespace AwsDotnetCsharp
 
 		public static int Count => dataTable.Count;
 
-		public static List<{{ .Name }}> GetDataList()
+		public static List<{{ message.name }}> GetDataList()
 		{
 			return dataTable.dataList;
 		}
 
-		public static void SetDataList(IEnumerable<{{ .Name }}> dataList)
+		public static void SetDataList(IEnumerable<{{ message.name }}> dataList)
 		{
 			Clear();
 			dataTable.InsertRange(dataList);
@@ -170,42 +164,41 @@ namespace AwsDotnetCsharp
 			dataTable.DeleteAll();
 		}
 
-		static partial void Setup{{ .Name }}TableIndex(DataTable<long, {{ .Name }}> targetDataTable);
+		static partial void Setup{{ message.name }}TableIndex(DataTable<long, {{ message.name }}> targetDataTable);
 
-		private static void Setup{{ .Name }}TableIndexGenerated(DataTable<long, {{ .Name }}> targetDataTable)
+		private static void Setup{{ message.name }}TableIndexGenerated(DataTable<long, {{ message.name }}> targetDataTable)
 		{
-			{{- range .Fields }}
-				{{- if or (eq .Name "id") (StrArrayContains $uniqueIndexes .Name) }}
-			targetDataTable.CreateUniqueIndex("{{ .Name | SnakeToPascal }}", aData => (object)aData.{{ .Name | ToCamelCase }});
+			{{- for field in message.field }}
+				{{- if (field.name == "id") }}
+			targetDataTable.CreateUniqueIndex("{{ field.name | to_pascal }}", aData => (object)aData.{{ field.name | to_camel }});
 				{{- end }}
 			{{- end }}
-			{{- range .Fields }}
-				{{- if (StrArrayContains $indexes .Name) }}
-			targetDataTable.CreateIndex("{{ .Name | SnakeToPascal }}", aData => (object)aData.{{ .Name | ToCamelCase }});
+			{{- for field in message.field }}
+				{{- if true }}
+			targetDataTable.CreateIndex("{{ field.name | to_pascal }}", aData => (object)aData.{{ field.name | to_camel }});
 				{{- end }}
 			{{- end }}
 		}
 		#endregion
 		{{- end }}
-		{{- $messageName := .Name }}
-		{{- range .Fields }}
-			{{- if or (eq .Name "id") (StrArrayContains $uniqueIndexes .Name) }}
-		#region DataTableUniqueIndex({{.Name | SnakeToPascal}})
-		public static {{ $messageName }} GetDataBy{{ .Name | SnakeToPascal }}(
-			{{ .BaseType }} {{ .Name | ToCamelCase }})
+		{{- for field in message.field }}
+			{{- if (field.name == "id") }}
+		#region DataTableUniqueIndex({{ field.name | to_pascal }})
+		public static {{ message.name }} GetDataBy{{ field.name | to_pascal }}(
+			{{ field | to_cs_type }} {{ field.name | to_camel }})
 		{
-			return dataTable.GetData("{{ .Name | SnakeToPascal }}", (object){{ .Name | ToCamelCase }});
+			return dataTable.GetData("{{ field.name | to_pascal }}", (object){{ field.name | to_camel }});
 		}
 		#endregion
 			{{- end }}
 		{{- end }}
-		{{- range .Fields }}
-			{{- if (StrArrayContains $indexes .Name) }}
-		#region DataTableIndex ({{.Name | SnakeToPascal}})
-		public static List<{{ $messageName }}> GetDataListBy{{ .Name | SnakeToPascal }}(
-			{{ .BaseType }} {{ .Name | ToCamelCase }})
+		{{- for field in message.field }}
+			{{- if true }}
+		#region DataTableIndex ({{ field.name | to_pascal }})
+		public static List<{{ message.name }}> GetDataListBy{{ field.name | to_pascal }}(
+			{{ field | to_cs_type }} {{ field.name | to_camel }})
 		{
-			return dataTable.GetDataList("{{ .Name | SnakeToPascal }}", (object){{ .Name | ToCamelCase }});
+			return dataTable.GetDataList("{{ field.name | to_pascal }}", (object){{ field.name | to_camel }});
 		}
 		#endregion
 			{{- end }}
@@ -214,100 +207,100 @@ namespace AwsDotnetCsharp
 		#region DataTableSetupIndex
 		public static async Task DbSetupIndex()
 		{
-			var builder = Builders<{{ $className }}>.IndexKeys;
-			{{- range .Fields }}
-				{{- if or (StrArrayContains $uniqueIndexes .Name) (StrArrayContains $indexes .Name) }}
-			await DbSetupOneIndex(builder.Ascending(aData => aData.{{ .Name | ToCamelCase }}));
+			var builder = Builders<{{ message.name }}>.IndexKeys;
+			{{- for field in message.field }}
+				{{- if true }}
+			await DbSetupOneIndex(builder.Ascending(aData => aData.{{ field.name | to_camel }}));
 				{{- end }}
 			{{- end }}
 		}
 
 		public static async Task DbSetupOneIndex(
-			IndexKeysDefinition<{{ $className }}> indexKeys)
+			IndexKeysDefinition<{{ message.name }}> indexKeys)
 		{
-			var indexModel = new CreateIndexModel<{{ $className }}>(indexKeys);
+			var indexModel = new CreateIndexModel<{{ message.name }}>(indexKeys);
 			await collection.Indexes
 				.CreateOneAsync(
 					sessionHandle,
 					indexModel);
 		}
 		#endregion
-		{{- range .Fields }}
-			{{- if or (eq .Name "id") (StrArrayContains $uniqueIndexes .Name) }}
-		#region MongoDbUniqueIndex({{.Name | SnakeToPascal}})
-		public static async Task<{{ $className }}> DbGetDataBy{{ .Name | SnakeToPascal }}(
-			{{ .BaseType }} {{ .Name | ToCamelCase }})
+		{{- for field in message.field }}
+			{{- if (field.name == "id") }}
+		#region MongoDbUniqueIndex({{ field.name | to_pascal }})
+		public static async Task<{{ message.name }}> DbGetDataBy{{ field.name | to_pascal }}(
+			{{ field | to_cs_type }} {{ field.name | to_camel }})
 		{
 			var sw = Stopwatch.StartNew();
-			var cacheKey = "{{ $className }}/GetDataBy{{ .Name | SnakeToPascal }}_" + {{ .Name | ToCamelCase }};
+			var cacheKey = "{{ message.name }}/GetDataBy{{ field.name | to_pascal }}_" + {{ field.name | to_camel }};
 			var result = await collection
 				.Find(
 					sessionHandle,
-					aData => aData.{{ .Name | ToCamelCase }} == {{ .Name | ToCamelCase }})
+					aData => aData.{{ field.name | to_camel }} == {{ field.name | to_camel }})
 				.FirstOrDefaultAsync();
-			Console.WriteLine($"{{ $className }}#DbGetDataBy{{ .Name | SnakeToPascal }} {sw.Elapsed.TotalSeconds}[秒]");
+			Console.WriteLine($"{{ message.name }}#DbGetDataBy{{ field.name | to_pascal }} {sw.Elapsed.TotalSeconds}[秒]");
 			return result;
 		}
 
-		public static async Task<List<{{ $className }}>> DbGetDataListIn{{ .Name | SnakeToPascal }}s(
-			IEnumerable<{{ .BaseType }}> {{ .Name | ToCamelCase }}s)
+		public static async Task<List<{{ message.name }}>> DbGetDataListIn{{ field.name | to_pascal }}s(
+			IEnumerable<{{ field | to_cs_type }}> {{ field.name | to_camel }}s)
 		{
 			var sw = Stopwatch.StartNew();
-			var filter = Builders<{{ $className }}>.Filter.In(aData => aData.{{ .Name | ToCamelCase }}, {{ .Name | ToCamelCase }}s);
+			var filter = Builders<{{ message.name }}>.Filter.In(aData => aData.{{ field.name | to_camel }}, {{ field.name | to_camel }}s);
 			var result = await collection
 				.Find(
 					sessionHandle,
 					filter)
 				.ToListAsync();
-			Console.WriteLine($"{{ $className }}#DbGetDataListIn{{ .Name | SnakeToPascal }}s {sw.Elapsed.TotalSeconds}[秒]");
+			Console.WriteLine($"{{ message.name }}#DbGetDataListIn{{ field.name | to_pascal }}s {sw.Elapsed.TotalSeconds}[秒]");
 			return result;
 		}
-{{ if (or (eq .Name "id") (eq $hasId false)) }}
-		public static async Task<bool> DbDeleteDataBy{{ .Name | SnakeToPascal }}(
-			{{ .BaseType }} {{ .Name | ToCamelCase }})
+{{ if ((field.name == "id") or (has_id)) }}
+		public static async Task<bool> DbDeleteDataBy{{ field.name | to_pascal }}(
+			{{ field | to_cs_type }} {{ field.name | to_camel }})
 		{
 			var sw = Stopwatch.StartNew();
 			var deleteResult = await collection
 				.DeleteOneAsync(
 					sessionHandle,
-					aData => aData.{{ .Name | ToCamelCase }} == {{ .Name | ToCamelCase }});
-			Console.WriteLine($"{{ $className }}#DbDeleteDataBy{{ .Name | SnakeToPascal }} {sw.Elapsed.TotalSeconds}[秒]");
+					aData => aData.{{ field.name | to_camel }} == {{ field.name | to_camel }});
+			Console.WriteLine($"{{ message.name }}#DbDeleteDataBy{{ field.name | to_pascal }} {sw.Elapsed.TotalSeconds}[秒]");
 			var result = deleteResult.IsAcknowledged;
-			{{- if (and (eq .Name "id") (eq $isClientUserData true)) }}
-			if (result) { userUpdateCache.{{ $messageNameCamel }}TableUpdate.Delete(id); }
+			{{- if ((field.name == "id") && (is_client_user_data)) }}
+			if (result) { userUpdateCache.{{ message_name_camel }}TableUpdate.Delete(id); }
 			{{- end }}
 			return result;
 		}
 
-		public static async Task<bool> DbDeleteDataBy{{ .Name | SnakeToPascal }}s(
-			IEnumerable<{{ .BaseType }}> {{ .Name | ToCamelCase }}s)
+		public static async Task<bool> DbDeleteDataBy{{ field.name | to_pascal }}s(
+			IEnumerable<{{ field | to_cs_type }}> {{ field.name | to_camel }}s)
 		{
 			var sw = Stopwatch.StartNew();
-			var keySet = {{ .Name | ToCamelCase }}s.ToHashSet();
+			var keySet = {{ field.name | to_camel }}s.ToHashSet();
 			var deleteResult = await collection
 				.DeleteManyAsync(
 					sessionHandle,
-					aData => keySet.Contains(aData.{{ .Name | ToCamelCase }}));
-			Console.WriteLine($"{{ $className }}#DbDeleteDataBy{{ .Name | SnakeToPascal }}s {sw.Elapsed.TotalSeconds}[秒]");
+					aData => keySet.Contains(aData.{{ field.name | to_camel }}));
+			Console.WriteLine($"{{ message.name }}#DbDeleteDataBy{{ field.name | to_pascal }}s {sw.Elapsed.TotalSeconds}[秒]");
 			var result = deleteResult.IsAcknowledged;
-			{{- if (and (eq .Name "id") (eq $isClientUserData true)) }}
-			if (result) { userUpdateCache.{{ $messageNameCamel }}TableUpdate.Delete(ids); }
+			{{- if (and (field.name == "id") (is_client_user_data)) }}
+			if (result) { userUpdateCache.{{ message_name_camel }}TableUpdate.Delete(ids); }
 			{{- end }}
 			return result;
 		}
 {{- else }}
-		public static async Task<bool> DbDeleteDataBy{{ .Name | SnakeToPascal }}(
-			{{ .BaseType }} {{ .Name | ToCamelCase }})
+		public static async Task<bool> DbDeleteDataBy{{ field.name | to_pascal }}(
+			{{ field | to_cs_type }} {{ field.name | to_camel }})
 		{
-			var data = await DbGetDataBy{{ .Name | SnakeToPascal }}({{ .Name | ToCamelCase }});
+			var data = await DbGetDataBy{{ field.name | to_pascal }}({{ field.name | to_camel }});
 			var result = await DbDeleteDataById(data.id);
 			return result;
 		}
 
-		public static async Task<bool> DbDeleteDataBy{{ .Name | SnakeToPascal }}s(
-			IEnumerable<{{ .BaseType }}> {{ .Name | ToCamelCase }}s)
+		public static async Task<bool> DbDeleteDataBy{{ field.name | to_pascal }}s(
+			IEnumerable<{{ field | to_cs_type }}> {{ field.name | to_camel }}s)
 		{
-			var dataList = await DbGetDataListIn{{ .Name | SnakeToPascal }}s({{ .Name | ToCamelCase }}s);
+			var dataList = await DbGetDataListIn{{ field.name | to_pascal }}s({{ field.name | to_camel }}s);
 			var ids = dataList.Select(data => data.id);
 			var result = await DbDeleteDataByIds(ids);
 			return result;
@@ -316,87 +309,87 @@ namespace AwsDotnetCsharp
 		#endregion
 			{{- end }}
 			{{- if (StrArrayContains $indexes .Name) }}
-		#region MongoDbIndex({{.Name | SnakeToPascal}})
-		public static async Task<{{ $className }}> DbGetDataBy{{ .Name | SnakeToPascal }}(
-			{{ .BaseType }} {{ .Name | ToCamelCase }})
+		#region MongoDbIndex({{ field.name | to_pascal }})
+		public static async Task<{{ message.name }}> DbGetDataBy{{ field.name | to_pascal }}(
+			{{ field | to_cs_type }} {{ field.name | to_camel }})
 		{
 			var sw = Stopwatch.StartNew();
 			var result = await collection
 				.Find(
 					sessionHandle,
-					aData => aData.{{ .Name | ToCamelCase }} == {{ .Name | ToCamelCase }})
+					aData => aData.{{ field.name | to_camel }} == {{ field.name | to_camel }})
 				.FirstOrDefaultAsync();
-			Console.WriteLine($"{{ $className }}#DbGetDataBy{{ .Name | SnakeToPascal }} {sw.Elapsed.TotalSeconds}[秒]");
+			Console.WriteLine($"{{ message.name }}#DbGetDataBy{{ field.name | to_pascal }} {sw.Elapsed.TotalSeconds}[秒]");
 			return result;
 		}
 
-		public static async Task<List<{{ $className }}>> DbGetDataListBy{{ .Name | SnakeToPascal }}(
-			{{ .BaseType }} {{ .Name | ToCamelCase }})
+		public static async Task<List<{{ message.name }}>> DbGetDataListBy{{ field.name | to_pascal }}(
+			{{ field | to_cs_type }} {{ field.name | to_camel }})
 		{
 			var sw = Stopwatch.StartNew();
 			var result = await collection
 				.Find(
 					sessionHandle,
-					aData => aData.{{ .Name | ToCamelCase }} == {{ .Name | ToCamelCase }})
+					aData => aData.{{ field.name | to_camel }} == {{ field.name | to_camel }})
 				.ToListAsync();
-			Console.WriteLine($"{{ $className }}#DbGetDataListBy{{ .Name | SnakeToPascal }} {sw.Elapsed.TotalSeconds}[秒]");
+			Console.WriteLine($"{{ message.name }}#DbGetDataListBy{{ field.name | to_pascall }} {sw.Elapsed.TotalSeconds}[秒]");
 			return result;
 		}
 		
-		public static async Task<List<{{ $className }}>> DbGetDataListBy{{ .Name | SnakeToPascal }}s(
-			IEnumerable<{{ .BaseType }}> {{ .Name | ToCamelCase }}s)
+		public static async Task<List<{{ message.name }}>> DbGetDataListBy{{ field.name | to_pascal }}s(
+			IEnumerable<{{ field | to_cs_type }}> {{ field.name | to_camel }}s)
 		{
 			var sw = Stopwatch.StartNew();
-			var keySet = {{ .Name | ToCamelCase }}s.ToHashSet();
+			var keySet = {{ field.name | to_camel }}s.ToHashSet();
 			var result = await collection
 				.Find(
 					sessionHandle,
-					data => keySet.Contains(data.{{ .Name | ToCamelCase }}))
+					data => keySet.Contains(data.{{ field.name | to_camel }}))
 				.ToListAsync();
-			Console.WriteLine($"{{ $className }}#DbGetDataListBy{{ .Name | SnakeToPascal }}s {sw.Elapsed.TotalSeconds}[秒]");
+			Console.WriteLine($"{{ message.name }}#DbGetDataListBy{{ field.name | to_pascal }}s {sw.Elapsed.TotalSeconds}[秒]");
 			return result;
 		}
-{{ if (eq $hasId false) }}
-		public static async Task<bool> DbDeleteDataBy{{ .Name | SnakeToPascal }}(
-			{{ .BaseType }} {{ .Name | ToCamelCase }})
+{{ if (!has_id) }}
+		public static async Task<bool> DbDeleteDataBy{{ field.name | to_pascal }}(
+			{{ field | to_cs_type }} {{ field.name | to_camel }})
 		{
 			var sw = Stopwatch.StartNew();
 			var deleteResult = await collection
 				.DeleteManyAsync(
 					sessionHandle,
-					aData => aData.{{ .Name | ToCamelCase }} == {{ .Name | ToCamelCase }});
-			Console.WriteLine($"{{ $className }}#DbDeleteDataBy{{ .Name | SnakeToPascal }} {sw.Elapsed.TotalSeconds}[秒]");
+					aData => aData.{{ field.name | to_camel }} == {{ field.name | to_camel }});
+			Console.WriteLine($"{{ message.name }}#DbDeleteDataBy{{ field.name | to_pascal }} {sw.Elapsed.TotalSeconds}[秒]");
 			var result = deleteResult.IsAcknowledged;
 			return result;
 		}
 
-		public static async Task<bool> DbDeleteDataBy{{ .Name | SnakeToPascal }}s(
-			IEnumerable<{{ .BaseType }}> {{ .Name | ToCamelCase }}s)
+		public static async Task<bool> DbDeleteDataBy{{ field.name | to_pascal }}s(
+			IEnumerable<{{ field | to_cs_type }}> {{ field.name | to_camel }}s)
 		{
 			var sw = Stopwatch.StartNew();
-			var keySet = {{ .Name | ToCamelCase }}s.ToHashSet();
+			var keySet = {{ field.name | to_camel }}s.ToHashSet();
 			var deleteResult = await collection
 				.DeleteManyAsync(
 					sessionHandle,
-					aData => keySet.Contains(aData.{{ .Name | ToCamelCase }}));
-			Console.WriteLine($"{{ $className }}#Db.DeleteDeleteDataBy{{ .Name | SnakeToPascal }}s {sw.Elapsed.TotalSeconds}[秒]");
+					aData => keySet.Contains(aData.{{ field.name | to_camel }}));
+			Console.WriteLine($"{{ message.name }}#Db.DeleteDeleteDataBy{{ field.name | to_pascal }}s {sw.Elapsed.TotalSeconds}[秒]");
 			var result = deleteResult.IsAcknowledged;
 			return result;
 		}
 {{- else }}
-		public static async Task<bool> DbDeleteDataBy{{ .Name | SnakeToPascal }}(
-			{{ .BaseType }} {{ .Name | ToCamelCase }})
+		public static async Task<bool> DbDeleteDataBy{{ field.name | to_pascal }}(
+			{{ field | to_cs_type }} {{ field.name | to_camel }})
 		{
-			var dataList = await DbGetDataListBy{{ .Name | SnakeToPascal }}({{ .Name | ToCamelCase }});
+			var dataList = await DbGetDataListBy{{ field.name | to_pascal }}({{ field.name | to_camel }});
 			var ids = dataList.Select(data => data.id);
 			var result = await DbDeleteDataByIds(ids);
 			return result;
 		}
 
-		public static async Task<bool> DbDeleteDataBy{{ .Name | SnakeToPascal }}s(
-			IEnumerable<{{ .BaseType }}> {{ .Name | ToCamelCase }}s)
+		public static async Task<bool> DbDeleteDataBy{{ field.name | to_pascal }}s(
+			IEnumerable<{{ field | to_cs_type }}> {{ field.name | to_camel }}s)
 		{
-			var dataList = await DbGetDataListBy{{ .Name | SnakeToPascal }}s({{ .Name | ToCamelCase }}s);
+			var dataList = await DbGetDataListBy{{ field.name | to_pascal }}s({{ field.name | to_camel }}s);
 			var ids = dataList.Select(data => data.id);
 			var result = await DbDeleteDataByIds(ids);
 			return result;
@@ -424,4 +417,3 @@ namespace AwsDotnetCsharp
 	}
 {{ end -}}
 }
-{{- end }}

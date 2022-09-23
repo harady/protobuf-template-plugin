@@ -1,36 +1,33 @@
-{{- if gt (len .Messages) 0 -}}
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace AwsDotnetCsharp
 {
-{{- range .Messages }}
-	{{- $className := .Name }}
-	public partial class {{ $className }}
+{{- for message in file.message_type }}
+	public partial class {{ message.name }}
 	{
 		public async Task LoadFromDB()
 		{
-{{- range .Fields }}
-		{{- if eq .Name "client_master" }}
-			await this.{{.Name | ToCamelCase}}.LoadFromDB();
+{{- for field in message.field }}
+		{{- if (field.name == "client_master") }}
+			await this.{{ field.name | to_camel }}.LoadFromDB();
 		{{- else }}
-			this.{{ .Name | ToCamelCase }} = await {{ .BaseType }}.DbGetDataList();
+			this.{{field.name | to_camel }} = await {{ field | to_cs_type }}.DbGetDataList();
 		{{- end }}
 {{- end }}
 		}
 
 		public void SetToGameDb()
 		{
-{{- range .Fields }}
-		{{- if eq .Name "client_master" }}
-			{{.Name | ToCamelCase}}.SetToGameDb();
+{{- for field in message.field }}
+		{{- if (field.name == "client_master") }}
+			{{ field.name | to_camel }}.SetToGameDb();
 		{{- else }}
-			{{.BaseType }}.SetDataList({{.Name | ToCamelCase}});
+			{{ field | to_cs_type }}.SetDataList({{ field.name | to_camel }});
 		{{- end }}
 {{- end }}
 		}
 	}
 {{ end -}}
 }
-{{ end }}

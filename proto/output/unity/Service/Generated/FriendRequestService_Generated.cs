@@ -1,4 +1,4 @@
-﻿//GENERATED CODE, DO NOT EDIT !
+//GENERATED CODE, DO NOT EDIT !
 using System;
 using System.Collections.Generic;
 using Newtonsoft.Json;
@@ -17,7 +17,7 @@ public partial class FriendRequestService : AbstractApiService
 		Action<FriendRequestListResponse> onSuccess,
 		Action<ErrorResponse> onFailure = null)
 	{
-		const string Path = "api/friend_request/list";
+		const string Path = "api/friendrequest/list";
 		request.SetupCommon();
 		var apiRequest = new APIRequest(Path, request);
 		// リクエストを送信.
@@ -36,7 +36,7 @@ public partial class FriendRequestService : AbstractApiService
 		Action<FriendRequestAcceptResponse> onSuccess,
 		Action<ErrorResponse> onFailure = null)
 	{
-		const string Path = "api/friend_request/accept";
+		const string Path = "api/friendrequest/accept";
 		request.SetupCommon();
 		var apiRequest = new APIRequest(Path, request);
 		// リクエストを送信.
@@ -55,7 +55,7 @@ public partial class FriendRequestService : AbstractApiService
 		Action<FriendRequestRejectResponse> onSuccess,
 		Action<ErrorResponse> onFailure = null)
 	{
-		const string Path = "api/friend_request/reject";
+		const string Path = "api/friendrequest/reject";
 		request.SetupCommon();
 		var apiRequest = new APIRequest(Path, request);
 		// リクエストを送信.
@@ -75,16 +75,6 @@ public partial class Services {
 		=> FriendRequestService.instance;
 }
 #region Request/Response
-public partial class FriendRequestAcceptRequest : CommonRequest
-{
-	[JsonProperty("user_id")]
-	public long userId { get; set; }
-}
-
-public partial class FriendRequestAcceptResponse : APIResponse
-{
-}
-
 public partial class FriendRequestListRequest : CommonRequest
 {
 }
@@ -94,6 +84,16 @@ public partial class FriendRequestListResponse : APIResponse
 	[JsonProperty("other_users")]
 	public List<OtherUserData> otherUsers { get; set; } 
 		= new List<OtherUserData>();
+}
+
+public partial class FriendRequestAcceptRequest : CommonRequest
+{
+	[JsonProperty("user_id")]
+	public long userId { get; set; }
+}
+
+public partial class FriendRequestAcceptResponse : APIResponse
+{
 }
 
 public partial class FriendRequestRejectRequest : CommonRequest

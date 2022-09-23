@@ -1,4 +1,4 @@
-﻿//GENERATED CODE, DO NOT EDIT !
+//GENERATED CODE, DO NOT EDIT !
 using System;
 using System.Collections.Generic;
 using Newtonsoft.Json;
@@ -17,7 +17,7 @@ public partial class ShopService : AbstractApiService
 		Action<ShopPurchaseGooglePlayResponse> onSuccess,
 		Action<ErrorResponse> onFailure = null)
 	{
-		const string Path = "api/shop/purchase_google_play";
+		const string Path = "api/shop/purchasegoogleplay";
 		request.SetupCommon();
 		var apiRequest = new APIRequest(Path, request);
 		// リクエストを送信.
@@ -36,7 +36,7 @@ public partial class ShopService : AbstractApiService
 		Action<ShopPurchaseAppStoreResponse> onSuccess,
 		Action<ErrorResponse> onFailure = null)
 	{
-		const string Path = "api/shop/purchase_app_store";
+		const string Path = "api/shop/purchaseappstore";
 		request.SetupCommon();
 		var apiRequest = new APIRequest(Path, request);
 		// リクエストを送信.
@@ -55,7 +55,7 @@ public partial class ShopService : AbstractApiService
 		Action<ShopPurchaseDebugResponse> onSuccess,
 		Action<ErrorResponse> onFailure = null)
 	{
-		const string Path = "api/shop/purchase_debug";
+		const string Path = "api/shop/purchasedebug";
 		request.SetupCommon();
 		var apiRequest = new APIRequest(Path, request);
 		// リクエストを送信.
@@ -75,6 +75,20 @@ public partial class Services {
 		=> ShopService.instance;
 }
 #region Request/Response
+public partial class ShopPurchaseGooglePlayRequest : CommonRequest
+{
+	[JsonProperty("shop_item_id")]
+	public long shopItemId { get; set; }
+	[JsonProperty("signed_data")]
+	public string signedData { get; set; }
+	[JsonProperty("signature")]
+	public string signature { get; set; }
+}
+
+public partial class ShopPurchaseGooglePlayResponse : APIResponse
+{
+}
+
 public partial class ShopPurchaseAppStoreRequest : CommonRequest
 {
 	[JsonProperty("shop_item_id")]
@@ -94,20 +108,6 @@ public partial class ShopPurchaseDebugRequest : CommonRequest
 }
 
 public partial class ShopPurchaseDebugResponse : APIResponse
-{
-}
-
-public partial class ShopPurchaseGooglePlayRequest : CommonRequest
-{
-	[JsonProperty("shop_item_id")]
-	public long shopItemId { get; set; }
-	[JsonProperty("signed_data")]
-	public string signedData { get; set; }
-	[JsonProperty("signature")]
-	public string signature { get; set; }
-}
-
-public partial class ShopPurchaseGooglePlayResponse : APIResponse
 {
 }
 #endregion

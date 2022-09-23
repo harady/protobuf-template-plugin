@@ -38,9 +38,9 @@ namespace AwsDotnetCsharp
 		[DataMember(Name = "questGroupId")]
 		public long questGroupId { get; set; }
 
-		[BsonElement("questDifficultyType")]
-		[DataMember(Name = "questDifficultyType")]
-		public QuestDifficultyType questDifficultyType { get; set; }
+		[BsonElement("questdifficultytype")]
+		[DataMember(Name = "questdifficultytype")]
+		public QuestDifficultyType questdifficultytype { get; set; }
 
 
 		public string idNameText => GetIdNameText(id, name);

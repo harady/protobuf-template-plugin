@@ -26,9 +26,9 @@ namespace AwsDotnetCsharp
 		[DataMember(Name = "questGroupId")]
 		public long questGroupId { get; set; }
 
-		[BsonElement("noContinue")]
-		[DataMember(Name = "noContinue")]
-		public bool noContinue { get; set; }
+		[BsonElement("nocontinue")]
+		[DataMember(Name = "nocontinue")]
+		public bool nocontinue { get; set; }
 
 		[BsonElement("questDifficultyType")]
 		[DataMember(Name = "questDifficultyType")]

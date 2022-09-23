@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using Google.Protobuf;
+﻿using Google.Protobuf;
 using Google.Protobuf.Compiler;
 using Scriban;
 using Scriban.Runtime;
@@ -39,6 +35,7 @@ namespace protoc_gen_myplugincsharp
 				//fileDesc.MessageType[0].Field[0].Name
 				//fileDesc.Service[0].Method[0].InputType
 				//fileDesc.Service[0].Method[0].OutputType;
+				//fileDesc.EnumType[0].Value
 
 				var model = new { File = fileDesc };
 				var scriptObject = new ScriptObject();
@@ -48,6 +45,8 @@ namespace protoc_gen_myplugincsharp
 				var context = new TemplateContext();
 				context.PushGlobal(scriptObject);
 				var output = template.Render(context);
+
+				if (output.Trim().Length == 0) { continue; }
 
 				// set as response
 				response.File.Add(

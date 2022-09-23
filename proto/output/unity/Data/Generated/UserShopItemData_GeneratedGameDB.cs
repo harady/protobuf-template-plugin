@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 
 public partial class UserShopItemData : IUnique<long>
 {
@@ -55,8 +55,6 @@ public partial class UserShopItemData : IUnique<long>
 	private static void SetupUserShopItemDataTableIndexGenerated(DataTable<long, UserShopItemData> targetDataTable)
 	{
 		targetDataTable.CreateUniqueIndex("Id", aData => (object)aData.id);
-		targetDataTable.CreateIndex("UserId", aData => (object)aData.userId);
-		targetDataTable.CreateIndex("ShopItemId", aData => (object)aData.shopItemId);
 	}
 	#endregion
 	#region DataTableUniqueIndex(Id)
@@ -75,17 +73,4 @@ public partial class UserShopItemData : IUnique<long>
 		dataTable.DeleteByKey("Id", (object)id);
 	}
 	#endregion
-	#region DataTableIndex (UserId)
-	public static List<UserShopItemData> GetDataListByUserId(long userId)
-	{
-		return dataTable.GetDataList("UserId", (object)userId);
-	}
-	#endregion
-	#region DataTableIndex (ShopItemId)
-	public static List<UserShopItemData> GetDataListByShopItemId(long shopItemId)
-	{
-		return dataTable.GetDataList("ShopItemId", (object)shopItemId);
-	}
-	#endregion
 }
-

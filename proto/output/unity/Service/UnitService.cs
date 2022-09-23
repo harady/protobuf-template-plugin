@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using UnityEngine;
@@ -6,7 +6,6 @@ using UnityEngine;
 
 public partial class UnitService
 {
-
 	public void DeckEdit(Action<UnitDeckEditResponse> onSuccess)
 	{
 		var request = new UnitDeckEditRequest();

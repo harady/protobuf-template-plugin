@@ -8,13 +8,14 @@ using MongoDB.Driver;
 
 namespace AwsDotnetCsharp
 {
+
 	public partial class ResourceLotteryItemData : IUnique<long>
 	{
 		private static bool isMaster => true;
 
 		private static IMongoCollection<ResourceLotteryItemData> _collection = null;
 		private static IMongoCollection<ResourceLotteryItemData> collection
-			=> _collection ?? (_collection = mongoDatabase.GetCollection<ResourceLotteryItemData>("resource_lottery_items"));
+			=> _collection ?? (_collection = mongoDatabase.GetCollection<ResourceLotteryItemData>("ResourceLotteryItemDatas"));
 
 		public static IClientSessionHandle sessionHandle
 			=> MongoSessionManager.sessionHandle;
@@ -51,6 +52,7 @@ namespace AwsDotnetCsharp
 					new ReplaceOptions { IsUpsert = true });
 			bool result = replaceOneResult.IsAcknowledged && (replaceOneResult.ModifiedCount > 0);
 			Console.WriteLine($"ResourceLotteryItemData#DbSetData {sw.Elapsed.TotalSeconds}[秒]");
+			if (result) { userUpdateCache.ResourceLotteryItemDataTableUpdate.Upsert(data); }
 			return result;
 		}
 
@@ -73,6 +75,7 @@ namespace AwsDotnetCsharp
 					new BulkWriteOptions());
 			Console.WriteLine($"ResourceLotteryItemData#DbSetDataList {sw.Elapsed.TotalSeconds}[秒]");
 			var result = requestResult.RequestCount == requestResult.ProcessedRequests.Count;
+			if (result) { userUpdateCache.ResourceLotteryItemDataTableUpdate.Upsert(dataList); }
 			return result;
 		}
 		#endregion
@@ -87,6 +90,7 @@ namespace AwsDotnetCsharp
 					aData => aData.id == id);
 			Console.WriteLine($"ResourceLotteryItemData#DbDeleteDataById {sw.Elapsed.TotalSeconds}[秒]");
 			var result = deleteResult.IsAcknowledged;
+			if (result) { userUpdateCache.ResourceLotteryItemDataTableUpdate.Delete(id); }
 			return result;
 		}
 
@@ -101,6 +105,7 @@ namespace AwsDotnetCsharp
 					aData => keySet.Contains(aData.id));
 			Console.WriteLine($"ResourceLotteryItemData#DbDeleteDataByIds {sw.Elapsed.TotalSeconds}[秒]");
 			var result = deleteResult.IsAcknowledged;
+			if (result) { userUpdateCache.ResourceLotteryItemDataTableUpdate.Delete(ids); }
 			return result;
 		}
 		#endregion
@@ -147,7 +152,13 @@ namespace AwsDotnetCsharp
 		private static void SetupResourceLotteryItemDataTableIndexGenerated(DataTable<long, ResourceLotteryItemData> targetDataTable)
 		{
 			targetDataTable.CreateUniqueIndex("Id", aData => (object)aData.id);
+			targetDataTable.CreateIndex("Id", aData => (object)aData.id);
 			targetDataTable.CreateIndex("ResourceLotteryId", aData => (object)aData.resourceLotteryId);
+			targetDataTable.CreateIndex("Weight", aData => (object)aData.weight);
+			targetDataTable.CreateIndex("ResourceType", aData => (object)aData.resourceType);
+			targetDataTable.CreateIndex("ResourceId", aData => (object)aData.resourceId);
+			targetDataTable.CreateIndex("ResourceAmountMin", aData => (object)aData.resourceAmountMin);
+			targetDataTable.CreateIndex("ResourceAmountMax", aData => (object)aData.resourceAmountMax);
 		}
 		#endregion
 		#region DataTableUniqueIndex(Id)
@@ -157,11 +168,53 @@ namespace AwsDotnetCsharp
 			return dataTable.GetData("Id", (object)id);
 		}
 		#endregion
+		#region DataTableIndex (Id)
+		public static List<ResourceLotteryItemData> GetDataListById(
+			long id)
+		{
+			return dataTable.GetDataList("Id", (object)id);
+		}
+		#endregion
 		#region DataTableIndex (ResourceLotteryId)
 		public static List<ResourceLotteryItemData> GetDataListByResourceLotteryId(
 			long resourceLotteryId)
 		{
 			return dataTable.GetDataList("ResourceLotteryId", (object)resourceLotteryId);
+		}
+		#endregion
+		#region DataTableIndex (Weight)
+		public static List<ResourceLotteryItemData> GetDataListByWeight(
+			long weight)
+		{
+			return dataTable.GetDataList("Weight", (object)weight);
+		}
+		#endregion
+		#region DataTableIndex (ResourceType)
+		public static List<ResourceLotteryItemData> GetDataListByResourceType(
+			ResourceType resourceType)
+		{
+			return dataTable.GetDataList("ResourceType", (object)resourceType);
+		}
+		#endregion
+		#region DataTableIndex (ResourceId)
+		public static List<ResourceLotteryItemData> GetDataListByResourceId(
+			long resourceId)
+		{
+			return dataTable.GetDataList("ResourceId", (object)resourceId);
+		}
+		#endregion
+		#region DataTableIndex (ResourceAmountMin)
+		public static List<ResourceLotteryItemData> GetDataListByResourceAmountMin(
+			long resourceAmountMin)
+		{
+			return dataTable.GetDataList("ResourceAmountMin", (object)resourceAmountMin);
+		}
+		#endregion
+		#region DataTableIndex (ResourceAmountMax)
+		public static List<ResourceLotteryItemData> GetDataListByResourceAmountMax(
+			long resourceAmountMax)
+		{
+			return dataTable.GetDataList("ResourceAmountMax", (object)resourceAmountMax);
 		}
 		#endregion
 	}

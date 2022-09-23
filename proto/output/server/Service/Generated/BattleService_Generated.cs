@@ -207,48 +207,6 @@ namespace AwsDotnetCsharp
 	}
 
 	[JsonObject(MemberSerialization.OptIn)]
-	public partial class BattleClearRequest : APIRequest
-	{
-		[JsonProperty("battle_id")]
-		public long battleId { get; set; }
-		[JsonProperty("battle_result")]
-		public BattleResultData battleResult { get; set; }
-	}
-
-	[JsonObject(MemberSerialization.OptIn)]
-	public partial class BattleClearResponse : APIResponse
-	{
-		[JsonProperty("result")]
-		public long result { get; set; }
-		[JsonProperty("battle_rewards")]
-		public BattleRewardsData battleRewards { get; set; }
-	}
-
-	[JsonObject(MemberSerialization.OptIn)]
-	public partial class BattleContinueRequest : APIRequest
-	{
-		[JsonProperty("battle_id")]
-		public long battleId { get; set; }
-	}
-
-	[JsonObject(MemberSerialization.OptIn)]
-	public partial class BattleContinueResponse : APIResponse
-	{
-	}
-
-	[JsonObject(MemberSerialization.OptIn)]
-	public partial class BattleGiveupRequest : APIRequest
-	{
-		[JsonProperty("battle_id")]
-		public long battleId { get; set; }
-	}
-
-	[JsonObject(MemberSerialization.OptIn)]
-	public partial class BattleGiveupResponse : APIResponse
-	{
-	}
-
-	[JsonObject(MemberSerialization.OptIn)]
 	public partial class BattleHelperListRequest : APIRequest
 	{
 		[JsonProperty("stage_id")]
@@ -256,7 +214,7 @@ namespace AwsDotnetCsharp
 	}
 
 	[JsonObject(MemberSerialization.OptIn)]
-	public partial class BattleHelperListResponse : APIResponse
+	public partial class BattleHelperListResponse : APIRequest
 	{
 		[JsonProperty("other_users")]
 		public List<OtherUserData> otherUsers { get; set; } = new List<OtherUserData>();
@@ -274,11 +232,53 @@ namespace AwsDotnetCsharp
 	}
 
 	[JsonObject(MemberSerialization.OptIn)]
-	public partial class BattleStartResponse : APIResponse
+	public partial class BattleStartResponse : APIRequest
 	{
 		[JsonProperty("battle_id")]
 		public long battleId { get; set; }
 		[JsonProperty("battle_client")]
 		public BattleClientData battleClient { get; set; }
+	}
+
+	[JsonObject(MemberSerialization.OptIn)]
+	public partial class BattleContinueRequest : APIRequest
+	{
+		[JsonProperty("battle_id")]
+		public long battleId { get; set; }
+	}
+
+	[JsonObject(MemberSerialization.OptIn)]
+	public partial class BattleContinueResponse : APIRequest
+	{
+	}
+
+	[JsonObject(MemberSerialization.OptIn)]
+	public partial class BattleGiveupRequest : APIRequest
+	{
+		[JsonProperty("battle_id")]
+		public long battleId { get; set; }
+	}
+
+	[JsonObject(MemberSerialization.OptIn)]
+	public partial class BattleGiveupResponse : APIRequest
+	{
+	}
+
+	[JsonObject(MemberSerialization.OptIn)]
+	public partial class BattleClearRequest : APIRequest
+	{
+		[JsonProperty("battle_id")]
+		public long battleId { get; set; }
+		[JsonProperty("battle_result")]
+		public BattleResultData battleResult { get; set; }
+	}
+
+	[JsonObject(MemberSerialization.OptIn)]
+	public partial class BattleClearResponse : APIRequest
+	{
+		[JsonProperty("result")]
+		public long result { get; set; }
+		[JsonProperty("battle_rewards")]
+		public BattleRewardsData battleRewards { get; set; }
 	}
 }

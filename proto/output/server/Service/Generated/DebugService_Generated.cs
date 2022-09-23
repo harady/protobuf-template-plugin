@@ -330,7 +330,7 @@ namespace AwsDotnetCsharp
 	}
 
 	[JsonObject(MemberSerialization.OptIn)]
-	public partial class DebugSetServerTimeResponse : APIResponse
+	public partial class DebugSetServerTimeResponse : APIRequest
 	{
 	}
 
@@ -342,7 +342,7 @@ namespace AwsDotnetCsharp
 	}
 
 	[JsonObject(MemberSerialization.OptIn)]
-	public partial class DebugTestResponse : APIResponse
+	public partial class DebugTestResponse : APIRequest
 	{
 		[JsonProperty("message")]
 		public string message { get; set; }

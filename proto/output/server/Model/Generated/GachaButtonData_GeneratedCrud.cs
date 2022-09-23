@@ -8,13 +8,14 @@ using MongoDB.Driver;
 
 namespace AwsDotnetCsharp
 {
+
 	public partial class GachaButtonData : IUnique<long>
 	{
 		private static bool isMaster => true;
 
 		private static IMongoCollection<GachaButtonData> _collection = null;
 		private static IMongoCollection<GachaButtonData> collection
-			=> _collection ?? (_collection = mongoDatabase.GetCollection<GachaButtonData>("gacha_buttons"));
+			=> _collection ?? (_collection = mongoDatabase.GetCollection<GachaButtonData>("GachaButtonDatas"));
 
 		public static IClientSessionHandle sessionHandle
 			=> MongoSessionManager.sessionHandle;
@@ -51,6 +52,7 @@ namespace AwsDotnetCsharp
 					new ReplaceOptions { IsUpsert = true });
 			bool result = replaceOneResult.IsAcknowledged && (replaceOneResult.ModifiedCount > 0);
 			Console.WriteLine($"GachaButtonData#DbSetData {sw.Elapsed.TotalSeconds}[秒]");
+			if (result) { userUpdateCache.GachaButtonDataTableUpdate.Upsert(data); }
 			return result;
 		}
 
@@ -73,6 +75,7 @@ namespace AwsDotnetCsharp
 					new BulkWriteOptions());
 			Console.WriteLine($"GachaButtonData#DbSetDataList {sw.Elapsed.TotalSeconds}[秒]");
 			var result = requestResult.RequestCount == requestResult.ProcessedRequests.Count;
+			if (result) { userUpdateCache.GachaButtonDataTableUpdate.Upsert(dataList); }
 			return result;
 		}
 		#endregion
@@ -87,6 +90,7 @@ namespace AwsDotnetCsharp
 					aData => aData.id == id);
 			Console.WriteLine($"GachaButtonData#DbDeleteDataById {sw.Elapsed.TotalSeconds}[秒]");
 			var result = deleteResult.IsAcknowledged;
+			if (result) { userUpdateCache.GachaButtonDataTableUpdate.Delete(id); }
 			return result;
 		}
 
@@ -101,6 +105,7 @@ namespace AwsDotnetCsharp
 					aData => keySet.Contains(aData.id));
 			Console.WriteLine($"GachaButtonData#DbDeleteDataByIds {sw.Elapsed.TotalSeconds}[秒]");
 			var result = deleteResult.IsAcknowledged;
+			if (result) { userUpdateCache.GachaButtonDataTableUpdate.Delete(ids); }
 			return result;
 		}
 		#endregion
@@ -147,7 +152,17 @@ namespace AwsDotnetCsharp
 		private static void SetupGachaButtonDataTableIndexGenerated(DataTable<long, GachaButtonData> targetDataTable)
 		{
 			targetDataTable.CreateUniqueIndex("Id", aData => (object)aData.id);
+			targetDataTable.CreateIndex("Id", aData => (object)aData.id);
+			targetDataTable.CreateIndex("Name", aData => (object)aData.name);
 			targetDataTable.CreateIndex("GachaId", aData => (object)aData.gachaId);
+			targetDataTable.CreateIndex("ViewOrder", aData => (object)aData.viewOrder);
+			targetDataTable.CreateIndex("DrawCount", aData => (object)aData.drawCount);
+			targetDataTable.CreateIndex("ExtraCount", aData => (object)aData.extraCount);
+			targetDataTable.CreateIndex("GuaranteeCount", aData => (object)aData.guaranteeCount);
+			targetDataTable.CreateIndex("PurchaseCount", aData => (object)aData.purchaseCount);
+			targetDataTable.CreateIndex("CostResourceType", aData => (object)aData.costResourceType);
+			targetDataTable.CreateIndex("CostResourceId", aData => (object)aData.costResourceId);
+			targetDataTable.CreateIndex("CostResourceAmount", aData => (object)aData.costResourceAmount);
 		}
 		#endregion
 		#region DataTableUniqueIndex(Id)
@@ -157,11 +172,81 @@ namespace AwsDotnetCsharp
 			return dataTable.GetData("Id", (object)id);
 		}
 		#endregion
+		#region DataTableIndex (Id)
+		public static List<GachaButtonData> GetDataListById(
+			long id)
+		{
+			return dataTable.GetDataList("Id", (object)id);
+		}
+		#endregion
+		#region DataTableIndex (Name)
+		public static List<GachaButtonData> GetDataListByName(
+			string name)
+		{
+			return dataTable.GetDataList("Name", (object)name);
+		}
+		#endregion
 		#region DataTableIndex (GachaId)
 		public static List<GachaButtonData> GetDataListByGachaId(
 			long gachaId)
 		{
 			return dataTable.GetDataList("GachaId", (object)gachaId);
+		}
+		#endregion
+		#region DataTableIndex (ViewOrder)
+		public static List<GachaButtonData> GetDataListByViewOrder(
+			long viewOrder)
+		{
+			return dataTable.GetDataList("ViewOrder", (object)viewOrder);
+		}
+		#endregion
+		#region DataTableIndex (DrawCount)
+		public static List<GachaButtonData> GetDataListByDrawCount(
+			long drawCount)
+		{
+			return dataTable.GetDataList("DrawCount", (object)drawCount);
+		}
+		#endregion
+		#region DataTableIndex (ExtraCount)
+		public static List<GachaButtonData> GetDataListByExtraCount(
+			long extraCount)
+		{
+			return dataTable.GetDataList("ExtraCount", (object)extraCount);
+		}
+		#endregion
+		#region DataTableIndex (GuaranteeCount)
+		public static List<GachaButtonData> GetDataListByGuaranteeCount(
+			long guaranteeCount)
+		{
+			return dataTable.GetDataList("GuaranteeCount", (object)guaranteeCount);
+		}
+		#endregion
+		#region DataTableIndex (PurchaseCount)
+		public static List<GachaButtonData> GetDataListByPurchaseCount(
+			long purchaseCount)
+		{
+			return dataTable.GetDataList("PurchaseCount", (object)purchaseCount);
+		}
+		#endregion
+		#region DataTableIndex (CostResourceType)
+		public static List<GachaButtonData> GetDataListByCostResourceType(
+			ResourceType costResourceType)
+		{
+			return dataTable.GetDataList("CostResourceType", (object)costResourceType);
+		}
+		#endregion
+		#region DataTableIndex (CostResourceId)
+		public static List<GachaButtonData> GetDataListByCostResourceId(
+			long costResourceId)
+		{
+			return dataTable.GetDataList("CostResourceId", (object)costResourceId);
+		}
+		#endregion
+		#region DataTableIndex (CostResourceAmount)
+		public static List<GachaButtonData> GetDataListByCostResourceAmount(
+			long costResourceAmount)
+		{
+			return dataTable.GetDataList("CostResourceAmount", (object)costResourceAmount);
 		}
 		#endregion
 	}

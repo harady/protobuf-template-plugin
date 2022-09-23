@@ -1,4 +1,4 @@
-﻿//GENERATED CODE, DO NOT EDIT !
+//GENERATED CODE, DO NOT EDIT !
 using System;
 using System.Collections.Generic;
 using Newtonsoft.Json;
@@ -115,16 +115,6 @@ public partial class FriendRemoveResponse : APIResponse
 {
 }
 
-public partial class FriendRequestRequest : CommonRequest
-{
-	[JsonProperty("user_id")]
-	public long userId { get; set; }
-}
-
-public partial class FriendRequestResponse : APIResponse
-{
-}
-
 public partial class FriendSearchRequest : CommonRequest
 {
 	[JsonProperty("code")]
@@ -135,5 +125,15 @@ public partial class FriendSearchResponse : APIResponse
 {
 	[JsonProperty("other_user")]
 	public OtherUserData otherUser { get; set; }
+}
+
+public partial class FriendRequestRequest : CommonRequest
+{
+	[JsonProperty("user_id")]
+	public long userId { get; set; }
+}
+
+public partial class FriendRequestResponse : APIResponse
+{
 }
 #endregion

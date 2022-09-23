@@ -8,13 +8,14 @@ using MongoDB.Driver;
 
 namespace AwsDotnetCsharp
 {
+
 	public partial class EventQuestCategoryData : IUnique<long>
 	{
 		private static bool isMaster => true;
 
 		private static IMongoCollection<EventQuestCategoryData> _collection = null;
 		private static IMongoCollection<EventQuestCategoryData> collection
-			=> _collection ?? (_collection = mongoDatabase.GetCollection<EventQuestCategoryData>("event_quest_categorys"));
+			=> _collection ?? (_collection = mongoDatabase.GetCollection<EventQuestCategoryData>("EventQuestCategoryDatas"));
 
 		public static IClientSessionHandle sessionHandle
 			=> MongoSessionManager.sessionHandle;
@@ -51,6 +52,7 @@ namespace AwsDotnetCsharp
 					new ReplaceOptions { IsUpsert = true });
 			bool result = replaceOneResult.IsAcknowledged && (replaceOneResult.ModifiedCount > 0);
 			Console.WriteLine($"EventQuestCategoryData#DbSetData {sw.Elapsed.TotalSeconds}[秒]");
+			if (result) { userUpdateCache.EventQuestCategoryDataTableUpdate.Upsert(data); }
 			return result;
 		}
 
@@ -73,6 +75,7 @@ namespace AwsDotnetCsharp
 					new BulkWriteOptions());
 			Console.WriteLine($"EventQuestCategoryData#DbSetDataList {sw.Elapsed.TotalSeconds}[秒]");
 			var result = requestResult.RequestCount == requestResult.ProcessedRequests.Count;
+			if (result) { userUpdateCache.EventQuestCategoryDataTableUpdate.Upsert(dataList); }
 			return result;
 		}
 		#endregion
@@ -87,6 +90,7 @@ namespace AwsDotnetCsharp
 					aData => aData.id == id);
 			Console.WriteLine($"EventQuestCategoryData#DbDeleteDataById {sw.Elapsed.TotalSeconds}[秒]");
 			var result = deleteResult.IsAcknowledged;
+			if (result) { userUpdateCache.EventQuestCategoryDataTableUpdate.Delete(id); }
 			return result;
 		}
 
@@ -101,6 +105,7 @@ namespace AwsDotnetCsharp
 					aData => keySet.Contains(aData.id));
 			Console.WriteLine($"EventQuestCategoryData#DbDeleteDataByIds {sw.Elapsed.TotalSeconds}[秒]");
 			var result = deleteResult.IsAcknowledged;
+			if (result) { userUpdateCache.EventQuestCategoryDataTableUpdate.Delete(ids); }
 			return result;
 		}
 		#endregion
@@ -147,6 +152,13 @@ namespace AwsDotnetCsharp
 		private static void SetupEventQuestCategoryDataTableIndexGenerated(DataTable<long, EventQuestCategoryData> targetDataTable)
 		{
 			targetDataTable.CreateUniqueIndex("Id", aData => (object)aData.id);
+			targetDataTable.CreateIndex("Id", aData => (object)aData.id);
+			targetDataTable.CreateIndex("Name", aData => (object)aData.name);
+			targetDataTable.CreateIndex("MinStartTime", aData => (object)aData.minStartTime);
+			targetDataTable.CreateIndex("MaxStartTime", aData => (object)aData.maxStartTime);
+			targetDataTable.CreateIndex("OpenHours", aData => (object)aData.openHours);
+			targetDataTable.CreateIndex("QuestGroupId", aData => (object)aData.questGroupId);
+			targetDataTable.CreateIndex("Questdifficultytype", aData => (object)aData.questdifficultytype);
 		}
 		#endregion
 		#region DataTableUniqueIndex(Id)
@@ -154,6 +166,55 @@ namespace AwsDotnetCsharp
 			long id)
 		{
 			return dataTable.GetData("Id", (object)id);
+		}
+		#endregion
+		#region DataTableIndex (Id)
+		public static List<EventQuestCategoryData> GetDataListById(
+			long id)
+		{
+			return dataTable.GetDataList("Id", (object)id);
+		}
+		#endregion
+		#region DataTableIndex (Name)
+		public static List<EventQuestCategoryData> GetDataListByName(
+			string name)
+		{
+			return dataTable.GetDataList("Name", (object)name);
+		}
+		#endregion
+		#region DataTableIndex (MinStartTime)
+		public static List<EventQuestCategoryData> GetDataListByMinStartTime(
+			long minStartTime)
+		{
+			return dataTable.GetDataList("MinStartTime", (object)minStartTime);
+		}
+		#endregion
+		#region DataTableIndex (MaxStartTime)
+		public static List<EventQuestCategoryData> GetDataListByMaxStartTime(
+			long maxStartTime)
+		{
+			return dataTable.GetDataList("MaxStartTime", (object)maxStartTime);
+		}
+		#endregion
+		#region DataTableIndex (OpenHours)
+		public static List<EventQuestCategoryData> GetDataListByOpenHours(
+			long openHours)
+		{
+			return dataTable.GetDataList("OpenHours", (object)openHours);
+		}
+		#endregion
+		#region DataTableIndex (QuestGroupId)
+		public static List<EventQuestCategoryData> GetDataListByQuestGroupId(
+			long questGroupId)
+		{
+			return dataTable.GetDataList("QuestGroupId", (object)questGroupId);
+		}
+		#endregion
+		#region DataTableIndex (Questdifficultytype)
+		public static List<EventQuestCategoryData> GetDataListByQuestdifficultytype(
+			QuestDifficultyType questdifficultytype)
+		{
+			return dataTable.GetDataList("Questdifficultytype", (object)questdifficultytype);
 		}
 		#endregion
 	}

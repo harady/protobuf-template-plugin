@@ -24,22 +24,22 @@ namespace AwsDotnetCsharp
 
 	}
 
-	public partial class FriendRequestRequest
-	{
-
-	}
-
-	public partial class FriendRequestResponse
-	{
-
-	}
-
 	public partial class FriendSearchRequest
 	{
 
 	}
 
 	public partial class FriendSearchResponse
+	{
+
+	}
+
+	public partial class FriendRequestRequest
+	{
+
+	}
+
+	public partial class FriendRequestResponse
 	{
 
 	}

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using UnityEngine;
@@ -6,7 +6,6 @@ using UnityEngine;
 
 public partial class MessageService
 {
-
 	public void List(Action<MessageListResponse> onSuccess)
 	{
 		var request = new MessageListRequest();

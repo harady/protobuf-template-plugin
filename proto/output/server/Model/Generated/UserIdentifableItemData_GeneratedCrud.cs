@@ -8,13 +8,14 @@ using MongoDB.Driver;
 
 namespace AwsDotnetCsharp
 {
+
 	public partial class UserIdentifableItemData : IUnique<long>
 	{
-		private static bool isMaster => false;
+		private static bool isMaster => true;
 
 		private static IMongoCollection<UserIdentifableItemData> _collection = null;
 		private static IMongoCollection<UserIdentifableItemData> collection
-			=> _collection ?? (_collection = mongoDatabase.GetCollection<UserIdentifableItemData>("user_identifable_items"));
+			=> _collection ?? (_collection = mongoDatabase.GetCollection<UserIdentifableItemData>("UserIdentifableItemDatas"));
 
 		public static IClientSessionHandle sessionHandle
 			=> MongoSessionManager.sessionHandle;
@@ -51,6 +52,7 @@ namespace AwsDotnetCsharp
 					new ReplaceOptions { IsUpsert = true });
 			bool result = replaceOneResult.IsAcknowledged && (replaceOneResult.ModifiedCount > 0);
 			Console.WriteLine($"UserIdentifableItemData#DbSetData {sw.Elapsed.TotalSeconds}[秒]");
+			if (result) { userUpdateCache.UserIdentifableItemDataTableUpdate.Upsert(data); }
 			return result;
 		}
 
@@ -73,55 +75,11 @@ namespace AwsDotnetCsharp
 					new BulkWriteOptions());
 			Console.WriteLine($"UserIdentifableItemData#DbSetDataList {sw.Elapsed.TotalSeconds}[秒]");
 			var result = requestResult.RequestCount == requestResult.ProcessedRequests.Count;
+			if (result) { userUpdateCache.UserIdentifableItemDataTableUpdate.Upsert(dataList); }
 			return result;
 		}
 		#endregion
-		#region DataTableSetupIndex
-		public static async Task DbSetupIndex()
-		{
-			var builder = Builders<UserIdentifableItemData>.IndexKeys;
-			await DbSetupOneIndex(builder.Ascending(aData => aData.userId));
-		}
-
-		public static async Task DbSetupOneIndex(
-			IndexKeysDefinition<UserIdentifableItemData> indexKeys)
-		{
-			var indexModel = new CreateIndexModel<UserIdentifableItemData>(indexKeys);
-			await collection.Indexes
-				.CreateOneAsync(
-					sessionHandle,
-					indexModel);
-		}
-		#endregion
-		#region MongoDbUniqueIndex(Id)
-		public static async Task<UserIdentifableItemData> DbGetDataById(
-			long id)
-		{
-			var sw = Stopwatch.StartNew();
-			var cacheKey = "UserIdentifableItemData/GetDataById_" + id;
-			var result = await collection
-				.Find(
-					sessionHandle,
-					aData => aData.id == id)
-				.FirstOrDefaultAsync();
-			Console.WriteLine($"UserIdentifableItemData#DbGetDataById {sw.Elapsed.TotalSeconds}[秒]");
-			return result;
-		}
-
-		public static async Task<List<UserIdentifableItemData>> DbGetDataListInIds(
-			IEnumerable<long> ids)
-		{
-			var sw = Stopwatch.StartNew();
-			var filter = Builders<UserIdentifableItemData>.Filter.In(aData => aData.id, ids);
-			var result = await collection
-				.Find(
-					sessionHandle,
-					filter)
-				.ToListAsync();
-			Console.WriteLine($"UserIdentifableItemData#DbGetDataListInIds {sw.Elapsed.TotalSeconds}[秒]");
-			return result;
-		}
-
+		#region MongoDb
 		public static async Task<bool> DbDeleteDataById(
 			long id)
 		{
@@ -132,6 +90,7 @@ namespace AwsDotnetCsharp
 					aData => aData.id == id);
 			Console.WriteLine($"UserIdentifableItemData#DbDeleteDataById {sw.Elapsed.TotalSeconds}[秒]");
 			var result = deleteResult.IsAcknowledged;
+			if (result) { userUpdateCache.UserIdentifableItemDataTableUpdate.Delete(id); }
 			return result;
 		}
 
@@ -146,81 +105,100 @@ namespace AwsDotnetCsharp
 					aData => keySet.Contains(aData.id));
 			Console.WriteLine($"UserIdentifableItemData#DbDeleteDataByIds {sw.Elapsed.TotalSeconds}[秒]");
 			var result = deleteResult.IsAcknowledged;
+			if (result) { userUpdateCache.UserIdentifableItemDataTableUpdate.Delete(ids); }
 			return result;
 		}
 		#endregion
-		#region MongoDbIndex(UserId)
-		public static async Task<UserIdentifableItemData> DbGetDataByUserId(
-			long userId)
-		{
-			var sw = Stopwatch.StartNew();
-			var result = await collection
-				.Find(
-					sessionHandle,
-					aData => aData.userId == userId)
-				.FirstOrDefaultAsync();
-			Console.WriteLine($"UserIdentifableItemData#DbGetDataByUserId {sw.Elapsed.TotalSeconds}[秒]");
-			return result;
-		}
-
-		public static async Task<List<UserIdentifableItemData>> DbGetDataListByUserId(
-			long userId)
-		{
-			var sw = Stopwatch.StartNew();
-			var result = await collection
-				.Find(
-					sessionHandle,
-					aData => aData.userId == userId)
-				.ToListAsync();
-			Console.WriteLine($"UserIdentifableItemData#DbGetDataListByUserId {sw.Elapsed.TotalSeconds}[秒]");
-			return result;
-		}
-		
-		public static async Task<List<UserIdentifableItemData>> DbGetDataListByUserIds(
-			IEnumerable<long> userIds)
-		{
-			var sw = Stopwatch.StartNew();
-			var keySet = userIds.ToHashSet();
-			var result = await collection
-				.Find(
-					sessionHandle,
-					data => keySet.Contains(data.userId))
-				.ToListAsync();
-			Console.WriteLine($"UserIdentifableItemData#DbGetDataListByUserIds {sw.Elapsed.TotalSeconds}[秒]");
-			return result;
-		}
-
-		public static async Task<bool> DbDeleteDataByUserId(
-			long userId)
-		{
-			var dataList = await DbGetDataListByUserId(userId);
-			var ids = dataList.Select(data => data.id);
-			var result = await DbDeleteDataByIds(ids);
-			return result;
-		}
-
-		public static async Task<bool> DbDeleteDataByUserIds(
-			IEnumerable<long> userIds)
-		{
-			var dataList = await DbGetDataListByUserIds(userIds);
-			var ids = dataList.Select(data => data.id);
-			var result = await DbDeleteDataByIds(ids);
-			return result;
-		}
+		#region NullObject
+		public static UserIdentifableItemData Null => NullObjectContainer.Get<UserIdentifableItemData>();
+	
+		public bool isNull => this == Null;
 		#endregion
-		#region Methods
-		public async Task<bool> DbSave()
-		{
-			if (this._id == ObjectId.Empty) {
-				var data = await DbGetDataById(this.id);
-				this._id = (data != null) ? data._id : this._id;
+		#region GameDbWrapper(DataTable)
+		public static DataTable<long, UserIdentifableItemData> dataTable {
+			get {
+				DataTable<long, UserIdentifableItemData> result;
+				if (GameDb.TableExists<long, UserIdentifableItemData>()) {
+					result = GameDb.From<long, UserIdentifableItemData>();
+				} else {
+					result = GameDb.CreateTable<long, UserIdentifableItemData>();
+					SetupUserIdentifableItemDataTableIndexGenerated(result);
+					SetupUserIdentifableItemDataTableIndex(result);
+				}
+				return result;
 			}
-			return await DbSetData(this);
 		}
 
-		public async Task<bool> DbDelete()
+		public static int Count => dataTable.Count;
+
+		public static List<UserIdentifableItemData> GetDataList()
 		{
-			return await DbDeleteDataById(this.id);
+			return dataTable.dataList;
+		}
+
+		public static void SetDataList(IEnumerable<UserIdentifableItemData> dataList)
+		{
+			Clear();
+			dataTable.InsertRange(dataList);
+		}
+
+		public static void Clear()
+		{
+			dataTable.DeleteAll();
+		}
+
+		static partial void SetupUserIdentifableItemDataTableIndex(DataTable<long, UserIdentifableItemData> targetDataTable);
+
+		private static void SetupUserIdentifableItemDataTableIndexGenerated(DataTable<long, UserIdentifableItemData> targetDataTable)
+		{
+			targetDataTable.CreateUniqueIndex("Id", aData => (object)aData.id);
+			targetDataTable.CreateIndex("Id", aData => (object)aData.id);
+			targetDataTable.CreateIndex("UserId", aData => (object)aData.userId);
+			targetDataTable.CreateIndex("IdentifableItemId", aData => (object)aData.identifableItemId);
+			targetDataTable.CreateIndex("ParamA", aData => (object)aData.paramA);
+			targetDataTable.CreateIndex("ParamB", aData => (object)aData.paramB);
+		}
+		#endregion
+		#region DataTableUniqueIndex(Id)
+		public static UserIdentifableItemData GetDataById(
+			long id)
+		{
+			return dataTable.GetData("Id", (object)id);
+		}
+		#endregion
+		#region DataTableIndex (Id)
+		public static List<UserIdentifableItemData> GetDataListById(
+			long id)
+		{
+			return dataTable.GetDataList("Id", (object)id);
+		}
+		#endregion
+		#region DataTableIndex (UserId)
+		public static List<UserIdentifableItemData> GetDataListByUserId(
+			long userId)
+		{
+			return dataTable.GetDataList("UserId", (object)userId);
+		}
+		#endregion
+		#region DataTableIndex (IdentifableItemId)
+		public static List<UserIdentifableItemData> GetDataListByIdentifableItemId(
+			long identifableItemId)
+		{
+			return dataTable.GetDataList("IdentifableItemId", (object)identifableItemId);
+		}
+		#endregion
+		#region DataTableIndex (ParamA)
+		public static List<UserIdentifableItemData> GetDataListByParamA(
+			long paramA)
+		{
+			return dataTable.GetDataList("ParamA", (object)paramA);
+		}
+		#endregion
+		#region DataTableIndex (ParamB)
+		public static List<UserIdentifableItemData> GetDataListByParamB(
+			long paramB)
+		{
+			return dataTable.GetDataList("ParamB", (object)paramB);
 		}
 		#endregion
 	}

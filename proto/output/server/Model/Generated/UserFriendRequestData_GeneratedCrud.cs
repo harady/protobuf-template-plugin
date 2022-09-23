@@ -8,13 +8,14 @@ using MongoDB.Driver;
 
 namespace AwsDotnetCsharp
 {
+
 	public partial class UserFriendRequestData : IUnique<long>
 	{
-		private static bool isMaster => false;
+		private static bool isMaster => true;
 
 		private static IMongoCollection<UserFriendRequestData> _collection = null;
 		private static IMongoCollection<UserFriendRequestData> collection
-			=> _collection ?? (_collection = mongoDatabase.GetCollection<UserFriendRequestData>("user_friend_requests"));
+			=> _collection ?? (_collection = mongoDatabase.GetCollection<UserFriendRequestData>("UserFriendRequestDatas"));
 
 		public static IClientSessionHandle sessionHandle
 			=> MongoSessionManager.sessionHandle;
@@ -51,6 +52,7 @@ namespace AwsDotnetCsharp
 					new ReplaceOptions { IsUpsert = true });
 			bool result = replaceOneResult.IsAcknowledged && (replaceOneResult.ModifiedCount > 0);
 			Console.WriteLine($"UserFriendRequestData#DbSetData {sw.Elapsed.TotalSeconds}[秒]");
+			if (result) { userUpdateCache.UserFriendRequestDataTableUpdate.Upsert(data); }
 			return result;
 		}
 
@@ -73,56 +75,11 @@ namespace AwsDotnetCsharp
 					new BulkWriteOptions());
 			Console.WriteLine($"UserFriendRequestData#DbSetDataList {sw.Elapsed.TotalSeconds}[秒]");
 			var result = requestResult.RequestCount == requestResult.ProcessedRequests.Count;
+			if (result) { userUpdateCache.UserFriendRequestDataTableUpdate.Upsert(dataList); }
 			return result;
 		}
 		#endregion
-		#region DataTableSetupIndex
-		public static async Task DbSetupIndex()
-		{
-			var builder = Builders<UserFriendRequestData>.IndexKeys;
-			await DbSetupOneIndex(builder.Ascending(aData => aData.senderUserId));
-			await DbSetupOneIndex(builder.Ascending(aData => aData.targetUserId));
-		}
-
-		public static async Task DbSetupOneIndex(
-			IndexKeysDefinition<UserFriendRequestData> indexKeys)
-		{
-			var indexModel = new CreateIndexModel<UserFriendRequestData>(indexKeys);
-			await collection.Indexes
-				.CreateOneAsync(
-					sessionHandle,
-					indexModel);
-		}
-		#endregion
-		#region MongoDbUniqueIndex(Id)
-		public static async Task<UserFriendRequestData> DbGetDataById(
-			long id)
-		{
-			var sw = Stopwatch.StartNew();
-			var cacheKey = "UserFriendRequestData/GetDataById_" + id;
-			var result = await collection
-				.Find(
-					sessionHandle,
-					aData => aData.id == id)
-				.FirstOrDefaultAsync();
-			Console.WriteLine($"UserFriendRequestData#DbGetDataById {sw.Elapsed.TotalSeconds}[秒]");
-			return result;
-		}
-
-		public static async Task<List<UserFriendRequestData>> DbGetDataListInIds(
-			IEnumerable<long> ids)
-		{
-			var sw = Stopwatch.StartNew();
-			var filter = Builders<UserFriendRequestData>.Filter.In(aData => aData.id, ids);
-			var result = await collection
-				.Find(
-					sessionHandle,
-					filter)
-				.ToListAsync();
-			Console.WriteLine($"UserFriendRequestData#DbGetDataListInIds {sw.Elapsed.TotalSeconds}[秒]");
-			return result;
-		}
-
+		#region MongoDb
 		public static async Task<bool> DbDeleteDataById(
 			long id)
 		{
@@ -133,6 +90,7 @@ namespace AwsDotnetCsharp
 					aData => aData.id == id);
 			Console.WriteLine($"UserFriendRequestData#DbDeleteDataById {sw.Elapsed.TotalSeconds}[秒]");
 			var result = deleteResult.IsAcknowledged;
+			if (result) { userUpdateCache.UserFriendRequestDataTableUpdate.Delete(id); }
 			return result;
 		}
 
@@ -147,140 +105,84 @@ namespace AwsDotnetCsharp
 					aData => keySet.Contains(aData.id));
 			Console.WriteLine($"UserFriendRequestData#DbDeleteDataByIds {sw.Elapsed.TotalSeconds}[秒]");
 			var result = deleteResult.IsAcknowledged;
+			if (result) { userUpdateCache.UserFriendRequestDataTableUpdate.Delete(ids); }
 			return result;
 		}
 		#endregion
-		#region MongoDbIndex(SenderUserId)
-		public static async Task<UserFriendRequestData> DbGetDataBySenderUserId(
-			long senderUserId)
-		{
-			var sw = Stopwatch.StartNew();
-			var result = await collection
-				.Find(
-					sessionHandle,
-					aData => aData.senderUserId == senderUserId)
-				.FirstOrDefaultAsync();
-			Console.WriteLine($"UserFriendRequestData#DbGetDataBySenderUserId {sw.Elapsed.TotalSeconds}[秒]");
-			return result;
-		}
-
-		public static async Task<List<UserFriendRequestData>> DbGetDataListBySenderUserId(
-			long senderUserId)
-		{
-			var sw = Stopwatch.StartNew();
-			var result = await collection
-				.Find(
-					sessionHandle,
-					aData => aData.senderUserId == senderUserId)
-				.ToListAsync();
-			Console.WriteLine($"UserFriendRequestData#DbGetDataListBySenderUserId {sw.Elapsed.TotalSeconds}[秒]");
-			return result;
-		}
-		
-		public static async Task<List<UserFriendRequestData>> DbGetDataListBySenderUserIds(
-			IEnumerable<long> senderUserIds)
-		{
-			var sw = Stopwatch.StartNew();
-			var keySet = senderUserIds.ToHashSet();
-			var result = await collection
-				.Find(
-					sessionHandle,
-					data => keySet.Contains(data.senderUserId))
-				.ToListAsync();
-			Console.WriteLine($"UserFriendRequestData#DbGetDataListBySenderUserIds {sw.Elapsed.TotalSeconds}[秒]");
-			return result;
-		}
-
-		public static async Task<bool> DbDeleteDataBySenderUserId(
-			long senderUserId)
-		{
-			var dataList = await DbGetDataListBySenderUserId(senderUserId);
-			var ids = dataList.Select(data => data.id);
-			var result = await DbDeleteDataByIds(ids);
-			return result;
-		}
-
-		public static async Task<bool> DbDeleteDataBySenderUserIds(
-			IEnumerable<long> senderUserIds)
-		{
-			var dataList = await DbGetDataListBySenderUserIds(senderUserIds);
-			var ids = dataList.Select(data => data.id);
-			var result = await DbDeleteDataByIds(ids);
-			return result;
-		}
+		#region NullObject
+		public static UserFriendRequestData Null => NullObjectContainer.Get<UserFriendRequestData>();
+	
+		public bool isNull => this == Null;
 		#endregion
-		#region MongoDbIndex(TargetUserId)
-		public static async Task<UserFriendRequestData> DbGetDataByTargetUserId(
-			long targetUserId)
-		{
-			var sw = Stopwatch.StartNew();
-			var result = await collection
-				.Find(
-					sessionHandle,
-					aData => aData.targetUserId == targetUserId)
-				.FirstOrDefaultAsync();
-			Console.WriteLine($"UserFriendRequestData#DbGetDataByTargetUserId {sw.Elapsed.TotalSeconds}[秒]");
-			return result;
-		}
-
-		public static async Task<List<UserFriendRequestData>> DbGetDataListByTargetUserId(
-			long targetUserId)
-		{
-			var sw = Stopwatch.StartNew();
-			var result = await collection
-				.Find(
-					sessionHandle,
-					aData => aData.targetUserId == targetUserId)
-				.ToListAsync();
-			Console.WriteLine($"UserFriendRequestData#DbGetDataListByTargetUserId {sw.Elapsed.TotalSeconds}[秒]");
-			return result;
-		}
-		
-		public static async Task<List<UserFriendRequestData>> DbGetDataListByTargetUserIds(
-			IEnumerable<long> targetUserIds)
-		{
-			var sw = Stopwatch.StartNew();
-			var keySet = targetUserIds.ToHashSet();
-			var result = await collection
-				.Find(
-					sessionHandle,
-					data => keySet.Contains(data.targetUserId))
-				.ToListAsync();
-			Console.WriteLine($"UserFriendRequestData#DbGetDataListByTargetUserIds {sw.Elapsed.TotalSeconds}[秒]");
-			return result;
-		}
-
-		public static async Task<bool> DbDeleteDataByTargetUserId(
-			long targetUserId)
-		{
-			var dataList = await DbGetDataListByTargetUserId(targetUserId);
-			var ids = dataList.Select(data => data.id);
-			var result = await DbDeleteDataByIds(ids);
-			return result;
-		}
-
-		public static async Task<bool> DbDeleteDataByTargetUserIds(
-			IEnumerable<long> targetUserIds)
-		{
-			var dataList = await DbGetDataListByTargetUserIds(targetUserIds);
-			var ids = dataList.Select(data => data.id);
-			var result = await DbDeleteDataByIds(ids);
-			return result;
-		}
-		#endregion
-		#region Methods
-		public async Task<bool> DbSave()
-		{
-			if (this._id == ObjectId.Empty) {
-				var data = await DbGetDataById(this.id);
-				this._id = (data != null) ? data._id : this._id;
+		#region GameDbWrapper(DataTable)
+		public static DataTable<long, UserFriendRequestData> dataTable {
+			get {
+				DataTable<long, UserFriendRequestData> result;
+				if (GameDb.TableExists<long, UserFriendRequestData>()) {
+					result = GameDb.From<long, UserFriendRequestData>();
+				} else {
+					result = GameDb.CreateTable<long, UserFriendRequestData>();
+					SetupUserFriendRequestDataTableIndexGenerated(result);
+					SetupUserFriendRequestDataTableIndex(result);
+				}
+				return result;
 			}
-			return await DbSetData(this);
 		}
 
-		public async Task<bool> DbDelete()
+		public static int Count => dataTable.Count;
+
+		public static List<UserFriendRequestData> GetDataList()
 		{
-			return await DbDeleteDataById(this.id);
+			return dataTable.dataList;
+		}
+
+		public static void SetDataList(IEnumerable<UserFriendRequestData> dataList)
+		{
+			Clear();
+			dataTable.InsertRange(dataList);
+		}
+
+		public static void Clear()
+		{
+			dataTable.DeleteAll();
+		}
+
+		static partial void SetupUserFriendRequestDataTableIndex(DataTable<long, UserFriendRequestData> targetDataTable);
+
+		private static void SetupUserFriendRequestDataTableIndexGenerated(DataTable<long, UserFriendRequestData> targetDataTable)
+		{
+			targetDataTable.CreateUniqueIndex("Id", aData => (object)aData.id);
+			targetDataTable.CreateIndex("Id", aData => (object)aData.id);
+			targetDataTable.CreateIndex("SenderUserId", aData => (object)aData.senderUserId);
+			targetDataTable.CreateIndex("TargetUserId", aData => (object)aData.targetUserId);
+		}
+		#endregion
+		#region DataTableUniqueIndex(Id)
+		public static UserFriendRequestData GetDataById(
+			long id)
+		{
+			return dataTable.GetData("Id", (object)id);
+		}
+		#endregion
+		#region DataTableIndex (Id)
+		public static List<UserFriendRequestData> GetDataListById(
+			long id)
+		{
+			return dataTable.GetDataList("Id", (object)id);
+		}
+		#endregion
+		#region DataTableIndex (SenderUserId)
+		public static List<UserFriendRequestData> GetDataListBySenderUserId(
+			long senderUserId)
+		{
+			return dataTable.GetDataList("SenderUserId", (object)senderUserId);
+		}
+		#endregion
+		#region DataTableIndex (TargetUserId)
+		public static List<UserFriendRequestData> GetDataListByTargetUserId(
+			long targetUserId)
+		{
+			return dataTable.GetDataList("TargetUserId", (object)targetUserId);
 		}
 		#endregion
 	}

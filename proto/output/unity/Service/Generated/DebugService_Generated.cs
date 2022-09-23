@@ -1,4 +1,4 @@
-﻿//GENERATED CODE, DO NOT EDIT !
+//GENERATED CODE, DO NOT EDIT !
 using System;
 using System.Collections.Generic;
 using Newtonsoft.Json;
@@ -17,7 +17,7 @@ public partial class DebugService : AbstractApiService
 		Action<DebugSetServerTimeResponse> onSuccess,
 		Action<ErrorResponse> onFailure = null)
 	{
-		const string Path = "api/debug/set_server_time";
+		const string Path = "api/debug/setservertime";
 		request.SetupCommon();
 		var apiRequest = new APIRequest(Path, request);
 		// リクエストを送信.

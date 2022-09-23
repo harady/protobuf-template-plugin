@@ -8,13 +8,14 @@ using MongoDB.Driver;
 
 namespace AwsDotnetCsharp
 {
+
 	public partial class LoginBonusData : IUnique<long>
 	{
 		private static bool isMaster => true;
 
 		private static IMongoCollection<LoginBonusData> _collection = null;
 		private static IMongoCollection<LoginBonusData> collection
-			=> _collection ?? (_collection = mongoDatabase.GetCollection<LoginBonusData>("login_bonuss"));
+			=> _collection ?? (_collection = mongoDatabase.GetCollection<LoginBonusData>("LoginBonusDatas"));
 
 		public static IClientSessionHandle sessionHandle
 			=> MongoSessionManager.sessionHandle;
@@ -51,6 +52,7 @@ namespace AwsDotnetCsharp
 					new ReplaceOptions { IsUpsert = true });
 			bool result = replaceOneResult.IsAcknowledged && (replaceOneResult.ModifiedCount > 0);
 			Console.WriteLine($"LoginBonusData#DbSetData {sw.Elapsed.TotalSeconds}[秒]");
+			if (result) { userUpdateCache.LoginBonusDataTableUpdate.Upsert(data); }
 			return result;
 		}
 
@@ -73,6 +75,7 @@ namespace AwsDotnetCsharp
 					new BulkWriteOptions());
 			Console.WriteLine($"LoginBonusData#DbSetDataList {sw.Elapsed.TotalSeconds}[秒]");
 			var result = requestResult.RequestCount == requestResult.ProcessedRequests.Count;
+			if (result) { userUpdateCache.LoginBonusDataTableUpdate.Upsert(dataList); }
 			return result;
 		}
 		#endregion
@@ -87,6 +90,7 @@ namespace AwsDotnetCsharp
 					aData => aData.id == id);
 			Console.WriteLine($"LoginBonusData#DbDeleteDataById {sw.Elapsed.TotalSeconds}[秒]");
 			var result = deleteResult.IsAcknowledged;
+			if (result) { userUpdateCache.LoginBonusDataTableUpdate.Delete(id); }
 			return result;
 		}
 
@@ -101,6 +105,7 @@ namespace AwsDotnetCsharp
 					aData => keySet.Contains(aData.id));
 			Console.WriteLine($"LoginBonusData#DbDeleteDataByIds {sw.Elapsed.TotalSeconds}[秒]");
 			var result = deleteResult.IsAcknowledged;
+			if (result) { userUpdateCache.LoginBonusDataTableUpdate.Delete(ids); }
 			return result;
 		}
 		#endregion
@@ -147,6 +152,8 @@ namespace AwsDotnetCsharp
 		private static void SetupLoginBonusDataTableIndexGenerated(DataTable<long, LoginBonusData> targetDataTable)
 		{
 			targetDataTable.CreateUniqueIndex("Id", aData => (object)aData.id);
+			targetDataTable.CreateIndex("Id", aData => (object)aData.id);
+			targetDataTable.CreateIndex("Name", aData => (object)aData.name);
 		}
 		#endregion
 		#region DataTableUniqueIndex(Id)
@@ -154,6 +161,20 @@ namespace AwsDotnetCsharp
 			long id)
 		{
 			return dataTable.GetData("Id", (object)id);
+		}
+		#endregion
+		#region DataTableIndex (Id)
+		public static List<LoginBonusData> GetDataListById(
+			long id)
+		{
+			return dataTable.GetDataList("Id", (object)id);
+		}
+		#endregion
+		#region DataTableIndex (Name)
+		public static List<LoginBonusData> GetDataListByName(
+			string name)
+		{
+			return dataTable.GetDataList("Name", (object)name);
 		}
 		#endregion
 	}

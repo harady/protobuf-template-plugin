@@ -8,13 +8,14 @@ using MongoDB.Driver;
 
 namespace AwsDotnetCsharp
 {
+
 	public partial class UserGachaButtonData : IUnique<long>
 	{
-		private static bool isMaster => false;
+		private static bool isMaster => true;
 
 		private static IMongoCollection<UserGachaButtonData> _collection = null;
 		private static IMongoCollection<UserGachaButtonData> collection
-			=> _collection ?? (_collection = mongoDatabase.GetCollection<UserGachaButtonData>("user_gacha_buttons"));
+			=> _collection ?? (_collection = mongoDatabase.GetCollection<UserGachaButtonData>("UserGachaButtonDatas"));
 
 		public static IClientSessionHandle sessionHandle
 			=> MongoSessionManager.sessionHandle;
@@ -51,7 +52,7 @@ namespace AwsDotnetCsharp
 					new ReplaceOptions { IsUpsert = true });
 			bool result = replaceOneResult.IsAcknowledged && (replaceOneResult.ModifiedCount > 0);
 			Console.WriteLine($"UserGachaButtonData#DbSetData {sw.Elapsed.TotalSeconds}[秒]");
-			if (result) { userUpdateCache.userGachaButtonTableUpdate.Upsert(data); }
+			if (result) { userUpdateCache.UserGachaButtonDataTableUpdate.Upsert(data); }
 			return result;
 		}
 
@@ -74,58 +75,11 @@ namespace AwsDotnetCsharp
 					new BulkWriteOptions());
 			Console.WriteLine($"UserGachaButtonData#DbSetDataList {sw.Elapsed.TotalSeconds}[秒]");
 			var result = requestResult.RequestCount == requestResult.ProcessedRequests.Count;
-			if (result) { userUpdateCache.userGachaButtonTableUpdate.Upsert(dataList); }
+			if (result) { userUpdateCache.UserGachaButtonDataTableUpdate.Upsert(dataList); }
 			return result;
 		}
 		#endregion
-		#region DataTableSetupIndex
-		public static async Task DbSetupIndex()
-		{
-			var builder = Builders<UserGachaButtonData>.IndexKeys;
-			await DbSetupOneIndex(builder.Ascending(aData => aData.userId));
-			await DbSetupOneIndex(builder.Ascending(aData => aData.gachaButtonId));
-			await DbSetupOneIndex(builder.Ascending(aData => aData.gachaScheduleId));
-		}
-
-		public static async Task DbSetupOneIndex(
-			IndexKeysDefinition<UserGachaButtonData> indexKeys)
-		{
-			var indexModel = new CreateIndexModel<UserGachaButtonData>(indexKeys);
-			await collection.Indexes
-				.CreateOneAsync(
-					sessionHandle,
-					indexModel);
-		}
-		#endregion
-		#region MongoDbUniqueIndex(Id)
-		public static async Task<UserGachaButtonData> DbGetDataById(
-			long id)
-		{
-			var sw = Stopwatch.StartNew();
-			var cacheKey = "UserGachaButtonData/GetDataById_" + id;
-			var result = await collection
-				.Find(
-					sessionHandle,
-					aData => aData.id == id)
-				.FirstOrDefaultAsync();
-			Console.WriteLine($"UserGachaButtonData#DbGetDataById {sw.Elapsed.TotalSeconds}[秒]");
-			return result;
-		}
-
-		public static async Task<List<UserGachaButtonData>> DbGetDataListInIds(
-			IEnumerable<long> ids)
-		{
-			var sw = Stopwatch.StartNew();
-			var filter = Builders<UserGachaButtonData>.Filter.In(aData => aData.id, ids);
-			var result = await collection
-				.Find(
-					sessionHandle,
-					filter)
-				.ToListAsync();
-			Console.WriteLine($"UserGachaButtonData#DbGetDataListInIds {sw.Elapsed.TotalSeconds}[秒]");
-			return result;
-		}
-
+		#region MongoDb
 		public static async Task<bool> DbDeleteDataById(
 			long id)
 		{
@@ -136,7 +90,7 @@ namespace AwsDotnetCsharp
 					aData => aData.id == id);
 			Console.WriteLine($"UserGachaButtonData#DbDeleteDataById {sw.Elapsed.TotalSeconds}[秒]");
 			var result = deleteResult.IsAcknowledged;
-			if (result) { userUpdateCache.userGachaButtonTableUpdate.Delete(id); }
+			if (result) { userUpdateCache.UserGachaButtonDataTableUpdate.Delete(id); }
 			return result;
 		}
 
@@ -151,200 +105,100 @@ namespace AwsDotnetCsharp
 					aData => keySet.Contains(aData.id));
 			Console.WriteLine($"UserGachaButtonData#DbDeleteDataByIds {sw.Elapsed.TotalSeconds}[秒]");
 			var result = deleteResult.IsAcknowledged;
-			if (result) { userUpdateCache.userGachaButtonTableUpdate.Delete(ids); }
+			if (result) { userUpdateCache.UserGachaButtonDataTableUpdate.Delete(ids); }
 			return result;
 		}
 		#endregion
-		#region MongoDbIndex(UserId)
-		public static async Task<UserGachaButtonData> DbGetDataByUserId(
-			long userId)
-		{
-			var sw = Stopwatch.StartNew();
-			var result = await collection
-				.Find(
-					sessionHandle,
-					aData => aData.userId == userId)
-				.FirstOrDefaultAsync();
-			Console.WriteLine($"UserGachaButtonData#DbGetDataByUserId {sw.Elapsed.TotalSeconds}[秒]");
-			return result;
-		}
-
-		public static async Task<List<UserGachaButtonData>> DbGetDataListByUserId(
-			long userId)
-		{
-			var sw = Stopwatch.StartNew();
-			var result = await collection
-				.Find(
-					sessionHandle,
-					aData => aData.userId == userId)
-				.ToListAsync();
-			Console.WriteLine($"UserGachaButtonData#DbGetDataListByUserId {sw.Elapsed.TotalSeconds}[秒]");
-			return result;
-		}
-		
-		public static async Task<List<UserGachaButtonData>> DbGetDataListByUserIds(
-			IEnumerable<long> userIds)
-		{
-			var sw = Stopwatch.StartNew();
-			var keySet = userIds.ToHashSet();
-			var result = await collection
-				.Find(
-					sessionHandle,
-					data => keySet.Contains(data.userId))
-				.ToListAsync();
-			Console.WriteLine($"UserGachaButtonData#DbGetDataListByUserIds {sw.Elapsed.TotalSeconds}[秒]");
-			return result;
-		}
-
-		public static async Task<bool> DbDeleteDataByUserId(
-			long userId)
-		{
-			var dataList = await DbGetDataListByUserId(userId);
-			var ids = dataList.Select(data => data.id);
-			var result = await DbDeleteDataByIds(ids);
-			return result;
-		}
-
-		public static async Task<bool> DbDeleteDataByUserIds(
-			IEnumerable<long> userIds)
-		{
-			var dataList = await DbGetDataListByUserIds(userIds);
-			var ids = dataList.Select(data => data.id);
-			var result = await DbDeleteDataByIds(ids);
-			return result;
-		}
+		#region NullObject
+		public static UserGachaButtonData Null => NullObjectContainer.Get<UserGachaButtonData>();
+	
+		public bool isNull => this == Null;
 		#endregion
-		#region MongoDbIndex(GachaButtonId)
-		public static async Task<UserGachaButtonData> DbGetDataByGachaButtonId(
-			long gachaButtonId)
-		{
-			var sw = Stopwatch.StartNew();
-			var result = await collection
-				.Find(
-					sessionHandle,
-					aData => aData.gachaButtonId == gachaButtonId)
-				.FirstOrDefaultAsync();
-			Console.WriteLine($"UserGachaButtonData#DbGetDataByGachaButtonId {sw.Elapsed.TotalSeconds}[秒]");
-			return result;
-		}
-
-		public static async Task<List<UserGachaButtonData>> DbGetDataListByGachaButtonId(
-			long gachaButtonId)
-		{
-			var sw = Stopwatch.StartNew();
-			var result = await collection
-				.Find(
-					sessionHandle,
-					aData => aData.gachaButtonId == gachaButtonId)
-				.ToListAsync();
-			Console.WriteLine($"UserGachaButtonData#DbGetDataListByGachaButtonId {sw.Elapsed.TotalSeconds}[秒]");
-			return result;
-		}
-		
-		public static async Task<List<UserGachaButtonData>> DbGetDataListByGachaButtonIds(
-			IEnumerable<long> gachaButtonIds)
-		{
-			var sw = Stopwatch.StartNew();
-			var keySet = gachaButtonIds.ToHashSet();
-			var result = await collection
-				.Find(
-					sessionHandle,
-					data => keySet.Contains(data.gachaButtonId))
-				.ToListAsync();
-			Console.WriteLine($"UserGachaButtonData#DbGetDataListByGachaButtonIds {sw.Elapsed.TotalSeconds}[秒]");
-			return result;
-		}
-
-		public static async Task<bool> DbDeleteDataByGachaButtonId(
-			long gachaButtonId)
-		{
-			var dataList = await DbGetDataListByGachaButtonId(gachaButtonId);
-			var ids = dataList.Select(data => data.id);
-			var result = await DbDeleteDataByIds(ids);
-			return result;
-		}
-
-		public static async Task<bool> DbDeleteDataByGachaButtonIds(
-			IEnumerable<long> gachaButtonIds)
-		{
-			var dataList = await DbGetDataListByGachaButtonIds(gachaButtonIds);
-			var ids = dataList.Select(data => data.id);
-			var result = await DbDeleteDataByIds(ids);
-			return result;
-		}
-		#endregion
-		#region MongoDbIndex(GachaScheduleId)
-		public static async Task<UserGachaButtonData> DbGetDataByGachaScheduleId(
-			long gachaScheduleId)
-		{
-			var sw = Stopwatch.StartNew();
-			var result = await collection
-				.Find(
-					sessionHandle,
-					aData => aData.gachaScheduleId == gachaScheduleId)
-				.FirstOrDefaultAsync();
-			Console.WriteLine($"UserGachaButtonData#DbGetDataByGachaScheduleId {sw.Elapsed.TotalSeconds}[秒]");
-			return result;
-		}
-
-		public static async Task<List<UserGachaButtonData>> DbGetDataListByGachaScheduleId(
-			long gachaScheduleId)
-		{
-			var sw = Stopwatch.StartNew();
-			var result = await collection
-				.Find(
-					sessionHandle,
-					aData => aData.gachaScheduleId == gachaScheduleId)
-				.ToListAsync();
-			Console.WriteLine($"UserGachaButtonData#DbGetDataListByGachaScheduleId {sw.Elapsed.TotalSeconds}[秒]");
-			return result;
-		}
-		
-		public static async Task<List<UserGachaButtonData>> DbGetDataListByGachaScheduleIds(
-			IEnumerable<long> gachaScheduleIds)
-		{
-			var sw = Stopwatch.StartNew();
-			var keySet = gachaScheduleIds.ToHashSet();
-			var result = await collection
-				.Find(
-					sessionHandle,
-					data => keySet.Contains(data.gachaScheduleId))
-				.ToListAsync();
-			Console.WriteLine($"UserGachaButtonData#DbGetDataListByGachaScheduleIds {sw.Elapsed.TotalSeconds}[秒]");
-			return result;
-		}
-
-		public static async Task<bool> DbDeleteDataByGachaScheduleId(
-			long gachaScheduleId)
-		{
-			var dataList = await DbGetDataListByGachaScheduleId(gachaScheduleId);
-			var ids = dataList.Select(data => data.id);
-			var result = await DbDeleteDataByIds(ids);
-			return result;
-		}
-
-		public static async Task<bool> DbDeleteDataByGachaScheduleIds(
-			IEnumerable<long> gachaScheduleIds)
-		{
-			var dataList = await DbGetDataListByGachaScheduleIds(gachaScheduleIds);
-			var ids = dataList.Select(data => data.id);
-			var result = await DbDeleteDataByIds(ids);
-			return result;
-		}
-		#endregion
-		#region Methods
-		public async Task<bool> DbSave()
-		{
-			if (this._id == ObjectId.Empty) {
-				var data = await DbGetDataById(this.id);
-				this._id = (data != null) ? data._id : this._id;
+		#region GameDbWrapper(DataTable)
+		public static DataTable<long, UserGachaButtonData> dataTable {
+			get {
+				DataTable<long, UserGachaButtonData> result;
+				if (GameDb.TableExists<long, UserGachaButtonData>()) {
+					result = GameDb.From<long, UserGachaButtonData>();
+				} else {
+					result = GameDb.CreateTable<long, UserGachaButtonData>();
+					SetupUserGachaButtonDataTableIndexGenerated(result);
+					SetupUserGachaButtonDataTableIndex(result);
+				}
+				return result;
 			}
-			return await DbSetData(this);
 		}
 
-		public async Task<bool> DbDelete()
+		public static int Count => dataTable.Count;
+
+		public static List<UserGachaButtonData> GetDataList()
 		{
-			return await DbDeleteDataById(this.id);
+			return dataTable.dataList;
+		}
+
+		public static void SetDataList(IEnumerable<UserGachaButtonData> dataList)
+		{
+			Clear();
+			dataTable.InsertRange(dataList);
+		}
+
+		public static void Clear()
+		{
+			dataTable.DeleteAll();
+		}
+
+		static partial void SetupUserGachaButtonDataTableIndex(DataTable<long, UserGachaButtonData> targetDataTable);
+
+		private static void SetupUserGachaButtonDataTableIndexGenerated(DataTable<long, UserGachaButtonData> targetDataTable)
+		{
+			targetDataTable.CreateUniqueIndex("Id", aData => (object)aData.id);
+			targetDataTable.CreateIndex("Id", aData => (object)aData.id);
+			targetDataTable.CreateIndex("UserId", aData => (object)aData.userId);
+			targetDataTable.CreateIndex("GachaButtonId", aData => (object)aData.gachaButtonId);
+			targetDataTable.CreateIndex("GachaScheduleId", aData => (object)aData.gachaScheduleId);
+			targetDataTable.CreateIndex("PurchaseCount", aData => (object)aData.purchaseCount);
+		}
+		#endregion
+		#region DataTableUniqueIndex(Id)
+		public static UserGachaButtonData GetDataById(
+			long id)
+		{
+			return dataTable.GetData("Id", (object)id);
+		}
+		#endregion
+		#region DataTableIndex (Id)
+		public static List<UserGachaButtonData> GetDataListById(
+			long id)
+		{
+			return dataTable.GetDataList("Id", (object)id);
+		}
+		#endregion
+		#region DataTableIndex (UserId)
+		public static List<UserGachaButtonData> GetDataListByUserId(
+			long userId)
+		{
+			return dataTable.GetDataList("UserId", (object)userId);
+		}
+		#endregion
+		#region DataTableIndex (GachaButtonId)
+		public static List<UserGachaButtonData> GetDataListByGachaButtonId(
+			long gachaButtonId)
+		{
+			return dataTable.GetDataList("GachaButtonId", (object)gachaButtonId);
+		}
+		#endregion
+		#region DataTableIndex (GachaScheduleId)
+		public static List<UserGachaButtonData> GetDataListByGachaScheduleId(
+			long gachaScheduleId)
+		{
+			return dataTable.GetDataList("GachaScheduleId", (object)gachaScheduleId);
+		}
+		#endregion
+		#region DataTableIndex (PurchaseCount)
+		public static List<UserGachaButtonData> GetDataListByPurchaseCount(
+			long purchaseCount)
+		{
+			return dataTable.GetDataList("PurchaseCount", (object)purchaseCount);
 		}
 		#endregion
 	}

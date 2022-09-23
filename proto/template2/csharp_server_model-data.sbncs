@@ -1,4 +1,3 @@
-{{- if gt (len .Messages) 0 -}}
 using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
@@ -9,34 +8,33 @@ using MessagePack;
 
 namespace AwsDotnetCsharp
 {
-{{- range .Messages }}
-	{{- $hasId := (eq (index .Fields 0).Name "id") -}}
-	{{- $className := .Name }}
+{{- for message in file.message_type }}
+	{{- has_id = (message.field[0].name == "id") }}
 	[BsonIgnoreExtraElements]
 	[DataContract]
-	public partial class {{ $className }} : AbstractData
+	public partial class {{ message.name }} : AbstractData
 	{
 		[BsonId]
 		public ObjectId _id { get; set; }
-{{- range .Fields }}
-		[BsonElement("{{ .Name | ToCamelCase }}")]
-		[DataMember(Name = "{{ .Name | ToCamelCase }}")]
-	{{- if .IsRepeated  }}
-		public List<{{ .BaseType }}> {{ .Name | ToCamelCase }} { get; set; } = new List<{{ .BaseType }}>();
+{{- for field in message.field }}
+		[BsonElement("{{ field.name | to_camel }}")]
+		[DataMember(Name = "{{ field.name | to_camel }}")]
+	{{- if (field | is_repeated) }}
+		public List<{{ field | to_cs_type }}> {{ field.name | to_camel }} { get; set; } = new List<{{ field | to_cs_type }}>();
 	{{- else }}
-		public {{ .BaseType }} {{ .Name | ToCamelCase }} { get; set; }
+		public {{ field | to_cs_type }} {{ field.name | to_camel }} { get; set; }
 	{{- end }}
-	{{- if (HasSuffix .Name "_at") }}
+	{{- if (field.name | string.ends_with "_at") }}
 		[BsonIgnore]
-		public DateTime {{ .Name | SnakeToPascal }} {
-			get { return DateTimeUtil.FromEpochTime({{ .Name | ToCamelCase }}); }
-			set { {{ .Name | ToCamelCase }} = value.ToEpochTime(); }
+		public DateTime {{ field.name | to_pascal }} {
+			get { return DateTimeUtil.FromEpochTime({{ field.name | to_camel }}); }
+			set { {{ field.name | to_camel }} = value.ToEpochTime(); }
 		}
 	{{- end }}
 {{ end }}
-{{- if eq $hasId true -}}
-	{{- range .Fields }}
-		{{- if (eq .Name "name") }}
+{{- if has_id -}}
+	{{- for field in message.field }}
+		{{- if (field.name == "name") }}
 
 		public string idNameText => GetIdNameText(id, name);
 	{{- end -}}
@@ -45,4 +43,3 @@ namespace AwsDotnetCsharp
 	}
 {{ end -}}
 }
-{{ end }}

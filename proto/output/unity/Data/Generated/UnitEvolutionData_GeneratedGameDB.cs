@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 
 public partial class UnitEvolutionData : IUnique<long>
 {
@@ -55,7 +55,6 @@ public partial class UnitEvolutionData : IUnique<long>
 	private static void SetupUnitEvolutionDataTableIndexGenerated(DataTable<long, UnitEvolutionData> targetDataTable)
 	{
 		targetDataTable.CreateUniqueIndex("Id", aData => (object)aData.id);
-		targetDataTable.CreateIndex("BaseUnitId", aData => (object)aData.baseUnitId);
 	}
 	#endregion
 	#region DataTableUniqueIndex(Id)
@@ -74,11 +73,4 @@ public partial class UnitEvolutionData : IUnique<long>
 		dataTable.DeleteByKey("Id", (object)id);
 	}
 	#endregion
-	#region DataTableIndex (BaseUnitId)
-	public static List<UnitEvolutionData> GetDataListByBaseUnitId(long baseUnitId)
-	{
-		return dataTable.GetDataList("BaseUnitId", (object)baseUnitId);
-	}
-	#endregion
 }
-
