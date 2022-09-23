@@ -56,7 +56,7 @@ public partial class ShopItemData : IUnique<long>
 	{
 		targetDataTable.CreateUniqueIndex("Id", aData => (object)aData.id);
 		targetDataTable.CreateUniqueIndex("PlatformProductId", aData => (object)aData.platformProductId);
-		targetDataTable.CreateIndex("ShopItemData", aData => (object)aData.shopItemData);
+		targetDataTable.CreateIndex("ShopId", aData => (object)aData.shopId);
 	}
 	#endregion
 	#region DataTableUniqueIndex(Id)
@@ -91,10 +91,11 @@ public partial class ShopItemData : IUnique<long>
 		dataTable.DeleteByKey("PlatformProductId", (object)platformProductId);
 	}
 	#endregion
-	#region DataTableIndex (ShopItemData)
+	#region DataTableIndex (ShopId)
 	public static List<ShopItemData> GetDataListByShopId(long shopId)
 	{
 		return dataTable.GetDataList("ShopId", (object)shopId);
 	}
 	#endregion
 }
+

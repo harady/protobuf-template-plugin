@@ -74,3 +74,4 @@ public partial class SkillData : IUnique<long>
 	}
 	#endregion
 }
+

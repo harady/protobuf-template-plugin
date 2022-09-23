@@ -55,7 +55,7 @@ public partial class ShopScheduleData : IUnique<long>
 	private static void SetupShopScheduleDataTableIndexGenerated(DataTable<long, ShopScheduleData> targetDataTable)
 	{
 		targetDataTable.CreateUniqueIndex("Id", aData => (object)aData.id);
-		targetDataTable.CreateIndex("ShopScheduleData", aData => (object)aData.shopScheduleData);
+		targetDataTable.CreateIndex("ShopId", aData => (object)aData.shopId);
 	}
 	#endregion
 	#region DataTableUniqueIndex(Id)
@@ -74,10 +74,11 @@ public partial class ShopScheduleData : IUnique<long>
 		dataTable.DeleteByKey("Id", (object)id);
 	}
 	#endregion
-	#region DataTableIndex (ShopScheduleData)
+	#region DataTableIndex (ShopId)
 	public static List<ShopScheduleData> GetDataListByShopId(long shopId)
 	{
 		return dataTable.GetDataList("ShopId", (object)shopId);
 	}
 	#endregion
 }
+

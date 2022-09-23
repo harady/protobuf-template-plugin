@@ -55,8 +55,8 @@ public partial class UserExchangeItemData : IUnique<long>
 	private static void SetupUserExchangeItemDataTableIndexGenerated(DataTable<long, UserExchangeItemData> targetDataTable)
 	{
 		targetDataTable.CreateUniqueIndex("Id", aData => (object)aData.id);
-		targetDataTable.CreateIndex("UserExchangeItemData", aData => (object)aData.userExchangeItemData);
-		targetDataTable.CreateIndex("UserExchangeItemData", aData => (object)aData.userExchangeItemData);
+		targetDataTable.CreateIndex("UserId", aData => (object)aData.userId);
+		targetDataTable.CreateIndex("ExchangeItemId", aData => (object)aData.exchangeItemId);
 	}
 	#endregion
 	#region DataTableUniqueIndex(Id)
@@ -75,16 +75,17 @@ public partial class UserExchangeItemData : IUnique<long>
 		dataTable.DeleteByKey("Id", (object)id);
 	}
 	#endregion
-	#region DataTableIndex (UserExchangeItemData)
+	#region DataTableIndex (UserId)
 	public static List<UserExchangeItemData> GetDataListByUserId(long userId)
 	{
 		return dataTable.GetDataList("UserId", (object)userId);
 	}
 	#endregion
-	#region DataTableIndex (UserExchangeItemData)
+	#region DataTableIndex (ExchangeItemId)
 	public static List<UserExchangeItemData> GetDataListByExchangeItemId(long exchangeItemId)
 	{
 		return dataTable.GetDataList("ExchangeItemId", (object)exchangeItemId);
 	}
 	#endregion
 }
+

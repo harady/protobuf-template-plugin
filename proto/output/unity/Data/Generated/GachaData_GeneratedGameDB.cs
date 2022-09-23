@@ -74,3 +74,4 @@ public partial class GachaData : IUnique<long>
 	}
 	#endregion
 }
+

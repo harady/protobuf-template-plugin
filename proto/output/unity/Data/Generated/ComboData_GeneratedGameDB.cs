@@ -74,3 +74,4 @@ public partial class ComboData : IUnique<long>
 	}
 	#endregion
 }
+

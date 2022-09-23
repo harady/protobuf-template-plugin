@@ -74,3 +74,4 @@ public partial class ResourceLotteryData : IUnique<long>
 	}
 	#endregion
 }
+

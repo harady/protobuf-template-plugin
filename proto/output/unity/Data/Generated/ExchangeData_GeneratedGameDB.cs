@@ -74,3 +74,4 @@ public partial class ExchangeData : IUnique<long>
 	}
 	#endregion
 }
+

@@ -74,3 +74,4 @@ public partial class LoginBonusData : IUnique<long>
 	}
 	#endregion
 }
+

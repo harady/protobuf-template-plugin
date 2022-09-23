@@ -74,3 +74,4 @@ public partial class ShopData : IUnique<long>
 	}
 	#endregion
 }
+

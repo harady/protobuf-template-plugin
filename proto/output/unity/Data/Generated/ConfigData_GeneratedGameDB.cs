@@ -91,3 +91,4 @@ public partial class ConfigData : IUnique<long>
 	}
 	#endregion
 }
+

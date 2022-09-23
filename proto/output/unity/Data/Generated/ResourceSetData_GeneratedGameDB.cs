@@ -74,3 +74,4 @@ public partial class ResourceSetData : IUnique<long>
 	}
 	#endregion
 }
+

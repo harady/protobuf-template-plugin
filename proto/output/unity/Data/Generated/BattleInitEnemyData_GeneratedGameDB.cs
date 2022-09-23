@@ -55,7 +55,7 @@ public partial class BattleInitEnemyData : IUnique<long>
 	private static void SetupBattleInitEnemyDataTableIndexGenerated(DataTable<long, BattleInitEnemyData> targetDataTable)
 	{
 		targetDataTable.CreateUniqueIndex("Id", aData => (object)aData.id);
-		targetDataTable.CreateIndex("BattleInitEnemyData", aData => (object)aData.battleInitEnemyData);
+		targetDataTable.CreateIndex("RoundId", aData => (object)aData.roundId);
 	}
 	#endregion
 	#region DataTableUniqueIndex(Id)
@@ -74,10 +74,11 @@ public partial class BattleInitEnemyData : IUnique<long>
 		dataTable.DeleteByKey("Id", (object)id);
 	}
 	#endregion
-	#region DataTableIndex (BattleInitEnemyData)
+	#region DataTableIndex (RoundId)
 	public static List<BattleInitEnemyData> GetDataListByRoundId(long roundId)
 	{
 		return dataTable.GetDataList("RoundId", (object)roundId);
 	}
 	#endregion
 }
+

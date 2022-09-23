@@ -55,7 +55,7 @@ public partial class UserMessageData : IUnique<long>
 	private static void SetupUserMessageDataTableIndexGenerated(DataTable<long, UserMessageData> targetDataTable)
 	{
 		targetDataTable.CreateUniqueIndex("Id", aData => (object)aData.id);
-		targetDataTable.CreateIndex("UserMessageData", aData => (object)aData.userMessageData);
+		targetDataTable.CreateIndex("UserId", aData => (object)aData.userId);
 	}
 	#endregion
 	#region DataTableUniqueIndex(Id)
@@ -74,10 +74,11 @@ public partial class UserMessageData : IUnique<long>
 		dataTable.DeleteByKey("Id", (object)id);
 	}
 	#endregion
-	#region DataTableIndex (UserMessageData)
+	#region DataTableIndex (UserId)
 	public static List<UserMessageData> GetDataListByUserId(long userId)
 	{
 		return dataTable.GetDataList("UserId", (object)userId);
 	}
 	#endregion
 }
+

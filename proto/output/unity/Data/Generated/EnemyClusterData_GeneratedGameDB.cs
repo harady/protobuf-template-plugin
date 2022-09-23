@@ -74,3 +74,4 @@ public partial class EnemyClusterData : IUnique<long>
 	}
 	#endregion
 }
+

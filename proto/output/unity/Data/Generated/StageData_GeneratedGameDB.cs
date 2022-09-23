@@ -55,7 +55,7 @@ public partial class StageData : IUnique<long>
 	private static void SetupStageDataTableIndexGenerated(DataTable<long, StageData> targetDataTable)
 	{
 		targetDataTable.CreateUniqueIndex("Id", aData => (object)aData.id);
-		targetDataTable.CreateIndex("StageData", aData => (object)aData.stageData);
+		targetDataTable.CreateIndex("QuestId", aData => (object)aData.questId);
 	}
 	#endregion
 	#region DataTableUniqueIndex(Id)
@@ -74,10 +74,11 @@ public partial class StageData : IUnique<long>
 		dataTable.DeleteByKey("Id", (object)id);
 	}
 	#endregion
-	#region DataTableIndex (StageData)
+	#region DataTableIndex (QuestId)
 	public static List<StageData> GetDataListByQuestId(long questId)
 	{
 		return dataTable.GetDataList("QuestId", (object)questId);
 	}
 	#endregion
 }
+

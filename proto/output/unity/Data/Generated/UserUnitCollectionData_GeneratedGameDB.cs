@@ -56,7 +56,7 @@ public partial class UserUnitCollectionData : IUnique<long>
 	{
 		targetDataTable.CreateUniqueIndex("Id", aData => (object)aData.id);
 		targetDataTable.CreateUniqueIndex("UnitId", aData => (object)aData.unitId);
-		targetDataTable.CreateIndex("UserUnitCollectionData", aData => (object)aData.userUnitCollectionData);
+		targetDataTable.CreateIndex("UserId", aData => (object)aData.userId);
 	}
 	#endregion
 	#region DataTableUniqueIndex(Id)
@@ -91,10 +91,11 @@ public partial class UserUnitCollectionData : IUnique<long>
 		dataTable.DeleteByKey("UnitId", (object)unitId);
 	}
 	#endregion
-	#region DataTableIndex (UserUnitCollectionData)
+	#region DataTableIndex (UserId)
 	public static List<UserUnitCollectionData> GetDataListByUserId(long userId)
 	{
 		return dataTable.GetDataList("UserId", (object)userId);
 	}
 	#endregion
 }
+

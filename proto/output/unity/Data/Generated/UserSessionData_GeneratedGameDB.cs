@@ -55,8 +55,8 @@ public partial class UserSessionData : IUnique<long>
 	private static void SetupUserSessionDataTableIndexGenerated(DataTable<long, UserSessionData> targetDataTable)
 	{
 		targetDataTable.CreateUniqueIndex("Id", aData => (object)aData.id);
-		targetDataTable.CreateIndex("UserSessionData", aData => (object)aData.userSessionData);
-		targetDataTable.CreateIndex("UserSessionData", aData => (object)aData.userSessionData);
+		targetDataTable.CreateIndex("UserId", aData => (object)aData.userId);
+		targetDataTable.CreateIndex("SessionId", aData => (object)aData.sessionId);
 	}
 	#endregion
 	#region DataTableUniqueIndex(Id)
@@ -75,16 +75,17 @@ public partial class UserSessionData : IUnique<long>
 		dataTable.DeleteByKey("Id", (object)id);
 	}
 	#endregion
-	#region DataTableIndex (UserSessionData)
+	#region DataTableIndex (UserId)
 	public static List<UserSessionData> GetDataListByUserId(long userId)
 	{
 		return dataTable.GetDataList("UserId", (object)userId);
 	}
 	#endregion
-	#region DataTableIndex (UserSessionData)
+	#region DataTableIndex (SessionId)
 	public static List<UserSessionData> GetDataListBySessionId(string sessionId)
 	{
 		return dataTable.GetDataList("SessionId", (object)sessionId);
 	}
 	#endregion
 }
+

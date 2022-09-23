@@ -91,3 +91,4 @@ public partial class UserRankExpData : IUnique<long>
 	}
 	#endregion
 }
+

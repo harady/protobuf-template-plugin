@@ -74,3 +74,4 @@ public partial class MessageData : IUnique<long>
 	}
 	#endregion
 }
+

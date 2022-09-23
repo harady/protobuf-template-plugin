@@ -55,7 +55,7 @@ public partial class EventScheduleData : IUnique<long>
 	private static void SetupEventScheduleDataTableIndexGenerated(DataTable<long, EventScheduleData> targetDataTable)
 	{
 		targetDataTable.CreateUniqueIndex("Id", aData => (object)aData.id);
-		targetDataTable.CreateIndex("EventScheduleData", aData => (object)aData.eventScheduleData);
+		targetDataTable.CreateIndex("QuestId", aData => (object)aData.questId);
 	}
 	#endregion
 	#region DataTableUniqueIndex(Id)
@@ -74,10 +74,11 @@ public partial class EventScheduleData : IUnique<long>
 		dataTable.DeleteByKey("Id", (object)id);
 	}
 	#endregion
-	#region DataTableIndex (EventScheduleData)
+	#region DataTableIndex (QuestId)
 	public static List<EventScheduleData> GetDataListByQuestId(long questId)
 	{
 		return dataTable.GetDataList("QuestId", (object)questId);
 	}
 	#endregion
 }
+

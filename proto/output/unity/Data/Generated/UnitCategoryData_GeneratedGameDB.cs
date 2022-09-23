@@ -74,3 +74,4 @@ public partial class UnitCategoryData : IUnique<long>
 	}
 	#endregion
 }
+

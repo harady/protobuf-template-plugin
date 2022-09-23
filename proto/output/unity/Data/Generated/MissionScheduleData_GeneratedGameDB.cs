@@ -74,3 +74,4 @@ public partial class MissionScheduleData : IUnique<long>
 	}
 	#endregion
 }
+

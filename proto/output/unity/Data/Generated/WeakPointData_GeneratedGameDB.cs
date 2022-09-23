@@ -74,3 +74,4 @@ public partial class WeakPointData : IUnique<long>
 	}
 	#endregion
 }
+

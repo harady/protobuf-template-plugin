@@ -55,8 +55,8 @@ public partial class UserData : IUnique<long>
 	private static void SetupUserDataTableIndexGenerated(DataTable<long, UserData> targetDataTable)
 	{
 		targetDataTable.CreateUniqueIndex("Id", aData => (object)aData.id);
-		targetDataTable.CreateIndex("UserData", aData => (object)aData.userData);
-		targetDataTable.CreateIndex("UserData", aData => (object)aData.userData);
+		targetDataTable.CreateIndex("Token", aData => (object)aData.token);
+		targetDataTable.CreateIndex("Code", aData => (object)aData.code);
 	}
 	#endregion
 	#region DataTableUniqueIndex(Id)
@@ -75,16 +75,17 @@ public partial class UserData : IUnique<long>
 		dataTable.DeleteByKey("Id", (object)id);
 	}
 	#endregion
-	#region DataTableIndex (UserData)
+	#region DataTableIndex (Token)
 	public static List<UserData> GetDataListByToken(string token)
 	{
 		return dataTable.GetDataList("Token", (object)token);
 	}
 	#endregion
-	#region DataTableIndex (UserData)
+	#region DataTableIndex (Code)
 	public static List<UserData> GetDataListByCode(long code)
 	{
 		return dataTable.GetDataList("Code", (object)code);
 	}
 	#endregion
 }
+

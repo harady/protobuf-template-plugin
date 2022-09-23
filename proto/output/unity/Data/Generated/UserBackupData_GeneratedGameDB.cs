@@ -56,8 +56,8 @@ public partial class UserBackupData : IUnique<long>
 	{
 		targetDataTable.CreateUniqueIndex("Id", aData => (object)aData.id);
 		targetDataTable.CreateUniqueIndex("BackupType", aData => (object)aData.backupType);
-		targetDataTable.CreateIndex("UserBackupData", aData => (object)aData.userBackupData);
-		targetDataTable.CreateIndex("UserBackupData", aData => (object)aData.userBackupData);
+		targetDataTable.CreateIndex("UserId", aData => (object)aData.userId);
+		targetDataTable.CreateIndex("BackupToken", aData => (object)aData.backupToken);
 	}
 	#endregion
 	#region DataTableUniqueIndex(Id)
@@ -92,16 +92,17 @@ public partial class UserBackupData : IUnique<long>
 		dataTable.DeleteByKey("BackupType", (object)backupType);
 	}
 	#endregion
-	#region DataTableIndex (UserBackupData)
+	#region DataTableIndex (UserId)
 	public static List<UserBackupData> GetDataListByUserId(long userId)
 	{
 		return dataTable.GetDataList("UserId", (object)userId);
 	}
 	#endregion
-	#region DataTableIndex (UserBackupData)
+	#region DataTableIndex (BackupToken)
 	public static List<UserBackupData> GetDataListByBackupToken(string backupToken)
 	{
 		return dataTable.GetDataList("BackupToken", (object)backupToken);
 	}
 	#endregion
 }
+

@@ -65,7 +65,7 @@ public partial class {{ message.name }} : IUnique<long>
 		{{- end }}
 		{{- for field in message.field }}
 			{{- if (indexs | array.contains field.name) }}
-		targetDataTable.CreateIndex("{{ message.name | to_pascal }}", aData => (object)aData.{{ message.name | to_camel }});
+		targetDataTable.CreateIndex("{{ field.name | to_pascal }}", aData => (object)aData.{{ field.name | to_camel }});
 			{{- end }}
 		{{- end }}
 	}
@@ -93,7 +93,7 @@ public partial class {{ message.name }} : IUnique<long>
 	{{- end }}
 	{{- for field in message.field }}
 		{{- if (indexs | array.contains field.name) }}
-	#region DataTableIndex ({{ message.name | to_pascal }})
+	#region DataTableIndex ({{ field.name | to_pascal }})
 	public static List<{{ message.name }}> GetDataListBy{{ field.name | to_pascal }}({{ field | to_cs_type }} {{ field.name | to_camel }})
 	{
 		return dataTable.GetDataList("{{ field.name | to_pascal }}", (object){{ field.name | to_camel }});
@@ -103,3 +103,4 @@ public partial class {{ message.name }} : IUnique<long>
 	{{- end }}
 }
 {{- end }}
+

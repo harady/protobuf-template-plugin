@@ -74,3 +74,4 @@ public partial class AbilityData : IUnique<long>
 	}
 	#endregion
 }
+

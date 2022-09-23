@@ -74,3 +74,4 @@ public partial class EventScheduleTermData : IUnique<long>
 	}
 	#endregion
 }
+

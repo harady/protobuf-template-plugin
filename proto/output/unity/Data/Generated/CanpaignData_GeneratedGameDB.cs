@@ -74,3 +74,4 @@ public partial class CanpaignData : IUnique<long>
 	}
 	#endregion
 }
+

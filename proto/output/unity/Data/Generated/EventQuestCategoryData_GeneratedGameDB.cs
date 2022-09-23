@@ -74,3 +74,4 @@ public partial class EventQuestCategoryData : IUnique<long>
 	}
 	#endregion
 }
+

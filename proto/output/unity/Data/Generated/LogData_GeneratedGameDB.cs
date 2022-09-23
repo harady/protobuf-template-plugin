@@ -74,3 +74,4 @@ public partial class LogData : IUnique<long>
 	}
 	#endregion
 }
+

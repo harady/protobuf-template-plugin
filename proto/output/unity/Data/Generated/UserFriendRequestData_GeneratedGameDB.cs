@@ -55,8 +55,8 @@ public partial class UserFriendRequestData : IUnique<long>
 	private static void SetupUserFriendRequestDataTableIndexGenerated(DataTable<long, UserFriendRequestData> targetDataTable)
 	{
 		targetDataTable.CreateUniqueIndex("Id", aData => (object)aData.id);
-		targetDataTable.CreateIndex("UserFriendRequestData", aData => (object)aData.userFriendRequestData);
-		targetDataTable.CreateIndex("UserFriendRequestData", aData => (object)aData.userFriendRequestData);
+		targetDataTable.CreateIndex("SenderUserId", aData => (object)aData.senderUserId);
+		targetDataTable.CreateIndex("TargetUserId", aData => (object)aData.targetUserId);
 	}
 	#endregion
 	#region DataTableUniqueIndex(Id)
@@ -75,16 +75,17 @@ public partial class UserFriendRequestData : IUnique<long>
 		dataTable.DeleteByKey("Id", (object)id);
 	}
 	#endregion
-	#region DataTableIndex (UserFriendRequestData)
+	#region DataTableIndex (SenderUserId)
 	public static List<UserFriendRequestData> GetDataListBySenderUserId(long senderUserId)
 	{
 		return dataTable.GetDataList("SenderUserId", (object)senderUserId);
 	}
 	#endregion
-	#region DataTableIndex (UserFriendRequestData)
+	#region DataTableIndex (TargetUserId)
 	public static List<UserFriendRequestData> GetDataListByTargetUserId(long targetUserId)
 	{
 		return dataTable.GetDataList("TargetUserId", (object)targetUserId);
 	}
 	#endregion
 }
+

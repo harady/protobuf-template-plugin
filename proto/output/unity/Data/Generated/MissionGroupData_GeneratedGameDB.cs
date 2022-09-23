@@ -55,7 +55,7 @@ public partial class MissionGroupData : IUnique<long>
 	private static void SetupMissionGroupDataTableIndexGenerated(DataTable<long, MissionGroupData> targetDataTable)
 	{
 		targetDataTable.CreateUniqueIndex("Id", aData => (object)aData.id);
-		targetDataTable.CreateIndex("MissionGroupData", aData => (object)aData.missionGroupData);
+		targetDataTable.CreateIndex("Type", aData => (object)aData.type);
 	}
 	#endregion
 	#region DataTableUniqueIndex(Id)
@@ -74,10 +74,11 @@ public partial class MissionGroupData : IUnique<long>
 		dataTable.DeleteByKey("Id", (object)id);
 	}
 	#endregion
-	#region DataTableIndex (MissionGroupData)
+	#region DataTableIndex (Type)
 	public static List<MissionGroupData> GetDataListByType(MissionGroupType type)
 	{
 		return dataTable.GetDataList("Type", (object)type);
 	}
 	#endregion
 }
+

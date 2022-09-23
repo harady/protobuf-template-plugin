@@ -74,3 +74,4 @@ public partial class VersionData : IUnique<long>
 	}
 	#endregion
 }
+

@@ -74,3 +74,4 @@ public partial class AdviceData : IUnique<long>
 	}
 	#endregion
 }
+
