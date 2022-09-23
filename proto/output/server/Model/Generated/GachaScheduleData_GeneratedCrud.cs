@@ -8,14 +8,13 @@ using MongoDB.Driver;
 
 namespace AwsDotnetCsharp
 {
-
 	public partial class GachaScheduleData : IUnique<long>
 	{
 		private static bool isMaster => true;
 
 		private static IMongoCollection<GachaScheduleData> _collection = null;
 		private static IMongoCollection<GachaScheduleData> collection
-			=> _collection ?? (_collection = mongoDatabase.GetCollection<GachaScheduleData>("GachaScheduleDatas"));
+			=> _collection ?? (_collection = mongoDatabase.GetCollection<GachaScheduleData>("gacha_schedules"));
 
 		public static IClientSessionHandle sessionHandle
 			=> MongoSessionManager.sessionHandle;
@@ -52,7 +51,6 @@ namespace AwsDotnetCsharp
 					new ReplaceOptions { IsUpsert = true });
 			bool result = replaceOneResult.IsAcknowledged && (replaceOneResult.ModifiedCount > 0);
 			Console.WriteLine($"GachaScheduleData#DbSetData {sw.Elapsed.TotalSeconds}[秒]");
-			if (result) { userUpdateCache.GachaScheduleDataTableUpdate.Upsert(data); }
 			return result;
 		}
 
@@ -75,7 +73,6 @@ namespace AwsDotnetCsharp
 					new BulkWriteOptions());
 			Console.WriteLine($"GachaScheduleData#DbSetDataList {sw.Elapsed.TotalSeconds}[秒]");
 			var result = requestResult.RequestCount == requestResult.ProcessedRequests.Count;
-			if (result) { userUpdateCache.GachaScheduleDataTableUpdate.Upsert(dataList); }
 			return result;
 		}
 		#endregion
@@ -90,7 +87,6 @@ namespace AwsDotnetCsharp
 					aData => aData.id == id);
 			Console.WriteLine($"GachaScheduleData#DbDeleteDataById {sw.Elapsed.TotalSeconds}[秒]");
 			var result = deleteResult.IsAcknowledged;
-			if (result) { userUpdateCache.GachaScheduleDataTableUpdate.Delete(id); }
 			return result;
 		}
 
@@ -105,7 +101,6 @@ namespace AwsDotnetCsharp
 					aData => keySet.Contains(aData.id));
 			Console.WriteLine($"GachaScheduleData#DbDeleteDataByIds {sw.Elapsed.TotalSeconds}[秒]");
 			var result = deleteResult.IsAcknowledged;
-			if (result) { userUpdateCache.GachaScheduleDataTableUpdate.Delete(ids); }
 			return result;
 		}
 		#endregion
@@ -152,10 +147,7 @@ namespace AwsDotnetCsharp
 		private static void SetupGachaScheduleDataTableIndexGenerated(DataTable<long, GachaScheduleData> targetDataTable)
 		{
 			targetDataTable.CreateUniqueIndex("Id", aData => (object)aData.id);
-			targetDataTable.CreateIndex("Id", aData => (object)aData.id);
 			targetDataTable.CreateIndex("GachaId", aData => (object)aData.gachaId);
-			targetDataTable.CreateIndex("OpenAt", aData => (object)aData.openAt);
-			targetDataTable.CreateIndex("CloseAt", aData => (object)aData.closeAt);
 		}
 		#endregion
 		#region DataTableUniqueIndex(Id)
@@ -165,32 +157,11 @@ namespace AwsDotnetCsharp
 			return dataTable.GetData("Id", (object)id);
 		}
 		#endregion
-		#region DataTableIndex (Id)
-		public static List<GachaScheduleData> GetDataListById(
-			long id)
-		{
-			return dataTable.GetDataList("Id", (object)id);
-		}
-		#endregion
 		#region DataTableIndex (GachaId)
 		public static List<GachaScheduleData> GetDataListByGachaId(
 			long gachaId)
 		{
 			return dataTable.GetDataList("GachaId", (object)gachaId);
-		}
-		#endregion
-		#region DataTableIndex (OpenAt)
-		public static List<GachaScheduleData> GetDataListByOpenAt(
-			long openAt)
-		{
-			return dataTable.GetDataList("OpenAt", (object)openAt);
-		}
-		#endregion
-		#region DataTableIndex (CloseAt)
-		public static List<GachaScheduleData> GetDataListByCloseAt(
-			long closeAt)
-		{
-			return dataTable.GetDataList("CloseAt", (object)closeAt);
 		}
 		#endregion
 	}

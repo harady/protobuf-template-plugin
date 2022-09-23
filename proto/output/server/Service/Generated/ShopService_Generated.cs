@@ -131,22 +131,6 @@ namespace AwsDotnetCsharp
 	}
 
 	[JsonObject(MemberSerialization.OptIn)]
-	public partial class ShopPurchaseGooglePlayRequest : APIRequest
-	{
-		[JsonProperty("shop_item_id")]
-		public long shopItemId { get; set; }
-		[JsonProperty("signed_data")]
-		public string signedData { get; set; }
-		[JsonProperty("signature")]
-		public string signature { get; set; }
-	}
-
-	[JsonObject(MemberSerialization.OptIn)]
-	public partial class ShopPurchaseGooglePlayResponse : APIRequest
-	{
-	}
-
-	[JsonObject(MemberSerialization.OptIn)]
 	public partial class ShopPurchaseAppStoreRequest : APIRequest
 	{
 		[JsonProperty("shop_item_id")]
@@ -156,7 +140,7 @@ namespace AwsDotnetCsharp
 	}
 
 	[JsonObject(MemberSerialization.OptIn)]
-	public partial class ShopPurchaseAppStoreResponse : APIRequest
+	public partial class ShopPurchaseAppStoreResponse : APIResponse
 	{
 	}
 
@@ -168,7 +152,23 @@ namespace AwsDotnetCsharp
 	}
 
 	[JsonObject(MemberSerialization.OptIn)]
-	public partial class ShopPurchaseDebugResponse : APIRequest
+	public partial class ShopPurchaseDebugResponse : APIResponse
+	{
+	}
+
+	[JsonObject(MemberSerialization.OptIn)]
+	public partial class ShopPurchaseGooglePlayRequest : APIRequest
+	{
+		[JsonProperty("shop_item_id")]
+		public long shopItemId { get; set; }
+		[JsonProperty("signed_data")]
+		public string signedData { get; set; }
+		[JsonProperty("signature")]
+		public string signature { get; set; }
+	}
+
+	[JsonObject(MemberSerialization.OptIn)]
+	public partial class ShopPurchaseGooglePlayResponse : APIResponse
 	{
 	}
 }

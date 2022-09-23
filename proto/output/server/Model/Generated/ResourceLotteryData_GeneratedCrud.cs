@@ -8,14 +8,13 @@ using MongoDB.Driver;
 
 namespace AwsDotnetCsharp
 {
-
 	public partial class ResourceLotteryData : IUnique<long>
 	{
 		private static bool isMaster => true;
 
 		private static IMongoCollection<ResourceLotteryData> _collection = null;
 		private static IMongoCollection<ResourceLotteryData> collection
-			=> _collection ?? (_collection = mongoDatabase.GetCollection<ResourceLotteryData>("ResourceLotteryDatas"));
+			=> _collection ?? (_collection = mongoDatabase.GetCollection<ResourceLotteryData>("resource_lotterys"));
 
 		public static IClientSessionHandle sessionHandle
 			=> MongoSessionManager.sessionHandle;
@@ -52,7 +51,6 @@ namespace AwsDotnetCsharp
 					new ReplaceOptions { IsUpsert = true });
 			bool result = replaceOneResult.IsAcknowledged && (replaceOneResult.ModifiedCount > 0);
 			Console.WriteLine($"ResourceLotteryData#DbSetData {sw.Elapsed.TotalSeconds}[秒]");
-			if (result) { userUpdateCache.ResourceLotteryDataTableUpdate.Upsert(data); }
 			return result;
 		}
 
@@ -75,7 +73,6 @@ namespace AwsDotnetCsharp
 					new BulkWriteOptions());
 			Console.WriteLine($"ResourceLotteryData#DbSetDataList {sw.Elapsed.TotalSeconds}[秒]");
 			var result = requestResult.RequestCount == requestResult.ProcessedRequests.Count;
-			if (result) { userUpdateCache.ResourceLotteryDataTableUpdate.Upsert(dataList); }
 			return result;
 		}
 		#endregion
@@ -90,7 +87,6 @@ namespace AwsDotnetCsharp
 					aData => aData.id == id);
 			Console.WriteLine($"ResourceLotteryData#DbDeleteDataById {sw.Elapsed.TotalSeconds}[秒]");
 			var result = deleteResult.IsAcknowledged;
-			if (result) { userUpdateCache.ResourceLotteryDataTableUpdate.Delete(id); }
 			return result;
 		}
 
@@ -105,7 +101,6 @@ namespace AwsDotnetCsharp
 					aData => keySet.Contains(aData.id));
 			Console.WriteLine($"ResourceLotteryData#DbDeleteDataByIds {sw.Elapsed.TotalSeconds}[秒]");
 			var result = deleteResult.IsAcknowledged;
-			if (result) { userUpdateCache.ResourceLotteryDataTableUpdate.Delete(ids); }
 			return result;
 		}
 		#endregion
@@ -152,9 +147,6 @@ namespace AwsDotnetCsharp
 		private static void SetupResourceLotteryDataTableIndexGenerated(DataTable<long, ResourceLotteryData> targetDataTable)
 		{
 			targetDataTable.CreateUniqueIndex("Id", aData => (object)aData.id);
-			targetDataTable.CreateIndex("Id", aData => (object)aData.id);
-			targetDataTable.CreateIndex("Name", aData => (object)aData.name);
-			targetDataTable.CreateIndex("HasEmpty", aData => (object)aData.hasEmpty);
 		}
 		#endregion
 		#region DataTableUniqueIndex(Id)
@@ -162,27 +154,6 @@ namespace AwsDotnetCsharp
 			long id)
 		{
 			return dataTable.GetData("Id", (object)id);
-		}
-		#endregion
-		#region DataTableIndex (Id)
-		public static List<ResourceLotteryData> GetDataListById(
-			long id)
-		{
-			return dataTable.GetDataList("Id", (object)id);
-		}
-		#endregion
-		#region DataTableIndex (Name)
-		public static List<ResourceLotteryData> GetDataListByName(
-			string name)
-		{
-			return dataTable.GetDataList("Name", (object)name);
-		}
-		#endregion
-		#region DataTableIndex (HasEmpty)
-		public static List<ResourceLotteryData> GetDataListByHasEmpty(
-			bool hasEmpty)
-		{
-			return dataTable.GetDataList("HasEmpty", (object)hasEmpty);
 		}
 		#endregion
 	}

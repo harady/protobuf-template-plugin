@@ -8,14 +8,13 @@ using MongoDB.Driver;
 
 namespace AwsDotnetCsharp
 {
-
 	public partial class UnitEvolutionData : IUnique<long>
 	{
 		private static bool isMaster => true;
 
 		private static IMongoCollection<UnitEvolutionData> _collection = null;
 		private static IMongoCollection<UnitEvolutionData> collection
-			=> _collection ?? (_collection = mongoDatabase.GetCollection<UnitEvolutionData>("UnitEvolutionDatas"));
+			=> _collection ?? (_collection = mongoDatabase.GetCollection<UnitEvolutionData>("unit_evolutions"));
 
 		public static IClientSessionHandle sessionHandle
 			=> MongoSessionManager.sessionHandle;
@@ -52,7 +51,6 @@ namespace AwsDotnetCsharp
 					new ReplaceOptions { IsUpsert = true });
 			bool result = replaceOneResult.IsAcknowledged && (replaceOneResult.ModifiedCount > 0);
 			Console.WriteLine($"UnitEvolutionData#DbSetData {sw.Elapsed.TotalSeconds}[秒]");
-			if (result) { userUpdateCache.UnitEvolutionDataTableUpdate.Upsert(data); }
 			return result;
 		}
 
@@ -75,7 +73,6 @@ namespace AwsDotnetCsharp
 					new BulkWriteOptions());
 			Console.WriteLine($"UnitEvolutionData#DbSetDataList {sw.Elapsed.TotalSeconds}[秒]");
 			var result = requestResult.RequestCount == requestResult.ProcessedRequests.Count;
-			if (result) { userUpdateCache.UnitEvolutionDataTableUpdate.Upsert(dataList); }
 			return result;
 		}
 		#endregion
@@ -90,7 +87,6 @@ namespace AwsDotnetCsharp
 					aData => aData.id == id);
 			Console.WriteLine($"UnitEvolutionData#DbDeleteDataById {sw.Elapsed.TotalSeconds}[秒]");
 			var result = deleteResult.IsAcknowledged;
-			if (result) { userUpdateCache.UnitEvolutionDataTableUpdate.Delete(id); }
 			return result;
 		}
 
@@ -105,7 +101,6 @@ namespace AwsDotnetCsharp
 					aData => keySet.Contains(aData.id));
 			Console.WriteLine($"UnitEvolutionData#DbDeleteDataByIds {sw.Elapsed.TotalSeconds}[秒]");
 			var result = deleteResult.IsAcknowledged;
-			if (result) { userUpdateCache.UnitEvolutionDataTableUpdate.Delete(ids); }
 			return result;
 		}
 		#endregion
@@ -152,12 +147,7 @@ namespace AwsDotnetCsharp
 		private static void SetupUnitEvolutionDataTableIndexGenerated(DataTable<long, UnitEvolutionData> targetDataTable)
 		{
 			targetDataTable.CreateUniqueIndex("Id", aData => (object)aData.id);
-			targetDataTable.CreateIndex("Id", aData => (object)aData.id);
-			targetDataTable.CreateIndex("Name", aData => (object)aData.name);
-			targetDataTable.CreateIndex("Type", aData => (object)aData.type);
 			targetDataTable.CreateIndex("BaseUnitId", aData => (object)aData.baseUnitId);
-			targetDataTable.CreateIndex("ResultUnitId", aData => (object)aData.resultUnitId);
-			targetDataTable.CreateIndex("CostResourceSetId", aData => (object)aData.costResourceSetId);
 		}
 		#endregion
 		#region DataTableUniqueIndex(Id)
@@ -167,46 +157,11 @@ namespace AwsDotnetCsharp
 			return dataTable.GetData("Id", (object)id);
 		}
 		#endregion
-		#region DataTableIndex (Id)
-		public static List<UnitEvolutionData> GetDataListById(
-			long id)
-		{
-			return dataTable.GetDataList("Id", (object)id);
-		}
-		#endregion
-		#region DataTableIndex (Name)
-		public static List<UnitEvolutionData> GetDataListByName(
-			string name)
-		{
-			return dataTable.GetDataList("Name", (object)name);
-		}
-		#endregion
-		#region DataTableIndex (Type)
-		public static List<UnitEvolutionData> GetDataListByType(
-			UnitEvolutionType type)
-		{
-			return dataTable.GetDataList("Type", (object)type);
-		}
-		#endregion
 		#region DataTableIndex (BaseUnitId)
 		public static List<UnitEvolutionData> GetDataListByBaseUnitId(
 			long baseUnitId)
 		{
 			return dataTable.GetDataList("BaseUnitId", (object)baseUnitId);
-		}
-		#endregion
-		#region DataTableIndex (ResultUnitId)
-		public static List<UnitEvolutionData> GetDataListByResultUnitId(
-			long resultUnitId)
-		{
-			return dataTable.GetDataList("ResultUnitId", (object)resultUnitId);
-		}
-		#endregion
-		#region DataTableIndex (CostResourceSetId)
-		public static List<UnitEvolutionData> GetDataListByCostResourceSetId(
-			long costResourceSetId)
-		{
-			return dataTable.GetDataList("CostResourceSetId", (object)costResourceSetId);
 		}
 		#endregion
 	}

@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
@@ -99,8 +99,8 @@ public partial class UnitData : AbstractData
 	[DataMember(Name = "salePrice")]
 	public long salePrice { get; set; }
 
-	[DataMember(Name = "baseexp")]
-	public long baseexp { get; set; }
+	[DataMember(Name = "baseExp")]
+	public long baseExp { get; set; }
 
 	public UnitData Clone() {
 		var result = new UnitData();
@@ -135,7 +135,7 @@ public partial class UnitData : AbstractData
 		result.ability5Id = ability5Id;
 		result.equipmentSlotCount = equipmentSlotCount;
 		result.salePrice = salePrice;
-		result.baseexp = baseexp;
+		result.baseExp = baseExp;
 		return result;
 	}
 

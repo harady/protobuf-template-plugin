@@ -1,4 +1,4 @@
-//GENERATED CODE, DO NOT EDIT !
+﻿//GENERATED CODE, DO NOT EDIT !
 using System;
 using System.Collections.Generic;
 using Newtonsoft.Json;
@@ -131,7 +131,7 @@ public partial class OperationService : AbstractApiService
 		Action<OperationUpdateMasterVersionResponse> onSuccess,
 		Action<ErrorResponse> onFailure = null)
 	{
-		const string Path = "api/operation/updatemasterversion";
+		const string Path = "api/operation/update_master_version";
 		request.SetupCommon();
 		var apiRequest = new APIRequest(Path, request);
 		// リクエストを送信.
@@ -150,7 +150,7 @@ public partial class OperationService : AbstractApiService
 		Action<OperationUpdateEventScheduleResponse> onSuccess,
 		Action<ErrorResponse> onFailure = null)
 	{
-		const string Path = "api/operation/updateeventschedule";
+		const string Path = "api/operation/update_event_schedule";
 		request.SetupCommon();
 		var apiRequest = new APIRequest(Path, request);
 		// リクエストを送信.
@@ -182,18 +182,6 @@ public partial class OperationTestResponse : APIResponse
 	public string message { get; set; }
 }
 
-public partial class OperationUpdateMasterVersionRequest : CommonRequest
-{
-	[JsonProperty("message")]
-	public string message { get; set; }
-}
-
-public partial class OperationUpdateMasterVersionResponse : APIResponse
-{
-	[JsonProperty("message")]
-	public string message { get; set; }
-}
-
 public partial class OperationUpdateEventScheduleRequest : CommonRequest
 {
 	[JsonProperty("message")]
@@ -201,6 +189,18 @@ public partial class OperationUpdateEventScheduleRequest : CommonRequest
 }
 
 public partial class OperationUpdateEventScheduleResponse : APIResponse
+{
+	[JsonProperty("message")]
+	public string message { get; set; }
+}
+
+public partial class OperationUpdateMasterVersionRequest : CommonRequest
+{
+	[JsonProperty("message")]
+	public string message { get; set; }
+}
+
+public partial class OperationUpdateMasterVersionResponse : APIResponse
 {
 	[JsonProperty("message")]
 	public string message { get; set; }

@@ -131,6 +131,18 @@ namespace AwsDotnetCsharp
 	}
 
 	[JsonObject(MemberSerialization.OptIn)]
+	public partial class BackupRemoveTokenRequest : APIRequest
+	{
+		[JsonProperty("backup_type")]
+		public BackupType backupType { get; set; }
+	}
+
+	[JsonObject(MemberSerialization.OptIn)]
+	public partial class BackupRemoveTokenResponse : APIResponse
+	{
+	}
+
+	[JsonObject(MemberSerialization.OptIn)]
 	public partial class BackupSaveTokenRequest : APIRequest
 	{
 		[JsonProperty("backup_type")]
@@ -140,19 +152,7 @@ namespace AwsDotnetCsharp
 	}
 
 	[JsonObject(MemberSerialization.OptIn)]
-	public partial class BackupSaveTokenResponse : APIRequest
-	{
-	}
-
-	[JsonObject(MemberSerialization.OptIn)]
-	public partial class BackupRemoveTokenRequest : APIRequest
-	{
-		[JsonProperty("backup_type")]
-		public BackupType backupType { get; set; }
-	}
-
-	[JsonObject(MemberSerialization.OptIn)]
-	public partial class BackupRemoveTokenResponse : APIRequest
+	public partial class BackupSaveTokenResponse : APIResponse
 	{
 	}
 
@@ -166,7 +166,7 @@ namespace AwsDotnetCsharp
 	}
 
 	[JsonObject(MemberSerialization.OptIn)]
-	public partial class BackupTransferResponse : APIRequest
+	public partial class BackupTransferResponse : APIResponse
 	{
 		[JsonProperty("token")]
 		public string token { get; set; }

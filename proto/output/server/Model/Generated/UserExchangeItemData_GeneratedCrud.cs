@@ -8,14 +8,13 @@ using MongoDB.Driver;
 
 namespace AwsDotnetCsharp
 {
-
 	public partial class UserExchangeItemData : IUnique<long>
 	{
-		private static bool isMaster => true;
+		private static bool isMaster => false;
 
 		private static IMongoCollection<UserExchangeItemData> _collection = null;
 		private static IMongoCollection<UserExchangeItemData> collection
-			=> _collection ?? (_collection = mongoDatabase.GetCollection<UserExchangeItemData>("UserExchangeItemDatas"));
+			=> _collection ?? (_collection = mongoDatabase.GetCollection<UserExchangeItemData>("user_exchange_items"));
 
 		public static IClientSessionHandle sessionHandle
 			=> MongoSessionManager.sessionHandle;
@@ -52,7 +51,7 @@ namespace AwsDotnetCsharp
 					new ReplaceOptions { IsUpsert = true });
 			bool result = replaceOneResult.IsAcknowledged && (replaceOneResult.ModifiedCount > 0);
 			Console.WriteLine($"UserExchangeItemData#DbSetData {sw.Elapsed.TotalSeconds}[秒]");
-			if (result) { userUpdateCache.UserExchangeItemDataTableUpdate.Upsert(data); }
+			if (result) { userUpdateCache.userExchangeItemTableUpdate.Upsert(data); }
 			return result;
 		}
 
@@ -75,11 +74,57 @@ namespace AwsDotnetCsharp
 					new BulkWriteOptions());
 			Console.WriteLine($"UserExchangeItemData#DbSetDataList {sw.Elapsed.TotalSeconds}[秒]");
 			var result = requestResult.RequestCount == requestResult.ProcessedRequests.Count;
-			if (result) { userUpdateCache.UserExchangeItemDataTableUpdate.Upsert(dataList); }
+			if (result) { userUpdateCache.userExchangeItemTableUpdate.Upsert(dataList); }
 			return result;
 		}
 		#endregion
-		#region MongoDb
+		#region DataTableSetupIndex
+		public static async Task DbSetupIndex()
+		{
+			var builder = Builders<UserExchangeItemData>.IndexKeys;
+			await DbSetupOneIndex(builder.Ascending(aData => aData.userId));
+			await DbSetupOneIndex(builder.Ascending(aData => aData.exchangeItemId));
+		}
+
+		public static async Task DbSetupOneIndex(
+			IndexKeysDefinition<UserExchangeItemData> indexKeys)
+		{
+			var indexModel = new CreateIndexModel<UserExchangeItemData>(indexKeys);
+			await collection.Indexes
+				.CreateOneAsync(
+					sessionHandle,
+					indexModel);
+		}
+		#endregion
+		#region MongoDbUniqueIndex(Id)
+		public static async Task<UserExchangeItemData> DbGetDataById(
+			long id)
+		{
+			var sw = Stopwatch.StartNew();
+			var cacheKey = "UserExchangeItemData/GetDataById_" + id;
+			var result = await collection
+				.Find(
+					sessionHandle,
+					aData => aData.id == id)
+				.FirstOrDefaultAsync();
+			Console.WriteLine($"UserExchangeItemData#DbGetDataById {sw.Elapsed.TotalSeconds}[秒]");
+			return result;
+		}
+
+		public static async Task<List<UserExchangeItemData>> DbGetDataListInIds(
+			IEnumerable<long> ids)
+		{
+			var sw = Stopwatch.StartNew();
+			var filter = Builders<UserExchangeItemData>.Filter.In(aData => aData.id, ids);
+			var result = await collection
+				.Find(
+					sessionHandle,
+					filter)
+				.ToListAsync();
+			Console.WriteLine($"UserExchangeItemData#DbGetDataListInIds {sw.Elapsed.TotalSeconds}[秒]");
+			return result;
+		}
+
 		public static async Task<bool> DbDeleteDataById(
 			long id)
 		{
@@ -90,7 +135,7 @@ namespace AwsDotnetCsharp
 					aData => aData.id == id);
 			Console.WriteLine($"UserExchangeItemData#DbDeleteDataById {sw.Elapsed.TotalSeconds}[秒]");
 			var result = deleteResult.IsAcknowledged;
-			if (result) { userUpdateCache.UserExchangeItemDataTableUpdate.Delete(id); }
+			if (result) { userUpdateCache.userExchangeItemTableUpdate.Delete(id); }
 			return result;
 		}
 
@@ -105,100 +150,141 @@ namespace AwsDotnetCsharp
 					aData => keySet.Contains(aData.id));
 			Console.WriteLine($"UserExchangeItemData#DbDeleteDataByIds {sw.Elapsed.TotalSeconds}[秒]");
 			var result = deleteResult.IsAcknowledged;
-			if (result) { userUpdateCache.UserExchangeItemDataTableUpdate.Delete(ids); }
+			if (result) { userUpdateCache.userExchangeItemTableUpdate.Delete(ids); }
 			return result;
 		}
 		#endregion
-		#region NullObject
-		public static UserExchangeItemData Null => NullObjectContainer.Get<UserExchangeItemData>();
-	
-		public bool isNull => this == Null;
-		#endregion
-		#region GameDbWrapper(DataTable)
-		public static DataTable<long, UserExchangeItemData> dataTable {
-			get {
-				DataTable<long, UserExchangeItemData> result;
-				if (GameDb.TableExists<long, UserExchangeItemData>()) {
-					result = GameDb.From<long, UserExchangeItemData>();
-				} else {
-					result = GameDb.CreateTable<long, UserExchangeItemData>();
-					SetupUserExchangeItemDataTableIndexGenerated(result);
-					SetupUserExchangeItemDataTableIndex(result);
-				}
-				return result;
-			}
-		}
-
-		public static int Count => dataTable.Count;
-
-		public static List<UserExchangeItemData> GetDataList()
-		{
-			return dataTable.dataList;
-		}
-
-		public static void SetDataList(IEnumerable<UserExchangeItemData> dataList)
-		{
-			Clear();
-			dataTable.InsertRange(dataList);
-		}
-
-		public static void Clear()
-		{
-			dataTable.DeleteAll();
-		}
-
-		static partial void SetupUserExchangeItemDataTableIndex(DataTable<long, UserExchangeItemData> targetDataTable);
-
-		private static void SetupUserExchangeItemDataTableIndexGenerated(DataTable<long, UserExchangeItemData> targetDataTable)
-		{
-			targetDataTable.CreateUniqueIndex("Id", aData => (object)aData.id);
-			targetDataTable.CreateIndex("Id", aData => (object)aData.id);
-			targetDataTable.CreateIndex("UserId", aData => (object)aData.userId);
-			targetDataTable.CreateIndex("ExchangeItemId", aData => (object)aData.exchangeItemId);
-			targetDataTable.CreateIndex("ExchangeScheduleId", aData => (object)aData.exchangeScheduleId);
-			targetDataTable.CreateIndex("ExchangedCount", aData => (object)aData.exchangedCount);
-		}
-		#endregion
-		#region DataTableUniqueIndex(Id)
-		public static UserExchangeItemData GetDataById(
-			long id)
-		{
-			return dataTable.GetData("Id", (object)id);
-		}
-		#endregion
-		#region DataTableIndex (Id)
-		public static List<UserExchangeItemData> GetDataListById(
-			long id)
-		{
-			return dataTable.GetDataList("Id", (object)id);
-		}
-		#endregion
-		#region DataTableIndex (UserId)
-		public static List<UserExchangeItemData> GetDataListByUserId(
+		#region MongoDbIndex(UserId)
+		public static async Task<UserExchangeItemData> DbGetDataByUserId(
 			long userId)
 		{
-			return dataTable.GetDataList("UserId", (object)userId);
+			var sw = Stopwatch.StartNew();
+			var result = await collection
+				.Find(
+					sessionHandle,
+					aData => aData.userId == userId)
+				.FirstOrDefaultAsync();
+			Console.WriteLine($"UserExchangeItemData#DbGetDataByUserId {sw.Elapsed.TotalSeconds}[秒]");
+			return result;
+		}
+
+		public static async Task<List<UserExchangeItemData>> DbGetDataListByUserId(
+			long userId)
+		{
+			var sw = Stopwatch.StartNew();
+			var result = await collection
+				.Find(
+					sessionHandle,
+					aData => aData.userId == userId)
+				.ToListAsync();
+			Console.WriteLine($"UserExchangeItemData#DbGetDataListByUserId {sw.Elapsed.TotalSeconds}[秒]");
+			return result;
+		}
+		
+		public static async Task<List<UserExchangeItemData>> DbGetDataListByUserIds(
+			IEnumerable<long> userIds)
+		{
+			var sw = Stopwatch.StartNew();
+			var keySet = userIds.ToHashSet();
+			var result = await collection
+				.Find(
+					sessionHandle,
+					data => keySet.Contains(data.userId))
+				.ToListAsync();
+			Console.WriteLine($"UserExchangeItemData#DbGetDataListByUserIds {sw.Elapsed.TotalSeconds}[秒]");
+			return result;
+		}
+
+		public static async Task<bool> DbDeleteDataByUserId(
+			long userId)
+		{
+			var dataList = await DbGetDataListByUserId(userId);
+			var ids = dataList.Select(data => data.id);
+			var result = await DbDeleteDataByIds(ids);
+			return result;
+		}
+
+		public static async Task<bool> DbDeleteDataByUserIds(
+			IEnumerable<long> userIds)
+		{
+			var dataList = await DbGetDataListByUserIds(userIds);
+			var ids = dataList.Select(data => data.id);
+			var result = await DbDeleteDataByIds(ids);
+			return result;
 		}
 		#endregion
-		#region DataTableIndex (ExchangeItemId)
-		public static List<UserExchangeItemData> GetDataListByExchangeItemId(
+		#region MongoDbIndex(ExchangeItemId)
+		public static async Task<UserExchangeItemData> DbGetDataByExchangeItemId(
 			long exchangeItemId)
 		{
-			return dataTable.GetDataList("ExchangeItemId", (object)exchangeItemId);
+			var sw = Stopwatch.StartNew();
+			var result = await collection
+				.Find(
+					sessionHandle,
+					aData => aData.exchangeItemId == exchangeItemId)
+				.FirstOrDefaultAsync();
+			Console.WriteLine($"UserExchangeItemData#DbGetDataByExchangeItemId {sw.Elapsed.TotalSeconds}[秒]");
+			return result;
+		}
+
+		public static async Task<List<UserExchangeItemData>> DbGetDataListByExchangeItemId(
+			long exchangeItemId)
+		{
+			var sw = Stopwatch.StartNew();
+			var result = await collection
+				.Find(
+					sessionHandle,
+					aData => aData.exchangeItemId == exchangeItemId)
+				.ToListAsync();
+			Console.WriteLine($"UserExchangeItemData#DbGetDataListByExchangeItemId {sw.Elapsed.TotalSeconds}[秒]");
+			return result;
+		}
+		
+		public static async Task<List<UserExchangeItemData>> DbGetDataListByExchangeItemIds(
+			IEnumerable<long> exchangeItemIds)
+		{
+			var sw = Stopwatch.StartNew();
+			var keySet = exchangeItemIds.ToHashSet();
+			var result = await collection
+				.Find(
+					sessionHandle,
+					data => keySet.Contains(data.exchangeItemId))
+				.ToListAsync();
+			Console.WriteLine($"UserExchangeItemData#DbGetDataListByExchangeItemIds {sw.Elapsed.TotalSeconds}[秒]");
+			return result;
+		}
+
+		public static async Task<bool> DbDeleteDataByExchangeItemId(
+			long exchangeItemId)
+		{
+			var dataList = await DbGetDataListByExchangeItemId(exchangeItemId);
+			var ids = dataList.Select(data => data.id);
+			var result = await DbDeleteDataByIds(ids);
+			return result;
+		}
+
+		public static async Task<bool> DbDeleteDataByExchangeItemIds(
+			IEnumerable<long> exchangeItemIds)
+		{
+			var dataList = await DbGetDataListByExchangeItemIds(exchangeItemIds);
+			var ids = dataList.Select(data => data.id);
+			var result = await DbDeleteDataByIds(ids);
+			return result;
 		}
 		#endregion
-		#region DataTableIndex (ExchangeScheduleId)
-		public static List<UserExchangeItemData> GetDataListByExchangeScheduleId(
-			long exchangeScheduleId)
+		#region Methods
+		public async Task<bool> DbSave()
 		{
-			return dataTable.GetDataList("ExchangeScheduleId", (object)exchangeScheduleId);
+			if (this._id == ObjectId.Empty) {
+				var data = await DbGetDataById(this.id);
+				this._id = (data != null) ? data._id : this._id;
+			}
+			return await DbSetData(this);
 		}
-		#endregion
-		#region DataTableIndex (ExchangedCount)
-		public static List<UserExchangeItemData> GetDataListByExchangedCount(
-			long exchangedCount)
+
+		public async Task<bool> DbDelete()
 		{
-			return dataTable.GetDataList("ExchangedCount", (object)exchangedCount);
+			return await DbDeleteDataById(this.id);
 		}
 		#endregion
 	}

@@ -8,14 +8,13 @@ using MongoDB.Driver;
 
 namespace AwsDotnetCsharp
 {
-
 	public partial class AdviceData : IUnique<long>
 	{
 		private static bool isMaster => true;
 
 		private static IMongoCollection<AdviceData> _collection = null;
 		private static IMongoCollection<AdviceData> collection
-			=> _collection ?? (_collection = mongoDatabase.GetCollection<AdviceData>("AdviceDatas"));
+			=> _collection ?? (_collection = mongoDatabase.GetCollection<AdviceData>("advices"));
 
 		public static IClientSessionHandle sessionHandle
 			=> MongoSessionManager.sessionHandle;
@@ -52,7 +51,6 @@ namespace AwsDotnetCsharp
 					new ReplaceOptions { IsUpsert = true });
 			bool result = replaceOneResult.IsAcknowledged && (replaceOneResult.ModifiedCount > 0);
 			Console.WriteLine($"AdviceData#DbSetData {sw.Elapsed.TotalSeconds}[秒]");
-			if (result) { userUpdateCache.AdviceDataTableUpdate.Upsert(data); }
 			return result;
 		}
 
@@ -75,7 +73,6 @@ namespace AwsDotnetCsharp
 					new BulkWriteOptions());
 			Console.WriteLine($"AdviceData#DbSetDataList {sw.Elapsed.TotalSeconds}[秒]");
 			var result = requestResult.RequestCount == requestResult.ProcessedRequests.Count;
-			if (result) { userUpdateCache.AdviceDataTableUpdate.Upsert(dataList); }
 			return result;
 		}
 		#endregion
@@ -90,7 +87,6 @@ namespace AwsDotnetCsharp
 					aData => aData.id == id);
 			Console.WriteLine($"AdviceData#DbDeleteDataById {sw.Elapsed.TotalSeconds}[秒]");
 			var result = deleteResult.IsAcknowledged;
-			if (result) { userUpdateCache.AdviceDataTableUpdate.Delete(id); }
 			return result;
 		}
 
@@ -105,7 +101,6 @@ namespace AwsDotnetCsharp
 					aData => keySet.Contains(aData.id));
 			Console.WriteLine($"AdviceData#DbDeleteDataByIds {sw.Elapsed.TotalSeconds}[秒]");
 			var result = deleteResult.IsAcknowledged;
-			if (result) { userUpdateCache.AdviceDataTableUpdate.Delete(ids); }
 			return result;
 		}
 		#endregion
@@ -152,8 +147,6 @@ namespace AwsDotnetCsharp
 		private static void SetupAdviceDataTableIndexGenerated(DataTable<long, AdviceData> targetDataTable)
 		{
 			targetDataTable.CreateUniqueIndex("Id", aData => (object)aData.id);
-			targetDataTable.CreateIndex("Id", aData => (object)aData.id);
-			targetDataTable.CreateIndex("Message", aData => (object)aData.message);
 		}
 		#endregion
 		#region DataTableUniqueIndex(Id)
@@ -161,20 +154,6 @@ namespace AwsDotnetCsharp
 			long id)
 		{
 			return dataTable.GetData("Id", (object)id);
-		}
-		#endregion
-		#region DataTableIndex (Id)
-		public static List<AdviceData> GetDataListById(
-			long id)
-		{
-			return dataTable.GetDataList("Id", (object)id);
-		}
-		#endregion
-		#region DataTableIndex (Message)
-		public static List<AdviceData> GetDataListByMessage(
-			string message)
-		{
-			return dataTable.GetDataList("Message", (object)message);
 		}
 		#endregion
 	}

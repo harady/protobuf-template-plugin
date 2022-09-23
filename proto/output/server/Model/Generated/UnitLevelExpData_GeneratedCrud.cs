@@ -8,14 +8,13 @@ using MongoDB.Driver;
 
 namespace AwsDotnetCsharp
 {
-
 	public partial class UnitLevelExpData : IUnique<long>
 	{
 		private static bool isMaster => true;
 
 		private static IMongoCollection<UnitLevelExpData> _collection = null;
 		private static IMongoCollection<UnitLevelExpData> collection
-			=> _collection ?? (_collection = mongoDatabase.GetCollection<UnitLevelExpData>("UnitLevelExpDatas"));
+			=> _collection ?? (_collection = mongoDatabase.GetCollection<UnitLevelExpData>("unit_level_exps"));
 
 		public static IClientSessionHandle sessionHandle
 			=> MongoSessionManager.sessionHandle;
@@ -52,7 +51,6 @@ namespace AwsDotnetCsharp
 					new ReplaceOptions { IsUpsert = true });
 			bool result = replaceOneResult.IsAcknowledged && (replaceOneResult.ModifiedCount > 0);
 			Console.WriteLine($"UnitLevelExpData#DbSetData {sw.Elapsed.TotalSeconds}[秒]");
-			if (result) { userUpdateCache.UnitLevelExpDataTableUpdate.Upsert(data); }
 			return result;
 		}
 
@@ -75,7 +73,6 @@ namespace AwsDotnetCsharp
 					new BulkWriteOptions());
 			Console.WriteLine($"UnitLevelExpData#DbSetDataList {sw.Elapsed.TotalSeconds}[秒]");
 			var result = requestResult.RequestCount == requestResult.ProcessedRequests.Count;
-			if (result) { userUpdateCache.UnitLevelExpDataTableUpdate.Upsert(dataList); }
 			return result;
 		}
 		#endregion
@@ -90,7 +87,6 @@ namespace AwsDotnetCsharp
 					aData => aData.id == id);
 			Console.WriteLine($"UnitLevelExpData#DbDeleteDataById {sw.Elapsed.TotalSeconds}[秒]");
 			var result = deleteResult.IsAcknowledged;
-			if (result) { userUpdateCache.UnitLevelExpDataTableUpdate.Delete(id); }
 			return result;
 		}
 
@@ -105,7 +101,6 @@ namespace AwsDotnetCsharp
 					aData => keySet.Contains(aData.id));
 			Console.WriteLine($"UnitLevelExpData#DbDeleteDataByIds {sw.Elapsed.TotalSeconds}[秒]");
 			var result = deleteResult.IsAcknowledged;
-			if (result) { userUpdateCache.UnitLevelExpDataTableUpdate.Delete(ids); }
 			return result;
 		}
 		#endregion
@@ -152,10 +147,8 @@ namespace AwsDotnetCsharp
 		private static void SetupUnitLevelExpDataTableIndexGenerated(DataTable<long, UnitLevelExpData> targetDataTable)
 		{
 			targetDataTable.CreateUniqueIndex("Id", aData => (object)aData.id);
-			targetDataTable.CreateIndex("Id", aData => (object)aData.id);
 			targetDataTable.CreateIndex("GrowthType", aData => (object)aData.growthType);
 			targetDataTable.CreateIndex("Level", aData => (object)aData.level);
-			targetDataTable.CreateIndex("TotalExp", aData => (object)aData.totalExp);
 		}
 		#endregion
 		#region DataTableUniqueIndex(Id)
@@ -163,13 +156,6 @@ namespace AwsDotnetCsharp
 			long id)
 		{
 			return dataTable.GetData("Id", (object)id);
-		}
-		#endregion
-		#region DataTableIndex (Id)
-		public static List<UnitLevelExpData> GetDataListById(
-			long id)
-		{
-			return dataTable.GetDataList("Id", (object)id);
 		}
 		#endregion
 		#region DataTableIndex (GrowthType)
@@ -184,13 +170,6 @@ namespace AwsDotnetCsharp
 			long level)
 		{
 			return dataTable.GetDataList("Level", (object)level);
-		}
-		#endregion
-		#region DataTableIndex (TotalExp)
-		public static List<UnitLevelExpData> GetDataListByTotalExp(
-			long totalExp)
-		{
-			return dataTable.GetDataList("TotalExp", (object)totalExp);
 		}
 		#endregion
 	}

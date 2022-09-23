@@ -1,4 +1,4 @@
-//GENERATED CODE, DO NOT EDIT !
+﻿//GENERATED CODE, DO NOT EDIT !
 using System;
 using System.Collections.Generic;
 using Newtonsoft.Json;
@@ -17,7 +17,7 @@ public partial class BattleService : AbstractApiService
 		Action<BattleHelperListResponse> onSuccess,
 		Action<ErrorResponse> onFailure = null)
 	{
-		const string Path = "api/battle/helperlist";
+		const string Path = "api/battle/helper_list";
 		request.SetupCommon();
 		var apiRequest = new APIRequest(Path, request);
 		// リクエストを送信.
@@ -113,6 +113,42 @@ public partial class Services {
 		=> BattleService.instance;
 }
 #region Request/Response
+public partial class BattleClearRequest : CommonRequest
+{
+	[JsonProperty("battle_id")]
+	public long battleId { get; set; }
+	[JsonProperty("battle_result")]
+	public BattleResultData battleResult { get; set; }
+}
+
+public partial class BattleClearResponse : APIResponse
+{
+	[JsonProperty("result")]
+	public long result { get; set; }
+	[JsonProperty("battle_rewards")]
+	public BattleRewardsData battleRewards { get; set; }
+}
+
+public partial class BattleContinueRequest : CommonRequest
+{
+	[JsonProperty("battle_id")]
+	public long battleId { get; set; }
+}
+
+public partial class BattleContinueResponse : APIResponse
+{
+}
+
+public partial class BattleGiveupRequest : CommonRequest
+{
+	[JsonProperty("battle_id")]
+	public long battleId { get; set; }
+}
+
+public partial class BattleGiveupResponse : APIResponse
+{
+}
+
 public partial class BattleHelperListRequest : CommonRequest
 {
 	[JsonProperty("stage_id")]
@@ -142,41 +178,5 @@ public partial class BattleStartResponse : APIResponse
 	public long battleId { get; set; }
 	[JsonProperty("battle_client")]
 	public BattleClientData battleClient { get; set; }
-}
-
-public partial class BattleContinueRequest : CommonRequest
-{
-	[JsonProperty("battle_id")]
-	public long battleId { get; set; }
-}
-
-public partial class BattleContinueResponse : APIResponse
-{
-}
-
-public partial class BattleGiveupRequest : CommonRequest
-{
-	[JsonProperty("battle_id")]
-	public long battleId { get; set; }
-}
-
-public partial class BattleGiveupResponse : APIResponse
-{
-}
-
-public partial class BattleClearRequest : CommonRequest
-{
-	[JsonProperty("battle_id")]
-	public long battleId { get; set; }
-	[JsonProperty("battle_result")]
-	public BattleResultData battleResult { get; set; }
-}
-
-public partial class BattleClearResponse : APIResponse
-{
-	[JsonProperty("result")]
-	public long result { get; set; }
-	[JsonProperty("battle_rewards")]
-	public BattleRewardsData battleRewards { get; set; }
 }
 #endregion

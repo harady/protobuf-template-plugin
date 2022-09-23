@@ -8,14 +8,13 @@ using MongoDB.Driver;
 
 namespace AwsDotnetCsharp
 {
-
 	public partial class UserItemData : IUnique<long>
 	{
-		private static bool isMaster => true;
+		private static bool isMaster => false;
 
 		private static IMongoCollection<UserItemData> _collection = null;
 		private static IMongoCollection<UserItemData> collection
-			=> _collection ?? (_collection = mongoDatabase.GetCollection<UserItemData>("UserItemDatas"));
+			=> _collection ?? (_collection = mongoDatabase.GetCollection<UserItemData>("user_items"));
 
 		public static IClientSessionHandle sessionHandle
 			=> MongoSessionManager.sessionHandle;
@@ -52,7 +51,7 @@ namespace AwsDotnetCsharp
 					new ReplaceOptions { IsUpsert = true });
 			bool result = replaceOneResult.IsAcknowledged && (replaceOneResult.ModifiedCount > 0);
 			Console.WriteLine($"UserItemData#DbSetData {sw.Elapsed.TotalSeconds}[秒]");
-			if (result) { userUpdateCache.UserItemDataTableUpdate.Upsert(data); }
+			if (result) { userUpdateCache.userItemTableUpdate.Upsert(data); }
 			return result;
 		}
 
@@ -75,11 +74,57 @@ namespace AwsDotnetCsharp
 					new BulkWriteOptions());
 			Console.WriteLine($"UserItemData#DbSetDataList {sw.Elapsed.TotalSeconds}[秒]");
 			var result = requestResult.RequestCount == requestResult.ProcessedRequests.Count;
-			if (result) { userUpdateCache.UserItemDataTableUpdate.Upsert(dataList); }
+			if (result) { userUpdateCache.userItemTableUpdate.Upsert(dataList); }
 			return result;
 		}
 		#endregion
-		#region MongoDb
+		#region DataTableSetupIndex
+		public static async Task DbSetupIndex()
+		{
+			var builder = Builders<UserItemData>.IndexKeys;
+			await DbSetupOneIndex(builder.Ascending(aData => aData.userId));
+			await DbSetupOneIndex(builder.Ascending(aData => aData.itemId));
+		}
+
+		public static async Task DbSetupOneIndex(
+			IndexKeysDefinition<UserItemData> indexKeys)
+		{
+			var indexModel = new CreateIndexModel<UserItemData>(indexKeys);
+			await collection.Indexes
+				.CreateOneAsync(
+					sessionHandle,
+					indexModel);
+		}
+		#endregion
+		#region MongoDbUniqueIndex(Id)
+		public static async Task<UserItemData> DbGetDataById(
+			long id)
+		{
+			var sw = Stopwatch.StartNew();
+			var cacheKey = "UserItemData/GetDataById_" + id;
+			var result = await collection
+				.Find(
+					sessionHandle,
+					aData => aData.id == id)
+				.FirstOrDefaultAsync();
+			Console.WriteLine($"UserItemData#DbGetDataById {sw.Elapsed.TotalSeconds}[秒]");
+			return result;
+		}
+
+		public static async Task<List<UserItemData>> DbGetDataListInIds(
+			IEnumerable<long> ids)
+		{
+			var sw = Stopwatch.StartNew();
+			var filter = Builders<UserItemData>.Filter.In(aData => aData.id, ids);
+			var result = await collection
+				.Find(
+					sessionHandle,
+					filter)
+				.ToListAsync();
+			Console.WriteLine($"UserItemData#DbGetDataListInIds {sw.Elapsed.TotalSeconds}[秒]");
+			return result;
+		}
+
 		public static async Task<bool> DbDeleteDataById(
 			long id)
 		{
@@ -90,7 +135,7 @@ namespace AwsDotnetCsharp
 					aData => aData.id == id);
 			Console.WriteLine($"UserItemData#DbDeleteDataById {sw.Elapsed.TotalSeconds}[秒]");
 			var result = deleteResult.IsAcknowledged;
-			if (result) { userUpdateCache.UserItemDataTableUpdate.Delete(id); }
+			if (result) { userUpdateCache.userItemTableUpdate.Delete(id); }
 			return result;
 		}
 
@@ -105,92 +150,128 @@ namespace AwsDotnetCsharp
 					aData => keySet.Contains(aData.id));
 			Console.WriteLine($"UserItemData#DbDeleteDataByIds {sw.Elapsed.TotalSeconds}[秒]");
 			var result = deleteResult.IsAcknowledged;
-			if (result) { userUpdateCache.UserItemDataTableUpdate.Delete(ids); }
+			if (result) { userUpdateCache.userItemTableUpdate.Delete(ids); }
 			return result;
 		}
 		#endregion
-		#region NullObject
-		public static UserItemData Null => NullObjectContainer.Get<UserItemData>();
-	
-		public bool isNull => this == Null;
-		#endregion
-		#region GameDbWrapper(DataTable)
-		public static DataTable<long, UserItemData> dataTable {
-			get {
-				DataTable<long, UserItemData> result;
-				if (GameDb.TableExists<long, UserItemData>()) {
-					result = GameDb.From<long, UserItemData>();
-				} else {
-					result = GameDb.CreateTable<long, UserItemData>();
-					SetupUserItemDataTableIndexGenerated(result);
-					SetupUserItemDataTableIndex(result);
-				}
-				return result;
-			}
-		}
-
-		public static int Count => dataTable.Count;
-
-		public static List<UserItemData> GetDataList()
-		{
-			return dataTable.dataList;
-		}
-
-		public static void SetDataList(IEnumerable<UserItemData> dataList)
-		{
-			Clear();
-			dataTable.InsertRange(dataList);
-		}
-
-		public static void Clear()
-		{
-			dataTable.DeleteAll();
-		}
-
-		static partial void SetupUserItemDataTableIndex(DataTable<long, UserItemData> targetDataTable);
-
-		private static void SetupUserItemDataTableIndexGenerated(DataTable<long, UserItemData> targetDataTable)
-		{
-			targetDataTable.CreateUniqueIndex("Id", aData => (object)aData.id);
-			targetDataTable.CreateIndex("Id", aData => (object)aData.id);
-			targetDataTable.CreateIndex("UserId", aData => (object)aData.userId);
-			targetDataTable.CreateIndex("ItemId", aData => (object)aData.itemId);
-			targetDataTable.CreateIndex("Amount", aData => (object)aData.amount);
-		}
-		#endregion
-		#region DataTableUniqueIndex(Id)
-		public static UserItemData GetDataById(
-			long id)
-		{
-			return dataTable.GetData("Id", (object)id);
-		}
-		#endregion
-		#region DataTableIndex (Id)
-		public static List<UserItemData> GetDataListById(
-			long id)
-		{
-			return dataTable.GetDataList("Id", (object)id);
-		}
-		#endregion
-		#region DataTableIndex (UserId)
-		public static List<UserItemData> GetDataListByUserId(
+		#region MongoDbIndex(UserId)
+		public static async Task<UserItemData> DbGetDataByUserId(
 			long userId)
 		{
-			return dataTable.GetDataList("UserId", (object)userId);
+			var sw = Stopwatch.StartNew();
+			var result = await collection
+				.Find(
+					sessionHandle,
+					aData => aData.userId == userId)
+				.FirstOrDefaultAsync();
+			Console.WriteLine($"UserItemData#DbGetDataByUserId {sw.Elapsed.TotalSeconds}[秒]");
+			return result;
+		}
+
+		public static async Task<List<UserItemData>> DbGetDataListByUserId(
+			long userId)
+		{
+			var sw = Stopwatch.StartNew();
+			var result = await collection
+				.Find(
+					sessionHandle,
+					aData => aData.userId == userId)
+				.ToListAsync();
+			Console.WriteLine($"UserItemData#DbGetDataListByUserId {sw.Elapsed.TotalSeconds}[秒]");
+			return result;
+		}
+		
+		public static async Task<List<UserItemData>> DbGetDataListByUserIds(
+			IEnumerable<long> userIds)
+		{
+			var sw = Stopwatch.StartNew();
+			var keySet = userIds.ToHashSet();
+			var result = await collection
+				.Find(
+					sessionHandle,
+					data => keySet.Contains(data.userId))
+				.ToListAsync();
+			Console.WriteLine($"UserItemData#DbGetDataListByUserIds {sw.Elapsed.TotalSeconds}[秒]");
+			return result;
+		}
+
+		public static async Task<bool> DbDeleteDataByUserId(
+			long userId)
+		{
+			var dataList = await DbGetDataListByUserId(userId);
+			var ids = dataList.Select(data => data.id);
+			var result = await DbDeleteDataByIds(ids);
+			return result;
+		}
+
+		public static async Task<bool> DbDeleteDataByUserIds(
+			IEnumerable<long> userIds)
+		{
+			var dataList = await DbGetDataListByUserIds(userIds);
+			var ids = dataList.Select(data => data.id);
+			var result = await DbDeleteDataByIds(ids);
+			return result;
 		}
 		#endregion
-		#region DataTableIndex (ItemId)
-		public static List<UserItemData> GetDataListByItemId(
+		#region MongoDbUniqueIndex(ItemId)
+		public static async Task<UserItemData> DbGetDataByItemId(
 			long itemId)
 		{
-			return dataTable.GetDataList("ItemId", (object)itemId);
+			var sw = Stopwatch.StartNew();
+			var cacheKey = "UserItemData/GetDataByItemId_" + itemId;
+			var result = await collection
+				.Find(
+					sessionHandle,
+					aData => aData.itemId == itemId)
+				.FirstOrDefaultAsync();
+			Console.WriteLine($"UserItemData#DbGetDataByItemId {sw.Elapsed.TotalSeconds}[秒]");
+			return result;
+		}
+
+		public static async Task<List<UserItemData>> DbGetDataListInItemIds(
+			IEnumerable<long> itemIds)
+		{
+			var sw = Stopwatch.StartNew();
+			var filter = Builders<UserItemData>.Filter.In(aData => aData.itemId, itemIds);
+			var result = await collection
+				.Find(
+					sessionHandle,
+					filter)
+				.ToListAsync();
+			Console.WriteLine($"UserItemData#DbGetDataListInItemIds {sw.Elapsed.TotalSeconds}[秒]");
+			return result;
+		}
+
+		public static async Task<bool> DbDeleteDataByItemId(
+			long itemId)
+		{
+			var data = await DbGetDataByItemId(itemId);
+			var result = await DbDeleteDataById(data.id);
+			return result;
+		}
+
+		public static async Task<bool> DbDeleteDataByItemIds(
+			IEnumerable<long> itemIds)
+		{
+			var dataList = await DbGetDataListInItemIds(itemIds);
+			var ids = dataList.Select(data => data.id);
+			var result = await DbDeleteDataByIds(ids);
+			return result;
 		}
 		#endregion
-		#region DataTableIndex (Amount)
-		public static List<UserItemData> GetDataListByAmount(
-			long amount)
+		#region Methods
+		public async Task<bool> DbSave()
 		{
-			return dataTable.GetDataList("Amount", (object)amount);
+			if (this._id == ObjectId.Empty) {
+				var data = await DbGetDataById(this.id);
+				this._id = (data != null) ? data._id : this._id;
+			}
+			return await DbSetData(this);
+		}
+
+		public async Task<bool> DbDelete()
+		{
+			return await DbDeleteDataById(this.id);
 		}
 		#endregion
 	}
