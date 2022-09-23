@@ -8,14 +8,13 @@ using MongoDB.Driver;
 
 namespace AwsDotnetCsharp
 {
-
 	public partial class GachaData : IUnique<long>
 	{
 		private static bool isMaster => true;
 
 		private static IMongoCollection<GachaData> _collection = null;
 		private static IMongoCollection<GachaData> collection
-			=> _collection ?? (_collection = mongoDatabase.GetCollection<GachaData>("GachaDatas"));
+			=> _collection ?? (_collection = mongoDatabase.GetCollection<GachaData>("gachas"));
 
 		public static IClientSessionHandle sessionHandle
 			=> MongoSessionManager.sessionHandle;
@@ -52,7 +51,7 @@ namespace AwsDotnetCsharp
 					new ReplaceOptions { IsUpsert = true });
 			bool result = replaceOneResult.IsAcknowledged && (replaceOneResult.ModifiedCount > 0);
 			Console.WriteLine($"GachaData#DbSetData {sw.Elapsed.TotalSeconds}[秒]");
-			if (result) { userUpdateCache.GachaDataTableUpdate.Upsert(data); }
+			if (result) { userUpdateCache.gachaTableUpdate.Upsert(data); }
 			return result;
 		}
 
@@ -75,7 +74,7 @@ namespace AwsDotnetCsharp
 					new BulkWriteOptions());
 			Console.WriteLine($"GachaData#DbSetDataList {sw.Elapsed.TotalSeconds}[秒]");
 			var result = requestResult.RequestCount == requestResult.ProcessedRequests.Count;
-			if (result) { userUpdateCache.GachaDataTableUpdate.Upsert(dataList); }
+			if (result) { userUpdateCache.gachaTableUpdate.Upsert(dataList); }
 			return result;
 		}
 		#endregion
@@ -90,7 +89,7 @@ namespace AwsDotnetCsharp
 					aData => aData.id == id);
 			Console.WriteLine($"GachaData#DbDeleteDataById {sw.Elapsed.TotalSeconds}[秒]");
 			var result = deleteResult.IsAcknowledged;
-			if (result) { userUpdateCache.GachaDataTableUpdate.Delete(id); }
+			if (result) { userUpdateCache.gachaTableUpdate.Delete(id); }
 			return result;
 		}
 
@@ -105,7 +104,7 @@ namespace AwsDotnetCsharp
 					aData => keySet.Contains(aData.id));
 			Console.WriteLine($"GachaData#DbDeleteDataByIds {sw.Elapsed.TotalSeconds}[秒]");
 			var result = deleteResult.IsAcknowledged;
-			if (result) { userUpdateCache.GachaDataTableUpdate.Delete(ids); }
+			if (result) { userUpdateCache.gachaTableUpdate.Delete(ids); }
 			return result;
 		}
 		#endregion

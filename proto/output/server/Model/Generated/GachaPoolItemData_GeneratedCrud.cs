@@ -8,14 +8,13 @@ using MongoDB.Driver;
 
 namespace AwsDotnetCsharp
 {
-
 	public partial class GachaPoolItemData : IUnique<long>
 	{
 		private static bool isMaster => true;
 
 		private static IMongoCollection<GachaPoolItemData> _collection = null;
 		private static IMongoCollection<GachaPoolItemData> collection
-			=> _collection ?? (_collection = mongoDatabase.GetCollection<GachaPoolItemData>("GachaPoolItemDatas"));
+			=> _collection ?? (_collection = mongoDatabase.GetCollection<GachaPoolItemData>("gacha_pool_items"));
 
 		public static IClientSessionHandle sessionHandle
 			=> MongoSessionManager.sessionHandle;
@@ -52,7 +51,7 @@ namespace AwsDotnetCsharp
 					new ReplaceOptions { IsUpsert = true });
 			bool result = replaceOneResult.IsAcknowledged && (replaceOneResult.ModifiedCount > 0);
 			Console.WriteLine($"GachaPoolItemData#DbSetData {sw.Elapsed.TotalSeconds}[秒]");
-			if (result) { userUpdateCache.GachaPoolItemDataTableUpdate.Upsert(data); }
+			if (result) { userUpdateCache.gachaPoolItemTableUpdate.Upsert(data); }
 			return result;
 		}
 
@@ -75,7 +74,7 @@ namespace AwsDotnetCsharp
 					new BulkWriteOptions());
 			Console.WriteLine($"GachaPoolItemData#DbSetDataList {sw.Elapsed.TotalSeconds}[秒]");
 			var result = requestResult.RequestCount == requestResult.ProcessedRequests.Count;
-			if (result) { userUpdateCache.GachaPoolItemDataTableUpdate.Upsert(dataList); }
+			if (result) { userUpdateCache.gachaPoolItemTableUpdate.Upsert(dataList); }
 			return result;
 		}
 		#endregion
@@ -90,7 +89,7 @@ namespace AwsDotnetCsharp
 					aData => aData.id == id);
 			Console.WriteLine($"GachaPoolItemData#DbDeleteDataById {sw.Elapsed.TotalSeconds}[秒]");
 			var result = deleteResult.IsAcknowledged;
-			if (result) { userUpdateCache.GachaPoolItemDataTableUpdate.Delete(id); }
+			if (result) { userUpdateCache.gachaPoolItemTableUpdate.Delete(id); }
 			return result;
 		}
 
@@ -105,7 +104,7 @@ namespace AwsDotnetCsharp
 					aData => keySet.Contains(aData.id));
 			Console.WriteLine($"GachaPoolItemData#DbDeleteDataByIds {sw.Elapsed.TotalSeconds}[秒]");
 			var result = deleteResult.IsAcknowledged;
-			if (result) { userUpdateCache.GachaPoolItemDataTableUpdate.Delete(ids); }
+			if (result) { userUpdateCache.gachaPoolItemTableUpdate.Delete(ids); }
 			return result;
 		}
 		#endregion

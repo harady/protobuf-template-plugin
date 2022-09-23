@@ -8,14 +8,13 @@ using MongoDB.Driver;
 
 namespace AwsDotnetCsharp
 {
-
 	public partial class UserMissionData : IUnique<long>
 	{
 		private static bool isMaster => true;
 
 		private static IMongoCollection<UserMissionData> _collection = null;
 		private static IMongoCollection<UserMissionData> collection
-			=> _collection ?? (_collection = mongoDatabase.GetCollection<UserMissionData>("UserMissionDatas"));
+			=> _collection ?? (_collection = mongoDatabase.GetCollection<UserMissionData>("user_missions"));
 
 		public static IClientSessionHandle sessionHandle
 			=> MongoSessionManager.sessionHandle;
@@ -52,7 +51,7 @@ namespace AwsDotnetCsharp
 					new ReplaceOptions { IsUpsert = true });
 			bool result = replaceOneResult.IsAcknowledged && (replaceOneResult.ModifiedCount > 0);
 			Console.WriteLine($"UserMissionData#DbSetData {sw.Elapsed.TotalSeconds}[秒]");
-			if (result) { userUpdateCache.UserMissionDataTableUpdate.Upsert(data); }
+			if (result) { userUpdateCache.userMissionTableUpdate.Upsert(data); }
 			return result;
 		}
 
@@ -75,7 +74,7 @@ namespace AwsDotnetCsharp
 					new BulkWriteOptions());
 			Console.WriteLine($"UserMissionData#DbSetDataList {sw.Elapsed.TotalSeconds}[秒]");
 			var result = requestResult.RequestCount == requestResult.ProcessedRequests.Count;
-			if (result) { userUpdateCache.UserMissionDataTableUpdate.Upsert(dataList); }
+			if (result) { userUpdateCache.userMissionTableUpdate.Upsert(dataList); }
 			return result;
 		}
 		#endregion
@@ -90,7 +89,7 @@ namespace AwsDotnetCsharp
 					aData => aData.id == id);
 			Console.WriteLine($"UserMissionData#DbDeleteDataById {sw.Elapsed.TotalSeconds}[秒]");
 			var result = deleteResult.IsAcknowledged;
-			if (result) { userUpdateCache.UserMissionDataTableUpdate.Delete(id); }
+			if (result) { userUpdateCache.userMissionTableUpdate.Delete(id); }
 			return result;
 		}
 
@@ -105,7 +104,7 @@ namespace AwsDotnetCsharp
 					aData => keySet.Contains(aData.id));
 			Console.WriteLine($"UserMissionData#DbDeleteDataByIds {sw.Elapsed.TotalSeconds}[秒]");
 			var result = deleteResult.IsAcknowledged;
-			if (result) { userUpdateCache.UserMissionDataTableUpdate.Delete(ids); }
+			if (result) { userUpdateCache.userMissionTableUpdate.Delete(ids); }
 			return result;
 		}
 		#endregion

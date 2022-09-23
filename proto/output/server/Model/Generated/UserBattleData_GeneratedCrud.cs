@@ -8,14 +8,13 @@ using MongoDB.Driver;
 
 namespace AwsDotnetCsharp
 {
-
 	public partial class UserBattleData : IUnique<long>
 	{
 		private static bool isMaster => true;
 
 		private static IMongoCollection<UserBattleData> _collection = null;
 		private static IMongoCollection<UserBattleData> collection
-			=> _collection ?? (_collection = mongoDatabase.GetCollection<UserBattleData>("UserBattleDatas"));
+			=> _collection ?? (_collection = mongoDatabase.GetCollection<UserBattleData>("user_battles"));
 
 		public static IClientSessionHandle sessionHandle
 			=> MongoSessionManager.sessionHandle;
@@ -52,7 +51,7 @@ namespace AwsDotnetCsharp
 					new ReplaceOptions { IsUpsert = true });
 			bool result = replaceOneResult.IsAcknowledged && (replaceOneResult.ModifiedCount > 0);
 			Console.WriteLine($"UserBattleData#DbSetData {sw.Elapsed.TotalSeconds}[秒]");
-			if (result) { userUpdateCache.UserBattleDataTableUpdate.Upsert(data); }
+			if (result) { userUpdateCache.userBattleTableUpdate.Upsert(data); }
 			return result;
 		}
 
@@ -75,7 +74,7 @@ namespace AwsDotnetCsharp
 					new BulkWriteOptions());
 			Console.WriteLine($"UserBattleData#DbSetDataList {sw.Elapsed.TotalSeconds}[秒]");
 			var result = requestResult.RequestCount == requestResult.ProcessedRequests.Count;
-			if (result) { userUpdateCache.UserBattleDataTableUpdate.Upsert(dataList); }
+			if (result) { userUpdateCache.userBattleTableUpdate.Upsert(dataList); }
 			return result;
 		}
 		#endregion
@@ -90,7 +89,7 @@ namespace AwsDotnetCsharp
 					aData => aData.id == id);
 			Console.WriteLine($"UserBattleData#DbDeleteDataById {sw.Elapsed.TotalSeconds}[秒]");
 			var result = deleteResult.IsAcknowledged;
-			if (result) { userUpdateCache.UserBattleDataTableUpdate.Delete(id); }
+			if (result) { userUpdateCache.userBattleTableUpdate.Delete(id); }
 			return result;
 		}
 
@@ -105,7 +104,7 @@ namespace AwsDotnetCsharp
 					aData => keySet.Contains(aData.id));
 			Console.WriteLine($"UserBattleData#DbDeleteDataByIds {sw.Elapsed.TotalSeconds}[秒]");
 			var result = deleteResult.IsAcknowledged;
-			if (result) { userUpdateCache.UserBattleDataTableUpdate.Delete(ids); }
+			if (result) { userUpdateCache.userBattleTableUpdate.Delete(ids); }
 			return result;
 		}
 		#endregion

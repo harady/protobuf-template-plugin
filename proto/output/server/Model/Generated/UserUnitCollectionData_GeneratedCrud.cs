@@ -8,14 +8,13 @@ using MongoDB.Driver;
 
 namespace AwsDotnetCsharp
 {
-
 	public partial class UserUnitCollectionData : IUnique<long>
 	{
 		private static bool isMaster => true;
 
 		private static IMongoCollection<UserUnitCollectionData> _collection = null;
 		private static IMongoCollection<UserUnitCollectionData> collection
-			=> _collection ?? (_collection = mongoDatabase.GetCollection<UserUnitCollectionData>("UserUnitCollectionDatas"));
+			=> _collection ?? (_collection = mongoDatabase.GetCollection<UserUnitCollectionData>("user_unit_collections"));
 
 		public static IClientSessionHandle sessionHandle
 			=> MongoSessionManager.sessionHandle;
@@ -52,7 +51,7 @@ namespace AwsDotnetCsharp
 					new ReplaceOptions { IsUpsert = true });
 			bool result = replaceOneResult.IsAcknowledged && (replaceOneResult.ModifiedCount > 0);
 			Console.WriteLine($"UserUnitCollectionData#DbSetData {sw.Elapsed.TotalSeconds}[秒]");
-			if (result) { userUpdateCache.UserUnitCollectionDataTableUpdate.Upsert(data); }
+			if (result) { userUpdateCache.userUnitCollectionTableUpdate.Upsert(data); }
 			return result;
 		}
 
@@ -75,7 +74,7 @@ namespace AwsDotnetCsharp
 					new BulkWriteOptions());
 			Console.WriteLine($"UserUnitCollectionData#DbSetDataList {sw.Elapsed.TotalSeconds}[秒]");
 			var result = requestResult.RequestCount == requestResult.ProcessedRequests.Count;
-			if (result) { userUpdateCache.UserUnitCollectionDataTableUpdate.Upsert(dataList); }
+			if (result) { userUpdateCache.userUnitCollectionTableUpdate.Upsert(dataList); }
 			return result;
 		}
 		#endregion
@@ -90,7 +89,7 @@ namespace AwsDotnetCsharp
 					aData => aData.id == id);
 			Console.WriteLine($"UserUnitCollectionData#DbDeleteDataById {sw.Elapsed.TotalSeconds}[秒]");
 			var result = deleteResult.IsAcknowledged;
-			if (result) { userUpdateCache.UserUnitCollectionDataTableUpdate.Delete(id); }
+			if (result) { userUpdateCache.userUnitCollectionTableUpdate.Delete(id); }
 			return result;
 		}
 
@@ -105,7 +104,7 @@ namespace AwsDotnetCsharp
 					aData => keySet.Contains(aData.id));
 			Console.WriteLine($"UserUnitCollectionData#DbDeleteDataByIds {sw.Elapsed.TotalSeconds}[秒]");
 			var result = deleteResult.IsAcknowledged;
-			if (result) { userUpdateCache.UserUnitCollectionDataTableUpdate.Delete(ids); }
+			if (result) { userUpdateCache.userUnitCollectionTableUpdate.Delete(ids); }
 			return result;
 		}
 		#endregion

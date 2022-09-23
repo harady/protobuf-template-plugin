@@ -8,14 +8,13 @@ using MongoDB.Driver;
 
 namespace AwsDotnetCsharp
 {
-
 	public partial class UnitLevelExpData : IUnique<long>
 	{
 		private static bool isMaster => true;
 
 		private static IMongoCollection<UnitLevelExpData> _collection = null;
 		private static IMongoCollection<UnitLevelExpData> collection
-			=> _collection ?? (_collection = mongoDatabase.GetCollection<UnitLevelExpData>("UnitLevelExpDatas"));
+			=> _collection ?? (_collection = mongoDatabase.GetCollection<UnitLevelExpData>("unit_level_exps"));
 
 		public static IClientSessionHandle sessionHandle
 			=> MongoSessionManager.sessionHandle;
@@ -52,7 +51,7 @@ namespace AwsDotnetCsharp
 					new ReplaceOptions { IsUpsert = true });
 			bool result = replaceOneResult.IsAcknowledged && (replaceOneResult.ModifiedCount > 0);
 			Console.WriteLine($"UnitLevelExpData#DbSetData {sw.Elapsed.TotalSeconds}[秒]");
-			if (result) { userUpdateCache.UnitLevelExpDataTableUpdate.Upsert(data); }
+			if (result) { userUpdateCache.unitLevelExpTableUpdate.Upsert(data); }
 			return result;
 		}
 
@@ -75,7 +74,7 @@ namespace AwsDotnetCsharp
 					new BulkWriteOptions());
 			Console.WriteLine($"UnitLevelExpData#DbSetDataList {sw.Elapsed.TotalSeconds}[秒]");
 			var result = requestResult.RequestCount == requestResult.ProcessedRequests.Count;
-			if (result) { userUpdateCache.UnitLevelExpDataTableUpdate.Upsert(dataList); }
+			if (result) { userUpdateCache.unitLevelExpTableUpdate.Upsert(dataList); }
 			return result;
 		}
 		#endregion
@@ -90,7 +89,7 @@ namespace AwsDotnetCsharp
 					aData => aData.id == id);
 			Console.WriteLine($"UnitLevelExpData#DbDeleteDataById {sw.Elapsed.TotalSeconds}[秒]");
 			var result = deleteResult.IsAcknowledged;
-			if (result) { userUpdateCache.UnitLevelExpDataTableUpdate.Delete(id); }
+			if (result) { userUpdateCache.unitLevelExpTableUpdate.Delete(id); }
 			return result;
 		}
 
@@ -105,7 +104,7 @@ namespace AwsDotnetCsharp
 					aData => keySet.Contains(aData.id));
 			Console.WriteLine($"UnitLevelExpData#DbDeleteDataByIds {sw.Elapsed.TotalSeconds}[秒]");
 			var result = deleteResult.IsAcknowledged;
-			if (result) { userUpdateCache.UnitLevelExpDataTableUpdate.Delete(ids); }
+			if (result) { userUpdateCache.unitLevelExpTableUpdate.Delete(ids); }
 			return result;
 		}
 		#endregion

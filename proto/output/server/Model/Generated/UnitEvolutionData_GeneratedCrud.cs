@@ -8,14 +8,13 @@ using MongoDB.Driver;
 
 namespace AwsDotnetCsharp
 {
-
 	public partial class UnitEvolutionData : IUnique<long>
 	{
 		private static bool isMaster => true;
 
 		private static IMongoCollection<UnitEvolutionData> _collection = null;
 		private static IMongoCollection<UnitEvolutionData> collection
-			=> _collection ?? (_collection = mongoDatabase.GetCollection<UnitEvolutionData>("UnitEvolutionDatas"));
+			=> _collection ?? (_collection = mongoDatabase.GetCollection<UnitEvolutionData>("unit_evolutions"));
 
 		public static IClientSessionHandle sessionHandle
 			=> MongoSessionManager.sessionHandle;
@@ -52,7 +51,7 @@ namespace AwsDotnetCsharp
 					new ReplaceOptions { IsUpsert = true });
 			bool result = replaceOneResult.IsAcknowledged && (replaceOneResult.ModifiedCount > 0);
 			Console.WriteLine($"UnitEvolutionData#DbSetData {sw.Elapsed.TotalSeconds}[秒]");
-			if (result) { userUpdateCache.UnitEvolutionDataTableUpdate.Upsert(data); }
+			if (result) { userUpdateCache.unitEvolutionTableUpdate.Upsert(data); }
 			return result;
 		}
 
@@ -75,7 +74,7 @@ namespace AwsDotnetCsharp
 					new BulkWriteOptions());
 			Console.WriteLine($"UnitEvolutionData#DbSetDataList {sw.Elapsed.TotalSeconds}[秒]");
 			var result = requestResult.RequestCount == requestResult.ProcessedRequests.Count;
-			if (result) { userUpdateCache.UnitEvolutionDataTableUpdate.Upsert(dataList); }
+			if (result) { userUpdateCache.unitEvolutionTableUpdate.Upsert(dataList); }
 			return result;
 		}
 		#endregion
@@ -90,7 +89,7 @@ namespace AwsDotnetCsharp
 					aData => aData.id == id);
 			Console.WriteLine($"UnitEvolutionData#DbDeleteDataById {sw.Elapsed.TotalSeconds}[秒]");
 			var result = deleteResult.IsAcknowledged;
-			if (result) { userUpdateCache.UnitEvolutionDataTableUpdate.Delete(id); }
+			if (result) { userUpdateCache.unitEvolutionTableUpdate.Delete(id); }
 			return result;
 		}
 
@@ -105,7 +104,7 @@ namespace AwsDotnetCsharp
 					aData => keySet.Contains(aData.id));
 			Console.WriteLine($"UnitEvolutionData#DbDeleteDataByIds {sw.Elapsed.TotalSeconds}[秒]");
 			var result = deleteResult.IsAcknowledged;
-			if (result) { userUpdateCache.UnitEvolutionDataTableUpdate.Delete(ids); }
+			if (result) { userUpdateCache.unitEvolutionTableUpdate.Delete(ids); }
 			return result;
 		}
 		#endregion

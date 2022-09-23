@@ -8,14 +8,13 @@ using MongoDB.Driver;
 
 namespace AwsDotnetCsharp
 {
-
 	public partial class EventQuestCategoryData : IUnique<long>
 	{
 		private static bool isMaster => true;
 
 		private static IMongoCollection<EventQuestCategoryData> _collection = null;
 		private static IMongoCollection<EventQuestCategoryData> collection
-			=> _collection ?? (_collection = mongoDatabase.GetCollection<EventQuestCategoryData>("EventQuestCategoryDatas"));
+			=> _collection ?? (_collection = mongoDatabase.GetCollection<EventQuestCategoryData>("event_quest_categorys"));
 
 		public static IClientSessionHandle sessionHandle
 			=> MongoSessionManager.sessionHandle;
@@ -52,7 +51,7 @@ namespace AwsDotnetCsharp
 					new ReplaceOptions { IsUpsert = true });
 			bool result = replaceOneResult.IsAcknowledged && (replaceOneResult.ModifiedCount > 0);
 			Console.WriteLine($"EventQuestCategoryData#DbSetData {sw.Elapsed.TotalSeconds}[秒]");
-			if (result) { userUpdateCache.EventQuestCategoryDataTableUpdate.Upsert(data); }
+			if (result) { userUpdateCache.eventQuestCategoryTableUpdate.Upsert(data); }
 			return result;
 		}
 
@@ -75,7 +74,7 @@ namespace AwsDotnetCsharp
 					new BulkWriteOptions());
 			Console.WriteLine($"EventQuestCategoryData#DbSetDataList {sw.Elapsed.TotalSeconds}[秒]");
 			var result = requestResult.RequestCount == requestResult.ProcessedRequests.Count;
-			if (result) { userUpdateCache.EventQuestCategoryDataTableUpdate.Upsert(dataList); }
+			if (result) { userUpdateCache.eventQuestCategoryTableUpdate.Upsert(dataList); }
 			return result;
 		}
 		#endregion
@@ -90,7 +89,7 @@ namespace AwsDotnetCsharp
 					aData => aData.id == id);
 			Console.WriteLine($"EventQuestCategoryData#DbDeleteDataById {sw.Elapsed.TotalSeconds}[秒]");
 			var result = deleteResult.IsAcknowledged;
-			if (result) { userUpdateCache.EventQuestCategoryDataTableUpdate.Delete(id); }
+			if (result) { userUpdateCache.eventQuestCategoryTableUpdate.Delete(id); }
 			return result;
 		}
 
@@ -105,7 +104,7 @@ namespace AwsDotnetCsharp
 					aData => keySet.Contains(aData.id));
 			Console.WriteLine($"EventQuestCategoryData#DbDeleteDataByIds {sw.Elapsed.TotalSeconds}[秒]");
 			var result = deleteResult.IsAcknowledged;
-			if (result) { userUpdateCache.EventQuestCategoryDataTableUpdate.Delete(ids); }
+			if (result) { userUpdateCache.eventQuestCategoryTableUpdate.Delete(ids); }
 			return result;
 		}
 		#endregion

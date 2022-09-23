@@ -8,14 +8,13 @@ using MongoDB.Driver;
 
 namespace AwsDotnetCsharp
 {
-
 	public partial class ShopData : IUnique<long>
 	{
 		private static bool isMaster => true;
 
 		private static IMongoCollection<ShopData> _collection = null;
 		private static IMongoCollection<ShopData> collection
-			=> _collection ?? (_collection = mongoDatabase.GetCollection<ShopData>("ShopDatas"));
+			=> _collection ?? (_collection = mongoDatabase.GetCollection<ShopData>("shops"));
 
 		public static IClientSessionHandle sessionHandle
 			=> MongoSessionManager.sessionHandle;
@@ -52,7 +51,7 @@ namespace AwsDotnetCsharp
 					new ReplaceOptions { IsUpsert = true });
 			bool result = replaceOneResult.IsAcknowledged && (replaceOneResult.ModifiedCount > 0);
 			Console.WriteLine($"ShopData#DbSetData {sw.Elapsed.TotalSeconds}[秒]");
-			if (result) { userUpdateCache.ShopDataTableUpdate.Upsert(data); }
+			if (result) { userUpdateCache.shopTableUpdate.Upsert(data); }
 			return result;
 		}
 
@@ -75,7 +74,7 @@ namespace AwsDotnetCsharp
 					new BulkWriteOptions());
 			Console.WriteLine($"ShopData#DbSetDataList {sw.Elapsed.TotalSeconds}[秒]");
 			var result = requestResult.RequestCount == requestResult.ProcessedRequests.Count;
-			if (result) { userUpdateCache.ShopDataTableUpdate.Upsert(dataList); }
+			if (result) { userUpdateCache.shopTableUpdate.Upsert(dataList); }
 			return result;
 		}
 		#endregion
@@ -90,7 +89,7 @@ namespace AwsDotnetCsharp
 					aData => aData.id == id);
 			Console.WriteLine($"ShopData#DbDeleteDataById {sw.Elapsed.TotalSeconds}[秒]");
 			var result = deleteResult.IsAcknowledged;
-			if (result) { userUpdateCache.ShopDataTableUpdate.Delete(id); }
+			if (result) { userUpdateCache.shopTableUpdate.Delete(id); }
 			return result;
 		}
 
@@ -105,7 +104,7 @@ namespace AwsDotnetCsharp
 					aData => keySet.Contains(aData.id));
 			Console.WriteLine($"ShopData#DbDeleteDataByIds {sw.Elapsed.TotalSeconds}[秒]");
 			var result = deleteResult.IsAcknowledged;
-			if (result) { userUpdateCache.ShopDataTableUpdate.Delete(ids); }
+			if (result) { userUpdateCache.shopTableUpdate.Delete(ids); }
 			return result;
 		}
 		#endregion

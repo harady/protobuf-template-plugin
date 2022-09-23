@@ -8,14 +8,13 @@ using MongoDB.Driver;
 
 namespace AwsDotnetCsharp
 {
-
 	public partial class BattleInitEnemyData : IUnique<long>
 	{
 		private static bool isMaster => true;
 
 		private static IMongoCollection<BattleInitEnemyData> _collection = null;
 		private static IMongoCollection<BattleInitEnemyData> collection
-			=> _collection ?? (_collection = mongoDatabase.GetCollection<BattleInitEnemyData>("BattleInitEnemyDatas"));
+			=> _collection ?? (_collection = mongoDatabase.GetCollection<BattleInitEnemyData>("battle_init_enemys"));
 
 		public static IClientSessionHandle sessionHandle
 			=> MongoSessionManager.sessionHandle;
@@ -52,7 +51,7 @@ namespace AwsDotnetCsharp
 					new ReplaceOptions { IsUpsert = true });
 			bool result = replaceOneResult.IsAcknowledged && (replaceOneResult.ModifiedCount > 0);
 			Console.WriteLine($"BattleInitEnemyData#DbSetData {sw.Elapsed.TotalSeconds}[秒]");
-			if (result) { userUpdateCache.BattleInitEnemyDataTableUpdate.Upsert(data); }
+			if (result) { userUpdateCache.battleInitEnemyTableUpdate.Upsert(data); }
 			return result;
 		}
 
@@ -75,7 +74,7 @@ namespace AwsDotnetCsharp
 					new BulkWriteOptions());
 			Console.WriteLine($"BattleInitEnemyData#DbSetDataList {sw.Elapsed.TotalSeconds}[秒]");
 			var result = requestResult.RequestCount == requestResult.ProcessedRequests.Count;
-			if (result) { userUpdateCache.BattleInitEnemyDataTableUpdate.Upsert(dataList); }
+			if (result) { userUpdateCache.battleInitEnemyTableUpdate.Upsert(dataList); }
 			return result;
 		}
 		#endregion
@@ -90,7 +89,7 @@ namespace AwsDotnetCsharp
 					aData => aData.id == id);
 			Console.WriteLine($"BattleInitEnemyData#DbDeleteDataById {sw.Elapsed.TotalSeconds}[秒]");
 			var result = deleteResult.IsAcknowledged;
-			if (result) { userUpdateCache.BattleInitEnemyDataTableUpdate.Delete(id); }
+			if (result) { userUpdateCache.battleInitEnemyTableUpdate.Delete(id); }
 			return result;
 		}
 
@@ -105,7 +104,7 @@ namespace AwsDotnetCsharp
 					aData => keySet.Contains(aData.id));
 			Console.WriteLine($"BattleInitEnemyData#DbDeleteDataByIds {sw.Elapsed.TotalSeconds}[秒]");
 			var result = deleteResult.IsAcknowledged;
-			if (result) { userUpdateCache.BattleInitEnemyDataTableUpdate.Delete(ids); }
+			if (result) { userUpdateCache.battleInitEnemyTableUpdate.Delete(ids); }
 			return result;
 		}
 		#endregion

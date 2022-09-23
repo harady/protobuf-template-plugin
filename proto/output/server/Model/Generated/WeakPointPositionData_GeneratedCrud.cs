@@ -8,14 +8,13 @@ using MongoDB.Driver;
 
 namespace AwsDotnetCsharp
 {
-
 	public partial class WeakPointPositionData : IUnique<long>
 	{
 		private static bool isMaster => true;
 
 		private static IMongoCollection<WeakPointPositionData> _collection = null;
 		private static IMongoCollection<WeakPointPositionData> collection
-			=> _collection ?? (_collection = mongoDatabase.GetCollection<WeakPointPositionData>("WeakPointPositionDatas"));
+			=> _collection ?? (_collection = mongoDatabase.GetCollection<WeakPointPositionData>("weak_point_positions"));
 
 		public static IClientSessionHandle sessionHandle
 			=> MongoSessionManager.sessionHandle;
@@ -52,7 +51,7 @@ namespace AwsDotnetCsharp
 					new ReplaceOptions { IsUpsert = true });
 			bool result = replaceOneResult.IsAcknowledged && (replaceOneResult.ModifiedCount > 0);
 			Console.WriteLine($"WeakPointPositionData#DbSetData {sw.Elapsed.TotalSeconds}[秒]");
-			if (result) { userUpdateCache.WeakPointPositionDataTableUpdate.Upsert(data); }
+			if (result) { userUpdateCache.weakPointPositionTableUpdate.Upsert(data); }
 			return result;
 		}
 
@@ -75,7 +74,7 @@ namespace AwsDotnetCsharp
 					new BulkWriteOptions());
 			Console.WriteLine($"WeakPointPositionData#DbSetDataList {sw.Elapsed.TotalSeconds}[秒]");
 			var result = requestResult.RequestCount == requestResult.ProcessedRequests.Count;
-			if (result) { userUpdateCache.WeakPointPositionDataTableUpdate.Upsert(dataList); }
+			if (result) { userUpdateCache.weakPointPositionTableUpdate.Upsert(dataList); }
 			return result;
 		}
 		#endregion
@@ -90,7 +89,7 @@ namespace AwsDotnetCsharp
 					aData => aData.id == id);
 			Console.WriteLine($"WeakPointPositionData#DbDeleteDataById {sw.Elapsed.TotalSeconds}[秒]");
 			var result = deleteResult.IsAcknowledged;
-			if (result) { userUpdateCache.WeakPointPositionDataTableUpdate.Delete(id); }
+			if (result) { userUpdateCache.weakPointPositionTableUpdate.Delete(id); }
 			return result;
 		}
 
@@ -105,7 +104,7 @@ namespace AwsDotnetCsharp
 					aData => keySet.Contains(aData.id));
 			Console.WriteLine($"WeakPointPositionData#DbDeleteDataByIds {sw.Elapsed.TotalSeconds}[秒]");
 			var result = deleteResult.IsAcknowledged;
-			if (result) { userUpdateCache.WeakPointPositionDataTableUpdate.Delete(ids); }
+			if (result) { userUpdateCache.weakPointPositionTableUpdate.Delete(ids); }
 			return result;
 		}
 		#endregion

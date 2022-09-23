@@ -8,14 +8,13 @@ using MongoDB.Driver;
 
 namespace AwsDotnetCsharp
 {
-
 	public partial class UserItemData : IUnique<long>
 	{
 		private static bool isMaster => true;
 
 		private static IMongoCollection<UserItemData> _collection = null;
 		private static IMongoCollection<UserItemData> collection
-			=> _collection ?? (_collection = mongoDatabase.GetCollection<UserItemData>("UserItemDatas"));
+			=> _collection ?? (_collection = mongoDatabase.GetCollection<UserItemData>("user_items"));
 
 		public static IClientSessionHandle sessionHandle
 			=> MongoSessionManager.sessionHandle;
@@ -52,7 +51,7 @@ namespace AwsDotnetCsharp
 					new ReplaceOptions { IsUpsert = true });
 			bool result = replaceOneResult.IsAcknowledged && (replaceOneResult.ModifiedCount > 0);
 			Console.WriteLine($"UserItemData#DbSetData {sw.Elapsed.TotalSeconds}[秒]");
-			if (result) { userUpdateCache.UserItemDataTableUpdate.Upsert(data); }
+			if (result) { userUpdateCache.userItemTableUpdate.Upsert(data); }
 			return result;
 		}
 
@@ -75,7 +74,7 @@ namespace AwsDotnetCsharp
 					new BulkWriteOptions());
 			Console.WriteLine($"UserItemData#DbSetDataList {sw.Elapsed.TotalSeconds}[秒]");
 			var result = requestResult.RequestCount == requestResult.ProcessedRequests.Count;
-			if (result) { userUpdateCache.UserItemDataTableUpdate.Upsert(dataList); }
+			if (result) { userUpdateCache.userItemTableUpdate.Upsert(dataList); }
 			return result;
 		}
 		#endregion
@@ -90,7 +89,7 @@ namespace AwsDotnetCsharp
 					aData => aData.id == id);
 			Console.WriteLine($"UserItemData#DbDeleteDataById {sw.Elapsed.TotalSeconds}[秒]");
 			var result = deleteResult.IsAcknowledged;
-			if (result) { userUpdateCache.UserItemDataTableUpdate.Delete(id); }
+			if (result) { userUpdateCache.userItemTableUpdate.Delete(id); }
 			return result;
 		}
 
@@ -105,7 +104,7 @@ namespace AwsDotnetCsharp
 					aData => keySet.Contains(aData.id));
 			Console.WriteLine($"UserItemData#DbDeleteDataByIds {sw.Elapsed.TotalSeconds}[秒]");
 			var result = deleteResult.IsAcknowledged;
-			if (result) { userUpdateCache.UserItemDataTableUpdate.Delete(ids); }
+			if (result) { userUpdateCache.userItemTableUpdate.Delete(ids); }
 			return result;
 		}
 		#endregion

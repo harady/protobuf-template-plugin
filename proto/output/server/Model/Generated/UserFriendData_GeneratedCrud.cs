@@ -8,14 +8,13 @@ using MongoDB.Driver;
 
 namespace AwsDotnetCsharp
 {
-
 	public partial class UserFriendData : IUnique<long>
 	{
 		private static bool isMaster => true;
 
 		private static IMongoCollection<UserFriendData> _collection = null;
 		private static IMongoCollection<UserFriendData> collection
-			=> _collection ?? (_collection = mongoDatabase.GetCollection<UserFriendData>("UserFriendDatas"));
+			=> _collection ?? (_collection = mongoDatabase.GetCollection<UserFriendData>("user_friends"));
 
 		public static IClientSessionHandle sessionHandle
 			=> MongoSessionManager.sessionHandle;
@@ -52,7 +51,7 @@ namespace AwsDotnetCsharp
 					new ReplaceOptions { IsUpsert = true });
 			bool result = replaceOneResult.IsAcknowledged && (replaceOneResult.ModifiedCount > 0);
 			Console.WriteLine($"UserFriendData#DbSetData {sw.Elapsed.TotalSeconds}[秒]");
-			if (result) { userUpdateCache.UserFriendDataTableUpdate.Upsert(data); }
+			if (result) { userUpdateCache.userFriendTableUpdate.Upsert(data); }
 			return result;
 		}
 
@@ -75,7 +74,7 @@ namespace AwsDotnetCsharp
 					new BulkWriteOptions());
 			Console.WriteLine($"UserFriendData#DbSetDataList {sw.Elapsed.TotalSeconds}[秒]");
 			var result = requestResult.RequestCount == requestResult.ProcessedRequests.Count;
-			if (result) { userUpdateCache.UserFriendDataTableUpdate.Upsert(dataList); }
+			if (result) { userUpdateCache.userFriendTableUpdate.Upsert(dataList); }
 			return result;
 		}
 		#endregion
@@ -90,7 +89,7 @@ namespace AwsDotnetCsharp
 					aData => aData.id == id);
 			Console.WriteLine($"UserFriendData#DbDeleteDataById {sw.Elapsed.TotalSeconds}[秒]");
 			var result = deleteResult.IsAcknowledged;
-			if (result) { userUpdateCache.UserFriendDataTableUpdate.Delete(id); }
+			if (result) { userUpdateCache.userFriendTableUpdate.Delete(id); }
 			return result;
 		}
 
@@ -105,7 +104,7 @@ namespace AwsDotnetCsharp
 					aData => keySet.Contains(aData.id));
 			Console.WriteLine($"UserFriendData#DbDeleteDataByIds {sw.Elapsed.TotalSeconds}[秒]");
 			var result = deleteResult.IsAcknowledged;
-			if (result) { userUpdateCache.UserFriendDataTableUpdate.Delete(ids); }
+			if (result) { userUpdateCache.userFriendTableUpdate.Delete(ids); }
 			return result;
 		}
 		#endregion

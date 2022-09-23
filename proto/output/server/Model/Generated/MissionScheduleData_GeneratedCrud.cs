@@ -8,14 +8,13 @@ using MongoDB.Driver;
 
 namespace AwsDotnetCsharp
 {
-
 	public partial class MissionScheduleData : IUnique<long>
 	{
 		private static bool isMaster => true;
 
 		private static IMongoCollection<MissionScheduleData> _collection = null;
 		private static IMongoCollection<MissionScheduleData> collection
-			=> _collection ?? (_collection = mongoDatabase.GetCollection<MissionScheduleData>("MissionScheduleDatas"));
+			=> _collection ?? (_collection = mongoDatabase.GetCollection<MissionScheduleData>("mission_schedules"));
 
 		public static IClientSessionHandle sessionHandle
 			=> MongoSessionManager.sessionHandle;
@@ -52,7 +51,7 @@ namespace AwsDotnetCsharp
 					new ReplaceOptions { IsUpsert = true });
 			bool result = replaceOneResult.IsAcknowledged && (replaceOneResult.ModifiedCount > 0);
 			Console.WriteLine($"MissionScheduleData#DbSetData {sw.Elapsed.TotalSeconds}[秒]");
-			if (result) { userUpdateCache.MissionScheduleDataTableUpdate.Upsert(data); }
+			if (result) { userUpdateCache.missionScheduleTableUpdate.Upsert(data); }
 			return result;
 		}
 
@@ -75,7 +74,7 @@ namespace AwsDotnetCsharp
 					new BulkWriteOptions());
 			Console.WriteLine($"MissionScheduleData#DbSetDataList {sw.Elapsed.TotalSeconds}[秒]");
 			var result = requestResult.RequestCount == requestResult.ProcessedRequests.Count;
-			if (result) { userUpdateCache.MissionScheduleDataTableUpdate.Upsert(dataList); }
+			if (result) { userUpdateCache.missionScheduleTableUpdate.Upsert(dataList); }
 			return result;
 		}
 		#endregion
@@ -90,7 +89,7 @@ namespace AwsDotnetCsharp
 					aData => aData.id == id);
 			Console.WriteLine($"MissionScheduleData#DbDeleteDataById {sw.Elapsed.TotalSeconds}[秒]");
 			var result = deleteResult.IsAcknowledged;
-			if (result) { userUpdateCache.MissionScheduleDataTableUpdate.Delete(id); }
+			if (result) { userUpdateCache.missionScheduleTableUpdate.Delete(id); }
 			return result;
 		}
 
@@ -105,7 +104,7 @@ namespace AwsDotnetCsharp
 					aData => keySet.Contains(aData.id));
 			Console.WriteLine($"MissionScheduleData#DbDeleteDataByIds {sw.Elapsed.TotalSeconds}[秒]");
 			var result = deleteResult.IsAcknowledged;
-			if (result) { userUpdateCache.MissionScheduleDataTableUpdate.Delete(ids); }
+			if (result) { userUpdateCache.missionScheduleTableUpdate.Delete(ids); }
 			return result;
 		}
 		#endregion

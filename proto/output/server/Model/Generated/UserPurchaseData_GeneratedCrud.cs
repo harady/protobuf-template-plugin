@@ -8,14 +8,13 @@ using MongoDB.Driver;
 
 namespace AwsDotnetCsharp
 {
-
 	public partial class UserPurchaseData : IUnique<long>
 	{
 		private static bool isMaster => true;
 
 		private static IMongoCollection<UserPurchaseData> _collection = null;
 		private static IMongoCollection<UserPurchaseData> collection
-			=> _collection ?? (_collection = mongoDatabase.GetCollection<UserPurchaseData>("UserPurchaseDatas"));
+			=> _collection ?? (_collection = mongoDatabase.GetCollection<UserPurchaseData>("user_purchases"));
 
 		public static IClientSessionHandle sessionHandle
 			=> MongoSessionManager.sessionHandle;
@@ -52,7 +51,7 @@ namespace AwsDotnetCsharp
 					new ReplaceOptions { IsUpsert = true });
 			bool result = replaceOneResult.IsAcknowledged && (replaceOneResult.ModifiedCount > 0);
 			Console.WriteLine($"UserPurchaseData#DbSetData {sw.Elapsed.TotalSeconds}[秒]");
-			if (result) { userUpdateCache.UserPurchaseDataTableUpdate.Upsert(data); }
+			if (result) { userUpdateCache.userPurchaseTableUpdate.Upsert(data); }
 			return result;
 		}
 
@@ -75,7 +74,7 @@ namespace AwsDotnetCsharp
 					new BulkWriteOptions());
 			Console.WriteLine($"UserPurchaseData#DbSetDataList {sw.Elapsed.TotalSeconds}[秒]");
 			var result = requestResult.RequestCount == requestResult.ProcessedRequests.Count;
-			if (result) { userUpdateCache.UserPurchaseDataTableUpdate.Upsert(dataList); }
+			if (result) { userUpdateCache.userPurchaseTableUpdate.Upsert(dataList); }
 			return result;
 		}
 		#endregion
@@ -90,7 +89,7 @@ namespace AwsDotnetCsharp
 					aData => aData.id == id);
 			Console.WriteLine($"UserPurchaseData#DbDeleteDataById {sw.Elapsed.TotalSeconds}[秒]");
 			var result = deleteResult.IsAcknowledged;
-			if (result) { userUpdateCache.UserPurchaseDataTableUpdate.Delete(id); }
+			if (result) { userUpdateCache.userPurchaseTableUpdate.Delete(id); }
 			return result;
 		}
 
@@ -105,7 +104,7 @@ namespace AwsDotnetCsharp
 					aData => keySet.Contains(aData.id));
 			Console.WriteLine($"UserPurchaseData#DbDeleteDataByIds {sw.Elapsed.TotalSeconds}[秒]");
 			var result = deleteResult.IsAcknowledged;
-			if (result) { userUpdateCache.UserPurchaseDataTableUpdate.Delete(ids); }
+			if (result) { userUpdateCache.userPurchaseTableUpdate.Delete(ids); }
 			return result;
 		}
 		#endregion

@@ -8,14 +8,13 @@ using MongoDB.Driver;
 
 namespace AwsDotnetCsharp
 {
-
 	public partial class EventScheduleData : IUnique<long>
 	{
 		private static bool isMaster => true;
 
 		private static IMongoCollection<EventScheduleData> _collection = null;
 		private static IMongoCollection<EventScheduleData> collection
-			=> _collection ?? (_collection = mongoDatabase.GetCollection<EventScheduleData>("EventScheduleDatas"));
+			=> _collection ?? (_collection = mongoDatabase.GetCollection<EventScheduleData>("event_schedules"));
 
 		public static IClientSessionHandle sessionHandle
 			=> MongoSessionManager.sessionHandle;
@@ -52,7 +51,7 @@ namespace AwsDotnetCsharp
 					new ReplaceOptions { IsUpsert = true });
 			bool result = replaceOneResult.IsAcknowledged && (replaceOneResult.ModifiedCount > 0);
 			Console.WriteLine($"EventScheduleData#DbSetData {sw.Elapsed.TotalSeconds}[秒]");
-			if (result) { userUpdateCache.EventScheduleDataTableUpdate.Upsert(data); }
+			if (result) { userUpdateCache.eventScheduleTableUpdate.Upsert(data); }
 			return result;
 		}
 
@@ -75,7 +74,7 @@ namespace AwsDotnetCsharp
 					new BulkWriteOptions());
 			Console.WriteLine($"EventScheduleData#DbSetDataList {sw.Elapsed.TotalSeconds}[秒]");
 			var result = requestResult.RequestCount == requestResult.ProcessedRequests.Count;
-			if (result) { userUpdateCache.EventScheduleDataTableUpdate.Upsert(dataList); }
+			if (result) { userUpdateCache.eventScheduleTableUpdate.Upsert(dataList); }
 			return result;
 		}
 		#endregion
@@ -90,7 +89,7 @@ namespace AwsDotnetCsharp
 					aData => aData.id == id);
 			Console.WriteLine($"EventScheduleData#DbDeleteDataById {sw.Elapsed.TotalSeconds}[秒]");
 			var result = deleteResult.IsAcknowledged;
-			if (result) { userUpdateCache.EventScheduleDataTableUpdate.Delete(id); }
+			if (result) { userUpdateCache.eventScheduleTableUpdate.Delete(id); }
 			return result;
 		}
 
@@ -105,7 +104,7 @@ namespace AwsDotnetCsharp
 					aData => keySet.Contains(aData.id));
 			Console.WriteLine($"EventScheduleData#DbDeleteDataByIds {sw.Elapsed.TotalSeconds}[秒]");
 			var result = deleteResult.IsAcknowledged;
-			if (result) { userUpdateCache.EventScheduleDataTableUpdate.Delete(ids); }
+			if (result) { userUpdateCache.eventScheduleTableUpdate.Delete(ids); }
 			return result;
 		}
 		#endregion

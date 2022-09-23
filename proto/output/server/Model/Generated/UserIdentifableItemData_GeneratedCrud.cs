@@ -8,14 +8,13 @@ using MongoDB.Driver;
 
 namespace AwsDotnetCsharp
 {
-
 	public partial class UserIdentifableItemData : IUnique<long>
 	{
 		private static bool isMaster => true;
 
 		private static IMongoCollection<UserIdentifableItemData> _collection = null;
 		private static IMongoCollection<UserIdentifableItemData> collection
-			=> _collection ?? (_collection = mongoDatabase.GetCollection<UserIdentifableItemData>("UserIdentifableItemDatas"));
+			=> _collection ?? (_collection = mongoDatabase.GetCollection<UserIdentifableItemData>("user_identifable_items"));
 
 		public static IClientSessionHandle sessionHandle
 			=> MongoSessionManager.sessionHandle;
@@ -52,7 +51,7 @@ namespace AwsDotnetCsharp
 					new ReplaceOptions { IsUpsert = true });
 			bool result = replaceOneResult.IsAcknowledged && (replaceOneResult.ModifiedCount > 0);
 			Console.WriteLine($"UserIdentifableItemData#DbSetData {sw.Elapsed.TotalSeconds}[秒]");
-			if (result) { userUpdateCache.UserIdentifableItemDataTableUpdate.Upsert(data); }
+			if (result) { userUpdateCache.userIdentifableItemTableUpdate.Upsert(data); }
 			return result;
 		}
 
@@ -75,7 +74,7 @@ namespace AwsDotnetCsharp
 					new BulkWriteOptions());
 			Console.WriteLine($"UserIdentifableItemData#DbSetDataList {sw.Elapsed.TotalSeconds}[秒]");
 			var result = requestResult.RequestCount == requestResult.ProcessedRequests.Count;
-			if (result) { userUpdateCache.UserIdentifableItemDataTableUpdate.Upsert(dataList); }
+			if (result) { userUpdateCache.userIdentifableItemTableUpdate.Upsert(dataList); }
 			return result;
 		}
 		#endregion
@@ -90,7 +89,7 @@ namespace AwsDotnetCsharp
 					aData => aData.id == id);
 			Console.WriteLine($"UserIdentifableItemData#DbDeleteDataById {sw.Elapsed.TotalSeconds}[秒]");
 			var result = deleteResult.IsAcknowledged;
-			if (result) { userUpdateCache.UserIdentifableItemDataTableUpdate.Delete(id); }
+			if (result) { userUpdateCache.userIdentifableItemTableUpdate.Delete(id); }
 			return result;
 		}
 
@@ -105,7 +104,7 @@ namespace AwsDotnetCsharp
 					aData => keySet.Contains(aData.id));
 			Console.WriteLine($"UserIdentifableItemData#DbDeleteDataByIds {sw.Elapsed.TotalSeconds}[秒]");
 			var result = deleteResult.IsAcknowledged;
-			if (result) { userUpdateCache.UserIdentifableItemDataTableUpdate.Delete(ids); }
+			if (result) { userUpdateCache.userIdentifableItemTableUpdate.Delete(ids); }
 			return result;
 		}
 		#endregion

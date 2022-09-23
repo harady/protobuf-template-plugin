@@ -8,14 +8,13 @@ using MongoDB.Driver;
 
 namespace AwsDotnetCsharp
 {
-
 	public partial class EquipmentData : IUnique<long>
 	{
 		private static bool isMaster => true;
 
 		private static IMongoCollection<EquipmentData> _collection = null;
 		private static IMongoCollection<EquipmentData> collection
-			=> _collection ?? (_collection = mongoDatabase.GetCollection<EquipmentData>("EquipmentDatas"));
+			=> _collection ?? (_collection = mongoDatabase.GetCollection<EquipmentData>("equipments"));
 
 		public static IClientSessionHandle sessionHandle
 			=> MongoSessionManager.sessionHandle;
@@ -52,7 +51,7 @@ namespace AwsDotnetCsharp
 					new ReplaceOptions { IsUpsert = true });
 			bool result = replaceOneResult.IsAcknowledged && (replaceOneResult.ModifiedCount > 0);
 			Console.WriteLine($"EquipmentData#DbSetData {sw.Elapsed.TotalSeconds}[秒]");
-			if (result) { userUpdateCache.EquipmentDataTableUpdate.Upsert(data); }
+			if (result) { userUpdateCache.equipmentTableUpdate.Upsert(data); }
 			return result;
 		}
 
@@ -75,7 +74,7 @@ namespace AwsDotnetCsharp
 					new BulkWriteOptions());
 			Console.WriteLine($"EquipmentData#DbSetDataList {sw.Elapsed.TotalSeconds}[秒]");
 			var result = requestResult.RequestCount == requestResult.ProcessedRequests.Count;
-			if (result) { userUpdateCache.EquipmentDataTableUpdate.Upsert(dataList); }
+			if (result) { userUpdateCache.equipmentTableUpdate.Upsert(dataList); }
 			return result;
 		}
 		#endregion
@@ -90,7 +89,7 @@ namespace AwsDotnetCsharp
 					aData => aData.id == id);
 			Console.WriteLine($"EquipmentData#DbDeleteDataById {sw.Elapsed.TotalSeconds}[秒]");
 			var result = deleteResult.IsAcknowledged;
-			if (result) { userUpdateCache.EquipmentDataTableUpdate.Delete(id); }
+			if (result) { userUpdateCache.equipmentTableUpdate.Delete(id); }
 			return result;
 		}
 
@@ -105,7 +104,7 @@ namespace AwsDotnetCsharp
 					aData => keySet.Contains(aData.id));
 			Console.WriteLine($"EquipmentData#DbDeleteDataByIds {sw.Elapsed.TotalSeconds}[秒]");
 			var result = deleteResult.IsAcknowledged;
-			if (result) { userUpdateCache.EquipmentDataTableUpdate.Delete(ids); }
+			if (result) { userUpdateCache.equipmentTableUpdate.Delete(ids); }
 			return result;
 		}
 		#endregion

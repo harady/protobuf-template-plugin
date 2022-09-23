@@ -8,14 +8,13 @@ using MongoDB.Driver;
 
 namespace AwsDotnetCsharp
 {
-
 	public partial class ResourceLotteryItemData : IUnique<long>
 	{
 		private static bool isMaster => true;
 
 		private static IMongoCollection<ResourceLotteryItemData> _collection = null;
 		private static IMongoCollection<ResourceLotteryItemData> collection
-			=> _collection ?? (_collection = mongoDatabase.GetCollection<ResourceLotteryItemData>("ResourceLotteryItemDatas"));
+			=> _collection ?? (_collection = mongoDatabase.GetCollection<ResourceLotteryItemData>("resource_lottery_items"));
 
 		public static IClientSessionHandle sessionHandle
 			=> MongoSessionManager.sessionHandle;
@@ -52,7 +51,7 @@ namespace AwsDotnetCsharp
 					new ReplaceOptions { IsUpsert = true });
 			bool result = replaceOneResult.IsAcknowledged && (replaceOneResult.ModifiedCount > 0);
 			Console.WriteLine($"ResourceLotteryItemData#DbSetData {sw.Elapsed.TotalSeconds}[秒]");
-			if (result) { userUpdateCache.ResourceLotteryItemDataTableUpdate.Upsert(data); }
+			if (result) { userUpdateCache.resourceLotteryItemTableUpdate.Upsert(data); }
 			return result;
 		}
 
@@ -75,7 +74,7 @@ namespace AwsDotnetCsharp
 					new BulkWriteOptions());
 			Console.WriteLine($"ResourceLotteryItemData#DbSetDataList {sw.Elapsed.TotalSeconds}[秒]");
 			var result = requestResult.RequestCount == requestResult.ProcessedRequests.Count;
-			if (result) { userUpdateCache.ResourceLotteryItemDataTableUpdate.Upsert(dataList); }
+			if (result) { userUpdateCache.resourceLotteryItemTableUpdate.Upsert(dataList); }
 			return result;
 		}
 		#endregion
@@ -90,7 +89,7 @@ namespace AwsDotnetCsharp
 					aData => aData.id == id);
 			Console.WriteLine($"ResourceLotteryItemData#DbDeleteDataById {sw.Elapsed.TotalSeconds}[秒]");
 			var result = deleteResult.IsAcknowledged;
-			if (result) { userUpdateCache.ResourceLotteryItemDataTableUpdate.Delete(id); }
+			if (result) { userUpdateCache.resourceLotteryItemTableUpdate.Delete(id); }
 			return result;
 		}
 
@@ -105,7 +104,7 @@ namespace AwsDotnetCsharp
 					aData => keySet.Contains(aData.id));
 			Console.WriteLine($"ResourceLotteryItemData#DbDeleteDataByIds {sw.Elapsed.TotalSeconds}[秒]");
 			var result = deleteResult.IsAcknowledged;
-			if (result) { userUpdateCache.ResourceLotteryItemDataTableUpdate.Delete(ids); }
+			if (result) { userUpdateCache.resourceLotteryItemTableUpdate.Delete(ids); }
 			return result;
 		}
 		#endregion

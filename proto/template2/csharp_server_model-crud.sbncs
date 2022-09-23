@@ -8,8 +8,9 @@ using MongoDB.Driver;
 
 namespace AwsDotnetCsharp
 {
-{{ for message in file.message_type }}
-	{{- message_name_camel = message.name }}
+{{- for message in file.message_type }}
+	{{- message_name_prefix = (message.name | regex.replace "Data$" "") }}
+	{{- message_name_camel = (message_name_prefix | to_camel) }}
 	{{- has_id = (message.field[0].name == "id") }}
 	{{- is_master = true }}
 	{{- is_client_user_data = true }}
@@ -19,7 +20,7 @@ namespace AwsDotnetCsharp
 
 		private static IMongoCollection<{{ message.name }}> _collection = null;
 		private static IMongoCollection<{{ message.name }}> collection
-			=> _collection ?? (_collection = mongoDatabase.GetCollection<{{ message.name }}>("{{ message.name }}s"));
+			=> _collection ?? (_collection = mongoDatabase.GetCollection<{{ message.name }}>("{{ message_name_prefix | to_snake }}s"));
 
 		public static IClientSessionHandle sessionHandle
 			=> MongoSessionManager.sessionHandle;

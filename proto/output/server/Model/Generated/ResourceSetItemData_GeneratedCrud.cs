@@ -8,14 +8,13 @@ using MongoDB.Driver;
 
 namespace AwsDotnetCsharp
 {
-
 	public partial class ResourceSetItemData : IUnique<long>
 	{
 		private static bool isMaster => true;
 
 		private static IMongoCollection<ResourceSetItemData> _collection = null;
 		private static IMongoCollection<ResourceSetItemData> collection
-			=> _collection ?? (_collection = mongoDatabase.GetCollection<ResourceSetItemData>("ResourceSetItemDatas"));
+			=> _collection ?? (_collection = mongoDatabase.GetCollection<ResourceSetItemData>("resource_set_items"));
 
 		public static IClientSessionHandle sessionHandle
 			=> MongoSessionManager.sessionHandle;
@@ -52,7 +51,7 @@ namespace AwsDotnetCsharp
 					new ReplaceOptions { IsUpsert = true });
 			bool result = replaceOneResult.IsAcknowledged && (replaceOneResult.ModifiedCount > 0);
 			Console.WriteLine($"ResourceSetItemData#DbSetData {sw.Elapsed.TotalSeconds}[秒]");
-			if (result) { userUpdateCache.ResourceSetItemDataTableUpdate.Upsert(data); }
+			if (result) { userUpdateCache.resourceSetItemTableUpdate.Upsert(data); }
 			return result;
 		}
 
@@ -75,7 +74,7 @@ namespace AwsDotnetCsharp
 					new BulkWriteOptions());
 			Console.WriteLine($"ResourceSetItemData#DbSetDataList {sw.Elapsed.TotalSeconds}[秒]");
 			var result = requestResult.RequestCount == requestResult.ProcessedRequests.Count;
-			if (result) { userUpdateCache.ResourceSetItemDataTableUpdate.Upsert(dataList); }
+			if (result) { userUpdateCache.resourceSetItemTableUpdate.Upsert(dataList); }
 			return result;
 		}
 		#endregion
@@ -90,7 +89,7 @@ namespace AwsDotnetCsharp
 					aData => aData.id == id);
 			Console.WriteLine($"ResourceSetItemData#DbDeleteDataById {sw.Elapsed.TotalSeconds}[秒]");
 			var result = deleteResult.IsAcknowledged;
-			if (result) { userUpdateCache.ResourceSetItemDataTableUpdate.Delete(id); }
+			if (result) { userUpdateCache.resourceSetItemTableUpdate.Delete(id); }
 			return result;
 		}
 
@@ -105,7 +104,7 @@ namespace AwsDotnetCsharp
 					aData => keySet.Contains(aData.id));
 			Console.WriteLine($"ResourceSetItemData#DbDeleteDataByIds {sw.Elapsed.TotalSeconds}[秒]");
 			var result = deleteResult.IsAcknowledged;
-			if (result) { userUpdateCache.ResourceSetItemDataTableUpdate.Delete(ids); }
+			if (result) { userUpdateCache.resourceSetItemTableUpdate.Delete(ids); }
 			return result;
 		}
 		#endregion

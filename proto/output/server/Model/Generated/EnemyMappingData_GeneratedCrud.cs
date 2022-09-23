@@ -8,14 +8,13 @@ using MongoDB.Driver;
 
 namespace AwsDotnetCsharp
 {
-
 	public partial class EnemyMappingData : IUnique<long>
 	{
 		private static bool isMaster => true;
 
 		private static IMongoCollection<EnemyMappingData> _collection = null;
 		private static IMongoCollection<EnemyMappingData> collection
-			=> _collection ?? (_collection = mongoDatabase.GetCollection<EnemyMappingData>("EnemyMappingDatas"));
+			=> _collection ?? (_collection = mongoDatabase.GetCollection<EnemyMappingData>("enemy_mappings"));
 
 		public static IClientSessionHandle sessionHandle
 			=> MongoSessionManager.sessionHandle;
@@ -52,7 +51,7 @@ namespace AwsDotnetCsharp
 					new ReplaceOptions { IsUpsert = true });
 			bool result = replaceOneResult.IsAcknowledged && (replaceOneResult.ModifiedCount > 0);
 			Console.WriteLine($"EnemyMappingData#DbSetData {sw.Elapsed.TotalSeconds}[秒]");
-			if (result) { userUpdateCache.EnemyMappingDataTableUpdate.Upsert(data); }
+			if (result) { userUpdateCache.enemyMappingTableUpdate.Upsert(data); }
 			return result;
 		}
 
@@ -75,7 +74,7 @@ namespace AwsDotnetCsharp
 					new BulkWriteOptions());
 			Console.WriteLine($"EnemyMappingData#DbSetDataList {sw.Elapsed.TotalSeconds}[秒]");
 			var result = requestResult.RequestCount == requestResult.ProcessedRequests.Count;
-			if (result) { userUpdateCache.EnemyMappingDataTableUpdate.Upsert(dataList); }
+			if (result) { userUpdateCache.enemyMappingTableUpdate.Upsert(dataList); }
 			return result;
 		}
 		#endregion
@@ -90,7 +89,7 @@ namespace AwsDotnetCsharp
 					aData => aData.id == id);
 			Console.WriteLine($"EnemyMappingData#DbDeleteDataById {sw.Elapsed.TotalSeconds}[秒]");
 			var result = deleteResult.IsAcknowledged;
-			if (result) { userUpdateCache.EnemyMappingDataTableUpdate.Delete(id); }
+			if (result) { userUpdateCache.enemyMappingTableUpdate.Delete(id); }
 			return result;
 		}
 
@@ -105,7 +104,7 @@ namespace AwsDotnetCsharp
 					aData => keySet.Contains(aData.id));
 			Console.WriteLine($"EnemyMappingData#DbDeleteDataByIds {sw.Elapsed.TotalSeconds}[秒]");
 			var result = deleteResult.IsAcknowledged;
-			if (result) { userUpdateCache.EnemyMappingDataTableUpdate.Delete(ids); }
+			if (result) { userUpdateCache.enemyMappingTableUpdate.Delete(ids); }
 			return result;
 		}
 		#endregion

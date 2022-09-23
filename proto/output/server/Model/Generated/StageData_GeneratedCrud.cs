@@ -8,14 +8,13 @@ using MongoDB.Driver;
 
 namespace AwsDotnetCsharp
 {
-
 	public partial class StageData : IUnique<long>
 	{
 		private static bool isMaster => true;
 
 		private static IMongoCollection<StageData> _collection = null;
 		private static IMongoCollection<StageData> collection
-			=> _collection ?? (_collection = mongoDatabase.GetCollection<StageData>("StageDatas"));
+			=> _collection ?? (_collection = mongoDatabase.GetCollection<StageData>("stages"));
 
 		public static IClientSessionHandle sessionHandle
 			=> MongoSessionManager.sessionHandle;
@@ -52,7 +51,7 @@ namespace AwsDotnetCsharp
 					new ReplaceOptions { IsUpsert = true });
 			bool result = replaceOneResult.IsAcknowledged && (replaceOneResult.ModifiedCount > 0);
 			Console.WriteLine($"StageData#DbSetData {sw.Elapsed.TotalSeconds}[秒]");
-			if (result) { userUpdateCache.StageDataTableUpdate.Upsert(data); }
+			if (result) { userUpdateCache.stageTableUpdate.Upsert(data); }
 			return result;
 		}
 
@@ -75,7 +74,7 @@ namespace AwsDotnetCsharp
 					new BulkWriteOptions());
 			Console.WriteLine($"StageData#DbSetDataList {sw.Elapsed.TotalSeconds}[秒]");
 			var result = requestResult.RequestCount == requestResult.ProcessedRequests.Count;
-			if (result) { userUpdateCache.StageDataTableUpdate.Upsert(dataList); }
+			if (result) { userUpdateCache.stageTableUpdate.Upsert(dataList); }
 			return result;
 		}
 		#endregion
@@ -90,7 +89,7 @@ namespace AwsDotnetCsharp
 					aData => aData.id == id);
 			Console.WriteLine($"StageData#DbDeleteDataById {sw.Elapsed.TotalSeconds}[秒]");
 			var result = deleteResult.IsAcknowledged;
-			if (result) { userUpdateCache.StageDataTableUpdate.Delete(id); }
+			if (result) { userUpdateCache.stageTableUpdate.Delete(id); }
 			return result;
 		}
 
@@ -105,7 +104,7 @@ namespace AwsDotnetCsharp
 					aData => keySet.Contains(aData.id));
 			Console.WriteLine($"StageData#DbDeleteDataByIds {sw.Elapsed.TotalSeconds}[秒]");
 			var result = deleteResult.IsAcknowledged;
-			if (result) { userUpdateCache.StageDataTableUpdate.Delete(ids); }
+			if (result) { userUpdateCache.stageTableUpdate.Delete(ids); }
 			return result;
 		}
 		#endregion

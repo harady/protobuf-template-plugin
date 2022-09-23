@@ -8,14 +8,13 @@ using MongoDB.Driver;
 
 namespace AwsDotnetCsharp
 {
-
 	public partial class UserExchangeItemData : IUnique<long>
 	{
 		private static bool isMaster => true;
 
 		private static IMongoCollection<UserExchangeItemData> _collection = null;
 		private static IMongoCollection<UserExchangeItemData> collection
-			=> _collection ?? (_collection = mongoDatabase.GetCollection<UserExchangeItemData>("UserExchangeItemDatas"));
+			=> _collection ?? (_collection = mongoDatabase.GetCollection<UserExchangeItemData>("user_exchange_items"));
 
 		public static IClientSessionHandle sessionHandle
 			=> MongoSessionManager.sessionHandle;
@@ -52,7 +51,7 @@ namespace AwsDotnetCsharp
 					new ReplaceOptions { IsUpsert = true });
 			bool result = replaceOneResult.IsAcknowledged && (replaceOneResult.ModifiedCount > 0);
 			Console.WriteLine($"UserExchangeItemData#DbSetData {sw.Elapsed.TotalSeconds}[秒]");
-			if (result) { userUpdateCache.UserExchangeItemDataTableUpdate.Upsert(data); }
+			if (result) { userUpdateCache.userExchangeItemTableUpdate.Upsert(data); }
 			return result;
 		}
 
@@ -75,7 +74,7 @@ namespace AwsDotnetCsharp
 					new BulkWriteOptions());
 			Console.WriteLine($"UserExchangeItemData#DbSetDataList {sw.Elapsed.TotalSeconds}[秒]");
 			var result = requestResult.RequestCount == requestResult.ProcessedRequests.Count;
-			if (result) { userUpdateCache.UserExchangeItemDataTableUpdate.Upsert(dataList); }
+			if (result) { userUpdateCache.userExchangeItemTableUpdate.Upsert(dataList); }
 			return result;
 		}
 		#endregion
@@ -90,7 +89,7 @@ namespace AwsDotnetCsharp
 					aData => aData.id == id);
 			Console.WriteLine($"UserExchangeItemData#DbDeleteDataById {sw.Elapsed.TotalSeconds}[秒]");
 			var result = deleteResult.IsAcknowledged;
-			if (result) { userUpdateCache.UserExchangeItemDataTableUpdate.Delete(id); }
+			if (result) { userUpdateCache.userExchangeItemTableUpdate.Delete(id); }
 			return result;
 		}
 
@@ -105,7 +104,7 @@ namespace AwsDotnetCsharp
 					aData => keySet.Contains(aData.id));
 			Console.WriteLine($"UserExchangeItemData#DbDeleteDataByIds {sw.Elapsed.TotalSeconds}[秒]");
 			var result = deleteResult.IsAcknowledged;
-			if (result) { userUpdateCache.UserExchangeItemDataTableUpdate.Delete(ids); }
+			if (result) { userUpdateCache.userExchangeItemTableUpdate.Delete(ids); }
 			return result;
 		}
 		#endregion
