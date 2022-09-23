@@ -1,7 +1,6 @@
 
 public enum MissionType
 {
-日本語表示確認
 	None = 0,
 	TotalLoginCount = 1,
 	TotalLuckMaxUnitCount = 2,

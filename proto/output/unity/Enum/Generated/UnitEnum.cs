@@ -1,7 +1,6 @@
 
 public enum UnitAttribute
 {
-日本語表示確認
 	None = 0,
 	Fire = 1,
 	Water = 2,
@@ -12,7 +11,6 @@ public enum UnitAttribute
 
 public enum UnitAttackType
 {
-日本語表示確認
 	None = 0,
 	Bound = 1,
 	Pierce = 2,
@@ -20,7 +18,6 @@ public enum UnitAttackType
 
 public enum UnitObtainType
 {
-日本語表示確認
 	None = 0,
 	Gacha = 1,
 	Other = 2,
@@ -28,6 +25,5 @@ public enum UnitObtainType
 
 public enum UnitEvolutionStateType
 {
-日本語表示確認
 	None = 0,
 }

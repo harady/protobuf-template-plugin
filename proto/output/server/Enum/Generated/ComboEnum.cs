@@ -1,7 +1,6 @@
 
 public enum ComboType
 {
-日本語表示確認
 	None = 0,
 	LockOnOneWayBeam = 101,
 	VerticalBeam = 102,

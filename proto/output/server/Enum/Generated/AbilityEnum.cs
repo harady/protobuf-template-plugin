@@ -1,7 +1,6 @@
 
 public enum AbilityType
 {
-日本語表示確認
 	None = 0,
 	AntiGimmickGravityFieldGuard = 1011,
 	AntiGimmickGravityFieldBreak = 1012,
@@ -60,6 +59,5 @@ public enum AbilityType
 
 public enum AbilityCategory
 {
-日本語表示確認
 	None = 0,
 }

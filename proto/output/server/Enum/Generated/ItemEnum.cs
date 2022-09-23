@@ -1,7 +1,6 @@
 
 public enum ItemCategory
 {
-日本語表示確認
 	None = 0,
 	UnitPowerup = 1,
 	UnitEvolution = 2,
@@ -12,7 +11,6 @@ public enum ItemCategory
 
 public enum ItemType
 {
-日本語表示確認
 	None = 0,
 	UnitExpUp = 101,
 	UnitHpPlusUp = 102,

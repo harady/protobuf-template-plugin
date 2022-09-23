@@ -1,7 +1,6 @@
 
 public enum QuestGroupType
 {
-日本語表示確認
 	None = 0,
 	Normal = 1,
 	Event = 2,
