@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -22,22 +22,22 @@ public partial class FriendRemoveResponse
 
 }
 
-public partial class FriendRequestRequest
-{
-
-}
-
-public partial class FriendRequestResponse
-{
-
-}
-
 public partial class FriendSearchRequest
 {
 
 }
 
 public partial class FriendSearchResponse
+{
+
+}
+
+public partial class FriendRequestRequest
+{
+
+}
+
+public partial class FriendRequestResponse
 {
 
 }

@@ -246,17 +246,27 @@ namespace AwsDotnetCsharp
 		public static async Task<bool> DbDeleteDataByBackupType(
 			BackupType backupType)
 		{
-			var data = await DbGetDataByBackupType(backupType);
-			var result = await DbDeleteDataById(data.id);
+			var sw = Stopwatch.StartNew();
+			var deleteResult = await collection
+				.DeleteOneAsync(
+					sessionHandle,
+					aData => aData.backupType == backupType);
+			Console.WriteLine($"UserBackupData#DbDeleteDataByBackupType {sw.Elapsed.TotalSeconds}[秒]");
+			var result = deleteResult.IsAcknowledged;
 			return result;
 		}
 
 		public static async Task<bool> DbDeleteDataByBackupTypes(
 			IEnumerable<BackupType> backupTypes)
 		{
-			var dataList = await DbGetDataListInBackupTypes(backupTypes);
-			var ids = dataList.Select(data => data.id);
-			var result = await DbDeleteDataByIds(ids);
+			var sw = Stopwatch.StartNew();
+			var keySet = backupTypes.ToHashSet();
+			var deleteResult = await collection
+				.DeleteManyAsync(
+					sessionHandle,
+					aData => keySet.Contains(aData.backupType));
+			Console.WriteLine($"UserBackupData#DbDeleteDataByBackupTypes {sw.Elapsed.TotalSeconds}[秒]");
+			var result = deleteResult.IsAcknowledged;
 			return result;
 		}
 		#endregion

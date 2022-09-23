@@ -1,13 +1,23 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
-public partial class BattleClearRequest
+public partial class BattleHelperListRequest
 {
 
 }
 
-public partial class BattleClearResponse
+public partial class BattleHelperListResponse
+{
+
+}
+
+public partial class BattleStartRequest
+{
+
+}
+
+public partial class BattleStartResponse
 {
 
 }
@@ -32,22 +42,12 @@ public partial class BattleGiveupResponse
 
 }
 
-public partial class BattleHelperListRequest
+public partial class BattleClearRequest
 {
 
 }
 
-public partial class BattleHelperListResponse
-{
-
-}
-
-public partial class BattleStartRequest
-{
-
-}
-
-public partial class BattleStartResponse
+public partial class BattleClearResponse
 {
 
 }
