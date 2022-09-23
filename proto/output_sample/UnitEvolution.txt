@@ -3,26 +3,38 @@ message.name:UnitEvolutionData
   field.name:id
     field | to_cs_type:long
     field.type:Int64
+    field.type_name:
+    field.label:Optional
     field | is_repeated:false
   field.name:name
     field | to_cs_type:string
     field.type:String
+    field.type_name:
+    field.label:Optional
     field | is_repeated:false
   field.name:type
     field | to_cs_type:UnitEvolutionType
     field.type:Enum
+    field.type_name:.monstershot.UnitEvolutionType
+    field.label:Optional
     field | is_repeated:false
   field.name:base_unit_id
     field | to_cs_type:long
     field.type:Int64
+    field.type_name:
+    field.label:Optional
     field | is_repeated:false
   field.name:result_unit_id
     field | to_cs_type:long
     field.type:Int64
+    field.type_name:
+    field.label:Optional
     field | is_repeated:false
   field.name:cost_resource_set_id
     field | to_cs_type:long
     field.type:Int64
+    field.type_name:
+    field.label:Optional
     field | is_repeated:false
 
 ■file.service

@@ -3,46 +3,68 @@ message.name:ComboData
   field.name:id
     field | to_cs_type:long
     field.type:Int64
+    field.type_name:
+    field.label:Optional
     field | is_repeated:false
   field.name:name
     field | to_cs_type:string
     field.type:String
+    field.type_name:
+    field.label:Optional
     field | is_repeated:false
   field.name:type
     field | to_cs_type:ComboType
     field.type:Enum
+    field.type_name:.monstershot.ComboType
+    field.label:Optional
     field | is_repeated:false
   field.name:description
     field | to_cs_type:string
     field.type:String
+    field.type_name:
+    field.label:Optional
     field | is_repeated:false
   field.name:rank
     field | to_cs_type:long
     field.type:Int64
+    field.type_name:
+    field.label:Optional
     field | is_repeated:false
   field.name:base_attack
     field | to_cs_type:long
     field.type:Int64
+    field.type_name:
+    field.label:Optional
     field | is_repeated:false
   field.name:max_attack
     field | to_cs_type:long
     field.type:Int64
+    field.type_name:
+    field.label:Optional
     field | is_repeated:false
   field.name:param_a
     field | to_cs_type:long
     field.type:Int64
+    field.type_name:
+    field.label:Optional
     field | is_repeated:false
   field.name:param_b
     field | to_cs_type:long
     field.type:Int64
+    field.type_name:
+    field.label:Optional
     field | is_repeated:false
   field.name:param_c
     field | to_cs_type:long
     field.type:Int64
+    field.type_name:
+    field.label:Optional
     field | is_repeated:false
   field.name:icon_id
     field | to_cs_type:long
     field.type:Int64
+    field.type_name:
+    field.label:Optional
     field | is_repeated:false
 
 ■file.service

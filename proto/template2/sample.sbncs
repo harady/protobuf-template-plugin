@@ -5,6 +5,15 @@ message.name:{{ message.name }}
   field.name:{{ field.name }}
     field | to_cs_type:{{ field | to_cs_type }}
     field.type:{{ field.type }}
+    field.type_name:{{ field.type_name }}
+    field.label:{{ field.label }}
+    field | is_repeated:{{ field | is_repeated }}
+{{- end }}
+{{- for field in message.extension }}
+  field.name:{{ field.name }}
+    field | to_cs_type:{{ field | to_cs_type }}
+    field.type:{{ field.type }}
+    field.type_name:{{ field.type_name }}
     field | is_repeated:{{ field | is_repeated }}
 {{- end }}
 {{ end }}

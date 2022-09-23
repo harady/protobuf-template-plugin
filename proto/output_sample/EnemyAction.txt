@@ -3,54 +3,80 @@ message.name:EnemyActionData
   field.name:id
     field | to_cs_type:long
     field.type:Int64
+    field.type_name:
+    field.label:Optional
     field | is_repeated:false
   field.name:enemy_id
     field | to_cs_type:long
     field.type:Int64
+    field.type_name:
+    field.label:Optional
     field | is_repeated:false
   field.name:action_no
     field | to_cs_type:long
     field.type:Int64
+    field.type_name:
+    field.label:Optional
     field | is_repeated:false
   field.name:trigger_type
     field | to_cs_type:TriggerType
     field.type:Enum
+    field.type_name:.monstershot.TriggerType
+    field.label:Optional
     field | is_repeated:false
   field.name:trigger_param_a
     field | to_cs_type:long
     field.type:Int64
+    field.type_name:
+    field.label:Optional
     field | is_repeated:false
   field.name:trigger_param_b
     field | to_cs_type:long
     field.type:Int64
+    field.type_name:
+    field.label:Optional
     field | is_repeated:false
   field.name:trigger_param_c
     field | to_cs_type:long
     field.type:Int64
+    field.type_name:
+    field.label:Optional
     field | is_repeated:false
   field.name:trigger_param_d
     field | to_cs_type:long
     field.type:Int64
+    field.type_name:
+    field.label:Optional
     field | is_repeated:false
   field.name:action_type
     field | to_cs_type:ActionType
     field.type:Enum
+    field.type_name:.monstershot.ActionType
+    field.label:Optional
     field | is_repeated:false
   field.name:action_param_a
     field | to_cs_type:long
     field.type:Int64
+    field.type_name:
+    field.label:Optional
     field | is_repeated:false
   field.name:action_param_b
     field | to_cs_type:long
     field.type:Int64
+    field.type_name:
+    field.label:Optional
     field | is_repeated:false
   field.name:action_param_c
     field | to_cs_type:long
     field.type:Int64
+    field.type_name:
+    field.label:Optional
     field | is_repeated:false
   field.name:action_param_d
     field | to_cs_type:long
     field.type:Int64
+    field.type_name:
+    field.label:Optional
     field | is_repeated:false
 
 ■file.service
