@@ -36,6 +36,7 @@ namespace protoc_gen_myplugincsharp
 				//fileDesc.Service[0].Method[0].InputType
 				//fileDesc.Service[0].Method[0].OutputType;
 				//fileDesc.EnumType[0].Value
+				//fileDesc.MessageType[0].Field[0].DefaultValue
 
 				var model = new { File = fileDesc };
 				var scriptObject = new ScriptObject();
