@@ -1,6 +1,7 @@
 # encoding: utf-8
 require "active_support/inflector"
 require "fileutils"
+require "parallel"
 
 #====================================================================
 # テンプレートからコードを生成する.
@@ -129,7 +130,11 @@ class CodeGenerator
     FileUtils.mkdir_p(actual_out_dir_path)
     src_file_paths = Dir.glob(actual_src_path_pattern)
 
-    src_file_paths.each do |src_file_path|
+    # src_file_paths.each do |src_file_path|
+    #   generate_code(src_file_path: src_file_path)
+    # end
+
+    Parallel.each(src_file_paths, in_threads: 4) do |src_file_path|
       generate_code(src_file_path: src_file_path)
     end
     self
