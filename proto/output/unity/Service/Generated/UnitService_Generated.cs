@@ -123,6 +123,19 @@ public partial class UnitDeckEditResponse : APIResponse
 {
 }
 
+public partial class UnitPowerupRequest : CommonRequest
+{
+	[JsonProperty("user_unit_id")]
+	public long userUnitId { get; set; }
+	[JsonProperty("consume_resources")]
+	public List<ResourceData> consumeResources { get; set; } 
+		= new List<ResourceData>();
+}
+
+public partial class UnitPowerupResponse : APIResponse
+{
+}
+
 public partial class UnitEvolutionRequest : CommonRequest
 {
 	[JsonProperty("user_unit_id")]
@@ -138,6 +151,17 @@ public partial class UnitEvolutionResponse : APIResponse
 {
 }
 
+public partial class UnitSellRequest : CommonRequest
+{
+	[JsonProperty("user_unit_ids")]
+	public List<long> userUnitIds { get; set; } 
+		= new List<long>();
+}
+
+public partial class UnitSellResponse : APIResponse
+{
+}
+
 public partial class UnitLockRequest : CommonRequest
 {
 	[JsonProperty("user_unit_id")]
@@ -147,30 +171,6 @@ public partial class UnitLockRequest : CommonRequest
 }
 
 public partial class UnitLockResponse : APIResponse
-{
-}
-
-public partial class UnitPowerupRequest : CommonRequest
-{
-	[JsonProperty("user_unit_id")]
-	public long userUnitId { get; set; }
-	[JsonProperty("consume_resources")]
-	public List<ResourceData> consumeResources { get; set; } 
-		= new List<ResourceData>();
-}
-
-public partial class UnitPowerupResponse : APIResponse
-{
-}
-
-public partial class UnitSellRequest : CommonRequest
-{
-	[JsonProperty("user_unit_ids")]
-	public List<long> userUnitIds { get; set; } 
-		= new List<long>();
-}
-
-public partial class UnitSellResponse : APIResponse
 {
 }
 #endregion

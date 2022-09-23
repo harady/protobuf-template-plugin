@@ -1,4 +1,4 @@
-■file.message_type
+﻿■file.message_type
 {{- for message in file.message_type }}
 message.name:{{ message.name }}
 {{- for field in message.field }}
