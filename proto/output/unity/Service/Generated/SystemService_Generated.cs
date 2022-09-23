@@ -2,7 +2,7 @@
 using System;
 using System.Collections.Generic;
 using Newtonsoft.Json;
-
+日本語表示確認
 
 public partial class SystemService : AbstractApiService
 {

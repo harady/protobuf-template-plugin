@@ -2,6 +2,7 @@
 {{- for enum in file.enum_type }}
 public enum {{ enum.name }}
 {
+日本語表示確認
 {{- for value in enum.value }}
 	{{ value.name | regex.replace ("^" + enum.name) "" }} = {{ value.number }},
 {{- end }}

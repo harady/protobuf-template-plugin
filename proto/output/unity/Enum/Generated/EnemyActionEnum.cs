@@ -1,6 +1,7 @@
 
 public enum TriggerType
 {
+日本語表示確認
 	None = 0,
 	UnitPowerup = 1,
 	UnitEvolution = 2,
@@ -11,6 +12,7 @@ public enum TriggerType
 
 public enum ActionType
 {
+日本語表示確認
 	None = 0,
 	UnitPowerup = 1,
 	UnitEvolution = 2,

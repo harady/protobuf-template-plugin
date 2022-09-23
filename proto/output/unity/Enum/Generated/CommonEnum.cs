@@ -1,6 +1,7 @@
 
 public enum PurchasePlatformType
 {
+日本語表示確認
 	None = 0,
 	GooglePlay = 1,
 	AppleAppStore = 2,
@@ -9,6 +10,7 @@ public enum PurchasePlatformType
 
 public enum ResourceType
 {
+日本語表示確認
 	None = 0,
 	Unit = 1,
 	Item = 2,
@@ -29,6 +31,7 @@ public enum ResourceType
 
 public enum QuestDifficultyType
 {
+日本語表示確認
 	None = 0,
 	Easy = 1,
 	Normal = 2,
@@ -47,6 +50,7 @@ public enum QuestDifficultyType
 
 public enum BattleRewardType
 {
+日本語表示確認
 	None = 0,
 	Normal = 1,
 	TotalTurn = 2,
