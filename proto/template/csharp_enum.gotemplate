@@ -1,4 +1,4 @@
-{{- if gt (len .EnumTypes) 0 -}}
+﻿{{- if gt (len .EnumTypes) 0 -}}
 {{ range .EnumTypes }}
 {{- $enumTypeName := .Name }}
 public enum {{ .Name }}
