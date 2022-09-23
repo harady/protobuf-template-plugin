@@ -19,6 +19,8 @@ namespace protoc_gen_myplugincsharp
 			var paramDict = ParseParameter(request.Parameter);
 			var templatePath = (string)paramDict["template"];
 
+			var hasBom = BomChecker.HasBom(templatePath);
+			var bom = hasBom ? Encoding.UTF8.GetPreamble().ToString() : "";
 			var templateStr = File.ReadAllText(templatePath, Encoding.UTF8);
 			var template = Template.Parse(templateStr);
 
@@ -49,7 +51,7 @@ namespace protoc_gen_myplugincsharp
 				response.File.Add(
 					new CodeGeneratorResponse.Types.File() {
 						Name = filename,
-						Content = output,
+						Content = bom + output,
 					}
 				);
 			}

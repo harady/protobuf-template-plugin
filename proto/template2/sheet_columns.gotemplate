@@ -1,4 +1,4 @@
-{{- if gt (len .Messages) 0 -}}
+﻿{{- if gt (len .Messages) 0 -}}
 {{- range .Messages -}}
 ・{{ Replace .Name "Data" "" | ToSnakeCase }}s
 {{ range .Fields -}}{{ .Name | ToCamelCase }}	{{ end }}
