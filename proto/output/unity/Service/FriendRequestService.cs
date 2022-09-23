@@ -16,6 +16,7 @@ public partial class FriendRequestService
 			}
 		);
 	}
+
 	public void Accept(Action<FriendRequestAcceptResponse> onSuccess)
 	{
 		var request = new FriendRequestAcceptRequest();
@@ -26,6 +27,7 @@ public partial class FriendRequestService
 			}
 		);
 	}
+
 	public void Reject(Action<FriendRequestRejectResponse> onSuccess)
 	{
 		var request = new FriendRequestRejectRequest();
@@ -36,4 +38,5 @@ public partial class FriendRequestService
 			}
 		);
 	}
+
 }

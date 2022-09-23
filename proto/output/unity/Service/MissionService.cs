@@ -16,6 +16,7 @@ public partial class MissionService
 			}
 		);
 	}
+
 	public void Receive(Action<MissionReceiveResponse> onSuccess)
 	{
 		var request = new MissionReceiveRequest();
@@ -26,4 +27,5 @@ public partial class MissionService
 			}
 		);
 	}
+
 }

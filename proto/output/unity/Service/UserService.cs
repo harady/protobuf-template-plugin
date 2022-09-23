@@ -16,6 +16,7 @@ public partial class UserService
 			}
 		);
 	}
+
 	public void NameEdit(Action<UserNameEditResponse> onSuccess)
 	{
 		var request = new UserNameEditRequest();
@@ -26,4 +27,5 @@ public partial class UserService
 			}
 		);
 	}
+
 }

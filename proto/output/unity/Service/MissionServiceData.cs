@@ -7,18 +7,15 @@ public partial class MissionAchieveRequest
 
 }
 
-
 public partial class MissionAchieveResponse
 {
 
 }
 
-
 public partial class MissionReceiveRequest
 {
 
 }
-
 
 public partial class MissionReceiveResponse
 {

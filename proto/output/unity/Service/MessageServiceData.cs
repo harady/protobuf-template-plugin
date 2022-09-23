@@ -7,18 +7,15 @@ public partial class MessageListRequest
 
 }
 
-
 public partial class MessageListResponse
 {
 
 }
 
-
 public partial class MessageReceiveRequest
 {
 
 }
-
 
 public partial class MessageReceiveResponse
 {

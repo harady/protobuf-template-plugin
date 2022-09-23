@@ -7,7 +7,6 @@ public partial class ExchangeExchangeRequest
 
 }
 
-
 public partial class ExchangeExchangeResponse
 {
 

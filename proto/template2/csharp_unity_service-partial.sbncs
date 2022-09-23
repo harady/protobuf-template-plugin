@@ -17,6 +17,6 @@ public partial class {{ service.name }}Service
 			}
 		);
 	}
-{{- end }}
+{{ end }}
 }
 {{ end -}}

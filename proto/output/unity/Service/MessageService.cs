@@ -16,6 +16,7 @@ public partial class MessageService
 			}
 		);
 	}
+
 	public void Receive(Action<MessageReceiveResponse> onSuccess)
 	{
 		var request = new MessageReceiveRequest();
@@ -26,4 +27,5 @@ public partial class MessageService
 			}
 		);
 	}
+
 }

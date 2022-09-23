@@ -16,6 +16,7 @@ public partial class OperationService
 			}
 		);
 	}
+
 	public void Test1(Action<OperationTestResponse> onSuccess)
 	{
 		var request = new OperationTestRequest();
@@ -26,6 +27,7 @@ public partial class OperationService
 			}
 		);
 	}
+
 	public void Test2(Action<OperationTestResponse> onSuccess)
 	{
 		var request = new OperationTestRequest();
@@ -36,6 +38,7 @@ public partial class OperationService
 			}
 		);
 	}
+
 	public void Test3(Action<OperationTestResponse> onSuccess)
 	{
 		var request = new OperationTestRequest();
@@ -46,6 +49,7 @@ public partial class OperationService
 			}
 		);
 	}
+
 	public void Test4(Action<OperationTestResponse> onSuccess)
 	{
 		var request = new OperationTestRequest();
@@ -56,6 +60,7 @@ public partial class OperationService
 			}
 		);
 	}
+
 	public void Test5(Action<OperationTestResponse> onSuccess)
 	{
 		var request = new OperationTestRequest();
@@ -66,6 +71,7 @@ public partial class OperationService
 			}
 		);
 	}
+
 	public void UpdateMasterVersion(Action<OperationUpdateMasterVersionResponse> onSuccess)
 	{
 		var request = new OperationUpdateMasterVersionRequest();
@@ -76,6 +82,7 @@ public partial class OperationService
 			}
 		);
 	}
+
 	public void UpdateEventSchedule(Action<OperationUpdateEventScheduleResponse> onSuccess)
 	{
 		var request = new OperationUpdateEventScheduleRequest();
@@ -86,4 +93,5 @@ public partial class OperationService
 			}
 		);
 	}
+
 }

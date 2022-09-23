@@ -16,6 +16,7 @@ public partial class SystemService
 			}
 		);
 	}
+
 	public void Signup(Action<SystemSignupResponse> onSuccess)
 	{
 		var request = new SystemSignupRequest();
@@ -26,6 +27,7 @@ public partial class SystemService
 			}
 		);
 	}
+
 	public void Login(Action<SystemLoginResponse> onSuccess)
 	{
 		var request = new SystemLoginRequest();
@@ -36,4 +38,5 @@ public partial class SystemService
 			}
 		);
 	}
+
 }

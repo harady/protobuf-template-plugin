@@ -7,18 +7,15 @@ public partial class DebugSetServerTimeRequest
 
 }
 
-
 public partial class DebugSetServerTimeResponse
 {
 
 }
 
-
 public partial class DebugTestRequest
 {
 
 }
-
 
 public partial class DebugTestResponse
 {

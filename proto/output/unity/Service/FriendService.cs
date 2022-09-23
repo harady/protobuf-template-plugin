@@ -16,6 +16,7 @@ public partial class FriendService
 			}
 		);
 	}
+
 	public void Remove(Action<FriendRemoveResponse> onSuccess)
 	{
 		var request = new FriendRemoveRequest();
@@ -26,6 +27,7 @@ public partial class FriendService
 			}
 		);
 	}
+
 	public void Search(Action<FriendSearchResponse> onSuccess)
 	{
 		var request = new FriendSearchRequest();
@@ -36,6 +38,7 @@ public partial class FriendService
 			}
 		);
 	}
+
 	public void Request(Action<FriendRequestResponse> onSuccess)
 	{
 		var request = new FriendRequestRequest();
@@ -46,4 +49,5 @@ public partial class FriendService
 			}
 		);
 	}
+
 }

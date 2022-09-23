@@ -7,7 +7,6 @@ public partial class GachaDrawRequest
 
 }
 
-
 public partial class GachaDrawResponse
 {
 
