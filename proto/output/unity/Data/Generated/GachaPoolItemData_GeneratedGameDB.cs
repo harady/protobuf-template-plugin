@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 
 public partial class GachaPoolItemData : IUnique<long>
 {
@@ -55,7 +55,6 @@ public partial class GachaPoolItemData : IUnique<long>
 	private static void SetupGachaPoolItemDataTableIndexGenerated(DataTable<long, GachaPoolItemData> targetDataTable)
 	{
 		targetDataTable.CreateUniqueIndex("Id", aData => (object)aData.id);
-		targetDataTable.CreateIndex("GachaPoolId", aData => (object)aData.gachaPoolId);
 	}
 	#endregion
 	#region DataTableUniqueIndex(Id)
@@ -74,11 +73,4 @@ public partial class GachaPoolItemData : IUnique<long>
 		dataTable.DeleteByKey("Id", (object)id);
 	}
 	#endregion
-	#region DataTableIndex (GachaPoolId)
-	public static List<GachaPoolItemData> GetDataListByGachaPoolId(long gachaPoolId)
-	{
-		return dataTable.GetDataList("GachaPoolId", (object)gachaPoolId);
-	}
-	#endregion
 }
-

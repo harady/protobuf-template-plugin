@@ -100,7 +100,7 @@ namespace AwsDotnetCsharp
 	}
 
 	[JsonObject(MemberSerialization.OptIn)]
-	public partial class MissionAchieveResponse : APIResponse
+	public partial class MissionAchieveResponse : APIRequest
 	{
 	}
 
@@ -112,7 +112,7 @@ namespace AwsDotnetCsharp
 	}
 
 	[JsonObject(MemberSerialization.OptIn)]
-	public partial class MissionReceiveResponse : APIResponse
+	public partial class MissionReceiveResponse : APIRequest
 	{
 	}
 }

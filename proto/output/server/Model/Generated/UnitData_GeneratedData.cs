@@ -138,9 +138,9 @@ namespace AwsDotnetCsharp
 		[DataMember(Name = "salePrice")]
 		public long salePrice { get; set; }
 
-		[BsonElement("baseExp")]
-		[DataMember(Name = "baseExp")]
-		public long baseExp { get; set; }
+		[BsonElement("baseexp")]
+		[DataMember(Name = "baseexp")]
+		public long baseexp { get; set; }
 
 
 		public string idNameText => GetIdNameText(id, name);

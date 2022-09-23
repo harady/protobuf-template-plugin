@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 
 public partial class ConfigData : IUnique<long>
 {
@@ -55,7 +55,6 @@ public partial class ConfigData : IUnique<long>
 	private static void SetupConfigDataTableIndexGenerated(DataTable<long, ConfigData> targetDataTable)
 	{
 		targetDataTable.CreateUniqueIndex("Id", aData => (object)aData.id);
-		targetDataTable.CreateUniqueIndex("Key", aData => (object)aData.key);
 	}
 	#endregion
 	#region DataTableUniqueIndex(Id)
@@ -74,21 +73,4 @@ public partial class ConfigData : IUnique<long>
 		dataTable.DeleteByKey("Id", (object)id);
 	}
 	#endregion
-	#region DataTableUniqueIndex(Key)
-	public static ConfigData GetDataByKey(string key)
-	{
-		return dataTable.GetData("Key", (object)key);
-	}
-
-	public static void RemoveDataByKeys(ICollection<string> keys)
-	{
-		keys.ForEach(aKey => RemoveDataByKey(aKey));
-	}
-
-	public static void RemoveDataByKey(string key)
-	{
-		dataTable.DeleteByKey("Key", (object)key);
-	}
-	#endregion
 }
-

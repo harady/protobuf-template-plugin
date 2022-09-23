@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using UnityEngine;
@@ -6,7 +6,6 @@ using UnityEngine;
 
 public partial class BackupService
 {
-
 	public void SaveToken(Action<BackupSaveTokenResponse> onSuccess)
 	{
 		var request = new BackupSaveTokenRequest();

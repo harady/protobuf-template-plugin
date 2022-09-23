@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 
 public partial class UserFriendData : IUnique<long>
 {
@@ -55,8 +55,6 @@ public partial class UserFriendData : IUnique<long>
 	private static void SetupUserFriendDataTableIndexGenerated(DataTable<long, UserFriendData> targetDataTable)
 	{
 		targetDataTable.CreateUniqueIndex("Id", aData => (object)aData.id);
-		targetDataTable.CreateIndex("UserId", aData => (object)aData.userId);
-		targetDataTable.CreateIndex("FriendUserId", aData => (object)aData.friendUserId);
 	}
 	#endregion
 	#region DataTableUniqueIndex(Id)
@@ -75,17 +73,4 @@ public partial class UserFriendData : IUnique<long>
 		dataTable.DeleteByKey("Id", (object)id);
 	}
 	#endregion
-	#region DataTableIndex (UserId)
-	public static List<UserFriendData> GetDataListByUserId(long userId)
-	{
-		return dataTable.GetDataList("UserId", (object)userId);
-	}
-	#endregion
-	#region DataTableIndex (FriendUserId)
-	public static List<UserFriendData> GetDataListByFriendUserId(long friendUserId)
-	{
-		return dataTable.GetDataList("FriendUserId", (object)friendUserId);
-	}
-	#endregion
 }
-

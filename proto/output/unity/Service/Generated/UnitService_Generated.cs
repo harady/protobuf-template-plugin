@@ -1,4 +1,4 @@
-﻿//GENERATED CODE, DO NOT EDIT !
+//GENERATED CODE, DO NOT EDIT !
 using System;
 using System.Collections.Generic;
 using Newtonsoft.Json;
@@ -17,7 +17,7 @@ public partial class UnitService : AbstractApiService
 		Action<UnitDeckEditResponse> onSuccess,
 		Action<ErrorResponse> onFailure = null)
 	{
-		const string Path = "api/unit/deck_edit";
+		const string Path = "api/unit/deckedit";
 		request.SetupCommon();
 		var apiRequest = new APIRequest(Path, request);
 		// リクエストを送信.
@@ -123,6 +123,19 @@ public partial class UnitDeckEditResponse : APIResponse
 {
 }
 
+public partial class UnitPowerupRequest : CommonRequest
+{
+	[JsonProperty("user_unit_id")]
+	public long userUnitId { get; set; }
+	[JsonProperty("consume_resources")]
+	public List<ResourceData> consumeResources { get; set; } 
+		= new List<ResourceData>();
+}
+
+public partial class UnitPowerupResponse : APIResponse
+{
+}
+
 public partial class UnitEvolutionRequest : CommonRequest
 {
 	[JsonProperty("user_unit_id")]
@@ -138,6 +151,17 @@ public partial class UnitEvolutionResponse : APIResponse
 {
 }
 
+public partial class UnitSellRequest : CommonRequest
+{
+	[JsonProperty("user_unit_ids")]
+	public List<long> userUnitIds { get; set; } 
+		= new List<long>();
+}
+
+public partial class UnitSellResponse : APIResponse
+{
+}
+
 public partial class UnitLockRequest : CommonRequest
 {
 	[JsonProperty("user_unit_id")]
@@ -147,30 +171,6 @@ public partial class UnitLockRequest : CommonRequest
 }
 
 public partial class UnitLockResponse : APIResponse
-{
-}
-
-public partial class UnitPowerupRequest : CommonRequest
-{
-	[JsonProperty("user_unit_id")]
-	public long userUnitId { get; set; }
-	[JsonProperty("consume_resources")]
-	public List<ResourceData> consumeResources { get; set; } 
-		= new List<ResourceData>();
-}
-
-public partial class UnitPowerupResponse : APIResponse
-{
-}
-
-public partial class UnitSellRequest : CommonRequest
-{
-	[JsonProperty("user_unit_ids")]
-	public List<long> userUnitIds { get; set; } 
-		= new List<long>();
-}
-
-public partial class UnitSellResponse : APIResponse
 {
 }
 #endregion

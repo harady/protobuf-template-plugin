@@ -131,32 +131,6 @@ namespace AwsDotnetCsharp
 	}
 
 	[JsonObject(MemberSerialization.OptIn)]
-	public partial class ShopPurchaseAppStoreRequest : APIRequest
-	{
-		[JsonProperty("shop_item_id")]
-		public long shopItemId { get; set; }
-		[JsonProperty("receipt")]
-		public string receipt { get; set; }
-	}
-
-	[JsonObject(MemberSerialization.OptIn)]
-	public partial class ShopPurchaseAppStoreResponse : APIResponse
-	{
-	}
-
-	[JsonObject(MemberSerialization.OptIn)]
-	public partial class ShopPurchaseDebugRequest : APIRequest
-	{
-		[JsonProperty("shop_item_id")]
-		public long shopItemId { get; set; }
-	}
-
-	[JsonObject(MemberSerialization.OptIn)]
-	public partial class ShopPurchaseDebugResponse : APIResponse
-	{
-	}
-
-	[JsonObject(MemberSerialization.OptIn)]
 	public partial class ShopPurchaseGooglePlayRequest : APIRequest
 	{
 		[JsonProperty("shop_item_id")]
@@ -168,7 +142,33 @@ namespace AwsDotnetCsharp
 	}
 
 	[JsonObject(MemberSerialization.OptIn)]
-	public partial class ShopPurchaseGooglePlayResponse : APIResponse
+	public partial class ShopPurchaseGooglePlayResponse : APIRequest
+	{
+	}
+
+	[JsonObject(MemberSerialization.OptIn)]
+	public partial class ShopPurchaseAppStoreRequest : APIRequest
+	{
+		[JsonProperty("shop_item_id")]
+		public long shopItemId { get; set; }
+		[JsonProperty("receipt")]
+		public string receipt { get; set; }
+	}
+
+	[JsonObject(MemberSerialization.OptIn)]
+	public partial class ShopPurchaseAppStoreResponse : APIRequest
+	{
+	}
+
+	[JsonObject(MemberSerialization.OptIn)]
+	public partial class ShopPurchaseDebugRequest : APIRequest
+	{
+		[JsonProperty("shop_item_id")]
+		public long shopItemId { get; set; }
+	}
+
+	[JsonObject(MemberSerialization.OptIn)]
+	public partial class ShopPurchaseDebugResponse : APIRequest
 	{
 	}
 }

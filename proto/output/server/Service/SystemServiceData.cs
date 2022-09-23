@@ -4,16 +4,6 @@ using System.Threading.Tasks;
 
 namespace AwsDotnetCsharp
 {
-	public partial class SystemLoginRequest
-	{
-
-	}
-
-	public partial class SystemLoginResponse
-	{
-
-	}
-
 	public partial class SystemPingRequest
 	{
 
@@ -30,6 +20,16 @@ namespace AwsDotnetCsharp
 	}
 
 	public partial class SystemSignupResponse
+	{
+
+	}
+
+	public partial class SystemLoginRequest
+	{
+
+	}
+
+	public partial class SystemLoginResponse
 	{
 
 	}

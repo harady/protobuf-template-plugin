@@ -174,7 +174,7 @@ namespace AwsDotnetCsharp
 	}
 
 	[JsonObject(MemberSerialization.OptIn)]
-	public partial class FriendListResponse : APIResponse
+	public partial class FriendListResponse : APIRequest
 	{
 		[JsonProperty("other_users")]
 		public List<OtherUserData> otherUsers { get; set; } = new List<OtherUserData>();
@@ -188,19 +188,7 @@ namespace AwsDotnetCsharp
 	}
 
 	[JsonObject(MemberSerialization.OptIn)]
-	public partial class FriendRemoveResponse : APIResponse
-	{
-	}
-
-	[JsonObject(MemberSerialization.OptIn)]
-	public partial class FriendRequestRequest : APIRequest
-	{
-		[JsonProperty("user_id")]
-		public long userId { get; set; }
-	}
-
-	[JsonObject(MemberSerialization.OptIn)]
-	public partial class FriendRequestResponse : APIResponse
+	public partial class FriendRemoveResponse : APIRequest
 	{
 	}
 
@@ -212,9 +200,21 @@ namespace AwsDotnetCsharp
 	}
 
 	[JsonObject(MemberSerialization.OptIn)]
-	public partial class FriendSearchResponse : APIResponse
+	public partial class FriendSearchResponse : APIRequest
 	{
 		[JsonProperty("other_user")]
 		public OtherUserData otherUser { get; set; }
+	}
+
+	[JsonObject(MemberSerialization.OptIn)]
+	public partial class FriendRequestRequest : APIRequest
+	{
+		[JsonProperty("user_id")]
+		public long userId { get; set; }
+	}
+
+	[JsonObject(MemberSerialization.OptIn)]
+	public partial class FriendRequestResponse : APIRequest
+	{
 	}
 }

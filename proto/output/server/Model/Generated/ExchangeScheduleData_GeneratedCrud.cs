@@ -8,13 +8,14 @@ using MongoDB.Driver;
 
 namespace AwsDotnetCsharp
 {
+
 	public partial class ExchangeScheduleData : IUnique<long>
 	{
 		private static bool isMaster => true;
 
 		private static IMongoCollection<ExchangeScheduleData> _collection = null;
 		private static IMongoCollection<ExchangeScheduleData> collection
-			=> _collection ?? (_collection = mongoDatabase.GetCollection<ExchangeScheduleData>("exchange_schedules"));
+			=> _collection ?? (_collection = mongoDatabase.GetCollection<ExchangeScheduleData>("ExchangeScheduleDatas"));
 
 		public static IClientSessionHandle sessionHandle
 			=> MongoSessionManager.sessionHandle;
@@ -51,6 +52,7 @@ namespace AwsDotnetCsharp
 					new ReplaceOptions { IsUpsert = true });
 			bool result = replaceOneResult.IsAcknowledged && (replaceOneResult.ModifiedCount > 0);
 			Console.WriteLine($"ExchangeScheduleData#DbSetData {sw.Elapsed.TotalSeconds}[秒]");
+			if (result) { userUpdateCache.ExchangeScheduleDataTableUpdate.Upsert(data); }
 			return result;
 		}
 
@@ -73,6 +75,7 @@ namespace AwsDotnetCsharp
 					new BulkWriteOptions());
 			Console.WriteLine($"ExchangeScheduleData#DbSetDataList {sw.Elapsed.TotalSeconds}[秒]");
 			var result = requestResult.RequestCount == requestResult.ProcessedRequests.Count;
+			if (result) { userUpdateCache.ExchangeScheduleDataTableUpdate.Upsert(dataList); }
 			return result;
 		}
 		#endregion
@@ -87,6 +90,7 @@ namespace AwsDotnetCsharp
 					aData => aData.id == id);
 			Console.WriteLine($"ExchangeScheduleData#DbDeleteDataById {sw.Elapsed.TotalSeconds}[秒]");
 			var result = deleteResult.IsAcknowledged;
+			if (result) { userUpdateCache.ExchangeScheduleDataTableUpdate.Delete(id); }
 			return result;
 		}
 
@@ -101,6 +105,7 @@ namespace AwsDotnetCsharp
 					aData => keySet.Contains(aData.id));
 			Console.WriteLine($"ExchangeScheduleData#DbDeleteDataByIds {sw.Elapsed.TotalSeconds}[秒]");
 			var result = deleteResult.IsAcknowledged;
+			if (result) { userUpdateCache.ExchangeScheduleDataTableUpdate.Delete(ids); }
 			return result;
 		}
 		#endregion
@@ -147,7 +152,10 @@ namespace AwsDotnetCsharp
 		private static void SetupExchangeScheduleDataTableIndexGenerated(DataTable<long, ExchangeScheduleData> targetDataTable)
 		{
 			targetDataTable.CreateUniqueIndex("Id", aData => (object)aData.id);
+			targetDataTable.CreateIndex("Id", aData => (object)aData.id);
 			targetDataTable.CreateIndex("ExchangeId", aData => (object)aData.exchangeId);
+			targetDataTable.CreateIndex("OpenAt", aData => (object)aData.openAt);
+			targetDataTable.CreateIndex("CloseAt", aData => (object)aData.closeAt);
 		}
 		#endregion
 		#region DataTableUniqueIndex(Id)
@@ -157,11 +165,32 @@ namespace AwsDotnetCsharp
 			return dataTable.GetData("Id", (object)id);
 		}
 		#endregion
+		#region DataTableIndex (Id)
+		public static List<ExchangeScheduleData> GetDataListById(
+			long id)
+		{
+			return dataTable.GetDataList("Id", (object)id);
+		}
+		#endregion
 		#region DataTableIndex (ExchangeId)
 		public static List<ExchangeScheduleData> GetDataListByExchangeId(
 			long exchangeId)
 		{
 			return dataTable.GetDataList("ExchangeId", (object)exchangeId);
+		}
+		#endregion
+		#region DataTableIndex (OpenAt)
+		public static List<ExchangeScheduleData> GetDataListByOpenAt(
+			long openAt)
+		{
+			return dataTable.GetDataList("OpenAt", (object)openAt);
+		}
+		#endregion
+		#region DataTableIndex (CloseAt)
+		public static List<ExchangeScheduleData> GetDataListByCloseAt(
+			long closeAt)
+		{
+			return dataTable.GetDataList("CloseAt", (object)closeAt);
 		}
 		#endregion
 	}

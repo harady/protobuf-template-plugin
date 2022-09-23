@@ -8,13 +8,14 @@ using MongoDB.Driver;
 
 namespace AwsDotnetCsharp
 {
+
 	public partial class UserBackupData : IUnique<long>
 	{
-		private static bool isMaster => false;
+		private static bool isMaster => true;
 
 		private static IMongoCollection<UserBackupData> _collection = null;
 		private static IMongoCollection<UserBackupData> collection
-			=> _collection ?? (_collection = mongoDatabase.GetCollection<UserBackupData>("user_backups"));
+			=> _collection ?? (_collection = mongoDatabase.GetCollection<UserBackupData>("UserBackupDatas"));
 
 		public static IClientSessionHandle sessionHandle
 			=> MongoSessionManager.sessionHandle;
@@ -51,7 +52,7 @@ namespace AwsDotnetCsharp
 					new ReplaceOptions { IsUpsert = true });
 			bool result = replaceOneResult.IsAcknowledged && (replaceOneResult.ModifiedCount > 0);
 			Console.WriteLine($"UserBackupData#DbSetData {sw.Elapsed.TotalSeconds}[秒]");
-			if (result) { userUpdateCache.userBackupTableUpdate.Upsert(data); }
+			if (result) { userUpdateCache.UserBackupDataTableUpdate.Upsert(data); }
 			return result;
 		}
 
@@ -74,58 +75,11 @@ namespace AwsDotnetCsharp
 					new BulkWriteOptions());
 			Console.WriteLine($"UserBackupData#DbSetDataList {sw.Elapsed.TotalSeconds}[秒]");
 			var result = requestResult.RequestCount == requestResult.ProcessedRequests.Count;
-			if (result) { userUpdateCache.userBackupTableUpdate.Upsert(dataList); }
+			if (result) { userUpdateCache.UserBackupDataTableUpdate.Upsert(dataList); }
 			return result;
 		}
 		#endregion
-		#region DataTableSetupIndex
-		public static async Task DbSetupIndex()
-		{
-			var builder = Builders<UserBackupData>.IndexKeys;
-			await DbSetupOneIndex(builder.Ascending(aData => aData.userId));
-			await DbSetupOneIndex(builder.Ascending(aData => aData.backupType));
-			await DbSetupOneIndex(builder.Ascending(aData => aData.backupToken));
-		}
-
-		public static async Task DbSetupOneIndex(
-			IndexKeysDefinition<UserBackupData> indexKeys)
-		{
-			var indexModel = new CreateIndexModel<UserBackupData>(indexKeys);
-			await collection.Indexes
-				.CreateOneAsync(
-					sessionHandle,
-					indexModel);
-		}
-		#endregion
-		#region MongoDbUniqueIndex(Id)
-		public static async Task<UserBackupData> DbGetDataById(
-			long id)
-		{
-			var sw = Stopwatch.StartNew();
-			var cacheKey = "UserBackupData/GetDataById_" + id;
-			var result = await collection
-				.Find(
-					sessionHandle,
-					aData => aData.id == id)
-				.FirstOrDefaultAsync();
-			Console.WriteLine($"UserBackupData#DbGetDataById {sw.Elapsed.TotalSeconds}[秒]");
-			return result;
-		}
-
-		public static async Task<List<UserBackupData>> DbGetDataListInIds(
-			IEnumerable<long> ids)
-		{
-			var sw = Stopwatch.StartNew();
-			var filter = Builders<UserBackupData>.Filter.In(aData => aData.id, ids);
-			var result = await collection
-				.Find(
-					sessionHandle,
-					filter)
-				.ToListAsync();
-			Console.WriteLine($"UserBackupData#DbGetDataListInIds {sw.Elapsed.TotalSeconds}[秒]");
-			return result;
-		}
-
+		#region MongoDb
 		public static async Task<bool> DbDeleteDataById(
 			long id)
 		{
@@ -136,7 +90,7 @@ namespace AwsDotnetCsharp
 					aData => aData.id == id);
 			Console.WriteLine($"UserBackupData#DbDeleteDataById {sw.Elapsed.TotalSeconds}[秒]");
 			var result = deleteResult.IsAcknowledged;
-			if (result) { userUpdateCache.userBackupTableUpdate.Delete(id); }
+			if (result) { userUpdateCache.UserBackupDataTableUpdate.Delete(id); }
 			return result;
 		}
 
@@ -151,187 +105,92 @@ namespace AwsDotnetCsharp
 					aData => keySet.Contains(aData.id));
 			Console.WriteLine($"UserBackupData#DbDeleteDataByIds {sw.Elapsed.TotalSeconds}[秒]");
 			var result = deleteResult.IsAcknowledged;
-			if (result) { userUpdateCache.userBackupTableUpdate.Delete(ids); }
+			if (result) { userUpdateCache.UserBackupDataTableUpdate.Delete(ids); }
 			return result;
 		}
 		#endregion
-		#region MongoDbIndex(UserId)
-		public static async Task<UserBackupData> DbGetDataByUserId(
-			long userId)
-		{
-			var sw = Stopwatch.StartNew();
-			var result = await collection
-				.Find(
-					sessionHandle,
-					aData => aData.userId == userId)
-				.FirstOrDefaultAsync();
-			Console.WriteLine($"UserBackupData#DbGetDataByUserId {sw.Elapsed.TotalSeconds}[秒]");
-			return result;
-		}
-
-		public static async Task<List<UserBackupData>> DbGetDataListByUserId(
-			long userId)
-		{
-			var sw = Stopwatch.StartNew();
-			var result = await collection
-				.Find(
-					sessionHandle,
-					aData => aData.userId == userId)
-				.ToListAsync();
-			Console.WriteLine($"UserBackupData#DbGetDataListByUserId {sw.Elapsed.TotalSeconds}[秒]");
-			return result;
-		}
-		
-		public static async Task<List<UserBackupData>> DbGetDataListByUserIds(
-			IEnumerable<long> userIds)
-		{
-			var sw = Stopwatch.StartNew();
-			var keySet = userIds.ToHashSet();
-			var result = await collection
-				.Find(
-					sessionHandle,
-					data => keySet.Contains(data.userId))
-				.ToListAsync();
-			Console.WriteLine($"UserBackupData#DbGetDataListByUserIds {sw.Elapsed.TotalSeconds}[秒]");
-			return result;
-		}
-
-		public static async Task<bool> DbDeleteDataByUserId(
-			long userId)
-		{
-			var dataList = await DbGetDataListByUserId(userId);
-			var ids = dataList.Select(data => data.id);
-			var result = await DbDeleteDataByIds(ids);
-			return result;
-		}
-
-		public static async Task<bool> DbDeleteDataByUserIds(
-			IEnumerable<long> userIds)
-		{
-			var dataList = await DbGetDataListByUserIds(userIds);
-			var ids = dataList.Select(data => data.id);
-			var result = await DbDeleteDataByIds(ids);
-			return result;
-		}
+		#region NullObject
+		public static UserBackupData Null => NullObjectContainer.Get<UserBackupData>();
+	
+		public bool isNull => this == Null;
 		#endregion
-		#region MongoDbUniqueIndex(BackupType)
-		public static async Task<UserBackupData> DbGetDataByBackupType(
-			BackupType backupType)
-		{
-			var sw = Stopwatch.StartNew();
-			var cacheKey = "UserBackupData/GetDataByBackupType_" + backupType;
-			var result = await collection
-				.Find(
-					sessionHandle,
-					aData => aData.backupType == backupType)
-				.FirstOrDefaultAsync();
-			Console.WriteLine($"UserBackupData#DbGetDataByBackupType {sw.Elapsed.TotalSeconds}[秒]");
-			return result;
-		}
-
-		public static async Task<List<UserBackupData>> DbGetDataListInBackupTypes(
-			IEnumerable<BackupType> backupTypes)
-		{
-			var sw = Stopwatch.StartNew();
-			var filter = Builders<UserBackupData>.Filter.In(aData => aData.backupType, backupTypes);
-			var result = await collection
-				.Find(
-					sessionHandle,
-					filter)
-				.ToListAsync();
-			Console.WriteLine($"UserBackupData#DbGetDataListInBackupTypes {sw.Elapsed.TotalSeconds}[秒]");
-			return result;
-		}
-
-		public static async Task<bool> DbDeleteDataByBackupType(
-			BackupType backupType)
-		{
-			var data = await DbGetDataByBackupType(backupType);
-			var result = await DbDeleteDataById(data.id);
-			return result;
-		}
-
-		public static async Task<bool> DbDeleteDataByBackupTypes(
-			IEnumerable<BackupType> backupTypes)
-		{
-			var dataList = await DbGetDataListInBackupTypes(backupTypes);
-			var ids = dataList.Select(data => data.id);
-			var result = await DbDeleteDataByIds(ids);
-			return result;
-		}
-		#endregion
-		#region MongoDbIndex(BackupToken)
-		public static async Task<UserBackupData> DbGetDataByBackupToken(
-			string backupToken)
-		{
-			var sw = Stopwatch.StartNew();
-			var result = await collection
-				.Find(
-					sessionHandle,
-					aData => aData.backupToken == backupToken)
-				.FirstOrDefaultAsync();
-			Console.WriteLine($"UserBackupData#DbGetDataByBackupToken {sw.Elapsed.TotalSeconds}[秒]");
-			return result;
-		}
-
-		public static async Task<List<UserBackupData>> DbGetDataListByBackupToken(
-			string backupToken)
-		{
-			var sw = Stopwatch.StartNew();
-			var result = await collection
-				.Find(
-					sessionHandle,
-					aData => aData.backupToken == backupToken)
-				.ToListAsync();
-			Console.WriteLine($"UserBackupData#DbGetDataListByBackupToken {sw.Elapsed.TotalSeconds}[秒]");
-			return result;
-		}
-		
-		public static async Task<List<UserBackupData>> DbGetDataListByBackupTokens(
-			IEnumerable<string> backupTokens)
-		{
-			var sw = Stopwatch.StartNew();
-			var keySet = backupTokens.ToHashSet();
-			var result = await collection
-				.Find(
-					sessionHandle,
-					data => keySet.Contains(data.backupToken))
-				.ToListAsync();
-			Console.WriteLine($"UserBackupData#DbGetDataListByBackupTokens {sw.Elapsed.TotalSeconds}[秒]");
-			return result;
-		}
-
-		public static async Task<bool> DbDeleteDataByBackupToken(
-			string backupToken)
-		{
-			var dataList = await DbGetDataListByBackupToken(backupToken);
-			var ids = dataList.Select(data => data.id);
-			var result = await DbDeleteDataByIds(ids);
-			return result;
-		}
-
-		public static async Task<bool> DbDeleteDataByBackupTokens(
-			IEnumerable<string> backupTokens)
-		{
-			var dataList = await DbGetDataListByBackupTokens(backupTokens);
-			var ids = dataList.Select(data => data.id);
-			var result = await DbDeleteDataByIds(ids);
-			return result;
-		}
-		#endregion
-		#region Methods
-		public async Task<bool> DbSave()
-		{
-			if (this._id == ObjectId.Empty) {
-				var data = await DbGetDataById(this.id);
-				this._id = (data != null) ? data._id : this._id;
+		#region GameDbWrapper(DataTable)
+		public static DataTable<long, UserBackupData> dataTable {
+			get {
+				DataTable<long, UserBackupData> result;
+				if (GameDb.TableExists<long, UserBackupData>()) {
+					result = GameDb.From<long, UserBackupData>();
+				} else {
+					result = GameDb.CreateTable<long, UserBackupData>();
+					SetupUserBackupDataTableIndexGenerated(result);
+					SetupUserBackupDataTableIndex(result);
+				}
+				return result;
 			}
-			return await DbSetData(this);
 		}
 
-		public async Task<bool> DbDelete()
+		public static int Count => dataTable.Count;
+
+		public static List<UserBackupData> GetDataList()
 		{
-			return await DbDeleteDataById(this.id);
+			return dataTable.dataList;
+		}
+
+		public static void SetDataList(IEnumerable<UserBackupData> dataList)
+		{
+			Clear();
+			dataTable.InsertRange(dataList);
+		}
+
+		public static void Clear()
+		{
+			dataTable.DeleteAll();
+		}
+
+		static partial void SetupUserBackupDataTableIndex(DataTable<long, UserBackupData> targetDataTable);
+
+		private static void SetupUserBackupDataTableIndexGenerated(DataTable<long, UserBackupData> targetDataTable)
+		{
+			targetDataTable.CreateUniqueIndex("Id", aData => (object)aData.id);
+			targetDataTable.CreateIndex("Id", aData => (object)aData.id);
+			targetDataTable.CreateIndex("UserId", aData => (object)aData.userId);
+			targetDataTable.CreateIndex("BackupType", aData => (object)aData.backupType);
+			targetDataTable.CreateIndex("BackupToken", aData => (object)aData.backupToken);
+		}
+		#endregion
+		#region DataTableUniqueIndex(Id)
+		public static UserBackupData GetDataById(
+			long id)
+		{
+			return dataTable.GetData("Id", (object)id);
+		}
+		#endregion
+		#region DataTableIndex (Id)
+		public static List<UserBackupData> GetDataListById(
+			long id)
+		{
+			return dataTable.GetDataList("Id", (object)id);
+		}
+		#endregion
+		#region DataTableIndex (UserId)
+		public static List<UserBackupData> GetDataListByUserId(
+			long userId)
+		{
+			return dataTable.GetDataList("UserId", (object)userId);
+		}
+		#endregion
+		#region DataTableIndex (BackupType)
+		public static List<UserBackupData> GetDataListByBackupType(
+			BackupType backupType)
+		{
+			return dataTable.GetDataList("BackupType", (object)backupType);
+		}
+		#endregion
+		#region DataTableIndex (BackupToken)
+		public static List<UserBackupData> GetDataListByBackupToken(
+			string backupToken)
+		{
+			return dataTable.GetDataList("BackupToken", (object)backupToken);
 		}
 		#endregion
 	}

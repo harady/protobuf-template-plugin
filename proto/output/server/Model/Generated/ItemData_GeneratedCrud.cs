@@ -8,13 +8,14 @@ using MongoDB.Driver;
 
 namespace AwsDotnetCsharp
 {
+
 	public partial class ItemData : IUnique<long>
 	{
 		private static bool isMaster => true;
 
 		private static IMongoCollection<ItemData> _collection = null;
 		private static IMongoCollection<ItemData> collection
-			=> _collection ?? (_collection = mongoDatabase.GetCollection<ItemData>("items"));
+			=> _collection ?? (_collection = mongoDatabase.GetCollection<ItemData>("ItemDatas"));
 
 		public static IClientSessionHandle sessionHandle
 			=> MongoSessionManager.sessionHandle;
@@ -51,6 +52,7 @@ namespace AwsDotnetCsharp
 					new ReplaceOptions { IsUpsert = true });
 			bool result = replaceOneResult.IsAcknowledged && (replaceOneResult.ModifiedCount > 0);
 			Console.WriteLine($"ItemData#DbSetData {sw.Elapsed.TotalSeconds}[秒]");
+			if (result) { userUpdateCache.ItemDataTableUpdate.Upsert(data); }
 			return result;
 		}
 
@@ -73,6 +75,7 @@ namespace AwsDotnetCsharp
 					new BulkWriteOptions());
 			Console.WriteLine($"ItemData#DbSetDataList {sw.Elapsed.TotalSeconds}[秒]");
 			var result = requestResult.RequestCount == requestResult.ProcessedRequests.Count;
+			if (result) { userUpdateCache.ItemDataTableUpdate.Upsert(dataList); }
 			return result;
 		}
 		#endregion
@@ -87,6 +90,7 @@ namespace AwsDotnetCsharp
 					aData => aData.id == id);
 			Console.WriteLine($"ItemData#DbDeleteDataById {sw.Elapsed.TotalSeconds}[秒]");
 			var result = deleteResult.IsAcknowledged;
+			if (result) { userUpdateCache.ItemDataTableUpdate.Delete(id); }
 			return result;
 		}
 
@@ -101,6 +105,7 @@ namespace AwsDotnetCsharp
 					aData => keySet.Contains(aData.id));
 			Console.WriteLine($"ItemData#DbDeleteDataByIds {sw.Elapsed.TotalSeconds}[秒]");
 			var result = deleteResult.IsAcknowledged;
+			if (result) { userUpdateCache.ItemDataTableUpdate.Delete(ids); }
 			return result;
 		}
 		#endregion
@@ -147,8 +152,15 @@ namespace AwsDotnetCsharp
 		private static void SetupItemDataTableIndexGenerated(DataTable<long, ItemData> targetDataTable)
 		{
 			targetDataTable.CreateUniqueIndex("Id", aData => (object)aData.id);
+			targetDataTable.CreateIndex("Id", aData => (object)aData.id);
+			targetDataTable.CreateIndex("Name", aData => (object)aData.name);
+			targetDataTable.CreateIndex("Attribute", aData => (object)aData.attribute);
+			targetDataTable.CreateIndex("Description", aData => (object)aData.description);
 			targetDataTable.CreateIndex("Category", aData => (object)aData.category);
 			targetDataTable.CreateIndex("Type", aData => (object)aData.type);
+			targetDataTable.CreateIndex("OwnedLimit", aData => (object)aData.ownedLimit);
+			targetDataTable.CreateIndex("ParamA", aData => (object)aData.paramA);
+			targetDataTable.CreateIndex("ParamB", aData => (object)aData.paramB);
 		}
 		#endregion
 		#region DataTableUniqueIndex(Id)
@@ -156,6 +168,34 @@ namespace AwsDotnetCsharp
 			long id)
 		{
 			return dataTable.GetData("Id", (object)id);
+		}
+		#endregion
+		#region DataTableIndex (Id)
+		public static List<ItemData> GetDataListById(
+			long id)
+		{
+			return dataTable.GetDataList("Id", (object)id);
+		}
+		#endregion
+		#region DataTableIndex (Name)
+		public static List<ItemData> GetDataListByName(
+			string name)
+		{
+			return dataTable.GetDataList("Name", (object)name);
+		}
+		#endregion
+		#region DataTableIndex (Attribute)
+		public static List<ItemData> GetDataListByAttribute(
+			long attribute)
+		{
+			return dataTable.GetDataList("Attribute", (object)attribute);
+		}
+		#endregion
+		#region DataTableIndex (Description)
+		public static List<ItemData> GetDataListByDescription(
+			string description)
+		{
+			return dataTable.GetDataList("Description", (object)description);
 		}
 		#endregion
 		#region DataTableIndex (Category)
@@ -170,6 +210,27 @@ namespace AwsDotnetCsharp
 			ItemType type)
 		{
 			return dataTable.GetDataList("Type", (object)type);
+		}
+		#endregion
+		#region DataTableIndex (OwnedLimit)
+		public static List<ItemData> GetDataListByOwnedLimit(
+			long ownedLimit)
+		{
+			return dataTable.GetDataList("OwnedLimit", (object)ownedLimit);
+		}
+		#endregion
+		#region DataTableIndex (ParamA)
+		public static List<ItemData> GetDataListByParamA(
+			long paramA)
+		{
+			return dataTable.GetDataList("ParamA", (object)paramA);
+		}
+		#endregion
+		#region DataTableIndex (ParamB)
+		public static List<ItemData> GetDataListByParamB(
+			long paramB)
+		{
+			return dataTable.GetDataList("ParamB", (object)paramB);
 		}
 		#endregion
 	}

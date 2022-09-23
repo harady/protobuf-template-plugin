@@ -8,13 +8,14 @@ using MongoDB.Driver;
 
 namespace AwsDotnetCsharp
 {
+
 	public partial class UserUnitData : IUnique<long>
 	{
-		private static bool isMaster => false;
+		private static bool isMaster => true;
 
 		private static IMongoCollection<UserUnitData> _collection = null;
 		private static IMongoCollection<UserUnitData> collection
-			=> _collection ?? (_collection = mongoDatabase.GetCollection<UserUnitData>("user_units"));
+			=> _collection ?? (_collection = mongoDatabase.GetCollection<UserUnitData>("UserUnitDatas"));
 
 		public static IClientSessionHandle sessionHandle
 			=> MongoSessionManager.sessionHandle;
@@ -51,7 +52,7 @@ namespace AwsDotnetCsharp
 					new ReplaceOptions { IsUpsert = true });
 			bool result = replaceOneResult.IsAcknowledged && (replaceOneResult.ModifiedCount > 0);
 			Console.WriteLine($"UserUnitData#DbSetData {sw.Elapsed.TotalSeconds}[秒]");
-			if (result) { userUpdateCache.userUnitTableUpdate.Upsert(data); }
+			if (result) { userUpdateCache.UserUnitDataTableUpdate.Upsert(data); }
 			return result;
 		}
 
@@ -74,57 +75,11 @@ namespace AwsDotnetCsharp
 					new BulkWriteOptions());
 			Console.WriteLine($"UserUnitData#DbSetDataList {sw.Elapsed.TotalSeconds}[秒]");
 			var result = requestResult.RequestCount == requestResult.ProcessedRequests.Count;
-			if (result) { userUpdateCache.userUnitTableUpdate.Upsert(dataList); }
+			if (result) { userUpdateCache.UserUnitDataTableUpdate.Upsert(dataList); }
 			return result;
 		}
 		#endregion
-		#region DataTableSetupIndex
-		public static async Task DbSetupIndex()
-		{
-			var builder = Builders<UserUnitData>.IndexKeys;
-			await DbSetupOneIndex(builder.Ascending(aData => aData.userId));
-			await DbSetupOneIndex(builder.Ascending(aData => aData.unitId));
-		}
-
-		public static async Task DbSetupOneIndex(
-			IndexKeysDefinition<UserUnitData> indexKeys)
-		{
-			var indexModel = new CreateIndexModel<UserUnitData>(indexKeys);
-			await collection.Indexes
-				.CreateOneAsync(
-					sessionHandle,
-					indexModel);
-		}
-		#endregion
-		#region MongoDbUniqueIndex(Id)
-		public static async Task<UserUnitData> DbGetDataById(
-			long id)
-		{
-			var sw = Stopwatch.StartNew();
-			var cacheKey = "UserUnitData/GetDataById_" + id;
-			var result = await collection
-				.Find(
-					sessionHandle,
-					aData => aData.id == id)
-				.FirstOrDefaultAsync();
-			Console.WriteLine($"UserUnitData#DbGetDataById {sw.Elapsed.TotalSeconds}[秒]");
-			return result;
-		}
-
-		public static async Task<List<UserUnitData>> DbGetDataListInIds(
-			IEnumerable<long> ids)
-		{
-			var sw = Stopwatch.StartNew();
-			var filter = Builders<UserUnitData>.Filter.In(aData => aData.id, ids);
-			var result = await collection
-				.Find(
-					sessionHandle,
-					filter)
-				.ToListAsync();
-			Console.WriteLine($"UserUnitData#DbGetDataListInIds {sw.Elapsed.TotalSeconds}[秒]");
-			return result;
-		}
-
+		#region MongoDb
 		public static async Task<bool> DbDeleteDataById(
 			long id)
 		{
@@ -135,7 +90,7 @@ namespace AwsDotnetCsharp
 					aData => aData.id == id);
 			Console.WriteLine($"UserUnitData#DbDeleteDataById {sw.Elapsed.TotalSeconds}[秒]");
 			var result = deleteResult.IsAcknowledged;
-			if (result) { userUpdateCache.userUnitTableUpdate.Delete(id); }
+			if (result) { userUpdateCache.UserUnitDataTableUpdate.Delete(id); }
 			return result;
 		}
 
@@ -150,141 +105,188 @@ namespace AwsDotnetCsharp
 					aData => keySet.Contains(aData.id));
 			Console.WriteLine($"UserUnitData#DbDeleteDataByIds {sw.Elapsed.TotalSeconds}[秒]");
 			var result = deleteResult.IsAcknowledged;
-			if (result) { userUpdateCache.userUnitTableUpdate.Delete(ids); }
+			if (result) { userUpdateCache.UserUnitDataTableUpdate.Delete(ids); }
 			return result;
 		}
 		#endregion
-		#region MongoDbIndex(UserId)
-		public static async Task<UserUnitData> DbGetDataByUserId(
-			long userId)
-		{
-			var sw = Stopwatch.StartNew();
-			var result = await collection
-				.Find(
-					sessionHandle,
-					aData => aData.userId == userId)
-				.FirstOrDefaultAsync();
-			Console.WriteLine($"UserUnitData#DbGetDataByUserId {sw.Elapsed.TotalSeconds}[秒]");
-			return result;
-		}
-
-		public static async Task<List<UserUnitData>> DbGetDataListByUserId(
-			long userId)
-		{
-			var sw = Stopwatch.StartNew();
-			var result = await collection
-				.Find(
-					sessionHandle,
-					aData => aData.userId == userId)
-				.ToListAsync();
-			Console.WriteLine($"UserUnitData#DbGetDataListByUserId {sw.Elapsed.TotalSeconds}[秒]");
-			return result;
-		}
-		
-		public static async Task<List<UserUnitData>> DbGetDataListByUserIds(
-			IEnumerable<long> userIds)
-		{
-			var sw = Stopwatch.StartNew();
-			var keySet = userIds.ToHashSet();
-			var result = await collection
-				.Find(
-					sessionHandle,
-					data => keySet.Contains(data.userId))
-				.ToListAsync();
-			Console.WriteLine($"UserUnitData#DbGetDataListByUserIds {sw.Elapsed.TotalSeconds}[秒]");
-			return result;
-		}
-
-		public static async Task<bool> DbDeleteDataByUserId(
-			long userId)
-		{
-			var dataList = await DbGetDataListByUserId(userId);
-			var ids = dataList.Select(data => data.id);
-			var result = await DbDeleteDataByIds(ids);
-			return result;
-		}
-
-		public static async Task<bool> DbDeleteDataByUserIds(
-			IEnumerable<long> userIds)
-		{
-			var dataList = await DbGetDataListByUserIds(userIds);
-			var ids = dataList.Select(data => data.id);
-			var result = await DbDeleteDataByIds(ids);
-			return result;
-		}
+		#region NullObject
+		public static UserUnitData Null => NullObjectContainer.Get<UserUnitData>();
+	
+		public bool isNull => this == Null;
 		#endregion
-		#region MongoDbIndex(UnitId)
-		public static async Task<UserUnitData> DbGetDataByUnitId(
-			long unitId)
-		{
-			var sw = Stopwatch.StartNew();
-			var result = await collection
-				.Find(
-					sessionHandle,
-					aData => aData.unitId == unitId)
-				.FirstOrDefaultAsync();
-			Console.WriteLine($"UserUnitData#DbGetDataByUnitId {sw.Elapsed.TotalSeconds}[秒]");
-			return result;
-		}
-
-		public static async Task<List<UserUnitData>> DbGetDataListByUnitId(
-			long unitId)
-		{
-			var sw = Stopwatch.StartNew();
-			var result = await collection
-				.Find(
-					sessionHandle,
-					aData => aData.unitId == unitId)
-				.ToListAsync();
-			Console.WriteLine($"UserUnitData#DbGetDataListByUnitId {sw.Elapsed.TotalSeconds}[秒]");
-			return result;
-		}
-		
-		public static async Task<List<UserUnitData>> DbGetDataListByUnitIds(
-			IEnumerable<long> unitIds)
-		{
-			var sw = Stopwatch.StartNew();
-			var keySet = unitIds.ToHashSet();
-			var result = await collection
-				.Find(
-					sessionHandle,
-					data => keySet.Contains(data.unitId))
-				.ToListAsync();
-			Console.WriteLine($"UserUnitData#DbGetDataListByUnitIds {sw.Elapsed.TotalSeconds}[秒]");
-			return result;
-		}
-
-		public static async Task<bool> DbDeleteDataByUnitId(
-			long unitId)
-		{
-			var dataList = await DbGetDataListByUnitId(unitId);
-			var ids = dataList.Select(data => data.id);
-			var result = await DbDeleteDataByIds(ids);
-			return result;
-		}
-
-		public static async Task<bool> DbDeleteDataByUnitIds(
-			IEnumerable<long> unitIds)
-		{
-			var dataList = await DbGetDataListByUnitIds(unitIds);
-			var ids = dataList.Select(data => data.id);
-			var result = await DbDeleteDataByIds(ids);
-			return result;
-		}
-		#endregion
-		#region Methods
-		public async Task<bool> DbSave()
-		{
-			if (this._id == ObjectId.Empty) {
-				var data = await DbGetDataById(this.id);
-				this._id = (data != null) ? data._id : this._id;
+		#region GameDbWrapper(DataTable)
+		public static DataTable<long, UserUnitData> dataTable {
+			get {
+				DataTable<long, UserUnitData> result;
+				if (GameDb.TableExists<long, UserUnitData>()) {
+					result = GameDb.From<long, UserUnitData>();
+				} else {
+					result = GameDb.CreateTable<long, UserUnitData>();
+					SetupUserUnitDataTableIndexGenerated(result);
+					SetupUserUnitDataTableIndex(result);
+				}
+				return result;
 			}
-			return await DbSetData(this);
 		}
 
-		public async Task<bool> DbDelete()
+		public static int Count => dataTable.Count;
+
+		public static List<UserUnitData> GetDataList()
 		{
-			return await DbDeleteDataById(this.id);
+			return dataTable.dataList;
+		}
+
+		public static void SetDataList(IEnumerable<UserUnitData> dataList)
+		{
+			Clear();
+			dataTable.InsertRange(dataList);
+		}
+
+		public static void Clear()
+		{
+			dataTable.DeleteAll();
+		}
+
+		static partial void SetupUserUnitDataTableIndex(DataTable<long, UserUnitData> targetDataTable);
+
+		private static void SetupUserUnitDataTableIndexGenerated(DataTable<long, UserUnitData> targetDataTable)
+		{
+			targetDataTable.CreateUniqueIndex("Id", aData => (object)aData.id);
+			targetDataTable.CreateIndex("Id", aData => (object)aData.id);
+			targetDataTable.CreateIndex("UserId", aData => (object)aData.userId);
+			targetDataTable.CreateIndex("UnitId", aData => (object)aData.unitId);
+			targetDataTable.CreateIndex("Level", aData => (object)aData.level);
+			targetDataTable.CreateIndex("Exp", aData => (object)aData.exp);
+			targetDataTable.CreateIndex("Luck", aData => (object)aData.luck);
+			targetDataTable.CreateIndex("PlusHp", aData => (object)aData.plusHp);
+			targetDataTable.CreateIndex("PlusAttack", aData => (object)aData.plusAttack);
+			targetDataTable.CreateIndex("PlusSpeed", aData => (object)aData.plusSpeed);
+			targetDataTable.CreateIndex("Equipment1Id", aData => (object)aData.equipment1Id);
+			targetDataTable.CreateIndex("Equipment2Id", aData => (object)aData.equipment2Id);
+			targetDataTable.CreateIndex("Equipment3Id", aData => (object)aData.equipment3Id);
+			targetDataTable.CreateIndex("HeroMark", aData => (object)aData.heroMark);
+			targetDataTable.CreateIndex("HeroBadge", aData => (object)aData.heroBadge);
+			targetDataTable.CreateIndex("IsLocked", aData => (object)aData.isLocked);
+			targetDataTable.CreateIndex("GetAt", aData => (object)aData.getAt);
+		}
+		#endregion
+		#region DataTableUniqueIndex(Id)
+		public static UserUnitData GetDataById(
+			long id)
+		{
+			return dataTable.GetData("Id", (object)id);
+		}
+		#endregion
+		#region DataTableIndex (Id)
+		public static List<UserUnitData> GetDataListById(
+			long id)
+		{
+			return dataTable.GetDataList("Id", (object)id);
+		}
+		#endregion
+		#region DataTableIndex (UserId)
+		public static List<UserUnitData> GetDataListByUserId(
+			long userId)
+		{
+			return dataTable.GetDataList("UserId", (object)userId);
+		}
+		#endregion
+		#region DataTableIndex (UnitId)
+		public static List<UserUnitData> GetDataListByUnitId(
+			long unitId)
+		{
+			return dataTable.GetDataList("UnitId", (object)unitId);
+		}
+		#endregion
+		#region DataTableIndex (Level)
+		public static List<UserUnitData> GetDataListByLevel(
+			long level)
+		{
+			return dataTable.GetDataList("Level", (object)level);
+		}
+		#endregion
+		#region DataTableIndex (Exp)
+		public static List<UserUnitData> GetDataListByExp(
+			long exp)
+		{
+			return dataTable.GetDataList("Exp", (object)exp);
+		}
+		#endregion
+		#region DataTableIndex (Luck)
+		public static List<UserUnitData> GetDataListByLuck(
+			long luck)
+		{
+			return dataTable.GetDataList("Luck", (object)luck);
+		}
+		#endregion
+		#region DataTableIndex (PlusHp)
+		public static List<UserUnitData> GetDataListByPlusHp(
+			long plusHp)
+		{
+			return dataTable.GetDataList("PlusHp", (object)plusHp);
+		}
+		#endregion
+		#region DataTableIndex (PlusAttack)
+		public static List<UserUnitData> GetDataListByPlusAttack(
+			long plusAttack)
+		{
+			return dataTable.GetDataList("PlusAttack", (object)plusAttack);
+		}
+		#endregion
+		#region DataTableIndex (PlusSpeed)
+		public static List<UserUnitData> GetDataListByPlusSpeed(
+			long plusSpeed)
+		{
+			return dataTable.GetDataList("PlusSpeed", (object)plusSpeed);
+		}
+		#endregion
+		#region DataTableIndex (Equipment1Id)
+		public static List<UserUnitData> GetDataListByEquipment1Id(
+			long equipment1Id)
+		{
+			return dataTable.GetDataList("Equipment1Id", (object)equipment1Id);
+		}
+		#endregion
+		#region DataTableIndex (Equipment2Id)
+		public static List<UserUnitData> GetDataListByEquipment2Id(
+			long equipment2Id)
+		{
+			return dataTable.GetDataList("Equipment2Id", (object)equipment2Id);
+		}
+		#endregion
+		#region DataTableIndex (Equipment3Id)
+		public static List<UserUnitData> GetDataListByEquipment3Id(
+			long equipment3Id)
+		{
+			return dataTable.GetDataList("Equipment3Id", (object)equipment3Id);
+		}
+		#endregion
+		#region DataTableIndex (HeroMark)
+		public static List<UserUnitData> GetDataListByHeroMark(
+			bool heroMark)
+		{
+			return dataTable.GetDataList("HeroMark", (object)heroMark);
+		}
+		#endregion
+		#region DataTableIndex (HeroBadge)
+		public static List<UserUnitData> GetDataListByHeroBadge(
+			bool heroBadge)
+		{
+			return dataTable.GetDataList("HeroBadge", (object)heroBadge);
+		}
+		#endregion
+		#region DataTableIndex (IsLocked)
+		public static List<UserUnitData> GetDataListByIsLocked(
+			bool isLocked)
+		{
+			return dataTable.GetDataList("IsLocked", (object)isLocked);
+		}
+		#endregion
+		#region DataTableIndex (GetAt)
+		public static List<UserUnitData> GetDataListByGetAt(
+			long getAt)
+		{
+			return dataTable.GetDataList("GetAt", (object)getAt);
 		}
 		#endregion
 	}

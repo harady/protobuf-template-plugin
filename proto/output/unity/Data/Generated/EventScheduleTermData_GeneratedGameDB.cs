@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 
 public partial class EventScheduleTermData : IUnique<long>
 {
@@ -74,4 +74,3 @@ public partial class EventScheduleTermData : IUnique<long>
 	}
 	#endregion
 }
-

@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 
 public partial class RoundData : IUnique<long>
 {
@@ -55,7 +55,6 @@ public partial class RoundData : IUnique<long>
 	private static void SetupRoundDataTableIndexGenerated(DataTable<long, RoundData> targetDataTable)
 	{
 		targetDataTable.CreateUniqueIndex("Id", aData => (object)aData.id);
-		targetDataTable.CreateIndex("StageId", aData => (object)aData.stageId);
 	}
 	#endregion
 	#region DataTableUniqueIndex(Id)
@@ -74,11 +73,4 @@ public partial class RoundData : IUnique<long>
 		dataTable.DeleteByKey("Id", (object)id);
 	}
 	#endregion
-	#region DataTableIndex (StageId)
-	public static List<RoundData> GetDataListByStageId(long stageId)
-	{
-		return dataTable.GetDataList("StageId", (object)stageId);
-	}
-	#endregion
 }
-

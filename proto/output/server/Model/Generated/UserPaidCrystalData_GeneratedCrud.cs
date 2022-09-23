@@ -8,13 +8,14 @@ using MongoDB.Driver;
 
 namespace AwsDotnetCsharp
 {
+
 	public partial class UserPaidCrystalData : IUnique<long>
 	{
-		private static bool isMaster => false;
+		private static bool isMaster => true;
 
 		private static IMongoCollection<UserPaidCrystalData> _collection = null;
 		private static IMongoCollection<UserPaidCrystalData> collection
-			=> _collection ?? (_collection = mongoDatabase.GetCollection<UserPaidCrystalData>("user_paid_crystals"));
+			=> _collection ?? (_collection = mongoDatabase.GetCollection<UserPaidCrystalData>("UserPaidCrystalDatas"));
 
 		public static IClientSessionHandle sessionHandle
 			=> MongoSessionManager.sessionHandle;
@@ -51,7 +52,7 @@ namespace AwsDotnetCsharp
 					new ReplaceOptions { IsUpsert = true });
 			bool result = replaceOneResult.IsAcknowledged && (replaceOneResult.ModifiedCount > 0);
 			Console.WriteLine($"UserPaidCrystalData#DbSetData {sw.Elapsed.TotalSeconds}[秒]");
-			if (result) { userUpdateCache.userPaidCrystalTableUpdate.Upsert(data); }
+			if (result) { userUpdateCache.UserPaidCrystalDataTableUpdate.Upsert(data); }
 			return result;
 		}
 
@@ -74,56 +75,11 @@ namespace AwsDotnetCsharp
 					new BulkWriteOptions());
 			Console.WriteLine($"UserPaidCrystalData#DbSetDataList {sw.Elapsed.TotalSeconds}[秒]");
 			var result = requestResult.RequestCount == requestResult.ProcessedRequests.Count;
-			if (result) { userUpdateCache.userPaidCrystalTableUpdate.Upsert(dataList); }
+			if (result) { userUpdateCache.UserPaidCrystalDataTableUpdate.Upsert(dataList); }
 			return result;
 		}
 		#endregion
-		#region DataTableSetupIndex
-		public static async Task DbSetupIndex()
-		{
-			var builder = Builders<UserPaidCrystalData>.IndexKeys;
-			await DbSetupOneIndex(builder.Ascending(aData => aData.userId));
-		}
-
-		public static async Task DbSetupOneIndex(
-			IndexKeysDefinition<UserPaidCrystalData> indexKeys)
-		{
-			var indexModel = new CreateIndexModel<UserPaidCrystalData>(indexKeys);
-			await collection.Indexes
-				.CreateOneAsync(
-					sessionHandle,
-					indexModel);
-		}
-		#endregion
-		#region MongoDbUniqueIndex(Id)
-		public static async Task<UserPaidCrystalData> DbGetDataById(
-			long id)
-		{
-			var sw = Stopwatch.StartNew();
-			var cacheKey = "UserPaidCrystalData/GetDataById_" + id;
-			var result = await collection
-				.Find(
-					sessionHandle,
-					aData => aData.id == id)
-				.FirstOrDefaultAsync();
-			Console.WriteLine($"UserPaidCrystalData#DbGetDataById {sw.Elapsed.TotalSeconds}[秒]");
-			return result;
-		}
-
-		public static async Task<List<UserPaidCrystalData>> DbGetDataListInIds(
-			IEnumerable<long> ids)
-		{
-			var sw = Stopwatch.StartNew();
-			var filter = Builders<UserPaidCrystalData>.Filter.In(aData => aData.id, ids);
-			var result = await collection
-				.Find(
-					sessionHandle,
-					filter)
-				.ToListAsync();
-			Console.WriteLine($"UserPaidCrystalData#DbGetDataListInIds {sw.Elapsed.TotalSeconds}[秒]");
-			return result;
-		}
-
+		#region MongoDb
 		public static async Task<bool> DbDeleteDataById(
 			long id)
 		{
@@ -134,7 +90,7 @@ namespace AwsDotnetCsharp
 					aData => aData.id == id);
 			Console.WriteLine($"UserPaidCrystalData#DbDeleteDataById {sw.Elapsed.TotalSeconds}[秒]");
 			var result = deleteResult.IsAcknowledged;
-			if (result) { userUpdateCache.userPaidCrystalTableUpdate.Delete(id); }
+			if (result) { userUpdateCache.UserPaidCrystalDataTableUpdate.Delete(id); }
 			return result;
 		}
 
@@ -149,82 +105,92 @@ namespace AwsDotnetCsharp
 					aData => keySet.Contains(aData.id));
 			Console.WriteLine($"UserPaidCrystalData#DbDeleteDataByIds {sw.Elapsed.TotalSeconds}[秒]");
 			var result = deleteResult.IsAcknowledged;
-			if (result) { userUpdateCache.userPaidCrystalTableUpdate.Delete(ids); }
+			if (result) { userUpdateCache.UserPaidCrystalDataTableUpdate.Delete(ids); }
 			return result;
 		}
 		#endregion
-		#region MongoDbIndex(UserId)
-		public static async Task<UserPaidCrystalData> DbGetDataByUserId(
-			long userId)
-		{
-			var sw = Stopwatch.StartNew();
-			var result = await collection
-				.Find(
-					sessionHandle,
-					aData => aData.userId == userId)
-				.FirstOrDefaultAsync();
-			Console.WriteLine($"UserPaidCrystalData#DbGetDataByUserId {sw.Elapsed.TotalSeconds}[秒]");
-			return result;
-		}
-
-		public static async Task<List<UserPaidCrystalData>> DbGetDataListByUserId(
-			long userId)
-		{
-			var sw = Stopwatch.StartNew();
-			var result = await collection
-				.Find(
-					sessionHandle,
-					aData => aData.userId == userId)
-				.ToListAsync();
-			Console.WriteLine($"UserPaidCrystalData#DbGetDataListByUserId {sw.Elapsed.TotalSeconds}[秒]");
-			return result;
-		}
-		
-		public static async Task<List<UserPaidCrystalData>> DbGetDataListByUserIds(
-			IEnumerable<long> userIds)
-		{
-			var sw = Stopwatch.StartNew();
-			var keySet = userIds.ToHashSet();
-			var result = await collection
-				.Find(
-					sessionHandle,
-					data => keySet.Contains(data.userId))
-				.ToListAsync();
-			Console.WriteLine($"UserPaidCrystalData#DbGetDataListByUserIds {sw.Elapsed.TotalSeconds}[秒]");
-			return result;
-		}
-
-		public static async Task<bool> DbDeleteDataByUserId(
-			long userId)
-		{
-			var dataList = await DbGetDataListByUserId(userId);
-			var ids = dataList.Select(data => data.id);
-			var result = await DbDeleteDataByIds(ids);
-			return result;
-		}
-
-		public static async Task<bool> DbDeleteDataByUserIds(
-			IEnumerable<long> userIds)
-		{
-			var dataList = await DbGetDataListByUserIds(userIds);
-			var ids = dataList.Select(data => data.id);
-			var result = await DbDeleteDataByIds(ids);
-			return result;
-		}
+		#region NullObject
+		public static UserPaidCrystalData Null => NullObjectContainer.Get<UserPaidCrystalData>();
+	
+		public bool isNull => this == Null;
 		#endregion
-		#region Methods
-		public async Task<bool> DbSave()
-		{
-			if (this._id == ObjectId.Empty) {
-				var data = await DbGetDataById(this.id);
-				this._id = (data != null) ? data._id : this._id;
+		#region GameDbWrapper(DataTable)
+		public static DataTable<long, UserPaidCrystalData> dataTable {
+			get {
+				DataTable<long, UserPaidCrystalData> result;
+				if (GameDb.TableExists<long, UserPaidCrystalData>()) {
+					result = GameDb.From<long, UserPaidCrystalData>();
+				} else {
+					result = GameDb.CreateTable<long, UserPaidCrystalData>();
+					SetupUserPaidCrystalDataTableIndexGenerated(result);
+					SetupUserPaidCrystalDataTableIndex(result);
+				}
+				return result;
 			}
-			return await DbSetData(this);
 		}
 
-		public async Task<bool> DbDelete()
+		public static int Count => dataTable.Count;
+
+		public static List<UserPaidCrystalData> GetDataList()
 		{
-			return await DbDeleteDataById(this.id);
+			return dataTable.dataList;
+		}
+
+		public static void SetDataList(IEnumerable<UserPaidCrystalData> dataList)
+		{
+			Clear();
+			dataTable.InsertRange(dataList);
+		}
+
+		public static void Clear()
+		{
+			dataTable.DeleteAll();
+		}
+
+		static partial void SetupUserPaidCrystalDataTableIndex(DataTable<long, UserPaidCrystalData> targetDataTable);
+
+		private static void SetupUserPaidCrystalDataTableIndexGenerated(DataTable<long, UserPaidCrystalData> targetDataTable)
+		{
+			targetDataTable.CreateUniqueIndex("Id", aData => (object)aData.id);
+			targetDataTable.CreateIndex("Id", aData => (object)aData.id);
+			targetDataTable.CreateIndex("UserId", aData => (object)aData.userId);
+			targetDataTable.CreateIndex("PurchasePlatformType", aData => (object)aData.purchasePlatformType);
+			targetDataTable.CreateIndex("Amount", aData => (object)aData.amount);
+		}
+		#endregion
+		#region DataTableUniqueIndex(Id)
+		public static UserPaidCrystalData GetDataById(
+			long id)
+		{
+			return dataTable.GetData("Id", (object)id);
+		}
+		#endregion
+		#region DataTableIndex (Id)
+		public static List<UserPaidCrystalData> GetDataListById(
+			long id)
+		{
+			return dataTable.GetDataList("Id", (object)id);
+		}
+		#endregion
+		#region DataTableIndex (UserId)
+		public static List<UserPaidCrystalData> GetDataListByUserId(
+			long userId)
+		{
+			return dataTable.GetDataList("UserId", (object)userId);
+		}
+		#endregion
+		#region DataTableIndex (PurchasePlatformType)
+		public static List<UserPaidCrystalData> GetDataListByPurchasePlatformType(
+			PurchasePlatformType purchasePlatformType)
+		{
+			return dataTable.GetDataList("PurchasePlatformType", (object)purchasePlatformType);
+		}
+		#endregion
+		#region DataTableIndex (Amount)
+		public static List<UserPaidCrystalData> GetDataListByAmount(
+			long amount)
+		{
+			return dataTable.GetDataList("Amount", (object)amount);
 		}
 		#endregion
 	}
