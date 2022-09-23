@@ -1,30 +1,22 @@
 ﻿
+public enum BattleRewardType
+{
+	None = 0,
+	Normal = 1,
+	TotalTurn = 2,
+	NoContinue = 3,
+	LuckBonus = 4,
+	FirstClear = 5,
+	ClearCount = 6,
+	SpecialRewardSet = 1000,
+}
+
 public enum PurchasePlatformType
 {
 	None = 0,
 	GooglePlay = 1,
 	AppleAppStore = 2,
 	Debug = 99,
-}
-
-public enum ResourceType
-{
-	None = 0,
-	Unit = 1,
-	Item = 2,
-	Money = 3,
-	StaminaFix = 4,
-	StaminaRate = 5,
-	FreeCrystal = 98,
-	PaidCrystal = 99,
-	UserUnit = 101,
-	Crystal = 199,
-	MaxStaminaPlus = 201,
-	MaxDeckPlus = 202,
-	MaxFriendPlus = 203,
-	MaxBoxPlus = 204,
-	ResourceSet = 301,
-	ResourceLottery = 302,
 }
 
 public enum QuestDifficultyType
@@ -45,14 +37,22 @@ public enum QuestDifficultyType
 	Other = 100,
 }
 
-public enum BattleRewardType
+public enum ResourceType
 {
 	None = 0,
-	Normal = 1,
-	TotalTurn = 2,
-	NoContinue = 3,
-	LuckBonus = 4,
-	FirstClear = 5,
-	ClearCount = 6,
-	SpecialRewardSet = 1000,
+	Unit = 1,
+	Item = 2,
+	Money = 3,
+	StaminaFix = 4,
+	StaminaRate = 5,
+	FreeCrystal = 98,
+	PaidCrystal = 99,
+	UserUnit = 101,
+	Crystal = 199,
+	MaxStaminaPlus = 201,
+	MaxDeckPlus = 202,
+	MaxFriendPlus = 203,
+	MaxBoxPlus = 204,
+	ResourceSet = 301,
+	ResourceLottery = 302,
 }

@@ -49,7 +49,7 @@ namespace protoc_gen_myplugincsharp
 				response.File.Add(
 					new CodeGeneratorResponse.Types.File() {
 						Name = filename,
-						Content = Encoding.UTF8.GetString(Encoding.UTF8.GetPreamble()) + output.ToString(),
+						Content = output,
 					}
 				);
 			}

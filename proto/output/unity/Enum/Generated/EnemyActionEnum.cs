@@ -1,5 +1,5 @@
 ﻿
-public enum TriggerType
+public enum ActionType
 {
 	None = 0,
 	UnitPowerup = 1,
@@ -9,7 +9,7 @@ public enum TriggerType
 	EventPoint = 5,
 }
 
-public enum ActionType
+public enum TriggerType
 {
 	None = 0,
 	UnitPowerup = 1,

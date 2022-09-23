@@ -4,16 +4,6 @@ using System.Threading.Tasks;
 
 namespace AwsDotnetCsharp
 {
-	public partial class ShopPurchaseGooglePlayRequest
-	{
-
-	}
-
-	public partial class ShopPurchaseGooglePlayResponse
-	{
-
-	}
-
 	public partial class ShopPurchaseAppStoreRequest
 	{
 
@@ -30,6 +20,16 @@ namespace AwsDotnetCsharp
 	}
 
 	public partial class ShopPurchaseDebugResponse
+	{
+
+	}
+
+	public partial class ShopPurchaseGooglePlayRequest
+	{
+
+	}
+
+	public partial class ShopPurchaseGooglePlayResponse
 	{
 
 	}

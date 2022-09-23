@@ -75,6 +75,18 @@ public partial class Services {
 		=> SystemService.instance;
 }
 #region Request/Response
+public partial class SystemLoginRequest : CommonRequest
+{
+	[JsonProperty("token")]
+	public string token { get; set; }
+}
+
+public partial class SystemLoginResponse : APIResponse
+{
+	[JsonProperty("session_id")]
+	public string sessionId { get; set; }
+}
+
 public partial class SystemPingRequest : CommonRequest
 {
 }
@@ -93,18 +105,6 @@ public partial class SystemSignupResponse : APIResponse
 {
 	[JsonProperty("token")]
 	public string token { get; set; }
-	[JsonProperty("session_id")]
-	public string sessionId { get; set; }
-}
-
-public partial class SystemLoginRequest : CommonRequest
-{
-	[JsonProperty("token")]
-	public string token { get; set; }
-}
-
-public partial class SystemLoginResponse : APIResponse
-{
 	[JsonProperty("session_id")]
 	public string sessionId { get; set; }
 }

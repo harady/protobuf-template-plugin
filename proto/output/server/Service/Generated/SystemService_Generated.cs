@@ -131,6 +131,20 @@ namespace AwsDotnetCsharp
 	}
 
 	[JsonObject(MemberSerialization.OptIn)]
+	public partial class SystemLoginRequest : APIRequest
+	{
+		[JsonProperty("token")]
+		public string token { get; set; }
+	}
+
+	[JsonObject(MemberSerialization.OptIn)]
+	public partial class SystemLoginResponse : APIResponse
+	{
+		[JsonProperty("session_id")]
+		public string sessionId { get; set; }
+	}
+
+	[JsonObject(MemberSerialization.OptIn)]
 	public partial class SystemPingRequest : APIRequest
 	{
 	}
@@ -152,20 +166,6 @@ namespace AwsDotnetCsharp
 	{
 		[JsonProperty("token")]
 		public string token { get; set; }
-		[JsonProperty("session_id")]
-		public string sessionId { get; set; }
-	}
-
-	[JsonObject(MemberSerialization.OptIn)]
-	public partial class SystemLoginRequest : APIRequest
-	{
-		[JsonProperty("token")]
-		public string token { get; set; }
-	}
-
-	[JsonObject(MemberSerialization.OptIn)]
-	public partial class SystemLoginResponse : APIResponse
-	{
 		[JsonProperty("session_id")]
 		public string sessionId { get; set; }
 	}

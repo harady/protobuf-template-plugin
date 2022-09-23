@@ -193,6 +193,18 @@ namespace AwsDotnetCsharp
 	}
 
 	[JsonObject(MemberSerialization.OptIn)]
+	public partial class FriendRequestRequest : APIRequest
+	{
+		[JsonProperty("user_id")]
+		public long userId { get; set; }
+	}
+
+	[JsonObject(MemberSerialization.OptIn)]
+	public partial class FriendRequestResponse : APIResponse
+	{
+	}
+
+	[JsonObject(MemberSerialization.OptIn)]
 	public partial class FriendSearchRequest : APIRequest
 	{
 		[JsonProperty("code")]
@@ -204,17 +216,5 @@ namespace AwsDotnetCsharp
 	{
 		[JsonProperty("other_user")]
 		public OtherUserData otherUser { get; set; }
-	}
-
-	[JsonObject(MemberSerialization.OptIn)]
-	public partial class FriendRequestRequest : APIRequest
-	{
-		[JsonProperty("user_id")]
-		public long userId { get; set; }
-	}
-
-	[JsonObject(MemberSerialization.OptIn)]
-	public partial class FriendRequestResponse : APIResponse
-	{
 	}
 }
