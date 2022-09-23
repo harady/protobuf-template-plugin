@@ -88,7 +88,7 @@ func (g *Generator) GenerateAllFiles() {
 		fileName := fmt.Sprintf("%s%s", strings.Title(SnakeToPascal(file.FileName)), g.fileSuffix)
 		content := fmt.Sprintf("%s", buf.String())
 
-		if len(strings.TrimSpace(content)) > 0 {
+		if len(strings.TrimSpace(content)) > 4 {
 			g.Response.File = append(g.Response.File, &plugin.CodeGeneratorResponse_File{
 				Name:    &fileName,
 				Content: &content,

@@ -1,4 +1,4 @@
-
+﻿
 public enum AbilityCategory
 {
 	None = 0,

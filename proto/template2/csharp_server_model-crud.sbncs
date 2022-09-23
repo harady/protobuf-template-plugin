@@ -259,7 +259,7 @@ namespace AwsDotnetCsharp
 			Console.WriteLine($"{{ message.name }}#DbGetDataListIn{{ field.name | to_pascal }}s {sw.Elapsed.TotalSeconds}[秒]");
 			return result;
 		}
-{{ if ((field.name == "id") || has_id) }}
+{{ if ((field.name == "id") || !has_id) }}
 		public static async Task<bool> DbDeleteDataBy{{ field.name | to_pascal }}(
 			{{ field | to_cs_type }} {{ field.name | to_camel }})
 		{

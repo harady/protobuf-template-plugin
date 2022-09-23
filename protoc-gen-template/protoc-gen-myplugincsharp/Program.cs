@@ -2,9 +2,11 @@
 using Google.Protobuf.Compiler;
 using Scriban;
 using Scriban.Runtime;
+using System.Text;
 
 namespace protoc_gen_myplugincsharp
 {
+
 	internal class Program
 	{
 		static void Main(string[] args)
@@ -17,7 +19,7 @@ namespace protoc_gen_myplugincsharp
 			var paramDict = ParseParameter(request.Parameter);
 			var templatePath = (string)paramDict["template"];
 
-			var templateStr = File.ReadAllText(templatePath);
+			var templateStr = File.ReadAllText(templatePath, Encoding.UTF8);
 			var template = Template.Parse(templateStr);
 
 			var response = new CodeGeneratorResponse();
@@ -31,12 +33,6 @@ namespace protoc_gen_myplugincsharp
 					= Path.GetFileNameWithoutExtension(fileDesc.Name)
 						.ToPascalCase();
 				filename += paramDict["fileSuffix"];
-
-				//fileDesc.MessageType[0].Field[0].Name
-				//fileDesc.Service[0].Method[0].InputType
-				//fileDesc.Service[0].Method[0].OutputType;
-				//fileDesc.EnumType[0].Value
-				//fileDesc.MessageType[0].Field[0].DefaultValue
 
 				var model = new { File = fileDesc };
 				var scriptObject = new ScriptObject();
@@ -53,7 +49,7 @@ namespace protoc_gen_myplugincsharp
 				response.File.Add(
 					new CodeGeneratorResponse.Types.File() {
 						Name = filename,
-						Content = output.ToString(),
+						Content = output,
 					}
 				);
 			}

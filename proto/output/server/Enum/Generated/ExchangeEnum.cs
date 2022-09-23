@@ -1,4 +1,4 @@
-
+﻿
 public enum ExchangeType
 {
 	None = 0,

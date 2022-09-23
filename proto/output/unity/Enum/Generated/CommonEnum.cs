@@ -1,4 +1,4 @@
-
+﻿
 public enum BattleRewardType
 {
 	None = 0,
