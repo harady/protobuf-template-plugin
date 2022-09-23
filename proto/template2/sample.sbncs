@@ -1,0 +1,29 @@
+■Messages
+{{- range .Messages }}
+Message.Name:{{ .Name }}
+  Message.PrimaryKey:{{ .PrimaryKey }}
+{{- range .Fields }}
+  Field.Name:{{ .Name }}
+    Field.BaseType:{{ .BaseType }}
+    Field.FullType:{{ .FullType }}
+    Field.IsRepeated:{{ .IsRepeated }}
+{{- end }}
+{{ end }}
+■Services
+{{- range .Services }}
+Message.Name:{{ .Name }}
+{{- range .Methods }}
+  Field.Name:{{ .Name }}
+    Field.Request:{{ .BaseType }}
+    Field.Response:{{ .Name }}
+    Field.IsRepeated:{{ .Name }}
+{{- end }}
+{{ end }}
+■EnumTypes
+{{- range .EnumTypes }}
+Message.Name:{{ .Name }}
+{{- range .Values }}
+  Value.Name:{{ .Name }}
+  Value.Number:{{ .Number }}
+{{- end }}
+{{ end }}

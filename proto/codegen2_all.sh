@@ -31,6 +31,10 @@ ruby codegen.rb -i codegen2_unity_cs.yml
 # マスターデータ側
 #sh protoc_sheet.sh
 
+
+# 出力サンプル
+ruby codegen.rb -i codegen2_sample.yml
+
 # 一時停止
 if [[ "$param" == *p* ]]; then
   echo "total $SECONDS [sec]"
