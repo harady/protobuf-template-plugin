@@ -24,8 +24,8 @@ namespace AwsDotnetCsharp
 		{
 {{- for field in message.field }}
 	{{- if field | is_repeated }}
-			{{- type_name_prefix = field.name }}
-			{{- deleted_ids_propertie_name = ("deleted" + type_name_prefix + "Ids") }}
+			{{- field_name_prefix = (field.name | regex.replace "s$" "") }}
+			{{- deleted_ids_propertie_name = ("deleted" + (field_name_prefix | to_pascal) + "Ids") }}
 			this.{{field.name | to_camel}}.Merge(toMerge.{{field.name | to_camel}});
 			this.{{ deleted_ids_propertie_name }}.Merge(toMerge.{{ deleted_ids_propertie_name }});
 	{{- else }}
@@ -36,8 +36,8 @@ namespace AwsDotnetCsharp
 {{- end }}
 		}
 {{- for field in message.field }}
-		{{- type_name_prefix = field.name }}
-		{{- deleted_ids_propertie_name = ("deleted" + type_name_prefix + "Ids") }}
+		{{- field_name_prefix = (field.name | regex.replace "s$" "") }}
+		{{- deleted_ids_propertie_name = ("deleted" + (field_name_prefix | to_pascal) + "Ids") }}
 		{{- if field | is_repeated  }}
 
 		[BsonElement("{{ deleted_ids_propertie_name }}")]
@@ -46,12 +46,11 @@ namespace AwsDotnetCsharp
 		{{- end }}
 {{- end }}
 {{- for field in message.field }}
-		{{- type_name_prefix_pascal = field.name }}
-		{{- type_name_prefix_camel = field.name }}
+		{{- field_name_prefix = (field.name | regex.replace "s$" "") }}
 		{{- if field | is_repeated  }}
 
-		public TableUpdateData<{{ field | to_cs_type }}> {{ type_name_prefix_camel }}TableUpdate
-			=> new TableUpdateData<{{ field | to_cs_type }}>({{ type_name_prefix_camel }}s, deleted{{ type_name_prefix_pascal }}Ids);
+		public TableUpdateData<{{ field | to_cs_type }}> {{ field_name_prefix | to_camel }}TableUpdate
+			=> new TableUpdateData<{{ field | to_cs_type }}>({{ field_name_prefix | to_camel }}s, deleted{{ field_name_prefix | to_pascal }}Ids);
 		{{- end }}
 {{- end }}
 	}
