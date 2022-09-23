@@ -1,6 +1,4 @@
-﻿#define sample03
-
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,13 +6,13 @@ using System.IO;
 
 namespace StreamReaderForBOM_sample
 {
-	class Program
+	class Program2
 	{
 		/// <summary>
 		/// This is the reading sample of BOM by StreamReader. 
 		/// </summary>
 		/// <param name="args">[1]:FileName</param>
-		static void Main(string[] args)
+		static void Test(string[] args)
 		{
 			if (args.Length == 0) {
 				Console.WriteLine("Please input file name !");
@@ -22,69 +20,6 @@ namespace StreamReaderForBOM_sample
 
 			string fileName = args[0];
 			string fileContent = null;
-
-#if sample01
-            // Simplest StreamReader sample code.
-            using (var reader =
-                new StreamReader(fileName, 
-                    Encoding.GetEncoding("utf-8"), true)
-                )
-            {
-                Console.WriteLine("Before reading content : {0},{1}\n", 
-                    reader.CurrentEncoding.ToString(), 
-                    reader.CurrentEncoding.CodePage.ToString());
-
-                fileContent = reader.ReadToEnd();
-
-                Console.WriteLine("After reading content : {0},{1}\n", 
-                    reader.CurrentEncoding.ToString(), 
-                    reader.CurrentEncoding.CodePage.ToString());
-            }
-
-            Console.WriteLine(fileContent);
-#endif
-
-#if sample02
-            // This is a sample code that can identify the BOM.
-            // However, I cannot identify that there is no BOM.
-            using (var reader =
-                new StreamReader(fileName,
-                    Encoding.GetEncoding("utf-8"), true)
-                )
-            {
-                Console.WriteLine("Peek().");
-
-                reader.Peek();
-
-                byte[] buffer;
-                buffer = reader.CurrentEncoding.GetPreamble().ToArray<byte>();
-
-                Console.WriteLine("GetPreamble().Length : {0}",
-                    reader.CurrentEncoding.GetPreamble().Length);
-
-                Console.Write("GetPreamble().ToArray ");
-
-                foreach(var buf in buffer)
-                {
-                    Console.Write(":{0}", buf.ToString("x2"));
-                }
-                Console.WriteLine(";");
-
-                Console.WriteLine("Before reading content : {0},{1}\n",
-                    reader.CurrentEncoding.ToString(),
-                    reader.CurrentEncoding.CodePage.ToString());
-
-                fileContent = reader.ReadToEnd();
-
-                Console.WriteLine("After reading content : {0},{1}\n",
-                    reader.CurrentEncoding.ToString(),
-                    reader.CurrentEncoding.CodePage.ToString());
-            }
-
-            Console.WriteLine(fileContent);
-#endif
-
-#if sample03
 
 			// This is sample code where utf and shift-jis can coexist.
 			using (FileStream fs =
@@ -126,10 +61,8 @@ namespace StreamReaderForBOM_sample
 				Console.WriteLine(fileContent);
 			}
 
-#endif
 		} //End of Main
 
-#if sample03
 
 		/// <summary>
 		/// Determine if it is BOM
@@ -187,8 +120,5 @@ namespace StreamReaderForBOM_sample
 
 			return result;
 		}
-
-#endif
-
 	}
 }
