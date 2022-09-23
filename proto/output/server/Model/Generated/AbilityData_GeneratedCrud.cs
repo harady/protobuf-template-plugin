@@ -147,15 +147,6 @@ namespace AwsDotnetCsharp
 		private static void SetupAbilityDataTableIndexGenerated(DataTable<long, AbilityData> targetDataTable)
 		{
 			targetDataTable.CreateUniqueIndex("Id", aData => (object)aData.id);
-			targetDataTable.CreateIndex("Id", aData => (object)aData.id);
-			targetDataTable.CreateIndex("Name", aData => (object)aData.name);
-			targetDataTable.CreateIndex("Category", aData => (object)aData.category);
-			targetDataTable.CreateIndex("Type", aData => (object)aData.type);
-			targetDataTable.CreateIndex("Description", aData => (object)aData.description);
-			targetDataTable.CreateIndex("Target", aData => (object)aData.target);
-			targetDataTable.CreateIndex("ParamA", aData => (object)aData.paramA);
-			targetDataTable.CreateIndex("ParamB", aData => (object)aData.paramB);
-			targetDataTable.CreateIndex("ParamC", aData => (object)aData.paramC);
 		}
 		#endregion
 		#region DataTableUniqueIndex(Id)
@@ -163,69 +154,6 @@ namespace AwsDotnetCsharp
 			long id)
 		{
 			return dataTable.GetData("Id", (object)id);
-		}
-		#endregion
-		#region DataTableIndex (Id)
-		public static List<AbilityData> GetDataListById(
-			long id)
-		{
-			return dataTable.GetDataList("Id", (object)id);
-		}
-		#endregion
-		#region DataTableIndex (Name)
-		public static List<AbilityData> GetDataListByName(
-			string name)
-		{
-			return dataTable.GetDataList("Name", (object)name);
-		}
-		#endregion
-		#region DataTableIndex (Category)
-		public static List<AbilityData> GetDataListByCategory(
-			AbilityCategory category)
-		{
-			return dataTable.GetDataList("Category", (object)category);
-		}
-		#endregion
-		#region DataTableIndex (Type)
-		public static List<AbilityData> GetDataListByType(
-			AbilityType type)
-		{
-			return dataTable.GetDataList("Type", (object)type);
-		}
-		#endregion
-		#region DataTableIndex (Description)
-		public static List<AbilityData> GetDataListByDescription(
-			string description)
-		{
-			return dataTable.GetDataList("Description", (object)description);
-		}
-		#endregion
-		#region DataTableIndex (Target)
-		public static List<AbilityData> GetDataListByTarget(
-			long target)
-		{
-			return dataTable.GetDataList("Target", (object)target);
-		}
-		#endregion
-		#region DataTableIndex (ParamA)
-		public static List<AbilityData> GetDataListByParamA(
-			long paramA)
-		{
-			return dataTable.GetDataList("ParamA", (object)paramA);
-		}
-		#endregion
-		#region DataTableIndex (ParamB)
-		public static List<AbilityData> GetDataListByParamB(
-			long paramB)
-		{
-			return dataTable.GetDataList("ParamB", (object)paramB);
-		}
-		#endregion
-		#region DataTableIndex (ParamC)
-		public static List<AbilityData> GetDataListByParamC(
-			long paramC)
-		{
-			return dataTable.GetDataList("ParamC", (object)paramC);
 		}
 		#endregion
 	}

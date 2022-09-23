@@ -147,11 +147,7 @@ namespace AwsDotnetCsharp
 		private static void SetupIdentifableItemDataTableIndexGenerated(DataTable<long, IdentifableItemData> targetDataTable)
 		{
 			targetDataTable.CreateUniqueIndex("Id", aData => (object)aData.id);
-			targetDataTable.CreateIndex("Id", aData => (object)aData.id);
-			targetDataTable.CreateIndex("Name", aData => (object)aData.name);
-			targetDataTable.CreateIndex("Description", aData => (object)aData.description);
 			targetDataTable.CreateIndex("Type", aData => (object)aData.type);
-			targetDataTable.CreateIndex("OwnedLimit", aData => (object)aData.ownedLimit);
 		}
 		#endregion
 		#region DataTableUniqueIndex(Id)
@@ -161,39 +157,11 @@ namespace AwsDotnetCsharp
 			return dataTable.GetData("Id", (object)id);
 		}
 		#endregion
-		#region DataTableIndex (Id)
-		public static List<IdentifableItemData> GetDataListById(
-			long id)
-		{
-			return dataTable.GetDataList("Id", (object)id);
-		}
-		#endregion
-		#region DataTableIndex (Name)
-		public static List<IdentifableItemData> GetDataListByName(
-			string name)
-		{
-			return dataTable.GetDataList("Name", (object)name);
-		}
-		#endregion
-		#region DataTableIndex (Description)
-		public static List<IdentifableItemData> GetDataListByDescription(
-			string description)
-		{
-			return dataTable.GetDataList("Description", (object)description);
-		}
-		#endregion
 		#region DataTableIndex (Type)
 		public static List<IdentifableItemData> GetDataListByType(
 			IdentifableItemType type)
 		{
 			return dataTable.GetDataList("Type", (object)type);
-		}
-		#endregion
-		#region DataTableIndex (OwnedLimit)
-		public static List<IdentifableItemData> GetDataListByOwnedLimit(
-			long ownedLimit)
-		{
-			return dataTable.GetDataList("OwnedLimit", (object)ownedLimit);
 		}
 		#endregion
 	}

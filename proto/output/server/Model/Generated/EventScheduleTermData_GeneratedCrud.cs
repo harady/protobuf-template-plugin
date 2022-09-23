@@ -147,10 +147,6 @@ namespace AwsDotnetCsharp
 		private static void SetupEventScheduleTermDataTableIndexGenerated(DataTable<long, EventScheduleTermData> targetDataTable)
 		{
 			targetDataTable.CreateUniqueIndex("Id", aData => (object)aData.id);
-			targetDataTable.CreateIndex("Id", aData => (object)aData.id);
-			targetDataTable.CreateIndex("DailyEventTableId", aData => (object)aData.dailyEventTableId);
-			targetDataTable.CreateIndex("OpenAt", aData => (object)aData.openAt);
-			targetDataTable.CreateIndex("CloseAt", aData => (object)aData.closeAt);
 		}
 		#endregion
 		#region DataTableUniqueIndex(Id)
@@ -158,34 +154,6 @@ namespace AwsDotnetCsharp
 			long id)
 		{
 			return dataTable.GetData("Id", (object)id);
-		}
-		#endregion
-		#region DataTableIndex (Id)
-		public static List<EventScheduleTermData> GetDataListById(
-			long id)
-		{
-			return dataTable.GetDataList("Id", (object)id);
-		}
-		#endregion
-		#region DataTableIndex (DailyEventTableId)
-		public static List<EventScheduleTermData> GetDataListByDailyEventTableId(
-			long dailyEventTableId)
-		{
-			return dataTable.GetDataList("DailyEventTableId", (object)dailyEventTableId);
-		}
-		#endregion
-		#region DataTableIndex (OpenAt)
-		public static List<EventScheduleTermData> GetDataListByOpenAt(
-			long openAt)
-		{
-			return dataTable.GetDataList("OpenAt", (object)openAt);
-		}
-		#endregion
-		#region DataTableIndex (CloseAt)
-		public static List<EventScheduleTermData> GetDataListByCloseAt(
-			long closeAt)
-		{
-			return dataTable.GetDataList("CloseAt", (object)closeAt);
 		}
 		#endregion
 	}

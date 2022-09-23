@@ -147,11 +147,7 @@ namespace AwsDotnetCsharp
 		private static void SetupWeakPointPositionDataTableIndexGenerated(DataTable<long, WeakPointPositionData> targetDataTable)
 		{
 			targetDataTable.CreateUniqueIndex("Id", aData => (object)aData.id);
-			targetDataTable.CreateIndex("Id", aData => (object)aData.id);
 			targetDataTable.CreateIndex("WeakPointId", aData => (object)aData.weakPointId);
-			targetDataTable.CreateIndex("Angle", aData => (object)aData.angle);
-			targetDataTable.CreateIndex("RadiusRate", aData => (object)aData.radiusRate);
-			targetDataTable.CreateIndex("SizeRate", aData => (object)aData.sizeRate);
 		}
 		#endregion
 		#region DataTableUniqueIndex(Id)
@@ -161,39 +157,11 @@ namespace AwsDotnetCsharp
 			return dataTable.GetData("Id", (object)id);
 		}
 		#endregion
-		#region DataTableIndex (Id)
-		public static List<WeakPointPositionData> GetDataListById(
-			long id)
-		{
-			return dataTable.GetDataList("Id", (object)id);
-		}
-		#endregion
 		#region DataTableIndex (WeakPointId)
 		public static List<WeakPointPositionData> GetDataListByWeakPointId(
 			long weakPointId)
 		{
 			return dataTable.GetDataList("WeakPointId", (object)weakPointId);
-		}
-		#endregion
-		#region DataTableIndex (Angle)
-		public static List<WeakPointPositionData> GetDataListByAngle(
-			long angle)
-		{
-			return dataTable.GetDataList("Angle", (object)angle);
-		}
-		#endregion
-		#region DataTableIndex (RadiusRate)
-		public static List<WeakPointPositionData> GetDataListByRadiusRate(
-			long radiusRate)
-		{
-			return dataTable.GetDataList("RadiusRate", (object)radiusRate);
-		}
-		#endregion
-		#region DataTableIndex (SizeRate)
-		public static List<WeakPointPositionData> GetDataListBySizeRate(
-			long sizeRate)
-		{
-			return dataTable.GetDataList("SizeRate", (object)sizeRate);
 		}
 		#endregion
 	}

@@ -82,10 +82,8 @@ namespace AwsDotnetCsharp
 		public static async Task DbSetupIndex()
 		{
 			var builder = Builders<UserItemData>.IndexKeys;
-			await DbSetupOneIndex(builder.Ascending(aData => aData.id));
 			await DbSetupOneIndex(builder.Ascending(aData => aData.userId));
 			await DbSetupOneIndex(builder.Ascending(aData => aData.itemId));
-			await DbSetupOneIndex(builder.Ascending(aData => aData.amount));
 		}
 
 		public static async Task DbSetupOneIndex(
@@ -212,6 +210,62 @@ namespace AwsDotnetCsharp
 			var dataList = await DbGetDataListByUserIds(userIds);
 			var ids = dataList.Select(data => data.id);
 			var result = await DbDeleteDataByIds(ids);
+			return result;
+		}
+		#endregion
+		#region MongoDbUniqueIndex(ItemId)
+		public static async Task<UserItemData> DbGetDataByItemId(
+			long itemId)
+		{
+			var sw = Stopwatch.StartNew();
+			var cacheKey = "UserItemData/GetDataByItemId_" + itemId;
+			var result = await collection
+				.Find(
+					sessionHandle,
+					aData => aData.itemId == itemId)
+				.FirstOrDefaultAsync();
+			Console.WriteLine($"UserItemData#DbGetDataByItemId {sw.Elapsed.TotalSeconds}[秒]");
+			return result;
+		}
+
+		public static async Task<List<UserItemData>> DbGetDataListInItemIds(
+			IEnumerable<long> itemIds)
+		{
+			var sw = Stopwatch.StartNew();
+			var filter = Builders<UserItemData>.Filter.In(aData => aData.itemId, itemIds);
+			var result = await collection
+				.Find(
+					sessionHandle,
+					filter)
+				.ToListAsync();
+			Console.WriteLine($"UserItemData#DbGetDataListInItemIds {sw.Elapsed.TotalSeconds}[秒]");
+			return result;
+		}
+
+		public static async Task<bool> DbDeleteDataByItemId(
+			long itemId)
+		{
+			var sw = Stopwatch.StartNew();
+			var deleteResult = await collection
+				.DeleteOneAsync(
+					sessionHandle,
+					aData => aData.itemId == itemId);
+			Console.WriteLine($"UserItemData#DbDeleteDataByItemId {sw.Elapsed.TotalSeconds}[秒]");
+			var result = deleteResult.IsAcknowledged;
+			return result;
+		}
+
+		public static async Task<bool> DbDeleteDataByItemIds(
+			IEnumerable<long> itemIds)
+		{
+			var sw = Stopwatch.StartNew();
+			var keySet = itemIds.ToHashSet();
+			var deleteResult = await collection
+				.DeleteManyAsync(
+					sessionHandle,
+					aData => keySet.Contains(aData.itemId));
+			Console.WriteLine($"UserItemData#DbDeleteDataByItemIds {sw.Elapsed.TotalSeconds}[秒]");
+			var result = deleteResult.IsAcknowledged;
 			return result;
 		}
 		#endregion

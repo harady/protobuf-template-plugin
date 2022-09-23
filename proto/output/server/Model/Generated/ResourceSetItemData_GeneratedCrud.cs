@@ -147,11 +147,7 @@ namespace AwsDotnetCsharp
 		private static void SetupResourceSetItemDataTableIndexGenerated(DataTable<long, ResourceSetItemData> targetDataTable)
 		{
 			targetDataTable.CreateUniqueIndex("Id", aData => (object)aData.id);
-			targetDataTable.CreateIndex("Id", aData => (object)aData.id);
 			targetDataTable.CreateIndex("ResourceSetId", aData => (object)aData.resourceSetId);
-			targetDataTable.CreateIndex("ResourceType", aData => (object)aData.resourceType);
-			targetDataTable.CreateIndex("ResourceId", aData => (object)aData.resourceId);
-			targetDataTable.CreateIndex("ResourceAmount", aData => (object)aData.resourceAmount);
 		}
 		#endregion
 		#region DataTableUniqueIndex(Id)
@@ -161,39 +157,11 @@ namespace AwsDotnetCsharp
 			return dataTable.GetData("Id", (object)id);
 		}
 		#endregion
-		#region DataTableIndex (Id)
-		public static List<ResourceSetItemData> GetDataListById(
-			long id)
-		{
-			return dataTable.GetDataList("Id", (object)id);
-		}
-		#endregion
 		#region DataTableIndex (ResourceSetId)
 		public static List<ResourceSetItemData> GetDataListByResourceSetId(
 			long resourceSetId)
 		{
 			return dataTable.GetDataList("ResourceSetId", (object)resourceSetId);
-		}
-		#endregion
-		#region DataTableIndex (ResourceType)
-		public static List<ResourceSetItemData> GetDataListByResourceType(
-			ResourceType resourceType)
-		{
-			return dataTable.GetDataList("ResourceType", (object)resourceType);
-		}
-		#endregion
-		#region DataTableIndex (ResourceId)
-		public static List<ResourceSetItemData> GetDataListByResourceId(
-			long resourceId)
-		{
-			return dataTable.GetDataList("ResourceId", (object)resourceId);
-		}
-		#endregion
-		#region DataTableIndex (ResourceAmount)
-		public static List<ResourceSetItemData> GetDataListByResourceAmount(
-			long resourceAmount)
-		{
-			return dataTable.GetDataList("ResourceAmount", (object)resourceAmount);
 		}
 		#endregion
 	}

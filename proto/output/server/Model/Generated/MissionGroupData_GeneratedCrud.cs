@@ -147,7 +147,6 @@ namespace AwsDotnetCsharp
 		private static void SetupMissionGroupDataTableIndexGenerated(DataTable<long, MissionGroupData> targetDataTable)
 		{
 			targetDataTable.CreateUniqueIndex("Id", aData => (object)aData.id);
-			targetDataTable.CreateIndex("Id", aData => (object)aData.id);
 			targetDataTable.CreateIndex("Type", aData => (object)aData.type);
 		}
 		#endregion
@@ -156,13 +155,6 @@ namespace AwsDotnetCsharp
 			long id)
 		{
 			return dataTable.GetData("Id", (object)id);
-		}
-		#endregion
-		#region DataTableIndex (Id)
-		public static List<MissionGroupData> GetDataListById(
-			long id)
-		{
-			return dataTable.GetDataList("Id", (object)id);
 		}
 		#endregion
 		#region DataTableIndex (Type)

@@ -147,9 +147,6 @@ namespace AwsDotnetCsharp
 		private static void SetupResourceLotteryDataTableIndexGenerated(DataTable<long, ResourceLotteryData> targetDataTable)
 		{
 			targetDataTable.CreateUniqueIndex("Id", aData => (object)aData.id);
-			targetDataTable.CreateIndex("Id", aData => (object)aData.id);
-			targetDataTable.CreateIndex("Name", aData => (object)aData.name);
-			targetDataTable.CreateIndex("HasEmpty", aData => (object)aData.hasEmpty);
 		}
 		#endregion
 		#region DataTableUniqueIndex(Id)
@@ -157,27 +154,6 @@ namespace AwsDotnetCsharp
 			long id)
 		{
 			return dataTable.GetData("Id", (object)id);
-		}
-		#endregion
-		#region DataTableIndex (Id)
-		public static List<ResourceLotteryData> GetDataListById(
-			long id)
-		{
-			return dataTable.GetDataList("Id", (object)id);
-		}
-		#endregion
-		#region DataTableIndex (Name)
-		public static List<ResourceLotteryData> GetDataListByName(
-			string name)
-		{
-			return dataTable.GetDataList("Name", (object)name);
-		}
-		#endregion
-		#region DataTableIndex (HasEmpty)
-		public static List<ResourceLotteryData> GetDataListByHasEmpty(
-			bool hasEmpty)
-		{
-			return dataTable.GetDataList("HasEmpty", (object)hasEmpty);
 		}
 		#endregion
 	}

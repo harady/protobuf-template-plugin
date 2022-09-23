@@ -82,22 +82,8 @@ namespace AwsDotnetCsharp
 		public static async Task DbSetupIndex()
 		{
 			var builder = Builders<UserUnitData>.IndexKeys;
-			await DbSetupOneIndex(builder.Ascending(aData => aData.id));
 			await DbSetupOneIndex(builder.Ascending(aData => aData.userId));
 			await DbSetupOneIndex(builder.Ascending(aData => aData.unitId));
-			await DbSetupOneIndex(builder.Ascending(aData => aData.level));
-			await DbSetupOneIndex(builder.Ascending(aData => aData.exp));
-			await DbSetupOneIndex(builder.Ascending(aData => aData.luck));
-			await DbSetupOneIndex(builder.Ascending(aData => aData.plusHp));
-			await DbSetupOneIndex(builder.Ascending(aData => aData.plusAttack));
-			await DbSetupOneIndex(builder.Ascending(aData => aData.plusSpeed));
-			await DbSetupOneIndex(builder.Ascending(aData => aData.equipment1Id));
-			await DbSetupOneIndex(builder.Ascending(aData => aData.equipment2Id));
-			await DbSetupOneIndex(builder.Ascending(aData => aData.equipment3Id));
-			await DbSetupOneIndex(builder.Ascending(aData => aData.heroMark));
-			await DbSetupOneIndex(builder.Ascending(aData => aData.heroBadge));
-			await DbSetupOneIndex(builder.Ascending(aData => aData.isLocked));
-			await DbSetupOneIndex(builder.Ascending(aData => aData.getAt));
 		}
 
 		public static async Task DbSetupOneIndex(

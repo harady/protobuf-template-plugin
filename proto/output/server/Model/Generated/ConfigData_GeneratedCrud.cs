@@ -147,10 +147,7 @@ namespace AwsDotnetCsharp
 		private static void SetupConfigDataTableIndexGenerated(DataTable<long, ConfigData> targetDataTable)
 		{
 			targetDataTable.CreateUniqueIndex("Id", aData => (object)aData.id);
-			targetDataTable.CreateIndex("Id", aData => (object)aData.id);
-			targetDataTable.CreateIndex("Key", aData => (object)aData.key);
-			targetDataTable.CreateIndex("Value", aData => (object)aData.value);
-			targetDataTable.CreateIndex("Text", aData => (object)aData.text);
+			targetDataTable.CreateUniqueIndex("Key", aData => (object)aData.key);
 		}
 		#endregion
 		#region DataTableUniqueIndex(Id)
@@ -160,32 +157,11 @@ namespace AwsDotnetCsharp
 			return dataTable.GetData("Id", (object)id);
 		}
 		#endregion
-		#region DataTableIndex (Id)
-		public static List<ConfigData> GetDataListById(
-			long id)
-		{
-			return dataTable.GetDataList("Id", (object)id);
-		}
-		#endregion
-		#region DataTableIndex (Key)
-		public static List<ConfigData> GetDataListByKey(
+		#region DataTableUniqueIndex(Key)
+		public static ConfigData GetDataByKey(
 			string key)
 		{
-			return dataTable.GetDataList("Key", (object)key);
-		}
-		#endregion
-		#region DataTableIndex (Value)
-		public static List<ConfigData> GetDataListByValue(
-			long value)
-		{
-			return dataTable.GetDataList("Value", (object)value);
-		}
-		#endregion
-		#region DataTableIndex (Text)
-		public static List<ConfigData> GetDataListByText(
-			string text)
-		{
-			return dataTable.GetDataList("Text", (object)text);
+			return dataTable.GetData("Key", (object)key);
 		}
 		#endregion
 	}

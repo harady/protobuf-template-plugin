@@ -147,10 +147,7 @@ namespace AwsDotnetCsharp
 		private static void SetupRoundDataTableIndexGenerated(DataTable<long, RoundData> targetDataTable)
 		{
 			targetDataTable.CreateUniqueIndex("Id", aData => (object)aData.id);
-			targetDataTable.CreateIndex("Id", aData => (object)aData.id);
-			targetDataTable.CreateIndex("Name", aData => (object)aData.name);
 			targetDataTable.CreateIndex("StageId", aData => (object)aData.stageId);
-			targetDataTable.CreateIndex("RoundNo", aData => (object)aData.roundNo);
 		}
 		#endregion
 		#region DataTableUniqueIndex(Id)
@@ -160,32 +157,11 @@ namespace AwsDotnetCsharp
 			return dataTable.GetData("Id", (object)id);
 		}
 		#endregion
-		#region DataTableIndex (Id)
-		public static List<RoundData> GetDataListById(
-			long id)
-		{
-			return dataTable.GetDataList("Id", (object)id);
-		}
-		#endregion
-		#region DataTableIndex (Name)
-		public static List<RoundData> GetDataListByName(
-			string name)
-		{
-			return dataTable.GetDataList("Name", (object)name);
-		}
-		#endregion
 		#region DataTableIndex (StageId)
 		public static List<RoundData> GetDataListByStageId(
 			long stageId)
 		{
 			return dataTable.GetDataList("StageId", (object)stageId);
-		}
-		#endregion
-		#region DataTableIndex (RoundNo)
-		public static List<RoundData> GetDataListByRoundNo(
-			long roundNo)
-		{
-			return dataTable.GetDataList("RoundNo", (object)roundNo);
 		}
 		#endregion
 	}

@@ -80,23 +80,8 @@ namespace AwsDotnetCsharp
 		public static async Task DbSetupIndex()
 		{
 			var builder = Builders<UserData>.IndexKeys;
-			await DbSetupOneIndex(builder.Ascending(aData => aData.id));
-			await DbSetupOneIndex(builder.Ascending(aData => aData.name));
 			await DbSetupOneIndex(builder.Ascending(aData => aData.token));
 			await DbSetupOneIndex(builder.Ascending(aData => aData.code));
-			await DbSetupOneIndex(builder.Ascending(aData => aData.rank));
-			await DbSetupOneIndex(builder.Ascending(aData => aData.exp));
-			await DbSetupOneIndex(builder.Ascending(aData => aData.money));
-			await DbSetupOneIndex(builder.Ascending(aData => aData.stamina));
-			await DbSetupOneIndex(builder.Ascending(aData => aData.lastStaminaUpdateAt));
-			await DbSetupOneIndex(builder.Ascending(aData => aData.freeCrystal));
-			await DbSetupOneIndex(builder.Ascending(aData => aData.paidCrystal));
-			await DbSetupOneIndex(builder.Ascending(aData => aData.currentDeckId));
-			await DbSetupOneIndex(builder.Ascending(aData => aData.maxStaminaPlus));
-			await DbSetupOneIndex(builder.Ascending(aData => aData.deckNumPlus));
-			await DbSetupOneIndex(builder.Ascending(aData => aData.maxFriendNumPlus));
-			await DbSetupOneIndex(builder.Ascending(aData => aData.unitBoxNumPlus));
-			await DbSetupOneIndex(builder.Ascending(aData => aData.friendUserUnitId));
 		}
 
 		public static async Task DbSetupOneIndex(

@@ -173,12 +173,12 @@ namespace AwsDotnetCsharp
 		private static void Setup{{ message.name }}TableIndexGenerated(DataTable<long, {{ message.name }}> targetDataTable)
 		{
 			{{- for field in message.field }}
-				{{- if (field.name == "id") }}
+				{{- if (field.name == "id") || (unique_indexs | array.contains field.name) }}
 			targetDataTable.CreateUniqueIndex("{{ field.name | to_pascal }}", aData => (object)aData.{{ field.name | to_camel }});
 				{{- end }}
 			{{- end }}
 			{{- for field in message.field }}
-				{{- if true }}
+				{{- if (indexs | array.contains field.name) }}
 			targetDataTable.CreateIndex("{{ field.name | to_pascal }}", aData => (object)aData.{{ field.name | to_camel }});
 				{{- end }}
 			{{- end }}
@@ -186,7 +186,7 @@ namespace AwsDotnetCsharp
 		#endregion
 		{{- end }}
 		{{- for field in message.field }}
-			{{- if (field.name == "id") }}
+			{{- if (field.name == "id") || (unique_indexs | array.contains field.name) }}
 		#region DataTableUniqueIndex({{ field.name | to_pascal }})
 		public static {{ message.name }} GetDataBy{{ field.name | to_pascal }}(
 			{{ field | to_cs_type }} {{ field.name | to_camel }})
@@ -197,7 +197,7 @@ namespace AwsDotnetCsharp
 			{{- end }}
 		{{- end }}
 		{{- for field in message.field }}
-			{{- if true }}
+			{{- if (indexs | array.contains field.name) }}
 		#region DataTableIndex ({{ field.name | to_pascal }})
 		public static List<{{ message.name }}> GetDataListBy{{ field.name | to_pascal }}(
 			{{ field | to_cs_type }} {{ field.name | to_camel }})
@@ -213,7 +213,7 @@ namespace AwsDotnetCsharp
 		{
 			var builder = Builders<{{ message.name }}>.IndexKeys;
 			{{- for field in message.field }}
-				{{- if true }}
+				{{- if (unique_indexs | array.contains field.name) || (indexs | array.contains field.name) }}
 			await DbSetupOneIndex(builder.Ascending(aData => aData.{{ field.name | to_camel }}));
 				{{- end }}
 			{{- end }}
@@ -230,7 +230,7 @@ namespace AwsDotnetCsharp
 		}
 		#endregion
 		{{- for field in message.field }}
-			{{- if (field.name == "id") }}
+			{{- if (field.name == "id") || (unique_indexs | array.contains field.name) }}
 		#region MongoDbUniqueIndex({{ field.name | to_pascal }})
 		public static async Task<{{ message.name }}> DbGetDataBy{{ field.name | to_pascal }}(
 			{{ field | to_cs_type }} {{ field.name | to_camel }})

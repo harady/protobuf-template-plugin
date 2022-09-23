@@ -147,15 +147,8 @@ namespace AwsDotnetCsharp
 		private static void SetupItemDataTableIndexGenerated(DataTable<long, ItemData> targetDataTable)
 		{
 			targetDataTable.CreateUniqueIndex("Id", aData => (object)aData.id);
-			targetDataTable.CreateIndex("Id", aData => (object)aData.id);
-			targetDataTable.CreateIndex("Name", aData => (object)aData.name);
-			targetDataTable.CreateIndex("Attribute", aData => (object)aData.attribute);
-			targetDataTable.CreateIndex("Description", aData => (object)aData.description);
 			targetDataTable.CreateIndex("Category", aData => (object)aData.category);
 			targetDataTable.CreateIndex("Type", aData => (object)aData.type);
-			targetDataTable.CreateIndex("OwnedLimit", aData => (object)aData.ownedLimit);
-			targetDataTable.CreateIndex("ParamA", aData => (object)aData.paramA);
-			targetDataTable.CreateIndex("ParamB", aData => (object)aData.paramB);
 		}
 		#endregion
 		#region DataTableUniqueIndex(Id)
@@ -163,34 +156,6 @@ namespace AwsDotnetCsharp
 			long id)
 		{
 			return dataTable.GetData("Id", (object)id);
-		}
-		#endregion
-		#region DataTableIndex (Id)
-		public static List<ItemData> GetDataListById(
-			long id)
-		{
-			return dataTable.GetDataList("Id", (object)id);
-		}
-		#endregion
-		#region DataTableIndex (Name)
-		public static List<ItemData> GetDataListByName(
-			string name)
-		{
-			return dataTable.GetDataList("Name", (object)name);
-		}
-		#endregion
-		#region DataTableIndex (Attribute)
-		public static List<ItemData> GetDataListByAttribute(
-			long attribute)
-		{
-			return dataTable.GetDataList("Attribute", (object)attribute);
-		}
-		#endregion
-		#region DataTableIndex (Description)
-		public static List<ItemData> GetDataListByDescription(
-			string description)
-		{
-			return dataTable.GetDataList("Description", (object)description);
 		}
 		#endregion
 		#region DataTableIndex (Category)
@@ -205,27 +170,6 @@ namespace AwsDotnetCsharp
 			ItemType type)
 		{
 			return dataTable.GetDataList("Type", (object)type);
-		}
-		#endregion
-		#region DataTableIndex (OwnedLimit)
-		public static List<ItemData> GetDataListByOwnedLimit(
-			long ownedLimit)
-		{
-			return dataTable.GetDataList("OwnedLimit", (object)ownedLimit);
-		}
-		#endregion
-		#region DataTableIndex (ParamA)
-		public static List<ItemData> GetDataListByParamA(
-			long paramA)
-		{
-			return dataTable.GetDataList("ParamA", (object)paramA);
-		}
-		#endregion
-		#region DataTableIndex (ParamB)
-		public static List<ItemData> GetDataListByParamB(
-			long paramB)
-		{
-			return dataTable.GetDataList("ParamB", (object)paramB);
 		}
 		#endregion
 	}

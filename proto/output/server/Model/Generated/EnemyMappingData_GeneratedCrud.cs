@@ -147,13 +147,7 @@ namespace AwsDotnetCsharp
 		private static void SetupEnemyMappingDataTableIndexGenerated(DataTable<long, EnemyMappingData> targetDataTable)
 		{
 			targetDataTable.CreateUniqueIndex("Id", aData => (object)aData.id);
-			targetDataTable.CreateIndex("Id", aData => (object)aData.id);
 			targetDataTable.CreateIndex("RoundId", aData => (object)aData.roundId);
-			targetDataTable.CreateIndex("EnemyId", aData => (object)aData.enemyId);
-			targetDataTable.CreateIndex("PosX", aData => (object)aData.posX);
-			targetDataTable.CreateIndex("PosY", aData => (object)aData.posY);
-			targetDataTable.CreateIndex("DropRate", aData => (object)aData.dropRate);
-			targetDataTable.CreateIndex("RewardResourceLotteryId", aData => (object)aData.rewardResourceLotteryId);
 		}
 		#endregion
 		#region DataTableUniqueIndex(Id)
@@ -163,53 +157,11 @@ namespace AwsDotnetCsharp
 			return dataTable.GetData("Id", (object)id);
 		}
 		#endregion
-		#region DataTableIndex (Id)
-		public static List<EnemyMappingData> GetDataListById(
-			long id)
-		{
-			return dataTable.GetDataList("Id", (object)id);
-		}
-		#endregion
 		#region DataTableIndex (RoundId)
 		public static List<EnemyMappingData> GetDataListByRoundId(
 			long roundId)
 		{
 			return dataTable.GetDataList("RoundId", (object)roundId);
-		}
-		#endregion
-		#region DataTableIndex (EnemyId)
-		public static List<EnemyMappingData> GetDataListByEnemyId(
-			long enemyId)
-		{
-			return dataTable.GetDataList("EnemyId", (object)enemyId);
-		}
-		#endregion
-		#region DataTableIndex (PosX)
-		public static List<EnemyMappingData> GetDataListByPosX(
-			long posX)
-		{
-			return dataTable.GetDataList("PosX", (object)posX);
-		}
-		#endregion
-		#region DataTableIndex (PosY)
-		public static List<EnemyMappingData> GetDataListByPosY(
-			long posY)
-		{
-			return dataTable.GetDataList("PosY", (object)posY);
-		}
-		#endregion
-		#region DataTableIndex (DropRate)
-		public static List<EnemyMappingData> GetDataListByDropRate(
-			long dropRate)
-		{
-			return dataTable.GetDataList("DropRate", (object)dropRate);
-		}
-		#endregion
-		#region DataTableIndex (RewardResourceLotteryId)
-		public static List<EnemyMappingData> GetDataListByRewardResourceLotteryId(
-			long rewardResourceLotteryId)
-		{
-			return dataTable.GetDataList("RewardResourceLotteryId", (object)rewardResourceLotteryId);
 		}
 		#endregion
 	}

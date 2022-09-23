@@ -82,7 +82,6 @@ namespace AwsDotnetCsharp
 		public static async Task DbSetupIndex()
 		{
 			var builder = Builders<UserBackupData>.IndexKeys;
-			await DbSetupOneIndex(builder.Ascending(aData => aData.id));
 			await DbSetupOneIndex(builder.Ascending(aData => aData.userId));
 			await DbSetupOneIndex(builder.Ascending(aData => aData.backupType));
 			await DbSetupOneIndex(builder.Ascending(aData => aData.backupToken));
@@ -212,6 +211,62 @@ namespace AwsDotnetCsharp
 			var dataList = await DbGetDataListByUserIds(userIds);
 			var ids = dataList.Select(data => data.id);
 			var result = await DbDeleteDataByIds(ids);
+			return result;
+		}
+		#endregion
+		#region MongoDbUniqueIndex(BackupType)
+		public static async Task<UserBackupData> DbGetDataByBackupType(
+			BackupType backupType)
+		{
+			var sw = Stopwatch.StartNew();
+			var cacheKey = "UserBackupData/GetDataByBackupType_" + backupType;
+			var result = await collection
+				.Find(
+					sessionHandle,
+					aData => aData.backupType == backupType)
+				.FirstOrDefaultAsync();
+			Console.WriteLine($"UserBackupData#DbGetDataByBackupType {sw.Elapsed.TotalSeconds}[秒]");
+			return result;
+		}
+
+		public static async Task<List<UserBackupData>> DbGetDataListInBackupTypes(
+			IEnumerable<BackupType> backupTypes)
+		{
+			var sw = Stopwatch.StartNew();
+			var filter = Builders<UserBackupData>.Filter.In(aData => aData.backupType, backupTypes);
+			var result = await collection
+				.Find(
+					sessionHandle,
+					filter)
+				.ToListAsync();
+			Console.WriteLine($"UserBackupData#DbGetDataListInBackupTypes {sw.Elapsed.TotalSeconds}[秒]");
+			return result;
+		}
+
+		public static async Task<bool> DbDeleteDataByBackupType(
+			BackupType backupType)
+		{
+			var sw = Stopwatch.StartNew();
+			var deleteResult = await collection
+				.DeleteOneAsync(
+					sessionHandle,
+					aData => aData.backupType == backupType);
+			Console.WriteLine($"UserBackupData#DbDeleteDataByBackupType {sw.Elapsed.TotalSeconds}[秒]");
+			var result = deleteResult.IsAcknowledged;
+			return result;
+		}
+
+		public static async Task<bool> DbDeleteDataByBackupTypes(
+			IEnumerable<BackupType> backupTypes)
+		{
+			var sw = Stopwatch.StartNew();
+			var keySet = backupTypes.ToHashSet();
+			var deleteResult = await collection
+				.DeleteManyAsync(
+					sessionHandle,
+					aData => keySet.Contains(aData.backupType));
+			Console.WriteLine($"UserBackupData#DbDeleteDataByBackupTypes {sw.Elapsed.TotalSeconds}[秒]");
+			var result = deleteResult.IsAcknowledged;
 			return result;
 		}
 		#endregion

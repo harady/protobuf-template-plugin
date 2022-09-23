@@ -82,11 +82,8 @@ namespace AwsDotnetCsharp
 		public static async Task DbSetupIndex()
 		{
 			var builder = Builders<UserUnitCollectionData>.IndexKeys;
-			await DbSetupOneIndex(builder.Ascending(aData => aData.id));
 			await DbSetupOneIndex(builder.Ascending(aData => aData.userId));
 			await DbSetupOneIndex(builder.Ascending(aData => aData.unitId));
-			await DbSetupOneIndex(builder.Ascending(aData => aData.hasEarned));
-			await DbSetupOneIndex(builder.Ascending(aData => aData.usedCount));
 		}
 
 		public static async Task DbSetupOneIndex(
@@ -213,6 +210,62 @@ namespace AwsDotnetCsharp
 			var dataList = await DbGetDataListByUserIds(userIds);
 			var ids = dataList.Select(data => data.id);
 			var result = await DbDeleteDataByIds(ids);
+			return result;
+		}
+		#endregion
+		#region MongoDbUniqueIndex(UnitId)
+		public static async Task<UserUnitCollectionData> DbGetDataByUnitId(
+			long unitId)
+		{
+			var sw = Stopwatch.StartNew();
+			var cacheKey = "UserUnitCollectionData/GetDataByUnitId_" + unitId;
+			var result = await collection
+				.Find(
+					sessionHandle,
+					aData => aData.unitId == unitId)
+				.FirstOrDefaultAsync();
+			Console.WriteLine($"UserUnitCollectionData#DbGetDataByUnitId {sw.Elapsed.TotalSeconds}[秒]");
+			return result;
+		}
+
+		public static async Task<List<UserUnitCollectionData>> DbGetDataListInUnitIds(
+			IEnumerable<long> unitIds)
+		{
+			var sw = Stopwatch.StartNew();
+			var filter = Builders<UserUnitCollectionData>.Filter.In(aData => aData.unitId, unitIds);
+			var result = await collection
+				.Find(
+					sessionHandle,
+					filter)
+				.ToListAsync();
+			Console.WriteLine($"UserUnitCollectionData#DbGetDataListInUnitIds {sw.Elapsed.TotalSeconds}[秒]");
+			return result;
+		}
+
+		public static async Task<bool> DbDeleteDataByUnitId(
+			long unitId)
+		{
+			var sw = Stopwatch.StartNew();
+			var deleteResult = await collection
+				.DeleteOneAsync(
+					sessionHandle,
+					aData => aData.unitId == unitId);
+			Console.WriteLine($"UserUnitCollectionData#DbDeleteDataByUnitId {sw.Elapsed.TotalSeconds}[秒]");
+			var result = deleteResult.IsAcknowledged;
+			return result;
+		}
+
+		public static async Task<bool> DbDeleteDataByUnitIds(
+			IEnumerable<long> unitIds)
+		{
+			var sw = Stopwatch.StartNew();
+			var keySet = unitIds.ToHashSet();
+			var deleteResult = await collection
+				.DeleteManyAsync(
+					sessionHandle,
+					aData => keySet.Contains(aData.unitId));
+			Console.WriteLine($"UserUnitCollectionData#DbDeleteDataByUnitIds {sw.Elapsed.TotalSeconds}[秒]");
+			var result = deleteResult.IsAcknowledged;
 			return result;
 		}
 		#endregion

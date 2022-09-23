@@ -82,10 +82,7 @@ namespace AwsDotnetCsharp
 		public static async Task DbSetupIndex()
 		{
 			var builder = Builders<UserPaidCrystalData>.IndexKeys;
-			await DbSetupOneIndex(builder.Ascending(aData => aData.id));
 			await DbSetupOneIndex(builder.Ascending(aData => aData.userId));
-			await DbSetupOneIndex(builder.Ascending(aData => aData.purchasePlatformType));
-			await DbSetupOneIndex(builder.Ascending(aData => aData.amount));
 		}
 
 		public static async Task DbSetupOneIndex(

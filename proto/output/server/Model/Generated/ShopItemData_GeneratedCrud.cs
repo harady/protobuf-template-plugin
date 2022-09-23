@@ -147,14 +147,8 @@ namespace AwsDotnetCsharp
 		private static void SetupShopItemDataTableIndexGenerated(DataTable<long, ShopItemData> targetDataTable)
 		{
 			targetDataTable.CreateUniqueIndex("Id", aData => (object)aData.id);
-			targetDataTable.CreateIndex("Id", aData => (object)aData.id);
-			targetDataTable.CreateIndex("Name", aData => (object)aData.name);
+			targetDataTable.CreateUniqueIndex("PlatformProductId", aData => (object)aData.platformProductId);
 			targetDataTable.CreateIndex("ShopId", aData => (object)aData.shopId);
-			targetDataTable.CreateIndex("PurchasePlatformType", aData => (object)aData.purchasePlatformType);
-			targetDataTable.CreateIndex("PlatformProductId", aData => (object)aData.platformProductId);
-			targetDataTable.CreateIndex("Price", aData => (object)aData.price);
-			targetDataTable.CreateIndex("ResourceSetId", aData => (object)aData.resourceSetId);
-			targetDataTable.CreateIndex("LimitCount", aData => (object)aData.limitCount);
 		}
 		#endregion
 		#region DataTableUniqueIndex(Id)
@@ -164,18 +158,11 @@ namespace AwsDotnetCsharp
 			return dataTable.GetData("Id", (object)id);
 		}
 		#endregion
-		#region DataTableIndex (Id)
-		public static List<ShopItemData> GetDataListById(
-			long id)
+		#region DataTableUniqueIndex(PlatformProductId)
+		public static ShopItemData GetDataByPlatformProductId(
+			string platformProductId)
 		{
-			return dataTable.GetDataList("Id", (object)id);
-		}
-		#endregion
-		#region DataTableIndex (Name)
-		public static List<ShopItemData> GetDataListByName(
-			string name)
-		{
-			return dataTable.GetDataList("Name", (object)name);
+			return dataTable.GetData("PlatformProductId", (object)platformProductId);
 		}
 		#endregion
 		#region DataTableIndex (ShopId)
@@ -183,41 +170,6 @@ namespace AwsDotnetCsharp
 			long shopId)
 		{
 			return dataTable.GetDataList("ShopId", (object)shopId);
-		}
-		#endregion
-		#region DataTableIndex (PurchasePlatformType)
-		public static List<ShopItemData> GetDataListByPurchasePlatformType(
-			PurchasePlatformType purchasePlatformType)
-		{
-			return dataTable.GetDataList("PurchasePlatformType", (object)purchasePlatformType);
-		}
-		#endregion
-		#region DataTableIndex (PlatformProductId)
-		public static List<ShopItemData> GetDataListByPlatformProductId(
-			string platformProductId)
-		{
-			return dataTable.GetDataList("PlatformProductId", (object)platformProductId);
-		}
-		#endregion
-		#region DataTableIndex (Price)
-		public static List<ShopItemData> GetDataListByPrice(
-			long price)
-		{
-			return dataTable.GetDataList("Price", (object)price);
-		}
-		#endregion
-		#region DataTableIndex (ResourceSetId)
-		public static List<ShopItemData> GetDataListByResourceSetId(
-			long resourceSetId)
-		{
-			return dataTable.GetDataList("ResourceSetId", (object)resourceSetId);
-		}
-		#endregion
-		#region DataTableIndex (LimitCount)
-		public static List<ShopItemData> GetDataListByLimitCount(
-			long limitCount)
-		{
-			return dataTable.GetDataList("LimitCount", (object)limitCount);
 		}
 		#endregion
 	}

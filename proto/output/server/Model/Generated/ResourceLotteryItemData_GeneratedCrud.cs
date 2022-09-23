@@ -147,13 +147,7 @@ namespace AwsDotnetCsharp
 		private static void SetupResourceLotteryItemDataTableIndexGenerated(DataTable<long, ResourceLotteryItemData> targetDataTable)
 		{
 			targetDataTable.CreateUniqueIndex("Id", aData => (object)aData.id);
-			targetDataTable.CreateIndex("Id", aData => (object)aData.id);
 			targetDataTable.CreateIndex("ResourceLotteryId", aData => (object)aData.resourceLotteryId);
-			targetDataTable.CreateIndex("Weight", aData => (object)aData.weight);
-			targetDataTable.CreateIndex("ResourceType", aData => (object)aData.resourceType);
-			targetDataTable.CreateIndex("ResourceId", aData => (object)aData.resourceId);
-			targetDataTable.CreateIndex("ResourceAmountMin", aData => (object)aData.resourceAmountMin);
-			targetDataTable.CreateIndex("ResourceAmountMax", aData => (object)aData.resourceAmountMax);
 		}
 		#endregion
 		#region DataTableUniqueIndex(Id)
@@ -163,53 +157,11 @@ namespace AwsDotnetCsharp
 			return dataTable.GetData("Id", (object)id);
 		}
 		#endregion
-		#region DataTableIndex (Id)
-		public static List<ResourceLotteryItemData> GetDataListById(
-			long id)
-		{
-			return dataTable.GetDataList("Id", (object)id);
-		}
-		#endregion
 		#region DataTableIndex (ResourceLotteryId)
 		public static List<ResourceLotteryItemData> GetDataListByResourceLotteryId(
 			long resourceLotteryId)
 		{
 			return dataTable.GetDataList("ResourceLotteryId", (object)resourceLotteryId);
-		}
-		#endregion
-		#region DataTableIndex (Weight)
-		public static List<ResourceLotteryItemData> GetDataListByWeight(
-			long weight)
-		{
-			return dataTable.GetDataList("Weight", (object)weight);
-		}
-		#endregion
-		#region DataTableIndex (ResourceType)
-		public static List<ResourceLotteryItemData> GetDataListByResourceType(
-			ResourceType resourceType)
-		{
-			return dataTable.GetDataList("ResourceType", (object)resourceType);
-		}
-		#endregion
-		#region DataTableIndex (ResourceId)
-		public static List<ResourceLotteryItemData> GetDataListByResourceId(
-			long resourceId)
-		{
-			return dataTable.GetDataList("ResourceId", (object)resourceId);
-		}
-		#endregion
-		#region DataTableIndex (ResourceAmountMin)
-		public static List<ResourceLotteryItemData> GetDataListByResourceAmountMin(
-			long resourceAmountMin)
-		{
-			return dataTable.GetDataList("ResourceAmountMin", (object)resourceAmountMin);
-		}
-		#endregion
-		#region DataTableIndex (ResourceAmountMax)
-		public static List<ResourceLotteryItemData> GetDataListByResourceAmountMax(
-			long resourceAmountMax)
-		{
-			return dataTable.GetDataList("ResourceAmountMax", (object)resourceAmountMax);
 		}
 		#endregion
 	}

@@ -147,10 +147,7 @@ namespace AwsDotnetCsharp
 		private static void SetupDailyEventTableItemDataTableIndexGenerated(DataTable<long, DailyEventTableItemData> targetDataTable)
 		{
 			targetDataTable.CreateUniqueIndex("Id", aData => (object)aData.id);
-			targetDataTable.CreateIndex("Id", aData => (object)aData.id);
 			targetDataTable.CreateIndex("DailyEventTableId", aData => (object)aData.dailyEventTableId);
-			targetDataTable.CreateIndex("EventQuestCategoryId", aData => (object)aData.eventQuestCategoryId);
-			targetDataTable.CreateIndex("Count", aData => (object)aData.count);
 		}
 		#endregion
 		#region DataTableUniqueIndex(Id)
@@ -160,32 +157,11 @@ namespace AwsDotnetCsharp
 			return dataTable.GetData("Id", (object)id);
 		}
 		#endregion
-		#region DataTableIndex (Id)
-		public static List<DailyEventTableItemData> GetDataListById(
-			long id)
-		{
-			return dataTable.GetDataList("Id", (object)id);
-		}
-		#endregion
 		#region DataTableIndex (DailyEventTableId)
 		public static List<DailyEventTableItemData> GetDataListByDailyEventTableId(
 			long dailyEventTableId)
 		{
 			return dataTable.GetDataList("DailyEventTableId", (object)dailyEventTableId);
-		}
-		#endregion
-		#region DataTableIndex (EventQuestCategoryId)
-		public static List<DailyEventTableItemData> GetDataListByEventQuestCategoryId(
-			long eventQuestCategoryId)
-		{
-			return dataTable.GetDataList("EventQuestCategoryId", (object)eventQuestCategoryId);
-		}
-		#endregion
-		#region DataTableIndex (Count)
-		public static List<DailyEventTableItemData> GetDataListByCount(
-			long count)
-		{
-			return dataTable.GetDataList("Count", (object)count);
 		}
 		#endregion
 	}

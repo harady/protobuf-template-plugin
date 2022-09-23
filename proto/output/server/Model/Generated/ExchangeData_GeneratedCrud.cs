@@ -147,9 +147,6 @@ namespace AwsDotnetCsharp
 		private static void SetupExchangeDataTableIndexGenerated(DataTable<long, ExchangeData> targetDataTable)
 		{
 			targetDataTable.CreateUniqueIndex("Id", aData => (object)aData.id);
-			targetDataTable.CreateIndex("Id", aData => (object)aData.id);
-			targetDataTable.CreateIndex("Name", aData => (object)aData.name);
-			targetDataTable.CreateIndex("Type", aData => (object)aData.type);
 		}
 		#endregion
 		#region DataTableUniqueIndex(Id)
@@ -157,27 +154,6 @@ namespace AwsDotnetCsharp
 			long id)
 		{
 			return dataTable.GetData("Id", (object)id);
-		}
-		#endregion
-		#region DataTableIndex (Id)
-		public static List<ExchangeData> GetDataListById(
-			long id)
-		{
-			return dataTable.GetDataList("Id", (object)id);
-		}
-		#endregion
-		#region DataTableIndex (Name)
-		public static List<ExchangeData> GetDataListByName(
-			string name)
-		{
-			return dataTable.GetDataList("Name", (object)name);
-		}
-		#endregion
-		#region DataTableIndex (Type)
-		public static List<ExchangeData> GetDataListByType(
-			ExchangeType type)
-		{
-			return dataTable.GetDataList("Type", (object)type);
 		}
 		#endregion
 	}

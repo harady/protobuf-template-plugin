@@ -147,12 +147,7 @@ namespace AwsDotnetCsharp
 		private static void SetupUnitEvolutionDataTableIndexGenerated(DataTable<long, UnitEvolutionData> targetDataTable)
 		{
 			targetDataTable.CreateUniqueIndex("Id", aData => (object)aData.id);
-			targetDataTable.CreateIndex("Id", aData => (object)aData.id);
-			targetDataTable.CreateIndex("Name", aData => (object)aData.name);
-			targetDataTable.CreateIndex("Type", aData => (object)aData.type);
 			targetDataTable.CreateIndex("BaseUnitId", aData => (object)aData.baseUnitId);
-			targetDataTable.CreateIndex("ResultUnitId", aData => (object)aData.resultUnitId);
-			targetDataTable.CreateIndex("CostResourceSetId", aData => (object)aData.costResourceSetId);
 		}
 		#endregion
 		#region DataTableUniqueIndex(Id)
@@ -162,46 +157,11 @@ namespace AwsDotnetCsharp
 			return dataTable.GetData("Id", (object)id);
 		}
 		#endregion
-		#region DataTableIndex (Id)
-		public static List<UnitEvolutionData> GetDataListById(
-			long id)
-		{
-			return dataTable.GetDataList("Id", (object)id);
-		}
-		#endregion
-		#region DataTableIndex (Name)
-		public static List<UnitEvolutionData> GetDataListByName(
-			string name)
-		{
-			return dataTable.GetDataList("Name", (object)name);
-		}
-		#endregion
-		#region DataTableIndex (Type)
-		public static List<UnitEvolutionData> GetDataListByType(
-			UnitEvolutionType type)
-		{
-			return dataTable.GetDataList("Type", (object)type);
-		}
-		#endregion
 		#region DataTableIndex (BaseUnitId)
 		public static List<UnitEvolutionData> GetDataListByBaseUnitId(
 			long baseUnitId)
 		{
 			return dataTable.GetDataList("BaseUnitId", (object)baseUnitId);
-		}
-		#endregion
-		#region DataTableIndex (ResultUnitId)
-		public static List<UnitEvolutionData> GetDataListByResultUnitId(
-			long resultUnitId)
-		{
-			return dataTable.GetDataList("ResultUnitId", (object)resultUnitId);
-		}
-		#endregion
-		#region DataTableIndex (CostResourceSetId)
-		public static List<UnitEvolutionData> GetDataListByCostResourceSetId(
-			long costResourceSetId)
-		{
-			return dataTable.GetDataList("CostResourceSetId", (object)costResourceSetId);
 		}
 		#endregion
 	}

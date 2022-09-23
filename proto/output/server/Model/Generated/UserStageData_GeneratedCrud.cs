@@ -82,12 +82,8 @@ namespace AwsDotnetCsharp
 		public static async Task DbSetupIndex()
 		{
 			var builder = Builders<UserStageData>.IndexKeys;
-			await DbSetupOneIndex(builder.Ascending(aData => aData.id));
 			await DbSetupOneIndex(builder.Ascending(aData => aData.userId));
 			await DbSetupOneIndex(builder.Ascending(aData => aData.stageId));
-			await DbSetupOneIndex(builder.Ascending(aData => aData.clearCount));
-			await DbSetupOneIndex(builder.Ascending(aData => aData.failedCount));
-			await DbSetupOneIndex(builder.Ascending(aData => aData.bestClearTime));
 		}
 
 		public static async Task DbSetupOneIndex(
@@ -214,6 +210,62 @@ namespace AwsDotnetCsharp
 			var dataList = await DbGetDataListByUserIds(userIds);
 			var ids = dataList.Select(data => data.id);
 			var result = await DbDeleteDataByIds(ids);
+			return result;
+		}
+		#endregion
+		#region MongoDbUniqueIndex(StageId)
+		public static async Task<UserStageData> DbGetDataByStageId(
+			long stageId)
+		{
+			var sw = Stopwatch.StartNew();
+			var cacheKey = "UserStageData/GetDataByStageId_" + stageId;
+			var result = await collection
+				.Find(
+					sessionHandle,
+					aData => aData.stageId == stageId)
+				.FirstOrDefaultAsync();
+			Console.WriteLine($"UserStageData#DbGetDataByStageId {sw.Elapsed.TotalSeconds}[秒]");
+			return result;
+		}
+
+		public static async Task<List<UserStageData>> DbGetDataListInStageIds(
+			IEnumerable<long> stageIds)
+		{
+			var sw = Stopwatch.StartNew();
+			var filter = Builders<UserStageData>.Filter.In(aData => aData.stageId, stageIds);
+			var result = await collection
+				.Find(
+					sessionHandle,
+					filter)
+				.ToListAsync();
+			Console.WriteLine($"UserStageData#DbGetDataListInStageIds {sw.Elapsed.TotalSeconds}[秒]");
+			return result;
+		}
+
+		public static async Task<bool> DbDeleteDataByStageId(
+			long stageId)
+		{
+			var sw = Stopwatch.StartNew();
+			var deleteResult = await collection
+				.DeleteOneAsync(
+					sessionHandle,
+					aData => aData.stageId == stageId);
+			Console.WriteLine($"UserStageData#DbDeleteDataByStageId {sw.Elapsed.TotalSeconds}[秒]");
+			var result = deleteResult.IsAcknowledged;
+			return result;
+		}
+
+		public static async Task<bool> DbDeleteDataByStageIds(
+			IEnumerable<long> stageIds)
+		{
+			var sw = Stopwatch.StartNew();
+			var keySet = stageIds.ToHashSet();
+			var deleteResult = await collection
+				.DeleteManyAsync(
+					sessionHandle,
+					aData => keySet.Contains(aData.stageId));
+			Console.WriteLine($"UserStageData#DbDeleteDataByStageIds {sw.Elapsed.TotalSeconds}[秒]");
+			var result = deleteResult.IsAcknowledged;
 			return result;
 		}
 		#endregion

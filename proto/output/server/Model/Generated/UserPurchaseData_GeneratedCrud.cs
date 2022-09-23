@@ -80,17 +80,7 @@ namespace AwsDotnetCsharp
 		public static async Task DbSetupIndex()
 		{
 			var builder = Builders<UserPurchaseData>.IndexKeys;
-			await DbSetupOneIndex(builder.Ascending(aData => aData.id));
 			await DbSetupOneIndex(builder.Ascending(aData => aData.userId));
-			await DbSetupOneIndex(builder.Ascending(aData => aData.purchasePlatformType));
-			await DbSetupOneIndex(builder.Ascending(aData => aData.shopItemId));
-			await DbSetupOneIndex(builder.Ascending(aData => aData.price));
-			await DbSetupOneIndex(builder.Ascending(aData => aData.googlePlayRequest));
-			await DbSetupOneIndex(builder.Ascending(aData => aData.appStoreRequest));
-			await DbSetupOneIndex(builder.Ascending(aData => aData.debugRequest));
-			await DbSetupOneIndex(builder.Ascending(aData => aData.isReceiptInquired));
-			await DbSetupOneIndex(builder.Ascending(aData => aData.isResourceGranted));
-			await DbSetupOneIndex(builder.Ascending(aData => aData.purchaseAt));
 		}
 
 		public static async Task DbSetupOneIndex(

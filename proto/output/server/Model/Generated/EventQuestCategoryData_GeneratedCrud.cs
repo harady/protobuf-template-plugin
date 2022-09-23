@@ -147,13 +147,6 @@ namespace AwsDotnetCsharp
 		private static void SetupEventQuestCategoryDataTableIndexGenerated(DataTable<long, EventQuestCategoryData> targetDataTable)
 		{
 			targetDataTable.CreateUniqueIndex("Id", aData => (object)aData.id);
-			targetDataTable.CreateIndex("Id", aData => (object)aData.id);
-			targetDataTable.CreateIndex("Name", aData => (object)aData.name);
-			targetDataTable.CreateIndex("MinStartTime", aData => (object)aData.minStartTime);
-			targetDataTable.CreateIndex("MaxStartTime", aData => (object)aData.maxStartTime);
-			targetDataTable.CreateIndex("OpenHours", aData => (object)aData.openHours);
-			targetDataTable.CreateIndex("QuestGroupId", aData => (object)aData.questGroupId);
-			targetDataTable.CreateIndex("QuestDifficultyType", aData => (object)aData.questDifficultyType);
 		}
 		#endregion
 		#region DataTableUniqueIndex(Id)
@@ -161,55 +154,6 @@ namespace AwsDotnetCsharp
 			long id)
 		{
 			return dataTable.GetData("Id", (object)id);
-		}
-		#endregion
-		#region DataTableIndex (Id)
-		public static List<EventQuestCategoryData> GetDataListById(
-			long id)
-		{
-			return dataTable.GetDataList("Id", (object)id);
-		}
-		#endregion
-		#region DataTableIndex (Name)
-		public static List<EventQuestCategoryData> GetDataListByName(
-			string name)
-		{
-			return dataTable.GetDataList("Name", (object)name);
-		}
-		#endregion
-		#region DataTableIndex (MinStartTime)
-		public static List<EventQuestCategoryData> GetDataListByMinStartTime(
-			long minStartTime)
-		{
-			return dataTable.GetDataList("MinStartTime", (object)minStartTime);
-		}
-		#endregion
-		#region DataTableIndex (MaxStartTime)
-		public static List<EventQuestCategoryData> GetDataListByMaxStartTime(
-			long maxStartTime)
-		{
-			return dataTable.GetDataList("MaxStartTime", (object)maxStartTime);
-		}
-		#endregion
-		#region DataTableIndex (OpenHours)
-		public static List<EventQuestCategoryData> GetDataListByOpenHours(
-			long openHours)
-		{
-			return dataTable.GetDataList("OpenHours", (object)openHours);
-		}
-		#endregion
-		#region DataTableIndex (QuestGroupId)
-		public static List<EventQuestCategoryData> GetDataListByQuestGroupId(
-			long questGroupId)
-		{
-			return dataTable.GetDataList("QuestGroupId", (object)questGroupId);
-		}
-		#endregion
-		#region DataTableIndex (QuestDifficultyType)
-		public static List<EventQuestCategoryData> GetDataListByQuestDifficultyType(
-			QuestDifficultyType questDifficultyType)
-		{
-			return dataTable.GetDataList("QuestDifficultyType", (object)questDifficultyType);
 		}
 		#endregion
 	}

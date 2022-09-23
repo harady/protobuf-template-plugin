@@ -147,13 +147,7 @@ namespace AwsDotnetCsharp
 		private static void SetupStageSpecialRewardDataTableIndexGenerated(DataTable<long, StageSpecialRewardData> targetDataTable)
 		{
 			targetDataTable.CreateUniqueIndex("Id", aData => (object)aData.id);
-			targetDataTable.CreateIndex("Id", aData => (object)aData.id);
-			targetDataTable.CreateIndex("Name", aData => (object)aData.name);
 			targetDataTable.CreateIndex("StageId", aData => (object)aData.stageId);
-			targetDataTable.CreateIndex("BattleRewardType", aData => (object)aData.battleRewardType);
-			targetDataTable.CreateIndex("ParamA", aData => (object)aData.paramA);
-			targetDataTable.CreateIndex("ParamB", aData => (object)aData.paramB);
-			targetDataTable.CreateIndex("ResourceLotteryId", aData => (object)aData.resourceLotteryId);
 		}
 		#endregion
 		#region DataTableUniqueIndex(Id)
@@ -163,53 +157,11 @@ namespace AwsDotnetCsharp
 			return dataTable.GetData("Id", (object)id);
 		}
 		#endregion
-		#region DataTableIndex (Id)
-		public static List<StageSpecialRewardData> GetDataListById(
-			long id)
-		{
-			return dataTable.GetDataList("Id", (object)id);
-		}
-		#endregion
-		#region DataTableIndex (Name)
-		public static List<StageSpecialRewardData> GetDataListByName(
-			string name)
-		{
-			return dataTable.GetDataList("Name", (object)name);
-		}
-		#endregion
 		#region DataTableIndex (StageId)
 		public static List<StageSpecialRewardData> GetDataListByStageId(
 			long stageId)
 		{
 			return dataTable.GetDataList("StageId", (object)stageId);
-		}
-		#endregion
-		#region DataTableIndex (BattleRewardType)
-		public static List<StageSpecialRewardData> GetDataListByBattleRewardType(
-			BattleRewardType battleRewardType)
-		{
-			return dataTable.GetDataList("BattleRewardType", (object)battleRewardType);
-		}
-		#endregion
-		#region DataTableIndex (ParamA)
-		public static List<StageSpecialRewardData> GetDataListByParamA(
-			long paramA)
-		{
-			return dataTable.GetDataList("ParamA", (object)paramA);
-		}
-		#endregion
-		#region DataTableIndex (ParamB)
-		public static List<StageSpecialRewardData> GetDataListByParamB(
-			long paramB)
-		{
-			return dataTable.GetDataList("ParamB", (object)paramB);
-		}
-		#endregion
-		#region DataTableIndex (ResourceLotteryId)
-		public static List<StageSpecialRewardData> GetDataListByResourceLotteryId(
-			long resourceLotteryId)
-		{
-			return dataTable.GetDataList("ResourceLotteryId", (object)resourceLotteryId);
 		}
 		#endregion
 	}

@@ -82,11 +82,9 @@ namespace AwsDotnetCsharp
 		public static async Task DbSetupIndex()
 		{
 			var builder = Builders<UserGachaButtonData>.IndexKeys;
-			await DbSetupOneIndex(builder.Ascending(aData => aData.id));
 			await DbSetupOneIndex(builder.Ascending(aData => aData.userId));
 			await DbSetupOneIndex(builder.Ascending(aData => aData.gachaButtonId));
 			await DbSetupOneIndex(builder.Ascending(aData => aData.gachaScheduleId));
-			await DbSetupOneIndex(builder.Ascending(aData => aData.purchaseCount));
 		}
 
 		public static async Task DbSetupOneIndex(

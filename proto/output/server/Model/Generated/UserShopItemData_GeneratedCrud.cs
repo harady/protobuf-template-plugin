@@ -82,11 +82,8 @@ namespace AwsDotnetCsharp
 		public static async Task DbSetupIndex()
 		{
 			var builder = Builders<UserShopItemData>.IndexKeys;
-			await DbSetupOneIndex(builder.Ascending(aData => aData.id));
 			await DbSetupOneIndex(builder.Ascending(aData => aData.userId));
 			await DbSetupOneIndex(builder.Ascending(aData => aData.shopItemId));
-			await DbSetupOneIndex(builder.Ascending(aData => aData.shopScheduleId));
-			await DbSetupOneIndex(builder.Ascending(aData => aData.purchasedCount));
 		}
 
 		public static async Task DbSetupOneIndex(

@@ -147,10 +147,8 @@ namespace AwsDotnetCsharp
 		private static void SetupUnitLevelExpDataTableIndexGenerated(DataTable<long, UnitLevelExpData> targetDataTable)
 		{
 			targetDataTable.CreateUniqueIndex("Id", aData => (object)aData.id);
-			targetDataTable.CreateIndex("Id", aData => (object)aData.id);
 			targetDataTable.CreateIndex("GrowthType", aData => (object)aData.growthType);
 			targetDataTable.CreateIndex("Level", aData => (object)aData.level);
-			targetDataTable.CreateIndex("TotalExp", aData => (object)aData.totalExp);
 		}
 		#endregion
 		#region DataTableUniqueIndex(Id)
@@ -158,13 +156,6 @@ namespace AwsDotnetCsharp
 			long id)
 		{
 			return dataTable.GetData("Id", (object)id);
-		}
-		#endregion
-		#region DataTableIndex (Id)
-		public static List<UnitLevelExpData> GetDataListById(
-			long id)
-		{
-			return dataTable.GetDataList("Id", (object)id);
 		}
 		#endregion
 		#region DataTableIndex (GrowthType)
@@ -179,13 +170,6 @@ namespace AwsDotnetCsharp
 			long level)
 		{
 			return dataTable.GetDataList("Level", (object)level);
-		}
-		#endregion
-		#region DataTableIndex (TotalExp)
-		public static List<UnitLevelExpData> GetDataListByTotalExp(
-			long totalExp)
-		{
-			return dataTable.GetDataList("TotalExp", (object)totalExp);
 		}
 		#endregion
 	}

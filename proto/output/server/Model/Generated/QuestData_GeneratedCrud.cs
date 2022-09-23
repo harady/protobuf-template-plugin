@@ -147,15 +147,7 @@ namespace AwsDotnetCsharp
 		private static void SetupQuestDataTableIndexGenerated(DataTable<long, QuestData> targetDataTable)
 		{
 			targetDataTable.CreateUniqueIndex("Id", aData => (object)aData.id);
-			targetDataTable.CreateIndex("Id", aData => (object)aData.id);
-			targetDataTable.CreateIndex("Name", aData => (object)aData.name);
 			targetDataTable.CreateIndex("QuestGroupId", aData => (object)aData.questGroupId);
-			targetDataTable.CreateIndex("NoContinue", aData => (object)aData.noContinue);
-			targetDataTable.CreateIndex("QuestDifficultyType", aData => (object)aData.questDifficultyType);
-			targetDataTable.CreateIndex("BossUnitId", aData => (object)aData.bossUnitId);
-			targetDataTable.CreateIndex("OpenAt", aData => (object)aData.openAt);
-			targetDataTable.CreateIndex("CloseAt", aData => (object)aData.closeAt);
-			targetDataTable.CreateIndex("OpenDow", aData => (object)aData.openDow);
 		}
 		#endregion
 		#region DataTableUniqueIndex(Id)
@@ -165,67 +157,11 @@ namespace AwsDotnetCsharp
 			return dataTable.GetData("Id", (object)id);
 		}
 		#endregion
-		#region DataTableIndex (Id)
-		public static List<QuestData> GetDataListById(
-			long id)
-		{
-			return dataTable.GetDataList("Id", (object)id);
-		}
-		#endregion
-		#region DataTableIndex (Name)
-		public static List<QuestData> GetDataListByName(
-			string name)
-		{
-			return dataTable.GetDataList("Name", (object)name);
-		}
-		#endregion
 		#region DataTableIndex (QuestGroupId)
 		public static List<QuestData> GetDataListByQuestGroupId(
 			long questGroupId)
 		{
 			return dataTable.GetDataList("QuestGroupId", (object)questGroupId);
-		}
-		#endregion
-		#region DataTableIndex (NoContinue)
-		public static List<QuestData> GetDataListByNoContinue(
-			bool noContinue)
-		{
-			return dataTable.GetDataList("NoContinue", (object)noContinue);
-		}
-		#endregion
-		#region DataTableIndex (QuestDifficultyType)
-		public static List<QuestData> GetDataListByQuestDifficultyType(
-			QuestDifficultyType questDifficultyType)
-		{
-			return dataTable.GetDataList("QuestDifficultyType", (object)questDifficultyType);
-		}
-		#endregion
-		#region DataTableIndex (BossUnitId)
-		public static List<QuestData> GetDataListByBossUnitId(
-			long bossUnitId)
-		{
-			return dataTable.GetDataList("BossUnitId", (object)bossUnitId);
-		}
-		#endregion
-		#region DataTableIndex (OpenAt)
-		public static List<QuestData> GetDataListByOpenAt(
-			long openAt)
-		{
-			return dataTable.GetDataList("OpenAt", (object)openAt);
-		}
-		#endregion
-		#region DataTableIndex (CloseAt)
-		public static List<QuestData> GetDataListByCloseAt(
-			long closeAt)
-		{
-			return dataTable.GetDataList("CloseAt", (object)closeAt);
-		}
-		#endregion
-		#region DataTableIndex (OpenDow)
-		public static List<QuestData> GetDataListByOpenDow(
-			long openDow)
-		{
-			return dataTable.GetDataList("OpenDow", (object)openDow);
 		}
 		#endregion
 	}

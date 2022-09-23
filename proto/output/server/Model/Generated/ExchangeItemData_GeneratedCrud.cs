@@ -147,17 +147,7 @@ namespace AwsDotnetCsharp
 		private static void SetupExchangeItemDataTableIndexGenerated(DataTable<long, ExchangeItemData> targetDataTable)
 		{
 			targetDataTable.CreateUniqueIndex("Id", aData => (object)aData.id);
-			targetDataTable.CreateIndex("Id", aData => (object)aData.id);
-			targetDataTable.CreateIndex("Name", aData => (object)aData.name);
 			targetDataTable.CreateIndex("ExchangeId", aData => (object)aData.exchangeId);
-			targetDataTable.CreateIndex("CostResourceType", aData => (object)aData.costResourceType);
-			targetDataTable.CreateIndex("CostResourceId", aData => (object)aData.costResourceId);
-			targetDataTable.CreateIndex("CostResourceAmount", aData => (object)aData.costResourceAmount);
-			targetDataTable.CreateIndex("ResourceType", aData => (object)aData.resourceType);
-			targetDataTable.CreateIndex("ResourceId", aData => (object)aData.resourceId);
-			targetDataTable.CreateIndex("ResourceAmount", aData => (object)aData.resourceAmount);
-			targetDataTable.CreateIndex("ResourceSetId", aData => (object)aData.resourceSetId);
-			targetDataTable.CreateIndex("LimitCount", aData => (object)aData.limitCount);
 		}
 		#endregion
 		#region DataTableUniqueIndex(Id)
@@ -167,81 +157,11 @@ namespace AwsDotnetCsharp
 			return dataTable.GetData("Id", (object)id);
 		}
 		#endregion
-		#region DataTableIndex (Id)
-		public static List<ExchangeItemData> GetDataListById(
-			long id)
-		{
-			return dataTable.GetDataList("Id", (object)id);
-		}
-		#endregion
-		#region DataTableIndex (Name)
-		public static List<ExchangeItemData> GetDataListByName(
-			string name)
-		{
-			return dataTable.GetDataList("Name", (object)name);
-		}
-		#endregion
 		#region DataTableIndex (ExchangeId)
 		public static List<ExchangeItemData> GetDataListByExchangeId(
 			long exchangeId)
 		{
 			return dataTable.GetDataList("ExchangeId", (object)exchangeId);
-		}
-		#endregion
-		#region DataTableIndex (CostResourceType)
-		public static List<ExchangeItemData> GetDataListByCostResourceType(
-			ResourceType costResourceType)
-		{
-			return dataTable.GetDataList("CostResourceType", (object)costResourceType);
-		}
-		#endregion
-		#region DataTableIndex (CostResourceId)
-		public static List<ExchangeItemData> GetDataListByCostResourceId(
-			long costResourceId)
-		{
-			return dataTable.GetDataList("CostResourceId", (object)costResourceId);
-		}
-		#endregion
-		#region DataTableIndex (CostResourceAmount)
-		public static List<ExchangeItemData> GetDataListByCostResourceAmount(
-			long costResourceAmount)
-		{
-			return dataTable.GetDataList("CostResourceAmount", (object)costResourceAmount);
-		}
-		#endregion
-		#region DataTableIndex (ResourceType)
-		public static List<ExchangeItemData> GetDataListByResourceType(
-			ResourceType resourceType)
-		{
-			return dataTable.GetDataList("ResourceType", (object)resourceType);
-		}
-		#endregion
-		#region DataTableIndex (ResourceId)
-		public static List<ExchangeItemData> GetDataListByResourceId(
-			long resourceId)
-		{
-			return dataTable.GetDataList("ResourceId", (object)resourceId);
-		}
-		#endregion
-		#region DataTableIndex (ResourceAmount)
-		public static List<ExchangeItemData> GetDataListByResourceAmount(
-			long resourceAmount)
-		{
-			return dataTable.GetDataList("ResourceAmount", (object)resourceAmount);
-		}
-		#endregion
-		#region DataTableIndex (ResourceSetId)
-		public static List<ExchangeItemData> GetDataListByResourceSetId(
-			long resourceSetId)
-		{
-			return dataTable.GetDataList("ResourceSetId", (object)resourceSetId);
-		}
-		#endregion
-		#region DataTableIndex (LimitCount)
-		public static List<ExchangeItemData> GetDataListByLimitCount(
-			long limitCount)
-		{
-			return dataTable.GetDataList("LimitCount", (object)limitCount);
 		}
 		#endregion
 	}

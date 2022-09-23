@@ -82,11 +82,8 @@ namespace AwsDotnetCsharp
 		public static async Task DbSetupIndex()
 		{
 			var builder = Builders<UserExchangeItemData>.IndexKeys;
-			await DbSetupOneIndex(builder.Ascending(aData => aData.id));
 			await DbSetupOneIndex(builder.Ascending(aData => aData.userId));
 			await DbSetupOneIndex(builder.Ascending(aData => aData.exchangeItemId));
-			await DbSetupOneIndex(builder.Ascending(aData => aData.exchangeScheduleId));
-			await DbSetupOneIndex(builder.Ascending(aData => aData.exchangedCount));
 		}
 
 		public static async Task DbSetupOneIndex(

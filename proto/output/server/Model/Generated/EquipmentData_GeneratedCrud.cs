@@ -147,13 +147,6 @@ namespace AwsDotnetCsharp
 		private static void SetupEquipmentDataTableIndexGenerated(DataTable<long, EquipmentData> targetDataTable)
 		{
 			targetDataTable.CreateUniqueIndex("Id", aData => (object)aData.id);
-			targetDataTable.CreateIndex("Id", aData => (object)aData.id);
-			targetDataTable.CreateIndex("Name", aData => (object)aData.name);
-			targetDataTable.CreateIndex("Type", aData => (object)aData.type);
-			targetDataTable.CreateIndex("Description", aData => (object)aData.description);
-			targetDataTable.CreateIndex("ParamA", aData => (object)aData.paramA);
-			targetDataTable.CreateIndex("ParamB", aData => (object)aData.paramB);
-			targetDataTable.CreateIndex("IconId", aData => (object)aData.iconId);
 		}
 		#endregion
 		#region DataTableUniqueIndex(Id)
@@ -161,55 +154,6 @@ namespace AwsDotnetCsharp
 			long id)
 		{
 			return dataTable.GetData("Id", (object)id);
-		}
-		#endregion
-		#region DataTableIndex (Id)
-		public static List<EquipmentData> GetDataListById(
-			long id)
-		{
-			return dataTable.GetDataList("Id", (object)id);
-		}
-		#endregion
-		#region DataTableIndex (Name)
-		public static List<EquipmentData> GetDataListByName(
-			string name)
-		{
-			return dataTable.GetDataList("Name", (object)name);
-		}
-		#endregion
-		#region DataTableIndex (Type)
-		public static List<EquipmentData> GetDataListByType(
-			EquipmentType type)
-		{
-			return dataTable.GetDataList("Type", (object)type);
-		}
-		#endregion
-		#region DataTableIndex (Description)
-		public static List<EquipmentData> GetDataListByDescription(
-			string description)
-		{
-			return dataTable.GetDataList("Description", (object)description);
-		}
-		#endregion
-		#region DataTableIndex (ParamA)
-		public static List<EquipmentData> GetDataListByParamA(
-			long paramA)
-		{
-			return dataTable.GetDataList("ParamA", (object)paramA);
-		}
-		#endregion
-		#region DataTableIndex (ParamB)
-		public static List<EquipmentData> GetDataListByParamB(
-			long paramB)
-		{
-			return dataTable.GetDataList("ParamB", (object)paramB);
-		}
-		#endregion
-		#region DataTableIndex (IconId)
-		public static List<EquipmentData> GetDataListByIconId(
-			long iconId)
-		{
-			return dataTable.GetDataList("IconId", (object)iconId);
 		}
 		#endregion
 	}

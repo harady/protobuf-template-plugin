@@ -147,17 +147,6 @@ namespace AwsDotnetCsharp
 		private static void SetupComboDataTableIndexGenerated(DataTable<long, ComboData> targetDataTable)
 		{
 			targetDataTable.CreateUniqueIndex("Id", aData => (object)aData.id);
-			targetDataTable.CreateIndex("Id", aData => (object)aData.id);
-			targetDataTable.CreateIndex("Name", aData => (object)aData.name);
-			targetDataTable.CreateIndex("Type", aData => (object)aData.type);
-			targetDataTable.CreateIndex("Description", aData => (object)aData.description);
-			targetDataTable.CreateIndex("Rank", aData => (object)aData.rank);
-			targetDataTable.CreateIndex("BaseAttack", aData => (object)aData.baseAttack);
-			targetDataTable.CreateIndex("MaxAttack", aData => (object)aData.maxAttack);
-			targetDataTable.CreateIndex("ParamA", aData => (object)aData.paramA);
-			targetDataTable.CreateIndex("ParamB", aData => (object)aData.paramB);
-			targetDataTable.CreateIndex("ParamC", aData => (object)aData.paramC);
-			targetDataTable.CreateIndex("IconId", aData => (object)aData.iconId);
 		}
 		#endregion
 		#region DataTableUniqueIndex(Id)
@@ -165,83 +154,6 @@ namespace AwsDotnetCsharp
 			long id)
 		{
 			return dataTable.GetData("Id", (object)id);
-		}
-		#endregion
-		#region DataTableIndex (Id)
-		public static List<ComboData> GetDataListById(
-			long id)
-		{
-			return dataTable.GetDataList("Id", (object)id);
-		}
-		#endregion
-		#region DataTableIndex (Name)
-		public static List<ComboData> GetDataListByName(
-			string name)
-		{
-			return dataTable.GetDataList("Name", (object)name);
-		}
-		#endregion
-		#region DataTableIndex (Type)
-		public static List<ComboData> GetDataListByType(
-			ComboType type)
-		{
-			return dataTable.GetDataList("Type", (object)type);
-		}
-		#endregion
-		#region DataTableIndex (Description)
-		public static List<ComboData> GetDataListByDescription(
-			string description)
-		{
-			return dataTable.GetDataList("Description", (object)description);
-		}
-		#endregion
-		#region DataTableIndex (Rank)
-		public static List<ComboData> GetDataListByRank(
-			long rank)
-		{
-			return dataTable.GetDataList("Rank", (object)rank);
-		}
-		#endregion
-		#region DataTableIndex (BaseAttack)
-		public static List<ComboData> GetDataListByBaseAttack(
-			long baseAttack)
-		{
-			return dataTable.GetDataList("BaseAttack", (object)baseAttack);
-		}
-		#endregion
-		#region DataTableIndex (MaxAttack)
-		public static List<ComboData> GetDataListByMaxAttack(
-			long maxAttack)
-		{
-			return dataTable.GetDataList("MaxAttack", (object)maxAttack);
-		}
-		#endregion
-		#region DataTableIndex (ParamA)
-		public static List<ComboData> GetDataListByParamA(
-			long paramA)
-		{
-			return dataTable.GetDataList("ParamA", (object)paramA);
-		}
-		#endregion
-		#region DataTableIndex (ParamB)
-		public static List<ComboData> GetDataListByParamB(
-			long paramB)
-		{
-			return dataTable.GetDataList("ParamB", (object)paramB);
-		}
-		#endregion
-		#region DataTableIndex (ParamC)
-		public static List<ComboData> GetDataListByParamC(
-			long paramC)
-		{
-			return dataTable.GetDataList("ParamC", (object)paramC);
-		}
-		#endregion
-		#region DataTableIndex (IconId)
-		public static List<ComboData> GetDataListByIconId(
-			long iconId)
-		{
-			return dataTable.GetDataList("IconId", (object)iconId);
 		}
 		#endregion
 	}

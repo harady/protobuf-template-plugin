@@ -147,16 +147,7 @@ namespace AwsDotnetCsharp
 		private static void SetupMissionDataTableIndexGenerated(DataTable<long, MissionData> targetDataTable)
 		{
 			targetDataTable.CreateUniqueIndex("Id", aData => (object)aData.id);
-			targetDataTable.CreateIndex("Id", aData => (object)aData.id);
-			targetDataTable.CreateIndex("Name", aData => (object)aData.name);
-			targetDataTable.CreateIndex("MissionGroupId", aData => (object)aData.missionGroupId);
 			targetDataTable.CreateIndex("Type", aData => (object)aData.type);
-			targetDataTable.CreateIndex("ToAchieveProgress", aData => (object)aData.toAchieveProgress);
-			targetDataTable.CreateIndex("ParamA", aData => (object)aData.paramA);
-			targetDataTable.CreateIndex("ParamB", aData => (object)aData.paramB);
-			targetDataTable.CreateIndex("RewardResourceType", aData => (object)aData.rewardResourceType);
-			targetDataTable.CreateIndex("RewardResourceId", aData => (object)aData.rewardResourceId);
-			targetDataTable.CreateIndex("RewardResourceAmount", aData => (object)aData.rewardResourceAmount);
 		}
 		#endregion
 		#region DataTableUniqueIndex(Id)
@@ -166,74 +157,11 @@ namespace AwsDotnetCsharp
 			return dataTable.GetData("Id", (object)id);
 		}
 		#endregion
-		#region DataTableIndex (Id)
-		public static List<MissionData> GetDataListById(
-			long id)
-		{
-			return dataTable.GetDataList("Id", (object)id);
-		}
-		#endregion
-		#region DataTableIndex (Name)
-		public static List<MissionData> GetDataListByName(
-			string name)
-		{
-			return dataTable.GetDataList("Name", (object)name);
-		}
-		#endregion
-		#region DataTableIndex (MissionGroupId)
-		public static List<MissionData> GetDataListByMissionGroupId(
-			long missionGroupId)
-		{
-			return dataTable.GetDataList("MissionGroupId", (object)missionGroupId);
-		}
-		#endregion
 		#region DataTableIndex (Type)
 		public static List<MissionData> GetDataListByType(
 			MissionType type)
 		{
 			return dataTable.GetDataList("Type", (object)type);
-		}
-		#endregion
-		#region DataTableIndex (ToAchieveProgress)
-		public static List<MissionData> GetDataListByToAchieveProgress(
-			long toAchieveProgress)
-		{
-			return dataTable.GetDataList("ToAchieveProgress", (object)toAchieveProgress);
-		}
-		#endregion
-		#region DataTableIndex (ParamA)
-		public static List<MissionData> GetDataListByParamA(
-			long paramA)
-		{
-			return dataTable.GetDataList("ParamA", (object)paramA);
-		}
-		#endregion
-		#region DataTableIndex (ParamB)
-		public static List<MissionData> GetDataListByParamB(
-			long paramB)
-		{
-			return dataTable.GetDataList("ParamB", (object)paramB);
-		}
-		#endregion
-		#region DataTableIndex (RewardResourceType)
-		public static List<MissionData> GetDataListByRewardResourceType(
-			ResourceType rewardResourceType)
-		{
-			return dataTable.GetDataList("RewardResourceType", (object)rewardResourceType);
-		}
-		#endregion
-		#region DataTableIndex (RewardResourceId)
-		public static List<MissionData> GetDataListByRewardResourceId(
-			long rewardResourceId)
-		{
-			return dataTable.GetDataList("RewardResourceId", (object)rewardResourceId);
-		}
-		#endregion
-		#region DataTableIndex (RewardResourceAmount)
-		public static List<MissionData> GetDataListByRewardResourceAmount(
-			long rewardResourceAmount)
-		{
-			return dataTable.GetDataList("RewardResourceAmount", (object)rewardResourceAmount);
 		}
 		#endregion
 	}

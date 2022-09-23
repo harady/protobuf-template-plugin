@@ -147,10 +147,6 @@ namespace AwsDotnetCsharp
 		private static void SetupGachaDataTableIndexGenerated(DataTable<long, GachaData> targetDataTable)
 		{
 			targetDataTable.CreateUniqueIndex("Id", aData => (object)aData.id);
-			targetDataTable.CreateIndex("Id", aData => (object)aData.id);
-			targetDataTable.CreateIndex("Name", aData => (object)aData.name);
-			targetDataTable.CreateIndex("BaseGachaId", aData => (object)aData.baseGachaId);
-			targetDataTable.CreateIndex("IsPremium", aData => (object)aData.isPremium);
 		}
 		#endregion
 		#region DataTableUniqueIndex(Id)
@@ -158,34 +154,6 @@ namespace AwsDotnetCsharp
 			long id)
 		{
 			return dataTable.GetData("Id", (object)id);
-		}
-		#endregion
-		#region DataTableIndex (Id)
-		public static List<GachaData> GetDataListById(
-			long id)
-		{
-			return dataTable.GetDataList("Id", (object)id);
-		}
-		#endregion
-		#region DataTableIndex (Name)
-		public static List<GachaData> GetDataListByName(
-			string name)
-		{
-			return dataTable.GetDataList("Name", (object)name);
-		}
-		#endregion
-		#region DataTableIndex (BaseGachaId)
-		public static List<GachaData> GetDataListByBaseGachaId(
-			long baseGachaId)
-		{
-			return dataTable.GetDataList("BaseGachaId", (object)baseGachaId);
-		}
-		#endregion
-		#region DataTableIndex (IsPremium)
-		public static List<GachaData> GetDataListByIsPremium(
-			bool isPremium)
-		{
-			return dataTable.GetDataList("IsPremium", (object)isPremium);
 		}
 		#endregion
 	}
