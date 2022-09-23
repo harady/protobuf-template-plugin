@@ -1,4 +1,3 @@
-{{- if gt (len .Messages) 0 -}}
 using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
@@ -8,54 +7,53 @@ using MongoDB.Bson.Serialization.Attributes;
 
 namespace AwsDotnetCsharp
 {
-{{- range .Messages }}
-	{{- $className := .Name }}
-	public partial class {{ $className }}
+{{- for message in file.message_type }}
+	public partial class {{ message.name }}
 	{
 		public async Task LoadAll(UserData user)
 		{
 			this.user = user ?? throw new APIException(message: "ユーザーが存在しません.");
-{{- range .Fields }}
-	{{- if .IsRepeated }}
-			this.{{.Name | ToCamelCase}} = await {{ .BaseType }}.DbGetDataListByUserId(this.user.id);
+{{- for field in message.field }}
+	{{- if field | is_repeated }}
+			this.{{field.name | to_camel}} = await {{ field | to_cs_type }}.DbGetDataListByUserId(this.user.id);
 	{{- end }}
 {{- end }}
 		}
 
-		public void Merge({{ $className }} toMerge)
+		public void Merge({{ message.name }} toMerge)
 		{
-{{- range .Fields }}
-	{{- if .IsRepeated }}
-			{{- $deletedIdsPropertieName := (Replace (Join (Join "deleted" (.Name | SnakeToPascal)) "_Ids") "s_Ids" "Ids") }}
-			this.{{.Name | ToCamelCase}}.Merge(toMerge.{{.Name | ToCamelCase}});
-			this.{{ $deletedIdsPropertieName }}.Merge(toMerge.{{ $deletedIdsPropertieName }});
+{{- for field in message.field }}
+	{{- if field | is_repeated }}
+			{{- type_name_prefix = field.name }}
+			{{- deleted_ids_propertie_name = ("deleted" + type_name_prefix + "Ids") }}
+			this.{{field.name | to_camel}}.Merge(toMerge.{{field.name | to_camel}});
+			this.{{ deleted_ids_propertie_name }}.Merge(toMerge.{{ deleted_ids_propertie_name }});
 	{{- else }}
-			if (toMerge.{{.Name | ToCamelCase}} != null) {
-				this.{{.Name | ToCamelCase}} = toMerge.{{.Name | ToCamelCase}};
+			if (toMerge.{{field.name | to_camel}} != null) {
+				this.{{field.name | to_camel}} = toMerge.{{field.name | to_camel}};
 			}
 	{{- end }}
 {{- end }}
 		}
-{{- range .Fields }}
-		{{- $typeNamePrefix := (Replace (Join (.Name | SnakeToPascal) "___") "s___" "") }}
-		{{- $deletedIdsPropertieName := (Join (Join "deleted" $typeNamePrefix) "Ids") }}
-		{{- if .IsRepeated  }}
+{{- for field in message.field }}
+		{{- type_name_prefix = field.name }}
+		{{- deleted_ids_propertie_name = ("deleted" + type_name_prefix + "Ids") }}
+		{{- if field | is_repeated  }}
 
-		[BsonElement("{{ $deletedIdsPropertieName }}")]
-		[DataMember(Name = "{{ $deletedIdsPropertieName }}")]
-		public List<long> {{ $deletedIdsPropertieName }} { get; set; } = new List<long>();
+		[BsonElement("{{ deleted_ids_propertie_name }}")]
+		[DataMember(Name = "{{ deleted_ids_propertie_name }}")]
+		public List<long> {{ deleted_ids_propertie_name }} { get; set; } = new List<long>();
 		{{- end }}
 {{- end }}
-{{- range .Fields }}
-		{{- $typeNamePrefixPascal := (Replace (Join (.Name | SnakeToPascal) "___") "s___" "") }}
-		{{- $typeNamePrefixCamel := (Replace (Join (.Name | ToCamelCase) "___") "s___" "") }}
-		{{- if .IsRepeated  }}
+{{- for field in message.field }}
+		{{- type_name_prefix_pascal = field.name }}
+		{{- type_name_prefix_camel = field.name }}
+		{{- if field | is_repeated  }}
 
-		public TableUpdateData<{{ .BaseType }}> {{ $typeNamePrefixCamel }}TableUpdate
-			=> new TableUpdateData<{{ .BaseType }}>({{ $typeNamePrefixCamel }}s, deleted{{ $typeNamePrefixPascal }}Ids);
+		public TableUpdateData<{{ field | to_cs_type }}> {{ type_name_prefix_camel }}TableUpdate
+			=> new TableUpdateData<{{ field | to_cs_type }}>({{ type_name_prefix_camel }}s, deleted{{ type_name_prefix_pascal }}Ids);
 		{{- end }}
 {{- end }}
 	}
 {{ end -}}
 }
-{{ end }}
