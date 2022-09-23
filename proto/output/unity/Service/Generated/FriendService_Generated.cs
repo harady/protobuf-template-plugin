@@ -1,4 +1,4 @@
-//GENERATED CODE, DO NOT EDIT !
+﻿//GENERATED CODE, DO NOT EDIT !
 using System;
 using System.Collections.Generic;
 using Newtonsoft.Json;

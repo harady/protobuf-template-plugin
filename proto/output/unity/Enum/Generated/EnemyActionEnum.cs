@@ -1,4 +1,4 @@
-
+﻿
 public enum TriggerType
 {
 	None = 0,
