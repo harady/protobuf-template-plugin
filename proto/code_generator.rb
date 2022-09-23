@@ -133,8 +133,7 @@ class CodeGenerator
     # src_file_paths.each do |src_file_path|
     #   generate_code(src_file_path: src_file_path)
     # end
-
-    Parallel.each(src_file_paths, in_threads: 4) do |src_file_path|
+    Parallel.each(src_file_paths, in_threads: 16) do |src_file_path|
       generate_code(src_file_path: src_file_path)
     end
     self
@@ -173,7 +172,7 @@ class CodeGenerator
     `#{command}`
 
     if File.exist?(out_file_path)
-      puts "generate_innerCode Source:#{out_file_path}"
+      puts "generate_innerCode Source:#{out_file_path}\n"
     end
   end
 end
