@@ -214,21 +214,7 @@ namespace AwsDotnetCsharp
 	}
 
 	[JsonObject(MemberSerialization.OptIn)]
-	public partial class UnitDeckEditResponse : APIRequest
-	{
-	}
-
-	[JsonObject(MemberSerialization.OptIn)]
-	public partial class UnitPowerupRequest : APIRequest
-	{
-		[JsonProperty("user_unit_id")]
-		public long userUnitId { get; set; }
-		[JsonProperty("consume_resources")]
-		public List<ResourceData> consumeResources { get; set; } = new List<ResourceData>();
-	}
-
-	[JsonObject(MemberSerialization.OptIn)]
-	public partial class UnitPowerupResponse : APIRequest
+	public partial class UnitDeckEditResponse : APIResponse
 	{
 	}
 
@@ -244,19 +230,7 @@ namespace AwsDotnetCsharp
 	}
 
 	[JsonObject(MemberSerialization.OptIn)]
-	public partial class UnitEvolutionResponse : APIRequest
-	{
-	}
-
-	[JsonObject(MemberSerialization.OptIn)]
-	public partial class UnitSellRequest : APIRequest
-	{
-		[JsonProperty("user_unit_ids")]
-		public List<long> userUnitIds { get; set; } = new List<long>();
-	}
-
-	[JsonObject(MemberSerialization.OptIn)]
-	public partial class UnitSellResponse : APIRequest
+	public partial class UnitEvolutionResponse : APIResponse
 	{
 	}
 
@@ -270,7 +244,33 @@ namespace AwsDotnetCsharp
 	}
 
 	[JsonObject(MemberSerialization.OptIn)]
-	public partial class UnitLockResponse : APIRequest
+	public partial class UnitLockResponse : APIResponse
+	{
+	}
+
+	[JsonObject(MemberSerialization.OptIn)]
+	public partial class UnitPowerupRequest : APIRequest
+	{
+		[JsonProperty("user_unit_id")]
+		public long userUnitId { get; set; }
+		[JsonProperty("consume_resources")]
+		public List<ResourceData> consumeResources { get; set; } = new List<ResourceData>();
+	}
+
+	[JsonObject(MemberSerialization.OptIn)]
+	public partial class UnitPowerupResponse : APIResponse
+	{
+	}
+
+	[JsonObject(MemberSerialization.OptIn)]
+	public partial class UnitSellRequest : APIRequest
+	{
+		[JsonProperty("user_unit_ids")]
+		public List<long> userUnitIds { get; set; } = new List<long>();
+	}
+
+	[JsonObject(MemberSerialization.OptIn)]
+	public partial class UnitSellResponse : APIResponse
 	{
 	}
 }

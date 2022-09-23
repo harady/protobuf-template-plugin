@@ -98,7 +98,7 @@ namespace AwsDotnetCsharp
 	}
 
 	[JsonObject(MemberSerialization.OptIn)]
-	public partial class UserDataListResponse : APIRequest
+	public partial class UserDataListResponse : APIResponse
 	{
 	}
 
@@ -110,7 +110,7 @@ namespace AwsDotnetCsharp
 	}
 
 	[JsonObject(MemberSerialization.OptIn)]
-	public partial class UserNameEditResponse : APIRequest
+	public partial class UserNameEditResponse : APIResponse
 	{
 	}
 }

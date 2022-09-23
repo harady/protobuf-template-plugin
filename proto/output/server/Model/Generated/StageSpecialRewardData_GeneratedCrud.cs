@@ -8,14 +8,13 @@ using MongoDB.Driver;
 
 namespace AwsDotnetCsharp
 {
-
 	public partial class StageSpecialRewardData : IUnique<long>
 	{
 		private static bool isMaster => true;
 
 		private static IMongoCollection<StageSpecialRewardData> _collection = null;
 		private static IMongoCollection<StageSpecialRewardData> collection
-			=> _collection ?? (_collection = mongoDatabase.GetCollection<StageSpecialRewardData>("StageSpecialRewardDatas"));
+			=> _collection ?? (_collection = mongoDatabase.GetCollection<StageSpecialRewardData>("stage_special_rewards"));
 
 		public static IClientSessionHandle sessionHandle
 			=> MongoSessionManager.sessionHandle;
@@ -52,7 +51,6 @@ namespace AwsDotnetCsharp
 					new ReplaceOptions { IsUpsert = true });
 			bool result = replaceOneResult.IsAcknowledged && (replaceOneResult.ModifiedCount > 0);
 			Console.WriteLine($"StageSpecialRewardData#DbSetData {sw.Elapsed.TotalSeconds}[秒]");
-			if (result) { userUpdateCache.StageSpecialRewardDataTableUpdate.Upsert(data); }
 			return result;
 		}
 
@@ -75,7 +73,6 @@ namespace AwsDotnetCsharp
 					new BulkWriteOptions());
 			Console.WriteLine($"StageSpecialRewardData#DbSetDataList {sw.Elapsed.TotalSeconds}[秒]");
 			var result = requestResult.RequestCount == requestResult.ProcessedRequests.Count;
-			if (result) { userUpdateCache.StageSpecialRewardDataTableUpdate.Upsert(dataList); }
 			return result;
 		}
 		#endregion
@@ -90,7 +87,6 @@ namespace AwsDotnetCsharp
 					aData => aData.id == id);
 			Console.WriteLine($"StageSpecialRewardData#DbDeleteDataById {sw.Elapsed.TotalSeconds}[秒]");
 			var result = deleteResult.IsAcknowledged;
-			if (result) { userUpdateCache.StageSpecialRewardDataTableUpdate.Delete(id); }
 			return result;
 		}
 
@@ -105,7 +101,6 @@ namespace AwsDotnetCsharp
 					aData => keySet.Contains(aData.id));
 			Console.WriteLine($"StageSpecialRewardData#DbDeleteDataByIds {sw.Elapsed.TotalSeconds}[秒]");
 			var result = deleteResult.IsAcknowledged;
-			if (result) { userUpdateCache.StageSpecialRewardDataTableUpdate.Delete(ids); }
 			return result;
 		}
 		#endregion
@@ -152,13 +147,7 @@ namespace AwsDotnetCsharp
 		private static void SetupStageSpecialRewardDataTableIndexGenerated(DataTable<long, StageSpecialRewardData> targetDataTable)
 		{
 			targetDataTable.CreateUniqueIndex("Id", aData => (object)aData.id);
-			targetDataTable.CreateIndex("Id", aData => (object)aData.id);
-			targetDataTable.CreateIndex("Name", aData => (object)aData.name);
 			targetDataTable.CreateIndex("StageId", aData => (object)aData.stageId);
-			targetDataTable.CreateIndex("BattleRewardType", aData => (object)aData.battleRewardType);
-			targetDataTable.CreateIndex("ParamA", aData => (object)aData.paramA);
-			targetDataTable.CreateIndex("ParamB", aData => (object)aData.paramB);
-			targetDataTable.CreateIndex("ResourceLotteryId", aData => (object)aData.resourceLotteryId);
 		}
 		#endregion
 		#region DataTableUniqueIndex(Id)
@@ -168,53 +157,11 @@ namespace AwsDotnetCsharp
 			return dataTable.GetData("Id", (object)id);
 		}
 		#endregion
-		#region DataTableIndex (Id)
-		public static List<StageSpecialRewardData> GetDataListById(
-			long id)
-		{
-			return dataTable.GetDataList("Id", (object)id);
-		}
-		#endregion
-		#region DataTableIndex (Name)
-		public static List<StageSpecialRewardData> GetDataListByName(
-			string name)
-		{
-			return dataTable.GetDataList("Name", (object)name);
-		}
-		#endregion
 		#region DataTableIndex (StageId)
 		public static List<StageSpecialRewardData> GetDataListByStageId(
 			long stageId)
 		{
 			return dataTable.GetDataList("StageId", (object)stageId);
-		}
-		#endregion
-		#region DataTableIndex (BattleRewardType)
-		public static List<StageSpecialRewardData> GetDataListByBattleRewardType(
-			BattleRewardType battleRewardType)
-		{
-			return dataTable.GetDataList("BattleRewardType", (object)battleRewardType);
-		}
-		#endregion
-		#region DataTableIndex (ParamA)
-		public static List<StageSpecialRewardData> GetDataListByParamA(
-			long paramA)
-		{
-			return dataTable.GetDataList("ParamA", (object)paramA);
-		}
-		#endregion
-		#region DataTableIndex (ParamB)
-		public static List<StageSpecialRewardData> GetDataListByParamB(
-			long paramB)
-		{
-			return dataTable.GetDataList("ParamB", (object)paramB);
-		}
-		#endregion
-		#region DataTableIndex (ResourceLotteryId)
-		public static List<StageSpecialRewardData> GetDataListByResourceLotteryId(
-			long resourceLotteryId)
-		{
-			return dataTable.GetDataList("ResourceLotteryId", (object)resourceLotteryId);
 		}
 		#endregion
 	}

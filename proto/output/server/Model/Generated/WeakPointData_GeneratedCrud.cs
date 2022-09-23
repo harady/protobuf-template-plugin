@@ -8,14 +8,13 @@ using MongoDB.Driver;
 
 namespace AwsDotnetCsharp
 {
-
 	public partial class WeakPointData : IUnique<long>
 	{
 		private static bool isMaster => true;
 
 		private static IMongoCollection<WeakPointData> _collection = null;
 		private static IMongoCollection<WeakPointData> collection
-			=> _collection ?? (_collection = mongoDatabase.GetCollection<WeakPointData>("WeakPointDatas"));
+			=> _collection ?? (_collection = mongoDatabase.GetCollection<WeakPointData>("weak_points"));
 
 		public static IClientSessionHandle sessionHandle
 			=> MongoSessionManager.sessionHandle;
@@ -52,7 +51,6 @@ namespace AwsDotnetCsharp
 					new ReplaceOptions { IsUpsert = true });
 			bool result = replaceOneResult.IsAcknowledged && (replaceOneResult.ModifiedCount > 0);
 			Console.WriteLine($"WeakPointData#DbSetData {sw.Elapsed.TotalSeconds}[秒]");
-			if (result) { userUpdateCache.WeakPointDataTableUpdate.Upsert(data); }
 			return result;
 		}
 
@@ -75,7 +73,6 @@ namespace AwsDotnetCsharp
 					new BulkWriteOptions());
 			Console.WriteLine($"WeakPointData#DbSetDataList {sw.Elapsed.TotalSeconds}[秒]");
 			var result = requestResult.RequestCount == requestResult.ProcessedRequests.Count;
-			if (result) { userUpdateCache.WeakPointDataTableUpdate.Upsert(dataList); }
 			return result;
 		}
 		#endregion
@@ -90,7 +87,6 @@ namespace AwsDotnetCsharp
 					aData => aData.id == id);
 			Console.WriteLine($"WeakPointData#DbDeleteDataById {sw.Elapsed.TotalSeconds}[秒]");
 			var result = deleteResult.IsAcknowledged;
-			if (result) { userUpdateCache.WeakPointDataTableUpdate.Delete(id); }
 			return result;
 		}
 
@@ -105,7 +101,6 @@ namespace AwsDotnetCsharp
 					aData => keySet.Contains(aData.id));
 			Console.WriteLine($"WeakPointData#DbDeleteDataByIds {sw.Elapsed.TotalSeconds}[秒]");
 			var result = deleteResult.IsAcknowledged;
-			if (result) { userUpdateCache.WeakPointDataTableUpdate.Delete(ids); }
 			return result;
 		}
 		#endregion
@@ -152,8 +147,6 @@ namespace AwsDotnetCsharp
 		private static void SetupWeakPointDataTableIndexGenerated(DataTable<long, WeakPointData> targetDataTable)
 		{
 			targetDataTable.CreateUniqueIndex("Id", aData => (object)aData.id);
-			targetDataTable.CreateIndex("Id", aData => (object)aData.id);
-			targetDataTable.CreateIndex("Name", aData => (object)aData.name);
 		}
 		#endregion
 		#region DataTableUniqueIndex(Id)
@@ -161,20 +154,6 @@ namespace AwsDotnetCsharp
 			long id)
 		{
 			return dataTable.GetData("Id", (object)id);
-		}
-		#endregion
-		#region DataTableIndex (Id)
-		public static List<WeakPointData> GetDataListById(
-			long id)
-		{
-			return dataTable.GetDataList("Id", (object)id);
-		}
-		#endregion
-		#region DataTableIndex (Name)
-		public static List<WeakPointData> GetDataListByName(
-			string name)
-		{
-			return dataTable.GetDataList("Name", (object)name);
 		}
 		#endregion
 	}

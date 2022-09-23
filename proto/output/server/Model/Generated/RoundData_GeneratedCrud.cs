@@ -8,14 +8,13 @@ using MongoDB.Driver;
 
 namespace AwsDotnetCsharp
 {
-
 	public partial class RoundData : IUnique<long>
 	{
 		private static bool isMaster => true;
 
 		private static IMongoCollection<RoundData> _collection = null;
 		private static IMongoCollection<RoundData> collection
-			=> _collection ?? (_collection = mongoDatabase.GetCollection<RoundData>("RoundDatas"));
+			=> _collection ?? (_collection = mongoDatabase.GetCollection<RoundData>("rounds"));
 
 		public static IClientSessionHandle sessionHandle
 			=> MongoSessionManager.sessionHandle;
@@ -52,7 +51,6 @@ namespace AwsDotnetCsharp
 					new ReplaceOptions { IsUpsert = true });
 			bool result = replaceOneResult.IsAcknowledged && (replaceOneResult.ModifiedCount > 0);
 			Console.WriteLine($"RoundData#DbSetData {sw.Elapsed.TotalSeconds}[秒]");
-			if (result) { userUpdateCache.RoundDataTableUpdate.Upsert(data); }
 			return result;
 		}
 
@@ -75,7 +73,6 @@ namespace AwsDotnetCsharp
 					new BulkWriteOptions());
 			Console.WriteLine($"RoundData#DbSetDataList {sw.Elapsed.TotalSeconds}[秒]");
 			var result = requestResult.RequestCount == requestResult.ProcessedRequests.Count;
-			if (result) { userUpdateCache.RoundDataTableUpdate.Upsert(dataList); }
 			return result;
 		}
 		#endregion
@@ -90,7 +87,6 @@ namespace AwsDotnetCsharp
 					aData => aData.id == id);
 			Console.WriteLine($"RoundData#DbDeleteDataById {sw.Elapsed.TotalSeconds}[秒]");
 			var result = deleteResult.IsAcknowledged;
-			if (result) { userUpdateCache.RoundDataTableUpdate.Delete(id); }
 			return result;
 		}
 
@@ -105,7 +101,6 @@ namespace AwsDotnetCsharp
 					aData => keySet.Contains(aData.id));
 			Console.WriteLine($"RoundData#DbDeleteDataByIds {sw.Elapsed.TotalSeconds}[秒]");
 			var result = deleteResult.IsAcknowledged;
-			if (result) { userUpdateCache.RoundDataTableUpdate.Delete(ids); }
 			return result;
 		}
 		#endregion
@@ -152,10 +147,7 @@ namespace AwsDotnetCsharp
 		private static void SetupRoundDataTableIndexGenerated(DataTable<long, RoundData> targetDataTable)
 		{
 			targetDataTable.CreateUniqueIndex("Id", aData => (object)aData.id);
-			targetDataTable.CreateIndex("Id", aData => (object)aData.id);
-			targetDataTable.CreateIndex("Name", aData => (object)aData.name);
 			targetDataTable.CreateIndex("StageId", aData => (object)aData.stageId);
-			targetDataTable.CreateIndex("RoundNo", aData => (object)aData.roundNo);
 		}
 		#endregion
 		#region DataTableUniqueIndex(Id)
@@ -165,32 +157,11 @@ namespace AwsDotnetCsharp
 			return dataTable.GetData("Id", (object)id);
 		}
 		#endregion
-		#region DataTableIndex (Id)
-		public static List<RoundData> GetDataListById(
-			long id)
-		{
-			return dataTable.GetDataList("Id", (object)id);
-		}
-		#endregion
-		#region DataTableIndex (Name)
-		public static List<RoundData> GetDataListByName(
-			string name)
-		{
-			return dataTable.GetDataList("Name", (object)name);
-		}
-		#endregion
 		#region DataTableIndex (StageId)
 		public static List<RoundData> GetDataListByStageId(
 			long stageId)
 		{
 			return dataTable.GetDataList("StageId", (object)stageId);
-		}
-		#endregion
-		#region DataTableIndex (RoundNo)
-		public static List<RoundData> GetDataListByRoundNo(
-			long roundNo)
-		{
-			return dataTable.GetDataList("RoundNo", (object)roundNo);
 		}
 		#endregion
 	}

@@ -8,14 +8,13 @@ using MongoDB.Driver;
 
 namespace AwsDotnetCsharp
 {
-
 	public partial class BattleInitEnemyData : IUnique<long>
 	{
-		private static bool isMaster => true;
+		private static bool isMaster => false;
 
 		private static IMongoCollection<BattleInitEnemyData> _collection = null;
 		private static IMongoCollection<BattleInitEnemyData> collection
-			=> _collection ?? (_collection = mongoDatabase.GetCollection<BattleInitEnemyData>("BattleInitEnemyDatas"));
+			=> _collection ?? (_collection = mongoDatabase.GetCollection<BattleInitEnemyData>("battle_init_enemys"));
 
 		public static IClientSessionHandle sessionHandle
 			=> MongoSessionManager.sessionHandle;
@@ -52,7 +51,6 @@ namespace AwsDotnetCsharp
 					new ReplaceOptions { IsUpsert = true });
 			bool result = replaceOneResult.IsAcknowledged && (replaceOneResult.ModifiedCount > 0);
 			Console.WriteLine($"BattleInitEnemyData#DbSetData {sw.Elapsed.TotalSeconds}[秒]");
-			if (result) { userUpdateCache.BattleInitEnemyDataTableUpdate.Upsert(data); }
 			return result;
 		}
 
@@ -75,11 +73,55 @@ namespace AwsDotnetCsharp
 					new BulkWriteOptions());
 			Console.WriteLine($"BattleInitEnemyData#DbSetDataList {sw.Elapsed.TotalSeconds}[秒]");
 			var result = requestResult.RequestCount == requestResult.ProcessedRequests.Count;
-			if (result) { userUpdateCache.BattleInitEnemyDataTableUpdate.Upsert(dataList); }
 			return result;
 		}
 		#endregion
-		#region MongoDb
+		#region DataTableSetupIndex
+		public static async Task DbSetupIndex()
+		{
+			var builder = Builders<BattleInitEnemyData>.IndexKeys;
+			await DbSetupOneIndex(builder.Ascending(aData => aData.roundId));
+		}
+
+		public static async Task DbSetupOneIndex(
+			IndexKeysDefinition<BattleInitEnemyData> indexKeys)
+		{
+			var indexModel = new CreateIndexModel<BattleInitEnemyData>(indexKeys);
+			await collection.Indexes
+				.CreateOneAsync(
+					sessionHandle,
+					indexModel);
+		}
+		#endregion
+		#region MongoDbUniqueIndex(Id)
+		public static async Task<BattleInitEnemyData> DbGetDataById(
+			long id)
+		{
+			var sw = Stopwatch.StartNew();
+			var cacheKey = "BattleInitEnemyData/GetDataById_" + id;
+			var result = await collection
+				.Find(
+					sessionHandle,
+					aData => aData.id == id)
+				.FirstOrDefaultAsync();
+			Console.WriteLine($"BattleInitEnemyData#DbGetDataById {sw.Elapsed.TotalSeconds}[秒]");
+			return result;
+		}
+
+		public static async Task<List<BattleInitEnemyData>> DbGetDataListInIds(
+			IEnumerable<long> ids)
+		{
+			var sw = Stopwatch.StartNew();
+			var filter = Builders<BattleInitEnemyData>.Filter.In(aData => aData.id, ids);
+			var result = await collection
+				.Find(
+					sessionHandle,
+					filter)
+				.ToListAsync();
+			Console.WriteLine($"BattleInitEnemyData#DbGetDataListInIds {sw.Elapsed.TotalSeconds}[秒]");
+			return result;
+		}
+
 		public static async Task<bool> DbDeleteDataById(
 			long id)
 		{
@@ -90,7 +132,6 @@ namespace AwsDotnetCsharp
 					aData => aData.id == id);
 			Console.WriteLine($"BattleInitEnemyData#DbDeleteDataById {sw.Elapsed.TotalSeconds}[秒]");
 			var result = deleteResult.IsAcknowledged;
-			if (result) { userUpdateCache.BattleInitEnemyDataTableUpdate.Delete(id); }
 			return result;
 		}
 
@@ -105,108 +146,81 @@ namespace AwsDotnetCsharp
 					aData => keySet.Contains(aData.id));
 			Console.WriteLine($"BattleInitEnemyData#DbDeleteDataByIds {sw.Elapsed.TotalSeconds}[秒]");
 			var result = deleteResult.IsAcknowledged;
-			if (result) { userUpdateCache.BattleInitEnemyDataTableUpdate.Delete(ids); }
 			return result;
 		}
 		#endregion
-		#region NullObject
-		public static BattleInitEnemyData Null => NullObjectContainer.Get<BattleInitEnemyData>();
-	
-		public bool isNull => this == Null;
-		#endregion
-		#region GameDbWrapper(DataTable)
-		public static DataTable<long, BattleInitEnemyData> dataTable {
-			get {
-				DataTable<long, BattleInitEnemyData> result;
-				if (GameDb.TableExists<long, BattleInitEnemyData>()) {
-					result = GameDb.From<long, BattleInitEnemyData>();
-				} else {
-					result = GameDb.CreateTable<long, BattleInitEnemyData>();
-					SetupBattleInitEnemyDataTableIndexGenerated(result);
-					SetupBattleInitEnemyDataTableIndex(result);
-				}
-				return result;
-			}
-		}
-
-		public static int Count => dataTable.Count;
-
-		public static List<BattleInitEnemyData> GetDataList()
-		{
-			return dataTable.dataList;
-		}
-
-		public static void SetDataList(IEnumerable<BattleInitEnemyData> dataList)
-		{
-			Clear();
-			dataTable.InsertRange(dataList);
-		}
-
-		public static void Clear()
-		{
-			dataTable.DeleteAll();
-		}
-
-		static partial void SetupBattleInitEnemyDataTableIndex(DataTable<long, BattleInitEnemyData> targetDataTable);
-
-		private static void SetupBattleInitEnemyDataTableIndexGenerated(DataTable<long, BattleInitEnemyData> targetDataTable)
-		{
-			targetDataTable.CreateUniqueIndex("Id", aData => (object)aData.id);
-			targetDataTable.CreateIndex("Id", aData => (object)aData.id);
-			targetDataTable.CreateIndex("RoundId", aData => (object)aData.roundId);
-			targetDataTable.CreateIndex("EnemyId", aData => (object)aData.enemyId);
-			targetDataTable.CreateIndex("PosX", aData => (object)aData.posX);
-			targetDataTable.CreateIndex("PosY", aData => (object)aData.posY);
-			targetDataTable.CreateIndex("DropRewardResource", aData => (object)aData.dropRewardResource);
-		}
-		#endregion
-		#region DataTableUniqueIndex(Id)
-		public static BattleInitEnemyData GetDataById(
-			long id)
-		{
-			return dataTable.GetData("Id", (object)id);
-		}
-		#endregion
-		#region DataTableIndex (Id)
-		public static List<BattleInitEnemyData> GetDataListById(
-			long id)
-		{
-			return dataTable.GetDataList("Id", (object)id);
-		}
-		#endregion
-		#region DataTableIndex (RoundId)
-		public static List<BattleInitEnemyData> GetDataListByRoundId(
+		#region MongoDbIndex(RoundId)
+		public static async Task<BattleInitEnemyData> DbGetDataByRoundId(
 			long roundId)
 		{
-			return dataTable.GetDataList("RoundId", (object)roundId);
+			var sw = Stopwatch.StartNew();
+			var result = await collection
+				.Find(
+					sessionHandle,
+					aData => aData.roundId == roundId)
+				.FirstOrDefaultAsync();
+			Console.WriteLine($"BattleInitEnemyData#DbGetDataByRoundId {sw.Elapsed.TotalSeconds}[秒]");
+			return result;
+		}
+
+		public static async Task<List<BattleInitEnemyData>> DbGetDataListByRoundId(
+			long roundId)
+		{
+			var sw = Stopwatch.StartNew();
+			var result = await collection
+				.Find(
+					sessionHandle,
+					aData => aData.roundId == roundId)
+				.ToListAsync();
+			Console.WriteLine($"BattleInitEnemyData#DbGetDataListByRoundId {sw.Elapsed.TotalSeconds}[秒]");
+			return result;
+		}
+		
+		public static async Task<List<BattleInitEnemyData>> DbGetDataListByRoundIds(
+			IEnumerable<long> roundIds)
+		{
+			var sw = Stopwatch.StartNew();
+			var keySet = roundIds.ToHashSet();
+			var result = await collection
+				.Find(
+					sessionHandle,
+					data => keySet.Contains(data.roundId))
+				.ToListAsync();
+			Console.WriteLine($"BattleInitEnemyData#DbGetDataListByRoundIds {sw.Elapsed.TotalSeconds}[秒]");
+			return result;
+		}
+
+		public static async Task<bool> DbDeleteDataByRoundId(
+			long roundId)
+		{
+			var dataList = await DbGetDataListByRoundId(roundId);
+			var ids = dataList.Select(data => data.id);
+			var result = await DbDeleteDataByIds(ids);
+			return result;
+		}
+
+		public static async Task<bool> DbDeleteDataByRoundIds(
+			IEnumerable<long> roundIds)
+		{
+			var dataList = await DbGetDataListByRoundIds(roundIds);
+			var ids = dataList.Select(data => data.id);
+			var result = await DbDeleteDataByIds(ids);
+			return result;
 		}
 		#endregion
-		#region DataTableIndex (EnemyId)
-		public static List<BattleInitEnemyData> GetDataListByEnemyId(
-			long enemyId)
+		#region Methods
+		public async Task<bool> DbSave()
 		{
-			return dataTable.GetDataList("EnemyId", (object)enemyId);
+			if (this._id == ObjectId.Empty) {
+				var data = await DbGetDataById(this.id);
+				this._id = (data != null) ? data._id : this._id;
+			}
+			return await DbSetData(this);
 		}
-		#endregion
-		#region DataTableIndex (PosX)
-		public static List<BattleInitEnemyData> GetDataListByPosX(
-			long posX)
+
+		public async Task<bool> DbDelete()
 		{
-			return dataTable.GetDataList("PosX", (object)posX);
-		}
-		#endregion
-		#region DataTableIndex (PosY)
-		public static List<BattleInitEnemyData> GetDataListByPosY(
-			long posY)
-		{
-			return dataTable.GetDataList("PosY", (object)posY);
-		}
-		#endregion
-		#region DataTableIndex (DropRewardResource)
-		public static List<BattleInitEnemyData> GetDataListByDropRewardResource(
-			ResourceData dropRewardResource)
-		{
-			return dataTable.GetDataList("DropRewardResource", (object)dropRewardResource);
+			return await DbDeleteDataById(this.id);
 		}
 		#endregion
 	}

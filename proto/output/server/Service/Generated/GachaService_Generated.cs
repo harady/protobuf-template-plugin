@@ -62,7 +62,7 @@ namespace AwsDotnetCsharp
 	}
 
 	[JsonObject(MemberSerialization.OptIn)]
-	public partial class GachaDrawResponse : APIRequest
+	public partial class GachaDrawResponse : APIResponse
 	{
 		[JsonProperty("gacha_result_items")]
 		public List<GachaResultItemData> gachaResultItems { get; set; } = new List<GachaResultItemData>();

@@ -8,14 +8,13 @@ using MongoDB.Driver;
 
 namespace AwsDotnetCsharp
 {
-
 	public partial class GachaPoolItemData : IUnique<long>
 	{
 		private static bool isMaster => true;
 
 		private static IMongoCollection<GachaPoolItemData> _collection = null;
 		private static IMongoCollection<GachaPoolItemData> collection
-			=> _collection ?? (_collection = mongoDatabase.GetCollection<GachaPoolItemData>("GachaPoolItemDatas"));
+			=> _collection ?? (_collection = mongoDatabase.GetCollection<GachaPoolItemData>("gacha_pool_items"));
 
 		public static IClientSessionHandle sessionHandle
 			=> MongoSessionManager.sessionHandle;
@@ -52,7 +51,6 @@ namespace AwsDotnetCsharp
 					new ReplaceOptions { IsUpsert = true });
 			bool result = replaceOneResult.IsAcknowledged && (replaceOneResult.ModifiedCount > 0);
 			Console.WriteLine($"GachaPoolItemData#DbSetData {sw.Elapsed.TotalSeconds}[秒]");
-			if (result) { userUpdateCache.GachaPoolItemDataTableUpdate.Upsert(data); }
 			return result;
 		}
 
@@ -75,7 +73,6 @@ namespace AwsDotnetCsharp
 					new BulkWriteOptions());
 			Console.WriteLine($"GachaPoolItemData#DbSetDataList {sw.Elapsed.TotalSeconds}[秒]");
 			var result = requestResult.RequestCount == requestResult.ProcessedRequests.Count;
-			if (result) { userUpdateCache.GachaPoolItemDataTableUpdate.Upsert(dataList); }
 			return result;
 		}
 		#endregion
@@ -90,7 +87,6 @@ namespace AwsDotnetCsharp
 					aData => aData.id == id);
 			Console.WriteLine($"GachaPoolItemData#DbDeleteDataById {sw.Elapsed.TotalSeconds}[秒]");
 			var result = deleteResult.IsAcknowledged;
-			if (result) { userUpdateCache.GachaPoolItemDataTableUpdate.Delete(id); }
 			return result;
 		}
 
@@ -105,7 +101,6 @@ namespace AwsDotnetCsharp
 					aData => keySet.Contains(aData.id));
 			Console.WriteLine($"GachaPoolItemData#DbDeleteDataByIds {sw.Elapsed.TotalSeconds}[秒]");
 			var result = deleteResult.IsAcknowledged;
-			if (result) { userUpdateCache.GachaPoolItemDataTableUpdate.Delete(ids); }
 			return result;
 		}
 		#endregion
@@ -152,14 +147,7 @@ namespace AwsDotnetCsharp
 		private static void SetupGachaPoolItemDataTableIndexGenerated(DataTable<long, GachaPoolItemData> targetDataTable)
 		{
 			targetDataTable.CreateUniqueIndex("Id", aData => (object)aData.id);
-			targetDataTable.CreateIndex("Id", aData => (object)aData.id);
 			targetDataTable.CreateIndex("GachaPoolId", aData => (object)aData.gachaPoolId);
-			targetDataTable.CreateIndex("ResourceType", aData => (object)aData.resourceType);
-			targetDataTable.CreateIndex("ResourceId", aData => (object)aData.resourceId);
-			targetDataTable.CreateIndex("ResourceAmount", aData => (object)aData.resourceAmount);
-			targetDataTable.CreateIndex("Weight", aData => (object)aData.weight);
-			targetDataTable.CreateIndex("OpenAt", aData => (object)aData.openAt);
-			targetDataTable.CreateIndex("CloseAt", aData => (object)aData.closeAt);
 		}
 		#endregion
 		#region DataTableUniqueIndex(Id)
@@ -169,60 +157,11 @@ namespace AwsDotnetCsharp
 			return dataTable.GetData("Id", (object)id);
 		}
 		#endregion
-		#region DataTableIndex (Id)
-		public static List<GachaPoolItemData> GetDataListById(
-			long id)
-		{
-			return dataTable.GetDataList("Id", (object)id);
-		}
-		#endregion
 		#region DataTableIndex (GachaPoolId)
 		public static List<GachaPoolItemData> GetDataListByGachaPoolId(
 			long gachaPoolId)
 		{
 			return dataTable.GetDataList("GachaPoolId", (object)gachaPoolId);
-		}
-		#endregion
-		#region DataTableIndex (ResourceType)
-		public static List<GachaPoolItemData> GetDataListByResourceType(
-			ResourceType resourceType)
-		{
-			return dataTable.GetDataList("ResourceType", (object)resourceType);
-		}
-		#endregion
-		#region DataTableIndex (ResourceId)
-		public static List<GachaPoolItemData> GetDataListByResourceId(
-			long resourceId)
-		{
-			return dataTable.GetDataList("ResourceId", (object)resourceId);
-		}
-		#endregion
-		#region DataTableIndex (ResourceAmount)
-		public static List<GachaPoolItemData> GetDataListByResourceAmount(
-			long resourceAmount)
-		{
-			return dataTable.GetDataList("ResourceAmount", (object)resourceAmount);
-		}
-		#endregion
-		#region DataTableIndex (Weight)
-		public static List<GachaPoolItemData> GetDataListByWeight(
-			long weight)
-		{
-			return dataTable.GetDataList("Weight", (object)weight);
-		}
-		#endregion
-		#region DataTableIndex (OpenAt)
-		public static List<GachaPoolItemData> GetDataListByOpenAt(
-			long openAt)
-		{
-			return dataTable.GetDataList("OpenAt", (object)openAt);
-		}
-		#endregion
-		#region DataTableIndex (CloseAt)
-		public static List<GachaPoolItemData> GetDataListByCloseAt(
-			long closeAt)
-		{
-			return dataTable.GetDataList("CloseAt", (object)closeAt);
 		}
 		#endregion
 	}

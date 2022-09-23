@@ -8,14 +8,13 @@ using MongoDB.Driver;
 
 namespace AwsDotnetCsharp
 {
-
 	public partial class UnitCategoryData : IUnique<long>
 	{
 		private static bool isMaster => true;
 
 		private static IMongoCollection<UnitCategoryData> _collection = null;
 		private static IMongoCollection<UnitCategoryData> collection
-			=> _collection ?? (_collection = mongoDatabase.GetCollection<UnitCategoryData>("UnitCategoryDatas"));
+			=> _collection ?? (_collection = mongoDatabase.GetCollection<UnitCategoryData>("unit_categorys"));
 
 		public static IClientSessionHandle sessionHandle
 			=> MongoSessionManager.sessionHandle;
@@ -52,7 +51,6 @@ namespace AwsDotnetCsharp
 					new ReplaceOptions { IsUpsert = true });
 			bool result = replaceOneResult.IsAcknowledged && (replaceOneResult.ModifiedCount > 0);
 			Console.WriteLine($"UnitCategoryData#DbSetData {sw.Elapsed.TotalSeconds}[秒]");
-			if (result) { userUpdateCache.UnitCategoryDataTableUpdate.Upsert(data); }
 			return result;
 		}
 
@@ -75,7 +73,6 @@ namespace AwsDotnetCsharp
 					new BulkWriteOptions());
 			Console.WriteLine($"UnitCategoryData#DbSetDataList {sw.Elapsed.TotalSeconds}[秒]");
 			var result = requestResult.RequestCount == requestResult.ProcessedRequests.Count;
-			if (result) { userUpdateCache.UnitCategoryDataTableUpdate.Upsert(dataList); }
 			return result;
 		}
 		#endregion
@@ -90,7 +87,6 @@ namespace AwsDotnetCsharp
 					aData => aData.id == id);
 			Console.WriteLine($"UnitCategoryData#DbDeleteDataById {sw.Elapsed.TotalSeconds}[秒]");
 			var result = deleteResult.IsAcknowledged;
-			if (result) { userUpdateCache.UnitCategoryDataTableUpdate.Delete(id); }
 			return result;
 		}
 
@@ -105,7 +101,6 @@ namespace AwsDotnetCsharp
 					aData => keySet.Contains(aData.id));
 			Console.WriteLine($"UnitCategoryData#DbDeleteDataByIds {sw.Elapsed.TotalSeconds}[秒]");
 			var result = deleteResult.IsAcknowledged;
-			if (result) { userUpdateCache.UnitCategoryDataTableUpdate.Delete(ids); }
 			return result;
 		}
 		#endregion
@@ -152,8 +147,6 @@ namespace AwsDotnetCsharp
 		private static void SetupUnitCategoryDataTableIndexGenerated(DataTable<long, UnitCategoryData> targetDataTable)
 		{
 			targetDataTable.CreateUniqueIndex("Id", aData => (object)aData.id);
-			targetDataTable.CreateIndex("Id", aData => (object)aData.id);
-			targetDataTable.CreateIndex("Name", aData => (object)aData.name);
 		}
 		#endregion
 		#region DataTableUniqueIndex(Id)
@@ -161,20 +154,6 @@ namespace AwsDotnetCsharp
 			long id)
 		{
 			return dataTable.GetData("Id", (object)id);
-		}
-		#endregion
-		#region DataTableIndex (Id)
-		public static List<UnitCategoryData> GetDataListById(
-			long id)
-		{
-			return dataTable.GetDataList("Id", (object)id);
-		}
-		#endregion
-		#region DataTableIndex (Name)
-		public static List<UnitCategoryData> GetDataListByName(
-			string name)
-		{
-			return dataTable.GetDataList("Name", (object)name);
 		}
 		#endregion
 	}

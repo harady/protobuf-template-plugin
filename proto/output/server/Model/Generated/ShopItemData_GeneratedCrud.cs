@@ -8,14 +8,13 @@ using MongoDB.Driver;
 
 namespace AwsDotnetCsharp
 {
-
 	public partial class ShopItemData : IUnique<long>
 	{
 		private static bool isMaster => true;
 
 		private static IMongoCollection<ShopItemData> _collection = null;
 		private static IMongoCollection<ShopItemData> collection
-			=> _collection ?? (_collection = mongoDatabase.GetCollection<ShopItemData>("ShopItemDatas"));
+			=> _collection ?? (_collection = mongoDatabase.GetCollection<ShopItemData>("shop_items"));
 
 		public static IClientSessionHandle sessionHandle
 			=> MongoSessionManager.sessionHandle;
@@ -52,7 +51,6 @@ namespace AwsDotnetCsharp
 					new ReplaceOptions { IsUpsert = true });
 			bool result = replaceOneResult.IsAcknowledged && (replaceOneResult.ModifiedCount > 0);
 			Console.WriteLine($"ShopItemData#DbSetData {sw.Elapsed.TotalSeconds}[秒]");
-			if (result) { userUpdateCache.ShopItemDataTableUpdate.Upsert(data); }
 			return result;
 		}
 
@@ -75,7 +73,6 @@ namespace AwsDotnetCsharp
 					new BulkWriteOptions());
 			Console.WriteLine($"ShopItemData#DbSetDataList {sw.Elapsed.TotalSeconds}[秒]");
 			var result = requestResult.RequestCount == requestResult.ProcessedRequests.Count;
-			if (result) { userUpdateCache.ShopItemDataTableUpdate.Upsert(dataList); }
 			return result;
 		}
 		#endregion
@@ -90,7 +87,6 @@ namespace AwsDotnetCsharp
 					aData => aData.id == id);
 			Console.WriteLine($"ShopItemData#DbDeleteDataById {sw.Elapsed.TotalSeconds}[秒]");
 			var result = deleteResult.IsAcknowledged;
-			if (result) { userUpdateCache.ShopItemDataTableUpdate.Delete(id); }
 			return result;
 		}
 
@@ -105,7 +101,6 @@ namespace AwsDotnetCsharp
 					aData => keySet.Contains(aData.id));
 			Console.WriteLine($"ShopItemData#DbDeleteDataByIds {sw.Elapsed.TotalSeconds}[秒]");
 			var result = deleteResult.IsAcknowledged;
-			if (result) { userUpdateCache.ShopItemDataTableUpdate.Delete(ids); }
 			return result;
 		}
 		#endregion
@@ -152,14 +147,8 @@ namespace AwsDotnetCsharp
 		private static void SetupShopItemDataTableIndexGenerated(DataTable<long, ShopItemData> targetDataTable)
 		{
 			targetDataTable.CreateUniqueIndex("Id", aData => (object)aData.id);
-			targetDataTable.CreateIndex("Id", aData => (object)aData.id);
-			targetDataTable.CreateIndex("Name", aData => (object)aData.name);
+			targetDataTable.CreateUniqueIndex("PlatformProductId", aData => (object)aData.platformProductId);
 			targetDataTable.CreateIndex("ShopId", aData => (object)aData.shopId);
-			targetDataTable.CreateIndex("PurchasePlatformType", aData => (object)aData.purchasePlatformType);
-			targetDataTable.CreateIndex("PlatformProductId", aData => (object)aData.platformProductId);
-			targetDataTable.CreateIndex("Price", aData => (object)aData.price);
-			targetDataTable.CreateIndex("ResourceSetId", aData => (object)aData.resourceSetId);
-			targetDataTable.CreateIndex("LimitCount", aData => (object)aData.limitCount);
 		}
 		#endregion
 		#region DataTableUniqueIndex(Id)
@@ -169,18 +158,11 @@ namespace AwsDotnetCsharp
 			return dataTable.GetData("Id", (object)id);
 		}
 		#endregion
-		#region DataTableIndex (Id)
-		public static List<ShopItemData> GetDataListById(
-			long id)
+		#region DataTableUniqueIndex(PlatformProductId)
+		public static ShopItemData GetDataByPlatformProductId(
+			string platformProductId)
 		{
-			return dataTable.GetDataList("Id", (object)id);
-		}
-		#endregion
-		#region DataTableIndex (Name)
-		public static List<ShopItemData> GetDataListByName(
-			string name)
-		{
-			return dataTable.GetDataList("Name", (object)name);
+			return dataTable.GetData("PlatformProductId", (object)platformProductId);
 		}
 		#endregion
 		#region DataTableIndex (ShopId)
@@ -188,41 +170,6 @@ namespace AwsDotnetCsharp
 			long shopId)
 		{
 			return dataTable.GetDataList("ShopId", (object)shopId);
-		}
-		#endregion
-		#region DataTableIndex (PurchasePlatformType)
-		public static List<ShopItemData> GetDataListByPurchasePlatformType(
-			PurchasePlatformType purchasePlatformType)
-		{
-			return dataTable.GetDataList("PurchasePlatformType", (object)purchasePlatformType);
-		}
-		#endregion
-		#region DataTableIndex (PlatformProductId)
-		public static List<ShopItemData> GetDataListByPlatformProductId(
-			string platformProductId)
-		{
-			return dataTable.GetDataList("PlatformProductId", (object)platformProductId);
-		}
-		#endregion
-		#region DataTableIndex (Price)
-		public static List<ShopItemData> GetDataListByPrice(
-			long price)
-		{
-			return dataTable.GetDataList("Price", (object)price);
-		}
-		#endregion
-		#region DataTableIndex (ResourceSetId)
-		public static List<ShopItemData> GetDataListByResourceSetId(
-			long resourceSetId)
-		{
-			return dataTable.GetDataList("ResourceSetId", (object)resourceSetId);
-		}
-		#endregion
-		#region DataTableIndex (LimitCount)
-		public static List<ShopItemData> GetDataListByLimitCount(
-			long limitCount)
-		{
-			return dataTable.GetDataList("LimitCount", (object)limitCount);
 		}
 		#endregion
 	}

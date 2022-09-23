@@ -8,14 +8,13 @@ using MongoDB.Driver;
 
 namespace AwsDotnetCsharp
 {
-
 	public partial class DailyEventTableItemData : IUnique<long>
 	{
 		private static bool isMaster => true;
 
 		private static IMongoCollection<DailyEventTableItemData> _collection = null;
 		private static IMongoCollection<DailyEventTableItemData> collection
-			=> _collection ?? (_collection = mongoDatabase.GetCollection<DailyEventTableItemData>("DailyEventTableItemDatas"));
+			=> _collection ?? (_collection = mongoDatabase.GetCollection<DailyEventTableItemData>("daily_event_table_items"));
 
 		public static IClientSessionHandle sessionHandle
 			=> MongoSessionManager.sessionHandle;
@@ -52,7 +51,6 @@ namespace AwsDotnetCsharp
 					new ReplaceOptions { IsUpsert = true });
 			bool result = replaceOneResult.IsAcknowledged && (replaceOneResult.ModifiedCount > 0);
 			Console.WriteLine($"DailyEventTableItemData#DbSetData {sw.Elapsed.TotalSeconds}[秒]");
-			if (result) { userUpdateCache.DailyEventTableItemDataTableUpdate.Upsert(data); }
 			return result;
 		}
 
@@ -75,7 +73,6 @@ namespace AwsDotnetCsharp
 					new BulkWriteOptions());
 			Console.WriteLine($"DailyEventTableItemData#DbSetDataList {sw.Elapsed.TotalSeconds}[秒]");
 			var result = requestResult.RequestCount == requestResult.ProcessedRequests.Count;
-			if (result) { userUpdateCache.DailyEventTableItemDataTableUpdate.Upsert(dataList); }
 			return result;
 		}
 		#endregion
@@ -90,7 +87,6 @@ namespace AwsDotnetCsharp
 					aData => aData.id == id);
 			Console.WriteLine($"DailyEventTableItemData#DbDeleteDataById {sw.Elapsed.TotalSeconds}[秒]");
 			var result = deleteResult.IsAcknowledged;
-			if (result) { userUpdateCache.DailyEventTableItemDataTableUpdate.Delete(id); }
 			return result;
 		}
 
@@ -105,7 +101,6 @@ namespace AwsDotnetCsharp
 					aData => keySet.Contains(aData.id));
 			Console.WriteLine($"DailyEventTableItemData#DbDeleteDataByIds {sw.Elapsed.TotalSeconds}[秒]");
 			var result = deleteResult.IsAcknowledged;
-			if (result) { userUpdateCache.DailyEventTableItemDataTableUpdate.Delete(ids); }
 			return result;
 		}
 		#endregion
@@ -152,10 +147,7 @@ namespace AwsDotnetCsharp
 		private static void SetupDailyEventTableItemDataTableIndexGenerated(DataTable<long, DailyEventTableItemData> targetDataTable)
 		{
 			targetDataTable.CreateUniqueIndex("Id", aData => (object)aData.id);
-			targetDataTable.CreateIndex("Id", aData => (object)aData.id);
 			targetDataTable.CreateIndex("DailyEventTableId", aData => (object)aData.dailyEventTableId);
-			targetDataTable.CreateIndex("EventQuestCategoryId", aData => (object)aData.eventQuestCategoryId);
-			targetDataTable.CreateIndex("Count", aData => (object)aData.count);
 		}
 		#endregion
 		#region DataTableUniqueIndex(Id)
@@ -165,32 +157,11 @@ namespace AwsDotnetCsharp
 			return dataTable.GetData("Id", (object)id);
 		}
 		#endregion
-		#region DataTableIndex (Id)
-		public static List<DailyEventTableItemData> GetDataListById(
-			long id)
-		{
-			return dataTable.GetDataList("Id", (object)id);
-		}
-		#endregion
 		#region DataTableIndex (DailyEventTableId)
 		public static List<DailyEventTableItemData> GetDataListByDailyEventTableId(
 			long dailyEventTableId)
 		{
 			return dataTable.GetDataList("DailyEventTableId", (object)dailyEventTableId);
-		}
-		#endregion
-		#region DataTableIndex (EventQuestCategoryId)
-		public static List<DailyEventTableItemData> GetDataListByEventQuestCategoryId(
-			long eventQuestCategoryId)
-		{
-			return dataTable.GetDataList("EventQuestCategoryId", (object)eventQuestCategoryId);
-		}
-		#endregion
-		#region DataTableIndex (Count)
-		public static List<DailyEventTableItemData> GetDataListByCount(
-			long count)
-		{
-			return dataTable.GetDataList("Count", (object)count);
 		}
 		#endregion
 	}

@@ -64,7 +64,7 @@ namespace AwsDotnetCsharp
 	}
 
 	[JsonObject(MemberSerialization.OptIn)]
-	public partial class ExchangeExchangeResponse : APIRequest
+	public partial class ExchangeExchangeResponse : APIResponse
 	{
 	}
 }

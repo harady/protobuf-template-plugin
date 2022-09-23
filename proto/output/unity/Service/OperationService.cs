@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using UnityEngine;
@@ -6,6 +6,7 @@ using UnityEngine;
 
 public partial class OperationService
 {
+
 	public void Test(Action<OperationTestResponse> onSuccess)
 	{
 		var request = new OperationTestRequest();

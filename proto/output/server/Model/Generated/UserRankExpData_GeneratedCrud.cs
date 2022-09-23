@@ -8,14 +8,13 @@ using MongoDB.Driver;
 
 namespace AwsDotnetCsharp
 {
-
 	public partial class UserRankExpData : IUnique<long>
 	{
 		private static bool isMaster => true;
 
 		private static IMongoCollection<UserRankExpData> _collection = null;
 		private static IMongoCollection<UserRankExpData> collection
-			=> _collection ?? (_collection = mongoDatabase.GetCollection<UserRankExpData>("UserRankExpDatas"));
+			=> _collection ?? (_collection = mongoDatabase.GetCollection<UserRankExpData>("user_rank_exps"));
 
 		public static IClientSessionHandle sessionHandle
 			=> MongoSessionManager.sessionHandle;
@@ -52,7 +51,6 @@ namespace AwsDotnetCsharp
 					new ReplaceOptions { IsUpsert = true });
 			bool result = replaceOneResult.IsAcknowledged && (replaceOneResult.ModifiedCount > 0);
 			Console.WriteLine($"UserRankExpData#DbSetData {sw.Elapsed.TotalSeconds}[秒]");
-			if (result) { userUpdateCache.UserRankExpDataTableUpdate.Upsert(data); }
 			return result;
 		}
 
@@ -75,7 +73,6 @@ namespace AwsDotnetCsharp
 					new BulkWriteOptions());
 			Console.WriteLine($"UserRankExpData#DbSetDataList {sw.Elapsed.TotalSeconds}[秒]");
 			var result = requestResult.RequestCount == requestResult.ProcessedRequests.Count;
-			if (result) { userUpdateCache.UserRankExpDataTableUpdate.Upsert(dataList); }
 			return result;
 		}
 		#endregion
@@ -90,7 +87,6 @@ namespace AwsDotnetCsharp
 					aData => aData.id == id);
 			Console.WriteLine($"UserRankExpData#DbDeleteDataById {sw.Elapsed.TotalSeconds}[秒]");
 			var result = deleteResult.IsAcknowledged;
-			if (result) { userUpdateCache.UserRankExpDataTableUpdate.Delete(id); }
 			return result;
 		}
 
@@ -105,7 +101,6 @@ namespace AwsDotnetCsharp
 					aData => keySet.Contains(aData.id));
 			Console.WriteLine($"UserRankExpData#DbDeleteDataByIds {sw.Elapsed.TotalSeconds}[秒]");
 			var result = deleteResult.IsAcknowledged;
-			if (result) { userUpdateCache.UserRankExpDataTableUpdate.Delete(ids); }
 			return result;
 		}
 		#endregion
@@ -152,13 +147,7 @@ namespace AwsDotnetCsharp
 		private static void SetupUserRankExpDataTableIndexGenerated(DataTable<long, UserRankExpData> targetDataTable)
 		{
 			targetDataTable.CreateUniqueIndex("Id", aData => (object)aData.id);
-			targetDataTable.CreateIndex("Id", aData => (object)aData.id);
-			targetDataTable.CreateIndex("Rank", aData => (object)aData.rank);
-			targetDataTable.CreateIndex("TotalExp", aData => (object)aData.totalExp);
-			targetDataTable.CreateIndex("MaxStamina", aData => (object)aData.maxStamina);
-			targetDataTable.CreateIndex("DeckNum", aData => (object)aData.deckNum);
-			targetDataTable.CreateIndex("MaxFriendNum", aData => (object)aData.maxFriendNum);
-			targetDataTable.CreateIndex("UnitBoxNum", aData => (object)aData.unitBoxNum);
+			targetDataTable.CreateUniqueIndex("Rank", aData => (object)aData.rank);
 		}
 		#endregion
 		#region DataTableUniqueIndex(Id)
@@ -168,53 +157,11 @@ namespace AwsDotnetCsharp
 			return dataTable.GetData("Id", (object)id);
 		}
 		#endregion
-		#region DataTableIndex (Id)
-		public static List<UserRankExpData> GetDataListById(
-			long id)
-		{
-			return dataTable.GetDataList("Id", (object)id);
-		}
-		#endregion
-		#region DataTableIndex (Rank)
-		public static List<UserRankExpData> GetDataListByRank(
+		#region DataTableUniqueIndex(Rank)
+		public static UserRankExpData GetDataByRank(
 			long rank)
 		{
-			return dataTable.GetDataList("Rank", (object)rank);
-		}
-		#endregion
-		#region DataTableIndex (TotalExp)
-		public static List<UserRankExpData> GetDataListByTotalExp(
-			long totalExp)
-		{
-			return dataTable.GetDataList("TotalExp", (object)totalExp);
-		}
-		#endregion
-		#region DataTableIndex (MaxStamina)
-		public static List<UserRankExpData> GetDataListByMaxStamina(
-			long maxStamina)
-		{
-			return dataTable.GetDataList("MaxStamina", (object)maxStamina);
-		}
-		#endregion
-		#region DataTableIndex (DeckNum)
-		public static List<UserRankExpData> GetDataListByDeckNum(
-			long deckNum)
-		{
-			return dataTable.GetDataList("DeckNum", (object)deckNum);
-		}
-		#endregion
-		#region DataTableIndex (MaxFriendNum)
-		public static List<UserRankExpData> GetDataListByMaxFriendNum(
-			long maxFriendNum)
-		{
-			return dataTable.GetDataList("MaxFriendNum", (object)maxFriendNum);
-		}
-		#endregion
-		#region DataTableIndex (UnitBoxNum)
-		public static List<UserRankExpData> GetDataListByUnitBoxNum(
-			long unitBoxNum)
-		{
-			return dataTable.GetDataList("UnitBoxNum", (object)unitBoxNum);
+			return dataTable.GetData("Rank", (object)rank);
 		}
 		#endregion
 	}

@@ -14,16 +14,6 @@ namespace AwsDotnetCsharp
 
 	}
 
-	public partial class UnitPowerupRequest
-	{
-
-	}
-
-	public partial class UnitPowerupResponse
-	{
-
-	}
-
 	public partial class UnitEvolutionRequest
 	{
 
@@ -34,22 +24,32 @@ namespace AwsDotnetCsharp
 
 	}
 
-	public partial class UnitSellRequest
-	{
-
-	}
-
-	public partial class UnitSellResponse
-	{
-
-	}
-
 	public partial class UnitLockRequest
 	{
 
 	}
 
 	public partial class UnitLockResponse
+	{
+
+	}
+
+	public partial class UnitPowerupRequest
+	{
+
+	}
+
+	public partial class UnitPowerupResponse
+	{
+
+	}
+
+	public partial class UnitSellRequest
+	{
+
+	}
+
+	public partial class UnitSellResponse
 	{
 
 	}

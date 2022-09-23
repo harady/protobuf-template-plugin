@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 public partial class IdentifableItemData : IUnique<long>
 {
@@ -55,6 +55,7 @@ public partial class IdentifableItemData : IUnique<long>
 	private static void SetupIdentifableItemDataTableIndexGenerated(DataTable<long, IdentifableItemData> targetDataTable)
 	{
 		targetDataTable.CreateUniqueIndex("Id", aData => (object)aData.id);
+		targetDataTable.CreateIndex("Type", aData => (object)aData.type);
 	}
 	#endregion
 	#region DataTableUniqueIndex(Id)
@@ -73,4 +74,11 @@ public partial class IdentifableItemData : IUnique<long>
 		dataTable.DeleteByKey("Id", (object)id);
 	}
 	#endregion
+	#region DataTableIndex (Type)
+	public static List<IdentifableItemData> GetDataListByType(IdentifableItemType type)
+	{
+		return dataTable.GetDataList("Type", (object)type);
+	}
+	#endregion
 }
+

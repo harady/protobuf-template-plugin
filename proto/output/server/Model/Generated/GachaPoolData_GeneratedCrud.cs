@@ -8,14 +8,13 @@ using MongoDB.Driver;
 
 namespace AwsDotnetCsharp
 {
-
 	public partial class GachaPoolData : IUnique<long>
 	{
 		private static bool isMaster => true;
 
 		private static IMongoCollection<GachaPoolData> _collection = null;
 		private static IMongoCollection<GachaPoolData> collection
-			=> _collection ?? (_collection = mongoDatabase.GetCollection<GachaPoolData>("GachaPoolDatas"));
+			=> _collection ?? (_collection = mongoDatabase.GetCollection<GachaPoolData>("gacha_pools"));
 
 		public static IClientSessionHandle sessionHandle
 			=> MongoSessionManager.sessionHandle;
@@ -52,7 +51,6 @@ namespace AwsDotnetCsharp
 					new ReplaceOptions { IsUpsert = true });
 			bool result = replaceOneResult.IsAcknowledged && (replaceOneResult.ModifiedCount > 0);
 			Console.WriteLine($"GachaPoolData#DbSetData {sw.Elapsed.TotalSeconds}[秒]");
-			if (result) { userUpdateCache.GachaPoolDataTableUpdate.Upsert(data); }
 			return result;
 		}
 
@@ -75,7 +73,6 @@ namespace AwsDotnetCsharp
 					new BulkWriteOptions());
 			Console.WriteLine($"GachaPoolData#DbSetDataList {sw.Elapsed.TotalSeconds}[秒]");
 			var result = requestResult.RequestCount == requestResult.ProcessedRequests.Count;
-			if (result) { userUpdateCache.GachaPoolDataTableUpdate.Upsert(dataList); }
 			return result;
 		}
 		#endregion
@@ -90,7 +87,6 @@ namespace AwsDotnetCsharp
 					aData => aData.id == id);
 			Console.WriteLine($"GachaPoolData#DbDeleteDataById {sw.Elapsed.TotalSeconds}[秒]");
 			var result = deleteResult.IsAcknowledged;
-			if (result) { userUpdateCache.GachaPoolDataTableUpdate.Delete(id); }
 			return result;
 		}
 
@@ -105,7 +101,6 @@ namespace AwsDotnetCsharp
 					aData => keySet.Contains(aData.id));
 			Console.WriteLine($"GachaPoolData#DbDeleteDataByIds {sw.Elapsed.TotalSeconds}[秒]");
 			var result = deleteResult.IsAcknowledged;
-			if (result) { userUpdateCache.GachaPoolDataTableUpdate.Delete(ids); }
 			return result;
 		}
 		#endregion
@@ -152,16 +147,7 @@ namespace AwsDotnetCsharp
 		private static void SetupGachaPoolDataTableIndexGenerated(DataTable<long, GachaPoolData> targetDataTable)
 		{
 			targetDataTable.CreateUniqueIndex("Id", aData => (object)aData.id);
-			targetDataTable.CreateIndex("Id", aData => (object)aData.id);
-			targetDataTable.CreateIndex("Name", aData => (object)aData.name);
 			targetDataTable.CreateIndex("GachaId", aData => (object)aData.gachaId);
-			targetDataTable.CreateIndex("BaseGachaPoolId", aData => (object)aData.baseGachaPoolId);
-			targetDataTable.CreateIndex("IsExtra", aData => (object)aData.isExtra);
-			targetDataTable.CreateIndex("IsPickup", aData => (object)aData.isPickup);
-			targetDataTable.CreateIndex("IsGuarantee", aData => (object)aData.isGuarantee);
-			targetDataTable.CreateIndex("Rarity", aData => (object)aData.rarity);
-			targetDataTable.CreateIndex("Attribute", aData => (object)aData.attribute);
-			targetDataTable.CreateIndex("Weight", aData => (object)aData.weight);
 		}
 		#endregion
 		#region DataTableUniqueIndex(Id)
@@ -171,74 +157,11 @@ namespace AwsDotnetCsharp
 			return dataTable.GetData("Id", (object)id);
 		}
 		#endregion
-		#region DataTableIndex (Id)
-		public static List<GachaPoolData> GetDataListById(
-			long id)
-		{
-			return dataTable.GetDataList("Id", (object)id);
-		}
-		#endregion
-		#region DataTableIndex (Name)
-		public static List<GachaPoolData> GetDataListByName(
-			string name)
-		{
-			return dataTable.GetDataList("Name", (object)name);
-		}
-		#endregion
 		#region DataTableIndex (GachaId)
 		public static List<GachaPoolData> GetDataListByGachaId(
 			long gachaId)
 		{
 			return dataTable.GetDataList("GachaId", (object)gachaId);
-		}
-		#endregion
-		#region DataTableIndex (BaseGachaPoolId)
-		public static List<GachaPoolData> GetDataListByBaseGachaPoolId(
-			long baseGachaPoolId)
-		{
-			return dataTable.GetDataList("BaseGachaPoolId", (object)baseGachaPoolId);
-		}
-		#endregion
-		#region DataTableIndex (IsExtra)
-		public static List<GachaPoolData> GetDataListByIsExtra(
-			bool isExtra)
-		{
-			return dataTable.GetDataList("IsExtra", (object)isExtra);
-		}
-		#endregion
-		#region DataTableIndex (IsPickup)
-		public static List<GachaPoolData> GetDataListByIsPickup(
-			bool isPickup)
-		{
-			return dataTable.GetDataList("IsPickup", (object)isPickup);
-		}
-		#endregion
-		#region DataTableIndex (IsGuarantee)
-		public static List<GachaPoolData> GetDataListByIsGuarantee(
-			bool isGuarantee)
-		{
-			return dataTable.GetDataList("IsGuarantee", (object)isGuarantee);
-		}
-		#endregion
-		#region DataTableIndex (Rarity)
-		public static List<GachaPoolData> GetDataListByRarity(
-			long rarity)
-		{
-			return dataTable.GetDataList("Rarity", (object)rarity);
-		}
-		#endregion
-		#region DataTableIndex (Attribute)
-		public static List<GachaPoolData> GetDataListByAttribute(
-			UnitAttribute attribute)
-		{
-			return dataTable.GetDataList("Attribute", (object)attribute);
-		}
-		#endregion
-		#region DataTableIndex (Weight)
-		public static List<GachaPoolData> GetDataListByWeight(
-			long weight)
-		{
-			return dataTable.GetDataList("Weight", (object)weight);
 		}
 		#endregion
 	}

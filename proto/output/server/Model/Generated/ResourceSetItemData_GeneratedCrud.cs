@@ -8,14 +8,13 @@ using MongoDB.Driver;
 
 namespace AwsDotnetCsharp
 {
-
 	public partial class ResourceSetItemData : IUnique<long>
 	{
 		private static bool isMaster => true;
 
 		private static IMongoCollection<ResourceSetItemData> _collection = null;
 		private static IMongoCollection<ResourceSetItemData> collection
-			=> _collection ?? (_collection = mongoDatabase.GetCollection<ResourceSetItemData>("ResourceSetItemDatas"));
+			=> _collection ?? (_collection = mongoDatabase.GetCollection<ResourceSetItemData>("resource_set_items"));
 
 		public static IClientSessionHandle sessionHandle
 			=> MongoSessionManager.sessionHandle;
@@ -52,7 +51,6 @@ namespace AwsDotnetCsharp
 					new ReplaceOptions { IsUpsert = true });
 			bool result = replaceOneResult.IsAcknowledged && (replaceOneResult.ModifiedCount > 0);
 			Console.WriteLine($"ResourceSetItemData#DbSetData {sw.Elapsed.TotalSeconds}[秒]");
-			if (result) { userUpdateCache.ResourceSetItemDataTableUpdate.Upsert(data); }
 			return result;
 		}
 
@@ -75,7 +73,6 @@ namespace AwsDotnetCsharp
 					new BulkWriteOptions());
 			Console.WriteLine($"ResourceSetItemData#DbSetDataList {sw.Elapsed.TotalSeconds}[秒]");
 			var result = requestResult.RequestCount == requestResult.ProcessedRequests.Count;
-			if (result) { userUpdateCache.ResourceSetItemDataTableUpdate.Upsert(dataList); }
 			return result;
 		}
 		#endregion
@@ -90,7 +87,6 @@ namespace AwsDotnetCsharp
 					aData => aData.id == id);
 			Console.WriteLine($"ResourceSetItemData#DbDeleteDataById {sw.Elapsed.TotalSeconds}[秒]");
 			var result = deleteResult.IsAcknowledged;
-			if (result) { userUpdateCache.ResourceSetItemDataTableUpdate.Delete(id); }
 			return result;
 		}
 
@@ -105,7 +101,6 @@ namespace AwsDotnetCsharp
 					aData => keySet.Contains(aData.id));
 			Console.WriteLine($"ResourceSetItemData#DbDeleteDataByIds {sw.Elapsed.TotalSeconds}[秒]");
 			var result = deleteResult.IsAcknowledged;
-			if (result) { userUpdateCache.ResourceSetItemDataTableUpdate.Delete(ids); }
 			return result;
 		}
 		#endregion
@@ -152,11 +147,7 @@ namespace AwsDotnetCsharp
 		private static void SetupResourceSetItemDataTableIndexGenerated(DataTable<long, ResourceSetItemData> targetDataTable)
 		{
 			targetDataTable.CreateUniqueIndex("Id", aData => (object)aData.id);
-			targetDataTable.CreateIndex("Id", aData => (object)aData.id);
 			targetDataTable.CreateIndex("ResourceSetId", aData => (object)aData.resourceSetId);
-			targetDataTable.CreateIndex("ResourceType", aData => (object)aData.resourceType);
-			targetDataTable.CreateIndex("ResourceId", aData => (object)aData.resourceId);
-			targetDataTable.CreateIndex("ResourceAmount", aData => (object)aData.resourceAmount);
 		}
 		#endregion
 		#region DataTableUniqueIndex(Id)
@@ -166,39 +157,11 @@ namespace AwsDotnetCsharp
 			return dataTable.GetData("Id", (object)id);
 		}
 		#endregion
-		#region DataTableIndex (Id)
-		public static List<ResourceSetItemData> GetDataListById(
-			long id)
-		{
-			return dataTable.GetDataList("Id", (object)id);
-		}
-		#endregion
 		#region DataTableIndex (ResourceSetId)
 		public static List<ResourceSetItemData> GetDataListByResourceSetId(
 			long resourceSetId)
 		{
 			return dataTable.GetDataList("ResourceSetId", (object)resourceSetId);
-		}
-		#endregion
-		#region DataTableIndex (ResourceType)
-		public static List<ResourceSetItemData> GetDataListByResourceType(
-			ResourceType resourceType)
-		{
-			return dataTable.GetDataList("ResourceType", (object)resourceType);
-		}
-		#endregion
-		#region DataTableIndex (ResourceId)
-		public static List<ResourceSetItemData> GetDataListByResourceId(
-			long resourceId)
-		{
-			return dataTable.GetDataList("ResourceId", (object)resourceId);
-		}
-		#endregion
-		#region DataTableIndex (ResourceAmount)
-		public static List<ResourceSetItemData> GetDataListByResourceAmount(
-			long resourceAmount)
-		{
-			return dataTable.GetDataList("ResourceAmount", (object)resourceAmount);
 		}
 		#endregion
 	}
