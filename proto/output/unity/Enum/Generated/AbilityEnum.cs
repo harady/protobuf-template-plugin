@@ -1,4 +1,9 @@
 
+public enum AbilityCategory
+{
+	None = 0,
+}
+
 public enum AbilityType
 {
 	None = 0,
@@ -55,9 +60,4 @@ public enum AbilityType
 	OtherSkillTurnReduce = 2401,
 	OtherSkillTurnCharge = 2403,
 	OtherShotAccel = 2405,
-}
-
-public enum AbilityCategory
-{
-	None = 0,
 }

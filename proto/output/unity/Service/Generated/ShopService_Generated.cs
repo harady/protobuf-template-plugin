@@ -1,4 +1,4 @@
-//GENERATED CODE, DO NOT EDIT !
+﻿//GENERATED CODE, DO NOT EDIT !
 using System;
 using System.Collections.Generic;
 using Newtonsoft.Json;
@@ -75,20 +75,6 @@ public partial class Services {
 		=> ShopService.instance;
 }
 #region Request/Response
-public partial class ShopPurchaseGooglePlayRequest : CommonRequest
-{
-	[JsonProperty("shop_item_id")]
-	public long shopItemId { get; set; }
-	[JsonProperty("signed_data")]
-	public string signedData { get; set; }
-	[JsonProperty("signature")]
-	public string signature { get; set; }
-}
-
-public partial class ShopPurchaseGooglePlayResponse : APIResponse
-{
-}
-
 public partial class ShopPurchaseAppStoreRequest : CommonRequest
 {
 	[JsonProperty("shop_item_id")]
@@ -108,6 +94,20 @@ public partial class ShopPurchaseDebugRequest : CommonRequest
 }
 
 public partial class ShopPurchaseDebugResponse : APIResponse
+{
+}
+
+public partial class ShopPurchaseGooglePlayRequest : CommonRequest
+{
+	[JsonProperty("shop_item_id")]
+	public long shopItemId { get; set; }
+	[JsonProperty("signed_data")]
+	public string signedData { get; set; }
+	[JsonProperty("signature")]
+	public string signature { get; set; }
+}
+
+public partial class ShopPurchaseGooglePlayResponse : APIResponse
 {
 }
 #endregion
