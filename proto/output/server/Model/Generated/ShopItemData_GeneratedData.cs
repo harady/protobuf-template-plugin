@@ -8,7 +8,6 @@ using MessagePack;
 
 namespace AwsDotnetCsharp
 {
-
 	[BsonIgnoreExtraElements]
 	[DataContract]
 	public partial class ShopItemData : AbstractData

@@ -8,7 +8,7 @@ using MessagePack;
 
 namespace AwsDotnetCsharp
 {
-{{ for message in file.message_type }}
+{{- for message in file.message_type }}
 	{{- has_id = (message.field[0].name == "id") }}
 	[BsonIgnoreExtraElements]
 	[DataContract]
