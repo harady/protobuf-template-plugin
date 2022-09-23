@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
 {{ for message in file.message_type }}
 {{- has_id = (message.field[0].name == "id") }}
+{{- unique_indexs = message | get_unique_indexs }}
+{{- indexs = message | get_indexs }}
 public partial class {{ message.name }} : IUnique<long>
 {
 	#region NullObject
@@ -57,20 +59,20 @@ public partial class {{ message.name }} : IUnique<long>
 	private static void Setup{{ message.name }}TableIndexGenerated(DataTable<long, {{ message.name }}> targetDataTable)
 	{
 		{{- for field in message.field }}
-			{{- if (field.name == "id") }}
+			{{- if (field.name == "id") || (unique_indexs | array.contains field.name) }}
 		targetDataTable.CreateUniqueIndex("{{ field.name | to_pascal }}", aData => (object)aData.{{ field.name | to_camel }});
 			{{- end }}
 		{{- end }}
 		{{- for field in message.field }}
-			{{- if false }}
-		targetDataTable.CreateIndex("{{ message.name | to_pascal }}", aData => (object)aData.{{ message.name | to_camel }});
+			{{- if (indexs | array.contains field.name) }}
+		targetDataTable.CreateIndex("{{ field.name | to_pascal }}", aData => (object)aData.{{ field.name | to_camel }});
 			{{- end }}
 		{{- end }}
 	}
 	#endregion
 	{{- end }}
 	{{- for field in message.field }}
-		{{- if (field.name == "id") }}
+		{{- if (field.name == "id") || (unique_indexs | array.contains field.name) }}
 	#region DataTableUniqueIndex({{ field.name | to_pascal }})
 	public static {{ message.name }} GetDataBy{{ field.name | to_pascal }}({{ field | to_cs_type }} {{ field.name | to_camel }})
 	{
@@ -90,8 +92,8 @@ public partial class {{ message.name }} : IUnique<long>
 		{{- end }}
 	{{- end }}
 	{{- for field in message.field }}
-		{{- if false }}
-	#region DataTableIndex ({{ message.name | to_pascal }})
+		{{- if (indexs | array.contains field.name) }}
+	#region DataTableIndex ({{ field.name | to_pascal }})
 	public static List<{{ message.name }}> GetDataListBy{{ field.name | to_pascal }}({{ field | to_cs_type }} {{ field.name | to_camel }})
 	{
 		return dataTable.GetDataList("{{ field.name | to_pascal }}", (object){{ field.name | to_camel }});
@@ -101,3 +103,4 @@ public partial class {{ message.name }} : IUnique<long>
 	{{- end }}
 }
 {{- end }}
+

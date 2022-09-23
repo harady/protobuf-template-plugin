@@ -4,7 +4,11 @@
 public static class StringExtensions_CaseConvent
 {
 	public static string[] ToWords(this string self)
-		=> self.Split('_');
+	{
+		var regex = new System.Text.RegularExpressions.Regex("[a-z][A-Z]");
+		var tmp = regex.Replace(self, s => $"{s.Groups[0].Value[0]}_{s.Groups[0].Value[1]}");
+		return tmp.Split('_');
+	}
 
 	/// <summary>
 	/// この文字列のキャメルケース表現を取得する.

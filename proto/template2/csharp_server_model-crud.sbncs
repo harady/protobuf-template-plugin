@@ -8,18 +8,22 @@ using MongoDB.Driver;
 
 namespace AwsDotnetCsharp
 {
-{{ for message in file.message_type }}
-	{{- message_name_camel = message.name }}
+{{- for message in file.message_type }}
+	{{- message_name_prefix = (message.name | regex.replace "Data$" "") }}
+	{{- message_name_camel = (message_name_prefix | to_camel) }}
 	{{- has_id = (message.field[0].name == "id") }}
-	{{- is_master = true }}
-	{{- is_client_user_data = true }}
+	{{- unique_indexs = message | get_unique_indexs }}
+	{{- indexs = message | get_indexs }}
+	{{- tags = message | get_tags }}
+	{{- is_master = (tags | array.contains "is_master") || (tags | array.contains "is_client_master") }}
+	{{- is_client_user_data = (tags | array.contains "is_client_user_data") }}
 	public partial class {{ message.name }}{{ if has_id }} : IUnique<long>{{ end }}
 	{
 		private static bool isMaster => {{ is_master }};
 
 		private static IMongoCollection<{{ message.name }}> _collection = null;
 		private static IMongoCollection<{{ message.name }}> collection
-			=> _collection ?? (_collection = mongoDatabase.GetCollection<{{ message.name }}>("{{ message.name }}s"));
+			=> _collection ?? (_collection = mongoDatabase.GetCollection<{{ message.name }}>("{{ message_name_prefix | to_snake }}s"));
 
 		public static IClientSessionHandle sessionHandle
 			=> MongoSessionManager.sessionHandle;
@@ -169,12 +173,12 @@ namespace AwsDotnetCsharp
 		private static void Setup{{ message.name }}TableIndexGenerated(DataTable<long, {{ message.name }}> targetDataTable)
 		{
 			{{- for field in message.field }}
-				{{- if (field.name == "id") }}
+				{{- if (field.name == "id") || (unique_indexs | array.contains field.name) }}
 			targetDataTable.CreateUniqueIndex("{{ field.name | to_pascal }}", aData => (object)aData.{{ field.name | to_camel }});
 				{{- end }}
 			{{- end }}
 			{{- for field in message.field }}
-				{{- if true }}
+				{{- if (indexs | array.contains field.name) }}
 			targetDataTable.CreateIndex("{{ field.name | to_pascal }}", aData => (object)aData.{{ field.name | to_camel }});
 				{{- end }}
 			{{- end }}
@@ -182,7 +186,7 @@ namespace AwsDotnetCsharp
 		#endregion
 		{{- end }}
 		{{- for field in message.field }}
-			{{- if (field.name == "id") }}
+			{{- if (field.name == "id") || (unique_indexs | array.contains field.name) }}
 		#region DataTableUniqueIndex({{ field.name | to_pascal }})
 		public static {{ message.name }} GetDataBy{{ field.name | to_pascal }}(
 			{{ field | to_cs_type }} {{ field.name | to_camel }})
@@ -193,7 +197,7 @@ namespace AwsDotnetCsharp
 			{{- end }}
 		{{- end }}
 		{{- for field in message.field }}
-			{{- if true }}
+			{{- if (indexs | array.contains field.name) }}
 		#region DataTableIndex ({{ field.name | to_pascal }})
 		public static List<{{ message.name }}> GetDataListBy{{ field.name | to_pascal }}(
 			{{ field | to_cs_type }} {{ field.name | to_camel }})
@@ -209,7 +213,7 @@ namespace AwsDotnetCsharp
 		{
 			var builder = Builders<{{ message.name }}>.IndexKeys;
 			{{- for field in message.field }}
-				{{- if true }}
+				{{- if (unique_indexs | array.contains field.name) || (indexs | array.contains field.name) }}
 			await DbSetupOneIndex(builder.Ascending(aData => aData.{{ field.name | to_camel }}));
 				{{- end }}
 			{{- end }}
@@ -226,7 +230,7 @@ namespace AwsDotnetCsharp
 		}
 		#endregion
 		{{- for field in message.field }}
-			{{- if (field.name == "id") }}
+			{{- if (field.name == "id") || (unique_indexs | array.contains field.name) }}
 		#region MongoDbUniqueIndex({{ field.name | to_pascal }})
 		public static async Task<{{ message.name }}> DbGetDataBy{{ field.name | to_pascal }}(
 			{{ field | to_cs_type }} {{ field.name | to_camel }})
@@ -255,7 +259,7 @@ namespace AwsDotnetCsharp
 			Console.WriteLine($"{{ message.name }}#DbGetDataListIn{{ field.name | to_pascal }}s {sw.Elapsed.TotalSeconds}[秒]");
 			return result;
 		}
-{{ if ((field.name == "id") or (has_id)) }}
+{{ if ((field.name == "id") || has_id) }}
 		public static async Task<bool> DbDeleteDataBy{{ field.name | to_pascal }}(
 			{{ field | to_cs_type }} {{ field.name | to_camel }})
 		{
@@ -283,7 +287,7 @@ namespace AwsDotnetCsharp
 					aData => keySet.Contains(aData.{{ field.name | to_camel }}));
 			Console.WriteLine($"{{ message.name }}#DbDeleteDataBy{{ field.name | to_pascal }}s {sw.Elapsed.TotalSeconds}[秒]");
 			var result = deleteResult.IsAcknowledged;
-			{{- if (and (field.name == "id") (is_client_user_data)) }}
+			{{- if ((field.name == "id") && is_client_user_data) }}
 			if (result) { userUpdateCache.{{ message_name_camel }}TableUpdate.Delete(ids); }
 			{{- end }}
 			return result;
@@ -308,7 +312,7 @@ namespace AwsDotnetCsharp
 {{- end }}
 		#endregion
 			{{- end }}
-			{{- if (StrArrayContains $indexes .Name) }}
+			{{- if (indexs | array.contains field.name) }}
 		#region MongoDbIndex({{ field.name | to_pascal }})
 		public static async Task<{{ message.name }}> DbGetDataBy{{ field.name | to_pascal }}(
 			{{ field | to_cs_type }} {{ field.name | to_camel }})
@@ -332,7 +336,7 @@ namespace AwsDotnetCsharp
 					sessionHandle,
 					aData => aData.{{ field.name | to_camel }} == {{ field.name | to_camel }})
 				.ToListAsync();
-			Console.WriteLine($"{{ message.name }}#DbGetDataListBy{{ field.name | to_pascall }} {sw.Elapsed.TotalSeconds}[秒]");
+			Console.WriteLine($"{{ message.name }}#DbGetDataListBy{{ field.name | to_pascal }} {sw.Elapsed.TotalSeconds}[秒]");
 			return result;
 		}
 		
