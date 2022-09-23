@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 
 public partial class UnitLevelExpData : IUnique<long>
 {
@@ -55,8 +55,6 @@ public partial class UnitLevelExpData : IUnique<long>
 	private static void SetupUnitLevelExpDataTableIndexGenerated(DataTable<long, UnitLevelExpData> targetDataTable)
 	{
 		targetDataTable.CreateUniqueIndex("Id", aData => (object)aData.id);
-		targetDataTable.CreateIndex("GrowthType", aData => (object)aData.growthType);
-		targetDataTable.CreateIndex("Level", aData => (object)aData.level);
 	}
 	#endregion
 	#region DataTableUniqueIndex(Id)
@@ -75,17 +73,4 @@ public partial class UnitLevelExpData : IUnique<long>
 		dataTable.DeleteByKey("Id", (object)id);
 	}
 	#endregion
-	#region DataTableIndex (GrowthType)
-	public static List<UnitLevelExpData> GetDataListByGrowthType(long growthType)
-	{
-		return dataTable.GetDataList("GrowthType", (object)growthType);
-	}
-	#endregion
-	#region DataTableIndex (Level)
-	public static List<UnitLevelExpData> GetDataListByLevel(long level)
-	{
-		return dataTable.GetDataList("Level", (object)level);
-	}
-	#endregion
 }
-

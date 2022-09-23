@@ -5,15 +5,16 @@ using Amazon.Lambda.Core;
 
 namespace AwsDotnetCsharp
 {
-{{- range .Services }}
-	public partial class {{ .Name }}Service : {{ .Name }}ServiceBase
+{{- for service in file.service }}
+{{- serviceName = (service.name + "Service") }}
+	public partial class {{ serviceName }} : {{ serviceName }}Base
 	{
-{{ range .Methods }}
-		public override async Task<{{ .Response.Name }}> {{ .Name }}Impl(
-			{{ .Request.Name }} request, ILambdaContext context)
+{{ for method in service.method }}
+		public override async Task<{{ method.output_type | to_short_name }}> {{ method.name }}Impl(
+			{{ method.input_type | to_short_name }} request, ILambdaContext context)
 		{
-			await Task.Run(() => Console.WriteLine("{{ .Name }}Impl is not implemented"));
-			var result = new {{ .Response.Name }}();
+			await Task.Run(() => Console.WriteLine("{{ method.name }}Impl is not implemented"));
+			var result = new {{ method.output_type | to_short_name }}();
 			return result;
 		}
 {{ end }}

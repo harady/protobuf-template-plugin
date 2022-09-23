@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 
 public partial class DailyEventTableItemData : IUnique<long>
 {
@@ -55,7 +55,6 @@ public partial class DailyEventTableItemData : IUnique<long>
 	private static void SetupDailyEventTableItemDataTableIndexGenerated(DataTable<long, DailyEventTableItemData> targetDataTable)
 	{
 		targetDataTable.CreateUniqueIndex("Id", aData => (object)aData.id);
-		targetDataTable.CreateIndex("DailyEventTableId", aData => (object)aData.dailyEventTableId);
 	}
 	#endregion
 	#region DataTableUniqueIndex(Id)
@@ -74,11 +73,4 @@ public partial class DailyEventTableItemData : IUnique<long>
 		dataTable.DeleteByKey("Id", (object)id);
 	}
 	#endregion
-	#region DataTableIndex (DailyEventTableId)
-	public static List<DailyEventTableItemData> GetDataListByDailyEventTableId(long dailyEventTableId)
-	{
-		return dataTable.GetDataList("DailyEventTableId", (object)dailyEventTableId);
-	}
-	#endregion
 }
-

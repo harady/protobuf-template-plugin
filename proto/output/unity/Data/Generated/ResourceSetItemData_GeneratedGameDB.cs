@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 
 public partial class ResourceSetItemData : IUnique<long>
 {
@@ -55,7 +55,6 @@ public partial class ResourceSetItemData : IUnique<long>
 	private static void SetupResourceSetItemDataTableIndexGenerated(DataTable<long, ResourceSetItemData> targetDataTable)
 	{
 		targetDataTable.CreateUniqueIndex("Id", aData => (object)aData.id);
-		targetDataTable.CreateIndex("ResourceSetId", aData => (object)aData.resourceSetId);
 	}
 	#endregion
 	#region DataTableUniqueIndex(Id)
@@ -74,11 +73,4 @@ public partial class ResourceSetItemData : IUnique<long>
 		dataTable.DeleteByKey("Id", (object)id);
 	}
 	#endregion
-	#region DataTableIndex (ResourceSetId)
-	public static List<ResourceSetItemData> GetDataListByResourceSetId(long resourceSetId)
-	{
-		return dataTable.GetDataList("ResourceSetId", (object)resourceSetId);
-	}
-	#endregion
 }
-

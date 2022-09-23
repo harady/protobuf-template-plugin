@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 
 public partial class WeakPointPositionData : IUnique<long>
 {
@@ -55,7 +55,6 @@ public partial class WeakPointPositionData : IUnique<long>
 	private static void SetupWeakPointPositionDataTableIndexGenerated(DataTable<long, WeakPointPositionData> targetDataTable)
 	{
 		targetDataTable.CreateUniqueIndex("Id", aData => (object)aData.id);
-		targetDataTable.CreateIndex("WeakPointId", aData => (object)aData.weakPointId);
 	}
 	#endregion
 	#region DataTableUniqueIndex(Id)
@@ -74,11 +73,4 @@ public partial class WeakPointPositionData : IUnique<long>
 		dataTable.DeleteByKey("Id", (object)id);
 	}
 	#endregion
-	#region DataTableIndex (WeakPointId)
-	public static List<WeakPointPositionData> GetDataListByWeakPointId(long weakPointId)
-	{
-		return dataTable.GetDataList("WeakPointId", (object)weakPointId);
-	}
-	#endregion
 }
-
