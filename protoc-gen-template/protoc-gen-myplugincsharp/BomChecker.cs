@@ -2,16 +2,11 @@
 {
 	public static bool HasBom(string filePath)
 	{
-		using (FileStream fs = new FileStream(filePath, FileMode.Open)) {
-			// I am read BOM of readfile.
-			byte[] bom = new byte[4] { 0xFF, 0xFF, 0xFF, 0xFF };
-			int codepage;
+		var bom = new byte[4];
+		using (var fs = new FileStream(filePath, FileMode.Open, FileAccess.Read)) {
 			fs.Read(bom, 0, 4);
-			fs.Position = 0;
-
-			return IsBOM(bom, out codepage);
 		}
-
+		return IsBOM(bom, out var codepage);
 	}
 
 	static bool IsBOM(byte[] bomByte, out int codepage)

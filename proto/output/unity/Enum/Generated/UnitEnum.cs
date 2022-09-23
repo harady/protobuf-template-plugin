@@ -1,11 +1,4 @@
 ﻿
-public enum UnitAttackType
-{
-	None = 0,
-	Bound = 1,
-	Pierce = 2,
-}
-
 public enum UnitAttribute
 {
 	None = 0,
@@ -16,9 +9,11 @@ public enum UnitAttribute
 	Dark = 5,
 }
 
-public enum UnitEvolutionStateType
+public enum UnitAttackType
 {
 	None = 0,
+	Bound = 1,
+	Pierce = 2,
 }
 
 public enum UnitObtainType
@@ -26,4 +21,9 @@ public enum UnitObtainType
 	None = 0,
 	Gacha = 1,
 	Other = 2,
+}
+
+public enum UnitEvolutionStateType
+{
+	None = 0,
 }
