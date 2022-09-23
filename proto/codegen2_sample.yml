@@ -1,7 +1,7 @@
 protoc_path : "bin/protoc"
-protoc_plugin_path : "plugin/protoc-gen-csharp-template"
+protoc_plugin_path : "plugin2/protoc-gen-csharp-template"
 src_base_path : "./"
-template_base_path : "template/"
+template_base_path : "template2/"
 out_base_path : "./output_sample"
 items:
   #============================================================

@@ -1,29 +1,27 @@
-■Messages
-{{- range .Messages }}
-Message.Name:{{ .Name }}
-  Message.PrimaryKey:{{ .PrimaryKey }}
-{{- range .Fields }}
-  Field.Name:{{ .Name }}
-    Field.BaseType:{{ .BaseType }}
-    Field.FullType:{{ .FullType }}
-    Field.IsRepeated:{{ .IsRepeated }}
+■file.message_type
+{{ for message in file.message_type }}
+message.name:{{ message.name }}
+{{ for field in message.field }}
+  field.name:{{ field.name }}
+    field | to_cs_type:{{ field | to_cs_type }}
+    field.type:{{ field.type }}
+    field | is_repeated:{{ field | is_repeated }}
 {{- end }}
 {{ end }}
-■Services
-{{- range .Services }}
-Message.Name:{{ .Name }}
-{{- range .Methods }}
-  Field.Name:{{ .Name }}
-    Field.Request:{{ .BaseType }}
-    Field.Response:{{ .Name }}
-    Field.IsRepeated:{{ .Name }}
+■file.service
+{{ for service in file.service }}
+service.name:{{ service.name }}
+{{ for method in service.method }}
+  method.name:{{ method.name }}
+    input_type.name:{{ method.input_type.name }}
+    output_type.name:{{ method.output_type.name }}
 {{- end }}
 {{ end }}
-■EnumTypes
-{{- range .EnumTypes }}
-Message.Name:{{ .Name }}
-{{- range .Values }}
-  Value.Name:{{ .Name }}
-  Value.Number:{{ .Number }}
+■file.enum_type
+{{ for enum in file.enum_type }}
+enum.name:{{ enum.name }}
+{{ for value in enum.value }}
+  value.name:{{ value.name }}
+  value.number:{{ value.number }}
 {{- end }}
 {{ end }}

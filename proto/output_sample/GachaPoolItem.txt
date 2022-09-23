@@ -1,0 +1,41 @@
+■file.message_type
+
+message.name:GachaPoolItemData
+
+  field.name:id
+    field | to_cs_type:long
+    field.type:Int64
+    field | is_repeated:false
+  field.name:gacha_pool_id
+    field | to_cs_type:long
+    field.type:Int64
+    field | is_repeated:false
+  field.name:resource_type
+    field | to_cs_type:ResourceType
+    field.type:Enum
+    field | is_repeated:false
+  field.name:resource_id
+    field | to_cs_type:long
+    field.type:Int64
+    field | is_repeated:false
+  field.name:resource_amount
+    field | to_cs_type:long
+    field.type:Int64
+    field | is_repeated:false
+  field.name:weight
+    field | to_cs_type:long
+    field.type:Int64
+    field | is_repeated:false
+  field.name:open_at
+    field | to_cs_type:long
+    field.type:Int64
+    field | is_repeated:false
+  field.name:close_at
+    field | to_cs_type:long
+    field.type:Int64
+    field | is_repeated:false
+
+■file.service
+
+■file.enum_type
+

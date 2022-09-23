@@ -1,0 +1,25 @@
+■file.message_type
+
+message.name:GachaData
+
+  field.name:id
+    field | to_cs_type:long
+    field.type:Int64
+    field | is_repeated:false
+  field.name:name
+    field | to_cs_type:string
+    field.type:String
+    field | is_repeated:false
+  field.name:base_gacha_id
+    field | to_cs_type:long
+    field.type:Int64
+    field | is_repeated:false
+  field.name:is_premium
+    field | to_cs_type:bool
+    field.type:Bool
+    field | is_repeated:false
+
+■file.service
+
+■file.enum_type
+
