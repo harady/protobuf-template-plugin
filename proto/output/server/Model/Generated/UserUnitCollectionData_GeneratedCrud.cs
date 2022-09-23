@@ -245,27 +245,17 @@ namespace AwsDotnetCsharp
 		public static async Task<bool> DbDeleteDataByUnitId(
 			long unitId)
 		{
-			var sw = Stopwatch.StartNew();
-			var deleteResult = await collection
-				.DeleteOneAsync(
-					sessionHandle,
-					aData => aData.unitId == unitId);
-			Console.WriteLine($"UserUnitCollectionData#DbDeleteDataByUnitId {sw.Elapsed.TotalSeconds}[秒]");
-			var result = deleteResult.IsAcknowledged;
+			var data = await DbGetDataByUnitId(unitId);
+			var result = await DbDeleteDataById(data.id);
 			return result;
 		}
 
 		public static async Task<bool> DbDeleteDataByUnitIds(
 			IEnumerable<long> unitIds)
 		{
-			var sw = Stopwatch.StartNew();
-			var keySet = unitIds.ToHashSet();
-			var deleteResult = await collection
-				.DeleteManyAsync(
-					sessionHandle,
-					aData => keySet.Contains(aData.unitId));
-			Console.WriteLine($"UserUnitCollectionData#DbDeleteDataByUnitIds {sw.Elapsed.TotalSeconds}[秒]");
-			var result = deleteResult.IsAcknowledged;
+			var dataList = await DbGetDataListInUnitIds(unitIds);
+			var ids = dataList.Select(data => data.id);
+			var result = await DbDeleteDataByIds(ids);
 			return result;
 		}
 		#endregion

@@ -1,4 +1,4 @@
-//GENERATED CODE, DO NOT EDIT !
+﻿//GENERATED CODE, DO NOT EDIT !
 using System;
 using System.Collections.Generic;
 using Newtonsoft.Json;
@@ -75,6 +75,16 @@ public partial class Services {
 		=> FriendRequestService.instance;
 }
 #region Request/Response
+public partial class FriendRequestAcceptRequest : CommonRequest
+{
+	[JsonProperty("user_id")]
+	public long userId { get; set; }
+}
+
+public partial class FriendRequestAcceptResponse : APIResponse
+{
+}
+
 public partial class FriendRequestListRequest : CommonRequest
 {
 }
@@ -84,16 +94,6 @@ public partial class FriendRequestListResponse : APIResponse
 	[JsonProperty("other_users")]
 	public List<OtherUserData> otherUsers { get; set; } 
 		= new List<OtherUserData>();
-}
-
-public partial class FriendRequestAcceptRequest : CommonRequest
-{
-	[JsonProperty("user_id")]
-	public long userId { get; set; }
-}
-
-public partial class FriendRequestAcceptResponse : APIResponse
-{
 }
 
 public partial class FriendRequestRejectRequest : CommonRequest

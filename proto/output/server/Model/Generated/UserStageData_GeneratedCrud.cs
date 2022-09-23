@@ -245,27 +245,17 @@ namespace AwsDotnetCsharp
 		public static async Task<bool> DbDeleteDataByStageId(
 			long stageId)
 		{
-			var sw = Stopwatch.StartNew();
-			var deleteResult = await collection
-				.DeleteOneAsync(
-					sessionHandle,
-					aData => aData.stageId == stageId);
-			Console.WriteLine($"UserStageData#DbDeleteDataByStageId {sw.Elapsed.TotalSeconds}[秒]");
-			var result = deleteResult.IsAcknowledged;
+			var data = await DbGetDataByStageId(stageId);
+			var result = await DbDeleteDataById(data.id);
 			return result;
 		}
 
 		public static async Task<bool> DbDeleteDataByStageIds(
 			IEnumerable<long> stageIds)
 		{
-			var sw = Stopwatch.StartNew();
-			var keySet = stageIds.ToHashSet();
-			var deleteResult = await collection
-				.DeleteManyAsync(
-					sessionHandle,
-					aData => keySet.Contains(aData.stageId));
-			Console.WriteLine($"UserStageData#DbDeleteDataByStageIds {sw.Elapsed.TotalSeconds}[秒]");
-			var result = deleteResult.IsAcknowledged;
+			var dataList = await DbGetDataListInStageIds(stageIds);
+			var ids = dataList.Select(data => data.id);
+			var result = await DbDeleteDataByIds(ids);
 			return result;
 		}
 		#endregion
