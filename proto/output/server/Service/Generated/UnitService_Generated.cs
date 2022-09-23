@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -219,6 +219,20 @@ namespace AwsDotnetCsharp
 	}
 
 	[JsonObject(MemberSerialization.OptIn)]
+	public partial class UnitPowerupRequest : APIRequest
+	{
+		[JsonProperty("user_unit_id")]
+		public long userUnitId { get; set; }
+		[JsonProperty("consume_resources")]
+		public List<ResourceData> consumeResources { get; set; } = new List<ResourceData>();
+	}
+
+	[JsonObject(MemberSerialization.OptIn)]
+	public partial class UnitPowerupResponse : APIResponse
+	{
+	}
+
+	[JsonObject(MemberSerialization.OptIn)]
 	public partial class UnitEvolutionRequest : APIRequest
 	{
 		[JsonProperty("user_unit_id")]
@@ -235,6 +249,18 @@ namespace AwsDotnetCsharp
 	}
 
 	[JsonObject(MemberSerialization.OptIn)]
+	public partial class UnitSellRequest : APIRequest
+	{
+		[JsonProperty("user_unit_ids")]
+		public List<long> userUnitIds { get; set; } = new List<long>();
+	}
+
+	[JsonObject(MemberSerialization.OptIn)]
+	public partial class UnitSellResponse : APIResponse
+	{
+	}
+
+	[JsonObject(MemberSerialization.OptIn)]
 	public partial class UnitLockRequest : APIRequest
 	{
 		[JsonProperty("user_unit_id")]
@@ -245,32 +271,6 @@ namespace AwsDotnetCsharp
 
 	[JsonObject(MemberSerialization.OptIn)]
 	public partial class UnitLockResponse : APIResponse
-	{
-	}
-
-	[JsonObject(MemberSerialization.OptIn)]
-	public partial class UnitPowerupRequest : APIRequest
-	{
-		[JsonProperty("user_unit_id")]
-		public long userUnitId { get; set; }
-		[JsonProperty("consume_resources")]
-		public List<ResourceData> consumeResources { get; set; } = new List<ResourceData>();
-	}
-
-	[JsonObject(MemberSerialization.OptIn)]
-	public partial class UnitPowerupResponse : APIResponse
-	{
-	}
-
-	[JsonObject(MemberSerialization.OptIn)]
-	public partial class UnitSellRequest : APIRequest
-	{
-		[JsonProperty("user_unit_ids")]
-		public List<long> userUnitIds { get; set; } = new List<long>();
-	}
-
-	[JsonObject(MemberSerialization.OptIn)]
-	public partial class UnitSellResponse : APIResponse
 	{
 	}
 }

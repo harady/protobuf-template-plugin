@@ -6,6 +6,7 @@ using System.Text;
 
 namespace protoc_gen_myplugincsharp
 {
+
 	internal class Program
 	{
 		static void Main(string[] args)
@@ -48,7 +49,7 @@ namespace protoc_gen_myplugincsharp
 				response.File.Add(
 					new CodeGeneratorResponse.Types.File() {
 						Name = filename,
-						Content = output.ToString(),
+						Content = Encoding.UTF8.GetString(Encoding.UTF8.GetPreamble()) + output.ToString(),
 					}
 				);
 			}

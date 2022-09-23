@@ -22,9 +22,7 @@ namespace StreamReaderForBOM_sample
 			string fileContent = null;
 
 			// This is sample code where utf and shift-jis can coexist.
-			using (FileStream fs =
-				new FileStream(fileName, FileMode.Open)
-				) {
+			using (FileStream fs = new FileStream(fileName, FileMode.Open)) {
 				// I am read BOM of readfile.
 				byte[] bom = new byte[4] { 0xFF, 0xFF, 0xFF, 0xFF };
 				int codepage;
@@ -40,13 +38,10 @@ namespace StreamReaderForBOM_sample
 					Console.WriteLine(";");
 				} else {
 					Console.WriteLine("non BOM ! ;");
-
 				}
 
 				// Determine the encoding of StreamReader using FileStream.
-				using (var reader =
-					new StreamReader(fs, Encoding.GetEncoding(codepage))
-					) {
+				using (var reader = new StreamReader(fs, Encoding.GetEncoding(codepage))) {
 					Console.WriteLine("Before reading content : {0},{1}\n",
 						reader.CurrentEncoding.EncodingName,
 						reader.CurrentEncoding.CodePage.ToString());

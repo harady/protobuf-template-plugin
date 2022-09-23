@@ -75,16 +75,6 @@ public partial class Services {
 		=> BackupService.instance;
 }
 #region Request/Response
-public partial class BackupRemoveTokenRequest : CommonRequest
-{
-	[JsonProperty("backup_type")]
-	public BackupType backupType { get; set; }
-}
-
-public partial class BackupRemoveTokenResponse : APIResponse
-{
-}
-
 public partial class BackupSaveTokenRequest : CommonRequest
 {
 	[JsonProperty("backup_type")]
@@ -94,6 +84,16 @@ public partial class BackupSaveTokenRequest : CommonRequest
 }
 
 public partial class BackupSaveTokenResponse : APIResponse
+{
+}
+
+public partial class BackupRemoveTokenRequest : CommonRequest
+{
+	[JsonProperty("backup_type")]
+	public BackupType backupType { get; set; }
+}
+
+public partial class BackupRemoveTokenResponse : APIResponse
 {
 }
 
