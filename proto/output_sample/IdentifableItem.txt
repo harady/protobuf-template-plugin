@@ -1,7 +1,5 @@
 ■file.message_type
-
 message.name:IdentifableItemData
-
   field.name:id
     field | to_cs_type:long
     field.type:Int64
@@ -24,11 +22,8 @@ message.name:IdentifableItemData
     field | is_repeated:false
 
 ■file.service
-
 ■file.enum_type
-
 enum.name:IdentifableItemType
-
   value.name:IdentifableItemTypeNone
   value.number:0
   value.name:IdentifableItemTypeQuestTicket

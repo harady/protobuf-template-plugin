@@ -1,7 +1,5 @@
 ■file.message_type
-
 message.name:MissionData
-
   field.name:id
     field | to_cs_type:long
     field.type:Int64
@@ -44,11 +42,8 @@ message.name:MissionData
     field | is_repeated:false
 
 ■file.service
-
 ■file.enum_type
-
 enum.name:MissionType
-
   value.name:MissionTypeNone
   value.number:0
   value.name:MissionTypeTotalLoginCount

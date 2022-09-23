@@ -1,7 +1,5 @@
 ■file.message_type
-
 message.name:ResourceLotteryData
-
   field.name:id
     field | to_cs_type:long
     field.type:Int64
@@ -16,6 +14,4 @@ message.name:ResourceLotteryData
     field | is_repeated:false
 
 ■file.service
-
 ■file.enum_type
-

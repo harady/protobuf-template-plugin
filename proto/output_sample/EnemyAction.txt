@@ -1,7 +1,5 @@
 ■file.message_type
-
 message.name:EnemyActionData
-
   field.name:id
     field | to_cs_type:long
     field.type:Int64
@@ -56,11 +54,8 @@ message.name:EnemyActionData
     field | is_repeated:false
 
 ■file.service
-
 ■file.enum_type
-
 enum.name:TriggerType
-
   value.name:TriggerTypeNone
   value.number:0
   value.name:TriggerTypeUnitPowerup
@@ -75,7 +70,6 @@ enum.name:TriggerType
   value.number:5
 
 enum.name:ActionType
-
   value.name:ActionTypeNone
   value.number:0
   value.name:ActionTypeUnitPowerup

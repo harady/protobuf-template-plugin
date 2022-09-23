@@ -1,7 +1,5 @@
 ■file.message_type
-
 message.name:UnitEvolutionData
-
   field.name:id
     field | to_cs_type:long
     field.type:Int64
@@ -28,11 +26,8 @@ message.name:UnitEvolutionData
     field | is_repeated:false
 
 ■file.service
-
 ■file.enum_type
-
 enum.name:UnitEvolutionType
-
   value.name:UnitEvolutionTypeNone
   value.number:0
   value.name:UnitEvolutionTypeShinka

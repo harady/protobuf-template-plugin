@@ -1,7 +1,5 @@
 ■file.message_type
-
 message.name:MissionGroupData
-
   field.name:id
     field | to_cs_type:long
     field.type:Int64
@@ -12,11 +10,8 @@ message.name:MissionGroupData
     field | is_repeated:false
 
 ■file.service
-
 ■file.enum_type
-
 enum.name:MissionGroupType
-
   value.name:MissionGroupTypeNone
   value.number:0
   value.name:MissionGroupTypeNormal

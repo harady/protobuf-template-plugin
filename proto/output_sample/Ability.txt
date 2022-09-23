@@ -1,7 +1,5 @@
 ■file.message_type
-
 message.name:AbilityData
-
   field.name:id
     field | to_cs_type:long
     field.type:Int64
@@ -40,11 +38,8 @@ message.name:AbilityData
     field | is_repeated:false
 
 ■file.service
-
 ■file.enum_type
-
 enum.name:AbilityType
-
   value.name:AbilityTypeNone
   value.number:0
   value.name:AbilityTypeAntiGimmickGravityFieldGuard
@@ -155,7 +150,6 @@ enum.name:AbilityType
   value.number:2405
 
 enum.name:AbilityCategory
-
   value.name:AbilityCategoryNone
   value.number:0
 

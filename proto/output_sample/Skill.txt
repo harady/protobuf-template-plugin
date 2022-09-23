@@ -1,7 +1,5 @@
 ■file.message_type
-
 message.name:SkillData
-
   field.name:id
     field | to_cs_type:long
     field.type:Int64
@@ -64,11 +62,8 @@ message.name:SkillData
     field | is_repeated:false
 
 ■file.service
-
 ■file.enum_type
-
 enum.name:SkillEffectType
-
   value.name:SkillEffectTypeNone
   value.number:0
 

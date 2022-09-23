@@ -1,7 +1,5 @@
 ■file.message_type
-
 message.name:UnitData
-
   field.name:id
     field | to_cs_type:long
     field.type:Int64
@@ -132,11 +130,8 @@ message.name:UnitData
     field | is_repeated:false
 
 ■file.service
-
 ■file.enum_type
-
 enum.name:UnitAttribute
-
   value.name:UnitAttributeNone
   value.number:0
   value.name:UnitAttributeFire
@@ -151,7 +146,6 @@ enum.name:UnitAttribute
   value.number:5
 
 enum.name:UnitAttackType
-
   value.name:UnitAttackTypeNone
   value.number:0
   value.name:UnitAttackTypeBound
@@ -160,7 +154,6 @@ enum.name:UnitAttackType
   value.number:2
 
 enum.name:UnitObtainType
-
   value.name:UnitObtainTypeNone
   value.number:0
   value.name:UnitObtainTypeGacha
@@ -169,7 +162,6 @@ enum.name:UnitObtainType
   value.number:2
 
 enum.name:UnitEvolutionStateType
-
   value.name:UnitEvolutionStateTypeNone
   value.number:0
 

@@ -1,7 +1,5 @@
 ■file.message_type
-
 message.name:ItemData
-
   field.name:id
     field | to_cs_type:long
     field.type:Int64
@@ -40,11 +38,8 @@ message.name:ItemData
     field | is_repeated:false
 
 ■file.service
-
 ■file.enum_type
-
 enum.name:ItemCategory
-
   value.name:ItemCategoryNone
   value.number:0
   value.name:ItemCategoryUnitPowerup
@@ -59,7 +54,6 @@ enum.name:ItemCategory
   value.number:5
 
 enum.name:ItemType
-
   value.name:ItemTypeNone
   value.number:0
   value.name:ItemTypeUnitExpUp

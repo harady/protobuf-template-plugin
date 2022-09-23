@@ -1,7 +1,5 @@
 ■file.message_type
-
 message.name:EnemyData
-
   field.name:id
     field | to_cs_type:long
     field.type:Int64
@@ -60,6 +58,4 @@ message.name:EnemyData
     field | is_repeated:false
 
 ■file.service
-
 ■file.enum_type
-
