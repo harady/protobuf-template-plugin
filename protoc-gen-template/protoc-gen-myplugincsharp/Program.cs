@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using Google.Protobuf;
+﻿using Google.Protobuf;
 using Google.Protobuf.Compiler;
 using Scriban;
 using Scriban.Runtime;
@@ -49,6 +45,8 @@ namespace protoc_gen_myplugincsharp
 				var context = new TemplateContext();
 				context.PushGlobal(scriptObject);
 				var output = template.Render(context);
+
+				if (output.Trim().Length == 0) { continue; }
 
 				// set as response
 				response.File.Add(
