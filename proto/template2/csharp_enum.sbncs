@@ -1,1 +1,8 @@
-﻿Hello {{ name }}!
+﻿{{- for enum in file.enum_type }}
+public enum {{ enum.name }}
+{
+{{- for value in enum.value }}
+	{{ value.name | regex.replace ("^" + enum.name) "" }} = {{ value.number }},
+{{- end }}
+}
+{{ end -}}
