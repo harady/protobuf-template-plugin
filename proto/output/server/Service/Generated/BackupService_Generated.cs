@@ -140,7 +140,7 @@ namespace AwsDotnetCsharp
 	}
 
 	[JsonObject(MemberSerialization.OptIn)]
-	public partial class BackupSaveTokenResponse : APIRequest
+	public partial class BackupSaveTokenResponse : APIResponse
 	{
 	}
 
@@ -152,7 +152,7 @@ namespace AwsDotnetCsharp
 	}
 
 	[JsonObject(MemberSerialization.OptIn)]
-	public partial class BackupRemoveTokenResponse : APIRequest
+	public partial class BackupRemoveTokenResponse : APIResponse
 	{
 	}
 
@@ -166,7 +166,7 @@ namespace AwsDotnetCsharp
 	}
 
 	[JsonObject(MemberSerialization.OptIn)]
-	public partial class BackupTransferResponse : APIRequest
+	public partial class BackupTransferResponse : APIResponse
 	{
 		[JsonProperty("token")]
 		public string token { get; set; }

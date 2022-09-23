@@ -328,7 +328,7 @@ namespace AwsDotnetCsharp
 	}
 
 	[JsonObject(MemberSerialization.OptIn)]
-	public partial class OperationTestResponse : APIRequest
+	public partial class OperationTestResponse : APIResponse
 	{
 		[JsonProperty("message")]
 		public string message { get; set; }
@@ -342,7 +342,7 @@ namespace AwsDotnetCsharp
 	}
 
 	[JsonObject(MemberSerialization.OptIn)]
-	public partial class OperationUpdateMasterVersionResponse : APIRequest
+	public partial class OperationUpdateMasterVersionResponse : APIResponse
 	{
 		[JsonProperty("message")]
 		public string message { get; set; }
@@ -356,7 +356,7 @@ namespace AwsDotnetCsharp
 	}
 
 	[JsonObject(MemberSerialization.OptIn)]
-	public partial class OperationUpdateEventScheduleResponse : APIRequest
+	public partial class OperationUpdateEventScheduleResponse : APIResponse
 	{
 		[JsonProperty("message")]
 		public string message { get; set; }

@@ -214,7 +214,7 @@ namespace AwsDotnetCsharp
 	}
 
 	[JsonObject(MemberSerialization.OptIn)]
-	public partial class UnitDeckEditResponse : APIRequest
+	public partial class UnitDeckEditResponse : APIResponse
 	{
 	}
 
@@ -228,7 +228,7 @@ namespace AwsDotnetCsharp
 	}
 
 	[JsonObject(MemberSerialization.OptIn)]
-	public partial class UnitPowerupResponse : APIRequest
+	public partial class UnitPowerupResponse : APIResponse
 	{
 	}
 
@@ -244,7 +244,7 @@ namespace AwsDotnetCsharp
 	}
 
 	[JsonObject(MemberSerialization.OptIn)]
-	public partial class UnitEvolutionResponse : APIRequest
+	public partial class UnitEvolutionResponse : APIResponse
 	{
 	}
 
@@ -256,7 +256,7 @@ namespace AwsDotnetCsharp
 	}
 
 	[JsonObject(MemberSerialization.OptIn)]
-	public partial class UnitSellResponse : APIRequest
+	public partial class UnitSellResponse : APIResponse
 	{
 	}
 
@@ -270,7 +270,7 @@ namespace AwsDotnetCsharp
 	}
 
 	[JsonObject(MemberSerialization.OptIn)]
-	public partial class UnitLockResponse : APIRequest
+	public partial class UnitLockResponse : APIResponse
 	{
 	}
 }

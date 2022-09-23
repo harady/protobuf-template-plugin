@@ -58,7 +58,7 @@ namespace AwsDotnetCsharp
 {{ end -}}	
 	
 {{- for message in file.message_type }}
-	{{- if (message | string.ends_with "Response") }}
+	{{- if (message.name | string.ends_with "Response") }}
 	[JsonObject(MemberSerialization.OptIn)]
 	public partial class {{ message.name }} : APIResponse
 	{

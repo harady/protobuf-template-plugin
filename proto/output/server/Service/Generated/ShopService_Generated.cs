@@ -142,7 +142,7 @@ namespace AwsDotnetCsharp
 	}
 
 	[JsonObject(MemberSerialization.OptIn)]
-	public partial class ShopPurchaseGooglePlayResponse : APIRequest
+	public partial class ShopPurchaseGooglePlayResponse : APIResponse
 	{
 	}
 
@@ -156,7 +156,7 @@ namespace AwsDotnetCsharp
 	}
 
 	[JsonObject(MemberSerialization.OptIn)]
-	public partial class ShopPurchaseAppStoreResponse : APIRequest
+	public partial class ShopPurchaseAppStoreResponse : APIResponse
 	{
 	}
 
@@ -168,7 +168,7 @@ namespace AwsDotnetCsharp
 	}
 
 	[JsonObject(MemberSerialization.OptIn)]
-	public partial class ShopPurchaseDebugResponse : APIRequest
+	public partial class ShopPurchaseDebugResponse : APIResponse
 	{
 	}
 }

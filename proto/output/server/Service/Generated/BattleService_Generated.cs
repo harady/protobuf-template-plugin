@@ -214,7 +214,7 @@ namespace AwsDotnetCsharp
 	}
 
 	[JsonObject(MemberSerialization.OptIn)]
-	public partial class BattleHelperListResponse : APIRequest
+	public partial class BattleHelperListResponse : APIResponse
 	{
 		[JsonProperty("other_users")]
 		public List<OtherUserData> otherUsers { get; set; } = new List<OtherUserData>();
@@ -232,7 +232,7 @@ namespace AwsDotnetCsharp
 	}
 
 	[JsonObject(MemberSerialization.OptIn)]
-	public partial class BattleStartResponse : APIRequest
+	public partial class BattleStartResponse : APIResponse
 	{
 		[JsonProperty("battle_id")]
 		public long battleId { get; set; }
@@ -248,7 +248,7 @@ namespace AwsDotnetCsharp
 	}
 
 	[JsonObject(MemberSerialization.OptIn)]
-	public partial class BattleContinueResponse : APIRequest
+	public partial class BattleContinueResponse : APIResponse
 	{
 	}
 
@@ -260,7 +260,7 @@ namespace AwsDotnetCsharp
 	}
 
 	[JsonObject(MemberSerialization.OptIn)]
-	public partial class BattleGiveupResponse : APIRequest
+	public partial class BattleGiveupResponse : APIResponse
 	{
 	}
 
@@ -274,7 +274,7 @@ namespace AwsDotnetCsharp
 	}
 
 	[JsonObject(MemberSerialization.OptIn)]
-	public partial class BattleClearResponse : APIRequest
+	public partial class BattleClearResponse : APIResponse
 	{
 		[JsonProperty("result")]
 		public long result { get; set; }
