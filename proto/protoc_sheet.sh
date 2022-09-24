@@ -10,7 +10,6 @@ mkdir -p ${masterdir}
 # スプレッドシートカラム名を生成.
 #============================================================
 sheet_columns_folder=output/sheet_columns
-rm -rf ${sheet_columns_folder}
 mkdir -p ${sheet_columns_folder}
 
 ruby codegen.rb -i protoc_sheet.yml
@@ -20,7 +19,7 @@ ruby codegen.rb -i protoc_sheet.yml
 # ファイルを結合(スプレッドシート用).
 #============================================================
 
-filepaths=$(find ./table -type f -name "*.proto")
+filepaths=$(find ./proto/table -type f -name "*.proto")
 
 shopt -s nocaseglob
 
