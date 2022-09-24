@@ -23,17 +23,17 @@ if [[ "$param" == *c* ]]; then
 fi
 
 # サーバー側
-ruby codegen.rb -i codegen2_server_cs.yml
+ruby codegen.rb -i codegen_server_cs.yml
 
 # Unity側
-ruby codegen.rb -i codegen2_unity_cs.yml
+ruby codegen.rb -i codegen_unity_cs.yml
 
 # マスターデータ側
 sh protoc_sheet.sh
 
 
 # 出力サンプル
-ruby codegen.rb -i codegen2_sample.yml
+ruby codegen.rb -i codegen_sample.yml
 
 # 一時停止
 if [[ "$param" == *p* ]]; then
