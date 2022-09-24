@@ -1,4 +1,4 @@
-{{- range .Services -}}
+﻿{{- range .Services -}}
 {{- $service_name := .Name -}}
 {{ range .Methods -}}
 {{ "" }}{{ $service_name | ToSnakeCase }}__{{ .Name | ToSnakeCase }}:
