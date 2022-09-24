@@ -2,28 +2,28 @@
 
 protoc=bin/protoc
 
+masterdir=./output/master_data
+
+mkdir -p ${masterdir}
+
 #============================================================
 # スプレッドシートカラム名を生成.
 #============================================================
-echo "スプレッドシートカラム名を生成."
-
-sheet_columns_folder=sheet_columns
+sheet_columns_folder=output/sheet_columns
 rm -rf ${sheet_columns_folder}
 mkdir -p ${sheet_columns_folder}
-filepaths=$(find ./table -type f -name "*.proto")
 
-for filepath in ${filepaths} ; do
-    echo ">>> ${filepath}"
-    # .
-    ${protoc} --csharp-template_out=template=template/sheet_columns.gotemplate,fileSuffix=.txt:${sheet_columns_folder} \
-        --plugin=plugin/protoc-gen-csharp-template ${filepath}
-done
+ruby codegen.rb -i protoc_sheet.yml
 
 
 #============================================================
 # ファイルを結合(スプレッドシート用).
 #============================================================
+
+filepaths=$(find ./table -type f -name "*.proto")
+
 shopt -s nocaseglob
+
 echo "ファイルを結合(スプレッドシート用)."
 prevpath=_
 sheet_columns=sheet_columns.txt
@@ -52,8 +52,8 @@ done
 grep "■master" ${sheet_columns} > ${books}
 sed -i -e "s/■//g" ${books}
 
-mv ${sheet_columns} ../master_data
-mv ${books} ../master_data
+mv ${sheet_columns} ${masterdir}
+mv ${books} ${masterdir}
 
 
 #============================================================
@@ -78,6 +78,6 @@ done
 
 sed -i -e "s/・//g" ${collections}
 
-mv ${collections} ../master_data/
+mv ${collections} ${masterdir}
 
 #read -p "Press [Enter] key to resume."

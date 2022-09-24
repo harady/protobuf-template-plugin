@@ -1,2 +1,0 @@
-・unit_categorys
-id	name	

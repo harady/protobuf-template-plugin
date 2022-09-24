@@ -1,2 +1,0 @@
-・user_items
-id	userId	itemId	amount	

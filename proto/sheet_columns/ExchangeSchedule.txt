@@ -1,2 +1,0 @@
-・exchange_schedules
-id	exchangeId	openAt	closeAt	

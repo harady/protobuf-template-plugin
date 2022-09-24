@@ -1,2 +1,0 @@
-・units
-id	name	number	baseUnitNumber	rarity	attribute	attackType	unitCategoryId	growthType	maxLevel	maxLuck	obtainType	baseHp	baseAttack	baseSpeed	maxHp	maxAttack	maxSpeed	maxPlusHp	maxPlusAttack	maxPlusSpeed	skillId	combo1Id	combo2Id	ability1Id	ability2Id	ability3Id	ability4Id	ability5Id	equipmentSlotCount	salePrice	baseExp	

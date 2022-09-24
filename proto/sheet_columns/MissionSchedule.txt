@@ -1,2 +1,0 @@
-・mission_schedules
-id	name	

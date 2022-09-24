@@ -1,2 +1,0 @@
-・exchanges
-id	name	type	
