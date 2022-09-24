@@ -2,6 +2,10 @@
 
 protoc=bin/protoc
 
+masterdir=../master_data
+
+mkdir -p ${masterdir}
+
 #============================================================
 # スプレッドシートカラム名を生成.
 #============================================================
@@ -52,8 +56,8 @@ done
 grep "■master" ${sheet_columns} > ${books}
 sed -i -e "s/■//g" ${books}
 
-mv ${sheet_columns} ../master_data
-mv ${books} ../master_data
+mv ${sheet_columns} ${masterdir}
+mv ${books} ${masterdir}
 
 
 #============================================================
@@ -78,6 +82,6 @@ done
 
 sed -i -e "s/・//g" ${collections}
 
-mv ${collections} ../master_data/
+mv ${collections} ${masterdir}
 
 #read -p "Press [Enter] key to resume."

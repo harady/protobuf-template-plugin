@@ -1,0 +1,243 @@
+
+■battle
+・battle_init_enemys
+id	roundId	enemyId	posX	posY	dropRewardResource	
+
+
+■master_battle
+・enemys
+id	name	unitId	hp	size	weakPointId	isBoss	isEscape	damageRate	directDamageRate	indirectDamageRate	baseEnemyId	dropRate	rewardResourceLotteryId	
+
+・enemy_actions
+id	enemyId	actionNo	triggerType	triggerParamA	triggerParamB	triggerParamC	triggerParamD	actionType	actionParamA	actionParamB	actionParamC	actionParamD	
+
+・enemy_clusters
+id	name	
+
+・enemy_mappings
+id	roundId	enemyId	posX	posY	dropRate	rewardResourceLotteryId	
+
+・rounds
+id	name	stageId	roundNo	
+
+・weak_points
+id	name	
+
+・weak_point_positions
+id	weakPointId	angle	radiusRate	sizeRate	
+
+
+■master_common
+・canpaigns
+id	name	
+
+・configs
+id	key	value	text	
+
+・identifable_items
+id	name	description	type	ownedLimit	
+
+・items
+id	name	attribute	description	category	type	ownedLimit	paramA	paramB	
+
+・resource_lotterys
+id	name	hasEmpty	
+
+・resource_lottery_items
+id	resourceLotteryId	weight	resourceType	resourceId	resourceAmountMin	resourceAmountMax	
+
+・resource_sets
+id	name	
+
+・resource_set_items
+id	resourceSetId	resourceType	resourceId	resourceAmount	
+
+
+■master_event
+・daily_event_tables
+id	name	
+
+・daily_event_table_items
+id	dailyEventTableId	eventQuestCategoryId	count	
+
+・event_quest_categorys
+id	name	minStartTime	maxStartTime	openHours	questGroupId	questDifficultyType	
+
+・event_schedule_terms
+id	dailyEventTableId	openAt	closeAt	
+
+
+■master_gacha
+・gachas
+id	name	baseGachaId	isPremium	
+
+・gacha_buttons
+id	name	gachaId	viewOrder	drawCount	extraCount	guaranteeCount	purchaseCount	costResourceType	costResourceId	costResourceAmount	
+
+・gacha_pools
+id	name	gachaId	baseGachaPoolId	isExtra	isPickup	isGuarantee	rarity	attribute	weight	
+
+・gacha_pool_items
+id	gachaPoolId	resourceType	resourceId	resourceAmount	weight	openAt	closeAt	
+
+・gacha_schedules
+id	gachaId	openAt	closeAt	
+
+
+■master_message
+・messages
+id	name	
+
+
+■master_mission
+・missions
+id	name	missionGroupId	type	toAchieveProgress	paramA	paramB	rewardResourceType	rewardResourceId	rewardResourceAmount	
+
+・mission_groups
+id	type	
+
+・mission_schedules
+id	name	
+
+
+■master_other
+・advices
+id	message	
+
+・logs
+id	name	
+
+・login_bonuss
+id	name	
+
+・login_bonus_items
+id	name	
+
+・user_rank_exps
+id	rank	totalExp	maxStamina	deckNum	maxFriendNum	unitBoxNum	
+
+・versions
+id	name	
+
+
+■master_quest
+・event_schedules
+id	questId	openAt	closeAt	
+
+・quests
+id	name	questGroupId	noContinue	questDifficultyType	bossUnitId	openAt	closeAt	openDow	
+
+・quest_groups
+id	name	type	
+
+・stages
+id	name	questId	stamina	earnExp	earnMoney	questDifficultyType	toUnlockStageId	baseStageId	
+
+・stage_special_rewards
+id	name	stageId	battleRewardType	paramA	paramB	resourceLotteryId	
+
+
+■master_shop
+・exchanges
+id	name	type	
+
+・exchange_items
+id	name	exchangeId	costResourceType	costResourceId	costResourceAmount	resourceType	resourceId	resourceAmount	resourceSetId	limitCount	
+
+・exchange_schedules
+id	exchangeId	openAt	closeAt	
+
+・shops
+id	name	
+
+・shop_items
+id	name	shopId	purchasePlatformType	platformProductId	price	resourceSetId	limitCount	
+
+・shop_schedules
+id	shopId	openAt	closeAt	
+
+
+■master_unit
+・abilitys
+id	name	category	type	description	target	paramA	paramB	paramC	
+
+・combos
+id	name	type	description	rank	baseAttack	maxAttack	paramA	paramB	paramC	iconId	
+
+・equipments
+id	name	type	description	paramA	paramB	iconId	
+
+・skills
+id	name	description	turn	attackRate	speedRate	brakeRate	effect1Type	effect1Rank	effect1ParamA	effect1ParamB	effect2Type	effect2Rank	effect2ParamA	effect2ParamB	
+
+・units
+id	name	number	baseUnitNumber	rarity	attribute	attackType	unitCategoryId	growthType	maxLevel	maxLuck	obtainType	baseHp	baseAttack	baseSpeed	maxHp	maxAttack	maxSpeed	maxPlusHp	maxPlusAttack	maxPlusSpeed	skillId	combo1Id	combo2Id	ability1Id	ability2Id	ability3Id	ability4Id	ability5Id	equipmentSlotCount	salePrice	baseExp	
+
+・unit_categorys
+id	name	
+
+・unit_evolutions
+id	name	type	baseUnitId	resultUnitId	costResourceSetId	
+
+・unit_level_exps
+id	growthType	level	totalExp	
+
+
+■user
+・users
+id	name	token	code	rank	exp	money	stamina	lastStaminaUpdateAt	freeCrystal	paidCrystal	currentDeckId	maxStaminaPlus	deckNumPlus	maxFriendNumPlus	unitBoxNumPlus	friendUserUnitId	
+
+・user_backups
+id	userId	backupType	backupToken	
+
+・user_battles
+id	userId	stageId	continueCount	battleClientData	battleServerData	startAt	
+
+・user_decks
+id	userId	deckNo	name	userUnit1Id	userUnit2Id	userUnit3Id	
+
+・user_exchange_items
+id	userId	exchangeItemId	exchangeScheduleId	exchangedCount	
+
+・user_friends
+id	userId	friendUserId	isFavorite	lastUsedAt	usedCount	
+
+・user_friend_requests
+id	senderUserId	targetUserId	
+
+・user_gacha_buttons
+id	userId	gachaButtonId	gachaScheduleId	purchaseCount	
+
+・user_identifable_items
+id	userId	identifableItemId	paramA	paramB	
+
+・user_items
+id	userId	itemId	amount	
+
+・user_messages
+id	userId	name	
+
+・user_missions
+id	userId	missionId	progress	
+
+・user_paid_crystals
+id	userId	purchasePlatformType	amount	
+
+・user_purchases
+id	userId	purchasePlatformType	shopItemId	price	googlePlayRequest	appStoreRequest	debugRequest	isReceiptInquired	isResourceGranted	purchaseAt	
+
+・user_sessions
+id	userId	sessionId	expireAt	
+
+・user_shop_items
+id	userId	shopItemId	shopScheduleId	purchasedCount	
+
+・user_stages
+id	userId	stageId	clearCount	failedCount	bestClearTime	
+
+・user_units
+id	userId	unitId	level	exp	luck	plusHp	plusAttack	plusSpeed	equipment1Id	equipment2Id	equipment3Id	heroMark	heroBadge	isLocked	getAt	
+
+・user_unit_collections
+id	userId	unitId	hasEarned	usedCount	
+
