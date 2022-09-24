@@ -1,11 +1,11 @@
 #!/bin/bash
 
 #================================
-# codegen_all
+# codegen2_all
 # c:クリーンビルド
 # p:終了時にポーズ
 # 例：
-# codegen2_all.sh cp
+# codegen_sample.sh cp
 #================================
 
 SECONDS=0
@@ -19,17 +19,11 @@ fi
 
 # 出力フォルダクリーン
 if [[ "$param" == *c* ]]; then
-  rm -rf output
+  rm -rf output_sample
 fi
 
-# サーバー側
-ruby codegen.rb -i codegen_server_cs.yml
-
-# Unity側
-ruby codegen.rb -i codegen_unity_cs.yml
-
-# マスターデータ側
-sh protoc_sheet.sh
+# 出力サンプル
+ruby codegen.rb -i codegen_sample.yml
 
 # 一時停止
 if [[ "$param" == *p* ]]; then
