@@ -1,2 +1,0 @@
-・gacha_pools
-id	name	gachaId	baseGachaPoolId	isExtra	isPickup	isGuarantee	rarity	attribute	weight	

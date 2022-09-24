@@ -9,19 +9,7 @@ mkdir -p ${masterdir}
 #============================================================
 # スプレッドシートカラム名を生成.
 #============================================================
-echo "スプレッドシートカラム名を生成."
-
-sheet_columns_folder=sheet_columns
-rm -rf ${sheet_columns_folder}
-mkdir -p ${sheet_columns_folder}
-filepaths=$(find ./table -type f -name "*.proto")
-
-for filepath in ${filepaths} ; do
-    echo ">>> ${filepath}"
-    # .
-    ${protoc} --csharp-template_out=template=template/sheet_columns.gotemplate,fileSuffix=.txt:${sheet_columns_folder} \
-        --plugin=plugin/protoc-gen-csharp-template ${filepath}
-done
+ruby codegen.rb -i protoc_sheet.yml
 
 
 #============================================================

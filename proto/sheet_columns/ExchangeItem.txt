@@ -1,2 +1,0 @@
-・exchange_items
-id	name	exchangeId	costResourceType	costResourceId	costResourceAmount	resourceType	resourceId	resourceAmount	resourceSetId	limitCount	

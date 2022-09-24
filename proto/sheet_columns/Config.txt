@@ -1,2 +1,0 @@
-・configs
-id	key	value	text	

@@ -1,2 +1,0 @@
-・abilitys
-id	name	category	type	description	target	paramA	paramB	paramC	

@@ -1,2 +1,0 @@
-・unit_level_exps
-id	growthType	level	totalExp	

@@ -1,4 +1,4 @@
-■file.message_type
+﻿■file.message_type
 message.name:ExchangeItemData
   field.name:id
     field | to_cs_type:long

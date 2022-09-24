@@ -1,2 +1,0 @@
-・user_stages
-id	userId	stageId	clearCount	failedCount	bestClearTime	

@@ -1,2 +1,0 @@
-・resource_set_items
-id	resourceSetId	resourceType	resourceId	resourceAmount	

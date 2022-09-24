@@ -1,2 +1,0 @@
-・items
-id	name	attribute	description	category	type	ownedLimit	paramA	paramB	
