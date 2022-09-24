@@ -166,7 +166,8 @@ class CodeGenerator
     return if skip
 
     # コード生成コマンド実行.
-    command = "#{protoc_path} --csharp-template_out=template=#{actual_template_path},"
+    command = "#{protoc_path} --proto_path=#{src_base_path}"
+    command += " --csharp-template_out=template=#{actual_template_path},"
     command += "fileSuffix=#{file_suffix}:#{actual_out_dir_path} "
     command += "--plugin=#{protoc_plugin_path} #{src_file_path}"
     `#{command}`
