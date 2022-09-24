@@ -2,7 +2,7 @@
 
 protoc=bin/protoc
 
-masterdir=../master_data
+masterdir=./output/master_data
 
 mkdir -p ${masterdir}
 
