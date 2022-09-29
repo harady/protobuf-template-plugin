@@ -11,6 +11,11 @@ https://github.com/protocolbuffers/protobuf/releases
 
 
 ## 環境設定
+
+### Rubyをインストールする  
+https://rubyinstaller.org/downloads/
+
+
 ### VisualStudioをインストールする  
 https://visualstudio.microsoft.com/ja/vs/community/
 
