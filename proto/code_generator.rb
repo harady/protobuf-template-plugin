@@ -186,7 +186,7 @@ class CodeGenerator
     # コード生成コマンド実行.
     command = "#{protoc_path} --proto_path=#{src_base_path}"
     command += " --csharp-template_out=template=#{actual_template_path},"
-    if !(variable.nil? || variable.empty?)
+    if !(file_name_case.nil? || file_name_case.empty?)
       command += "outFileCase=#{file_name_case},"
     end
     command += "fileSuffix=#{file_suffix}:#{actual_out_dir_path} "
