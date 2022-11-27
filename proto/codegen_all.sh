@@ -5,7 +5,7 @@
 # c:クリーンビルド
 # p:終了時にポーズ
 # 例：
-# codegen2_all.sh cp
+# codegen_all.sh cp
 #================================
 
 SECONDS=0

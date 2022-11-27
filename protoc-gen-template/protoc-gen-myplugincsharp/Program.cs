@@ -19,9 +19,12 @@ namespace protoc_gen_myplugincsharp
 			var paramDict = ParseParameter(request.Parameter);
 			var templatePath = (string)paramDict["template"];
 
+			// テンプレートのBOMを取得.
 			var utf8 = Encoding.UTF8;
 			var hasBom = BomChecker.HasBom(templatePath);
 			var bom = hasBom ? utf8.GetString(utf8.GetPreamble()) : "";
+
+
 			var templateStr = File.ReadAllText(templatePath, Encoding.UTF8);
 			var template = Template.Parse(templateStr);
 
@@ -31,11 +34,26 @@ namespace protoc_gen_myplugincsharp
 			var outputFileDescs = request.ProtoFile
 				.Where(file => fileToGenerates.Contains(file.Name));
 
+
+			var fileSuffix 
+				= paramDict.GetValueOrDefault("fileSuffix", "").ToString();
+			var fileNameCase
+				= paramDict.GetValueOrDefault("outFileCase", "Pascal").ToString();
 			foreach (var fileDesc in outputFileDescs) {
-				var filename
-					= Path.GetFileNameWithoutExtension(fileDesc.Name)
-						.ToPascalCase();
-				filename += paramDict["fileSuffix"];
+				var filePrefix = Path.GetFileNameWithoutExtension(fileDesc.Name);
+				if (fileNameCase == "Pascal") {
+					filePrefix = filePrefix.ToPascalCase();
+				} else if (fileNameCase == "Camel") {
+					filePrefix = filePrefix.ToCamelCase();
+				} else if (fileNameCase == "Snake") {
+					filePrefix = filePrefix.ToSnakeCase();
+				} else if (fileNameCase == "UpperSnake") {
+					filePrefix = filePrefix.ToUpperSnakeCase();
+				} else {
+					filePrefix = filePrefix.ToPascalCase();
+				}
+
+				var filename = filePrefix + fileSuffix;
 
 				var model = new { File = fileDesc };
 				var scriptObject = new ScriptObject();
