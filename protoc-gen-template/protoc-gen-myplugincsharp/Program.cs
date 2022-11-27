@@ -34,11 +34,26 @@ namespace protoc_gen_myplugincsharp
 			var outputFileDescs = request.ProtoFile
 				.Where(file => fileToGenerates.Contains(file.Name));
 
+
+			var fileSuffix 
+				= paramDict.GetValueOrDefault("fileSuffix", "").ToString();
+			var fileNameCase
+				= paramDict.GetValueOrDefault("case", "Pascal").ToString();
 			foreach (var fileDesc in outputFileDescs) {
-				var filename
-					= Path.GetFileNameWithoutExtension(fileDesc.Name)
-						.ToPascalCase();
-				filename += paramDict["fileSuffix"];
+				var filePrefix = Path.GetFileNameWithoutExtension(fileDesc.Name);
+				if (fileNameCase == "Pascal") {
+					filePrefix = filePrefix.ToPascalCase();
+				} else if (fileNameCase == "Camel") {
+					filePrefix = filePrefix.ToCamelCase();
+				} else if (fileNameCase == "Snake") {
+					filePrefix = filePrefix.ToSnakeCase();
+				} else if (fileNameCase == "UpperSnake") {
+					filePrefix = filePrefix.ToUpperSnakeCase();
+				} else {
+					filePrefix = filePrefix.ToPascalCase();
+				}
+
+				var filename = filePrefix + fileSuffix;
 
 				var model = new { File = fileDesc };
 				var scriptObject = new ScriptObject();
