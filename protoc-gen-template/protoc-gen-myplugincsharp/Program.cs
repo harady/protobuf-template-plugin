@@ -19,9 +19,12 @@ namespace protoc_gen_myplugincsharp
 			var paramDict = ParseParameter(request.Parameter);
 			var templatePath = (string)paramDict["template"];
 
+			// テンプレートのBOMを取得.
 			var utf8 = Encoding.UTF8;
 			var hasBom = BomChecker.HasBom(templatePath);
 			var bom = hasBom ? utf8.GetString(utf8.GetPreamble()) : "";
+
+
 			var templateStr = File.ReadAllText(templatePath, Encoding.UTF8);
 			var template = Template.Parse(templateStr);
 
