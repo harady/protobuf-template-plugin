@@ -133,7 +133,7 @@ class CodeGenerator
     # src_file_paths.each do |src_file_path|
     #   generate_code(src_file_path: src_file_path)
     # end
-    Parallel.each(src_file_paths, in_threads: 16) do |src_file_path|
+    Parallel.each(src_file_paths, in_threads: 10) do |src_file_path|
       generate_code(src_file_path: src_file_path)
     end
     self
