@@ -38,7 +38,7 @@ namespace protoc_gen_myplugincsharp
 			var fileSuffix 
 				= paramDict.GetValueOrDefault("fileSuffix", "").ToString();
 			var fileNameCase
-				= paramDict.GetValueOrDefault("case", "Pascal").ToString();
+				= paramDict.GetValueOrDefault("outFileCase", "Pascal").ToString();
 			foreach (var fileDesc in outputFileDescs) {
 				var filePrefix = Path.GetFileNameWithoutExtension(fileDesc.Name);
 				if (fileNameCase == "Pascal") {
