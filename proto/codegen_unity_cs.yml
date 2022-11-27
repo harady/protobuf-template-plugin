@@ -3,6 +3,7 @@ protoc_plugin_path : "bin/plugin/protoc-gen-csharp-template"
 src_base_path : "./proto/"
 template_base_path : "template/"
 out_base_path : "output/unity/"
+file_name_case : "Pascal"
 items:
   #============================================================
   # Unity Model(TableData)のC#ファイルを生成.

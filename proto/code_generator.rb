@@ -155,6 +155,7 @@ class CodeGenerator
     src_file_path:
   )
     file_prefix = File.basename(src_file_path, ".*").camelize
+
     if file_name_case == "Pascal"
       file_prefix = file_prefix.camelize(:upper)
     elsif file_name_case == "Camel"
@@ -164,7 +165,6 @@ class CodeGenerator
     elsif file_name_case == "UpperSnake"
       file_prefix = file_prefix.underscore.upcase
     else
-      file_name_case = "Pascal"
       file_prefix = file_prefix.camelize(:upper)
     end
 
@@ -186,7 +186,9 @@ class CodeGenerator
     # コード生成コマンド実行.
     command = "#{protoc_path} --proto_path=#{src_base_path}"
     command += " --csharp-template_out=template=#{actual_template_path},"
-    command += "outFileCase=#{file_name_case},"
+    if !(variable.nil? || variable.empty?)
+      command += "outFileCase=#{file_name_case},"
+    end
     command += "fileSuffix=#{file_suffix}:#{actual_out_dir_path} "
     command += "--plugin=#{protoc_plugin_path} #{src_file_path}"
     `#{command}`
