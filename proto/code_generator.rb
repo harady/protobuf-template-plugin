@@ -19,6 +19,7 @@ class CodeGenerator
   attr_accessor :out_dir_path
   attr_accessor :is_editable
   attr_accessor :is_force_update
+  attr_accessor :file_name_case
 
   def initialize
     @message = ""
@@ -34,6 +35,7 @@ class CodeGenerator
     @is_editable = false
     @is_force_update = false
     @target_content_pattern = nil
+    @file_name_case = ""
   end
 
   def actual_src_path_pattern
@@ -85,6 +87,7 @@ class CodeGenerator
       is_editable: data.dig("is_editable"),
       is_force_update: data.dig("is_force_update"),
       target_content_pattern: data.dig("target_content_pattern"),
+      file_name_case: data.dig("file_name_case"),
     )
   end
 
@@ -104,7 +107,8 @@ class CodeGenerator
     out_dir_path: nil,
     is_editable: nil,
     is_force_update: nil,
-    target_content_pattern: nil
+    target_content_pattern: nil,
+    file_name_case: nil
   )
     self.message = message if !message.nil?
     self.protoc_path = protoc_path if !protoc_path.nil?
@@ -119,6 +123,7 @@ class CodeGenerator
     self.is_editable = is_editable if !is_editable.nil?
     self.is_force_update = is_force_update if !is_force_update.nil?
     self.target_content_pattern = target_content_pattern if !target_content_pattern.nil?
+    self.file_name_case = file_name_case if !file_name_case.nil?
     self
   end
 
@@ -150,6 +155,19 @@ class CodeGenerator
     src_file_path:
   )
     file_prefix = File.basename(src_file_path, ".*").camelize
+    if file_name_case == "Pascal"
+      file_prefix = file_prefix.camelize(:upper)
+    elsif file_name_case == "Camel"
+      file_prefix = file_prefix.camelize(:lower)
+    elsif file_name_case == "Snake"
+      file_prefix = file_prefix.underscore
+    elsif file_name_case == "UpperSnake"
+      file_prefix = file_prefix.underscore.upcase
+    else
+      file_name_case = "Pascal"
+      file_prefix = file_prefix.camelize(:upper)
+    end
+
     out_file_path = "#{actual_out_dir_path}/#{file_prefix}#{file_suffix}"
 
     # 更新不要ならスキップ.
@@ -168,6 +186,7 @@ class CodeGenerator
     # コード生成コマンド実行.
     command = "#{protoc_path} --proto_path=#{src_base_path}"
     command += " --csharp-template_out=template=#{actual_template_path},"
+    command += "outFileCase=#{file_name_case},"
     command += "fileSuffix=#{file_suffix}:#{actual_out_dir_path} "
     command += "--plugin=#{protoc_plugin_path} #{src_file_path}"
     `#{command}`
