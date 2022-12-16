@@ -11,6 +11,20 @@ public class CustomFunctions_FieldDescriptorProto
 			: param.Type.ToCsTypeName();
 	}
 
+	public static string ToCsType(FieldDescriptorProto param)
+	{
+		return param.HasTypeName
+			? CustomFunctions_String.ToShortName(param.TypeName)
+			: param.Type.ToCsTypeName();
+	}
+
+	public static string ToCsType(FieldDescriptorProto param)
+	{
+		return param.HasTypeName
+			? CustomFunctions_String.ToShortName(param.TypeName)
+			: param.Type.ToCsTypeName();
+	}
+
 	public static bool IsRepeated(FieldDescriptorProto param)
 	{
 		return param.Label == FieldDescriptorProto.Types.Label.Repeated;
