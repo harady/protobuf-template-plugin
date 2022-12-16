@@ -40,14 +40,14 @@ public static class TypeExtensions
 
 	static Dictionary<FieldDescriptorProto.Types.Type, string> typeRbTypeDict
 		= new Dictionary<FieldDescriptorProto.Types.Type, string> {
-			{ FieldDescriptorProto.Types.Type.Double, "double" },
-			{ FieldDescriptorProto.Types.Type.Float, "float" },
-			{ FieldDescriptorProto.Types.Type.Int64, "long" },
-			{ FieldDescriptorProto.Types.Type.Fixed64, "ulong" },
-			{ FieldDescriptorProto.Types.Type.Int32, "int" },
-			{ FieldDescriptorProto.Types.Type.Fixed32, "uint" },
-			{ FieldDescriptorProto.Types.Type.Bool, "bool" },
-			{ FieldDescriptorProto.Types.Type.String, "string" },
+			{ FieldDescriptorProto.Types.Type.Double, "Float" },
+			{ FieldDescriptorProto.Types.Type.Float, "Float" },
+			{ FieldDescriptorProto.Types.Type.Int64, "Integer" },
+			{ FieldDescriptorProto.Types.Type.Fixed64, "Integer" },
+			{ FieldDescriptorProto.Types.Type.Int32, "Integer" },
+			{ FieldDescriptorProto.Types.Type.Fixed32, "Integer" },
+			{ FieldDescriptorProto.Types.Type.Bool, "Boolean" },
+			{ FieldDescriptorProto.Types.Type.String, "String" },
 			{ FieldDescriptorProto.Types.Type.Group, "GROUP" },
 			{ FieldDescriptorProto.Types.Type.Message, "MESSAGE" },
 			{ FieldDescriptorProto.Types.Type.Bytes, "Google.Protobuf.ByteString" },
