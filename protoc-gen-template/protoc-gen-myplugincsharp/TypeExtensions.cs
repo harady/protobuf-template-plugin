@@ -51,12 +51,12 @@ public static class TypeExtensions
 			{ FieldDescriptorProto.Types.Type.Group, "GROUP" },
 			{ FieldDescriptorProto.Types.Type.Message, "MESSAGE" },
 			{ FieldDescriptorProto.Types.Type.Bytes, "Google.Protobuf.ByteString" },
-			{ FieldDescriptorProto.Types.Type.Uint32, "uint" },
+			{ FieldDescriptorProto.Types.Type.Uint32, "Integer" },
 			{ FieldDescriptorProto.Types.Type.Enum, "ENUM" },
-			{ FieldDescriptorProto.Types.Type.Sfixed32, "int" },
-			{ FieldDescriptorProto.Types.Type.Sfixed64, "long" },
-			{ FieldDescriptorProto.Types.Type.Sint32, "int" },
-			{ FieldDescriptorProto.Types.Type.Sint64, "long" },
+			{ FieldDescriptorProto.Types.Type.Sfixed32, "Integer" },
+			{ FieldDescriptorProto.Types.Type.Sfixed64, "Integer" },
+			{ FieldDescriptorProto.Types.Type.Sint32, "Integer" },
+			{ FieldDescriptorProto.Types.Type.Sint64, "Integer" },
 		};
 
 	public static string ToRbTypeDefaultValue(
