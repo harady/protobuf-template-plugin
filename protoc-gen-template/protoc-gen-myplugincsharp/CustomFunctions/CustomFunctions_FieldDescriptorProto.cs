@@ -29,7 +29,7 @@ public class CustomFunctions_FieldDescriptorProto
 	{
 		return param.HasTypeName
 			? CustomFunctions_String.ToShortName(param.TypeName)
-			: param.Type.ToCsTypeName();
+			: param.Type.ToRbTypeName();
 	}
 
 	/// <summary>
@@ -38,8 +38,8 @@ public class CustomFunctions_FieldDescriptorProto
 	public static string ToRbTypeDefault(FieldDescriptorProto param)
 	{
 		return param.HasTypeName
-			? CustomFunctions_String.ToShortName(param.TypeName)
-			: param.Type.ToCsTypeName();
+			? $"{CustomFunctions_String.ToShortName(param.TypeName)}.new"
+			: param.Type.ToRbTypeDefaultValue();
 	}
 
 	public static void SetupCustomFunction(ScriptObject target)
