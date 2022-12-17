@@ -62,8 +62,17 @@ public static class TypeExtensions
 	public static string ToRbTypeDefaultValue(
 		this FieldDescriptorProto.Types.Type type)
 	{
-		return typeCsTypeDict.GetValueOrDefault(type, "");
+		return rbTypeDefaultValueDict
+			.GetValueOrDefault(type.ToRbTypeName(), "nil");
 	}
 
-
+	static Dictionary<string, string> rbTypeDefaultValueDict
+		= new Dictionary<string, string> {
+			{ "Float",  "0.0"},
+			{ "Integer", "0"  },
+			{ "Boolean", "false"  },
+			{ "String", "\"\""  },
+			{ "Array", "[]"  },
+			{ "HashSet", "{}"  },
+	};
 }
