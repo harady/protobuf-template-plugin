@@ -32,6 +32,33 @@ public static class TypeExtensions
 			{ FieldDescriptorProto.Types.Type.Sint64, "long" },
 		};
 
+	public static string ToTsTypeName(
+		this FieldDescriptorProto.Types.Type type)
+	{
+		return typeTsTypeDict.GetValueOrDefault(type, "");
+	}
+
+	static Dictionary<FieldDescriptorProto.Types.Type, string> typeTsTypeDict
+		= new Dictionary<FieldDescriptorProto.Types.Type, string> {
+			{ FieldDescriptorProto.Types.Type.Double, "number" },
+			{ FieldDescriptorProto.Types.Type.Float, "number" },
+			{ FieldDescriptorProto.Types.Type.Int64, "number" },
+			{ FieldDescriptorProto.Types.Type.Fixed64, "number" },
+			{ FieldDescriptorProto.Types.Type.Int32, "number" },
+			{ FieldDescriptorProto.Types.Type.Fixed32, "number" },
+			{ FieldDescriptorProto.Types.Type.Bool, "boolean" },
+			{ FieldDescriptorProto.Types.Type.String, "string" },
+			{ FieldDescriptorProto.Types.Type.Group, "unknown" },
+			{ FieldDescriptorProto.Types.Type.Message, "MESSAGE" },
+			{ FieldDescriptorProto.Types.Type.Bytes, "Uint8Array" },
+			{ FieldDescriptorProto.Types.Type.Uint32, "number" },
+			{ FieldDescriptorProto.Types.Type.Enum, "ENUM" },
+			{ FieldDescriptorProto.Types.Type.Sfixed32, "number" },
+			{ FieldDescriptorProto.Types.Type.Sfixed64, "number" },
+			{ FieldDescriptorProto.Types.Type.Sint32, "number" },
+			{ FieldDescriptorProto.Types.Type.Sint64, "number" },
+		};
+
 	public static string ToRbTypeName(
 		this FieldDescriptorProto.Types.Type type)
 	{

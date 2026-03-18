@@ -50,6 +50,16 @@ public class ProtoField
 		}
 	}
 
+	public string ShortTsTypeName
+	{
+		get
+		{
+			return HasTypeName
+				? CustomFunctions_String.ToShortName(TypeName)
+				: Type.ToTsTypeName();
+		}
+	}
+
 	public ProtoMessage Message => Root.GetMessageByName(ShortTypeName);
 
 	public bool IsMessage => Message != null;

@@ -21,6 +21,14 @@ public class CustomFunctions_ProtoField
 	}
 
 	/// <summary>
+	/// このフィールドのTypeScriptにおける型を取得する.
+	/// </summary>
+	public static string ToTsType(ProtoField param)
+	{
+		return param.ShortTsTypeName;
+	}
+
+	/// <summary>
 	/// このフィールドのRubyにおける型を取得する.
 	/// </summary>
 	public static string ToRbType(ProtoField param)
@@ -47,6 +55,9 @@ public class CustomFunctions_ProtoField
 
 		target.Import("is_repeated",
 			new Func<ProtoField, bool>(type => IsRepeated(type)));
+
+		target.Import("to_ts_type",
+			new Func<ProtoField, string>(type => ToTsType(type)));
 
 		target.Import("to_rb_type",
 			new Func<ProtoField, string>(type => ToRbType(type)));
