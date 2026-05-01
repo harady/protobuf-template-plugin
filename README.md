@@ -1,50 +1,59 @@
 # protobuf-template-plugin
 
-Generate code in **any language** from `.proto` definitions and [Scriban](https://github.com/scriban/scriban) templates.
+`.proto` 定義と [Scriban](https://github.com/scriban/scriban) テンプレートから、**任意の言語のコードを生成**する protoc プラグイン。
 
-[日本語](README.ja.md)
+> **ツール自体は Ruby + C# で動作しますが、生成するコードの言語は問いません。**
+> TypeScript・Go・Python・Swift・Kotlin など、テンプレートを書けばどんな言語にも対応できます。
+
+[English](README.en.md)
 
 ---
 
-## What is this?
+## これは何？
 
-A `protoc` plugin that reads `.proto` schema files and renders them through Scriban templates to produce source code in any target language — C#, TypeScript, Ruby, Go, or anything you can template.
+`.proto` スキーマを単一の信頼できる情報源として、**複数言語のコードを一括生成**するためのツールです。
 
-- **Schema**: define data models, enums, and services once in `.proto`
-- **Templates**: write one `.sbncs` template per output file type
-- **Config**: a YAML file ties schemas, templates, and output paths together
-- **Runner**: a Ruby script (`codegen.rb`) drives `protoc` + the plugin in parallel
+クライアント・サーバー間でデータ型や API インターフェースを共有したい場合などに特に有効です。
 
-## How it works
+- **スキーマ**：データモデル・enum・サービスを `.proto` で一元定義
+- **テンプレート**：出力したい言語ごとに `.sbncs` テンプレートを書くだけ
+- **設定**：YAML でスキーマ・テンプレート・出力先をまとめて管理
+- **実行**：Ruby スクリプト（`codegen.rb`）が `protoc` + プラグインを並列実行
+
+### どんな言語でも生成できる
+
+テンプレートは [Scriban](https://github.com/scriban/scriban) で書くため、出力言語に制限はありません。付属のサンプルでは TypeScript・Ruby・C# を用意していますが、同じ仕組みで Go・Python・Swift・Kotlin など何でも対応できます。
+
+## 仕組み
 
 ```
-codegen.rb reads YAML config
-  → for each .proto, runs protoc with the plugin
-    → protoc calls protoc-gen-template (C# binary)
-      → plugin renders Scriban template with proto structure
-        → outputs generated file to the configured directory
+codegen.rb が YAML 設定を読み込む
+  → .proto ごとに protoc を起動
+    → protoc がプラグイン（protoc-gen-template）を呼び出す
+      → プラグインが Scriban テンプレートで proto 構造体からコードを生成
+        → 指定ディレクトリにファイル出力
 ```
 
-## Quick Start
+## クイックスタート
 
-### Requirements
+### 必要なもの
 
-- [Ruby](https://rubyinstaller.org/downloads/) — to run `codegen.rb`
-- [.NET 8 SDK](https://dotnet.microsoft.com/en-us/download/dotnet/8.0) — to build the plugin
-- [protoc](https://github.com/protocolbuffers/protobuf/releases) — Protocol Buffers compiler
+- [Ruby](https://rubyinstaller.org/downloads/) — `codegen.rb` の実行に必要
+- [.NET 8 SDK](https://dotnet.microsoft.com/en-us/download/dotnet/8.0) — プラグインのビルドに必要
+- [protoc](https://github.com/protocolbuffers/protobuf/releases) — Protocol Buffers コンパイラ
 
-### 1. Build the plugin
+### 1. プラグインをビルド
 
 ```bash
 cd protoc-gen-template/protoc-gen-myplugincsharp
 dotnet publish -c Release -r win-x64 --self-contained -p:PublishSingleFile=true -o ./publish
 ```
 
-Place the generated `publish/protoc-gen-template.exe` into your project's `proto/bin/plugin/` directory.
+生成された `publish/protoc-gen-template.exe` をプロジェクトの `proto/bin/plugin/` に配置してください。
 
-### 2. Write a template
+### 2. テンプレートを書く
 
-Create a Scriban template (e.g. `typescript_interface.sbncs`):
+例：TypeScript の interface を生成する `typescript_interface.sbncs`
 
 ```
 {{- for message in file.message_type }}
@@ -56,7 +65,7 @@ export interface {{ message.name }} {
 {{ end }}
 ```
 
-### 3. Configure YAML
+### 3. YAML で設定
 
 ```yaml
 protoc_path: "bin/protoc"
@@ -73,109 +82,109 @@ items:
         out_dir_path: "typescript/"
 ```
 
-### 4. Run
+### 4. 実行
 
 ```bash
 cd proto
 ruby codegen.rb codegen.yml
 ```
 
-See the [`examples/`](examples/) directory for working samples.
+動作するサンプルは [`examples/`](examples/) を参照してください。
 
 ---
 
-## Writing Templates
+## テンプレートの書き方
 
-### Available objects
+### 参照できるオブジェクト
 
-| Object | Description |
+| オブジェクト | 説明 |
 |---|---|
-| `file.message_type` | List of `message` definitions in the proto file |
-| `file.enum_type` | List of `enum` definitions |
-| `file.service` | List of `service` definitions |
+| `file.message_type` | proto ファイル内の `message` 一覧 |
+| `file.enum_type` | proto ファイル内の `enum` 一覧 |
+| `file.service` | proto ファイル内の `service` 一覧 |
 
-**Message fields** (`message.field[]`):
+**フィールド**（`message.field[]`）:
 
-| Property | Type | Description |
+| プロパティ | 型 | 説明 |
 |---|---|---|
-| `field.name` | string | Field name as defined in `.proto` |
-| `field.type` | int | Field type number (FieldDescriptorProto.Type) |
-| `field.type_name` | string | Fully qualified type name (for message/enum fields) |
+| `field.name` | string | `.proto` で定義したフィールド名 |
+| `field.type` | int | フィールド型番号（FieldDescriptorProto.Type） |
+| `field.type_name` | string | message / enum フィールドの完全修飾型名 |
 | `field.label` | int | 1=optional, 2=required, 3=repeated |
 
-**Enum values** (`enum.value[]`): `.name`, `.number`
+**enum 値**（`enum.value[]`）: `.name`, `.number`
 
-**Service methods** (`service.method[]`): `.name`, `.input_type`, `.output_type`
+**サービスメソッド**（`service.method[]`）: `.name`, `.input_type`, `.output_type`
 
-### Custom filters — strings
+### カスタムフィルター — 文字列
 
-| Filter | Description | Example |
+| フィルター | 説明 | 例 |
 |---|---|---|
-| `to_camel` | camelCase | `user_name` → `userName` |
-| `to_pascal` | PascalCase | `user_name` → `UserName` |
-| `to_snake` | snake_Case | `UserName` → `User_Name` |
-| `to_lower_snake` | lower_snake_case | `UserName` → `user_name` |
-| `to_upper_snake` | UPPER_SNAKE_CASE | `userName` → `USER_NAME` |
-| `to_short_name` | Strip package prefix | `.pkg.UserName` → `UserName` |
-| `to_file_name` | Filename from path | `path/to/file.proto` → `file.proto` |
-| `to_file_name_without_extension` | Filename without extension | `file.proto` → `file` |
+| `to_camel` | camelCase に変換 | `user_name` → `userName` |
+| `to_pascal` | PascalCase に変換 | `user_name` → `UserName` |
+| `to_snake` | snake_Case に変換 | `UserName` → `User_Name` |
+| `to_lower_snake` | lower_snake_case に変換 | `UserName` → `user_name` |
+| `to_upper_snake` | UPPER_SNAKE_CASE に変換 | `userName` → `USER_NAME` |
+| `to_short_name` | パッケージプレフィックスを除去 | `.pkg.UserName` → `UserName` |
+| `to_file_name` | パスからファイル名を取得 | `path/to/file.proto` → `file.proto` |
+| `to_file_name_without_extension` | 拡張子なしファイル名 | `file.proto` → `file` |
 
-### Custom filters — fields
+### カスタムフィルター — フィールド
 
-| Filter | Description |
+| フィルター | 説明 |
 |---|---|
-| `to_cs_type` | C# type name (`string`, `long`, `MyEnum`, …) |
-| `to_ts_type` | TypeScript type name (`string`, `number`, `MyEnum`, …) |
-| `to_rb_type` | Ruby type name (`String`, `Integer`, `MyEnum`, …) |
-| `is_repeated` | `true` if the field is `repeated` |
+| `to_cs_type` | C# の型名（`string`, `long`, `MyEnum` など） |
+| `to_ts_type` | TypeScript の型名（`string`, `number`, `MyEnum` など） |
+| `to_rb_type` | Ruby の型名（`String`, `Integer`, `MyEnum` など） |
+| `is_repeated` | `repeated` フィールドなら `true` |
 
-### Custom filters — messages
+### カスタムフィルター — メッセージ
 
-| Filter | Description |
+| フィルター | 説明 |
 |---|---|
-| `get_primary_keys` | Parse `reserved "primary_key:..."` annotations |
-| `get_indexs` | Parse `reserved "index:..."` annotations |
-| `get_unique_indexs` | Parse `reserved "unique_index:..."` annotations |
-| `get_tags` | Parse `reserved "tag:..."` annotations |
+| `get_primary_keys` | `reserved "primary_key:..."` アノテーションを解析 |
+| `get_indexs` | `reserved "index:..."` アノテーションを解析 |
+| `get_unique_indexs` | `reserved "unique_index:..."` アノテーションを解析 |
+| `get_tags` | `reserved "tag:..."` アノテーションを解析 |
 
 ---
 
-## YAML Configuration
+## YAML 設定リファレンス
 
-| Key | Description |
+| キー | 説明 |
 |---|---|
-| `protoc_path` | Path to the `protoc` binary |
-| `protoc_plugin_path` | Path to `protoc-gen-template` binary |
-| `src_base_path` | Base directory for `.proto` files |
-| `template_base_path` | Base directory for template files |
-| `out_base_path` | Base directory for generated output |
-| `items[].src_path_pattern` | Glob pattern to select `.proto` files |
-| `items[].template_path` | Template file to use |
-| `items[].file_suffix` | Suffix appended to each generated filename |
-| `items[].out_dir_path` | Subdirectory under `out_base_path` for output |
-| `items[].out_file_case` | Output filename casing: `pascal`, `camel`, or `snake` |
-| `items[].is_editable` | If `true`, skip regeneration when the output file exists |
+| `protoc_path` | `protoc` バイナリのパス |
+| `protoc_plugin_path` | `protoc-gen-template` バイナリのパス |
+| `src_base_path` | `.proto` ファイルのベースディレクトリ |
+| `template_base_path` | テンプレートファイルのベースディレクトリ |
+| `out_base_path` | 出力先のベースディレクトリ |
+| `items[].src_path_pattern` | 対象 `.proto` を選択する glob パターン |
+| `items[].template_path` | 使用するテンプレートファイル |
+| `items[].file_suffix` | 生成ファイル名に付けるサフィックス |
+| `items[].out_dir_path` | `out_base_path` 配下の出力サブディレクトリ |
+| `items[].out_file_case` | 出力ファイル名のケース：`pascal` / `camel` / `snake` |
+| `items[].is_editable` | `true` にすると出力ファイルが既存の場合は上書きしない |
 
-Items can be nested — a parent item can define `src_path_pattern` and contain multiple child items that each specify a different template.
+items はネスト可能です。親 item で `src_path_pattern` を指定し、子 item ごとに別テンプレートを指定できます。
 
 ---
 
-## Examples
+## サンプル
 
-| Example | Description |
+| サンプル | 説明 |
 |---|---|
-| [`examples/typescript/`](examples/typescript/) | Generate TypeScript interfaces from `.proto` |
-| [`examples/ruby/`](examples/ruby/) | Generate Ruby classes from `.proto` |
-| [`examples/csharp/`](examples/csharp/) | Generate C# model classes from `.proto` |
+| [`examples/typescript/`](examples/typescript/) | `.proto` から TypeScript interface を生成 |
+| [`examples/ruby/`](examples/ruby/) | `.proto` から Ruby クラスを生成 |
+| [`examples/csharp/`](examples/csharp/) | `.proto` から C# モデルクラスを生成 |
 
 ---
 
-## Building the Plugin
+## プラグインのビルド
 
 ```bash
 cd protoc-gen-template/protoc-gen-myplugincsharp
 
-# Windows x64 — single self-contained executable
+# Windows x64 — 単一実行ファイル
 dotnet publish -c Release -r win-x64 --self-contained -p:PublishSingleFile=true -o ./publish
 
 # macOS arm64
@@ -185,22 +194,22 @@ dotnet publish -c Release -r osx-arm64 --self-contained -p:PublishSingleFile=tru
 dotnet publish -c Release -r linux-x64 --self-contained -p:PublishSingleFile=true -o ./publish
 ```
 
-The plugin depends on:
+依存ライブラリ：
 
 - [Google.Protobuf](https://www.nuget.org/packages/Google.Protobuf) 3.21.6
 - [Scriban](https://github.com/scriban/scriban) 5.7.0
 
 ---
 
-## References
+## 参考リンク
 
 - [Protocol Buffers](https://github.com/protocolbuffers/protobuf)
-- [Scriban template engine](https://github.com/scriban/scriban)
-- [Scriban Visual Studio extension](https://marketplace.visualstudio.com/items?itemName=xoofx.scriban)
-- [protoc-gen-myplugincsharp](https://github.com/cactuaroid/protoc-gen-myplugincsharp) — the C# plugin base this project is built on
+- [Scriban テンプレートエンジン](https://github.com/scriban/scriban)
+- [Scriban Visual Studio 拡張](https://marketplace.visualstudio.com/items?itemName=xoofx.scriban)
+- [protoc-gen-myplugincsharp](https://github.com/cactuaroid/protoc-gen-myplugincsharp) — C# プラグインのベースにしたプロジェクト
 
 ---
 
-## License
+## ライセンス
 
-MIT — see [LICENSE](LICENSE)
+MIT — [LICENSE](LICENSE) を参照
