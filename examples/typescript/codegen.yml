@@ -1,0 +1,21 @@
+protoc_path: "../../bin/protoc"
+protoc_plugin_path: "../../bin/plugin/protoc-gen-template"
+src_base_path: "./proto/"
+template_base_path: "template/"
+out_base_path: "./output/"
+items:
+  - name: "generate_typescript"
+    src_path_pattern: "./**/*.proto"
+    items:
+      # TypeScript interface (types + enums)
+      - message: "Generating TypeScript interfaces..."
+        template_path: "typescript_interface.sbncs"
+        file_suffix: ".ts"
+        out_dir_path: ""
+        out_file_case: "snake"
+      # TypeScript service interface
+      - message: "Generating TypeScript service interfaces..."
+        template_path: "typescript_service.sbncs"
+        file_suffix: "_service.ts"
+        out_dir_path: ""
+        out_file_case: "snake"

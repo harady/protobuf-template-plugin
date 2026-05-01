@@ -1,0 +1,30 @@
+syntax = "proto3";
+
+package example;
+
+enum UserRole {
+  USER_ROLE_UNSPECIFIED = 0;
+  USER_ROLE_GUEST = 1;
+  USER_ROLE_MEMBER = 2;
+  USER_ROLE_ADMIN = 3;
+}
+
+message User {
+  int64 id = 1;
+  string name = 2;
+  string email = 3;
+  UserRole role = 4;
+  repeated string tags = 5;
+}
+
+message GetUserRequest {
+  int64 id = 1;
+}
+
+message GetUserResponse {
+  User user = 1;
+}
+
+service UserService {
+  rpc GetUser(GetUserRequest) returns (GetUserResponse);
+}

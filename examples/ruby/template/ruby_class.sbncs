@@ -1,0 +1,20 @@
+{{- for enum in file.enum_type }}
+module {{ enum.name }}
+{{- for value in enum.value }}
+  {{ value.name }} = {{ value.number }}
+{{- end }}
+end
+
+{{ end -}}
+{{- for message in file.message_type }}
+class {{ message.name }}
+  attr_accessor {{ for field in message.field }}:{{ field.name | to_lower_snake }}{{ if !for.last }}, {{ end }}{{ end }}
+
+  def initialize({{ for field in message.field }}{{ field.name | to_lower_snake }}: {{ if field | is_repeated }}[]{{ else }}nil{{ end }}{{ if !for.last }}, {{ end }}{{ end }})
+{{- for field in message.field }}
+    @{{ field.name | to_lower_snake }} = {{ field.name | to_lower_snake }}
+{{- end }}
+  end
+end
+
+{{ end -}}

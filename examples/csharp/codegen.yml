@@ -1,0 +1,14 @@
+protoc_path: "../../bin/protoc"
+protoc_plugin_path: "../../bin/plugin/protoc-gen-template"
+src_base_path: "./proto/"
+template_base_path: "template/"
+out_base_path: "./output/"
+items:
+  - name: "generate_csharp"
+    src_path_pattern: "./**/*.proto"
+    items:
+      - message: "Generating C# classes..."
+        template_path: "csharp_class.sbncs"
+        file_suffix: ".cs"
+        out_dir_path: ""
+        out_file_case: "pascal"

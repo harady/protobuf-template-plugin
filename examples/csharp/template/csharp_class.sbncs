@@ -1,0 +1,18 @@
+{{- for enum in file.enum_type }}
+public enum {{ enum.name }}
+{
+{{- for value in enum.value }}
+    {{ value.name }} = {{ value.number }},
+{{- end }}
+}
+
+{{ end -}}
+{{- for message in file.message_type }}
+public class {{ message.name }}
+{
+{{- for field in message.field }}
+    public {{ field | to_cs_type }}{{ if field | is_repeated }}[]{{ end }} {{ field.name | to_pascal }} { get; set; }
+{{- end }}
+}
+
+{{ end -}}
