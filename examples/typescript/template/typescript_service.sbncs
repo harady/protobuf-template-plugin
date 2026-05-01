@@ -1,0 +1,7 @@
+{{- for service in file.service }}
+export interface {{ service.name }} {
+{{- for method in service.method }}
+  {{ method.name | to_camel }}(request: {{ method.input_type | to_short_name }}): Promise<{{ method.output_type | to_short_name }}>;
+{{- end }}
+}
+{{ end -}}

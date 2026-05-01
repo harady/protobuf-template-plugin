@@ -1,0 +1,17 @@
+{{- for enum in file.enum_type }}
+export const {{ enum.name }} = {
+{{- for value in enum.value }}
+  {{ value.name }}: {{ value.number }},
+{{- end }}
+} as const;
+export type {{ enum.name }} = typeof {{ enum.name }}[keyof typeof {{ enum.name }}];
+
+{{ end -}}
+{{- for message in file.message_type }}
+export interface {{ message.name }} {
+{{- for field in message.field }}
+  {{ field.name | to_camel }}: {{ field | to_ts_type }}{{ if field | is_repeated }}[]{{ end }};
+{{- end }}
+}
+
+{{ end -}}
