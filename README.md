@@ -2,6 +2,8 @@
 
 Generate code in **any language** from `.proto` definitions and [Scriban](https://github.com/scriban/scriban) templates.
 
+[日本語](README.ja.md)
+
 ---
 
 ## What is this?
